@@ -1147,3 +1147,58 @@ Stage Summary:
 - DataBelanja component: rebuilt dengan 36 kolom, Uraian clickable, Nama Barang dipisah
 - Edit dialog: 7 section dengan 34 field Excel editable
 - 780 baris data terimport dengan semua field terisi
+
+---
+Task ID: 14-DATABELANJA-MASTER-DETAIL
+Agent: Main (Claude)
+Task: Rebuild Data Belanja dengan struktur master-detail per No. Pesanan (expand/collapse)
+
+Work Log:
+- User konfirmasi: ingin tampilan master-detail - tabel per No. Pesanan dengan tombol `>` untuk expand, saat di-klik menampilkan semua barang di dalam pesanan tersebut
+- Rebuild DataBelanja component (1642 → 1080 lines, lebih clean):
+  
+  **Master Table (1 row per No. Pesanan):**
+  - Kolom: `>` expand/collapse, No, No. Pesan, No. BKU, Tgl Pesanan, Vendor/Toko, Jumlah Barang (badge), Total Nilai, Status
+  - Setiap row CLICKABLE untuk expand/collapse
+  - Status group: draft (jika ada item draft), lunas, pending
+  - Draft groups di-highlight amber
+  
+  **Detail Items (saat di-expand):**
+  - "Daftar Barang pada Pesanan #XX — N barang"
+  - Tabel: No, Nama Barang (CLICKABLE untuk edit), Uraian Kegiatan, Volume, Satuan, Harga Satuan, Jumlah, Status
+  - Nama Barang cell clickable (cursor pointer, blue text, hover underline)
+  - Klik Nama Barang → buka Edit Dialog
+  - Total row di bawah tabel items
+  
+  **Tombol Buka Semua / Tutup Semua:**
+  - Buka Semua: expand semua 574 groups sekaligus
+  - Tutup Semua: collapse semua
+  
+  **Stats:**
+  - Total Pesanan (574)
+  - Draft (Belum Lengkap) (361)
+  - Pending (95)
+  - Lunas
+  
+  **Edit Dialog:**
+  - 7 section: Belanja, Informasi Pesanan, Tanggal, Toko/Vendor, Kwitansi & Lainnya, Status
+  - Semua 34 field Excel editable
+  - Title: "Edit Barang Belanja" dengan subtitle "No. Pesan: XX · No. BKU: BPUXX"
+  - Badge "Draft - Lengkapi data" untuk item draft
+  - Tombol Hapus + Batal + Simpan
+
+- Verifikasi Agent Browser:
+  - 574 pesanan groups muncul di tabel master
+  - Klik baris BPU04 (UD. JOSUA, 66 barang) → expand menampilkan 66 items
+  - Items: Plastik Mika, Kertas Warna, Kertas Buffalo, Kertas Post-It, dll
+  - Klik "Plastik Mika" → Edit Dialog muncul dengan semua field
+  - Tombol "Buka Semua" → 574 groups ter-expand
+  - Tombol "Tutup Semua" → semua ter-collapse
+  - Tidak ada error, lint clean
+
+Stage Summary:
+- DataBelanja rebuilt dengan master-detail hierarchy
+- 574 pesanan groups, 780 total barang
+- Expand/collapse per pesanan + Buka/Tutup Semua
+- Klik Nama Barang untuk edit (bukan tombol di kanan)
+- Edit dialog dengan 34 field Excel
