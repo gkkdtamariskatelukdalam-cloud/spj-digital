@@ -180,6 +180,19 @@ model Document {
   @@index([type])
 }
 
+// ============ PRINT STATUS (TRACKING CETAK DOKUMEN) ============
+
+model PrintStatus {
+  id            String   @id @default(cuid())
+  groupKey      String   // noPesan atau noBku (identifikasi pesanan)
+  docType       String   // surat-pesanan, dokumen-pembanding, dll
+  printedAt     DateTime @default(now())
+  printedCount  Int      @default(1)  // berapa kali dicetak
+  
+  @@unique([groupKey, docType])
+  @@index([groupKey])
+}
+
 // ============ LETTERHEAD (KOP SURAT) SETTINGS ============
 
 model LetterheadSettings {

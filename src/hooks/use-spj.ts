@@ -373,6 +373,62 @@ export function useDocumentGroups(bulan?: number, q?: string) {
   });
 }
 
+// ============ Print Status ============
+export function usePrintStatus(groupKey: string | null) {
+  return useQuery({
+    queryKey: ["spj-print-status", groupKey],
+    queryFn: async (): Promise<{
+      groupKey: string;
+      statuses: Record<string, { printed: boolean; printedAt: string | null; printedCount: number }>;
+    } | null> => {
+      if (!groupKey) return null;
+      const res = await fetch(`/api/spj/print-status?groupKey=${encodeURIComponent(groupKey)}`, {
+        cache: "no-store",
+      });
+      if (!res.ok) throw new Error("Failed");
+      return res.json();
+    },
+    enabled: !!groupKey,
+    staleTime: 10 * 1000,
+  });
+}
+
+export function useAllPrintStatuses() {
+  return useQuery({
+    queryKey: ["spj-print-status-all"],
+    queryFn: async (): Promise<{
+      allStatuses: Record<string, Record<string, { printed: boolean; printedAt: string }>>;
+    }> => {
+      const res = await fetch("/api/spj/print-status?all=true", {
+        method: "PUT",
+        cache: "no-store",
+      });
+      if (!res.ok) throw new Error("Failed");
+      return res.json();
+    },
+    staleTime: 10 * 1000,
+  });
+}
+
+export function useMarkPrinted() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ groupKey, docType }: { groupKey: string; docType: string }) => {
+      const res = await fetch("/api/spj/print-status", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ groupKey, docType }),
+      });
+      if (!res.ok) throw new Error("Failed");
+      return res.json();
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["spj-print-status"] });
+      qc.invalidateQueries({ queryKey: ["spj-print-status-all"] });
+    },
+  });
+}
+
 // ============ Letterhead Settings ============
 export function useLetterhead() {
   return useQuery({

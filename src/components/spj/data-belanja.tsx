@@ -50,6 +50,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DocumentPreview, CetakMenuButton } from "@/components/spj/document-preview";
+import { useAllPrintStatuses } from "@/hooks/use-spj";
 import {
   useTransactions,
   useUpdateTransaction,
@@ -127,6 +128,10 @@ export function DataBelanja() {
   const [showPreview, setShowPreview] = useState(false);
   const [showVendorMenu, setShowVendorMenu] = useState(false);
   const [previewVendorName, setPreviewVendorName] = useState<string | null>(null);
+  
+  // Fetch all print statuses for tracking
+  const { data: allPrintStatusesData } = useAllPrintStatuses();
+  const printStatuses = allPrintStatusesData?.allStatuses || {};
 
   const bulan = bulanFilter === "all" ? undefined : parseInt(bulanFilter);
   const status = statusFilter === "all" ? undefined : statusFilter;
@@ -458,7 +463,8 @@ export function DataBelanja() {
                     <th className="w-24 p-2 border-b text-center font-semibold">Jumlah Barang</th>
                     <th className="w-36 p-2 border-b text-right font-semibold">Total Nilai</th>
                     <th className="w-24 p-2 border-b text-center font-semibold">Status</th>
-                    <th className="w-32 p-2 border-b text-center font-semibold">Cetak</th>
+                    <th className="w-40 p-2 border-b text-center font-semibold">Status Cetak Dokumen</th>
+                    <th className="w-28 p-2 border-b text-center font-semibold">Cetak</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -470,6 +476,7 @@ export function DataBelanja() {
                         group={group}
                         index={gi + 1}
                         isExpanded={isExpanded}
+                        printStatuses={printStatuses}
                         onToggle={() => toggleExpand(group.key)}
                         onEditItem={(tx) => setEditingTx(tx)}
                         onCetakPreview={(g, docId) => {
@@ -516,6 +523,7 @@ function PesananRow({
   group,
   index,
   isExpanded,
+  printStatuses,
   onToggle,
   onEditItem,
   onCetakPreview,
@@ -523,6 +531,7 @@ function PesananRow({
   group: PesananGroup;
   index: number;
   isExpanded: boolean;
+  printStatuses: Record<string, Record<string, { printed: boolean; printedAt: string }>>;
   onToggle: () => void;
   onEditItem: (tx: Transaction) => void;
   onCetakPreview: (group: PesananGroup, docId?: string) => void;
@@ -624,6 +633,10 @@ function PesananRow({
             </Badge>
           )}
         </td>
+        {/* Status Cetak Dokumen - 7 indicators */}
+        <td className="p-2 border-b text-center" onClick={(e) => e.stopPropagation()}>
+          <PrintStatusBadges group={group} printStatuses={printStatuses} />
+        </td>
         {/* Cetak button cell */}
         <td className="p-2 border-b text-center" onClick={(e) => e.stopPropagation()}>
           <CetakMenuButton
@@ -638,7 +651,7 @@ function PesananRow({
       {/* === Detail Items (expanded) === */}
       {isExpanded && (
         <tr>
-          <td colSpan={10} className="p-0 border-b">
+          <td colSpan={11} className="p-0 border-b">
             <div className="bg-slate-50/50 dark:bg-slate-900/30 p-3">
               <div className="mb-2 flex items-center gap-2 text-xs text-muted-foreground">
                 <Package className="h-3.5 w-3.5" />
@@ -697,6 +710,73 @@ function PesananRow({
         </tr>
       )}
     </>
+  );
+}
+
+// === Print Status Badges (7 dokumen indicators) ===
+const DOC_LABELS: Array<{ id: string; short: string }> = [
+  { id: "surat-pesanan", short: "PESAN" },
+  { id: "dokumen-pembanding", short: "BANDING" },
+  { id: "dokumen-rencana", short: "RENCANA" },
+  { id: "surat-hasil-pemeriksaan", short: "SHP" },
+  { id: "berita-acara-serah-terima", short: "BAST" },
+  { id: "surat-penawaran-toko", short: "TOKO" },
+  { id: "surat-pertanggungjawaban", short: "SPJ" },
+];
+
+function PrintStatusBadges({
+  group,
+  printStatuses,
+}: {
+  group: PesananGroup;
+  printStatuses: Record<string, Record<string, { printed: boolean; printedAt: string }>>;
+}) {
+  const gKey = group.noPesan || group.noBku || group.key;
+  const groupStatuses = printStatuses[gKey] || {};
+  
+  const printedCount = DOC_LABELS.filter((d) => groupStatuses[d.id]?.printed).length;
+  const totalCount = DOC_LABELS.length;
+  const allPrinted = printedCount === totalCount;
+  
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <div className="flex items-center gap-0.5 flex-wrap justify-center">
+        {DOC_LABELS.map((doc) => {
+          const isPrinted = groupStatuses[doc.id]?.printed === true;
+          return (
+            <span
+              key={doc.id}
+              title={`${doc.short}: ${isPrinted ? "Sudah dicetak" : "Belum dicetak"}`}
+              className={cn(
+                "inline-flex items-center gap-0.5 px-1 py-0.5 rounded text-[8px] font-mono",
+                isPrinted
+                  ? "bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700"
+                  : "bg-muted/50 text-muted-foreground border border-muted"
+              )}
+            >
+              {isPrinted ? (
+                <CheckCircle2 className="h-2 w-2" />
+              ) : (
+                <span className="h-2 w-2 rounded-full bg-muted-foreground/30" />
+              )}
+              {doc.short}
+            </span>
+          );
+        })}
+      </div>
+      <span
+        className={cn(
+          "text-[9px] font-semibold",
+          allPrinted
+            ? "text-emerald-600 dark:text-emerald-400"
+            : printedCount > 0
+            ? "text-amber-600 dark:text-amber-400"
+            : "text-muted-foreground"
+        )}
+      >
+        {printedCount}/{totalCount} tercetak
+      </span>
+    </div>
   );
 }
 

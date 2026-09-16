@@ -18,10 +18,11 @@ import {
   FileText,
   Loader2,
   X,
+  CheckCircle2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { useSchool, useDocumentGroups } from "@/hooks/use-spj";
+import { useSchool, useMarkPrinted, useAllPrintStatuses } from "@/hooks/use-spj";
 import type { DocumentGroup } from "@/lib/types/spj";
 
 // Import all 7 document templates
@@ -113,6 +114,8 @@ export function DocumentPreview({
   initialDocId,
 }: DocumentPreviewProps) {
   const { data: schoolData } = useSchool();
+  const markPrintedMutation = useMarkPrinted();
+  const { data: allPrintStatusesData } = useAllPrintStatuses();
   const school = schoolData?.item ?? null;
   
   // State for navigation
@@ -162,6 +165,15 @@ export function DocumentPreview({
     } else if ((mode === "all" || mode === "vendor") && currentGroupIdx > 0) {
       setCurrentGroupIdx(currentGroupIdx - 1);
       setCurrentDocIdx(DOC_TEMPLATES.length - 1);
+    }
+  };
+
+  // Mark document as printed (for tracking)
+  const markAsPrinted = async (groupKey: string, docType: string) => {
+    try {
+      await markPrintedMutation.mutateAsync({ groupKey, docType });
+    } catch (e) {
+      console.error("Failed to mark as printed:", e);
     }
   };
 
@@ -225,6 +237,21 @@ export function DocumentPreview({
 
       await html2pdf().set(opt).from(container).save();
       document.body.removeChild(container);
+      
+      // Mark all rendered docs as printed
+      const groupKey = currentGroup.noPesan || currentGroup.noBku || currentGroup.key;
+      if (mode === "single") {
+        await markAsPrinted(groupKey, currentDoc.id);
+      } else {
+        // Mark all docs in all groups
+        for (const g of groupsToRender) {
+          const gk = g.noPesan || g.noBku || g.key;
+          for (const doc of DOC_TEMPLATES) {
+            await markAsPrinted(gk, doc.id);
+          }
+        }
+      }
+      
       toast.success("PDF berhasil diunduh!");
     } catch (e) {
       console.error("PDF error:", e);
@@ -282,6 +309,20 @@ export function DocumentPreview({
     
     printWindow.document.close();
     printWindow.focus();
+    
+    // Mark as printed
+    const groupKey = currentGroup.noPesan || currentGroup.noBku || currentGroup.key;
+    if (mode === "single") {
+      markAsPrinted(groupKey, currentDoc.id);
+    } else {
+      // Mark all docs in all groups
+      for (const g of groups) {
+        const gk = g.noPesan || g.noBku || g.key;
+        for (const doc of DOC_TEMPLATES) {
+          markAsPrinted(gk, doc.id);
+        }
+      }
+    }
     
     setTimeout(() => {
       printWindow.print();
@@ -355,20 +396,30 @@ export function DocumentPreview({
 
           {/* Doc type selector */}
           <div className="flex items-center gap-1.5 mt-3 flex-wrap">
-            {DOC_TEMPLATES.map((doc, i) => (
-              <button
-                key={doc.id}
-                onClick={() => setCurrentDocIdx(i)}
-                className={cn(
-                  "text-[10px] px-2 py-1 rounded border transition-all",
-                  i === currentDocIdx
-                    ? doc.color + " bg-muted/50 font-semibold"
-                    : "border-transparent text-muted-foreground hover:bg-muted/30"
-                )}
-              >
-                {doc.short}
-              </button>
-            ))}
+            {DOC_TEMPLATES.map((doc, i) => {
+              // Check if this doc is printed
+              const gKey = currentGroup?.noPesan || currentGroup?.noBku || currentGroup?.key || "";
+              const allStatuses = allPrintStatusesData?.allStatuses || {};
+              const isPrinted = allStatuses[gKey]?.[doc.id]?.printed === true;
+              
+              return (
+                <button
+                  key={doc.id}
+                  onClick={() => setCurrentDocIdx(i)}
+                  className={cn(
+                    "text-[10px] px-2 py-1 rounded border transition-all flex items-center gap-1",
+                    i === currentDocIdx
+                      ? doc.color + " bg-muted/50 font-semibold"
+                      : "border-transparent text-muted-foreground hover:bg-muted/30"
+                  )}
+                >
+                  {isPrinted && (
+                    <CheckCircle2 className="h-2.5 w-2.5 text-emerald-500" />
+                  )}
+                  {doc.short}
+                </button>
+              );
+            })}
             
             {/* Group selector (only in "all" mode) */}
             {((mode === "all" || mode === "vendor") && groups.length > 0) && (

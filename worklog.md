@@ -1293,3 +1293,52 @@ Stage Summary:
 - Tombol "Cetak per Toko" dengan dropdown vendor list (nama, jumlah pesanan, total nilai)
 - Mode vendor: preview semua dokumen untuk semua pesanan dari 1 vendor
 - 3 pilihan cetak: per pesanan (existing), per toko (baru), semua SPJ (existing)
+
+---
+Task ID: 17-PRINT-STATUS-TRACKING
+Agent: Main (Claude)
+Task: Buat fitur tracking status cetak dokumen - tahu dokumen mana yang sudah/belum dicetak per pesanan
+
+Work Log:
+- User ingin tahu dokumen mana yang sudah/belum dicetak per pesanan (bukan untuk mencegah cetak ulang, hanya tracking)
+- Tambah model PrintStatus ke Prisma schema:
+  - groupKey (noPesan/noBku), docType, printedAt, printedCount
+  - Unique constraint: [groupKey, docType] (1 dokumen per pesanan)
+  - printedCount untuk track berapa kali dicetak (bisa cetak ulang)
+- Buat API /api/spj/print-status:
+  - GET ?groupKey=XXX - status cetak untuk 1 pesanan
+  - POST {groupKey, docType} - mark dokumen as printed (upsert: increment count jika sudah ada)
+  - PUT ?all=true - semua status cetak untuk semua pesanan (batch query)
+- Tambah hook usePrintStatus, useAllPrintStatuses, useMarkPrinted
+- Update DocumentPreview:
+  - Import useMarkPrinted, useAllPrintStatuses
+  - Tambah markAsPrinted function
+  - Update handleDownloadPDF: setelah PDF berhasil, mark dokumen as printed
+    - Mode single: mark currentDoc.id
+    - Mode all/vendor: mark semua docs di semua groups
+  - Update handlePrint: setelah print window dibuka, mark dokumen as printed
+  - Update tab dokumen selector: tampilkan icon CheckCircle2 (hijau) untuk dokumen yang sudah dicetak
+- Tambah kolom "Status Cetak Dokumen" di tabel master Data Belanja:
+  - 7 badge per pesanan: PESAN, BANDING, RENCANA, SHP, BAST, TOKO, SPJ
+  - Badge hijau dengan ✓ untuk dokumen yang sudah dicetak
+  - Badge abu-abu dengan titik untuk dokumen yang belum dicetak
+  - Counter: "X/7 tercetak" (warna hijau jika semua, amber jika sebagian, abu jika belum ada)
+  - Tooltip: "PESAN: Sudah dicetak" atau "PESAN: Belum dicetak"
+- Update colSpan detail row dari 10 → 11 (tambah kolom Status Cetak)
+- Verifikasi Agent Browser:
+  - Kolom "Status Cetak Dokumen" muncul di tabel master
+  - 7 badge per baris: PESAN, BANDING, RENCANA, SHP, BAST, TOKO, SPJ
+  - Pesanan #01: "1/7 tercetak" (Surat Pesanan sudah dicetak via API test)
+  - Pesanan lain: "0/7 tercetak" (belum ada yang dicetak)
+  - API print-status bekerja: POST returns success dengan printedCount
+  - Tab dokumen di preview modal: icon ✓ hijau untuk dokumen yang sudah dicetak
+  - Tidak ada error, lint clean
+
+Stage Summary:
+- 1 model baru: PrintStatus (groupKey, docType, printedAt, printedCount)
+- 1 API route baru: /api/spj/print-status (GET, POST, PUT)
+- 3 hooks baru: usePrintStatus, useAllPrintStatuses, useMarkPrinted
+- Kolom "Status Cetak Dokumen" di tabel master dengan 7 badge + counter
+- Tab dokumen di preview modal: icon ✓ untuk dokumen yang sudah dicetak
+- Auto-mark as printed saat Unduh PDF atau Cetak Langsung
+- Tetap bisa cetak ulang (printedCount bertambah, bukan diblokir)
