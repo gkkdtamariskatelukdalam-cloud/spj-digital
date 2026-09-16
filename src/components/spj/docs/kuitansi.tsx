@@ -121,28 +121,14 @@ export function Kuitansi({
         TANDA PEMBAYARAN
       </div>
 
-      {/* === BODY BLOCK - rata kiri, ':' sejajar pakai label width fix === */}
-      <div style={{ fontSize: "12px", lineHeight: 1.8, marginBottom: "16px", textAlign: "left" }}>
-        <div style={{ display: "flex", alignItems: "baseline" }}>
-          <span style={{ display: "inline-block", width: "180px", textAlign: "right", paddingRight: "6px" }}>Sudah terima dari :</span>
-          <span>Bendahara SMA Negeri 1 Telukdalam</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "baseline" }}>
-          <span style={{ display: "inline-block", width: "180px", textAlign: "right", paddingRight: "6px" }}>Uang sebesar :</span>
-          <span style={{ fontWeight: 700 }}>{formatRupiah(total)}</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "baseline" }}>
-          <span style={{ display: "inline-block", width: "180px", textAlign: "right", paddingRight: "6px" }}>Terbilang :</span>
-          <span style={{ fontStyle: "italic", fontWeight: 700 }}>{terbilangText}</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "baseline" }}>
-          <span style={{ display: "inline-block", width: "180px", textAlign: "right", paddingRight: "6px" }}>Nomor Surat persetujuan penyediaan barang<br />dan jasa :</span>
-          <span style={{ alignSelf: "flex-end" }}>{nomorSurat}</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "baseline" }}>
-          <span style={{ display: "inline-block", width: "180px", textAlign: "right", paddingRight: "6px" }}>Untuk pembayaran :</span>
-          <span>{firstUraian}</span>
-        </div>
+      {/* === BODY BLOCK - rata kiri, ':' sejajar === */}
+      <div style={{ fontSize: "12px", lineHeight: 1.8, marginBottom: "16px" }}>
+        <div><span style={{ display: "inline-block", width: "170px" }}>Sudah terima dari :</span>Bendahara SMA Negeri 1 Telukdalam</div>
+        <div><span style={{ display: "inline-block", width: "170px" }}>Uang sebesar :</span><span style={{ fontWeight: 700 }}>{formatRupiah(total)}</span></div>
+        <div><span style={{ display: "inline-block", width: "170px" }}>Terbilang :</span><span style={{ fontStyle: "italic", fontWeight: 700 }}>{terbilangText}</span></div>
+        <div>Nomor Surat persetujuan penyediaan barang</div>
+        <div><span style={{ display: "inline-block", width: "170px" }}>dan jasa :</span>{nomorSurat}</div>
+        <div><span style={{ display: "inline-block", width: "170px" }}>Untuk pembayaran :</span>{firstUraian}</div>
       </div>
 
       {/* === 3-COLUMN SIGNATURE TABLE (borderless) === */}
