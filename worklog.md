@@ -539,3 +539,118 @@ Stage Summary:
 - Print CSS A4 portrait dengan proper page break
 - Semua dokumen dapat di-cetak via tombol "Cetak Dokumen" (window.print())
 - Data real dari Excel: 419 grup transaksi, 9 vendor, semua pejabat sekolah ter-pre-filled
+
+---
+Task ID: 6-letterhead-update
+Agent: Sub-agent (general-purpose)
+Task: Replace hardcoded school KOP header in all SPJ document templates with the reusable `<Letterhead />` component.
+
+Work Log:
+- Read `/home/z/my-project/src/components/spj/letterhead.tsx` to understand the reusable component: `Letterhead` (client, fetches settings via `useLetterhead()` React Query hook) and `LetterheadStatic` (server, takes settings as prop). Renders logo (with offset X/Y), 7 text lines (bold toggle + size), font family, line spacing, and optional bottom border line. Falls back to sensible defaults if no settings saved.
+- Audited all 7 templates under `src/components/spj/docs/` to determine which actually render a school KOP:
+  1. `surat-pesanan.tsx`            → HAS school KOP (`<header>` block w/ PEMERINTAH PROVINSI SUMATERA UTARA / DINAS PENDIDIKAN / schoolName / schoolAddress + 4 more lines) → UPDATE
+  2. `surat-hasil-pemeriksaan.tsx` → HAS school KOP (compact 4-line variant) → UPDATE
+  3. `berita-acara-serah-terima.tsx` → HAS school KOP (compact 4-line variant) → UPDATE
+  4. `surat-pertanggungjawaban.tsx` → HAS school KOP (compact 4-line variant) → UPDATE
+  5. `dokumen-pembanding.tsx`      → NO school KOP (just title "DOKUMEN HASIL PEMBANDING" + meta block that mentions `schoolName`). LEAVE AS-IS.
+  6. `dokumen-rencana.tsx`         → NO school KOP (just title "DOKUMEN PERENCANAAN" + meta block). LEAVE AS-IS.
+  7. `surat-penawaran-toko.tsx`   → NO school KOP — uses VENDOR letterhead (`{vendorName}` + `{vendorAddress}`). LEAVE AS-IS per task instructions.
+
+Changes applied to 4 templates (surat-pesanan, surat-hasil-pemeriksaan, berita-acara-serah-terima, surat-pertanggungjawaban):
+- Added import: `import { Letterhead } from "@/components/spj/letterhead";`
+- Replaced the entire `<header className="text-center border-b-2 border-slate-800 pb-3 mb-5">…</header>` block (which contained the hardcoded `PEMERINTAH PROVINSI SUMATERA UTARA` / `DINAS PENDIDIKAN` / `schoolName(school)` / `schoolAddress(school)` + extra text lines) with:
+  ```tsx
+  <div className="mb-5">
+    <Letterhead />
+  </div>
+  ```
+- Kept the document title (e.g. "SURAT PESANAN", "BERITA ACARA SERAH TERIMA") BELOW the new Letterhead wrapper — only the KOP was replaced.
+- Trimmed unused imports where the helpers were no longer referenced after KOP removal:
+  - `surat-pesanan.tsx`: dropped `schoolAddress`, `schoolName` (only used in KOP). `school` prop still needed for signatures (`school?.principalName`, `school?.treasurerName`, …) so prop type kept.
+  - `surat-pertanggungjawaban.tsx`: dropped `schoolAddress`, `schoolName` (only used in KOP). `school` prop still needed for 3-column signature block.
+- For `surat-hasil-pemeriksaan.tsx` and `berita-acara-serah-terima.tsx`: KEPT the `schoolName` + `schoolAddress` imports because they are still used later in the body ("Nama Satuan Pendidikan" + "Alamat" lines describing PIHAK KEDUA / Pemeriksa). Only the KOP `<header>` block was replaced.
+
+Verification:
+- `cd /home/z/my-project && bun run lint 2>&1 | tail -30` → **0 errors**, 1 pre-existing warning unrelated to this task:
+  ```
+  /home/z/my-project/src/components/spj/letterhead.tsx
+    68:14  warning  Unused eslint-disable directive (no problems were reported from '@next/next/no-img-element')
+  ✖ 1 problem (0 errors, 1 warning)
+  ```
+  This warning is inside the Letterhead component itself (created by an earlier task, not touched here) and was already present before this task ran. No new errors or warnings introduced by the 4 template edits.
+
+Summary:
+- **Updated (4 files):** `surat-pesanan.tsx`, `surat-hasil-pemeriksaan.tsx`, `berita-acara-serah-terima.tsx`, `surat-pertanggungjawaban.tsx` — each now renders `<Letterhead />` instead of a hardcoded KOP.
+- **Left as-is (3 files):** `dokumen-pembanding.tsx` (no KOP, only title), `dokumen-rencana.tsx` (no KOP, only title), `surat-penawaran-toko.tsx` (uses VENDOR letterhead, not school KOP — per task instructions do NOT add school Letterhead here).
+
+Next actions for downstream agents:
+- Optional: fix the 1 pre-existing `Unused eslint-disable directive` warning inside `src/components/spj/letterhead.tsx` (line 68) by removing the `// eslint-disable-next-line @next/next/no-img-element` comment since the rule is not active in this repo. Outside scope of this task.
+- Optional: replace the inline `school?.name ?? "SMA Negeri 1 Telukdalam"` fallback in `surat-penawaran-toko.tsx` with the `schoolName()` helper for consistency (currently uses an inline fallback — works but inconsistent with the other templates).
+- Optional: consider also adding `<Letterhead />` to `dokumen-pembanding.tsx` and `dokumen-rencana.tsx` if the user later decides those internal docs should carry the school KOP (the original Excel sheets `02BANDING` and `03RENCANA` did not have a KOP block).
+
+---
+Task ID: 7-KOP-SETTINGS
+Agent: Main (Claude)
+Task: Membuat pengaturan KOP Surat dengan fitur: font, jenis huruf, bold/tidak, jarak antar baris (up/down), upload logo, geser logo kiri/kanan/atas/bawah
+
+Work Log:
+- Analisa format KOP dari gambar yang diupload user menggunakan VLM skill
+- Ekstrak 5 gambar dari Excel file, identifikasi image4.png sebagai logo resmi SMA Negeri 1 Telukdalam
+- Tambah model LetterheadSettings ke Prisma schema dengan 30+ fields:
+  - Logo: logoPath, logoWidth, logoHeight, logoOffsetX, logoOffsetY
+  - Font: fontFamily (13 pilihan: Arial, Times New Roman, Calibri, dll), lineSpacing
+  - 7 baris teks: masing-masing dengan Text, Bold (toggle), Size (slider 8-32px)
+  - Garis bawah: showBottomLine (switch), bottomLineWidth (slider 1-5px)
+- Push schema ke DB, regenerate Prisma client, restart dev server
+- Buat 2 API routes:
+  - GET/PUT /api/spj/letterhead - read/update settings (upsert pattern)
+  - POST /api/spj/letterhead/upload-logo - upload logo file (FormData, max 5MB, PNG/JPG/WebP/GIF)
+- Buat hook useLetterhead, useUpdateLetterhead, useUploadLogo di use-spj.ts
+- Buat komponen Letterhead (reusable) di letterhead.tsx:
+  - LetterheadStatic (server-renderable dengan settings prop)
+  - Letterhead (client component dengan React Query auto-fetch)
+  - Render: logo dengan transform translate(offsetX, offsetY), 7 baris teks dengan font/bold/size per baris, garis bawah optional
+- Update 4 template dokumen (Surat Pesanan, SHP, BAST, SPJ) untuk pakai <Letterhead /> component
+  - 3 template lain (Pembanding, Rencana, Toko) tidak diubah karena tidak punya KOP sekolah
+- Buat komponen LetterheadSettingsPanel (UI pengaturan KOP) dengan:
+  - Upload logo (button + hidden file input + preview)
+  - Posisi logo: 4 tombol panah (atas/kiri/reset/kanan/bawah) + 2 slider (Offset X -100 to 100, Offset Y -100 to 100)
+  - Ukuran logo: 2 slider (Lebar 40-250px, Tinggi 40-250px)
+  - Font family selector (13 opsi dengan preview font)
+  - Jarak antar baris: slider 0-30px + tombol up/down
+  - Garis bawah: switch toggle + slider ketebalan 1-5px
+  - Per-baris: text input + bold toggle button + size slider (8-32px) untuk 7 baris
+  - Live preview KOP di bagian bawah
+  - Auto-save dengan debounce 800ms (ref pattern untuk hindari race condition)
+  - Reset to default button
+  - Toast notifications (sonner)
+- Tambah tab "Pengaturan KOP" ke navigasi utama (6th tab)
+- Fix race condition di auto-save dengan localRef pattern
+- Verifikasi Agent Browser end-to-end:
+  - Tab "Pengaturan KOP" muncul di navigasi
+  - Upload logo bekerja (API test: POST /api/spj/letterhead/upload-logo returns logoPath)
+  - Font family change persists (test: Arial → Times New Roman, reload → masih Times New Roman)
+  - Logo position controls bekerja (test: klik "Geser ke kanan" 1x → LogoOffsetX = 5, tersimpan)
+  - Bold toggle bekerja (test: toggle line 4 → line4Bold = true, tersimpan)
+  - Line spacing slider bekerja
+  - Logo size slider bekerja
+  - Live preview menampilkan KOP dengan logo + 7 baris teks
+  - KOP muncul di dokumen Surat Pesanan dengan Times New Roman font
+  - Mobile responsive (semua kontrol accessible di 375px viewport)
+  - Tidak ada error di console, lint clean, semua API 200 OK
+
+Stage Summary:
+- 1 model Prisma baru: LetterheadSettings (30+ fields untuk logo, font, 7 baris teks, garis bawah)
+- 2 API routes baru: GET/PUT /api/spj/letterhead, POST /api/spj/letterhead/upload-logo
+- 3 hooks baru: useLetterhead, useUpdateLetterhead, useUploadLogo
+- 2 komponen baru: Letterhead (reusable), LetterheadSettingsPanel (UI pengaturan)
+- 4 template dokumen diupdate untuk pakai Letterhead component
+- 1 tab baru "Pengaturan KOP" di navigasi utama
+- Default logo: logo SMA Negeri 1 Telukdalam (diekstrak dari Excel)
+- Semua 6 fitur yang diminta user sudah diimplementasi:
+  1. ✅ Font (ukuran per baris dengan slider 8-32px)
+  2. ✅ Jenis huruf (13 pilihan font family)
+  3. ✅ Bold/tidak (toggle per baris)
+  4. ✅ Jarak antar baris (slider 0-30px + tombol up/down)
+  5. ✅ Upload logo (PNG/JPG/WebP/GIF, max 5MB)
+  6. ✅ Geser logo (4 tombol arah + 2 slider untuk X/Y offset -100 to 100px)

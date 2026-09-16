@@ -373,6 +373,52 @@ export function useDocumentGroups(bulan?: number, q?: string) {
   });
 }
 
+// ============ Letterhead Settings ============
+export function useLetterhead() {
+  return useQuery({
+    queryKey: ["spj-letterhead"],
+    queryFn: async (): Promise<{ settings: import("@/lib/types/spj").LetterheadSettings }> => {
+      const res = await fetch("/api/spj/letterhead", { cache: "no-store" });
+      if (!res.ok) throw new Error("Failed");
+      return res.json();
+    },
+    staleTime: 30 * 1000,
+  });
+}
+
+export function useUpdateLetterhead() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: Partial<import("@/lib/types/spj").LetterheadSettings>) => {
+      const res = await fetch("/api/spj/letterhead", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error((await res.json()).error || "Failed");
+      return res.json();
+    },
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["spj-letterhead"] }),
+  });
+}
+
+export function useUploadLogo() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (file: File) => {
+      const formData = new FormData();
+      formData.append("logo", file);
+      const res = await fetch("/api/spj/letterhead/upload-logo", {
+        method: "POST",
+        body: formData,
+      });
+      if (!res.ok) throw new Error((await res.json()).error || "Failed");
+      return res.json();
+    },
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["spj-letterhead"] }),
+  });
+}
+
 export function useCreateDocument() {
   const qc = useQueryClient();
   return useMutation({

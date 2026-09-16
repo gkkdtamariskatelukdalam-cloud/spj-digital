@@ -6,6 +6,7 @@ import { Transactions } from "@/components/spj/transactions";
 import { MasterData } from "@/components/spj/master-data";
 import { Reports } from "@/components/spj/reports";
 import { Documents } from "@/components/spj/documents";
+import { LetterheadSettingsPanel } from "@/components/spj/letterhead-settings";
 import { Toaster } from "@/components/ui/sonner";
 import {
   LayoutDashboard,
@@ -15,11 +16,12 @@ import {
   BarChart3,
   Wallet,
   Lock,
+  Image as ImageIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 
-type View = "dashboard" | "transactions" | "documents" | "reports" | "master";
+type View = "dashboard" | "transactions" | "documents" | "reports" | "master" | "letterhead";
 
 interface NavItem {
   id: View;
@@ -64,6 +66,13 @@ const navItems: NavItem[] = [
     icon: <Database className="h-4 w-4" />,
     description: "Vendor, produk, BPU",
     color: "cyan",
+  },
+  {
+    id: "letterhead",
+    label: "Pengaturan KOP",
+    icon: <ImageIcon className="h-4 w-4" />,
+    description: "Logo, font, layout KOP",
+    color: "rose",
   },
 ];
 
@@ -137,6 +146,7 @@ export default function Home() {
           {view === "documents" && <Documents />}
           {view === "reports" && <Reports />}
           {view === "master" && <MasterData />}
+          {view === "letterhead" && <LetterheadSettingsPanel />}
         </div>
       </main>
 

@@ -118,3 +118,57 @@ model Document {
   @@index([transactionId])
   @@index([type])
 }
+
+// ============ LETTERHEAD (KOP SURAT) SETTINGS ============
+
+model LetterheadSettings {
+  id              String   @id @default(cuid())
+  
+  // Logo settings
+  logoPath        String?  // relative path to uploaded logo, e.g. /uploads/logo.png
+  logoWidth       Int      @default(110)  // logo width in px
+  logoHeight      Int      @default(110)   // logo height in px (auto if 0)
+  logoOffsetX     Int      @default(0)     // horizontal shift: negative=left, positive=right
+  logoOffsetY     Int      @default(0)     // vertical shift: negative=up, positive=down
+  
+  // Font settings
+  fontFamily      String   @default("Arial")
+  lineSpacing     Int      @default(6)     // extra spacing between lines in px
+  
+  // 7 text lines (KOP structure)
+  line1Text       String   @default("PEMERINTAH PROVINSI SUMATERA UTARA")
+  line1Bold       Boolean  @default(true)
+  line1Size       Int      @default(14)
+  
+  line2Text       String   @default("DINAS PENDIDIKAN")
+  line2Bold       Boolean  @default(true)
+  line2Size       Int      @default(14)
+  
+  line3Text       String   @default("SMA NEGERI 1 TELUKDALAM")
+  line3Bold       Boolean  @default(true)
+  line3Size       Int      @default(20)
+  
+  line4Text       String   @default("Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan,")
+  line4Bold       Boolean  @default(false)
+  line4Size       Int      @default(11)
+  
+  line5Text       String   @default("Cabdisdik Wil XIV, Kode Pos 22865")
+  line5Bold       Boolean  @default(false)
+  line5Size       Int      @default(11)
+  
+  line6Text       String   @default("Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com")
+  line6Bold       Boolean  @default(false)
+  line6Size       Int      @default(11)
+  
+  line7Text       String   @default("Laman : smansatelukdalam.sch.id")
+  line7Bold       Boolean  @default(false)
+  line7Size       Int      @default(11)
+  
+  // Bottom border line
+  showBottomLine  Boolean  @default(true)
+  bottomLineWidth Int      @default(2)     // border thickness in px
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+

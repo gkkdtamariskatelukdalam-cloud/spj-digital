@@ -178,3 +178,39 @@ export interface DocumentGroupsResponse {
     withoutVendor: number;
   };
 }
+
+// ============ Letterhead (KOP Surat) Settings ============
+
+export interface LetterheadSettings {
+  id: string;
+  logoPath: string | null;
+  logoWidth: number;
+  logoHeight: number;
+  logoOffsetX: number;
+  logoOffsetY: number;
+  fontFamily: string;
+  lineSpacing: number;
+  line1Text: string;
+  line1Bold: boolean;
+  line1Size: number;
+  line2Text: string;
+  line2Bold: boolean;
+  line2Size: number;
+  line3Text: string;
+  line3Bold: boolean;
+  line3Size: number;
+  line4Text: string;
+  line4Bold: boolean;
+  line4Size: number;
+  line5Text: string;
+  line5Bold: boolean;
+  line5Size: number;
+  line6Text: string;
+  line6Bold: boolean;
+  line6Size: number;
+  line7Text: string;
+  line7Bold: boolean;
+  line7Size: number;
+  showBottomLine: boolean;
+  bottomLineWidth: number;
+}

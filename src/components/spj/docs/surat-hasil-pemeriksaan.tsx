@@ -2,6 +2,7 @@
 
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate, formatNumber, getMonthName } from "@/lib/format";
+import { Letterhead } from "@/components/spj/letterhead";
 import {
   getDayName,
   getDayNum,
@@ -39,18 +40,9 @@ export function SuratHasilPemeriksaan({
   return (
     <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
       {/* === Kop Surat === */}
-      <header className="text-center border-b-2 border-slate-800 pb-3 mb-5">
-        <div className="font-bold uppercase text-[13px] tracking-wide">
-          PEMERINTAH PROVINSI SUMATERA UTARA
-        </div>
-        <div className="font-bold uppercase text-[13px] tracking-wide">
-          DINAS PENDIDIKAN
-        </div>
-        <div className="font-bold uppercase text-[14px] tracking-wide">
-          {schoolName(school)}
-        </div>
-        <div className="text-[11px] mt-1">{schoolAddress(school)}</div>
-      </header>
+      <div className="mb-5">
+        <Letterhead />
+      </div>
 
       {/* === Title === */}
       <div className="text-center mb-5">

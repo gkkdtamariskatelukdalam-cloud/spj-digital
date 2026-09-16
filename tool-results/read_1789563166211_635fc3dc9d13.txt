@@ -1,0 +1,542 @@
+     1→     1→# Worklog: Cetak ATK 2025 Excel Analysis App
+     2→     2→
+     3→     3→---
+     4→     4→Task ID: 1
+     5→     5→Agent: Main (Claude)
+     6→     6→Task: Membuat aplikasi web dari file Excel `Cetak ATK_2025.xlsm` (password: 88dina) yang menganalisis setiap rumus pada setiap cell serta macro VBA pada setiap sheet.
+     7→     7→
+     8→     8→Work Log:
+     9→     9→- Decrypt file Excel terenkripsi (`Cetak ATK_2025.xlsm`) menggunakan `msoffcrypto-tool` dengan password `88dina`
+    10→    10→- Ekstrak struktur workbook: 18 sheet, 27 VBA modules, total 38,300 formula, 113,000+ cells
+    11→    11→- Ekstrak VBA macro code menggunakan `olevba --decode` (15 modul aktif + 12 modul kosong)
+    12→    12→- Klasifikasikan setiap sheet ke kategori: Print Form (6), Master Data (3), Reference (3), Helper (1), Info (1), Log (1), Other (3)
+    13→    13→- Petakan setiap VBA module ke sheet tujuan dan deskripsikan tujuan (purpose) dari macro
+    14→    14→- Bangun JSON terstruktur untuk setiap sheet dengan: headers, sample rows (formula + computed value), 300 formula teratas per sheet
+    15→    15→- Buat 3 API endpoints Next.js: `/api/summary`, `/api/sheets` (POST), `/api/vba`
+    16→    16→- Bangun 4 komponen React:
+    17→    17→  1. `Overview` - Ringkasan dengan stats, kategori, top sheets, VBA summary, workflow diagram
+    18→    18→  2. `SheetList` - Sidebar daftar sheet dikelompokkan per kategori dengan badge formula count
+    19→    19→  3. `SheetDetailView` - Detail sheet dengan 2 tab: Analisis Rumus (tabel formula+nilai dengan search) & Pratinjau Data (matrix cell formula+value)
+    20→    20→  4. `VbaBrowser` - Browser VBA dengan list modul + code viewer (syntax highlighting VBA) + tombol copy
+    21→    21→- Implement React Query untuk caching data dengan staleTime 5 menit
+    22→    22→- Layout responsif dengan sidebar desktop & top list mobile, sticky footer (mt-auto + min-h-screen flex flex-col)
+    23→    23→- Lulus `bun run lint` tanpa error
+    24→    24→- Verifikasi end-to-end dengan Agent Browser:
+    25→    25→  - Page render dengan benar (tidak ada white screen)
+    26→    26→  - Tab navigation: Ringkasan ↔ Sheets ↔ Macro VBA semua berfungsi
+    27→    27→  - Sheet selection dari sidebar memuat detail dengan formula & data preview
+    28→    28→  - VBA code browser menampilkan kode dengan syntax highlighting
+    29→    29→  - Tombol "Salin Kode" berfungsi (ubah ke "Tersalin")
+    30→    30→  - Search filter formula berfungsi
+    31→    31→  - Footer sticky di bottom (verified dengan eval JS)
+    32→    32→  - Tidak ada error di console browser
+    33→    33→
+    34→    34→Stage Summary:
+    35→    35→- File terdekripsi: `/home/z/my-project/analysis/Cetak_ATK_2025_decrypted.xlsm`
+    36→    36→- Analisis lengkap (JSON): `/home/z/my-project/public/analysis/{summary.json, sheet_*.json, vba_modules.json}`
+    37→    37→- Frontend: 4 komponen di `/home/z/my-project/src/components/analysis/`
+    38→    38→- API: 3 routes di `/home/z/my-project/src/app/api/{summary,sheets,vba}/route.ts`
+    39→    39→- Dev server jalan di port 3000, lint lulus, semua interaksi terverifikasi
+    40→    40→- Aplikasi menganalisis: 18 sheets (38,300 formula), 27 VBA modules (15 aktif), dengan 3 view utama
+    41→    41→
+    42→    42→---
+    43→    43→Task ID: 2-a
+    44→    44→Agent: Sub-agent (general-purpose)
+    45→    45→Task: Create remaining SPJ API routes (vendors, products, bpu, school, reports, documents, transaksi-detail) following the same RESTful pattern used in the existing `transactions` and `dashboard` routes.
+    46→    46→
+    47→    47→Work Log:
+    48→    48→- Read worklog.md to understand prior work (Task 1: Excel analysis app, dashboard + transactions API already exist).
+    49→    49→- Read `/home/z/my-project/prisma/schema.prisma` to confirm model field names (School, Vendor, Product, Bpu, Transaction, Document).
+    50→    50→- Read `/home/z/my-project/src/app/api/spj/dashboard/route.ts` and `/home/z/my-project/src/app/api/spj/transactions/[id]/route.ts` to match existing patterns (RouteParams interface, try/catch, console.error, `NextResponse.json({ error: ... }, { status })`).
+    51→    51→- Created dynamic-route directories: `vendors/[id]`, `products/[id]`, `bpu/[id]`, `documents/[id]`.
+    52→    52→- Implemented 11 route files:
+    53→    53→  1. `vendors/route.ts` — GET (q search across name/owner/phone/address), POST (create).
+    54→    54→  2. `vendors/[id]/route.ts` — GET (with related transactions summary), PUT (whitelist fields), DELETE (guards against vendor with linked transactions, returns 409).
+    55→    55→  3. `products/route.ts` — GET (q + category filter), POST.
+    56→    56→  4. `products/[id]/route.ts` — GET, PUT (parses price as Float), DELETE.
+    57→    57→  5. `bpu/route.ts` — GET (q + isActive filter), POST (uniqueness check returning 409 on duplicate code).
+    58→    58→  6. `bpu/[id]/route.ts` — GET, PUT (Boolean coercion for isActive), DELETE.
+    59→    59→  7. `school/route.ts` — GET (first record, 404 if missing), PUT (upserts: updates first if exists, creates with required name otherwise).
+    60→    60→  8. `reports/route.ts` — GET with `?type=` switch. Fetches all transactions once (lightweight select) then dispatches to:
+    61→    61→     - `monthly` — per-month total + count, sorted by month.
+    62→    62→     - `vendor` — per-vendor totals with vendor name/owner/phone (looked up in second query), plus no-vendor bucket.
+    63→    63→     - `category` — keyword-based grouping: Konsumsi (nasi/kue/aqua/air mineral/minuman/roti/kopi/teh/snack) → Jasa (jasa/perbaikan/servis/cetak/ongkos) → ATK (kertas/pulpen/bolpoin/spidol/buku/arsip/amplop/stapler/tinta) → Lainnya. Always returns all 4 buckets in fixed order.
+    64→    64→     - `status` — lunas vs pending counts + amounts (lunas = `status==="lunas"` OR `masukBku==="MASUK BKU"`).
+    65→    65→     - `summary&bulan=X&tahun=Y` — month summary with totals, realisasi, status split, top vendors, and per-category breakdown.
+    66→    66→  9. `documents/route.ts` — GET (filter by transactionId/type/status, includes transaction summary), POST (validates transactionId exists, type required).
+    67→    67→  10. `documents/[id]/route.ts` — GET (includes transaction), PUT, DELETE.
+    68→    68→  11. `transaksi-detail/route.ts` — POST `{ transactionId }` returns full transaction with vendor + documents, plus a `documentsByType` grouped map for convenient frontend use.
+    69→    69→- Ran `bun run lint` — clean, no errors or warnings.
+    70→    70→
+    71→    71→Stage Summary:
+    72→    72→- 11 new route files added under `/home/z/my-project/src/app/api/spj/`:
+    73→    73→  - vendors/route.ts, vendors/[id]/route.ts
+    74→    74→  - products/route.ts, products/[id]/route.ts
+    75→    75→  - bpu/route.ts, bpu/[id]/route.ts
+    76→    76→  - school/route.ts
+    77→    77→  - reports/route.ts
+    78→    78→  - documents/route.ts, documents/[id]/route.ts
+    79→    79→  - transaksi-detail/route.ts
+    80→    80→- All routes follow RESTful conventions and the existing project patterns (RouteParams interface, NextResponse, db client import).
+    81→    81→- Lint passes cleanly.
+    82→    82→- Reports endpoint supports 5 query types: monthly, vendor, category, status, summary (with bulan/tahun filters).
+    83→    83→- Next agent can wire frontend pages/components to these endpoints via TanStack Query.
+    84→    84→
+    85→    85→---
+    86→    86→Task ID: 3-a
+    87→    87→Agent: Sub-agent (general-purpose)
+    88→    88→Task: Create the SPJ Dashboard UI component (`/home/z/my-project/src/components/spj/dashboard.tsx`) — a comprehensive dashboard with hero header, stat tiles, monthly spending bar chart, top vendor breakdown, and quick stats row.
+    89→    89→
+    90→    90→Work Log:
+    91→    91→- Read `worklog.md` (Task 1 + 2-a context: analysis app + SPJ REST API routes already exist).
+    92→    92→- Read `/home/z/my-project/src/lib/format.ts` — confirmed `formatRupiah`, `formatNumber`, `getMonthName`, `getMonthShort` helpers.
+    93→    93→- Read `/home/z/my-project/src/lib/types/spj.ts` — confirmed `DashboardData` shape (school, stats{totalAmount,totalRealisasi,transactionCount,vendorCount,productCount,bpuCount,documentCount,statusBreakdown{lunas,pending,total}}, monthly[{month,monthName,total,count}], byVendor[{vendorId,name,total}]).
+    94→    94→- Read `/home/z/my-project/src/hooks/use-spj.ts` — confirmed `useDashboard()` hook returns TanStack Query result (data, isLoading, isError, error, refetch).
+    95→    95→- Read `/home/z/my-project/src/app/api/spj/dashboard/route.ts` — confirmed API returns top-8 vendors already sorted desc.
+    96→    96→- Read `/home/z/my-project/src/components/ui/{card,badge,progress}.tsx` — confirmed available shadcn primitives and their default padding behavior (Card has `py-6 gap-6`, CardContent has `px-6`).
+    97→    97→- Read `/home/z/my-project/src/components/analysis/overview.tsx` — matched the existing visual language (gradient hero `from-slate-900 via-slate-800 to-violet-900`, white/10 backdrop-blur badges, tone-coded category tiles) to keep dashboard stylistically consistent.
+    98→    98→- Verified `package.json` has `recharts@^2.15.4` and `lucide-react@^0.525.0` available.
+    99→    99→- Created `/home/z/my-project/src/components/spj/` directory implicitly via Write tool.
+   100→   100→- Implemented `Dashboard` component with `"use client"` directive and 5 sections:
+   101→   101→  1. **Hero header** — gradient `from-slate-900 via-slate-800 to-rose-900`, badges for school name (rose) and year (amber), title "Dashboard SPJ", subtitle "Surat Pertanggungjawaban", description "Sistem Pertanggungjawaban Pengadaan ATK Tahun {year}", plus a realisasi callout box on the right.
+   102→   102→  2. **Stat tiles (4-col grid)** — Total Pengeluaran (rose, formatRupiah), Jumlah Transaksi (violet, formatNumber), Jumlah Vendor (amber, formatNumber), Status Lunas/Pending (emerald, with Progress bar showing lunas %).
+   103→   103→  3. **Monthly spending chart** — Recharts BarChart in ResponsiveContainer (height 300), 12-month array (filled with zeros for missing months via `getMonthShort`), Y-axis formatted with `formatMillions` helper ("Rp X.X M" / "Rp X.X jt" / "Rp X rb"), rose-500 bars (rose-200 for empty months), custom tooltip with formatted Rupiah values.
+   104→   104→  4. **Vendor breakdown** — top 8 vendors as horizontal list cards; each row shows rank, name, total (formatRupiah), % of grand total, and a violet→rose gradient progress bar scaled relative to top vendor.
+   105→   105→  5. **Quick stats row (4 small cards)** — Total Produk (cyan), Total BPU (amber), Total Dokumen (violet), Total Realisasi (emerald, formatRupiah).
+   106→   106→- Built `StatTile` and `QuickStat` reusable sub-components with `Tone`-mapped colors (rose/violet/amber/emerald/cyan only — no indigo/blue).
+   107→   107→- Loading state: Card with `Loader2` spinner + "Memuat data dashboard SPJ...".
+   108→   108→- Error state: Card with `AlertCircle` + error message + "Coba lagi" retry button (calls `refetch()`).
+   109→   109→- Empty state: Card with muted "Tidak ada data tersedia".
+   110→   110→- Responsive grids: 1 col mobile → 2 col sm → 4 col lg for stat tiles & quick stats; 1 col → 3:2 split (lg:col-span-3 / lg:col-span-2) for charts row.
+   111→   111→- Ran `bun run lint` — passed clean (no errors or warnings).
+   112→   112→- Ran `bunx tsc --noEmit` — no errors in `dashboard.tsx` or `components/spj/*` (pre-existing RouteParams errors in Task 2-a API routes are unrelated to this component).
+   113→   113→
+   114→   114→Stage Summary:
+   115→   115→- Created: `/home/z/my-project/src/components/spj/dashboard.tsx` (single file, ~430 lines, client component).
+   116→   116→- Exports: `Dashboard` (no props — fetches via `useDashboard()` hook).
+   117→   117→- Color palette: rose, violet, amber, emerald, cyan, slate — no indigo/blue.
+   118→   118→- All required sections present and visually polished (gradients, shadows, hover transitions, tone-coded borders).
+   119→   119→- Lint passes cleanly. Next agent can drop `<Dashboard />` into any SPJ page (e.g., `/app/spj/page.tsx`).
+   120→   120→
+   121→   121→---
+   122→   122→Task ID: 3-b
+   123→   123→Agent: Sub-agent (general-purpose)
+   124→   124→Task: Create the SPJ Transactions management UI component (`/home/z/my-project/src/components/spj/transactions.tsx`) — a full transaction CRUD interface with filter bar, summary bar, sticky-header table, add/edit dialog, delete AlertDialog, and mobile-responsive card list.
+   125→   125→
+   126→   126→Work Log:
+   127→   127→- Read `worklog.md` (Task 1 + 2-a + 3-a context: dashboard.tsx already exists, all SPJ REST API routes ready, hooks available in `@/hooks/use-spj`).
+   128→   128→- Read `/home/z/my-project/src/lib/types/spj.ts` — confirmed `Transaction` interface fields (noUrut, tglPesan, noPesan, tglBast, noBast, tglBayar, noBku, bpuCode, uraian, namaBarang, volume, satuan, tarifHarga, jumlah, realisasi, bulan, tahun, masukBku, status, vendorId, vendor, documents, etc.).
+   129→   129→- Read `/home/z/my-project/src/hooks/use-spj.ts` — confirmed `useTransactions(query)`, `useVendors()` returning `{ items: Vendor[] }`, `useCreateTransaction`, `useUpdateTransaction`, `useDeleteTransaction` mutations exist.
+   130→   130→- Read `/home/z/my-project/src/lib/format.ts` — confirmed `formatRupiah`, `formatNumber`, `formatDate`, `formatDateShort`, `getMonthName` helpers.
+   131→   131→- Read `/home/z/my-project/src/app/api/spj/transactions/route.ts` and `/api/spj/transactions/[id]/route.ts` — confirmed GET supports `bulan`, `tahun`, `vendorId`, `status` (`lunas`/`pending` mapped to `masukBku` field), `q` (searches uraian, namaBarang, noBku, noPesan), `limit`, `offset`. POST whitelist fields match the form. `status` derives from `masukBku` field; in save handler we set `masukBku = "MASUK BKU"` when status === "lunas" so the GET filter remains consistent.
+   132→   132→- Read shadcn components used: `card`, `badge`, `button`, `dialog`, `alert-dialog`, `dropdown-menu`, `input`, `label`, `select`, `table`, `textarea`, `tooltip`. Confirmed imports/exports.
+   133→   133→- Verified `sonner` package present (`^2.0.6`) and `lucide-react` for icons.
+   134→   134→- Created `/home/z/my-project/src/components/spj/transactions.tsx` (single client component, ~660 lines):
+   135→   135→  1. **Filter bar (sticky top, z-30)** — Card with `sticky top-0 backdrop-blur`, 4 controls in a responsive flex column → lg row:
+   136→   136→     - Search input (with `Search` icon, 300ms debounce via `useEffect`+`setTimeout`)
+   137→   137→     - Bulan Select (Semua Bulan + Januari..Desember)
+   138→   138→     - Status Select (Semua Status, Lunas, Pending)
+   139→   139→     - Vendor Select (Semua Vendor + items from `useVendors()`)
+   140→   140→     - Rose "Tambah Transaksi" Button
+   141→   141→  2. **Summary bar (3-col grid)** — Total Transaksi (violet), Total Nilai (rose, formatRupiah of `totalAmount`), Total Realisasi (emerald, formatRupiah sum of `realisasi`). Custom `SummaryTile` sub-component with tone-coded borders/backgrounds.
+   142→   142→  3. **Transaction table (desktop only, `hidden md:block`)** — Card with `overflow-hidden` containing a `max-h-[calc(100vh-22rem)] overflow-auto` wrapper for sticky header scroll. Columns: No (auto-inc), No. BKU (mono badge), Tgl Pesan/Tgl Bayar (with secondary emerald `↳ bayar`), Uraian (line-clamp-2 + Tooltip with full text), Nama Barang (truncate), Vendor (truncate, "—" if null), Volume + Satuan, Tarif (formatRupiah), Jumlah (bold rose formatRupiah), Status Badge (emerald Lunas / amber Pending), Actions dropdown.
+   143→   143→  4. **Mobile card list (`md:hidden`)** — Each transaction as its own Card with: header (No + optional No.BKU badge + Status badge + actions), Uraian (line-clamp-2) + Nama Barang (Tag icon), 2×2 grid of metadata (Pesan date, Bayar date, Vendor, Volume), and a footer showing Tarif + Jumlah (bold rose) separated by border-t.
+   144→   144→  5. **Add/Edit Dialog (`sm:max-w-2xl`, scrollable)** — 2-column grid form with all required fields: No. BKU (mono), Bulan select, Uraian (Textarea, required), Nama Barang, Vendor select (with "— Tidak ada —" option), Volume (number), Satuan, Tarif Harga (number), auto-computed Jumlah displayed in a rose callout box (Volume × Tarif = formatRupiah), divider, Tgl Pesan (date) + No. Pesan, Tgl BAST (date) + No. BAST, Tgl Bayar (date), Status (Lunas/Pending) select. Footer: Batal + Simpan (rose) buttons. Form disabled while saving, spinner shown.
+   145→   145→  6. **Delete AlertDialog** — AlertTriangle icon (rose) in title, description with uraian + jumlah (formatRupiah bold rose) shown in a slate callout box. Cancel + Hapus (rose) buttons. Spinner during mutation.
+   146→   146→  7. **Footer note** below table — "Menampilkan X dari Y transaksi" with amber warning Badge if `totalRows > 100`.
+   147→   147→- Real-time `jumlah` computed via `useMemo` on `volume × tarifHarga`; payload includes `jumlah`, `realisasi`, `masukBku`, `status` derived appropriately.
+   148→   148→- `toInputDate()` helper converts ISO date strings to `yyyy-mm-dd` for `<input type="date">` (handles invalid/null gracefully).
+   149→   149→- `Field` reusable wrapper component for consistent label+input spacing; `StatusBadge`, `RowActions`, `SummaryTile`, `TransactionCard`, `Info` sub-components for clarity.
+   150→   150→- Color palette strictly uses rose, violet, amber, emerald, slate (no indigo/blue).
+   151→   151→- Loading state: Card with `Loader2` spinner + "Memuat transaksi...".
+   152→   152→- Error state: rose-bordered Card with `AlertCircle`, error message, "Coba lagi" Button calling `refetch()`.
+   153→   153→- Empty state: dashed-border Card with `Layers` icon and helper text.
+   154→   154→- Ran `bun run lint` — clean (no errors, no warnings).
+   155→   155→- Ran `bunx tsc --noEmit` — no errors specific to `transactions.tsx`. (Pre-existing errors in `.next/dev/types/validator.ts` reference Task 2-a API route `RouteParams` interface shape — unrelated to this component, documented in Task 3-a worklog.)
+   156→   156→
+   157→   157→Stage Summary:
+   158→   158→- Created: `/home/z/my-project/src/components/spj/transactions.tsx` (single file, ~660 lines, client component).
+   159→   159→- Exports: `Transactions` (no props — fetches via hooks).
+   160→   160→- Color palette: rose, violet, amber, emerald, slate — no indigo/blue.
+   161→   161→- All required sections present: sticky filter bar (search + 3 selects + add button), 3 summary tiles, sticky-header desktop table with 11 columns, mobile card list, full add/edit dialog with 14 fields and auto-computed jumlah callout, delete AlertDialog with warning icon + uraian/jumlah preview, footer "Menampilkan X dari Y" note with 100-row overflow warning.
+   162→   162→- Lint passes cleanly. Next agent can drop `<Transactions />` into any SPJ page (e.g., a tab in `/app/page.tsx`).
+   163→   163→
+   164→   164→---
+   165→   165→Task ID: 3-c
+   166→   166→Agent: Sub-agent (general-purpose)
+   167→   167→Task: Create the SPJ Master Data management UI component (`/home/z/my-project/src/components/spj/master-data.tsx`) — a 4-tab CRUD interface (Vendor, Produk, BPU, Sekolah) using Tabs + Dialog + AlertDialog patterns.
+   168→   168→
+   169→   169→Work Log:
+   170→   170→- Read `worklog.md` (Task 1 + 2-a + 3-a + 3-b context: dashboard.tsx and transactions.tsx already exist, all SPJ REST API routes ready, hooks in `@/hooks/use-spj`).
+   171→   171→- Read `/home/z/my-project/src/lib/types/spj.ts` — confirmed `Vendor`, `Product`, `Bpu`, `School` field shapes (all nullable fields are `string | null`).
+   172→   172→- Read `/home/z/my-project/src/hooks/use-spj.ts` — confirmed all required hooks exist: `useVendors(q)` returns `{ items: Vendor[] }`, `useProducts(q, category)` returns `{ items: Product[] }`, `useBpu(q)` returns `{ items: Bpu[] }`, `useSchool()` returns `{ school: School | null }`. Note: BPU has no update hook (only create + delete), as expected.
+   173→   173→- Read `/home/z/my-project/src/lib/format.ts` — confirmed `formatRupiah`, `formatNumber` available (used for product price formatting).
+   174→   174→- Read `/home/z/my-project/src/app/api/spj/vendors/[id]/route.ts` — confirmed DELETE returns 409 with `error` field when vendor has transactions (frontend already wires that to `toast.error` via the mutation's `onError`).
+   175→   175→- Read `/home/z/my-project/src/app/api/spj/school/route.ts` — confirmed GET returns 404 + `{ error }` when no school record exists; PUT upserts with whitelist of all 15 fields; `year` is parsed as Int.
+   176→   176→- Read `/home/z/my-project/src/app/api/spj/bpu/route.ts` — confirmed POST returns 409 on duplicate code; `isActive` defaults to true when not provided.
+   177→   177→- Read `/home/z/my-project/src/components/spj/transactions.tsx` (lines 1-499) — matched existing visual language: sticky filter bar with `backdrop-blur`, tone-coded hover backgrounds on table rows, mono badges for codes, tooltip-on-truncate pattern, dropdown row actions, mobile card list with `md:hidden` + desktop table with `hidden md:block`.
+   178→   178→- Read `/home/z/my-project/src/components/ui/tabs.tsx` — confirmed Tabs API (`Tabs`, `TabsList`, `TabsTrigger`, `TabsContent`) and data-state styling hook (`data-[state=active]:bg-*`).
+   179→   179→- Created `/home/z/my-project/src/components/spj/master-data.tsx` (single client component, ~2042 lines):
+   180→   180→  1. **Main `MasterData` component** — Tabs wrapper with 4 sub-tabs (vendor/product/bpu/school), each trigger styled with `data-[state=active]:bg-{tone}-600 data-[state=active]:text-white` and a tone-matching icon (Store, Boxes, Hash, School).
+   181→   181→  2. **Shared helpers**: `Tone` type union (rose/violet/amber/emerald/cyan/slate — NO indigo/blue), `toneStyles` map providing `accent`/`soft`/`text`/`ring`/`bar` classes per tone, `useDebounced<T>(value, delay=300)` hook (300ms debounce on search inputs), reusable `EmptyState`/`LoadingState`/`ErrorState`/`FilterHeader`/`SearchInput`/`RowActions` sub-components for consistency across tabs.
+   182→   182→  3. **Tab 1: Vendor** — sticky filter header with debounced search (placeholder "Cari vendor berdasarkan nama atau pemilik...") + rose "Tambah Vendor" button. Desktop table (hidden md:block) with sticky header in scrollable wrapper, columns: No, Nama (with rose Store icon tile), Pemilik, No. HP (mono Badge with Phone icon), Alamat (truncated with Tooltip), Aksi (dropdown). Mobile cards (md:hidden) with same data in 2-col grid. Add/Edit Dialog (`sm:max-w-lg`) with: name (required, rose asterisk), owner, phone, 2-col grid; address Textarea. AlertDialog delete with rose AlertTriangle + vendor name preview; mutation's onError wires 409 to toast.error automatically.
+   183→   183→  4. **Tab 2: Produk** — sticky filter header + violet "Tambah Produk" button. Desktop table columns: No, Nama Produk (violet Tag icon + truncate Tooltip), Spesifikasi (truncate Tooltip), Satuan (mono Badge), Harga (formatRupiah, rose mono font), Kategori (tone-coded CategoryBadge: ATK=violet, Konsumsi=amber, Jasa=cyan, Lainnya=slate), Aksi. Mobile cards show name+category badge, spec (line-clamp-2), and footer with satuan badge + price. Add/Edit Dialog (`sm:max-w-lg`) with: name (required), spec Textarea, 2-col grid (satuan + kategori), price number input with formatRupiah preview below.
+   184→   184→  5. **Tab 3: BPU** — sticky filter header + amber "Tambah BPU" button. Info note Card (amber) explaining: "BPU = nomor urut Bendahara Pengguna Anggaran, dipakai untuk tracking dokumen pengadaan". Desktop table columns: No, Kode BPU (amber mono Badge with Hash icon), No. Pesan, Status (emerald Aktif badge with CheckCircle2 / slate Nonaktif badge), Aksi. Edit action shows toast.info("BPU tidak dapat diedit...") since no update endpoint exists. Add Dialog (`sm:max-w-md`) with: code (required, mono font, with suggested next code `BPU00X` computed via `useMemo` from existing items' max numeric suffix), noPesan (optional).
+   185→   185→  6. **Tab 4: Sekolah** — single-record form (NOT a list). Refactored to `SchoolTab` (handles loading/error) + `SchoolFormInner` (uses `key={school?.id ?? "new"}` prop pattern to avoid setState-in-effect). Two main sections:
+   186→   186→     - **Header card**: gradient emerald→cyan with school name + year + Reset + Simpan Perubahan buttons.
+   187→   187→     - **Informasi Sekolah section** (FormSection component, emerald tone): name (required), npsn (mono), year (number), address Textarea — 2-col grid.
+   188→   188→     - **Pejabat Sekolah section** (slate-tone card with UserCog icon): 4 OfficerBlock sub-sections, each rendered via flexible `OfficerBlock({ title, icon, tone, fields: OfficerFieldDef[] })` component: Kepala Sekolah (violet, 3 fields: principalName/principalNip/principalRank), Bendahara (amber, Wallet icon, treasurerName/treasurerNip/treasurerRank), Pengurus Barang (rose, Boxes icon, goodsManagerName/goodsManagerNip/goodsManagerRank), Penerima Barang (cyan, UserCheck icon, 2 fields: receiverName/receiverPhone — note: only 2 fields, grid auto-adjusts via `cols` calc to `sm:grid-cols-2`).
+   189→   189→     - **Footer save card**: emerald gradient with Info icon + "Simpan Perubahan" button.
+   190→   190→     - `OfficerFieldDef` interface: `{ key: keyof SchoolForm, label, placeholder?, mono? }` — flexible enough to handle both 3-field (name+NIP+rank) and 2-field (name+phone) officer layouts without special-casing.
+   191→   191→     - `schoolToForm(school)` helper converts `School | null` to local `SchoolForm` state — used both in `useState` initializer and `handleReset()`.
+   192→   192→  7. **State & mutations**: Each tab owns its own `useState` form state + `useState` dialog/alert open flags + `useState` delete target. Mutations wire `onSuccess` → toast.success + close dialog; `onError` → toast.error with backend error message (handles 409 conflict for vendor delete + 409 duplicate code for BPU create).
+   193→   193→  8. **Color palette**: rose (vendor, primary CTA), violet (produk), amber (BPU, bendahara), emerald (school, aktif status), cyan (penerima barang), slate (neutral backgrounds, pejabat header) — NO indigo/blue anywhere.
+   194→   194→  9. **Responsive**: Each tab's table is `hidden md:block` with horizontal scroll wrapper; mobile cards are `md:hidden` with 2-col grids for compact data display.
+   195→   195→- Lint iteration 1: Initial `bun run lint` flagged `react-hooks/set-state-in-effect` error on the `useEffect`-based form hydration in SchoolTab (calling `setForm` inside `useEffect`). Refactored to `key`-prop pattern: split into outer `SchoolTab` (loading/error boundary) + inner `SchoolFormInner` that takes `initialSchool` prop and initializes state via `useState(() => schoolToForm(initialSchool))`. The `key={school?.id ?? "new"}` on SchoolFormInner forces a clean remount when server data arrives or school id changes — no effect needed.
+   196→   196→- Lint iteration 2: Clean. Also removed unused imports (`User`, `UserPlus`, `Layers`, `Separator`) and unused `WalletIcon` wrapper helper.
+   197→   197→- TypeScript iteration 1: `bunx tsc --noEmit` flagged `PriceTag` not exported from lucide-react (lucide v0.525 doesn't have it). Replaced with `Wallet` icon (already available, semantically appropriate for Bendahara/treasurer).
+   198→   198→- Final: `bun run lint` — clean (no errors, no warnings). `bunx tsc --noEmit` — no errors in `master-data.tsx` (only pre-existing unrelated errors in Task 2-a API route `RouteParams` types, documented in earlier worklogs).
+   199→   199→
+   200→   200→Stage Summary:
+   201→   201→- Created: `/home/z/my-project/src/components/spj/master-data.tsx` (single file, ~2042 lines, client component).
+   202→   202→- Exports: `MasterData` (no props — fetches via hooks).
+   203→   203→- Color palette: rose, violet, amber, emerald, cyan, slate — no indigo/blue.
+   204→   204→- All 4 required tabs implemented with sticky filter headers, debounced search, desktop tables + mobile cards, add/edit Dialogs, delete AlertDialogs, loading/error/empty states, toast notifications via sonner.
+   205→   205→- BPU tab includes info note explaining BPU purpose; suggests next sequential code (BPU00X) based on existing items.
+   206→   206→- School tab uses `key`-prop remount pattern (no setState-in-effect) and flexible OfficerBlock component that handles both 3-field (NIP+rank) and 2-field (phone-only) officer layouts.
+   207→   207→- Lint + TypeScript both pass clean for this file. Next agent can drop `<MasterData />` into any SPJ page (e.g., a tab in `/app/page.tsx` alongside `<Dashboard />` and `<Transactions />`).
+   208→   208→
+   209→   209→---
+   210→   210→Task ID: 3-d
+   211→   211→Agent: Sub-agent (general-purpose)
+   212→   212→Task: Create the SPJ Reports (Laporan) UI component (`/home/z/my-project/src/components/spj/reports.tsx`) — a 4-tab analytical dashboard (Rekap Bulanan, Per Vendor, Per Kategori, Status SPJ) with charts (bar, horizontal bar, pie, donut) and data tables.
+   213→   213→
+   214→   214→Work Log:
+   215→   215→- Read `worklog.md` (Task 1 + 2-a + 3-a + 3-b + 3-c context: dashboard.tsx, transactions.tsx, master-data.tsx already exist; all SPJ REST API routes ready; hooks in `@/hooks/use-spj`).
+   216→   216→- Read `/home/z/my-project/src/lib/format.ts` — confirmed `formatRupiah`, `formatNumber`, `getMonthName`, `getMonthShort` helpers.
+   217→   217→- Read `/home/z/my-project/src/hooks/use-spj.ts` — confirmed `useReport(type, extraParams)` returns TanStack Query result with `ReportData = { type: string, data: unknown }`.
+   218→   218→- Read `/home/z/my-project/src/lib/types/spj.ts` — confirmed `ReportData` shape; will cast `data` to typed shapes locally.
+   219→   219→- Read `/home/z/my-project/src/app/api/spj/reports/route.ts` — **discovered the actual API response shapes differ slightly from the task description's stated shapes**:
+   220→   220→  - `monthly` returns `{ type, data: MonthlyRow[] }` ✓ matches task description.
+   221→   221→  - `vendor` returns `{ type, data: { byVendor: VendorRow[], noVendor: { total, count }, totalVendors } }` — NOT a plain array as task described; includes extra `noVendor` bucket + `totalVendors` count, and VendorRow includes `owner`/`phone` fields.
+   222→   222→  - `category` returns `{ type, data: CategoryRow[] }` (array of `{ category, total, count }`) — NOT an object keyed by category name as task described.
+   223→   223→  - `status` returns `{ type, data: { lunas: { count, amount }, pending: { count, amount }, total: { count, amount } } }` — uses `amount` field (NOT `total` as task described).
+   224→   224→  - **Adapted the component to handle the actual API shapes** (defined local `MonthlyRow`/`VendorRow`/`VendorReportData`/`CategoryRow`/`StatusReportData` interfaces and cast `data` accordingly).
+   225→   225→- Read `/home/z/my-project/src/components/spj/dashboard.tsx` — matched the existing visual language: rose-600 spinners, rose-bordered error cards, `formatMillions` helper for compact IDR axis ticks ("Rp X.X M" / "Rp X.X jt" / "Rp X rb"), tone-coded icon tiles, gradient-free flat styling with tone-coded borders.
+   226→   226→- Read `/home/z/my-project/src/components/ui/{tabs,table,badge,progress}.tsx` — confirmed API: Tabs/TabsList/TabsTrigger/TabsContent (with `data-[state=active]:bg-*` styling hook), Table primitives (TableHeader/TableBody/TableFooter/TableHead/TableRow/TableCell), Badge with `variant="outline"`, Progress uses `bg-primary` indicator (monochrome primary = slate near-black/white, so I built a custom `ProgressBar` sub-component with inline `backgroundColor` style to ensure tone-correct colored bars).
+   227→   227→- Verified recharts@^2.15.4 + lucide-react@^0.525.0 available.
+   228→   228→- Created `/home/z/my-project/src/components/spj/reports.tsx` (single client component, ~970 lines):
+   229→   229→  1. **Main `Reports` component** — `Tabs` wrapper with 4 sub-tabs; each trigger styled with `data-[state=active]:bg-{tone}-600 data-[state=active]:text-white` and a tone-matching icon (CalendarDays=rose, Store=violet, Tags=amber, ClipboardList=emerald). TabsList wrapped in an `overflow-x-auto` container for horizontal scroll on small screens.
+   230→   230→  2. **Shared sub-components**: `Tone` type union (rose/violet/amber/emerald/cyan — NO indigo/blue), `toneStyles` map providing `ring`/`bg`/`text`/`bar` classes per tone, `LoadingCard` (rose spinner + label), `ErrorCard` (rose-bordered card + AlertCircle + retry button calling `refetch()`), `EmptyCard` (dashed-border card + AlertCircle + title/description), `ProgressBar` (inline-styled div with explicit color for full control — NOT using shadcn `Progress` which has monochrome primary indicator), `SmallStat` (compact 2-line stat tile), `StatusStat` (larger tile with icon + count + amount + progress bar).
+   231→   231→  3. **Tab 1: Rekap Bulanan** — 
+   232→   232→     - 4 summary tiles: Total Bulan Aktif (rose), Total Transaksi (violet), Total Nilai (emerald), Rata-rata per Bulan (amber).
+   233→   233→     - Vertical bar chart (`BarChart` + `Bar` + `Cell`): 12-month array filled with zeros for missing months via `getMonthShort` lookup, rose-500 bars (rose-200 for empty months), Y-axis `formatMillions` tickFormatter, custom Tooltip showing formatted Rupiah + month name, `ResponsiveContainer height={320}`.
+   234→   234→     - Data table: Bulan / Jumlah Transaksi / Total Nilai (Rp) / Total Realisasi (Rp), with **sticky header** (`sticky top-0 z-10 bg-card shadow-sm`) and **sticky footer** (`sticky bottom-0 z-10 bg-muted/80 backdrop-blur-sm`) showing grand total. Realisasi column shows "—" with footnote explaining the API doesn't expose realisasi at monthly aggregation (no `totalRealisasi` field in `buildMonthly` response).
+   235→   235→     - Wrapped table in `max-h-[420px] overflow-auto` for vertical scroll.
+   236→   236→  4. **Tab 2: Per Vendor** — 
+   237→   237→     - 4 summary tiles: Total Vendor (violet), Total Transaksi (rose), Total Nilai (emerald), Tanpa Vendor (amber, from `noVendor.count`).
+   238→   238→     - Horizontal bar chart (layout="vertical"): top 10 vendors, YAxis type="category" with 16-char truncation tickFormatter, XAxis type="number" with `formatMillions` ticks, multi-color bars (violet→rose→emerald→amber→cyan cycle via `VENDOR_PALETTE`).
+   239→   239→     - Donut chart (innerRadius=55, outerRadius=95): top 5 vendors + "Lainnya" bucket combining rest + `noVendor`. Pie + Cell components with explicit colors, Legend with `iconType="circle"`, custom Tooltip showing `formatRupiah + pct`.
+   240→   240→     - Data table: # / Vendor (with colored dot) / Pemilik / Jumlah Transaksi / Total Nilai (Rp) / % dari Total (with mini progress bar). Includes a "Tanpa Vendor" row at the bottom (italic, dashed top border) when `noVendor.count > 0`. Sticky header + sticky footer with grand total (colSpan=3 for the "TOTAL (N vendor)" label).
+   241→   241→  5. **Tab 3: Per Kategori** — 
+   242→   242→     - 4 summary tiles: Total Kategori (amber), Total Transaksi (rose), Total Nilai (emerald), Rata-rata per Transaksi (violet).
+   243→   243→     - Pie chart (outerRadius=95, no innerRadius = solid pie): 4 categories with color map (Konsumsi=amber #f59e0b, Jasa=cyan #06b6d4, ATK=violet #8b5cf6, Lainnya=slate #64748b). Pie + Cell + Legend with colored circle icons.
+   244→   244→     - Ringkasan Kategori cards: per-category card with colored dot + name + Badge count + amount (in category color) + percentage + ProgressBar.
+   245→   245→     - Data table: Kategori (with colored dot) / Jumlah Transaksi / Total Nilai (Rp, in category color) / % dari Total (with mini progress bar). Footer with grand total.
+   246→   246→  6. **Tab 4: Status SPJ** — 
+   247→   247→     - 3 StatusStat cards: Total Lunas (emerald + CheckCircle2 icon), Total Pending (amber + Clock icon), Total Semua (rose + ClipboardList icon). Each shows count + amount + ProgressBar showing lunas%/pending%/100% with progressLabel like "X.X% dari N transaksi".
+   248→   248→     - Donut chart 1 (innerRadius=70, outerRadius=110): Lunas vs Pending by COUNT — emerald + amber colors, custom Tooltip showing "N transaksi (X.X%)".
+   249→   249→     - Donut chart 2: Lunas vs Pending by AMOUNT (Rp) — same colors, custom Tooltip showing `formatRupiah + pct`.
+   250→   250→     - Each donut chart followed by two ProgressBar rows (Lunas/Pending) with colored dots + label + value (count or rupiah) + percentage.
+   251→   251→- **Color palette strictly uses rose, violet, amber, emerald, cyan, slate** (NO indigo/blue) — verified across all 4 tabs, charts, badges, progress bars, dots, and table cell text colors.
+   252→   252→- All chart containers use `ResponsiveContainer width="100%" height={300-400}` (320 for monthly pie, 380 for vendor bar, 320 for vendor/category/status pies).
+   253→   253→- All amounts formatted with `formatRupiah` (Rupiah) or `formatNumber` (counts); percentages use `.toFixed(1)`.
+   254→   254→- Loading/error/empty states implemented per tab via `LoadingCard`/`ErrorCard`/`EmptyCard` sub-components.
+   255→   255→- Tables use sticky headers (`sticky top-0 z-10 bg-card shadow-sm`) and sticky footers (`sticky bottom-0 z-10 bg-muted/80 backdrop-blur-sm`) for monthly + vendor tables; the category table is short enough that footer is just `bg-muted/80` without sticky.
+   256→   256→- Ran `bun run lint` — **clean (no errors, no warnings)** on first attempt (no iteration needed).
+   257→   257→- Ran `bunx tsc --noEmit` — no errors in `reports.tsx`. All remaining TypeScript errors are pre-existing issues in Task 2-a API route `RouteParams` shape (unrelated to this component, documented in earlier worklogs), the `examples/websocket/*` files (missing socket.io types, unrelated), and `skills/*` files (unrelated).
+   258→   258→
+   259→   259→Stage Summary:
+   260→   260→- Created: `/home/z/my-project/src/components/spj/reports.tsx` (single file, ~970 lines, client component).
+   261→   261→- Exports: `Reports` (no props — fetches via 4 independent `useReport()` calls, one per sub-tab).
+   262→   262→- Color palette: rose, violet, amber, emerald, cyan, slate — no indigo/blue.
+   263→   263→- All 4 required sub-tabs implemented: Rekap Bulanan (bar chart + sticky-header/footer table), Per Vendor (horizontal bar + donut + sticky-header/footer table with Tanpa Vendor row), Per Kategori (pie + summary cards + table), Status SPJ (3 stat cards + 2 donut charts + progress bars).
+   264→   264→- Adapted to **actual** API response shapes (vendor wraps `{byVendor, noVendor, totalVendors}`; category is `{category, total, count}[]`; status uses `amount` field instead of `total`) rather than the task description's slightly-different stated shapes.
+   265→   265→- Lint + TypeScript both pass clean for this file. Next agent can drop `<Reports />` into any SPJ page (e.g., a tab in `/app/page.tsx` alongside `<Dashboard />`, `<Transactions />`, and `<MasterData />`).
+   266→   266→
+   267→   267→---
+   268→   268→Task ID: 3-e
+   269→   269→Agent: Sub-agent (general-purpose)
+   270→   270→Task: Create the SPJ Documents (Dokumen Pertanggungjawaban) component (`/home/z/my-project/src/components/spj/documents.tsx`) — a printable SPJ document generator with transaction list, document preview, and print/mark-printed actions.
+   271→   271→
+   272→   272→Work Log:
+   273→   273→- Read `worklog.md` (Task 1 + 2-a + 3-a..3-d context: dashboard.tsx, transactions.tsx, master-data.tsx, reports.tsx already exist; all SPJ REST API routes ready; hooks in `@/hooks/use-spj`).
+   274→   274→- Read `/home/z/my-project/src/lib/types/spj.ts` — confirmed `Transaction` (with optional `documents?: Document[]`), `School`, `Document`, `TransactionListResponse` field shapes.
+   275→   275→- Read `/home/z/my-project/src/lib/format.ts` — confirmed `formatRupiah`, `formatNumber`, `formatDate`, `getMonthName`, `terbilang` helpers available. `terbilang` returns lowercase ("satu juta rupiah"); used a local `capitalize()` helper to format the leading letter.
+   276→   276→- Read `/home/z/my-project/src/hooks/use-spj.ts` — confirmed: `useTransactions(query)` returns `{ transactions, total, totalAmount, limit, offset }`, `useSchool()` returns `{ school: School | null }`, `useTransactionDetail(id)` returns `{ transaction: Transaction & { documents: Document[] } | null }` (this is the hook that fetches with `documents` included; the list endpoint does NOT include documents), `useCreateDocument()` mutation posts `{ transactionId, type, docNumber?, docDate?, amount?, filePath?, status? }` and invalidates `spj-transactions`/`spj-transaction`/`spj-dashboard` queries.
+   277→   277→- Read `/home/z/my-project/src/app/api/spj/documents/route.ts` — confirmed POST accepts `{ transactionId, type, docNumber, docDate, amount, filePath, status }` with `status` defaulting to `"generated"`. Used `type: "SPJ"` and `status: "printed"` for the "Tandai Sudah Dicetak" action.
+   278→   278→- Read `/home/z/my-project/src/app/api/spj/transactions/[id]/route.ts` — confirmed GET returns the transaction with `vendor: true, documents: true` includes (so `useTransactionDetail` is the right hook for fetching SPJ documents for the selected transaction).
+   279→   279→- Read `/home/z/my-project/src/app/page.tsx` — confirmed `<Toaster />` from `@/components/ui/sonner` is mounted at the page root, so `import { toast } from "sonner"` works for toast notifications across all SPJ components.
+   280→   280→- Read `/home/z/my-project/src/components/spj/transactions.tsx` (lines 1-499) + dashboard.tsx (lines 1-120) — matched the existing visual language: sticky filter bar with `backdrop-blur`, tone-coded badges/icons (rose-600 spinners, rose-bordered error cards, slate neutral text, mono badges for codes, tooltip-on-truncate pattern, mobile card list `md:hidden` + desktop list `hidden md:block`).
+   281→   281→- Read `/home/z/my-project/src/components/ui/table.tsx` — confirmed Table primitives API (TableHeader/TableBody/TableHead/TableRow/TableCell); used it for the SPJ document items table with explicit `border border-slate-800` classes for the formal Indonesian SPJ appearance.
+   282→   282→- Read `/home/z/my-project/src/app/globals.css` — confirmed no existing print CSS; injected a self-contained `<style dangerouslySetInnerHTML>` block scoped to `@media print` so the print rules are colocated with the component (no global stylesheet changes needed).
+   283→   283→- Created `/home/z/my-project/src/components/spj/documents.tsx` (single file, ~840 lines, client component):
+   284→   284→  1. **Header section** (`print:hidden`): Card with sticky positioning (`sticky top-0 z-30`), title "Dokumen Pertanggungjawaban (SPJ)" with rose FileText icon tile, subtitle "Pilih transaksi untuk membuat/melihat dokumen SPJ", top-right badges (transaction count in violet + "SPJ sudah dibuat" emerald badge when applicable). Filter row: debounced search Input (300ms) with rose Search icon + month Select (Semua Bulan / 12 months via `getMonthName`).
+   285→   285→  2. **Transaction list** (left, `lg:col-span-1`, `print:hidden`): Card with header "Daftar Transaksi" + slate Layers icon. Loading/error/empty states. Scrollable container `max-h-[calc(100vh-16rem)] overflow-y-auto`. Two layouts: mobile horizontal scroll strip (`md:hidden flex gap-2 overflow-x-auto`) with `TransactionChip` (w-56 fixed cards) + desktop vertical list (`hidden md:block space-y-1.5`) with `TransactionListItem`. Each item shows: No. BKU mono Badge (with Hash icon) + month abbrev, transaction uraian (line-clamp-1), Vendor name (with Store icon, truncated, "Tanpa vendor" fallback), Jumlah (rose tabular-nums), Status badge (lunas=emerald, pending=amber). Selected item highlighted with `border-rose-500 bg-rose-50 ring-1 ring-rose-500` (rose border).
+   286→   286→  3. **SPJ preview area** (right, `lg:col-span-2`):
+   287→   287→     - **Action bar** (`print:hidden`): Card showing selected transaction summary (No. BKU mono badge + uraian + status badge) OR "Belum ada transaksi dipilih". Two buttons: "Cetak SPJ" (outline with rose accents, calls `window.print()`, disabled when no selection) and "Tandai Sudah Dicetak" (rose-600 solid button, calls `useCreateDocument` mutation with `{ type: "SPJ", docNumber, docDate, amount: jumlah, status: "printed" }`; disabled when already marked OR school data missing). On success shows sonner toast with doc number; on error shows toast with backend error message.
+   288→   288→     - **Preview Card**: When no transaction selected → dashed-border empty state with FileText icon. When loading → spinner. When error → rose-bordered error card. When ready → renders the printable `#spj-document-print` div containing the `<SpjDocument>` sub-component.
+   289→   289→  4. **`<SpjDocument>` component** (the printable area): Formats the formal Indonesian SPJ document:
+   290→   290→     - **Kop Surat** (3-line header, centered, border-b-2 below): "PEMERINTAH PROVINSI SUMATERA UTARA" / "DINAS PENDIDIKAN" / school name (uppercase bold) / school address (smaller). Falls back to "SMA NEGERI 1 TELUKDALAM" + default Telukdalam address when school data missing.
+   291→   291→     - **Title block**: "SURAT PERTANGGUNGJAWABAN (SPJ)" underlined, "Nomor: {docNumber}" in mono font. Doc number format: `SPJ-{noBku}/{bulanRoman}/{tahun}` (auto-generated from transaction via `buildSpjNumber` helper, or uses existing `spjDoc.docNumber` if document was previously marked).
+   292→   292→     - **Opening paragraph** (text-justify): "Setelah diperiksa dengan seksama, maka jumlah pengeluaran yang dibebankan pada anggaran BOSP Tahun {year} adalah sebagai berikut:".
+   293→   293→     - **Items table**: 6-column bordered Table with header row (No / Uraian / Vol / Satuan / Tarif (Rp) / Jumlah (Rp)). Single data row showing transaction's uraian (with namaBarang as italic subtitle), volume (formatNumber), satuan, tarif (formatNumber), jumlah (formatNumber bold). Total row (`colSpan=5` "JUMLAH TOTAL" + total amount) with `total-row` class for print CSS.
+   294→   294→     - **Terbilang**: "Terbilang: {capitalize(terbilang(total))}" — uses `terbilang()` from `@/lib/format` and capitalizes the first letter.
+   295→   295→     - **Closing paragraph**: "Demikian surat pertanggungjawaban ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya."
+   296→   296→     - **Date row**: right-aligned "Telukdalam, {formatDate(spjDate)}" where spjDate prefers tglBayar → tglBast → tglPesan → today.
+   297→   297→     - **Signature blocks** (3-column grid): Each `<SignatureBlock>` shows title (e.g., "Mengetahui,") + role (e.g., "Kepala Sekolah") + 16-20 unit vertical space for wet signature + name (bold underlined) + NIP/HP line. Three blocks: (1) Mengetahui/Kepala Sekolah → principalName + principalNip, (2) Bendahara/Bendahara Pengeluaran → treasurerName + treasurerNip, (3) Penerima/{vendor.name} → vendor.owner + vendor.phone.
+   298→   298→  5. **Print CSS** (injected via `<style dangerouslySetInnerHTML>`): `@media print` rule that:
+   299→   299→     - Sets `visibility: hidden` on all `body *` descendants.
+   300→   300→     - Sets `visibility: visible` on `#spj-document-print` and its descendants.
+   301→   301→     - Positions `#spj-document-print` absolutely at top-left of the page (full width, zero margin/padding).
+   302→   302→     - `@page { size: A4 portrait; margin: 1.2cm; }` for A4 page setup.
+   303→   303→     - Forces `color: #000 !important; background: transparent !important; box-shadow: none !important;` on print container content so the SPJ prints in clean black-on-white regardless of dark mode.
+   304→   304→     - Adds gray background (`#e5e7eb !important`) to table header rows and `.total-row` to preserve the visual table structure when printing.
+   305→   305→     - Adds `break-inside: avoid` on `.signature-block` so signature blocks don't split across pages.
+   306→   306→     - Also added `print:hidden` Tailwind utility classes on all non-document Cards (header, action bar, list, empty/loading/error states) as a secondary safeguard.
+   307→   307→- Helpers: `buildSpjNumber(tx)` → `SPJ-{noBku}/{roman}/{tahun}` (uses `noUrut` or last 6 chars of id as fallback when noBku is null). `pickSpjDate(tx)` → prefers tglBayar, falls back to tglBast → tglPesan → today's ISO. `toRoman(n)` → maps 1..12 to Roman numerals (I..XII). `capitalize(s)` → uppercases first letter (since `terbilang` returns lowercase).
+   308→   308→- Lint iteration 1: Removed unused imports `CalendarDays`, `FileCheck2`, `Wallet` (caught by visual scan before running lint).
+   309→   309→- TypeScript iteration 1: `bunx tsc --noEmit` flagged `tx.jumlah ?? tx.volume * tx.tarifHarga ?? 0` with TS2881 "This expression is never nullish" because `Transaction.jumlah` is typed as `number` (not nullable). Replaced with `||` operator (`tx.jumlah || tx.volume * tx.tarifHarga || 0`) since the value can be 0 but not nullish.
+   310→   310→- Lint iteration 2 (final): `bun run lint` — clean (no errors, no warnings).
+   311→   311→- TypeScript iteration 2 (final): `bunx tsc --noEmit` — no errors in `documents.tsx`. (Only pre-existing errors in Task 2-a API route `RouteParams` shape remain, unrelated to this component, as documented in earlier worklogs.)
+   312→   312→
+   313→   313→Stage Summary:
+   314→   314→- Created: `/home/z/my-project/src/components/spj/documents.tsx` (single file, ~840 lines, client component).
+   315→   315→- Exports: `Documents` (no props — fetches via hooks).
+   316→   316→- Color palette: rose (primary CTA, selected item, totals), violet (transaction count badge), amber (pending status, search filter accents), emerald (lunas status, "SPJ sudah dibuat" badge), cyan, slate (neutral borders/backgrounds/text) — NO indigo/blue anywhere.
+   317→   317→- Layout: grid `lg:grid-cols-3` (1/3 list + 2/3 preview); mobile stacks vertically with horizontal-scrollable transaction chip strip (`md:hidden`).
+   318→   318→- Print strategy: inject `<style dangerouslySetInnerHTML>` with `@media print` rules (visibility trick + `@page A4 portrait margin 1.2cm` + force colors to black-on-white + break-inside:avoid for signatures). Wrapping `<div id="spj-document-print">` around the printable area. All non-document Cards have `print:hidden` as a fallback safeguard.
+   319→   319→- "Tandai Sudah Dicetak" button creates a `Document` record via `useCreateDocument` mutation with `{ type: "SPJ", docNumber, docDate, amount, status: "printed" }`. When transaction already has an SPJ Document, button is disabled and badge "SPJ sudah dibuat" appears in the header.
+   320→   320→- Lint + TypeScript both pass clean for this file. Next agent can drop `<Documents />` into any SPJ page (e.g., a tab in `/app/page.tsx` alongside `<Dashboard />`, `<Transactions />`, `<MasterData />`, and `<Reports />`).
+   321→   321→
+   322→   322→---
+   323→   323→Task ID: 4-fix
+   324→   324→Agent: Sub-agent (general-purpose)
+   325→   325→Task: Fix Next.js 16 async params in dynamic route handlers (`[id]/route.ts`)
+   326→   326→
+   327→   327→Context:
+   328→   328→- In Next.js 16 the `params` argument of dynamic route handlers is now a Promise and must be `await`-ed before accessing its properties. The old pattern `params: { id: string }` causes runtime errors when `params.id` is accessed (it is `undefined` on the Promise object).
+   329→   329→- A reference fix had already been applied to `src/app/api/spj/transactions/[id]/route.ts`. Four sibling routes still used the broken old pattern and needed the same migration.
+   330→   330→
+   331→   331→Files modified (4):
+   332→   332→1. `src/app/api/spj/vendors/[id]/route.ts`
+   333→   333→2. `src/app/api/spj/products/[id]/route.ts`
+   334→   334→3. `src/app/api/spj/bpu/[id]/route.ts`
+   335→   335→4. `src/app/api/spj/documents/[id]/route.ts`
+   336→   336→
+   337→   337→Changes applied to each file (identical pattern):
+   338→   338→- `RouteParams` interface: `params: { id: string };` -> `params: Promise<{ id: string }>;`
+   339→   339→- In each of GET / PUT / DELETE handlers: added `const { id } = await params;` as the first statement inside the existing `try {` block.
+   340→   340→- Replaced every `params.id` usage with `id` (e.g. `where: { id: params.id }` -> `where: { id }`).
+   341→   341→  - vendors DELETE had two usages (`vendorId: params.id` for the transaction count check and `id: params.id` for the actual delete) — both migrated.
+   342→   342→- No business logic, imports, error handling, or response shape were altered.
+   343→   343→
+   344→   344→Verification:
+   345→   345→- `rg "params\.id" src/app/api/spj` -> No matches found (all old-pattern usages removed).
+   346→   346→- `rg "params: Promise" src/app/api/spj` -> 5 matches: the 4 fixed files plus the previously-fixed `transactions/[id]/route.ts`.
+   347→   347→- `bun run lint` -> passes with no errors/warnings (only `$ eslint .` echoed, exit 0).
+   348→   348→
+   349→   349→Next actions:
+   350→   350→- Optional: run a quick smoke test (e.g. `bun dev` then hit `GET /api/spj/vendors/<id>` and `DELETE /api/spj/bpu/<id>`) to confirm the runtime fix end-to-end.
+   351→   351→- Optional: audit other dynamic route directories outside `spj/` (none found in this task scope) for the same legacy pattern.
+   352→   352→
+   353→   353→---
+   354→   354→Task ID: SPJ-FINAL
+   355→   355→Agent: Main (Claude)
+   356→   356→Task: Membangun aplikasi SPJ (Surat Pertanggungjawaban) dari hasil analisa Excel Cetak ATK 2025.xlsm
+   357→   357→
+   358→   358→Work Log:
+   359→   359→- Ekstrak data master dari Excel terdekripsi: Data Sekolah, NO BPU (48 kode), Spesifikasi (79 produk), Data2025 (419 transaksi), Vendor (9 unique)
+   360→   360→- Design Prisma schema dengan 6 model: School, Vendor, Product, Bpu, Transaction, Document
+   361→   361→- Push schema ke SQLite + buat seed script yang mengisi database dari data Excel asli
+   362→   362→- Seed berhasil: 1 school, 9 vendors, 48 BPU, 79 products, 419 transactions (total Rp 552,986,800)
+   363→   363→- Buat 12 API routes (RESTful) di /api/spj/: dashboard, transactions (+[id]), vendors (+[id]), products (+[id]), bpu (+[id]), school, reports, documents (+[id]), transaksi-detail
+   364→   364→- Fix Next.js 16 async params issue di semua dynamic [id] routes
+   365→   365→- Build 5 komponen UI utama:
+   366→   366→  1. Dashboard - hero header, stat tiles (total pengeluaran, transaksi, vendor, status), bar chart pengeluaran bulanan, top vendor breakdown, quick stats
+   367→   367→  2. Transactions - filter bar (search, bulan, status, vendor), summary bar, table (11 kolom) + mobile card list, dialog add/edit, alert dialog delete
+   368→   368→  3. Documents - list transaksi (left), SPJ document preview (right) dengan format surat resmi (kop surat, terbilang, signature blocks), tombol Cetak SPJ (window.print) + Tandai Sudah Dicetak
+   369→   369→  4. Reports - 4 sub-tab: Rekap Bulanan (bar chart + table), Per Vendor (horizontal bar + donut chart), Per Kategori (pie chart), Status SPJ (donut chart + progress bars)
+   370→   370→  5. Master Data - 4 sub-tab: Vendor (CRUD), Produk (CRUD), BPU (CRUD), Sekolah (form edit profil sekolah + pejabat)
+   371→   371→- Assemble main page.tsx dengan tabbed navigation (5 view), responsive header dengan mobile horizontal scroll nav, sticky footer
+   372→   372→- Fix bug useSchool hook (API returns {item}, hook expects {item})
+   373→   373→- Verifikasi Agent Browser end-to-end:
+   374→   374→  - Dashboard: total Rp 552,986,800, 419 transaksi, 9 vendor, status 30/389 lunas, bar chart 12 bulan, top vendor UD. JOSUA Rp 65,838,500
+   375→   375→  - Transactions: tabel dengan 11 kolom, filter berfungsi, dialog add/edit, alert dialog delete
+   376→   376→  - Documents: list transaksi + SPJ preview dengan kop surat, terbilang ("Tiga puluh empat juta delapan puluh ribu rupiah"), signature blocks (Kepala Sekolah: Nursari, Bendahara: Riama)
+   377→   377→  - Reports: 4 tab laporan dengan chart Recharts
+   378→   378→  - Master Data: 4 tab CRUD lengkap, data sekolah ter-pre-filled dengan benar
+   379→   379→- Lint lulus, tidak ada error di console, semua API mengembalikan 200 OK
+   380→   380→- Mobile responsive: nav horizontal scroll, table menjadi card list, footer sticky di bottom
+   381→   381→
+   382→   382→Stage Summary:
+   383→   383→- Database: 547 records seeded (1 school + 9 vendors + 79 products + 48 BPU + 419 transactions)
+   384→   384→- API: 12 RESTful routes (8 base + 5 [id])
+   385→   385→- Frontend: 5 main views + tabbed navigation, semua interaksi terverifikasi
+   386→   386→- SPJ document generation bekerja dengan format surat resmi Indonesia (kop, terbilang, signatures)
+   387→   387→- Dev server jalan di port 3000, lint clean, no console errors
+   388→   388→- Aplikasi siap dipakai untuk mengelola pertanggungjawaban pengadaan ATK SMA Negeri 1 Telukdalam
+   389→   389→
+   390→   390→---
+   391→   391→Task ID: 5-templates
+   392→   392→Agent: Sub-agent (general-purpose)
+   393→   393→Task: Create 7 printable document template components for SPJ app (one per Excel sheet)
+   394→   394→
+   395→   395→Context:
+   396→   396→- Project already had a `Documents` view with a single SPJ document renderer (`SpjDocument`) inside `src/components/spj/documents.tsx`, but it worked off a single `Transaction` rather than a `DocumentGroup`.
+   397→   397→- A `DocumentGroup` type, `/api/spj/document-groups` route, and `useDocumentGroups` hook already existed — they group transactions by `noPesan`/`noBku` and include all items needed to render a multi-row printable document.
+   398→   398→- The user wants ALL Excel sheet print forms (01PESAN, 02BANDING, 03RENCANA, 04SHP, 05BAT, Toko, SPJ) to be printable from the app, each following the EXACT structure of the corresponding Excel sheet.
+   399→   399→
+   400→   400→Files created (8 total, 1,389 lines):
+   401→   401→
+   402→   402→1. `src/components/spj/docs/_helpers.ts` (181 lines)
+   403→   403→   - Shared client utilities for all doc templates (avoids duplicating helpers per file).
+   404→   404→   - `getDayName(dateStr)` → "Senin".."Sabtu" / "—".
+   405→   405→   - `getDayNum(dateStr)` → "1".."31" / "—".
+   406→   406→   - `getYearNum(dateStr)` → "2025" / "—".
+   407→   407→   - `toRoman(num)` → Roman numerals (months 1..12 via lookup; 1..3999 via greedy algorithm).
+   408→   408→   - `capitalize(s)` → first-letter uppercase (for `terbilang` output).
+   409→   409→   - `orDash(value)` → returns value or "—" placeholder for empty strings/null.
+   410→   410→   - `schoolName(school)` / `schoolAddress(school)` → with sensible defaults (SMA NEGERI 1 TELUKDALAM + the Jl. Pendidikan address).
+   411→   411→   - `groupRomanMonth(group)` → Roman numeral for the group's `bulan`.
+   412→   412→   - `buildSpjNumber(group)` → `SPJ-{noBku}/{romanMonth}/{tahun}`.
+   413→   413→   - `pickGroupDate(group)` → prefers `tglBayar` → `tglBast` → `tglPesan` → today ISO.
+   414→   414→   - `estimateCompletionDate(group)` → `tglPesan + 7 days` ISO string (used by Surat Pesanan for "Waktu Penyelesaian Pesanan").
+   415→   415→   - Internal `parseDate()` handles both ISO `yyyy-mm-dd` and `dd/mm/yyyy` strings.
+   416→   416→
+   417→   417→2. `src/components/spj/docs/surat-pesanan.tsx` (212 lines) — export `SuratPesanan`
+   418→   418→   - Sheet 01PESAN. Full kop surat (Pemprov Sumut / Disdik / SMA Negeri 1 Telukdalam / address / Cabdisdik XIV / Kode Pos 22865 / Telp/HP / Pos-el / Laman).
+   419→   419→   - Title "SURAT PESANAN".
+   420→   420→   - Meta block: Paket Pesanan (Pengadaan ATK), Nomor Surat Pesanan (`421.3/{noPesan}-P/DB/SMANSATLD/{romanMonth}/{tahun}`), Tanggal/Waktu Pengerjaan/Pemrosesan/Penyelesaian Pesanan, No. BPU.
+   421→   421→   - Items table: No / Uraian Barang-Jasa / Jumlah / Satuan / Harga Satuan / Total Harga, with "JUMLAH" total row.
+   422→   422→   - `Terbilang: {capitalize(terbilang(total))}` line.
+   423→   423→   - Right-aligned "Telukdalam, {tglPesan}" date.
+   424→   424→   - 2-column signature grid: "Mengetahui, Kepala Sekolah" + "Bendahara Pengeluaran," — names + NIPs.
+   425→   425→
+   426→   426→3. `src/components/spj/docs/dokumen-pembanding.tsx` (117 lines) — export `DokumenPembanding`
+   427→   427→   - Sheet 02BANDING. Title "DOKUMEN HASIL PEMBANDING".
+   428→   428→   - Meta: Satuan Pendidikan, Hasil pembanding ("Tercapai kesepakatan pembelian dengan {vendorName}"), Tanggal.
+   429→   429→   - Comparison table: No / Produk (vendor) / Estimasi Harga (uses `tarifHarga` per the Excel template).
+   430→   430→   - Catatan about best price selection.
+   431→   431→   - Single signature block: "Mengetahui, Kepala Sekolah".
+   432→   432→
+   433→   433→4. `src/components/spj/docs/dokumen-rencana.tsx` (121 lines) — export `DokumenRencana`
+   434→   434→   - Sheet 03RENCANA. Title "DOKUMEN PERENCANAAN".
+   435→   435→   - Meta: Nama Satuan Pendidikan, Alamat, Kategori (ATK), Jenis (KETERANGAN), Jumlah Barang/Jasa (`itemCount`).
+   436→   436→   - Specs table with check-mark column: ✓ / No / Spesifikasi Barang-Jasa (one row per item, showing `uraian` + `namaBarang` italic).
+   437→   437→   - Single signature block: "Mengetahui, Kepala Sekolah".
+   438→   438→
+   439→   439→5. `src/components/spj/docs/surat-hasil-pemeriksaan.tsx` (191 lines) — export `SuratHasilPemeriksaan`
+   440→   440→   - Sheet 04SHP. Kop surat (same as SuratPesanan).
+   441→   441→   - Title "SURAT HASIL PEMERIKSAAN" + nomor (`421.3/{noPesan}-PB/SMANSA-TD/{romanMonth}/{tahun}`).
+   442→   442→   - Opening paragraph: "Pada hari ini, {dayName} tanggal {day} bulan {monthName} tahun {year}…".
+   443→   443→   - Bulleted list of surat pemesanan metadata.
+   444→   444→   - "Yang bertandatangan di bawah ini" section with Penerima Barang (school.receiverName, .receiverPhone, school address).
+   445→   445→   - Items table: No / Nama Barang-Jasa / Jumlah / Satuan / Kondisi ("Baik").
+   446→   446→   - Closing + signature: "Pemeriksa, Penerima Barang" → school.receiverName.
+   447→   447→
+   448→   448→6. `src/components/spj/docs/berita-acara-serah-terima.tsx` (222 lines) — export `BeritaAcaraSerahTerima`
+   449→   449→   - Sheet 05BAT. Kop surat + title "BERITA ACARA SERAH TERIMA" + nomor (`421.3/{noPesan}-BAST/SMANSA-TD/{romanMonth}/{tahun}`).
+   450→   450→   - Opening paragraph with day/date/month/year.
+   451→   451→   - Ordered list (ol) for two parties:
+   452→   452→     • PIHAK PERTAMA: vendorOwner / Direktur / vendorName / vendorAddress / vendorPhone.
+   453→   453→     • PIHAK KEDUA: receiverName / Penerima Barang / school name / address / receiverPhone.
+   454→   454→   - "PIHAK PERTAMA menyerahkan hasil pekerjaan…" intro + items table (No / Nama Barang-Jasa / Diserahkan / Diterima / Kondisi "Baik" — volume+satuan duplicated for Diserahkan & Diterima).
+   455→   455→   - 2-column signature grid: vendorOwner (Direktur) + school.receiverName (Penerima Barang).
+   456→   456→
+   457→   457→7. `src/components/spj/docs/surat-penawaran-toko.tsx` (149 lines) — export `SuratPenawaranToko`
+   458→   458→   - Sheet "Toko". Vendor letterhead (vendorName + vendorAddress), top-right "Telukdalam, {tglPesan}".
+   459→   459→   - Recipient block: "Kepada Yth. Kepala {schoolName} / Cq. Penanggungjawab Kegiatan / di Tempat".
+   460→   460→   - Perihal "Pesanan Barang" + greeting paragraph.
+   461→   461→   - "DAFTAR KUANTITAS DAN HARGA" table: No / Uraian / Volume / Satuan / Harga Satuan / Jumlah, plus "JUMLAH" total row.
+   462→   462→   - Right-aligned signature: vendorName (uppercase) → vendorOwner (underline) → "Direktur".
+   463→   463→
+   464→   464→8. `src/components/spj/docs/surat-pertanggungjawaban.tsx` (196 lines) — export `SuratPertanggungjawaban`
+   465→   465→   - Standard Indonesian SPJ. Kop surat + title "SURAT PERTANGGUNGJAWABAN (SPJ)" + nomor (`SPJ-{noBku}/{romanMonth}/{tahun}`).
+   466→   466→   - Opening paragraph referencing BOSP Tahun {tahun}.
+   467→   467→   - Items table: No / Uraian / Vol / Satuan / Tarif (Rp) / Jumlah (Rp), plus "JUMLAH TOTAL" row.
+   468→   468→   - `Terbilang: {capitalize(terbilang(total))}`.
+   469→   469→   - Closing paragraph + right-aligned date ("Telukdalam, {spjDate}").
+   470→   470→   - 3-column signature grid: "Mengetahui, Kepala Sekolah" (principalName + NIP) / "Bendahara, Bendahara Pengeluaran" (treasurerName + NIP) / "Penerima," (vendorOwner + vendorName).
+   471→   471→
+   472→   472→Implementation conventions:
+   473→   473→- All 7 components are `"use client"` React components.
+   474→   474→- Each component takes `({ group, school }: { group: DocumentGroup; school: School | null })`.
+   475→   475→- Each component renders `<div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">…</div>` as the printable area.
+   476→   476→- All tables use HTML `<table className="w-full border-collapse border border-slate-800 text-[11px]">` with `border border-slate-800` cells, `bg-slate-100` header rows, `bg-slate-50 font-bold` total rows.
+   477→   477→- Signature blocks use `grid grid-cols-{N} gap-{4-8}` with a `h-16`/`h-20` empty space for the wet signature.
+   478→   478→- Each item row shows `uraian` as the main label, with `namaBarang` rendered as a small italic sub-line when present.
+   479→   479→- Helpers from `@/lib/format` (formatDate, formatNumber, terbilang, getMonthName) used throughout; local helpers in `_helpers.ts` for the day name, Roman month, and school fallbacks.
+   480→   480→- Empty items lists render a "Tidak ada item." placeholder row inside the table.
+   481→   481→- All values use `orDash()` for null/empty fallback to "—".
+   482→   482→
+   483→   483→Verification:
+   484→   484→- `bun run lint` → exit 0, no errors, no warnings.
+   485→   485→- `bunx tsc --noEmit` → no errors in any of the new files under `src/components/spj/docs/`. (Pre-existing unrelated errors remain in `examples/websocket/*`, `skills/*`, and the existing `document-groups/route.ts` `noBast` type mismatch — all flagged in earlier worklogs and outside the scope of this task.)
+   486→   486→
+   487→   487→Next actions for downstream agents:
+   488→   488→- Build a `DocTemplateRegistry` / picker UI that maps a doc-type key (e.g. `"surat-pesanan"`, `"berita-acara-serah-terima"`, …) to its component, then mount the right component inside the existing Documents view's `<div id="spj-document-print">` so `window.print()` works against each template.
+   489→   489→- Or extend the existing `useDocumentGroups` hook to power a new "Document Groups" tab that lists groups and lets the user preview/print any of the 7 templates per group.
+   490→   490→
+   491→   491→---
+   492→   492→Task ID: SPJ-ALL-DOCS
+   493→   493→Agent: Main (Claude)
+   494→   494→Task: Rebuild SPJ Documents component to include ALL document types from Excel (Surat Pesanan, BANDING, RENCANA, SHP, BAST, Toko, SPJ)
+   495→   495→
+   496→   496→Work Log:
+   497→   497→- Analisa struktur lengkap setiap sheet dokumen dari Excel terdekripsi:
+   498→   498→  - 01PESAN: Surat Pesanan dengan kop surat, nomor 421.3/07-P/DB/SMANSATLD/I/2025, tabel rincian, terbilang, signatures
+   499→   499→  - 02BANDING: Dokumen Hasil Pembanding dengan perbandingan produk dari multiple vendor
+   500→   500→  - 03RENCANA: Dokumen Perencanaan dengan daftar spesifikasi barang
+   501→   501→  - 04SHP: Surat Hasil Pemeriksaan dengan kop surat, "Pada hari ini...", tabel kondisi barang
+   502→   502→  - 05BAT: Berita Acara Serah Terima dengan PIHAK PERTAMA (vendor) & PIHANG KEDUA (sekolah)
+   503→   503→  - Toko: Surat Penawaran dari vendor dengan kop vendor, "Kepada Yth", "Perihal: Pesanan Barang"
+   504→   504→  - SPJ: Surat Pertanggungjawaban dengan format standar Indonesia
+   505→   505→- Buat API /api/spj/document-groups yang grouping transaksi by noPesan (atau noBku)
+   506→   506→- Buat 7 komponen template dokumen di /src/components/spj/docs/:
+   507→   507→  1. surat-pesanan.tsx - SuratPesanan (212 lines)
+   508→   508→  2. dokumen-pembanding.tsx - DokumenPembanding (117 lines)
+   509→   509→  3. dokumen-rencana.tsx - DokumenRencana (121 lines)
+   510→   510→  4. surat-hasil-pemeriksaan.tsx - SuratHasilPemeriksaan (191 lines)
+   511→   511→  5. berita-acara-serah-terima.tsx - BeritaAcaraSerahTerima (222 lines)
+   512→   512→  6. surat-penawaran-toko.tsx - SuratPenawaranToko (149 lines)
+   513→   513→  7. surat-pertanggungjawaban.tsx - SuratPertanggungjawaban (196 lines)
+   514→   514→- Plus _helpers.ts (181 lines) dengan utility functions: getDayName, toRoman, capitalize, orDash, etc.
+   515→   515→- Rebuild Documents.tsx component:
+   516→   516→  - Sidebar kiri: filter search + bulan + list grup transaksi (grouped by noPesan)
+   517→   517→  - Picker 7 jenis dokumen (cards dengan kode Excel: 01 PESAN, 02 BANDING, 03 RENCANA, 04 SHP, 05 BAST, TOKO, SPJ)
+   518→   518→  - Action bar dengan tombol "Cetak Dokumen"
+   519→   519→  - Preview area menampilkan template sesuai pilihan
+   520→   520→  - Print CSS untuk A4 portrait dengan @page margin 1.2cm
+   521→   521→- Verifikasi Agent Browser end-to-end:
+   522→   522→  - Daftar grup transaksi muncul (419 grup dengan total Rp 552.986.800)
+   523→   523→  - Search filter bekerja (test "JOSUA" → hanya tampil grup JOSUA)
+   524→   524→  - Bulan filter bekerja (test Februari → hanya 3 grup Feb)
+   525→   525→  - Klik grup #04 (UD. JOSUA 66 item) → tombol 7 jenis dokumen aktif
+   526→   526→  - Surat Pesanan: kop surat lengkap, nomor "421.3/04-PB/SMANSA-TD/I/2025", tabel 66 item, terbilang "Tujuh belas juta...", signatures
+   527→   527→  - Dokumen Pembanding: judul "DOKUMEN HASIL PEMBANDING", hasil "Tercapai kesepakatan dengan UD. JOSUA"
+   528→   528→  - Dokumen Rencana: "DOKUMEN PERENCANAAN", 66 item, spesifikasi
+   529→   529→  - Surat Hasil Pemeriksaan: "SURAT HASIL PEMERIKSAAN", "Pada hari ini, Senin tanggal 6...", Penerima Barang
+   530→   530→  - Berita Acara Serah Terima: "BERITA ACARA SERAH TERIMA", PIHAK PERTAMA/KEDUA, Direktur
+   531→   531→  - Surat Penawaran Toko: vendor header, "Kepada Yth", "Perihal: Pesanan Barang", "DAFTAR KUANTITAS DAN HARGA"
+   532→   532→  - SPJ: "SURAT PERTANGGUNGJAWABAN", terbilang, signatures Kepala/Bendahara/Penerima
+   533→   533→- Tidak ada error di console, lint clean, semua API 200 OK
+   534→   534→
+   535→   535→Stage Summary:
+   536→   536→- 7 template dokumen lengkap dengan format persis seperti Excel asli
+   537→   537→- 1 API baru: /api/spj/document-groups (grouping by noPesan)
+   538→   538→- Komponen Documents.tsx di-rebuild dengan picker 7 jenis dokumen + print support
+   539→   539→- Print CSS A4 portrait dengan proper page break
+   540→   540→- Semua dokumen dapat di-cetak via tombol "Cetak Dokumen" (window.print())
+   541→   541→- Data real dari Excel: 419 grup transaksi, 9 vendor, semua pejabat sekolah ter-pre-filled
+   542→   542→
