@@ -7,6 +7,7 @@ import { MasterData } from "@/components/spj/master-data";
 import { Reports } from "@/components/spj/reports";
 import { Documents } from "@/components/spj/documents";
 import { LetterheadSettingsPanel } from "@/components/spj/letterhead-settings";
+import { ImportExcel } from "@/components/spj/import-excel";
 import { Toaster } from "@/components/ui/sonner";
 import {
   LayoutDashboard,
@@ -17,11 +18,12 @@ import {
   Wallet,
   Lock,
   Image as ImageIcon,
+  Upload,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 
-type View = "dashboard" | "transactions" | "documents" | "reports" | "master" | "letterhead";
+type View = "dashboard" | "transactions" | "documents" | "reports" | "master" | "letterhead" | "import";
 
 interface NavItem {
   id: View;
@@ -73,6 +75,13 @@ const navItems: NavItem[] = [
     icon: <ImageIcon className="h-4 w-4" />,
     description: "Logo, font, layout KOP",
     color: "rose",
+  },
+  {
+    id: "import",
+    label: "Import Excel",
+    icon: <Upload className="h-4 w-4" />,
+    description: "Import data dari Excel",
+    color: "emerald",
   },
 ];
 
@@ -147,6 +156,7 @@ export default function Home() {
           {view === "reports" && <Reports />}
           {view === "master" && <MasterData />}
           {view === "letterhead" && <LetterheadSettingsPanel />}
+          {view === "import" && <ImportExcel />}
         </div>
       </main>
 

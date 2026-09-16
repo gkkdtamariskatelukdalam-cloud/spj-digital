@@ -881,3 +881,56 @@ Stage Summary:
 - Toko: UD. JOSUA header besar (bukan KOP sekolah) + 2-row numbered header (1-6)
 - Rencana: NO KOP, langsung tabel besar dengan border tebal
 - Fix duplicate text: hanya tampilkan namaBarang || uraian (tidak keduanya)
+
+---
+Task ID: 10-IMPORT-EXCEL
+Agent: Main (Claude)
+Task: Membuat fitur import Excel sesuai format "import aplikasi SPJ.xlsx" yang diupload user
+
+Work Log:
+- Analisa format Excel import user: sheet "Master" dengan 38 kolom (No. Surat Pesan, No BKU, Kode Program, Kode Rekening, Tanggal Perencanaan, Tanggal Pesanan, Tanggal BAST, Tanggal Pemeriksaan, Tanggal Bayar, Uraian Kegiatan, Nama Barang, Volume, Satuan, Harga Satuan, Jumlah, Kategori Belanja, Spesifikasi, Harga Toko 1/2, Nama Toko 1/2, Direktur Toko 1, Alamat Toko 1/2, NO HP, dll.)
+- Install library xlsx (SheetJS) untuk parse Excel di server-side
+- Buat 2 API endpoints:
+  1. POST /api/spj/import/preview - parse Excel tanpa import, return preview data (first 10 rows + summary stats + column detection)
+  2. POST /api/spj/import - parse Excel dan import ke database (transactions + vendors + BPU)
+- API import features:
+  - Auto-detect sheet "Master" (atau sheet pertama)
+  - Auto-detect 10+ kolom berdasarkan header names (noPesan, noBku, tglPesan, uraian, namaBarang, volume, satuan, hargaSatuan, jumlah, vendorName)
+  - Parse tanggal dari berbagai format (ISO, dd/mm/yyyy, Excel serial date)
+  - Auto-create vendor baru jika belum ada di database
+  - Auto-create BPU code baru jika belum ada
+  - Auto-detect bulan dari tanggal pesan
+  - Skip empty rows
+- Buat komponen ImportExcel UI:
+  - Drag & drop upload area (atau click to select)
+  - File validation (.xlsx/.xls only, max 10MB)
+  - Auto-preview setelah file dipilih
+  - Preview summary: total baris, vendor, BPU, total nilai
+  - Column detection badges (✓/✗ per kolom)
+  - Preview table (10 baris pertama dengan semua kolom)
+  - Import button dengan konfirmasi
+  - Progress indicator saat importing
+  - Success alert dengan summary hasil import
+  - Reset/clear button
+  - "Import File Lain" button setelah berhasil
+- Tambah tab "Import Excel" (warna emerald) ke navigasi utama (7th tab)
+- Verifikasi Agent Browser:
+  - Tab "Import Excel" muncul di navigasi
+  - Upload area: drag & drop atau click
+  - Upload file "import aplikasi SPJ.xlsx" (407.1 KB)
+  - Preview otomatis: 780 baris, 10 vendor, 110 BPU, Rp 552.986.800
+  - Semua 10 kolom terdeteksi (✓)
+  - Preview table menampilkan 10 baris pertama dengan data
+  - Klik "Import 780 Baris" → confirm dialog → import berhasil
+  - Hasil: 780 transaksi, 10 vendor, 110 BPU baru, 0 di-skip
+  - Database: 1199 transactions, 10 vendors, 158 BPU, Rp 1.105.973.600
+  - Tidak ada error di console
+- Lint clean
+
+Stage Summary:
+- 2 API routes baru: /api/spj/import (POST), /api/spj/import/preview (POST)
+- 1 komponen baru: ImportExcel dengan drag & drop + preview + import
+- 1 tab baru "Import Excel" di navigasi
+- Library xlsx terinstall untuk parse Excel server-side
+- Format yang didukung: sheet "Master" dengan 38 kolom (sesuai Excel user)
+- Import berhasil: 780 transaksi + 10 vendor + 110 BPU dari 1 file Excel
