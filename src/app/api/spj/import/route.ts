@@ -232,9 +232,12 @@ export async function POST(req: Request) {
       noHp: string;
       bulan: number | null;
       vendorName: string;
+      excelRowNum: number;
     }> = [];
 
-    for (const row of dataRows) {
+    for (let rowIdx = 0; rowIdx < dataRows.length; rowIdx++) {
+      const row = dataRows[rowIdx];
+      const excelRowNum = rowIdx + 4; // Excel data starts at row 4
       const cells = row as unknown[];
 
       const noPesan = parseStr(cells[colMap.noPesan]);
@@ -328,6 +331,7 @@ export async function POST(req: Request) {
         noHp: vendorPhone,
         bulan: bulan,
         vendorName: vendorName,
+        excelRowNum: excelRowNum,
       });
     }
 
@@ -361,15 +365,55 @@ export async function POST(req: Request) {
       }
     }
 
-    // 3. Create transactions
+    // 3. Create or update transactions (dedup based on noPesan + noBku + namaBarang)
     let txCreated = 0;
+    let txUpdated = 0;
     let txSkipped = 0;
+    
+    // Build lookup map of existing transactions for this import batch
+    // Key = noPesan + noBku + namaBarang (unique combination)
+    // Fallback key = excelRowNum (for draft rows without noPesan/noBku)
+    const existingTxMap = new Map<string, string>(); // key -> transaction id
+    
+    if (transactions.length > 0) {
+      // Query existing transactions with matching noPesan+noBku+namaBarang
+      const txsWithIdentity = transactions.filter((tx) => tx.noPesan || tx.noBku);
+      if (txsWithIdentity.length > 0) {
+        const existingTxs = await db.transaction.findMany({
+          where: {
+            OR: txsWithIdentity.map((tx) => ({
+              noPesan: tx.noPesan || null,
+              noBku: tx.noBku || null,
+              namaBarang: tx.namaBarang || null,
+            })),
+          },
+          select: { id: true, noPesan: true, noBku: true, namaBarang: true },
+        });
+        for (const ex of existingTxs) {
+          const key = `${ex.noPesan || ""}|${ex.noBku || ""}|${ex.namaBarang || ""}`;
+          existingTxMap.set(key, ex.id);
+        }
+      }
+      
+      // Query existing transactions with matching excelRowNum (for draft rows)
+      const txsWithoutIdentity = transactions.filter((tx) => !tx.noPesan && !tx.noBku);
+      if (txsWithoutIdentity.length > 0) {
+        const excelRowNums = txsWithoutIdentity.map((tx) => tx.excelRowNum).filter((n) => n > 0);
+        if (excelRowNums.length > 0) {
+          const existingByRow = await db.transaction.findMany({
+            where: { excelRowNum: { in: excelRowNums } },
+            select: { id: true, excelRowNum: true },
+          });
+          for (const ex of existingByRow) {
+            if (ex.excelRowNum) {
+              existingTxMap.set(`row:${ex.excelRowNum}`, ex.id);
+            }
+          }
+        }
+      }
+    }
+    
     for (const tx of transactions) {
-      // Keep ALL rows that have any meaningful data, even incomplete ones (draft belanja)
-      // Status determination:
-      // - draft: missing uraian AND namaBarang, or jumlah = 0
-      // - lunas: has tglBayar (already paid)
-      // - pending: complete data but not yet paid
       const isComplete = tx.uraian || tx.namaBarang;
       const hasAmount = tx.jumlah > 0;
 
@@ -385,54 +429,74 @@ export async function POST(req: Request) {
         status = "lunas";
       }
 
-      await db.transaction.create({
-        data: {
-          noUrut: tx.noUrut,
-          noPesan: tx.noPesan || null,
-          noBku: tx.noBku || null,
-          kodeProgram: tx.kodeProgram || null,
-          kodeRekening: tx.kodeRekening || null,
-          tglPerencanaan: tx.tglPerencanaan,
-          tglPesan: tx.tglPesan,
-          tglBast: tx.tglBast,
-          noBast: null,
-          tglPeriksa: tx.tglPeriksa,
-          tglBayar: tx.tglBayar,
-          uraian: tx.uraian || "",
-          namaBarang: tx.namaBarang || null,
-          volume: tx.volume,
-          satuan: tx.satuan || null,
-          tarifHarga: tx.tarifHarga,
-          jumlah: tx.jumlah,
-          kategoriBelanja: tx.kategoriBelanja || null,
-          spesifikasiBarang: tx.spesifikasiBarang || null,
-          hargaToko1: tx.hargaToko1,
-          hargaToko2: tx.hargaToko2,
-          namaToko1: tx.namaToko1 || null,
-          namaToko2: tx.namaToko2 || null,
-          direkturToko1: tx.direkturToko1 || null,
-          alamatToko1: tx.alamatToko1 || null,
-          alamatToko2: tx.alamatToko2 || null,
-          uraianKwitansi: tx.uraianKwitansi || null,
-          namaPekerjaanKategori: tx.namaPekerjaanKategori || null,
-          satuan2: tx.satuan2 || null,
-          hargaSatuanSebelumPajak: tx.hargaSatuanSebelumPajak,
-          jumlahHargaSebelumPajak: tx.jumlahHargaSebelumPajak,
-          hargaTotalAsli: tx.hargaTotalAsli,
-          totalHargaSebelumDPP: tx.totalHargaSebelumDPP,
-          totalHargaAsli: tx.totalHargaAsli,
-          alamatSuratBalasan: tx.alamatSuratBalasan || null,
-          noHp: tx.noHp || null,
-          realisasi: tx.jumlah,
-          bulan: tx.bulan,
-          tahun: 2025,
-          masukBku: tx.tglBayar ? "MASUK BKU" : null,
-          status: status,
-          bpuCode: tx.bpuCode || null,
-          vendorId: vendorId,
-        },
-      });
-      txCreated++;
+      // Build dedup key: noPesan + noBku + namaBarang
+      // For rows without noPesan AND noBku (draft), use excelRowNum as fallback
+      const hasIdentity = tx.noPesan || tx.noBku;
+      const dedupKey = hasIdentity
+        ? `${tx.noPesan || ""}|${tx.noBku || ""}|${tx.namaBarang || ""}`
+        : `row:${tx.excelRowNum}`;
+      const existingId = existingTxMap.get(dedupKey);
+
+      const txData = {
+        noUrut: tx.noUrut,
+        noPesan: tx.noPesan || null,
+        noBku: tx.noBku || null,
+        kodeProgram: tx.kodeProgram || null,
+        kodeRekening: tx.kodeRekening || null,
+        tglPerencanaan: tx.tglPerencanaan,
+        tglPesan: tx.tglPesan,
+        tglBast: tx.tglBast,
+        noBast: null,
+        tglPeriksa: tx.tglPeriksa,
+        tglBayar: tx.tglBayar,
+        uraian: tx.uraian || "",
+        namaBarang: tx.namaBarang || null,
+        volume: tx.volume,
+        satuan: tx.satuan || null,
+        tarifHarga: tx.tarifHarga,
+        jumlah: tx.jumlah,
+        kategoriBelanja: tx.kategoriBelanja || null,
+        spesifikasiBarang: tx.spesifikasiBarang || null,
+        hargaToko1: tx.hargaToko1,
+        hargaToko2: tx.hargaToko2,
+        namaToko1: tx.namaToko1 || null,
+        namaToko2: tx.namaToko2 || null,
+        direkturToko1: tx.direkturToko1 || null,
+        alamatToko1: tx.alamatToko1 || null,
+        alamatToko2: tx.alamatToko2 || null,
+        uraianKwitansi: tx.uraianKwitansi || null,
+        namaPekerjaanKategori: tx.namaPekerjaanKategori || null,
+        satuan2: tx.satuan2 || null,
+        hargaSatuanSebelumPajak: tx.hargaSatuanSebelumPajak,
+        jumlahHargaSebelumPajak: tx.jumlahHargaSebelumPajak,
+        hargaTotalAsli: tx.hargaTotalAsli,
+        totalHargaSebelumDPP: tx.totalHargaSebelumDPP,
+        totalHargaAsli: tx.totalHargaAsli,
+        alamatSuratBalasan: tx.alamatSuratBalasan || null,
+        noHp: tx.noHp || null,
+        realisasi: tx.jumlah,
+        bulan: tx.bulan,
+        tahun: 2025,
+        masukBku: tx.tglBayar ? "MASUK BKU" : null,
+        status: status,
+        bpuCode: tx.bpuCode || null,
+        vendorId: vendorId,
+        excelRowNum: tx.excelRowNum,
+      };
+
+      if (existingId) {
+        // UPDATE existing transaction (not duplicate)
+        await db.transaction.update({
+          where: { id: existingId },
+          data: txData,
+        });
+        txUpdated++;
+      } else {
+        // CREATE new transaction
+        const created = await db.transaction.create({ data: txData });
+        existingTxMap.set(dedupKey, created.id);
+        txCreated++;
+      }
     }
 
     return NextResponse.json({
@@ -440,6 +504,7 @@ export async function POST(req: Request) {
       summary: {
         totalRows: dataRows.length,
         transactionsImported: txCreated,
+        transactionsUpdated: txUpdated,
         transactionsSkipped: txSkipped,
         vendorsImported: vendorMap.size,
         bpuImported: bpuCreated,

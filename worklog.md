@@ -1342,3 +1342,35 @@ Stage Summary:
 - Tab dokumen di preview modal: icon ✓ untuk dokumen yang sudah dicetak
 - Auto-mark as printed saat Unduh PDF atau Cetak Langsung
 - Tetap bisa cetak ulang (printedCount bertambah, bukan diblokir)
+
+---
+Task ID: 18-DEDUP-IMPORT
+Agent: Main (Claude)
+Task: Tambah deteksi duplikat saat import Excel - No.Pesan + BKU + Nama Barang sebagai key unik
+
+Work Log:
+- User konfirmasi: import ulang file yang sama tidak boleh duplikat, update jika No.Pesan+BKU+NamaBarang sama
+- Barang yang sama di BPU berbeda (mis. Kertas HVS di BPU01 dan BPU60) = bukan duplikat
+- Tambah field excelRowNum ke Prisma schema (untuk dedup baris draft tanpa No.Pesan/BKU)
+- Update import API dengan dedup logic:
+  - Key utama: noPesan + noBku + namaBarang (untuk baris dengan identitas)
+  - Key fallback: excelRowNum (untuk baris draft tanpa noPesan/noBku)
+  - Sebelum import: query existing transactions, build lookup map
+  - Saat import: cek map → jika ada, UPDATE; jika tidak, CREATE
+  - Track: txCreated (baru), txUpdated (diperbarui), txSkipped
+- Update ImportExcel component:
+  - ImportResult interface: tambah transactionsUpdated field
+  - Success alert: tampilkan "X transaksi baru" + "Y diperbarui" + info dedup
+  - Tambahan note: "✓ X transaksi diperbarui (No. Pesanan + BKU + Nama Barang sama → update, bukan duplikat)"
+- Test hasil:
+  - Import 1: 778 baru, 2 updated (2 baris duplikat dalam Excel itu sendiri)
+  - Import 2 (file sama): 0 baru, 780 updated → TIDAK ADA DUPLIKAT
+  - Database: 778 transactions (bukan 1556)
+- Lint clean, tidak ada error
+
+Stage Summary:
+- Dedup berdasarkan: No.Pesan + No.BKU + Nama Barang (untuk baris dengan identitas)
+- Fallback: Excel row number (untuk baris draft tanpa identitas)
+- Import ulang file yang sama → semua di-update, tidak duplikat
+- Barang sama di BPU berbeda → tetap masuk sebagai transaksi terpisah
+- UI menampilkan: "X transaksi baru" + "Y diperbarui"

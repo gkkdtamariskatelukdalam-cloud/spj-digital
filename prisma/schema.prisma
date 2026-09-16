@@ -150,6 +150,7 @@ model Transaction {
   status        String    @default("lunas") // lunas, pending, draft
   bpuCode       String?
   vendorId      String?
+  excelRowNum   Int?      // original Excel row number for dedup tracking
   vendor        Vendor?   @relation(fields: [vendorId], references: [id])
   documents     Document[]
   createdAt     DateTime  @default(now())

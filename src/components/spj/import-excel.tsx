@@ -70,6 +70,7 @@ interface ImportResult {
   summary: {
     totalRows: number;
     transactionsImported: number;
+    transactionsUpdated: number;
     transactionsSkipped: number;
     vendorsImported: number;
     bpuImported: number;
@@ -452,12 +453,18 @@ export function ImportExcel() {
                       Import Berhasil!
                     </AlertTitle>
                     <AlertDescription>
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2 text-xs">
+                      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-2 text-xs">
                         <div>
                           <span className="font-bold text-emerald-700 dark:text-emerald-300">
                             {importResult.summary.transactionsImported}
                           </span>{" "}
-                          transaksi
+                          transaksi baru
+                        </div>
+                        <div>
+                          <span className="font-bold text-violet-700 dark:text-violet-300">
+                            {importResult.summary.transactionsUpdated}
+                          </span>{" "}
+                          diperbarui
                         </div>
                         <div>
                           <span className="font-bold text-emerald-700 dark:text-emerald-300">
@@ -477,6 +484,11 @@ export function ImportExcel() {
                           </span>
                         </div>
                       </div>
+                      {importResult.summary.transactionsUpdated > 0 && (
+                        <p className="text-[10px] text-violet-600 dark:text-violet-400 mt-2">
+                          ✓ {importResult.summary.transactionsUpdated} transaksi diperbarui (No. Pesanan + BKU + Nama Barang sama → update, bukan duplikat)
+                        </p>
+                      )}
                     </AlertDescription>
                   </Alert>
 
