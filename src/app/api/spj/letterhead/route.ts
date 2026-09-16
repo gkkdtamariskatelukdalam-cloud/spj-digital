@@ -43,6 +43,13 @@ export async function PUT(req: Request) {
       "line5Text", "line5Bold", "line5Size",
       "line6Text", "line6Bold", "line6Size",
       "line7Text", "line7Bold", "line7Size",
+      "dualLine1Text", "dualLine1Bold", "dualLine1Size",
+      "dualLine2Text", "dualLine2Bold", "dualLine2Size",
+      "dualLine3Text", "dualLine3Bold", "dualLine3Size",
+      "dualLine4Text", "dualLine4Bold", "dualLine4Size",
+      "dualLine5Text", "dualLine5Bold", "dualLine5Size",
+      "dualLine6Text", "dualLine6Bold", "dualLine6Size",
+      "dualLine7Text", "dualLine7Bold", "dualLine7Size",
       "showBottomLine", "bottomLineWidth",
     ];
     

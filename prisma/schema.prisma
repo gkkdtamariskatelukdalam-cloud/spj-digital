@@ -216,11 +216,11 @@ model LetterheadSettings {
   // KOP mode: "single" (1 logo left) or "dual" (2 logos left+right, text centered)
   kopMode         String   @default("single")
   
-  // Font settings
+  // Font settings (shared between both modes)
   fontFamily      String   @default("Arial")
   lineSpacing     Int      @default(6)     // extra spacing between lines in px
   
-  // 9 text lines (KOP structure - expanded for 2-logo KOP with CABDIS + NIS/NPSN row)
+  // === KOP 1 LOGO lines (single mode) ===
   line1Text       String   @default("PEMERINTAH PROVINSI SUMATERA UTARA")
   line1Bold       Boolean  @default(true)
   line1Size       Int      @default(14)
@@ -229,25 +229,54 @@ model LetterheadSettings {
   line2Bold       Boolean  @default(true)
   line2Size       Int      @default(14)
   
-  line3Text       String   @default("CABDIS PENDIDIKAN WILAYAH XIV")
+  line3Text       String   @default("SMA NEGERI 1 TELUKDALAM")
   line3Bold       Boolean  @default(true)
-  line3Size       Int      @default(13)
+  line3Size       Int      @default(20)
   
-  line4Text       String   @default("SMA NEGERI 1 TELUKDALAM")
-  line4Bold       Boolean  @default(true)
-  line4Size       Int      @default(20)
+  line4Text       String   @default("Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan,")
+  line4Bold       Boolean  @default(false)
+  line4Size       Int      @default(11)
   
-  line5Text       String   @default("NIS : 300010         NPSN : 10258246        Terakreditasi A           NSS: 301071701001")
+  line5Text       String   @default("Cabdisdik Wil.XIV, Kode Pos 22865")
   line5Bold       Boolean  @default(false)
   line5Size       Int      @default(11)
   
-  line6Text       String   @default("Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865")
+  line6Text       String   @default("Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com")
   line6Bold       Boolean  @default(false)
   line6Size       Int      @default(11)
   
-  line7Text       String   @default("Email: smansatelukdalam1987@gmail.com ; website: www.smansatelukdalam.sch.id")
+  line7Text       String   @default("Laman : smansatelukdalam.sch.id")
   line7Bold       Boolean  @default(false)
   line7Size       Int      @default(11)
+  
+  // === KOP 2 LOGO lines (dual mode) ===
+  dualLine1Text       String   @default("PEMERINTAH PROVINSI SUMATERA UTARA")
+  dualLine1Bold       Boolean  @default(true)
+  dualLine1Size       Int      @default(14)
+  
+  dualLine2Text       String   @default("DINAS PENDIDIKAN")
+  dualLine2Bold       Boolean  @default(true)
+  dualLine2Size       Int      @default(14)
+  
+  dualLine3Text       String   @default("CABDIS PENDIDIKAN WILAYAH XIV")
+  dualLine3Bold       Boolean  @default(true)
+  dualLine3Size       Int      @default(13)
+  
+  dualLine4Text       String   @default("SMA NEGERI 1 TELUKDALAM")
+  dualLine4Bold       Boolean  @default(true)
+  dualLine4Size       Int      @default(20)
+  
+  dualLine5Text       String   @default("NIS : 300010         NPSN : 10258246        Terakreditasi A           NSS: 301071701001")
+  dualLine5Bold       Boolean  @default(false)
+  dualLine5Size       Int      @default(11)
+  
+  dualLine6Text       String   @default("Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865")
+  dualLine6Bold       Boolean  @default(false)
+  dualLine6Size       Int      @default(11)
+  
+  dualLine7Text       String   @default("Email: smansatelukdalam1987@gmail.com ; website: www.smansatelukdalam.sch.id")
+  dualLine7Bold       Boolean  @default(false)
+  dualLine7Size       Int      @default(11)
   
   // Bottom border line
   showBottomLine  Boolean  @default(true)

@@ -240,6 +240,14 @@ export interface LetterheadSettings {
   line7Text: string;
   line7Bold: boolean;
   line7Size: number;
+  // Dual mode lines (KOP 2 Logo)
+  dualLine1Text: string; dualLine1Bold: boolean; dualLine1Size: number;
+  dualLine2Text: string; dualLine2Bold: boolean; dualLine2Size: number;
+  dualLine3Text: string; dualLine3Bold: boolean; dualLine3Size: number;
+  dualLine4Text: string; dualLine4Bold: boolean; dualLine4Size: number;
+  dualLine5Text: string; dualLine5Bold: boolean; dualLine5Size: number;
+  dualLine6Text: string; dualLine6Bold: boolean; dualLine6Size: number;
+  dualLine7Text: string; dualLine7Bold: boolean; dualLine7Size: number;
   showBottomLine: boolean;
   bottomLineWidth: number;
 }

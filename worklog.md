@@ -1551,3 +1551,61 @@ Stage Summary:
 - Upload logo 2 dengan controls lengkap (position, size)
 - KOP centered di dual mode (teks di tengah antara 2 logo)
 - Auto-save dengan debounce
+
+---
+Task ID: 22-dual-kop-lines
+Agent: Sub-agent (general-purpose)
+Task: Update LetterheadSettings UI to support dual set of line editors (single mode line1-7 vs dual mode dualLine1-7) with their own Text/Bold/Size fields.
+
+Work Log:
+- Read previous worklog (Task 20-LETTERHEAD-DUAL-LOGO) to understand context: Prisma schema already has both `line1Text`-`line7Text` (single mode) and `dualLine1Text`-`dualLine7Text` (dual mode); Letterhead component already renders correct lines based on `kopMode`; only the Settings UI panel needed updating.
+- Verified type definitions in `/home/z/my-project/src/lib/types/spj.ts` (lines 219-250): both sets of fields exist in `LetterheadSettings`.
+
+Changes to `/home/z/my-project/src/components/spj/letterhead-settings.tsx`:
+
+1. DEFAULT_SETTINGS update:
+   - Single mode (KOP 1 Logo) lines restored to original simpler text:
+     - line1: "PEMERINTAH PROVINSI SUMATERA UTARA" (bold, 14) - same
+     - line2: "DINAS PENDIDIKAN" (bold, 14) - same
+     - line3: "SMA NEGERI 1 TELUKDALAM" (bold, 20) - was CABDIS line, now school name
+     - line4: "Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan," (not bold, 11)
+     - line5: "Cabdisdik Wil.XIV, Kode Pos 22865" (not bold, 11)
+     - line6: "Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com" (not bold, 11)
+     - line7: "Laman : smansatelukdalam.sch.id" (not bold, 11)
+   - Added new dual mode (KOP 2 Logo) fields with expanded text (7 lines):
+     - dualLine1: "PEMERINTAH PROVINSI SUMATERA UTARA" (bold, 14)
+     - dualLine2: "DINAS PENDIDIKAN" (bold, 14)
+     - dualLine3: "CABDIS PENDIDIKAN WILAYAH XIV" (bold, 13)
+     - dualLine4: "SMA NEGERI 1 TELUKDALAM" (bold, 20)
+     - dualLine5: "NIS : 300010         NPSN : 10258246        Terakreditasi A           NSS: 301071701001" (not bold, 11)
+     - dualLine6: "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865" (not bold, 11)
+     - dualLine7: "Email: smansatelukdalam1987@gmail.com ; website: www.smansatelukdalam.sch.id" (not bold, 11)
+
+2. Added new `updateDualLine` function (mirrors `updateLine` but builds key as `dualLine${lineNum}${field}`) right after `updateLine`.
+
+3. Updated `lineMeta` array placeholders/labels to reflect restored single-mode text (line 3 is now SMA NEGERI 1, line 4 is alamat, line 5 cabdisdik, line 6 telp/email, line 7 laman).
+
+4. Added new `dualLineMeta` array with 7 entries (Baris 1 PEMERINTAH, Baris 2 DINAS, Baris 3 CABDIS, Baris 4 SMA NEGERI terbesar, Baris 5 NIS/NPSN, Baris 6 alamat, Baris 7 email/web).
+
+5. Updated CardTitle for per-line section from "Teks & Format per Baris" to "Teks & Format per Baris — KOP 1 Logo" or "Teks & Format per Baris — KOP 2 Logo" based on `local.kopMode`.
+
+6. Replaced the single `lineMeta.map(...)` block with conditional rendering:
+   - `local.kopMode === "single"` → renders single mode editors using `lineMeta`, `local.line${n}Text/Bold/Size`, and `updateLine()`.
+   - Otherwise (dual) → renders dual mode editors using `dualLineMeta`, `local.dualLine${n}Text/Bold/Size`, and `updateDualLine()`.
+   - Both branches share the same UI structure (Label + Bold toggle button + Input + Size Slider).
+
+Behavior:
+- User switching KOP mode via the toggle (Task 20 component) now also switches which set of line editors appears in the right column.
+- The card title makes it obvious which mode is being edited ("KOP 1 Logo" / "KOP 2 Logo").
+- Single mode defaults restore the original simpler header (school name on line 3, address/cabdisdik/telp/laman on lines 4-7).
+- Dual mode defaults keep the expanded 7-line header (CABDIS on line 3, SMA NEGERI on line 4, NIS/NPSN on line 5, full address on line 6, email/web on line 7).
+- All edits auto-save debounced (800ms) via `scheduleSave()` → `updateMutation.mutate()`.
+- Live preview (`LetterheadStatic`) auto-renders the correct line set because `letterhead.tsx` already branches on `kopMode`.
+
+Verification:
+- `bun run lint` → exit code 0, no errors, no warnings.
+- File grew from 913 → ~1000 lines.
+
+Next Actions:
+- Optional: verify in Agent Browser that toggling KOP mode also swaps the per-line editor fields and that editing dual-line text persists and reflects in the live preview / SPJ documents.
+- Optional: consider resetting existing DB rows to apply the new single-mode default text (users who already saved with the previous single-mode defaults will keep the old values until they reset).

@@ -85,21 +85,47 @@ const DEFAULT_SETTINGS: LetterheadSettings = {
   line2Text: "DINAS PENDIDIKAN",
   line2Bold: true,
   line2Size: 14,
-  line3Text: "CABDIS PENDIDIKAN WILAYAH XIV",
+  line3Text: "SMA NEGERI 1 TELUKDALAM",
   line3Bold: true,
-  line3Size: 13,
-  line4Text: "SMA NEGERI 1 TELUKDALAM",
-  line4Bold: true,
-  line4Size: 20,
-  line5Text: "NIS : 300010         NPSN : 10258246        Terakreditasi A           NSS: 301071701001",
+  line3Size: 20,
+  line4Text:
+    "Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan,",
+  line4Bold: false,
+  line4Size: 11,
+  line5Text: "Cabdisdik Wil.XIV, Kode Pos 22865",
   line5Bold: false,
   line5Size: 11,
-  line6Text: "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865",
+  line6Text: "Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com",
   line6Bold: false,
   line6Size: 11,
-  line7Text: "Email: smansatelukdalam1987@gmail.com ; website: www.smansatelukdalam.sch.id",
+  line7Text: "Laman : smansatelukdalam.sch.id",
   line7Bold: false,
   line7Size: 11,
+  // Dual mode (KOP 2 Logo) - expanded text with CABDIS, NIS, etc.
+  dualLine1Text: "PEMERINTAH PROVINSI SUMATERA UTARA",
+  dualLine1Bold: true,
+  dualLine1Size: 14,
+  dualLine2Text: "DINAS PENDIDIKAN",
+  dualLine2Bold: true,
+  dualLine2Size: 14,
+  dualLine3Text: "CABDIS PENDIDIKAN WILAYAH XIV",
+  dualLine3Bold: true,
+  dualLine3Size: 13,
+  dualLine4Text: "SMA NEGERI 1 TELUKDALAM",
+  dualLine4Bold: true,
+  dualLine4Size: 20,
+  dualLine5Text:
+    "NIS : 300010         NPSN : 10258246        Terakreditasi A           NSS: 301071701001",
+  dualLine5Bold: false,
+  dualLine5Size: 11,
+  dualLine6Text:
+    "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865",
+  dualLine6Bold: false,
+  dualLine6Size: 11,
+  dualLine7Text:
+    "Email: smansatelukdalam1987@gmail.com ; website: www.smansatelukdalam.sch.id",
+  dualLine7Bold: false,
+  dualLine7Size: 11,
   showBottomLine: true,
   bottomLineWidth: 2,
 };
@@ -159,6 +185,15 @@ export function LetterheadSettingsPanel() {
     scheduleSave({ ...localRef.current, [key]: value } as LetterheadSettings);
   };
 
+  const updateDualLine = (
+    lineNum: number,
+    field: "Text" | "Bold" | "Size",
+    value: string | boolean | number
+  ) => {
+    const key = (`dualLine${lineNum}${field}` as keyof LetterheadSettings);
+    scheduleSave({ ...localRef.current, [key]: value } as LetterheadSettings);
+  };
+
   const handleFileUpload = async (
     e: React.ChangeEvent<HTMLInputElement>,
     isLogo2 = false
@@ -200,6 +235,16 @@ export function LetterheadSettingsPanel() {
   }
 
   const lineMeta = [
+    { num: 1, label: "Baris 1", placeholder: "PEMERINTAH PROVINSI..." },
+    { num: 2, label: "Baris 2", placeholder: "DINAS PENDIDIKAN" },
+    { num: 3, label: "Baris 3 (terbesar)", placeholder: "SMA NEGERI 1..." },
+    { num: 4, label: "Baris 4 (alamat)", placeholder: "Jl. Pendidikan..." },
+    { num: 5, label: "Baris 5 (cabdisdik/pos)", placeholder: "Cabdisdik Wil..." },
+    { num: 6, label: "Baris 6 (telp/email)", placeholder: "Telp/HP: ..." },
+    { num: 7, label: "Baris 7 (laman)", placeholder: "Laman : ..." },
+  ];
+
+  const dualLineMeta = [
     { num: 1, label: "Baris 1", placeholder: "PEMERINTAH PROVINSI..." },
     { num: 2, label: "Baris 2", placeholder: "DINAS PENDIDIKAN" },
     { num: 3, label: "Baris 3", placeholder: "CABDIS PENDIDIKAN..." },
@@ -806,7 +851,8 @@ export function LetterheadSettingsPanel() {
             <CardHeader className="pb-3">
               <CardTitle className="text-base flex items-center gap-2">
                 <AlignLeft className="h-4 w-4 text-emerald-600" />
-                Teks & Format per Baris
+                Teks & Format per Baris —{" "}
+                {local.kopMode === "dual" ? "KOP 2 Logo" : "KOP 1 Logo"}
               </CardTitle>
               <CardDescription className="text-xs">
                 Atur teks, ukuran font, dan bold/tidak untuk setiap baris KOP
@@ -815,69 +861,137 @@ export function LetterheadSettingsPanel() {
             <CardContent>
               <ScrollArea className="h-[520px] pr-3">
                 <div className="space-y-3">
-                  {lineMeta.map((lm) => {
-                    const textKey = `line${lm.num}Text` as keyof LetterheadSettings;
-                    const boldKey = `line${lm.num}Bold` as keyof LetterheadSettings;
-                    const sizeKey = `line${lm.num}Size` as keyof LetterheadSettings;
-                    const text = local[textKey] as string;
-                    const bold = local[boldKey] as boolean;
-                    const size = local[sizeKey] as number;
-                    return (
-                      <div
-                        key={lm.num}
-                        className="rounded-md border p-2.5 space-y-2"
-                      >
-                        <div className="flex items-center justify-between">
-                          <Label className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
-                            {lm.label}
-                          </Label>
-                          <div className="flex items-center gap-1">
-                            <Button
-                              variant={bold ? "default" : "outline"}
-                              size="sm"
-                              className="h-6 w-7 p-0"
-                              onClick={() => updateLine(lm.num, "Bold", !bold)}
-                              title={bold ? "Bold aktif" : "Aktifkan bold"}
-                            >
-                              <Bold className="h-3 w-3" />
-                            </Button>
+                  {local.kopMode === "single"
+                    ? lineMeta.map((lm) => {
+                        const textKey = `line${lm.num}Text` as keyof LetterheadSettings;
+                        const boldKey = `line${lm.num}Bold` as keyof LetterheadSettings;
+                        const sizeKey = `line${lm.num}Size` as keyof LetterheadSettings;
+                        const text = local[textKey] as string;
+                        const bold = local[boldKey] as boolean;
+                        const size = local[sizeKey] as number;
+                        return (
+                          <div
+                            key={lm.num}
+                            className="rounded-md border p-2.5 space-y-2"
+                          >
+                            <div className="flex items-center justify-between">
+                              <Label className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+                                {lm.label}
+                              </Label>
+                              <div className="flex items-center gap-1">
+                                <Button
+                                  variant={bold ? "default" : "outline"}
+                                  size="sm"
+                                  className="h-6 w-7 p-0"
+                                  onClick={() =>
+                                    updateLine(lm.num, "Bold", !bold)
+                                  }
+                                  title={bold ? "Bold aktif" : "Aktifkan bold"}
+                                >
+                                  <Bold className="h-3 w-3" />
+                                </Button>
+                              </div>
+                            </div>
+                            <Input
+                              value={text}
+                              onChange={(e) =>
+                                updateLine(lm.num, "Text", e.target.value)
+                              }
+                              placeholder={lm.placeholder}
+                              className="h-8 text-xs"
+                              style={{
+                                fontFamily: local.fontFamily,
+                                fontWeight: bold ? 700 : 400,
+                              }}
+                            />
+                            <div>
+                              <div className="flex items-center justify-between">
+                                <Label className="text-[10px] text-muted-foreground">
+                                  Ukuran Font
+                                </Label>
+                                <span className="text-[10px] font-mono text-muted-foreground">
+                                  {size}px
+                                </span>
+                              </div>
+                              <Slider
+                                value={[size]}
+                                min={8}
+                                max={32}
+                                step={1}
+                                onValueChange={(v) =>
+                                  updateLine(lm.num, "Size", v[0])
+                                }
+                                className="mt-1"
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <Input
-                          value={text}
-                          onChange={(e) =>
-                            updateLine(lm.num, "Text", e.target.value)
-                          }
-                          placeholder={lm.placeholder}
-                          className="h-8 text-xs"
-                          style={{
-                            fontFamily: local.fontFamily,
-                            fontWeight: bold ? 700 : 400,
-                          }}
-                        />
-                        <div>
-                          <div className="flex items-center justify-between">
-                            <Label className="text-[10px] text-muted-foreground">
-                              Ukuran Font
-                            </Label>
-                            <span className="text-[10px] font-mono text-muted-foreground">
-                              {size}px
-                            </span>
+                        );
+                      })
+                    : dualLineMeta.map((lm) => {
+                        const textKey = `dualLine${lm.num}Text` as keyof LetterheadSettings;
+                        const boldKey = `dualLine${lm.num}Bold` as keyof LetterheadSettings;
+                        const sizeKey = `dualLine${lm.num}Size` as keyof LetterheadSettings;
+                        const text = local[textKey] as string;
+                        const bold = local[boldKey] as boolean;
+                        const size = local[sizeKey] as number;
+                        return (
+                          <div
+                            key={lm.num}
+                            className="rounded-md border p-2.5 space-y-2"
+                          >
+                            <div className="flex items-center justify-between">
+                              <Label className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+                                {lm.label}
+                              </Label>
+                              <div className="flex items-center gap-1">
+                                <Button
+                                  variant={bold ? "default" : "outline"}
+                                  size="sm"
+                                  className="h-6 w-7 p-0"
+                                  onClick={() =>
+                                    updateDualLine(lm.num, "Bold", !bold)
+                                  }
+                                  title={bold ? "Bold aktif" : "Aktifkan bold"}
+                                >
+                                  <Bold className="h-3 w-3" />
+                                </Button>
+                              </div>
+                            </div>
+                            <Input
+                              value={text}
+                              onChange={(e) =>
+                                updateDualLine(lm.num, "Text", e.target.value)
+                              }
+                              placeholder={lm.placeholder}
+                              className="h-8 text-xs"
+                              style={{
+                                fontFamily: local.fontFamily,
+                                fontWeight: bold ? 700 : 400,
+                              }}
+                            />
+                            <div>
+                              <div className="flex items-center justify-between">
+                                <Label className="text-[10px] text-muted-foreground">
+                                  Ukuran Font
+                                </Label>
+                                <span className="text-[10px] font-mono text-muted-foreground">
+                                  {size}px
+                                </span>
+                              </div>
+                              <Slider
+                                value={[size]}
+                                min={8}
+                                max={32}
+                                step={1}
+                                onValueChange={(v) =>
+                                  updateDualLine(lm.num, "Size", v[0])
+                                }
+                                className="mt-1"
+                              />
+                            </div>
                           </div>
-                          <Slider
-                            value={[size]}
-                            min={8}
-                            max={32}
-                            step={1}
-                            onValueChange={(v) =>
-                              updateLine(lm.num, "Size", v[0])
-                            }
-                            className="mt-1"
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
+                        );
+                      })}
                 </div>
               </ScrollArea>
             </CardContent>
