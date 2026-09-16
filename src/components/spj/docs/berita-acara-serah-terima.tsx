@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate, formatNumber, getMonthName } from "@/lib/format";
 import { Letterhead } from "@/components/spj/letterhead";
@@ -21,6 +22,21 @@ interface BeritaAcaraSerahTerimaProps {
   group: DocumentGroup;
   school: School | null;
 }
+
+const cellStyle: CSSProperties = {
+  border: "1px solid #000",
+  padding: "4px 6px",
+};
+const tableStyle: CSSProperties = {
+  borderCollapse: "collapse",
+  width: "100%",
+  border: "1px solid #000",
+};
+const headerCellStyle: CSSProperties = {
+  ...cellStyle,
+  background: "#e2e8f0",
+  fontWeight: 700,
+};
 
 export function BeritaAcaraSerahTerima({
   group,
@@ -121,22 +137,22 @@ export function BeritaAcaraSerahTerima({
 
       {/* === Items table === */}
       <div className="mb-4">
-        <table className="w-full border-collapse border border-slate-800 text-[11px]">
+        <table style={tableStyle}>
           <thead>
-            <tr className="bg-slate-100">
-              <th className="border border-slate-800 px-2 py-1 text-center w-10">
+            <tr>
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "40px" }}>
                 No
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-left">
+              <th style={{ ...headerCellStyle, textAlign: "left" }}>
                 Nama Barang/Jasa
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-center w-20">
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "100px" }}>
                 Diserahkan
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-center w-20">
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "100px" }}>
                 Diterima
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-center w-20">
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "90px" }}>
                 Kondisi
               </th>
             </tr>
@@ -144,17 +160,20 @@ export function BeritaAcaraSerahTerima({
           <tbody>
             {group.items.length === 0 ? (
               <tr>
-                <td colSpan={5} className="border border-slate-800 px-2 py-3 text-center text-slate-500">
+                <td
+                  colSpan={5}
+                  style={{ ...cellStyle, textAlign: "center", color: "#64748b" }}
+                >
                   Tidak ada item.
                 </td>
               </tr>
             ) : (
               group.items.map((item, idx) => (
                 <tr key={item.id}>
-                  <td className="border border-slate-800 px-2 py-1 text-center tabular-nums">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {idx + 1}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1">
+                  <td style={{ ...cellStyle, textAlign: "left" }}>
                     <div className="font-medium">{item.uraian}</div>
                     {item.namaBarang && (
                       <div className="text-[10px] italic text-slate-600">
@@ -162,13 +181,13 @@ export function BeritaAcaraSerahTerima({
                       </div>
                     )}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-center tabular-nums">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {formatNumber(item.volume)} {item.satuan ?? ""}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-center tabular-nums">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {formatNumber(item.volume)} {item.satuan ?? ""}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-center">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     Baik
                   </td>
                 </tr>
@@ -190,6 +209,7 @@ export function BeritaAcaraSerahTerima({
         </div>
       </div>
 
+      {/* 2-column top: PIHAK PERTAMA / PIHAK KEDUA */}
       <div className="grid grid-cols-2 gap-8 text-center text-[12px]">
         <div>
           <div className="font-medium">PIHAK PERTAMA,</div>
@@ -207,6 +227,21 @@ export function BeritaAcaraSerahTerima({
             {orDash(school?.receiverName)}
           </div>
           <div>Penerima Barang</div>
+        </div>
+      </div>
+
+      {/* Bottom centered: Pemeriksa Barang */}
+      <div className="mt-8 flex justify-center text-center text-[12px]">
+        <div>
+          <div className="font-medium">Pemeriksa Barang,</div>
+          <div className="h-20" />
+          <div className="font-semibold underline underline-offset-4">
+            {orDash(school?.goodsManagerName)}
+          </div>
+          <div className="text-[11px]">
+            NIP.{" "}
+            <span className="font-mono">{orDash(school?.goodsManagerNip)}</span>
+          </div>
         </div>
       </div>
     </div>

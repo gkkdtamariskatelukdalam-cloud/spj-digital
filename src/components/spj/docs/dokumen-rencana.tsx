@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate } from "@/lib/format";
 import { orDash, schoolAddress, schoolName } from "./_helpers";
@@ -12,6 +13,21 @@ interface DokumenRencanaProps {
   group: DocumentGroup;
   school: School | null;
 }
+
+const cellStyle: CSSProperties = {
+  border: "1px solid #000",
+  padding: "4px 6px",
+};
+const tableStyle: CSSProperties = {
+  borderCollapse: "collapse",
+  width: "100%",
+  border: "1px solid #000",
+};
+const headerCellStyle: CSSProperties = {
+  ...cellStyle,
+  background: "#e2e8f0",
+  fontWeight: 700,
+};
 
 export function DokumenRencana({ group, school }: DokumenRencanaProps) {
   return (
@@ -51,16 +67,16 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
         <div className="font-semibold text-[12px] mb-2">
           Spesifikasi/ruang lingkup barang/jasa:
         </div>
-        <table className="w-full border-collapse border border-slate-800 text-[11px]">
+        <table style={tableStyle}>
           <thead>
-            <tr className="bg-slate-100">
-              <th className="border border-slate-800 px-2 py-1 text-center w-8">
+            <tr>
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "32px" }}>
                 ✓
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-center w-10">
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "40px" }}>
                 No
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-left">
+              <th style={{ ...headerCellStyle, textAlign: "left" }}>
                 Spesifikasi Barang/Jasa
               </th>
             </tr>
@@ -68,20 +84,23 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
           <tbody>
             {group.items.length === 0 ? (
               <tr>
-                <td colSpan={3} className="border border-slate-800 px-2 py-3 text-center text-slate-500">
+                <td
+                  colSpan={3}
+                  style={{ ...cellStyle, textAlign: "center", color: "#64748b" }}
+                >
                   Tidak ada item.
                 </td>
               </tr>
             ) : (
               group.items.map((item, idx) => (
                 <tr key={item.id}>
-                  <td className="border border-slate-800 px-2 py-1 text-center">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     ✓
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-center tabular-nums">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {idx + 1}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1">
+                  <td style={{ ...cellStyle, textAlign: "left" }}>
                     <div className="font-medium">{item.uraian}</div>
                     {item.namaBarang && (
                       <div className="text-[10px] italic text-slate-600">

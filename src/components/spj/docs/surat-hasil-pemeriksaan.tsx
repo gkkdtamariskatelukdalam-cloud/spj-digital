@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate, formatNumber, getMonthName } from "@/lib/format";
 import { Letterhead } from "@/components/spj/letterhead";
@@ -21,6 +22,21 @@ interface SuratHasilPemeriksaanProps {
   group: DocumentGroup;
   school: School | null;
 }
+
+const cellStyle: CSSProperties = {
+  border: "1px solid #000",
+  padding: "4px 6px",
+};
+const tableStyle: CSSProperties = {
+  borderCollapse: "collapse",
+  width: "100%",
+  border: "1px solid #000",
+};
+const headerCellStyle: CSSProperties = {
+  ...cellStyle,
+  background: "#e2e8f0",
+  fontWeight: 700,
+};
 
 export function SuratHasilPemeriksaan({
   group,
@@ -99,22 +115,22 @@ export function SuratHasilPemeriksaan({
 
       {/* === Items table === */}
       <div className="mb-4">
-        <table className="w-full border-collapse border border-slate-800 text-[11px]">
+        <table style={tableStyle}>
           <thead>
-            <tr className="bg-slate-100">
-              <th className="border border-slate-800 px-2 py-1 text-center w-10">
+            <tr>
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "40px" }}>
                 No
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-left">
+              <th style={{ ...headerCellStyle, textAlign: "left" }}>
                 Nama Barang/Jasa
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-center w-16">
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "70px" }}>
                 Jumlah
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-center w-20">
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "90px" }}>
                 Satuan
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-center w-20">
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "90px" }}>
                 Kondisi
               </th>
             </tr>
@@ -122,17 +138,20 @@ export function SuratHasilPemeriksaan({
           <tbody>
             {group.items.length === 0 ? (
               <tr>
-                <td colSpan={5} className="border border-slate-800 px-2 py-3 text-center text-slate-500">
+                <td
+                  colSpan={5}
+                  style={{ ...cellStyle, textAlign: "center", color: "#64748b" }}
+                >
                   Tidak ada item.
                 </td>
               </tr>
             ) : (
               group.items.map((item, idx) => (
                 <tr key={item.id}>
-                  <td className="border border-slate-800 px-2 py-1 text-center tabular-nums">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {idx + 1}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1">
+                  <td style={{ ...cellStyle, textAlign: "left" }}>
                     <div className="font-medium">{item.uraian}</div>
                     {item.namaBarang && (
                       <div className="text-[10px] italic text-slate-600">
@@ -140,13 +159,13 @@ export function SuratHasilPemeriksaan({
                       </div>
                     )}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-center tabular-nums">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {formatNumber(item.volume)}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-center">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {orDash(item.satuan)}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-center">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     Baik
                   </td>
                 </tr>

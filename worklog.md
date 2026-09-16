@@ -654,3 +654,144 @@ Stage Summary:
   4. ✅ Jarak antar baris (slider 0-30px + tombol up/down)
   5. ✅ Upload logo (PNG/JPG/WebP/GIF, max 5MB)
   6. ✅ Geser logo (4 tombol arah + 2 slider untuk X/Y offset -100 to 100px)
+
+---
+Task ID: 8-pdf-match
+Agent: Sub-agent (general-purpose)
+Task: Rebuild all 7 SPJ doc templates to match the EXACT PDF format (full grid #000 borders, exact column structures, exact signature blocks, Times New Roman font).
+
+Work Log:
+
+### globals.css changes (`src/app/globals.css`)
+- Updated screen `.spj-doc` block: `font-family: "Times New Roman", Times, serif` (was `var(--font-geist-sans), system-ui, sans-serif`).
+- Updated print `.spj-doc` block inside `@media print`: added `font-family: "Times New Roman", Times, serif !important` so the print output also uses Times New Roman.
+
+### Pattern used in all 7 template files
+Replaced the previous Tailwind-class table styling (`border border-slate-800 px-2 py-1 ...`) with explicit inline `style={...}` React CSSProperties objects so every cell renders a sharp `1px solid #000` border. Each file now declares 4 reusable style constants at the top:
+- `cellStyle`     = `{ border: "1px solid #000", padding: "4px 6px" }`
+- `headerCellStyle` = `{ ...cellStyle, background: "#e2e8f0", fontWeight: 700 }`
+- `totalCellStyle`  = `{ ...cellStyle, background: "#f8fafc", fontWeight: 700 }` (where applicable)
+- `tableStyle`    = `{ borderCollapse: "collapse", width: "100%", border: "1px solid #000" }`
+
+Each `<th>` and `<td>` uses `{ ...cellStyle, textAlign: "..." }` (or `headerCellStyle`/`totalCellStyle`) — guaranteeing FULL GRID BORDERS (no missing edges) with consistent `4px 6px` cell padding.
+
+### Per-file changes
+
+1. **`surat-pesanan.tsx`** (01PESAN — Surat Pesanan)
+   - Rebuilt "RINCIAN PEKERJAAN" table with full #000 grid borders.
+   - 6-column header: No | Uraian Barang / Jasa | Jumlah | Satuan Ukuran | Harga Satuan | Total Harga (right-aligned Rp).
+   - Renamed column 4 header from "Satuan" to "Satuan Ukuran" per PDF spec.
+   - Total row "JUMLAH" with colSpan={5} and Rp total in last cell.
+
+2. **`surat-penawaran-toko.tsx`** (Toko — Surat Penawaran)
+   - Rebuilt "DAFTAR KUANTITAS DAN HARGA" table with full #000 grid borders.
+   - Added **2-row header** per PDF spec:
+     - Header row 1: No | Uraian | Volume | Satuan | Harga Satuan | Jumlah
+     - Header row 2: 1 | 2 | 3 | 4 | 5 | 6 (numbered sub-header)
+   - **Removed the JUMLAH total row** that was inside the table — per PDF spec the total is below the table separately.
+   - Added new section **below the table** with `Total Harga: Rp X` and `Terbilang: ...` (was missing terbilang before; uses existing `terbilang` + `capitalize` helpers).
+   - Right-aligned single-column signature block (vendorName uppercase → vendorOwner underlined → Direktur) — already correct, kept.
+
+3. **`surat-hasil-pemeriksaan.tsx`** (04SHP)
+   - Rebuilt items table (5 columns: No | Nama Barang/Jasa | Jumlah | Satuan | Kondisi) with full #000 grid borders.
+   - Kondisi column = "Baik" (center). No total row. Right-aligned signature "Pemeriksa, Penerima Barang" already correct, kept.
+
+4. **`berita-acara-serah-terima.tsx`** (05BAT)
+   - Rebuilt items table (5 columns: No | Nama Barang/Jasa | Diserahkan | Diterima | Kondisi) with full #000 grid borders.
+   - **Added missing 3rd signature block** per PDF spec — bottom centered "Pemeriksa Barang," with `school.goodsManagerName` + NIP. The previous version only had the 2-column top block (PIHAK PERTAMA / PIHAK KEDUA).
+   - 2-column top: PIHAK PERTAMA (vendorOwner / vendorName / Direktur) and PIHAK KEDUA (receiverName / Penerima Barang) — kept.
+   - Bottom centered: Pemeriksa Barang → goodsManagerName → NIP. (matches PDF spec layout)
+
+5. **`surat-pertanggungjawaban.tsx`** (SPJ)
+   - Rebuilt items table (6 columns: No | Uraian | Vol | Satuan | Tarif (Rp) | Jumlah (Rp)) with full #000 grid borders.
+   - Total row "JUMLAH TOTAL" with colSpan={5} and total in last cell.
+   - 3-column signature block: simplified "Bendahara," label (removed second "Bendahara Pengeluaran" line so each column has consistent label height — matches PDF spec which shows just "Bendahara," for col 2).
+
+6. **`dokumen-pembanding.tsx`** (02BANDING)
+   - Rebuilt comparison table (3 columns: No | Nama Produk | Harga ({vendorName})) with full #000 grid borders.
+   - Renamed column 3 header from "Estimasi Harga" to "Harga ({vendorName})" for clarity.
+   - Right-aligned prices with `Rp` prefix. Single-column signature kept.
+
+7. **`dokumen-rencana.tsx`** (03RENCANA)
+   - Rebuilt spesifikasi table (3 columns: ✓ | No | Spesifikasi Barang/Jasa) with full #000 grid borders.
+   - First column shows ✓ checkmark on every row (header + data).
+
+### Verification
+- `cd /home/z/my-project && bun run lint` → exit **0**, no errors, no warnings (the previously-noted "Unused eslint-disable directive" warning in `letterhead.tsx` is no longer present in this run).
+- `bunx tsc --noEmit` → **0 errors** in any of the 7 modified `src/components/spj/docs/*` files or in `src/app/globals.css`. The 6 remaining tsc errors are all pre-existing and outside this task's scope:
+  - `examples/websocket/*` (missing `socket.io-client` / `socket.io` types — example code)
+  - `skills/image-edit/...` and `skills/stock-analysis-skill/...` (skill sample code, pre-existing)
+  - `src/app/api/spj/document-groups/route.ts:106` `noBast` type mismatch (flagged in earlier worklogs, outside this task's scope)
+
+Summary of changes:
+- **Files modified (8 total):**
+  - `src/app/globals.css` (Times New Roman for screen + print)
+  - `src/components/spj/docs/surat-pesanan.tsx` (#000 borders, "Satuan Ukuran" header)
+  - `src/components/spj/docs/surat-penawaran-toko.tsx` (#000 borders, 2-row header, removed in-table total row, added below-table Total+Terbilang)
+  - `src/components/spj/docs/surat-hasil-pemeriksaan.tsx` (#000 borders)
+  - `src/components/spj/docs/berita-acara-serah-terima.tsx` (#000 borders, added bottom "Pemeriksa Barang" signature block)
+  - `src/components/spj/docs/surat-pertanggungjawaban.tsx` (#000 borders, simplified Bendahara label)
+  - `src/components/spj/docs/dokumen-pembanding.tsx` (#000 borders, "Harga ({vendorName})" header)
+  - `src/components/spj/docs/dokumen-rencana.tsx` (#000 borders)
+- **Imports unchanged:** every file still uses `<Letterhead />` for the KOP (where applicable), the same helper functions (`getDayName`, `toRoman`, `capitalize`, `orDash`, `schoolName`, `schoolAddress`, `pickGroupDate`, `buildSpjNumber`, `estimateCompletionDate`, `groupRomanMonth`), and the same component signatures `{ group: DocumentGroup; school: School | null }`.
+- New import added to every doc file: `import type { CSSProperties } from "react";` for typing the inline style objects.
+- Files NOT changed: `_helpers.ts` (no changes needed), `letterhead.tsx` (handled by earlier task).
+
+Next actions for downstream agents:
+- Verify the rendered output in the browser/print preview by opening the Documents tab and selecting each of the 7 document types. Specifically:
+  - Confirm full grid borders render as 1px black lines on every cell (no missing top/bottom/left/right edges).
+  - Confirm Toko (Surat Penawaran) now shows the 2-row numbered header (1/2/3/4/5/6) and the "Total Harga:" + "Terbilang:" lines below the table (not inside it).
+  - Confirm BAST now shows 3 signature blocks (PIHAK PERTAMA / PIHAK KEDUA top row + bottom-centered "Pemeriksa Barang," with goodsManagerName/NIP).
+  - Confirm SPJ Bendahara column shows just one label line "Bendahara," (no second "Bendahara Pengeluaran" line).
+  - Confirm Times New Roman font is applied both on screen and in print output.
+- Optional: ask the user to re-export a PDF print from the app and visually compare to the 5 reference PDFs to catch any remaining format drift (e.g. column widths, signature spacing, total row label "JUMLAH" vs "JUMLAH TOTAL").
+- Optional: the `document-groups/route.ts:106` `noBast` type mismatch is still open from earlier worklog — would be good to fix in a separate small task.
+
+---
+Task ID: 8-PDF-MATCH-FINAL
+Agent: Main (Claude)
+Task: Membuat semua template dokumen sama persis dengan format PDF output dari Excel, termasuk border tabel
+
+Work Log:
+- Analisa 5 PDF yang diupload user (Toko, 01PESAN, 03RENCANA, 04SHP, 05BAT) menggunakan VLM skill
+- Ekstrak text dari semua PDF menggunakan pdf.py extract.text
+- Convert PDF ke image menggunakan pdftoppm untuk analisa visual layout
+- Analisa detail setiap PDF: border tabel, struktur kolom, signature blocks, font, alignment
+- Key findings dari PDF analysis:
+  - KOP: logo di KIRI, teks center di kanan logo (sudah ada di Letterhead component)
+  - SEMUA tabel harus punya border grid lengkap (1px solid black di setiap cell)
+  - Tidak ada border luar dokumen (page border)
+  - Font: Times New Roman
+  - Toko: 2-row header (No|Uraian|Volume|Satuan|Harga|Jumlah, lalu 1|2|3|4|5|6)
+  - BAST: 3 signature blocks (PIHAK PERTAMA, PIHAK KEDUA, Pemeriksa Barang di tengah bawah)
+  - SHP: 5 kolom (No|Nama Barang|Jumlah|Satuan|Kondisi="Baik")
+  - SPJ: 6 kolom + JUMLAH TOTAL row + Terbilang
+- Rebuild semua 7 template dokumen:
+  1. surat-pesanan.tsx - tabel 6 kolom dengan border grid, header "Satuan Ukuran", total row JUMLAH
+  2. surat-penawaran-toko.tsx - tabel 2-row header (1-6), total+terbilang di bawah tabel
+  3. surat-hasil-pemeriksaan.tsx - tabel 5 kolom, kondisi="Baik", no total row
+  4. berita-acara-serah-terima.tsx - tabel 5 kolom + 3rd signature block "Pemeriksa Barang"
+  5. surat-pertanggungjawaban.tsx - tabel 6 kolom + JUMLAH TOTAL + Terbilang
+  6. dokumen-pembanding.tsx - tabel 3 kolom dengan header "Harga ({vendor})"
+  7. dokumen-rencana.tsx - tabel 3 kolom dengan checkmark ✓
+- Update globals.css: .spj-doc font-family → "Times New Roman", Times, serif
+- Pattern border konsisten: setiap td/th pakai style={border: "1px solid #000", padding: "4px 6px"}
+- Verifikasi Agent Browser:
+  - Semua tabel punya border grid lengkap (test: 201 cells, allCellsBordered=true)
+  - Font Times New Roman aktif (computed style: "Times New Roman", Times, serif)
+  - Toko: 2-row header + Total Harga + Terbilang di bawah tabel
+  - BAST: 3rd signature block "Pemeriksa Barang" dengan "Radius S. K. Siburian, S.Pd" + NIP
+  - SPJ: JUMLAH TOTAL row + Terbilang + 3-column signatures
+  - Surat Pesanan: RINCIAN PEKERJAAN dengan border grid
+  - Dokumen Pembanding: tabel dengan "Harga (UD. JOSUA)" header
+  - Dokumen Rencana: tabel dengan checkmark ✓ di kolom pertama
+- Lint clean (0 errors), tidak ada console errors
+
+Stage Summary:
+- 7 template dokumen di-rebuild dengan border grid 1px solid black di setiap cell
+- Font diubah ke Times New Roman untuk match format resmi
+- Struktur tabel match persis dengan PDF asli user (kolom, header, alignment)
+- Signature blocks match persis (2 kolom untuk Pesanan/Toko/SPJ, 3 untuk BAST)
+- Toko template: 2-row numbered header (1-6) sesuai format RAB Indonesia
+- BAST template: 3rd signature "Pemeriksa Barang" dengan goodsManagerName + NIP
+- Semua dokumen siap dicetak dengan format yang sama persis dengan PDF output Excel

@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate, formatNumber, terbilang } from "@/lib/format";
 import { Letterhead } from "@/components/spj/letterhead";
@@ -18,6 +19,26 @@ interface SuratPesananProps {
   group: DocumentGroup;
   school: School | null;
 }
+
+const cellStyle: CSSProperties = {
+  border: "1px solid #000",
+  padding: "4px 6px",
+};
+const tableStyle: CSSProperties = {
+  borderCollapse: "collapse",
+  width: "100%",
+  border: "1px solid #000",
+};
+const headerCellStyle: CSSProperties = {
+  ...cellStyle,
+  background: "#e2e8f0",
+  fontWeight: 700,
+};
+const totalCellStyle: CSSProperties = {
+  ...cellStyle,
+  background: "#f8fafc",
+  fontWeight: 700,
+};
 
 export function SuratPesanan({ group, school }: SuratPesananProps) {
   const romanMonth = groupRomanMonth(group);
@@ -77,25 +98,25 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
         <div className="font-semibold text-[12px] mb-2">
           RINCIAN PEKERJAAN
         </div>
-        <table className="w-full border-collapse border border-slate-800 text-[11px]">
+        <table style={tableStyle}>
           <thead>
-            <tr className="bg-slate-100">
-              <th className="border border-slate-800 px-2 py-1 text-center w-10">
+            <tr>
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "40px" }}>
                 No
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-left">
+              <th style={{ ...headerCellStyle, textAlign: "left" }}>
                 Uraian Barang / Jasa
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-center w-16">
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "70px" }}>
                 Jumlah
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-center w-20">
-                Satuan
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "90px" }}>
+                Satuan Ukuran
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-right w-28">
+              <th style={{ ...headerCellStyle, textAlign: "right", width: "130px" }}>
                 Harga Satuan
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-right w-32">
+              <th style={{ ...headerCellStyle, textAlign: "right", width: "150px" }}>
                 Total Harga
               </th>
             </tr>
@@ -103,17 +124,20 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           <tbody>
             {group.items.length === 0 ? (
               <tr>
-                <td colSpan={6} className="border border-slate-800 px-2 py-3 text-center text-slate-500">
+                <td
+                  colSpan={6}
+                  style={{ ...cellStyle, textAlign: "center", color: "#64748b" }}
+                >
                   Tidak ada item.
                 </td>
               </tr>
             ) : (
               group.items.map((item, idx) => (
                 <tr key={item.id}>
-                  <td className="border border-slate-800 px-2 py-1 text-center tabular-nums">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {idx + 1}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1">
+                  <td style={{ ...cellStyle, textAlign: "left" }}>
                     <div className="font-medium">{item.uraian}</div>
                     {item.namaBarang && (
                       <div className="text-[10px] italic text-slate-600">
@@ -121,27 +145,27 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                       </div>
                     )}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-center tabular-nums">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {formatNumber(item.volume)}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-center">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {orDash(item.satuan)}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-right tabular-nums">
+                  <td style={{ ...cellStyle, textAlign: "right" }}>
                     Rp {formatNumber(item.tarifHarga)}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-right tabular-nums font-medium">
+                  <td style={{ ...cellStyle, textAlign: "right", fontWeight: 500 }}>
                     Rp {formatNumber(item.jumlah)}
                   </td>
                 </tr>
               ))
             )}
             {/* Total row */}
-            <tr className="bg-slate-50 font-bold">
-              <td className="border border-slate-800 px-2 py-1" colSpan={5}>
+            <tr>
+              <td style={totalCellStyle} colSpan={5}>
                 JUMLAH
               </td>
-              <td className="border border-slate-800 px-2 py-1 text-right tabular-nums">
+              <td style={{ ...totalCellStyle, textAlign: "right" }}>
                 Rp {formatNumber(total)}
               </td>
             </tr>

@@ -1,8 +1,9 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
-import { formatDate, formatNumber } from "@/lib/format";
-import { orDash } from "./_helpers";
+import { formatDate, formatNumber, terbilang } from "@/lib/format";
+import { capitalize, orDash } from "./_helpers";
 
 // ============================================================
 // Toko — Surat Penawaran Toko / Penyedia
@@ -12,6 +13,21 @@ interface SuratPenawaranTokoProps {
   group: DocumentGroup;
   school: School | null;
 }
+
+const cellStyle: CSSProperties = {
+  border: "1px solid #000",
+  padding: "4px 6px",
+};
+const tableStyle: CSSProperties = {
+  borderCollapse: "collapse",
+  width: "100%",
+  border: "1px solid #000",
+};
+const headerCellStyle: CSSProperties = {
+  ...cellStyle,
+  background: "#e2e8f0",
+  fontWeight: 700,
+};
 
 export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
   const vendorName = group.vendorName || "—";
@@ -61,43 +77,54 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
         <div className="font-semibold text-[12px] mb-2">
           DAFTAR KUANTITAS DAN HARGA
         </div>
-        <table className="w-full border-collapse border border-slate-800 text-[11px]">
+        <table style={tableStyle}>
           <thead>
-            <tr className="bg-slate-100">
-              <th className="border border-slate-800 px-2 py-1 text-center w-10">
+            <tr>
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "40px" }}>
                 No
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-left">
+              <th style={{ ...headerCellStyle, textAlign: "left" }}>
                 Uraian
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-center w-16">
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "70px" }}>
                 Volume
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-center w-20">
+              <th style={{ ...headerCellStyle, textAlign: "center", width: "90px" }}>
                 Satuan
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-right w-28">
+              <th style={{ ...headerCellStyle, textAlign: "right", width: "130px" }}>
                 Harga Satuan
               </th>
-              <th className="border border-slate-800 px-2 py-1 text-right w-32">
+              <th style={{ ...headerCellStyle, textAlign: "right", width: "150px" }}>
                 Jumlah
               </th>
+            </tr>
+            <tr>
+              <th style={{ ...headerCellStyle, textAlign: "center" }}>1</th>
+              <th style={{ ...headerCellStyle, textAlign: "center" }}>2</th>
+              <th style={{ ...headerCellStyle, textAlign: "center" }}>3</th>
+              <th style={{ ...headerCellStyle, textAlign: "center" }}>4</th>
+              <th style={{ ...headerCellStyle, textAlign: "center" }}>5</th>
+              <th style={{ ...headerCellStyle, textAlign: "center" }}>6</th>
             </tr>
           </thead>
           <tbody>
             {group.items.length === 0 ? (
               <tr>
-                <td colSpan={6} className="border border-slate-800 px-2 py-3 text-center text-slate-500">
+                <td
+                  colSpan={6}
+                  style={{ ...cellStyle, textAlign: "center", color: "#64748b" }}
+                >
                   Tidak ada item.
                 </td>
               </tr>
             ) : (
               group.items.map((item, idx) => (
                 <tr key={item.id}>
-                  <td className="border border-slate-800 px-2 py-1 text-center tabular-nums">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {idx + 1}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1">
+                  <td style={{ ...cellStyle, textAlign: "left" }}>
                     <div className="font-medium">{item.uraian}</div>
                     {item.namaBarang && (
                       <div className="text-[10px] italic text-slate-600">
@@ -105,32 +132,35 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
                       </div>
                     )}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-center tabular-nums">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {formatNumber(item.volume)}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-center">
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
                     {orDash(item.satuan)}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-right tabular-nums">
+                  <td style={{ ...cellStyle, textAlign: "right" }}>
                     Rp {formatNumber(item.tarifHarga)}
                   </td>
-                  <td className="border border-slate-800 px-2 py-1 text-right tabular-nums font-medium">
+                  <td style={{ ...cellStyle, textAlign: "right", fontWeight: 500 }}>
                     Rp {formatNumber(item.jumlah)}
                   </td>
                 </tr>
               ))
             )}
-            {/* Total row */}
-            <tr className="bg-slate-50 font-bold">
-              <td className="border border-slate-800 px-2 py-1" colSpan={5}>
-                JUMLAH
-              </td>
-              <td className="border border-slate-800 px-2 py-1 text-right tabular-nums">
-                Rp {formatNumber(total)}
-              </td>
-            </tr>
           </tbody>
         </table>
+      </div>
+
+      {/* === Total & Terbilang (below table, not in table) === */}
+      <div className="mb-5 text-[12px] space-y-1">
+        <div>
+          <span className="font-semibold">Total Harga:</span>{" "}
+          Rp {formatNumber(total)}
+        </div>
+        <div>
+          <span className="font-semibold">Terbilang:</span>{" "}
+          <span className="italic">{capitalize(terbilang(total))}</span>
+        </div>
       </div>
 
       {/* === Signature === */}
