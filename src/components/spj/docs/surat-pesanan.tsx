@@ -323,11 +323,6 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
         </ol>
       </div>
 
-      {/* === Date CENTERED === */}
-      <div className="text-center mb-5 text-[12px]">
-        Telukdalam, {formatDate(tglPesan)}
-      </div>
-
       {/* === 2-column borderless signature table (Penyedia | Pelaksana) === */}
       <table style={borderlessTableStyle}>
         <tbody>
@@ -335,12 +330,12 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             <td
               style={{
                 width: "50%",
-                textAlign: "center",
+                textAlign: "left",
                 padding: "0 8px",
                 verticalAlign: "top",
               }}
             >
-              <div>Penyedia</div>
+              <div>Penyedia,</div>
               <div>{vendorName || "—"}</div>
               <div style={{ height: "64px" }} />
               <div style={{ fontWeight: 400 }}>{vendorOwner || "—"}</div>
@@ -349,12 +344,13 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             <td
               style={{
                 width: "50%",
-                textAlign: "center",
+                textAlign: "left",
                 padding: "0 8px",
                 verticalAlign: "top",
               }}
             >
-              <div>Pelaksana</div>
+              <div>Telukdalam, {formatDate(tglPesan)}</div>
+              <div>Pelaksana,</div>
               <div style={{ height: "64px" }} />
               <div style={nameStyle}>{principalName}</div>
               <div>NIP. {principalNip}</div>
