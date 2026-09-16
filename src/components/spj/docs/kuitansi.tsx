@@ -121,8 +121,7 @@ export function Kuitansi({
         TANDA PEMBAYARAN
       </div>
 
-      {/* === BODY BLOCK === */}
-      {/* Sudah terima dari */}
+      {/* === BODY BLOCK (all in one borderless table, ':' sejajar) === */}
       <table style={borderlessTableStyle}>
         <tbody>
           <tr>
@@ -141,18 +140,16 @@ export function Kuitansi({
               <span style={{ fontStyle: "italic", fontWeight: 700 }}>{terbilangText}</span>
             </td>
           </tr>
-        </tbody>
-      </table>
-
-      {/* Nomor Surat - OUTSIDE the aligned table (label on its own, value below) */}
-      <div style={{ fontSize: "12px", padding: "1px 4px", marginTop: "4px" }}>
-        Nomor Surat persetujuan penyediaan barang<br />
-        dan jasa : {nomorSurat}
-      </div>
-
-      {/* Untuk pembayaran - back in aligned table */}
-      <table style={borderlessTableStyle}>
-        <tbody>
+          <tr>
+            <td style={bodyLabelStyle}>
+              Nomor Surat persetujuan penyediaan barang
+              <br />
+              dan jasa :
+            </td>
+            <td style={{ ...bodyValueStyle, verticalAlign: "bottom" }}>
+              {nomorSurat}
+            </td>
+          </tr>
           <tr>
             <td style={bodyLabelStyle}>Untuk pembayaran :</td>
             <td style={bodyValueStyle}>{firstUraian}</td>
