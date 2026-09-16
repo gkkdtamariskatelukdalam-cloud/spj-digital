@@ -1,0 +1,1889 @@
+/home/z/.venv/lib/python3.12/site-packages/openpyxl/worksheet/_reader.py:329: UserWarning: Data Validation extension is not supported and will be removed
+  warn(msg)
+/home/z/.venv/lib/python3.12/site-packages/openpyxl/reader/drawings.py:33: UserWarning: DrawingML support is incomplete and limited to charts and images only. Shapes and drawings will be lost.
+  warn("DrawingML support is incomplete and limited to charts and images only. Shapes and drawings will be lost.")
+
+====================================================================================================
+SHEET: 01PESAN (max_row=159, max_col=29)
+====================================================================================================
+
+Merged cells: ['H82:I82', 'H53:I53', 'H35:I35', 'J82:K82', 'B65:E65', 'B74:E74', 'B68:E68', 'J19:K19', 'H55:I55', 'J28:K28', 'J59:K59', 'J60:K60', 'B36:E36', 'B76:E76', 'B45:E45', 'H39:I39', 'J68:K68', 'E132:K135', 'W15:X17', 'G89:I89']
+
+--- Content preview (first 30 rows) ---
+  A1: 'PEMERINTAH PROVINSI SUMATERA UTARA'
+  A2: 'DINAS PENDIDIKAN'
+  A3: 'SMA NEGERI 1 TELUKDALAM'
+  Q3: '=P4-1'
+  A4: 'Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan, '
+  P4: '07'
+  A5: 'Cabdisdik Wil.XIV, Kode Pos 22865'
+  Q5: '=P4+1'
+  A6: 'Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com '
+  A7: 'Laman : smansatelukdalam.sch.id'
+  A8: 'SURAT PESANAN'
+  M8: 'PESANAN'
+  N8: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789cfb890>
+  O8: '=ROMAN(MONTH(M11))'
+  AA8: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789cfb920>
+  AB8: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789cfab10>
+  AC8: '=ROMAN(MONTH(Z10))'
+  M9: 'BAST'
+  N9: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789cec6e0>
+  O9: '=ROMAN(MONTH(M11))'
+  A10: 'Paket Pesanan :'
+  F10: 'Nomor Surat Pesanan'
+  H10: '="421.3/"&N8&"-P/DB/SMANSATLD/"&O8&"/"&YEAR(M11)&""'
+  M10: 'SHP'
+  N10: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a5958b0>
+  O10: '=ROMAN(MONTH(M11))'
+  AB10: 'Penyedia'
+  A11: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a68bd10>
+  F11: 'Tanggal Pesanan '
+  H11: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a68a690>
+  M11: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a68a660>
+  F12: 'Tanggal Negosiasi '
+  A13: '="Waktu Pengerjaan Pesanan  : "&H11&""'
+  F13: 'No. BPU'
+  H13: '=M19'
+  I13: '=M20'
+  J13: '=M21'
+  K13: '=M22'
+  S13: '=IFERROR(LEFT(M10; 2) & TEXT(VALUE(RIGHT(M10; LEN(M10)-2))+1;"000"); "")'
+  AA13: 'Hrg Satuan'
+  AB13: 'Total Hrg'
+  A14: '="Waktu Pemrosesan Pesanan : "&H11&""'
+  H14: '=M23'
+  I14: '=M24'
+  J14: '=O23'
+  K14: '=P23'
+  AA14: '=IFERROR(#REF!/F19,0)'
+  AB14: '=IFERROR(AA14*F19,0)'
+  A15: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789da9640>
+  F15: 'Catatan Pengiriman Untuk Penyedia:'
+  A17: 'RINCIAN PEKERJAAN'
+  A18: 'No'
+  B18: 'Uraian Barang / Jasa'
+  F18: 'Jumlah'
+  G18: 'Satuan Ukuran '
+  H18: 'Harga Satuan '
+  J18: 'Total Harga'
+  S18: '=IFERROR(LEFT(M12; 3) & TEXT(VALUE(RIGHT(M12; LEN(M12)-3))-1;"000"); "")'
+  A19: '=IF(B19<>"",COUNTA($B$19:B19),"")'
+  B19: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789ecce90>
+  F19: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789eccce0>
+  G19: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789eccd10>
+  H19: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789eccd40>
+  J19: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789ecdca0>
+  L19: '=IF(B19="","0","1")'
+  M19: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789ecdd60>
+  O19: '=F19*H19'
+  P19: 11398500
+  A20: '=IF(B20<>"",COUNTA($B$19:B20),"")'
+  B20: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e5b350>
+  F20: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e5b3e0>
+  G20: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e5b3b0>
+  H20: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e5b2c0>
+  J20: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e5a360>
+  L20: '=IF(B20="","0","1")'
+  M20: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a79e2a0>
+  A21: '=IF(B21<>"",COUNTA($B$19:B21),"")'
+  B21: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a1d3410>
+  F21: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a1d34a0>
+  G21: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a1d2fc0>
+  H21: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a1d2f30>
+  J21: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a1d08c0>
+  L21: '=IF(B21="","0","1")'
+  M21: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a1d1f10>
+  A22: '=IF(B22<>"",COUNTA($B$19:B22),"")'
+  B22: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e03020>
+  F22: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e021e0>
+  G22: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e03080>
+  H22: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e03110>
+  J22: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e03fe0>
+  L22: '=IF(B22="","0","1")'
+  M22: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e00920>
+  A23: '=IF(B23<>"",COUNTA($B$19:B23),"")'
+  B23: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e5bad0>
+  F23: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e58710>
+  G23: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e5b440>
+  H23: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e5b050>
+  J23: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e5b020>
+  L23: '=IF(B23="","0","1")'
+  M23: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789e59f10>
+  R23: 'HG Satuan Asli'
+  S23: 'Total Bayar'
+  A24: '=IF(B24<>"",COUNTA($B$19:B24),"")'
+  B24: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789d5b080>
+  F24: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789d5afc0>
+  G24: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789d5a180>
+  H24: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789d5a0f0>
+  J24: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789ef7170>
+  L24: '=IF(B24="","0","1")'
+  M24: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789ef47d0>
+  R24: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789ef6990>
+  S24: '=IFERROR(F19*R24,0)'
+  A25: '=IF(B25<>"",COUNTA($B$19:B25),"")'
+  B25: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789bbe5d0>
+  F25: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789bbf350>
+  G25: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789bbcc50>
+  H25: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789bbe450>
+  J25: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789bbe420>
+  L25: '=IF(B25="","0","1")'
+  M25: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789b3ea80>
+  A26: '=IF(B26<>"",COUNTA($B$19:B26),"")'
+  B26: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a596210>
+  F26: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a595970>
+  G26: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a770950>
+  H26: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a6ca990>
+  J26: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a6ca930>
+  L26: '=IF(B26="","0","1")'
+  M26: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a6ca060>
+  A27: '=IF(B27<>"",COUNTA($B$19:B27),"")'
+  B27: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a5b8200>
+  F27: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a5ba4b0>
+  G27: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a5ba540>
+  H27: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a5b8e30>
+  J27: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a5ae0f0>
+  L27: '=IF(B27="","0","1")'
+  M27: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789cfa9f0>
+  A28: '=IF(B28<>"",COUNTA($B$19:B28),"")'
+  B28: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789f6b6e0>
+  F28: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789f69460>
+  G28: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789f684a0>
+  H28: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789f68b90>
+  J28: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789f68440>
+  L28: '=IF(B28="","0","1")'
+  M28: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a089190>
+  A29: '=IF(B29<>"",COUNTA($B$19:B29),"")'
+  B29: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789f11d30>
+  F29: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789f10290>
+  G29: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789f10170>
+  H29: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789f10230>
+  J29: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789f13950>
+  L29: '=IF(B29="","0","1")'
+  A30: '=IF(B30<>"",COUNTA($B$19:B30),"")'
+  B30: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789fa90d0>
+  F30: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789fa9940>
+  G30: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789fa98b0>
+  H30: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789fa99d0>
+  J30: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789fa9ac0>
+  L30: '=IF(B30="","0","1")'
+
+--- All formulas (first 200) ---
+  Q3: =P4-1
+  Q5: =P4+1
+  O8: =ROMAN(MONTH(M11))
+  AC8: =ROMAN(MONTH(Z10))
+  O9: =ROMAN(MONTH(M11))
+  H10: ="421.3/"&N8&"-P/DB/SMANSATLD/"&O8&"/"&YEAR(M11)&""
+  O10: =ROMAN(MONTH(M11))
+  A13: ="Waktu Pengerjaan Pesanan  : "&H11&""
+  H13: =M19
+  I13: =M20
+  J13: =M21
+  K13: =M22
+  S13: =IFERROR(LEFT(M10; 2) & TEXT(VALUE(RIGHT(M10; LEN(M10)-2))+1;"000"); "")
+  A14: ="Waktu Pemrosesan Pesanan : "&H11&""
+  H14: =M23
+  I14: =M24
+  J14: =O23
+  K14: =P23
+  AA14: =IFERROR(#REF!/F19,0)
+  AB14: =IFERROR(AA14*F19,0)
+  S18: =IFERROR(LEFT(M12; 3) & TEXT(VALUE(RIGHT(M12; LEN(M12)-3))-1;"000"); "")
+  A19: =IF(B19<>"",COUNTA($B$19:B19),"")
+  L19: =IF(B19="","0","1")
+  O19: =F19*H19
+  A20: =IF(B20<>"",COUNTA($B$19:B20),"")
+  L20: =IF(B20="","0","1")
+  A21: =IF(B21<>"",COUNTA($B$19:B21),"")
+  L21: =IF(B21="","0","1")
+  A22: =IF(B22<>"",COUNTA($B$19:B22),"")
+  L22: =IF(B22="","0","1")
+  A23: =IF(B23<>"",COUNTA($B$19:B23),"")
+  L23: =IF(B23="","0","1")
+  A24: =IF(B24<>"",COUNTA($B$19:B24),"")
+  L24: =IF(B24="","0","1")
+  S24: =IFERROR(F19*R24,0)
+  A25: =IF(B25<>"",COUNTA($B$19:B25),"")
+  L25: =IF(B25="","0","1")
+  A26: =IF(B26<>"",COUNTA($B$19:B26),"")
+  L26: =IF(B26="","0","1")
+  A27: =IF(B27<>"",COUNTA($B$19:B27),"")
+  L27: =IF(B27="","0","1")
+  A28: =IF(B28<>"",COUNTA($B$19:B28),"")
+  L28: =IF(B28="","0","1")
+  A29: =IF(B29<>"",COUNTA($B$19:B29),"")
+  L29: =IF(B29="","0","1")
+  A30: =IF(B30<>"",COUNTA($B$19:B30),"")
+  L30: =IF(B30="","0","1")
+  A31: =IF(B31<>"",COUNTA($B$19:B31),"")
+  L31: =IF(B31="","0","1")
+  A32: =IF(B32<>"",COUNTA($B$19:B32),"")
+  L32: =IF(B32="","0","1")
+  A33: =IF(B33<>"",COUNTA($B$19:B33),"")
+  L33: =IF(B33="","0","1")
+  A34: =IF(B34<>"",COUNTA($B$19:B34),"")
+  L34: =IF(B34="","0","1")
+  A35: =IF(B35<>"",COUNTA($B$19:B35),"")
+  L35: =IF(B35="","0","1")
+  A36: =IF(B36<>"",COUNTA($B$19:B36),"")
+  L36: =IF(B36="","0","1")
+  A37: =IF(B37<>"",COUNTA($B$19:B37),"")
+  L37: =IF(B37="","0","1")
+  A38: =IF(B38<>"",COUNTA($B$19:B38),"")
+  L38: =IF(B38="","0","1")
+  A39: =IF(B39<>"",COUNTA($B$19:B39),"")
+  L39: =IF(B39="","0","1")
+  A40: =IF(B40<>"",COUNTA($B$19:B40),"")
+  L40: =IF(B40="","0","1")
+  A41: =IF(B41<>"",COUNTA($B$19:B41),"")
+  L41: =IF(B41="","0","1")
+  A42: =IF(B42<>"",COUNTA($B$19:B42),"")
+  L42: =IF(B42="","0","1")
+  A43: =IF(B43<>"",COUNTA($B$19:B43),"")
+  L43: =IF(B43="","0","1")
+  A44: =IF(B44<>"",COUNTA($B$19:B44),"")
+  L44: =IF(B44="","0","1")
+  A45: =IF(B45<>"",COUNTA($B$19:B45),"")
+  L45: =IF(B45="","0","1")
+  A46: =IF(B46<>"",COUNTA($B$19:B46),"")
+  L46: =IF(B46="","0","1")
+  A47: =IF(B47<>"",COUNTA($B$19:B47),"")
+  L47: =IF(B47="","0","1")
+  A48: =IF(B48<>"",COUNTA($B$19:B48),"")
+  L48: =IF(B48="","0","1")
+  A49: =IF(B49<>"",COUNTA($B$19:B49),"")
+  L49: =IF(B49="","0","1")
+  A50: =IF(B50<>"",COUNTA($B$19:B50),"")
+  L50: =IF(B50="","0","1")
+  A51: =IF(B51<>"",COUNTA($B$19:B51),"")
+  L51: =IF(B51="","0","1")
+  A52: =IF(B52<>"",COUNTA($B$19:B52),"")
+  L52: =IF(B52="","0","1")
+  A53: =IF(B53<>"",COUNTA($B$19:B53),"")
+  L53: =IF(B53="","0","1")
+  A54: =IF(B54<>"",COUNTA($B$19:B54),"")
+  L54: =IF(B54="","0","1")
+  A55: =IF(B55<>"",COUNTA($B$19:B55),"")
+  L55: =IF(B55="","0","1")
+  A56: =IF(B56<>"",COUNTA($B$19:B56),"")
+  L56: =IF(B56="","0","1")
+  A57: =IF(B57<>"",COUNTA($B$19:B57),"")
+  L57: =IF(B57="","0","1")
+  A58: =IF(B58<>"",COUNTA($B$19:B58),"")
+  L58: =IF(B58="","0","1")
+  A59: =IF(B59<>"",COUNTA($B$19:B59),"")
+  L59: =IF(B59="","0","1")
+  A60: =IF(B60<>"",COUNTA($B$19:B60),"")
+  L60: =IF(B60="","0","1")
+  A61: =IF(B61<>"",COUNTA($B$19:B61),"")
+  L61: =IF(B61="","0","1")
+  A62: =IF(B62<>"",COUNTA($B$19:B62),"")
+  L62: =IF(B62="","0","1")
+  A63: =IF(B63<>"",COUNTA($B$19:B63),"")
+  L63: =IF(B63="","0","1")
+  A64: =IF(B64<>"",COUNTA($B$19:B64),"")
+  L64: =IF(B64="","0","1")
+  A65: =IF(B65<>"",COUNTA($B$19:B65),"")
+  L65: =IF(B65="","0","1")
+  A66: =IF(B66<>"",COUNTA($B$19:B66),"")
+  L66: =IF(B66="","0","1")
+  A67: =IF(B67<>"",COUNTA($B$19:B67),"")
+  L67: =IF(B67="","0","1")
+  A68: =IF(B68<>"",COUNTA($B$19:B68),"")
+  L68: =IF(B68="","0","1")
+  A69: =IF(B69<>"",COUNTA($B$19:B69),"")
+  L69: =IF(B69="","0","1")
+  A70: =IF(B70<>"",COUNTA($B$19:B70),"")
+  L70: =IF(B70="","0","1")
+  A71: =IF(B71<>"",COUNTA($B$19:B71),"")
+  L71: =IF(B71="","0","1")
+  A72: =IF(B72<>"",COUNTA($B$19:B72),"")
+  L72: =IF(B72="","0","1")
+  A73: =IF(B73<>"",COUNTA($B$19:B73),"")
+  L73: =IF(B73="","0","1")
+  A74: =IF(B74<>"",COUNTA($B$19:B74),"")
+  L74: =IF(B74="","0","1")
+  A75: =IF(B75<>"",COUNTA($B$19:B75),"")
+  L75: =IF(B75="","0","1")
+  A76: =IF(B76<>"",COUNTA($B$19:B76),"")
+  L76: =IF(B76="","0","1")
+  A77: =IF(B77<>"",COUNTA($B$19:B77),"")
+  L77: =IF(B77="","0","1")
+  A78: =IF(B78<>"",COUNTA($B$19:B78),"")
+  L78: =IF(B78="","0","1")
+  A79: =IF(B79<>"",COUNTA($B$19:B79),"")
+  L79: =IF(B79="","0","1")
+  A80: =IF(B80<>"",COUNTA($B$19:B80),"")
+  L80: =IF(B80="","0","1")
+  A81: =IF(B81<>"",COUNTA($B$19:B81),"")
+  L81: =IF(B81="","0","1")
+  A82: =IF(B82<>"",COUNTA($B$19:B82),"")
+  L82: =IF(B82="","0","1")
+  A83: =IF(B83<>"",COUNTA($B$19:B83),"")
+  L83: =IF(B83="","0","1")
+  A84: =IF(B84<>"",COUNTA($B$19:B84),"")
+  L84: =IF(B84="","0","1")
+  A85: =IF(B85<>"",COUNTA($B$19:B85),"")
+  L85: =IF(B85="","0","1")
+  A86: =IF(B86<>"",COUNTA($B$19:B86),"")
+  L86: =IF(B86="","0","1")
+  A87: =IF(B87<>"",COUNTA($B$19:B87),"")
+  L87: =IF(B87="","0","1")
+  A88: =IF(B88<>"",COUNTA($B$19:B88),"")
+  L88: =IF(B88="","0","1")
+  G89: =IF(SUMPRODUCT((B19:B24="Nasi Kotak")+(B19:B24="Kue")+(B19:B24="Aqua Botol")+(B19:B24="Aqua Cup")) > 0,"Harga Total", "Harga sebelum PPN")
+  J89: =J92
+  J90: =IF(AND(OR(B19="Nasi Kotak", B19="Kue Kotak", B19="Aqua Botol", B19="Aqua Cup"), J89>=2000000), J89-J93, IF(AND(NOT(OR(B19="Nasi Kotak", B19="Kue Kotak", B19="Aqua Botol", B19="Aqua Cup")), J89>=2000000), J89-J91, "-"))
+  N90: =IF(OR(B12:B79="Nasi Kotak";B12:B79="Kue"; B12:B79="Aqua Botol";B12:B79="Aqua Cup"); "Harga Total"; "Harga sebelum PPN")
+  J91: =IF(AND(NOT(OR(B19="Nasi Kotak", B19="Kue Kotak", B19="Aqua Botol", B19="Aqua Cup")), J89>=2000000), J89*11%, "-")
+  M91: =IF(B19="Nasi Kotak","Harga Total","-")
+  J92: =SUM(J19:J28)
+  J93: =IF(AND(OR(B19="Nasi Kotak", B19="Kue Kotak", B19="Aqua Botol", B19="Aqua Cup"), J89>=2000000), J19*2%, "-")
+  O93: =IF(B12="Nasi Kotak";G80="Harga Total");"Total sebelum PPN"
+  E94: =IF(J92=0,"nol",IF(J92<0,"minus ","")& SUBSTITUTE(TRIM(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( IF(--MID(TEXT(ABS(J92),"000000000000000"),1,3)=0,"",MID(TEXT(ABS(J92),"000000000000000"),1,1)&" Ratus "&MID(TEXT(ABS(J92),"000000000000000"),2,1)&" puluh "&MID(TEXT(ABS(J92),"000000000000000"),3,1)&" trilyun ")& IF(--MID(TEXT(ABS(J92),"000000000000000"),4,3)=0,"",MID(TEXT(ABS(J92),"000000000000000"),4,1)&" ratus "&MID(TEXT(ABS(J92),"000000000000000"),5,1)&" Puluh "&MID(TEXT(ABS(J92),"000000000000000"),6,1)&" Milyar ")& IF(--MID(TEXT(ABS(J92),"000000000000000"),7,3)=0,"",MID(TEXT(ABS(J92),"000000000000000"),7,1)&" Ratus "&MID(TEXT(ABS(J92),"000000000000000"),8,1)&" Puluh "&MID(TEXT(ABS(J92),"000000000000000"),9,1)&" Juta ")& IF(--MID(TEXT(ABS(J92),"000000000000000"),10,3)=0,"",IF(--MID(TEXT(ABS(J92),"000000000000000"),10,3)=1,"*",MID(TEXT(ABS(J92),"000000000000000"),10,1)&" Ratus "&MID(TEXT(ABS(J92),"000000000000000"),11,1)&" Puluh ")&MID(TEXT(ABS(J92),"000000000000000"),12,1)&" Ribu ")& IF(--MID(TEXT(ABS(J92),"000000000000000"),13,3)=0,"",MID(TEXT(ABS(J92),"000000000000000"),13,1)&" Ratus "&MID(TEXT(ABS(J92),"000000000000000"),14,1)&" Puluh "&MID(TEXT(ABS(J92),"000000000000000"),15,1)),1,"Satu"),2,"Dua"),3,"Tiga"),4,"Empat"),5,"Lima"),6,"Enam"),7,"Tujuh"),8,"Delapan"),9,"Sembilan"),"0 Ratus",""),"0 Puluh",""),"Satu Puluh 0","Sepuluh"),"Satu Puluh Satu","Sebelas"),"Satu Puluh Dua","Dua Belas"),"Satu Puluh Tiga","Tiga Belas"),"Satu Puluh Empat","Empat Belas"),"Satu Puluh Lima","Lima Belas"),"Satu Puluh Enam","Enam Belas"),"Satu Puluh Tujuh","Tujuh Belas"),"Satu Puluh Delapan","Delapan Belas"),"Satu Puluh Sembilan","Sembilan Belas"),"Satu Ratus","Seratus"),"*Satu Ribu","Seribu"),0,""))," "," "))& " Rupiah"
+  G105: ="Telukdalam, "&TEXT(M11, "[$-421] DD MMMM YYYY")&""
+  G112: ='Data Sekolah'!A6
+  G113: ="NIP. "&'Data Sekolah'!B6
+  C118: ="Dana BOSP "&YEAR(M11)&""
+  E128: =J92
+  E129: =E94
+  E131: =H10
+  I137: =IF(OR(I138="Penerima",I138="Pembayar Tagihan"), "","Diterima oleh :")
+  A145: ='Data Sekolah'!A10
+  E145: ='Data Sekolah'!A8
+  A146: ='Data Sekolah'!C10
+  E146: ='Data Sekolah'!C8
+  I146: =IF(OR(I145="David J. Sitinjak, S.Pd", I145="Riama Siahaan"), "", "Direktur")
+  A147: ="NIP. "&'Data Sekolah'!B10
+  E147: ="NIP. "&'Data Sekolah'!B8
+  A157: ='Data Sekolah'!A6
+  A158: ='Data Sekolah'!C6
+  A159: ="NIP. "&'Data Sekolah'!B6
+
+Total formulas in 01PESAN: 191
+
+====================================================================================================
+SHEET: 02BANDING (max_row=140, max_col=14)
+====================================================================================================
+
+Merged cells: ['D60:E60', 'F116:G116', 'F16:G16', 'F103:G103', 'F108:G108', 'F118:G118', 'H9:I9', 'D45:E45', 'H118:I118', 'B12:C12', 'B14:C14', 'D70:E70', 'F70:G70', 'B13:C13', 'B78:C78', 'D7:E7', 'D78:E78', 'F23:G23', 'F121:G121', 'D71:E71']
+
+--- Content preview (first 30 rows) ---
+  A1: 'DOKUMEN HASIL PEMBANDING'
+  B2: 'Satuan Pendidikan '
+  D2: 'SMA Negeri 1 Telukdalam'
+  K2: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07896daa20>
+  B3: 'Hasil pembanding'
+  D3: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07896d99d0>
+  M3: '04'
+  A5: 'No'
+  D5: 'Produk I'
+  F5: 'Produk II'
+  H5: 'dst'
+  B6: 'Nama Calon penyedia'
+  D6: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07896c99a0>
+  F6: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07896cbd70>
+  A7: 1
+  B7: 'Nama Produk'
+  D7: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07896ca5d0>
+  F7: '=D7'
+  K7: '=IF(D7="","0","1")'
+  B8: 'Gambar produk'
+  F8: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07896c8e00>
+  K8: '=IF(D8="","0","1")'
+  M8: "    ' Menampilkan pratinjau cetak"
+  B9: 'Harga satuan'
+  D9: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07896b85c0>
+  F9: '=D9+2000'
+  K9: '=IF(D9="","0","1")'
+  B10: 'Spesifikasi'
+  D10: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07896b8980>
+  F10: '=D10'
+  K10: '=IF(D10="","0","1")'
+  B11: 'Estimasi harga'
+  D11: '=D9'
+  F11: '=D11+2000'
+  K11: '=IF(D11="","0","1")'
+  A12: 2
+  B12: 'Nama Produk'
+  D12: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07896a8440>
+  F12: '=D12'
+  K12: '=IF(D12="","0","1")'
+  B13: 'Gambar produk'
+  F13: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789697fe0>
+  K13: '=IF(D13="","0","1")'
+  M13: 'End Sub'
+  B14: 'Harga satuan'
+  D14: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789694dd0>
+  F14: '=D14+2000'
+  K14: '=IF(D14="","0","1")'
+  B15: 'Spesifikasi'
+  D15: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078967bd70>
+  F15: '=D15'
+  K15: '=IF(D15="","0","1")'
+  B16: 'Estimasi harga'
+  D16: '=D14'
+  F16: '=D16+2000'
+  K16: '=IF(D16="","0","1")'
+  A17: 3
+  B17: 'Nama Produk'
+  D17: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07896795b0>
+  F17: '=D17'
+  K17: '=IF(D17="","0","1")'
+  B18: 'Gambar produk'
+  F18: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789657fb0>
+  K18: '=IF(D18="","0","1")'
+  B19: 'Harga satuan'
+  D19: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789655640>
+  F19: '=D19+2000'
+  K19: '=IF(D19="","0","1")'
+  B20: 'Spesifikasi'
+  D20: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789661280>
+  F20: '=D20'
+  K20: '=IF(D20="","0","1")'
+  B21: 'Estimasi harga'
+  D21: '=D19'
+  F21: '=D21+2000'
+  K21: '=IF(D21="","0","1")'
+  A22: 4
+  B22: 'Nama Produk'
+  D22: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897cd430>
+  F22: '=D22'
+  K22: '=IF(D22="","0","1")'
+  B23: 'Gambar produk'
+  F23: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897a46e0>
+  K23: '=IF(D23="","0","1")'
+  B24: 'Harga satuan'
+  D24: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078989d7c0>
+  F24: '=D24+2000'
+  K24: '=IF(D24="","0","1")'
+  B25: 'Spesifikasi'
+  D25: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789615a60>
+  F25: '=D25'
+  K25: '=IF(D25="","0","1")'
+  B26: 'Estimasi harga'
+  D26: '=D24'
+  F26: '=D26+2000'
+  K26: '=IF(D26="","0","1")'
+  A27: 5
+  B27: 'Nama Produk'
+  D27: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789637dd0>
+  F27: '=D27'
+  K27: '=IF(D27="","0","1")'
+  B28: 'Gambar produk'
+  F28: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789689ac0>
+  K28: '=IF(D28="","0","1")'
+  B29: 'Harga satuan'
+  D29: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078968a0c0>
+  F29: '=D29+2000'
+  K29: '=IF(D29="","0","1")'
+  B30: 'Spesifikasi'
+  D30: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789688350>
+  F30: '=D30'
+  K30: '=IF(D30="","0","1")'
+
+--- All formulas (first 200) ---
+  F7: =D7
+  K7: =IF(D7="","0","1")
+  K8: =IF(D8="","0","1")
+  F9: =D9+2000
+  K9: =IF(D9="","0","1")
+  F10: =D10
+  K10: =IF(D10="","0","1")
+  D11: =D9
+  F11: =D11+2000
+  K11: =IF(D11="","0","1")
+  F12: =D12
+  K12: =IF(D12="","0","1")
+  K13: =IF(D13="","0","1")
+  F14: =D14+2000
+  K14: =IF(D14="","0","1")
+  F15: =D15
+  K15: =IF(D15="","0","1")
+  D16: =D14
+  F16: =D16+2000
+  K16: =IF(D16="","0","1")
+  F17: =D17
+  K17: =IF(D17="","0","1")
+  K18: =IF(D18="","0","1")
+  F19: =D19+2000
+  K19: =IF(D19="","0","1")
+  F20: =D20
+  K20: =IF(D20="","0","1")
+  D21: =D19
+  F21: =D21+2000
+  K21: =IF(D21="","0","1")
+  F22: =D22
+  K22: =IF(D22="","0","1")
+  K23: =IF(D23="","0","1")
+  F24: =D24+2000
+  K24: =IF(D24="","0","1")
+  F25: =D25
+  K25: =IF(D25="","0","1")
+  D26: =D24
+  F26: =D26+2000
+  K26: =IF(D26="","0","1")
+  F27: =D27
+  K27: =IF(D27="","0","1")
+  K28: =IF(D28="","0","1")
+  F29: =D29+2000
+  K29: =IF(D29="","0","1")
+  F30: =D30
+  K30: =IF(D30="","0","1")
+  D31: =D29
+  F31: =D31+2000
+  K31: =IF(D31="","0","1")
+  F32: =D32
+  K32: =IF(D32="","0","1")
+  K33: =IF(D33="","0","1")
+  F34: =D34+2000
+  K34: =IF(D34="","0","1")
+  F35: =D35
+  K35: =IF(D35="","0","1")
+  D36: =D34
+  F36: =D36+2000
+  K36: =IF(D36="","0","1")
+  F37: =D37
+  K37: =IF(D37="","0","1")
+  K38: =IF(D38="","0","1")
+  F39: =D39+2000
+  K39: =IF(D39="","0","1")
+  F40: =D40
+  K40: =IF(D40="","0","1")
+  D41: =D39
+  F41: =D41+2000
+  K41: =IF(D41="","0","1")
+  F42: =D42
+  K42: =IF(D42="","0","1")
+  K43: =IF(D43="","0","1")
+  F44: =D44+2000
+  K44: =IF(D44="","0","1")
+  F45: =D45
+  K45: =IF(D45="","0","1")
+  D46: =D44
+  F46: =D46+2000
+  K46: =IF(D46="","0","1")
+  F47: =D47
+  K47: =IF(D47="","0","1")
+  K48: =IF(D48="","0","1")
+  F49: =D49+2000
+  K49: =IF(D49="","0","1")
+  F50: =D50
+  K50: =IF(D50="","0","1")
+  D51: =D49
+  F51: =D51+2000
+  K51: =IF(D51="","0","1")
+  F52: =D52
+  K52: =IF(D52="","0","1")
+  K53: =IF(D53="","0","1")
+  F54: =D54+2000
+  K54: =IF(D54="","0","1")
+  F55: =D55
+  K55: =IF(D55="","0","1")
+  D56: =D54
+  F56: =D56+2000
+  K56: =IF(D56="","0","1")
+  F57: =D57
+  K57: =IF(D57="","0","1")
+  K58: =IF(D58="","0","1")
+  F59: =D59+2000
+  K59: =IF(D59="","0","1")
+  F60: =D60
+  K60: =IF(D60="","0","1")
+  D61: =D59
+  F61: =D61+2000
+  K61: =IF(D61="","0","1")
+  F62: =D62
+  K62: =IF(D62="","0","1")
+  K63: =IF(D63="","0","1")
+  F64: =D64+2000
+  K64: =IF(D64="","0","1")
+  F65: =D65
+  K65: =IF(D65="","0","1")
+  D66: =D64
+  F66: =D66+2000
+  K66: =IF(D66="","0","1")
+  F67: =D67
+  K67: =IF(D67="","0","1")
+  K68: =IF(D68="","0","1")
+  F69: =D69+2000
+  K69: =IF(D69="","0","1")
+  F70: =D70
+  K70: =IF(D70="","0","1")
+  D71: =D69
+  F71: =D71+2000
+  K71: =IF(D71="","0","1")
+  F72: =D72
+  K72: =IF(D72="","0","1")
+  K73: =IF(D73="","0","1")
+  F74: =D74+2000
+  K74: =IF(D74="","0","1")
+  F75: =D75
+  K75: =IF(D75="","0","1")
+  D76: =D74
+  F76: =D76+2000
+  K76: =IF(D76="","0","1")
+  F77: =D77
+  K77: =IF(D77="","0","1")
+  K78: =IF(D78="","0","1")
+  F79: =D79+2000
+  K79: =IF(D79="","0","1")
+  F80: =D80
+  K80: =IF(D80="","0","1")
+  D81: =D79
+  F81: =D81+2000
+  K81: =IF(D81="","0","1")
+  F82: =D82
+  K82: =IF(D82="","0","1")
+  K83: =IF(D83="","0","1")
+  F84: =D84+2000
+  K84: =IF(D84="","0","1")
+  F85: =D85
+  K85: =IF(D85="","0","1")
+  D86: =D84
+  F86: =D86+2000
+  K86: =IF(D86="","0","1")
+  F87: =D87
+  K87: =IF(D87="","0","1")
+  K88: =IF(D88="","0","1")
+  F89: =D89+2000
+  K89: =IF(D89="","0","1")
+  F90: =D90
+  K90: =IF(D90="","0","1")
+  D91: =D89
+  F91: =D91+2000
+  K91: =IF(D91="","0","1")
+  F92: =D92
+  K92: =IF(D92="","0","1")
+  K93: =IF(D93="","0","1")
+  F94: =D94+2000
+  K94: =IF(D94="","0","1")
+  F95: =D95
+  K95: =IF(D95="","0","1")
+  D96: =D94
+  F96: =D96+2000
+  K96: =IF(D96="","0","1")
+  F97: =D97
+  K97: =IF(D97="","0","1")
+  K98: =IF(D98="","0","1")
+  F99: =D99+2000
+  K99: =IF(D99="","0","1")
+  F100: =D100
+  K100: =IF(D100="","0","1")
+  D101: =D99
+  F101: =D101+2000
+  K101: =IF(D101="","0","1")
+  F102: =D102
+  K102: =IF(D102="","0","1")
+  K103: =IF(D103="","0","1")
+  F104: =D104+2000
+  K104: =IF(D104="","0","1")
+  F105: =D105
+  K105: =IF(D105="","0","1")
+  D106: =D104
+  F106: =D106+2000
+  K106: =IF(D106="","0","1")
+  ... and 41 more formulas
+
+Total formulas in 02BANDING: 241
+
+====================================================================================================
+SHEET: 03RENCANA (max_row=247, max_col=20)
+====================================================================================================
+
+Merged cells: ['A5:D5', 'J231:K231', 'A232:E232', 'J180:K180', 'E26:N26', 'E57:N57', 'A207:E207', 'A182:E182', 'J190:K190', 'A216:E216', 'J230:K230', 'G210:I210', 'E16:N16', 'G195:I195', 'G233:K233', 'A218:E218', 'A7:B7', 'E18:N18', 'E58:N58', 'G192:I192']
+
+--- Content preview (first 30 rows) ---
+  A1: 'DOKUMEN PERENCANAAN'
+  A3: 'Nama Satuan Pendidikan'
+  E3: "='Data Sekolah'!B2"
+  A4: 'Alamat Satuan Pendidikan'
+  E4: "='Data Sekolah'!B4"
+  P4: '07'
+  Q4: '=P4-1'
+  A5: 'Kategori Barang/Jasa'
+  E5: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078989d3d0>
+  A6: 'Jenis'
+  C6: 'KETERANGAN'
+  Q6: '=P4+1'
+  A7: 'Jumlah Barang/Jasa'
+  C7: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078986daf0>
+  A8: 'Spesifikasi/ruang lingkup barang/jasa'
+  C8: 'ü'
+  D8: '=IF(E8<>"",COUNTA($E$8:E8),"")'
+  E8: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078987bbc0>
+  O8: '=IF(E8="","0","1")'
+  C9: 'ü'
+  D9: '=IF(E9<>"",COUNTA($E$8:E9),"")'
+  E9: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789f81190>
+  O9: '=IF(E9="","0","1")'
+  C10: 'ü'
+  D10: '=IF(E10<>"",COUNTA($E$8:E10),"")'
+  E10: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789abd250>
+  O10: '=IF(E10="","0","1")'
+  C11: 'ü'
+  D11: '=IF(E11<>"",COUNTA($E$8:E11),"")'
+  E11: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898204a0>
+  O11: '=IF(E11="","0","1")'
+  C12: 'ü'
+  D12: '=IF(E12<>"",COUNTA($E$8:E12),"")'
+  E12: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789851610>
+  O12: '=IF(E12="","0","1")'
+  C13: 'ü'
+  D13: '=IF(E13<>"",COUNTA($E$8:E13),"")'
+  E13: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789884ef0>
+  O13: '=IF(E13="","0","1")'
+  C14: 'ü'
+  D14: '=IF(E14<>"",COUNTA($E$8:E14),"")'
+  E14: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789886750>
+  O14: '=IF(E14="","0","1")'
+  C15: 'ü'
+  D15: '=IF(E15<>"",COUNTA($E$8:E15),"")'
+  E15: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898aa900>
+  O15: '=IF(E15="","0","1")'
+  C16: 'ü'
+  D16: '=IF(E16<>"",COUNTA($E$8:E16),"")'
+  E16: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898ab110>
+  O16: '=IF(E16="","0","1")'
+  C17: 'ü'
+  D17: '=IF(E17<>"",COUNTA($E$8:E17),"")'
+  E17: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898ab920>
+  O17: '=IF(E17="","0","1")'
+  C18: 'ü'
+  D18: '=IF(E18<>"",COUNTA($E$8:E18),"")'
+  E18: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898ab8c0>
+  O18: '=IF(E18="","0","1")'
+  C19: 'ü'
+  D19: '=IF(E19<>"",COUNTA($E$8:E19),"")'
+  E19: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898ab020>
+  O19: '=IF(E19="","0","1")'
+  C20: 'ü'
+  D20: '=IF(E20<>"",COUNTA($E$8:E20),"")'
+  E20: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898aa840>
+  O20: '=IF(E20="","0","1")'
+  C21: 'ü'
+  D21: '=IF(E21<>"",COUNTA($E$8:E21),"")'
+  E21: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789884140>
+  O21: '=IF(E21="","0","1")'
+  C22: 'ü'
+  D22: '=IF(E22<>"",COUNTA($E$8:E22),"")'
+  E22: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898ee3f0>
+  O22: '=IF(E22="","0","1")'
+  C23: 'ü'
+  D23: '=IF(E23<>"",COUNTA($E$8:E23),"")'
+  E23: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898ceae0>
+  O23: '=IF(E23="","0","1")'
+  C24: 'ü'
+  D24: '=IF(E24<>"",COUNTA($E$8:E24),"")'
+  E24: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898509b0>
+  O24: '=IF(E24="","0","1")'
+  C25: 'ü'
+  D25: '=IF(E25<>"",COUNTA($E$8:E25),"")'
+  E25: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078a417380>
+  O25: '=IF(E25="","0","1")'
+  C26: 'ü'
+  D26: '=IF(E26<>"",COUNTA($E$8:E26),"")'
+  E26: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078986eab0>
+  O26: '=IF(E26="","0","1")'
+  C27: 'ü'
+  D27: '=IF(E27<>"",COUNTA($E$8:E27),"")'
+  E27: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078989d640>
+  O27: '=IF(E27="","0","1")'
+  C28: 'ü'
+  D28: '=IF(E28<>"",COUNTA($E$8:E28),"")'
+  E28: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078989df40>
+  O28: '=IF(E28="","0","1")'
+  C29: 'ü'
+  D29: '=IF(E29<>"",COUNTA($E$8:E29),"")'
+  E29: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078989e6c0>
+  O29: '=IF(E29="","0","1")'
+  C30: 'ü'
+  D30: '=IF(E30<>"",COUNTA($E$8:E30),"")'
+  E30: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898789e0>
+  O30: '=IF(E30="","0","1")'
+
+--- All formulas (first 200) ---
+  E3: ='Data Sekolah'!B2
+  E4: ='Data Sekolah'!B4
+  Q4: =P4-1
+  Q6: =P4+1
+  D8: =IF(E8<>"",COUNTA($E$8:E8),"")
+  O8: =IF(E8="","0","1")
+  D9: =IF(E9<>"",COUNTA($E$8:E9),"")
+  O9: =IF(E9="","0","1")
+  D10: =IF(E10<>"",COUNTA($E$8:E10),"")
+  O10: =IF(E10="","0","1")
+  D11: =IF(E11<>"",COUNTA($E$8:E11),"")
+  O11: =IF(E11="","0","1")
+  D12: =IF(E12<>"",COUNTA($E$8:E12),"")
+  O12: =IF(E12="","0","1")
+  D13: =IF(E13<>"",COUNTA($E$8:E13),"")
+  O13: =IF(E13="","0","1")
+  D14: =IF(E14<>"",COUNTA($E$8:E14),"")
+  O14: =IF(E14="","0","1")
+  D15: =IF(E15<>"",COUNTA($E$8:E15),"")
+  O15: =IF(E15="","0","1")
+  D16: =IF(E16<>"",COUNTA($E$8:E16),"")
+  O16: =IF(E16="","0","1")
+  D17: =IF(E17<>"",COUNTA($E$8:E17),"")
+  O17: =IF(E17="","0","1")
+  D18: =IF(E18<>"",COUNTA($E$8:E18),"")
+  O18: =IF(E18="","0","1")
+  D19: =IF(E19<>"",COUNTA($E$8:E19),"")
+  O19: =IF(E19="","0","1")
+  D20: =IF(E20<>"",COUNTA($E$8:E20),"")
+  O20: =IF(E20="","0","1")
+  D21: =IF(E21<>"",COUNTA($E$8:E21),"")
+  O21: =IF(E21="","0","1")
+  D22: =IF(E22<>"",COUNTA($E$8:E22),"")
+  O22: =IF(E22="","0","1")
+  D23: =IF(E23<>"",COUNTA($E$8:E23),"")
+  O23: =IF(E23="","0","1")
+  D24: =IF(E24<>"",COUNTA($E$8:E24),"")
+  O24: =IF(E24="","0","1")
+  D25: =IF(E25<>"",COUNTA($E$8:E25),"")
+  O25: =IF(E25="","0","1")
+  D26: =IF(E26<>"",COUNTA($E$8:E26),"")
+  O26: =IF(E26="","0","1")
+  D27: =IF(E27<>"",COUNTA($E$8:E27),"")
+  O27: =IF(E27="","0","1")
+  D28: =IF(E28<>"",COUNTA($E$8:E28),"")
+  O28: =IF(E28="","0","1")
+  D29: =IF(E29<>"",COUNTA($E$8:E29),"")
+  O29: =IF(E29="","0","1")
+  D30: =IF(E30<>"",COUNTA($E$8:E30),"")
+  O30: =IF(E30="","0","1")
+  D31: =IF(E31<>"",COUNTA($E$8:E31),"")
+  O31: =IF(E31="","0","1")
+  D32: =IF(E32<>"",COUNTA($E$8:E32),"")
+  O32: =IF(E32="","0","1")
+  D33: =IF(E33<>"",COUNTA($E$8:E33),"")
+  O33: =IF(E33="","0","1")
+  D34: =IF(E34<>"",COUNTA($E$8:E34),"")
+  O34: =IF(E34="","0","1")
+  D35: =IF(E35<>"",COUNTA($E$8:E35),"")
+  O35: =IF(E35="","0","1")
+  D36: =IF(E36<>"",COUNTA($E$8:E36),"")
+  O36: =IF(E36="","0","1")
+  D37: =IF(E37<>"",COUNTA($E$8:E37),"")
+  O37: =IF(E37="","0","1")
+  D38: =IF(E38<>"",COUNTA($E$8:E38),"")
+  O38: =IF(E38="","0","1")
+  D39: =IF(E39<>"",COUNTA($E$8:E39),"")
+  O39: =IF(E39="","0","1")
+  D40: =IF(E40<>"",COUNTA($E$8:E40),"")
+  O40: =IF(E40="","0","1")
+  D41: =IF(E41<>"",COUNTA($E$8:E41),"")
+  O41: =IF(E41="","0","1")
+  D42: =IF(E42<>"",COUNTA($E$8:E42),"")
+  O42: =IF(E42="","0","1")
+  D43: =IF(E43<>"",COUNTA($E$8:E43),"")
+  O43: =IF(E43="","0","1")
+  D44: =IF(E44<>"",COUNTA($E$8:E44),"")
+  O44: =IF(E44="","0","1")
+  D45: =IF(E45<>"",COUNTA($E$8:E45),"")
+  O45: =IF(E45="","0","1")
+  D46: =IF(E46<>"",COUNTA($E$8:E46),"")
+  O46: =IF(E46="","0","1")
+  D47: =IF(E47<>"",COUNTA($E$8:E47),"")
+  O47: =IF(E47="","0","1")
+  D48: =IF(E48<>"",COUNTA($E$8:E48),"")
+  O48: =IF(E48="","0","1")
+  D49: =IF(E49<>"",COUNTA($E$8:E49),"")
+  O49: =IF(E49="","0","1")
+  D50: =IF(E50<>"",COUNTA($E$8:E50),"")
+  O50: =IF(E50="","0","1")
+  D51: =IF(E51<>"",COUNTA($E$8:E51),"")
+  O51: =IF(E51="","0","1")
+  D52: =IF(E52<>"",COUNTA($E$8:E52),"")
+  O52: =IF(E52="","0","1")
+  D53: =IF(E53<>"",COUNTA($E$8:E53),"")
+  O53: =IF(E53="","0","1")
+  D54: =IF(E54<>"",COUNTA($E$8:E54),"")
+  O54: =IF(E54="","0","1")
+  D55: =IF(E55<>"",COUNTA($E$8:E55),"")
+  O55: =IF(E55="","0","1")
+  D56: =IF(E56<>"",COUNTA($E$8:E56),"")
+  O56: =IF(E56="","0","1")
+  D57: =IF(E57<>"",COUNTA($E$8:E57),"")
+  O57: =IF(E57="","0","1")
+  D58: =IF(E58<>"",COUNTA($E$8:E58),"")
+  O58: =IF(E58="","0","1")
+  D59: =IF(E59<>"",COUNTA($E$8:E59),"")
+  O59: =IF(E59="","0","1")
+  D60: =IF(E60<>"",COUNTA($E$8:E60),"")
+  O60: =IF(E60="","0","1")
+  D61: =IF(E61<>"",COUNTA($E$8:E61),"")
+  O61: =IF(E61="","0","1")
+  D62: =IF(E62<>"",COUNTA($E$8:E62),"")
+  O62: =IF(E62="","0","1")
+  D63: =IF(E63<>"",COUNTA($E$8:E63),"")
+  O63: =IF(E63="","0","1")
+  D64: =IF(E64<>"",COUNTA($E$8:E64),"")
+  O64: =IF(E64="","0","1")
+  D65: =IF(E65<>"",COUNTA($E$8:E65),"")
+  O65: =IF(E65="","0","1")
+  D66: =IF(E66<>"",COUNTA($E$8:E66),"")
+  O66: =IF(E66="","0","1")
+  D67: =IF(E67<>"",COUNTA($E$8:E67),"")
+  O67: =IF(E67="","0","1")
+  D68: =IF(E68<>"",COUNTA($E$8:E68),"")
+  O68: =IF(E68="","0","1")
+  D69: =IF(E69<>"",COUNTA($E$8:E69),"")
+  O69: =IF(E69="","0","1")
+  D70: =IF(E70<>"",COUNTA($E$8:E70),"")
+  O70: =IF(E70="","0","1")
+  D71: =IF(E71<>"",COUNTA($E$8:E71),"")
+  O71: =IF(E71="","0","1")
+  D72: =IF(E72<>"",COUNTA($E$8:E72),"")
+  O72: =IF(E72="","0","1")
+  D73: =IF(E73<>"",COUNTA($E$8:E73),"")
+  O73: =IF(E73="","0","1")
+  D74: =IF(E74<>"",COUNTA($E$8:E74),"")
+  O74: =IF(E74="","0","1")
+  D75: =IF(E75<>"",COUNTA($E$8:E75),"")
+  O75: =IF(E75="","0","1")
+  D76: =IF(E76<>"",COUNTA($E$8:E76),"")
+  O76: =IF(E76="","0","1")
+  D77: =IF(E77<>"",COUNTA($E$8:E77),"")
+  O77: =IF(E77="","0","1")
+  C79: ='Data Sekolah'!B2
+  C80: ='Data Sekolah'!A14
+  J94: ='Data Sekolah'!A6
+  J95: ="NIP. "&'Data Sekolah'!B6
+  D170: ="Penawaran tercapai kesepakatan dengan "&D167 &""
+  G233: =SUM(J173:K232)
+  I236: ="Telukdalam, "&D169&""
+
+Total formulas in 03RENCANA: 151
+
+====================================================================================================
+SHEET: 04SHP (max_row=166, max_col=17)
+====================================================================================================
+
+Merged cells: ['H82:I82', 'H53:I53', 'H35:I35', 'B81:F81', 'B25:F25', 'B90:F90', 'A136:C136', 'A156:J156', 'B71:F71', 'H55:I55', 'B58:F58', 'B27:F27', 'B52:F52', 'B12:C12', 'H39:I39', 'A115:J115', 'B21:C21', 'B42:F42', 'B60:F60', 'B14:C14']
+
+--- Content preview (first 30 rows) ---
+  A1: 'PEMERINTAH PROVINSI SUMATERA UTARA'
+  A2: 'DINAS PENDIDIKAN'
+  A3: 'SMA NEGERI 1 TELUKDALAM'
+  Q3: '=P4-1'
+  A4: 'Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan, '
+  P4: '04'
+  A5: 'Cabdisdik Wil.XIV, Kode Pos 22865'
+  Q5: '=P4+1'
+  A6: 'Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com '
+  A7: 'Laman : smansatelukdalam.sch.id'
+  A8: 'SURAT HASIL PEMERIKSAAN'
+  K8: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789779a30>
+  L8: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897799d0>
+  M8: '=ROMAN(MONTH(K8))'
+  A9: '="NOMOR : 421.3/"&L8&"-PB/SMANSA-TD/"&M8&"/"&YEAR(K8)&""'
+  L10: 'PESANAN'
+  M10: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078977a7e0>
+  A11: '="Pada hari ini, "&TEXT(K8,"[$-421] dddd")&" tanggal "&TEXT(K8,"[$-421] DD")&" bulan "&TEXT(K8,"[$-421] mmmm")&" tahun "&YEAR(K8)&", sesuai dengan :"'
+  L11: 'BAST'
+  M11: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897790a0>
+  B12: 'Nomor Surat Pemesanan'
+  D12: '="421.3/"&M10&"-P/DB/SMANSATD/"&M8&"/"&YEAR(K8)&""'
+  L12: 'SHP'
+  M12: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078977a090>
+  B13: 'Tanggal'
+  D13: '=TEXT(K8, "[$-421] dd mmmm yyyy")'
+  B14: 'Nama pekerjaan'
+  D14: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078975b6e0>
+  B15: 'Tahun'
+  D15: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897599a0>
+  A16: 'Yang bertandatangan di bawah ini: '
+  B17: 'Nama'
+  D17: "='Data Sekolah'!A12"
+  B18: 'Jabatan'
+  D18: "='Data Sekolah'!A11"
+  B19: 'Nama Satuan Pendidikan'
+  D19: "='Data Sekolah'!B2"
+  B20: 'Alamat Satuan Pendidikan'
+  D20: "='Data Sekolah'!B4"
+  B21: 'No. Telepon'
+  D21: "='Data Sekolah'!B12"
+  A22: 'Telah melakukan pemeriksanaan terhadap hasil pekerjaan sesuai surat pemesanan dimaksud dengan rincian berikut:'
+  A23: 'No'
+  B23: 'Nama Barang/Jasa'
+  G23: 'Jumlah'
+  H23: 'Satuan'
+  J23: 'Kondisi'
+  A24: '=IF(B24<>"",COUNTA($B$24:B24),"")'
+  B24: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078972ac90>
+  G24: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789729b80>
+  H24: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789728aa0>
+  J24: '=IF(B24="","","Baik")'
+  K24: '=IF(B24="","0","1")'
+  A25: '=IF(B25<>"",COUNTA($B$24:B25),"")'
+  B25: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789729e20>
+  G25: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078972a120>
+  H25: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078972a0c0>
+  J25: '=IF(B25="","","Baik")'
+  K25: '=IF(B25="","0","1")'
+  A26: '=IF(B26<>"",COUNTA($B$24:B26),"")'
+  B26: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897286b0>
+  G26: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789728650>
+  H26: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789728680>
+  J26: '=IF(B26="","","Baik")'
+  K26: '=IF(B26="","0","1")'
+  A27: '=IF(B27<>"",COUNTA($B$24:B27),"")'
+  B27: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789710800>
+  G27: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789710860>
+  H27: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897103e0>
+  J27: '=IF(B27="","","Baik")'
+  K27: '=IF(B27="","0","1")'
+  A28: '=IF(B28<>"",COUNTA($B$24:B28),"")'
+  B28: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789713e00>
+  G28: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789713e60>
+  H28: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789713e30>
+  J28: '=IF(B28="","","Baik")'
+  K28: '=IF(B28="","0","1")'
+  A29: '=IF(B29<>"",COUNTA($B$24:B29),"")'
+  B29: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789712780>
+  G29: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789712930>
+  H29: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789712900>
+  J29: '=IF(B29="","","Baik")'
+  K29: '=IF(B29="","0","1")'
+  A30: '=IF(B30<>"",COUNTA($B$24:B30),"")'
+  B30: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898dfb30>
+  G30: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898df320>
+  H30: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898deb10>
+  J30: '=IF(B30="","","Baik")'
+  K30: '=IF(B30="","0","1")'
+
+--- All formulas (first 200) ---
+  Q3: =P4-1
+  Q5: =P4+1
+  M8: =ROMAN(MONTH(K8))
+  A9: ="NOMOR : 421.3/"&L8&"-PB/SMANSA-TD/"&M8&"/"&YEAR(K8)&""
+  A11: ="Pada hari ini, "&TEXT(K8,"[$-421] dddd")&" tanggal "&TEXT(K8,"[$-421] DD")&" bulan "&TEXT(K8,"[$-421] mmmm")&" tahun "&YEAR(K8)&", sesuai dengan :"
+  D12: ="421.3/"&M10&"-P/DB/SMANSATD/"&M8&"/"&YEAR(K8)&""
+  D13: =TEXT(K8, "[$-421] dd mmmm yyyy")
+  D17: ='Data Sekolah'!A12
+  D18: ='Data Sekolah'!A11
+  D19: ='Data Sekolah'!B2
+  D20: ='Data Sekolah'!B4
+  D21: ='Data Sekolah'!B12
+  A24: =IF(B24<>"",COUNTA($B$24:B24),"")
+  J24: =IF(B24="","","Baik")
+  K24: =IF(B24="","0","1")
+  A25: =IF(B25<>"",COUNTA($B$24:B25),"")
+  J25: =IF(B25="","","Baik")
+  K25: =IF(B25="","0","1")
+  A26: =IF(B26<>"",COUNTA($B$24:B26),"")
+  J26: =IF(B26="","","Baik")
+  K26: =IF(B26="","0","1")
+  A27: =IF(B27<>"",COUNTA($B$24:B27),"")
+  J27: =IF(B27="","","Baik")
+  K27: =IF(B27="","0","1")
+  A28: =IF(B28<>"",COUNTA($B$24:B28),"")
+  J28: =IF(B28="","","Baik")
+  K28: =IF(B28="","0","1")
+  A29: =IF(B29<>"",COUNTA($B$24:B29),"")
+  J29: =IF(B29="","","Baik")
+  K29: =IF(B29="","0","1")
+  A30: =IF(B30<>"",COUNTA($B$24:B30),"")
+  J30: =IF(B30="","","Baik")
+  K30: =IF(B30="","0","1")
+  A31: =IF(B31<>"",COUNTA($B$24:B31),"")
+  J31: =IF(B31="","","Baik")
+  K31: =IF(B31="","0","1")
+  A32: =IF(B32<>"",COUNTA($B$24:B32),"")
+  J32: =IF(B32="","","Baik")
+  K32: =IF(B32="","0","1")
+  A33: =IF(B33<>"",COUNTA($B$24:B33),"")
+  J33: =IF(B33="","","Baik")
+  K33: =IF(B33="","0","1")
+  A34: =IF(B34<>"",COUNTA($B$24:B34),"")
+  J34: =IF(B34="","","Baik")
+  K34: =IF(B34="","0","1")
+  A35: =IF(B35<>"",COUNTA($B$24:B35),"")
+  J35: =IF(B35="","","Baik")
+  K35: =IF(B35="","0","1")
+  A36: =IF(B36<>"",COUNTA($B$24:B36),"")
+  J36: =IF(B36="","","Baik")
+  K36: =IF(B36="","0","1")
+  A37: =IF(B37<>"",COUNTA($B$24:B37),"")
+  J37: =IF(B37="","","Baik")
+  K37: =IF(B37="","0","1")
+  A38: =IF(B38<>"",COUNTA($B$24:B38),"")
+  J38: =IF(B38="","","Baik")
+  K38: =IF(B38="","0","1")
+  A39: =IF(B39<>"",COUNTA($B$24:B39),"")
+  J39: =IF(B39="","","Baik")
+  K39: =IF(B39="","0","1")
+  A40: =IF(B40<>"",COUNTA($B$24:B40),"")
+  J40: =IF(B40="","","Baik")
+  K40: =IF(B40="","0","1")
+  A41: =IF(B41<>"",COUNTA($B$24:B41),"")
+  J41: =IF(B41="","","Baik")
+  K41: =IF(B41="","0","1")
+  A42: =IF(B42<>"",COUNTA($B$24:B42),"")
+  J42: =IF(B42="","","Baik")
+  K42: =IF(B42="","0","1")
+  A43: =IF(B43<>"",COUNTA($B$24:B43),"")
+  J43: =IF(B43="","","Baik")
+  K43: =IF(B43="","0","1")
+  A44: =IF(B44<>"",COUNTA($B$24:B44),"")
+  J44: =IF(B44="","","Baik")
+  K44: =IF(B44="","0","1")
+  A45: =IF(B45<>"",COUNTA($B$24:B45),"")
+  J45: =IF(B45="","","Baik")
+  K45: =IF(B45="","0","1")
+  A46: =IF(B46<>"",COUNTA($B$24:B46),"")
+  J46: =IF(B46="","","Baik")
+  K46: =IF(B46="","0","1")
+  A47: =IF(B47<>"",COUNTA($B$24:B47),"")
+  J47: =IF(B47="","","Baik")
+  K47: =IF(B47="","0","1")
+  A48: =IF(B48<>"",COUNTA($B$24:B48),"")
+  J48: =IF(B48="","","Baik")
+  K48: =IF(B48="","0","1")
+  A49: =IF(B49<>"",COUNTA($B$24:B49),"")
+  J49: =IF(B49="","","Baik")
+  K49: =IF(B49="","0","1")
+  A50: =IF(B50<>"",COUNTA($B$24:B50),"")
+  J50: =IF(B50="","","Baik")
+  K50: =IF(B50="","0","1")
+  A51: =IF(B51<>"",COUNTA($B$24:B51),"")
+  J51: =IF(B51="","","Baik")
+  K51: =IF(B51="","0","1")
+  A52: =IF(B52<>"",COUNTA($B$24:B52),"")
+  J52: =IF(B52="","","Baik")
+  K52: =IF(B52="","0","1")
+  A53: =IF(B53<>"",COUNTA($B$24:B53),"")
+  J53: =IF(B53="","","Baik")
+  K53: =IF(B53="","0","1")
+  A54: =IF(B54<>"",COUNTA($B$24:B54),"")
+  J54: =IF(B54="","","Baik")
+  K54: =IF(B54="","0","1")
+  A55: =IF(B55<>"",COUNTA($B$24:B55),"")
+  J55: =IF(B55="","","Baik")
+  K55: =IF(B55="","0","1")
+  A56: =IF(B56<>"",COUNTA($B$24:B56),"")
+  J56: =IF(B56="","","Baik")
+  K56: =IF(B56="","0","1")
+  A57: =IF(B57<>"",COUNTA($B$24:B57),"")
+  J57: =IF(B57="","","Baik")
+  K57: =IF(B57="","0","1")
+  A58: =IF(B58<>"",COUNTA($B$24:B58),"")
+  J58: =IF(B58="","","Baik")
+  K58: =IF(B58="","0","1")
+  A59: =IF(B59<>"",COUNTA($B$24:B59),"")
+  J59: =IF(B59="","","Baik")
+  K59: =IF(B59="","0","1")
+  A60: =IF(B60<>"",COUNTA($B$24:B60),"")
+  J60: =IF(B60="","","Baik")
+  K60: =IF(B60="","0","1")
+  A61: =IF(B61<>"",COUNTA($B$24:B61),"")
+  J61: =IF(B61="","","Baik")
+  K61: =IF(B61="","0","1")
+  A62: =IF(B62<>"",COUNTA($B$24:B62),"")
+  J62: =IF(B62="","","Baik")
+  K62: =IF(B62="","0","1")
+  A63: =IF(B63<>"",COUNTA($B$24:B63),"")
+  J63: =IF(B63="","","Baik")
+  K63: =IF(B63="","0","1")
+  A64: =IF(B64<>"",COUNTA($B$24:B64),"")
+  J64: =IF(B64="","","Baik")
+  K64: =IF(B64="","0","1")
+  A65: =IF(B65<>"",COUNTA($B$24:B65),"")
+  J65: =IF(B65="","","Baik")
+  K65: =IF(B65="","0","1")
+  A66: =IF(B66<>"",COUNTA($B$24:B66),"")
+  J66: =IF(B66="","","Baik")
+  K66: =IF(B66="","0","1")
+  A67: =IF(B67<>"",COUNTA($B$24:B67),"")
+  J67: =IF(B67="","","Baik")
+  K67: =IF(B67="","0","1")
+  A68: =IF(B68<>"",COUNTA($B$24:B68),"")
+  J68: =IF(B68="","","Baik")
+  K68: =IF(B68="","0","1")
+  A69: =IF(B69<>"",COUNTA($B$24:B69),"")
+  J69: =IF(B69="","","Baik")
+  K69: =IF(B69="","0","1")
+  A70: =IF(B70<>"",COUNTA($B$24:B70),"")
+  J70: =IF(B70="","","Baik")
+  K70: =IF(B70="","0","1")
+  A71: =IF(B71<>"",COUNTA($B$24:B71),"")
+  J71: =IF(B71="","","Baik")
+  K71: =IF(B71="","0","1")
+  A72: =IF(B72<>"",COUNTA($B$24:B72),"")
+  J72: =IF(B72="","","Baik")
+  K72: =IF(B72="","0","1")
+  A73: =IF(B73<>"",COUNTA($B$24:B73),"")
+  J73: =IF(B73="","","Baik")
+  K73: =IF(B73="","0","1")
+  A74: =IF(B74<>"",COUNTA($B$24:B74),"")
+  J74: =IF(B74="","","Baik")
+  K74: =IF(B74="","0","1")
+  A75: =IF(B75<>"",COUNTA($B$24:B75),"")
+  J75: =IF(B75="","","Baik")
+  K75: =IF(B75="","0","1")
+  A76: =IF(B76<>"",COUNTA($B$24:B76),"")
+  J76: =IF(B76="","","Baik")
+  K76: =IF(B76="","0","1")
+  A77: =IF(B77<>"",COUNTA($B$24:B77),"")
+  J77: =IF(B77="","","Baik")
+  K77: =IF(B77="","0","1")
+  A78: =IF(B78<>"",COUNTA($B$24:B78),"")
+  J78: =IF(B78="","","Baik")
+  K78: =IF(B78="","0","1")
+  A79: =IF(B79<>"",COUNTA($B$24:B79),"")
+  J79: =IF(B79="","","Baik")
+  K79: =IF(B79="","0","1")
+  A80: =IF(B80<>"",COUNTA($B$24:B80),"")
+  J80: =IF(B80="","","Baik")
+  K80: =IF(B80="","0","1")
+  A81: =IF(B81<>"",COUNTA($B$24:B81),"")
+  J81: =IF(B81="","","Baik")
+  K81: =IF(B81="","0","1")
+  A82: =IF(B82<>"",COUNTA($B$24:B82),"")
+  J82: =IF(B82="","","Baik")
+  K82: =IF(B82="","0","1")
+  A83: =IF(B83<>"",COUNTA($B$24:B83),"")
+  J83: =IF(B83="","","Baik")
+  K83: =IF(B83="","0","1")
+  A84: =IF(B84<>"",COUNTA($B$24:B84),"")
+  J84: =IF(B84="","","Baik")
+  K84: =IF(B84="","0","1")
+  A85: =IF(B85<>"",COUNTA($B$24:B85),"")
+  J85: =IF(B85="","","Baik")
+  K85: =IF(B85="","0","1")
+  A86: =IF(B86<>"",COUNTA($B$24:B86),"")
+  J86: =IF(B86="","","Baik")
+  ... and 27 more formulas
+
+Total formulas in 04SHP: 227
+
+====================================================================================================
+SHEET: 05BAT (max_row=363, max_col=17)
+====================================================================================================
+
+Merged cells: ['C44:E44', 'C80:E80', 'C31:E31', 'C40:E40', 'B22:C22', 'C51:E51', 'C95:E95', 'A6:H6', 'C60:E60', 'B21:C21', 'C71:E71', 'A354:H354', 'C335:D335', 'B14:C14', 'C91:E91', 'B241:D241', 'B13:C13', 'A3:H3', 'P4:P6', 'C57:E57']
+
+--- Content preview (first 30 rows) ---
+  A1: 'PEMERINTAH PROVINSI SUMATERA UTARA'
+  A2: 'DINAS PENDIDIKAN'
+  A3: 'SMA NEGERI 1 TELUKDALAM'
+  Q3: '=P4-1'
+  A4: 'Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan, '
+  P4: '04'
+  A5: 'Cabdisdik Wil.XIV, Kode Pos 22865'
+  Q5: '=P4+1'
+  A6: 'Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com '
+  A7: 'Laman : smansatelukdalam.sch.id'
+  A9: 'BERITA ACARA SERAH TERIMA'
+  J9: 'BAST'
+  K9: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897f48f0>
+  L9: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897f49e0>
+  M9: '=ROMAN(MONTH(K9))'
+  A10: '="NOMOR : 421.3/"&L9&"-BAST/SMANSA-TD/"&M9&"/"&YEAR(K9)&""'
+  J10: 'PESAN'
+  K10: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897f5fa0>
+  L10: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897f5fd0>
+  A12: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897f4a10>
+  J12: 'SHP'
+  K12: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897f4680>
+  L12: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897f45c0>
+  B13: 'Nomor Surat Pemesanan'
+  D13: '="421.3/"&L10&"-P/SMANSA-TD/"&M9&"/"&YEAR(K9)&""'
+  B14: 'Tanggal'
+  D14: '=TEXT(K9, "[$-421] dd mmmm yyyy")'
+  B15: 'Nama pekerjaan'
+  D15: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897ea3c0>
+  B16: 'Tahun'
+  D16: '=YEAR(K9)'
+  A17: 'Yang bertandatangan di bawah ini:'
+  A18: 1
+  B18: 'Nama'
+  D18: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789706240>
+  B19: 'Jabatan'
+  D19: 'Direktur'
+  B20: 'Nama Penyedia'
+  D20: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898ee7b0>
+  B21: 'Alamat Penyedia'
+  D21: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07897451c0>
+  B22: 'No. Telepon'
+  D22: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789761310>
+  A23: 'Sebagai pihak yang menyerahkan, selanjutnya disebut PIHAK PERTAMA'
+  A24: 2
+  B24: 'Nama'
+  D24: "='Data Sekolah'!A12"
+  B25: 'Jabatan'
+  D25: "='Data Sekolah'!A11"
+  B26: 'Nama Satuan Pendidikan'
+  D26: "='Data Sekolah'!B2"
+  B27: 'Alamat Satuan Pendidikan'
+  D27: "='Data Sekolah'!B4"
+  B28: 'No. Telepon'
+  D28: "='Data Sekolah'!B12"
+  A29: 'Sebagai pihak yang menerima, selanjutnya disebut PIHAK KEDUA'
+  A30: '="PIHAK  PERTAMA  menyerahkan  hasil  pekerjaan "&D15&" kepada  PIHAK  KEDUA,  dan PIHAK  KEDUA  telah  menerima  hasil  pekerjaan  tersebut  dalam  jumlah  yang  lengkap  dan kondisi yang baik sesuai dengan rincian berikut:"'
+
+--- All formulas (first 200) ---
+  Q3: =P4-1
+  Q5: =P4+1
+  M9: =ROMAN(MONTH(K9))
+  A10: ="NOMOR : 421.3/"&L9&"-BAST/SMANSA-TD/"&M9&"/"&YEAR(K9)&""
+  D13: ="421.3/"&L10&"-P/SMANSA-TD/"&M9&"/"&YEAR(K9)&""
+  D14: =TEXT(K9, "[$-421] dd mmmm yyyy")
+  D16: =YEAR(K9)
+  D24: ='Data Sekolah'!A12
+  D25: ='Data Sekolah'!A11
+  D26: ='Data Sekolah'!B2
+  D27: ='Data Sekolah'!B4
+  D28: ='Data Sekolah'!B12
+  A30: ="PIHAK  PERTAMA  menyerahkan  hasil  pekerjaan "&D15&" kepada  PIHAK  KEDUA,  dan PIHAK  KEDUA  telah  menerima  hasil  pekerjaan  tersebut  dalam  jumlah  yang  lengkap  dan kondisi yang baik sesuai dengan rincian berikut:"
+  B32: =IF(C32<>"",COUNTA($C$32:C32),"")
+  G32: =F32
+  I32: =IF(C32="","0","1")
+  B33: =IF(C33<>"",COUNTA($C$32:C33),"")
+  G33: =F33
+  I33: =IF(C33="","0","1")
+  B34: =IF(C34<>"",COUNTA($C$32:C34),"")
+  G34: =F34
+  I34: =IF(C34="","0","1")
+  B35: =IF(C35<>"",COUNTA($C$32:C35),"")
+  G35: =F35
+  I35: =IF(C35="","0","1")
+  B36: =IF(C36<>"",COUNTA($C$32:C36),"")
+  G36: =F36
+  I36: =IF(C36="","0","1")
+  B37: =IF(C37<>"",COUNTA($C$32:C37),"")
+  G37: =F37
+  I37: =IF(C37="","0","1")
+  B38: =IF(C38<>"",COUNTA($C$32:C38),"")
+  G38: =F38
+  I38: =IF(C38="","0","1")
+  B39: =IF(C39<>"",COUNTA($C$32:C39),"")
+  G39: =F39
+  I39: =IF(C39="","0","1")
+  B40: =IF(C40<>"",COUNTA($C$32:C40),"")
+  G40: =F40
+  I40: =IF(C40="","0","1")
+  B41: =IF(C41<>"",COUNTA($C$32:C41),"")
+  G41: =F41
+  I41: =IF(C41="","0","1")
+  B42: =IF(C42<>"",COUNTA($C$32:C42),"")
+  G42: =F42
+  I42: =IF(C42="","0","1")
+  B43: =IF(C43<>"",COUNTA($C$32:C43),"")
+  G43: =F43
+  I43: =IF(C43="","0","1")
+  B44: =IF(C44<>"",COUNTA($C$32:C44),"")
+  G44: =F44
+  I44: =IF(C44="","0","1")
+  B45: =IF(C45<>"",COUNTA($C$32:C45),"")
+  G45: =F45
+  I45: =IF(C45="","0","1")
+  B46: =IF(C46<>"",COUNTA($C$32:C46),"")
+  G46: =F46
+  I46: =IF(C46="","0","1")
+  B47: =IF(C47<>"",COUNTA($C$32:C47),"")
+  G47: =F47
+  I47: =IF(C47="","0","1")
+  B48: =IF(C48<>"",COUNTA($C$32:C48),"")
+  G48: =F48
+  I48: =IF(C48="","0","1")
+  B49: =IF(C49<>"",COUNTA($C$32:C49),"")
+  G49: =F49
+  I49: =IF(C49="","0","1")
+  B50: =IF(C50<>"",COUNTA($C$32:C50),"")
+  G50: =F50
+  I50: =IF(C50="","0","1")
+  B51: =IF(C51<>"",COUNTA($C$32:C51),"")
+  G51: =F51
+  I51: =IF(C51="","0","1")
+  B52: =IF(C52<>"",COUNTA($C$32:C52),"")
+  G52: =F52
+  I52: =IF(C52="","0","1")
+  B53: =IF(C53<>"",COUNTA($C$32:C53),"")
+  G53: =F53
+  I53: =IF(C53="","0","1")
+  B54: =IF(C54<>"",COUNTA($C$32:C54),"")
+  G54: =F54
+  I54: =IF(C54="","0","1")
+  B55: =IF(C55<>"",COUNTA($C$32:C55),"")
+  G55: =F55
+  I55: =IF(C55="","0","1")
+  B56: =IF(C56<>"",COUNTA($C$32:C56),"")
+  G56: =F56
+  I56: =IF(C56="","0","1")
+  B57: =IF(C57<>"",COUNTA($C$32:C57),"")
+  G57: =F57
+  I57: =IF(C57="","0","1")
+  B58: =IF(C58<>"",COUNTA($C$32:C58),"")
+  G58: =F58
+  I58: =IF(C58="","0","1")
+  B59: =IF(C59<>"",COUNTA($C$32:C59),"")
+  G59: =F59
+  I59: =IF(C59="","0","1")
+  B60: =IF(C60<>"",COUNTA($C$32:C60),"")
+  G60: =F60
+  I60: =IF(C60="","0","1")
+  B61: =IF(C61<>"",COUNTA($C$32:C61),"")
+  G61: =F61
+  I61: =IF(C61="","0","1")
+  B62: =IF(C62<>"",COUNTA($C$32:C62),"")
+  G62: =F62
+  I62: =IF(C62="","0","1")
+  B63: =IF(C63<>"",COUNTA($C$32:C63),"")
+  G63: =F63
+  I63: =IF(C63="","0","1")
+  B64: =IF(C64<>"",COUNTA($C$32:C64),"")
+  G64: =F64
+  I64: =IF(C64="","0","1")
+  B65: =IF(C65<>"",COUNTA($C$32:C65),"")
+  G65: =F65
+  I65: =IF(C65="","0","1")
+  B66: =IF(C66<>"",COUNTA($C$32:C66),"")
+  G66: =F66
+  I66: =IF(C66="","0","1")
+  B67: =IF(C67<>"",COUNTA($C$32:C67),"")
+  G67: =F67
+  I67: =IF(C67="","0","1")
+  B68: =IF(C68<>"",COUNTA($C$32:C68),"")
+  G68: =F68
+  I68: =IF(C68="","0","1")
+  B69: =IF(C69<>"",COUNTA($C$32:C69),"")
+  G69: =F69
+  I69: =IF(C69="","0","1")
+  B70: =IF(C70<>"",COUNTA($C$32:C70),"")
+  G70: =F70
+  I70: =IF(C70="","0","1")
+  B71: =IF(C71<>"",COUNTA($C$32:C71),"")
+  G71: =F71
+  I71: =IF(C71="","0","1")
+  B72: =IF(C72<>"",COUNTA($C$32:C72),"")
+  G72: =F72
+  I72: =IF(C72="","0","1")
+  B73: =IF(C73<>"",COUNTA($C$32:C73),"")
+  G73: =F73
+  I73: =IF(C73="","0","1")
+  B74: =IF(C74<>"",COUNTA($C$32:C74),"")
+  G74: =F74
+  I74: =IF(C74="","0","1")
+  B75: =IF(C75<>"",COUNTA($C$32:C75),"")
+  G75: =F75
+  I75: =IF(C75="","0","1")
+  B76: =IF(C76<>"",COUNTA($C$32:C76),"")
+  G76: =F76
+  I76: =IF(C76="","0","1")
+  B77: =IF(C77<>"",COUNTA($C$32:C77),"")
+  G77: =F77
+  I77: =IF(C77="","0","1")
+  B78: =IF(C78<>"",COUNTA($C$32:C78),"")
+  G78: =F78
+  I78: =IF(C78="","0","1")
+  B79: =IF(C79<>"",COUNTA($C$32:C79),"")
+  G79: =F79
+  I79: =IF(C79="","0","1")
+  B80: =IF(C80<>"",COUNTA($C$32:C80),"")
+  G80: =F80
+  I80: =IF(C80="","0","1")
+  B81: =IF(C81<>"",COUNTA($C$32:C81),"")
+  G81: =F81
+  I81: =IF(C81="","0","1")
+  B82: =IF(C82<>"",COUNTA($C$32:C82),"")
+  G82: =F82
+  I82: =IF(C82="","0","1")
+  B83: =IF(C83<>"",COUNTA($C$32:C83),"")
+  G83: =F83
+  I83: =IF(C83="","0","1")
+  B84: =IF(C84<>"",COUNTA($C$32:C84),"")
+  G84: =F84
+  I84: =IF(C84="","0","1")
+  B85: =IF(C85<>"",COUNTA($C$32:C85),"")
+  G85: =F85
+  I85: =IF(C85="","0","1")
+  B86: =IF(C86<>"",COUNTA($C$32:C86),"")
+  G86: =F86
+  I86: =IF(C86="","0","1")
+  B87: =IF(C87<>"",COUNTA($C$32:C87),"")
+  G87: =F87
+  I87: =IF(C87="","0","1")
+  B88: =IF(C88<>"",COUNTA($C$32:C88),"")
+  G88: =F88
+  I88: =IF(C88="","0","1")
+  B89: =IF(C89<>"",COUNTA($C$32:C89),"")
+  G89: =F89
+  I89: =IF(C89="","0","1")
+  B90: =IF(C90<>"",COUNTA($C$32:C90),"")
+  G90: =F90
+  I90: =IF(C90="","0","1")
+  B91: =IF(C91<>"",COUNTA($C$32:C91),"")
+  G91: =F91
+  I91: =IF(C91="","0","1")
+  B92: =IF(C92<>"",COUNTA($C$32:C92),"")
+  G92: =F92
+  I92: =IF(C92="","0","1")
+  B93: =IF(C93<>"",COUNTA($C$32:C93),"")
+  G93: =F93
+  I93: =IF(C93="","0","1")
+  B94: =IF(C94<>"",COUNTA($C$32:C94),"")
+  ... and 218 more formulas
+
+Total formulas in 05BAT: 418
+
+====================================================================================================
+SHEET: Toko (max_row=121, max_col=17)
+====================================================================================================
+
+Merged cells: ['I81:J81', 'B65:E65', 'I95:J95', 'B74:E74', 'I89:J89', 'I104:J104', 'B68:E68', 'B76:E76', 'B45:E45', 'I106:J106', 'I76:J76', 'B91:E91', 'B14:J20', 'B100:E100', 'A34:J34', 'H36:H37', 'B47:E47', 'I71:J71', 'I66:J66', 'I58:J58']
+
+--- Content preview (first 30 rows) ---
+  A1: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789851550>
+  M1: 'Pesanan'
+  N1: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07898515e0>
+  A2: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f078981aa20>
+  Q3: '=P4-1'
+  G4: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789821070>
+  P4: '04'
+  Q5: '=P4+1'
+  A6: 'Kepada Yth.'
+  A7: 'Kepala SMA Negeri 1 Telukdalam'
+  A8: 'Cq. Penanggungjawab Kegiatan'
+  A9: 'di '
+  B10: 'Tempat'
+  A11: 'Perihal'
+  B11: "='[1]Cetak Pesanan'!C11"
+  B13: 'Dengan hormat,'
+  B14: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07899fa990>
+  G22: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f07899eaa80>
+  G26: <openpyxl.worksheet.formula.ArrayFormula object at 0x7f0789ab23c0>
+  G27: 'Direktur'
+
+--- All formulas (first 200) ---
+  Q3: =P4-1
+  Q5: =P4+1
+  B11: ='[1]Cetak Pesanan'!C11
+  A31: =A1
+  A32: =A2
+  A39: =IF(B39<>"",COUNTA($B$39:B39),"")
+  K39: =IF(A39="","0","1")
+  A40: =IF(B40<>"",COUNTA($B$39:B40),"")
+  K40: =IF(A40="","0","1")
+  A41: =IF(B41<>"",COUNTA($B$39:B41),"")
+  K41: =IF(A41="","0","1")
+  A42: =IF(B42<>"",COUNTA($B$39:B42),"")
+  K42: =IF(A42="","0","1")
+  A43: =IF(B43<>"",COUNTA($B$39:B43),"")
+  K43: =IF(A43="","0","1")
+  A44: =IF(B44<>"",COUNTA($B$39:B44),"")
+  K44: =IF(A44="","0","1")
+  A45: =IF(B45<>"",COUNTA($B$39:B45),"")
+  K45: =IF(A45="","0","1")
+  A46: =IF(B46<>"",COUNTA($B$39:B46),"")
+  K46: =IF(A46="","0","1")
+  A47: =IF(B47<>"",COUNTA($B$39:B47),"")
+  K47: =IF(A47="","0","1")
+  A48: =IF(B48<>"",COUNTA($B$39:B48),"")
+  K48: =IF(A48="","0","1")
+  A49: =IF(B49<>"",COUNTA($B$39:B49),"")
+  K49: =IF(A49="","0","1")
+  A50: =IF(B50<>"",COUNTA($B$39:B50),"")
+  K50: =IF(A50="","0","1")
+  A51: =IF(B51<>"",COUNTA($B$39:B51),"")
+  K51: =IF(A51="","0","1")
+  A52: =IF(B52<>"",COUNTA($B$39:B52),"")
+  K52: =IF(A52="","0","1")
+  A53: =IF(B53<>"",COUNTA($B$39:B53),"")
+  K53: =IF(A53="","0","1")
+  A54: =IF(B54<>"",COUNTA($B$39:B54),"")
+  K54: =IF(A54="","0","1")
+  A55: =IF(B55<>"",COUNTA($B$39:B55),"")
+  K55: =IF(A55="","0","1")
+  A56: =IF(B56<>"",COUNTA($B$39:B56),"")
+  K56: =IF(A56="","0","1")
+  A57: =IF(B57<>"",COUNTA($B$39:B57),"")
+  K57: =IF(A57="","0","1")
+  A58: =IF(B58<>"",COUNTA($B$39:B58),"")
+  K58: =IF(A58="","0","1")
+  A59: =IF(B59<>"",COUNTA($B$39:B59),"")
+  K59: =IF(A59="","0","1")
+  A60: =IF(B60<>"",COUNTA($B$39:B60),"")
+  K60: =IF(A60="","0","1")
+  A61: =IF(B61<>"",COUNTA($B$39:B61),"")
+  K61: =IF(A61="","0","1")
+  A62: =IF(B62<>"",COUNTA($B$39:B62),"")
+  K62: =IF(A62="","0","1")
+  A63: =IF(B63<>"",COUNTA($B$39:B63),"")
+  K63: =IF(A63="","0","1")
+  A64: =IF(B64<>"",COUNTA($B$39:B64),"")
+  K64: =IF(A64="","0","1")
+  A65: =IF(B65<>"",COUNTA($B$39:B65),"")
+  K65: =IF(A65="","0","1")
+  A66: =IF(B66<>"",COUNTA($B$39:B66),"")
+  K66: =IF(A66="","0","1")
+  A67: =IF(B67<>"",COUNTA($B$39:B67),"")
+  K67: =IF(A67="","0","1")
+  A68: =IF(B68<>"",COUNTA($B$39:B68),"")
+  K68: =IF(A68="","0","1")
+  A69: =IF(B69<>"",COUNTA($B$39:B69),"")
+  K69: =IF(A69="","0","1")
+  A70: =IF(B70<>"",COUNTA($B$39:B70),"")
+  K70: =IF(A70="","0","1")
+  A71: =IF(B71<>"",COUNTA($B$39:B71),"")
+  K71: =IF(A71="","0","1")
+  A72: =IF(B72<>"",COUNTA($B$39:B72),"")
+  K72: =IF(A72="","0","1")
+  A73: =IF(B73<>"",COUNTA($B$39:B73),"")
+  K73: =IF(A73="","0","1")
+  A74: =IF(B74<>"",COUNTA($B$39:B74),"")
+  K74: =IF(A74="","0","1")
+  A75: =IF(B75<>"",COUNTA($B$39:B75),"")
+  K75: =IF(A75="","0","1")
+  A76: =IF(B76<>"",COUNTA($B$39:B76),"")
+  K76: =IF(A76="","0","1")
+  A77: =IF(B77<>"",COUNTA($B$39:B77),"")
+  K77: =IF(A77="","0","1")
+  A78: =IF(B78<>"",COUNTA($B$39:B78),"")
+  K78: =IF(A78="","0","1")
+  A79: =IF(B79<>"",COUNTA($B$39:B79),"")
+  K79: =IF(A79="","0","1")
+  A80: =IF(B80<>"",COUNTA($B$39:B80),"")
+  K80: =IF(A80="","0","1")
+  A81: =IF(B81<>"",COUNTA($B$39:B81),"")
+  K81: =IF(A81="","0","1")
+  A82: =IF(B82<>"",COUNTA($B$39:B82),"")
+  K82: =IF(A82="","0","1")
+  A83: =IF(B83<>"",COUNTA($B$39:B83),"")
+  K83: =IF(A83="","0","1")
+  A84: =IF(B84<>"",COUNTA($B$39:B84),"")
+  K84: =IF(A84="","0","1")
+  A85: =IF(B85<>"",COUNTA($B$39:B85),"")
+  K85: =IF(A85="","0","1")
+  A86: =IF(B86<>"",COUNTA($B$39:B86),"")
+  K86: =IF(A86="","0","1")
+  A87: =IF(B87<>"",COUNTA($B$39:B87),"")
+  K87: =IF(A87="","0","1")
+  A88: =IF(B88<>"",COUNTA($B$39:B88),"")
+  K88: =IF(A88="","0","1")
+  A89: =IF(B89<>"",COUNTA($B$39:B89),"")
+  K89: =IF(A89="","0","1")
+  A90: =IF(B90<>"",COUNTA($B$39:B90),"")
+  K90: =IF(A90="","0","1")
+  A91: =IF(B91<>"",COUNTA($B$39:B91),"")
+  K91: =IF(A91="","0","1")
+  A92: =IF(B92<>"",COUNTA($B$39:B92),"")
+  K92: =IF(A92="","0","1")
+  A93: =IF(B93<>"",COUNTA($B$39:B93),"")
+  K93: =IF(A93="","0","1")
+  A94: =IF(B94<>"",COUNTA($B$39:B94),"")
+  K94: =IF(A94="","0","1")
+  A95: =IF(B95<>"",COUNTA($B$39:B95),"")
+  K95: =IF(A95="","0","1")
+  A96: =IF(B96<>"",COUNTA($B$39:B96),"")
+  K96: =IF(A96="","0","1")
+  A97: =IF(B97<>"",COUNTA($B$39:B97),"")
+  K97: =IF(A97="","0","1")
+  A98: =IF(B98<>"",COUNTA($B$39:B98),"")
+  K98: =IF(A98="","0","1")
+  A99: =IF(B99<>"",COUNTA($B$39:B99),"")
+  K99: =IF(A99="","0","1")
+  A100: =IF(B100<>"",COUNTA($B$39:B100),"")
+  K100: =IF(A100="","0","1")
+  A101: =IF(B101<>"",COUNTA($B$39:B101),"")
+  K101: =IF(A101="","0","1")
+  A102: =IF(B102<>"",COUNTA($B$39:B102),"")
+  K102: =IF(A102="","0","1")
+  A103: =IF(B103<>"",COUNTA($B$39:B103),"")
+  K103: =IF(A103="","0","1")
+  A104: =IF(B104<>"",COUNTA($B$39:B104),"")
+  K104: =IF(A104="","0","1")
+  A105: =IF(B105<>"",COUNTA($B$39:B105),"")
+  K105: =IF(A105="","0","1")
+  A106: =IF(B106<>"",COUNTA($B$39:B106),"")
+  K106: =IF(A106="","0","1")
+  A107: =IF(B107<>"",COUNTA($B$39:B107),"")
+  K107: =IF(A107="","0","1")
+  A108: =IF(B108<>"",COUNTA($B$39:B108),"")
+  K108: =IF(A108="","0","1")
+  I109: =SUM(I39:I108)
+  D110: =IF(I109=0,"nol",IF(I109<0,"minus ","")& SUBSTITUTE(TRIM(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( IF(--MID(TEXT(ABS(I109),"000000000000000"),1,3)=0,"",MID(TEXT(ABS(I109),"000000000000000"),1,1)&" Ratus "&MID(TEXT(ABS(I109),"000000000000000"),2,1)&" puluh "&MID(TEXT(ABS(I109),"000000000000000"),3,1)&" trilyun ")& IF(--MID(TEXT(ABS(I109),"000000000000000"),4,3)=0,"",MID(TEXT(ABS(I109),"000000000000000"),4,1)&" ratus "&MID(TEXT(ABS(I109),"000000000000000"),5,1)&" Puluh "&MID(TEXT(ABS(I109),"000000000000000"),6,1)&" Milyar ")& IF(--MID(TEXT(ABS(I109),"000000000000000"),7,3)=0,"",MID(TEXT(ABS(I109),"000000000000000"),7,1)&" Ratus "&MID(TEXT(ABS(I109),"000000000000000"),8,1)&" Puluh "&MID(TEXT(ABS(I109),"000000000000000"),9,1)&" Juta ")& IF(--MID(TEXT(ABS(I109),"000000000000000"),10,3)=0,"",IF(--MID(TEXT(ABS(I109),"000000000000000"),10,3)=1,"*",MID(TEXT(ABS(I109),"000000000000000"),10,1)&" Ratus "&MID(TEXT(ABS(I109),"000000000000000"),11,1)&" Puluh ")&MID(TEXT(ABS(I109),"000000000000000"),12,1)&" Ribu ")& IF(--MID(TEXT(ABS(I109),"000000000000000"),13,3)=0,"",MID(TEXT(ABS(I109),"000000000000000"),13,1)&" Ratus "&MID(TEXT(ABS(I109),"000000000000000"),14,1)&" Puluh "&MID(TEXT(ABS(I109),"000000000000000"),15,1)),1,"Satu"),2,"Dua"),3,"Tiga"),4,"Empat"),5,"Lima"),6,"Enam"),7,"Tujuh"),8,"Delapan"),9,"Sembilan"),"0 Ratus",""),"0 Puluh",""),"Satu Puluh 0","Sepuluh"),"Satu Puluh Satu","Sebelas"),"Satu Puluh Dua","Dua Belas"),"Satu Puluh Tiga","Tiga Belas"),"Satu Puluh Empat","Empat Belas"),"Satu Puluh Lima","Lima Belas"),"Satu Puluh Enam","Enam Belas"),"Satu Puluh Tujuh","Tujuh Belas"),"Satu Puluh Delapan","Delapan Belas"),"Satu Puluh Sembilan","Sembilan Belas"),"Satu Ratus","Seratus"),"*Satu Ribu","Seribu"),0,""))," "," "))& " Rupiah"
+  G114: =G4
+  G115: =G22
+  G120: =G26
+  G121: =G27
+
+Total formulas in Toko: 151
+
+====================================================================================================
+SHEET: BACK (max_row=9, max_col=18)
+====================================================================================================
+
+Merged cells: ['K4:R4', 'A5:J5', 'K3:R3', 'A6:J6', 'A9:J9', 'K1:R1', 'A3:J3', 'K2:R2', 'K5:R5', 'A7:J7', 'A4:J4', 'A2:J2', 'K6:R6']
+
+--- Content preview (first 30 rows) ---
+  K1: 'PEMERINTAH PROVINSI SUMATERA UTARA'
+  A2: 'SMA NEGERI 1 TELUKDALAM'
+  K2: 'DINAS PENDIDIKAN '
+  A3: 'JL. PENDIDIKAN NO. 13, KELURAHAN PASAR TELUKDALAM'
+  K3: 'SMA NEGERI 1 TELUKDALAM'
+  A4: 'TELUKDALAM'
+  K4: 'NIS: 300010              NPSN: 10258246            Terakreditasi A               NSS: 301071701001\n'
+  A5: 'KABUPATEN NIAS SELATAN'
+  K5: 'Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865'
+  A6: 'SUMATERA UTARA'
+  K6: 'Email: smansatelukdalam@ymail.com; Website: www.smansatelukdalam.sch.id'
+  A7: 2024
+  A9: 'KELENGKAPAN PELAPORAN PERTANGGUNGJAWABAN BOPS'
+
+--- All formulas (first 200) ---
+
+Total formulas in BACK: 0
+
+====================================================================================================
+SHEET: Spesifikasi (max_row=82, max_col=10)
+====================================================================================================
+
+Merged cells: []
+
+--- Content preview (first 30 rows) ---
+  A1: 'ATK'
+  A2: 'Amplop Coklat Aa (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 7Gr)'
+  A3: 'Amplop Coklat Bertali (Length 5.0Cm, Width 5.0Cm, Height 7.0Cm, Weight 268Gr)'
+  A4: 'Amplop Coklat Folio (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 7Gr)'
+  A5: 'Amplop Putih Panjang (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A6: 'Ballpoint Boldiner Standar  (Satuan. 300 Gram ; Dimensi Ukuran. 15X5X7.5Cm. (Berat Volume: 0.09Kg) '
+  A7: 'Ballpoint Drawing Pen 0,5 Snowman (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A8: 'Ballpoint Pilot G2 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A9: 'Ballpoint Standard Ae7 (Ukuran: 0.5 Mm Warna: Hitam 1 , Lebar Produk 6 Cm, Tinggi Produk 4 Cm)'
+  A10: 'Bantalan Cap Besar (Berat Produk 1 Kg, Panjang Produk 12 Cm, Lebar Produk 8 Cm, Tinggi Produk 12 Cm)'
+  A11: 'Bantalan Cap Kecil ( Dimensi, 8Cm X 11Cm X 2Cm. Berat, 48G.)'
+  A12: 'Baterey Kecil (Type: Aa; Tegangan: 1.5 Volt; Ukuran: 14 X 50 Mm)'
+  A13: 'Baterai Tanggung (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A14: 'Binder Clip N0 107 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A15: 'Binder Clip No 111 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A16: 'Binder Clip Nomor 200 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A17: 'Binder Clip No 260 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A18: 'Binder Clip No 105 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)  '
+  A19: 'Binder Klip Ordner (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A20: 'Box File (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A21: 'Buku Ekspedisi 100 (Berat Satuan. 400 Gram ; Dimensi Ukuran. 32X11X1Cm)'
+  A22: 'Buku Induk/Inventaris 35 Cm X 50 Cm (Lebar : 50 Cm, Tinggi : 4 Cm, Berat : 1000 Gr)'
+  A23: 'Tinta Printer Epson 664 Biru (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A24: 'Tnta Printer Epson 664 Merah (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A25: 'Tinta Printer Epson 664 Kuning (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A26: 'Tinta Printer Epson 664 Hitam (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A27: 'Canon Catridge 741 ((Cyan, Magenta, Yellow). Daya Tampung Tinta: 4 Ml. Berat Produk: 160 Gr)'
+  A28: 'Catridge Printer Epson T 014 (Tipe: T6641 Black, T6642 Cyan, T6643 Magenta, T6644 Yellow; Isi: 70 Ml)'
+  A29: 'Gunting Sedang (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)'
+  A30: 'Hardisk (Dimensi: P X L X T /80.0 Mm × 0.583Inci/14.8Mm Bobot : 170 G)'
+
+--- All formulas (first 200) ---
+
+Total formulas in Spesifikasi: 0
+
+====================================================================================================
+SHEET: Data Sekolah (max_row=14, max_col=3)
+====================================================================================================
+
+Merged cells: ['A11:C11', 'A1:C1', 'A5:C5', 'A14:C14', 'A9:C9', 'A7:C7']
+
+--- Content preview (first 30 rows) ---
+  A1: 'Data Sekolah'
+  A2: 'Nama Sekolah'
+  B2: 'SMA NEGERI 1 TELUKDALAM'
+  A3: 'NPSN'
+  B3: 10258246
+  A4: 'Alamat Sekolah'
+  B4: 'Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Teluk Dalam'
+  A5: 'Kepala Sekolah'
+  A6: 'Nursari Rindu Simanullang, S.Pd., M.M.'
+  B6: '19691208 200502 2 001'
+  C6: 'Pembina Tk I'
+  A7: 'Bendahara'
+  A8: 'Riama Tiodora Siahaan, S.Pd'
+  B8: '19800301 201001 2 016'
+  C8: 'Penata TK. I'
+  A9: 'Pengurus Barang'
+  A10: 'Radius S. K. Siburian, S.Pd'
+  B10: '19861005 201903 1 009'
+  C10: 'Penata Muda'
+  A11: 'Penerima Barang'
+  A12: 'Estera Nehe, S.Pd.'
+  B12: '0823 8612 4861'
+  A14: 'Bantuan Operasional Satuan Pendidikan (BOSP) 2025'
+
+--- All formulas (first 200) ---
+
+Total formulas in Data Sekolah: 0
+
+====================================================================================================
+SHEET: NO BPU (max_row=653, max_col=5)
+====================================================================================================
+
+Merged cells: []
+
+--- Content preview (first 30 rows) ---
+  C1: 'NO. BPU 2024'
+  E1: 'NO Pesanan 2023'
+  C2: 'BPU001'
+  E2: '01'
+  C3: 'BPU002'
+  E3: '02'
+  C4: 'BPU003'
+  E4: '03'
+  C5: 'BPU004'
+  E5: '04'
+  C6: 'BPU005'
+  E6: '05'
+  C7: 'BPU006'
+  E7: '06'
+  C8: 'BPU007'
+  E8: '07'
+  C9: 'BPU008'
+  E9: '08'
+  C10: 'BPU009'
+  E10: '09'
+  C11: 'BPU010'
+  E11: 10
+  C12: 'BPU011'
+  E12: 11
+  C13: 'BPU012'
+  E13: 12
+  C14: 'BPU013'
+  E14: 13
+  C15: 'BPU014'
+  E15: 14
+  C16: 'BPU015'
+  E16: 15
+  C17: 'BPU016'
+  E17: 16
+  C18: 'BPU017'
+  E18: 17
+  C19: 'BPU018'
+  E19: 18
+  C20: 'BPU019'
+  E20: 19
+  C21: 'BPU020'
+  E21: 20
+  C22: 'BPU021'
+  E22: 21
+  C23: 'BPU022'
+  E23: 22
+  C24: 'BPU023'
+  E24: 23
+  C25: 'BPU024'
+  E25: 24
+  C26: 'BPU025'
+  E26: 25
+  C27: 'BPU026'
+  E27: 26
+  C28: 'BPU027'
+  E28: 27
+  C29: 'BPU028'
+  E29: 28
+  C30: 'BPU029'
+  E30: 29
+
+--- All formulas (first 200) ---
+
+Total formulas in NO BPU: 0

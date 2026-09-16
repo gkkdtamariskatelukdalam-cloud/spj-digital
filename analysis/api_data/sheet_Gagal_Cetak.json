@@ -1,0 +1,200 @@
+{
+  "name": "Gagal Cetak",
+  "max_row": 11,
+  "max_col": 6,
+  "non_empty_cells": 17,
+  "formulas_count": 0,
+  "type": "Log",
+  "purpose": "Failed print jobs log",
+  "category": "log",
+  "headers": [],
+  "sample_rows": [
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "No Pesanan",
+          "value": "No Pesanan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "Cetak Terakhir",
+          "value": "Cetak Terakhir",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "48",
+          "value": "48",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "52",
+          "value": "52",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "67",
+          "value": "67",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "69",
+          "value": "69",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Materai",
+          "value": "Materai",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "71",
+          "value": "71",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Lebih dari 6",
+          "value": "Lebih dari 6",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "72",
+          "value": "72",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "100-105",
+          "value": "100-105",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "FLS2N",
+          "value": "FLS2N",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "108",
+          "value": "108",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Pembersih",
+          "value": "Pembersih",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "153",
+          "value": "153",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "258",
+          "value": "258",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Servis Proyektor Kosong",
+          "value": "Servis Proyektor Kosong",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    }
+  ],
+  "formulas": []
+}

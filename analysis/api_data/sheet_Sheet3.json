@@ -1,0 +1,1034 @@
+{
+  "name": "Sheet3",
+  "max_row": 170,
+  "max_col": 12,
+  "non_empty_cells": 429,
+  "formulas_count": 13,
+  "type": "Other",
+  "purpose": "Auxiliary sheet",
+  "category": "other",
+  "headers": [
+    {
+      "col": "B",
+      "col_idx": 2,
+      "header": "Telepon"
+    },
+    {
+      "col": "C",
+      "col_idx": 3,
+      "header": "Toko 1"
+    },
+    {
+      "col": "D",
+      "col_idx": 4,
+      "header": "Direktur"
+    },
+    {
+      "col": "E",
+      "col_idx": 5,
+      "header": "Alamat"
+    }
+  ],
+  "sample_rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Telepon",
+          "value": "Telepon",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Toko 1",
+          "value": "Toko 1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Direktur",
+          "value": "Direktur",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Alamat",
+          "value": "Alamat",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "082164895397",
+          "value": "082164895397",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Rumah Roti Helena",
+          "value": "Rumah Roti Helena",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Fudi Supiyanto",
+          "value": "Fudi Supiyanto",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Selatan",
+          "value": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=B3",
+          "value": "082164895397",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=VLOOKUP(G3,'Tabel Bantu'!$K$3:$Q$1022,6,0)",
+          "value": "#N/A",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "2",
+          "value": "2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "085297578868",
+          "value": "085297578868",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Resto JFC Esther",
+          "value": "Resto JFC Esther",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Limaati Daeli",
+          "value": "Limaati Daeli",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Jl. Saonigeho Km. 2 Telukdalam - Nias Selatan",
+          "value": "Jl. Saonigeho Km. 2 Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=B4",
+          "value": "085297578868",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Bahan dan Alat Kebersihan",
+          "value": "Bahan dan Alat Kebersihan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Nasi Kotak",
+          "value": "Nasi Kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "value": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "3",
+          "value": "3",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "081375309828",
+          "value": "081375309828",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Gestiwan Bazikho",
+          "value": "Gestiwan Bazikho",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=B5",
+          "value": "081375309828",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Obat-obatan",
+          "value": "Obat-obatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Aqua Botol 600 ml",
+          "value": "Aqua Botol 600 ml",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Aqua Botol (Berat Satuan 600 gram; Dimensi Ukuran 2x3x2cm; Berat volume: 0.00kg)",
+          "value": "Aqua Botol (Berat Satuan 600 gram; Dimensi Ukuran 2x3x2cm; Berat volume: 0.00kg)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "082166714290",
+          "value": "082166714290",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "CV. Goriyaku Wiratrade",
+          "value": "CV. Goriyaku Wiratrade",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Wirawan Bazikho",
+          "value": "Wirawan Bazikho",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Jl. Diponegoro No. 87, Kel Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Diponegoro No. 87, Kel Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=B6",
+          "value": "082166714290",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Kue",
+          "value": "Kue",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Aqua Cup  ",
+          "value": "Aqua Cup  ",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Aqua Cup (Diameter: 6.3cm. Tinggi: 9.5cm)",
+          "value": "Aqua Cup (Diameter: 6.3cm. Tinggi: 9.5cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "UD. BALIZATO",
+          "value": "UD. BALIZATO",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Pieter B.P. Loi",
+          "value": "Pieter B.P. Loi",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=B7",
+          "value": "082166506229",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Nasi kotak",
+          "value": "Nasi kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Kue ",
+          "value": "Kue ",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Kue (bahan tepung terigu, gula, telur, mentega; berat 100gr, panjang 15cm, lebar 8 cm)",
+          "value": "Kue (bahan tepung terigu, gula, telur, mentega; berat 100gr, panjang 15cm, lebar 8 cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "082259370739",
+          "value": "082259370739",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Toko Kue Neng Geulis",
+          "value": "Toko Kue Neng Geulis",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Jl. Imam Bonjol, Ps. Tlk. Dalam, Kec. Tlk. Dalam, Kabupaten Nias Selatan, Sumatera Utara 22865",
+          "value": "Jl. Imam Bonjol, Ps. Tlk. Dalam, Kec. Tlk. Dalam, Kabupaten Nias Selatan, Sumatera Utara 22865",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=B8",
+          "value": "082259370739",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Aqua Cup",
+          "value": "Aqua Cup",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Tissue Jolly",
+          "value": "Tissue Jolly",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Sapu Lidi (Panjang 120 cm)",
+          "value": "Sapu Lidi (Panjang 120 cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "2",
+          "value": "2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "081264720368",
+          "value": "081264720368",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Rumah Makan Imanuel",
+          "value": "Rumah Makan Imanuel",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Dolli Sinaga",
+          "value": "Dolli Sinaga",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Jl. Saonigeho Km. 1 Kel. Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Saonigeho Km. 1 Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=B9",
+          "value": "081264720368",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Bahan dan Peralatan Listrik",
+          "value": "Bahan dan Peralatan Listrik",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Sorok sampah Nagata",
+          "value": "Sorok sampah Nagata",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Alat Pel lantai besar (Merek : Nagoya Code : 703-L, Ukuran : Besar, Tongkat : Aluminium, Kepala Pel: Sumbu, Panjang Tongkat 110cm, Lebar Kelapa Pel: 19cm)",
+          "value": "Alat Pel lantai besar (Merek : Nagoya Code : 703-L, Ukuran : Besar, Tongkat : Aluminium, Kepala Pel: Sumbu, Panjang Tongkat 110cm, Lebar Kelapa Pel: 19cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "3",
+          "value": "3",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "081370034744",
+          "value": "081370034744",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Sinadodo Laia",
+          "value": "Sinadodo Laia",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=B10",
+          "value": "081370034744",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Penggandaan dan Percetakan (ATK)",
+          "value": "Penggandaan dan Percetakan (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Handsoap Dee Dee",
+          "value": "Handsoap Dee Dee",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Tempat sampah (Bahan Plastik 33x32cm,)",
+          "value": "Tempat sampah (Bahan Plastik 33x32cm,)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "085261247862",
+          "value": "085261247862",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "CV. Marsatu Jaya Badiri",
+          "value": "CV. Marsatu Jaya Badiri",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Marusaha S. Simanjuntak",
+          "value": "Marusaha S. Simanjuntak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Jl. Oswald Siahaan No. 6A Aek Tolang Pandan",
+          "value": "Jl. Oswald Siahaan No. 6A Aek Tolang Pandan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=B11",
+          "value": "085261247862",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Jasa Sewa Gedung",
+          "value": "Jasa Sewa Gedung",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Sapu Lantai Nagata",
+          "value": "Sapu Lantai Nagata",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "value": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "082324886081",
+          "value": "082324886081",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "UD. Nisel Reklame",
+          "value": "UD. Nisel Reklame",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Elisander Zai, S.Th",
+          "value": "Elisander Zai, S.Th",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Jl. Saonigeho Km. 1 Kel. Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Saonigeho Km. 1 Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=B12",
+          "value": "082324886081",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Langganan Listrik",
+          "value": "Langganan Listrik",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "vixal 500ml",
+          "value": "vixal 500ml",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Aqua Botol (Berat Satuan 600 gram; Dimensi Ukuran 2x3x2cm; Berat volume: 0.00kg)",
+          "value": "Aqua Botol (Berat Satuan 600 gram; Dimensi Ukuran 2x3x2cm; Berat volume: 0.00kg)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=B13",
+          "value": "0",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Langganan Indihome",
+          "value": "Langganan Indihome",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Sikat Kloset Nagata",
+          "value": "Sikat Kloset Nagata",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Kue (bahan tepung terigu, gula, telur, mentega; berat 100gr, panjang 15cm, lebar 8 cm)",
+          "value": "Kue (bahan tepung terigu, gula, telur, mentega; berat 100gr, panjang 15cm, lebar 8 cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=B14",
+          "value": "0",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Jasa Operator Dapodik",
+          "value": "Jasa Operator Dapodik",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Sapu Lidi",
+          "value": "Sapu Lidi",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Kertas Ukuran A4",
+          "value": "Kertas Ukuran A4",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Elektronik",
+          "value": "Elektronik",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Stik Pel Besar",
+          "value": "Stik Pel Besar",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "value": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    }
+  ],
+  "formulas": [
+    {
+      "cell": "F3",
+      "row": 3,
+      "col": "F",
+      "formula": "=B3",
+      "value": "082164895397",
+      "type": "normal"
+    },
+    {
+      "cell": "H3",
+      "row": 3,
+      "col": "H",
+      "formula": "=VLOOKUP(G3,'Tabel Bantu'!$K$3:$Q$1022,6,0)",
+      "value": "#N/A",
+      "type": "normal"
+    },
+    {
+      "cell": "F4",
+      "row": 4,
+      "col": "F",
+      "formula": "=B4",
+      "value": "085297578868",
+      "type": "normal"
+    },
+    {
+      "cell": "F5",
+      "row": 5,
+      "col": "F",
+      "formula": "=B5",
+      "value": "081375309828",
+      "type": "normal"
+    },
+    {
+      "cell": "F6",
+      "row": 6,
+      "col": "F",
+      "formula": "=B6",
+      "value": "082166714290",
+      "type": "normal"
+    },
+    {
+      "cell": "F7",
+      "row": 7,
+      "col": "F",
+      "formula": "=B7",
+      "value": "082166506229",
+      "type": "normal"
+    },
+    {
+      "cell": "F8",
+      "row": 8,
+      "col": "F",
+      "formula": "=B8",
+      "value": "082259370739",
+      "type": "normal"
+    },
+    {
+      "cell": "F9",
+      "row": 9,
+      "col": "F",
+      "formula": "=B9",
+      "value": "081264720368",
+      "type": "normal"
+    },
+    {
+      "cell": "F10",
+      "row": 10,
+      "col": "F",
+      "formula": "=B10",
+      "value": "081370034744",
+      "type": "normal"
+    },
+    {
+      "cell": "F11",
+      "row": 11,
+      "col": "F",
+      "formula": "=B11",
+      "value": "085261247862",
+      "type": "normal"
+    },
+    {
+      "cell": "F12",
+      "row": 12,
+      "col": "F",
+      "formula": "=B12",
+      "value": "082324886081",
+      "type": "normal"
+    },
+    {
+      "cell": "F13",
+      "row": 13,
+      "col": "F",
+      "formula": "=B13",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "F14",
+      "row": 14,
+      "col": "F",
+      "formula": "=B14",
+      "value": "0",
+      "type": "normal"
+    }
+  ]
+}

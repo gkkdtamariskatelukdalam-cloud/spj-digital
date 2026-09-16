@@ -1,0 +1,2896 @@
+{
+  "name": "01PESAN",
+  "max_row": 159,
+  "max_col": 29,
+  "non_empty_cells": 644,
+  "formulas_count": 573,
+  "type": "Print Form",
+  "purpose": "Surat Pesanan (Order Letter) - main procurement order document",
+  "category": "form",
+  "headers": [
+    {
+      "col": "A",
+      "col_idx": 1,
+      "header": "PEMERINTAH PROVINSI SUMATERA UTARA"
+    }
+  ],
+  "sample_rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "PEMERINTAH PROVINSI SUMATERA UTARA",
+          "value": "PEMERINTAH PROVINSI SUMATERA UTARA",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "DINAS PENDIDIKAN",
+          "value": "DINAS PENDIDIKAN",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "SMA NEGERI 1 TELUKDALAM",
+          "value": "SMA NEGERI 1 TELUKDALAM",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=P4-1",
+          "value": "6",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan, ",
+          "value": "Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan, ",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "07",
+          "value": "07",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Cabdisdik Wil.XIV, Kode Pos 22865",
+          "value": "Cabdisdik Wil.XIV, Kode Pos 22865",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=P4+1",
+          "value": "8",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com ",
+          "value": "Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com ",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Laman : smansatelukdalam.sch.id",
+          "value": "Laman : smansatelukdalam.sch.id",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "SURAT PESANAN",
+          "value": "SURAT PESANAN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "PESANAN",
+          "value": "PESANAN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+          "value": "07",
+          "is_formula": true,
+          "is_array": true
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=ROMAN(MONTH(M11))",
+          "value": "I",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "=IFERROR(INDEX(_xlnm.Database,SMALL(IF(kriteria=$Q$15,ROW(kriteria)),ROW(B8)),5),\"\")",
+          "value": "",
+          "is_formula": true,
+          "is_array": true
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=IFERROR(INDEX(_xlnm.Database,SMALL(IF(kriteria=$Q$15,ROW(kriteria)),ROW(B8)),6),\"\")",
+          "value": "",
+          "is_formula": true,
+          "is_array": true
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "=ROMAN(MONTH(Z10))",
+          "value": "I",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "BAST",
+          "value": "BAST",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+          "value": "07",
+          "is_formula": true,
+          "is_array": true
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=ROMAN(MONTH(M11))",
+          "value": "I",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Paket Pesanan :",
+          "value": "Paket Pesanan :",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "Nomor Surat Pesanan",
+          "value": "Nomor Surat Pesanan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=\"421.3/\"&N8&\"-P/DB/SMANSATLD/\"&O8&\"/\"&YEAR(M11)&\"\"",
+          "value": "421.3/07-P/DB/SMANSATLD/I/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "SHP",
+          "value": "SHP",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+          "value": "07",
+          "is_formula": true,
+          "is_array": true
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=ROMAN(MONTH(M11))",
+          "value": "I",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "Penyedia",
+          "value": "Penyedia",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=\"Kegiatan jual beli dengan mitra \"&IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C8)),20),\"\")",
+          "value": "Kegiatan jual beli dengan mitra UD. JOSUA",
+          "is_formula": true,
+          "is_array": true
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "Tanggal Pesanan ",
+          "value": "Tanggal Pesanan ",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=TEXT(IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),6),\"\"), \"[$-421] DD MMMM YYYY\")",
+          "value": " 06 Januari 2025",
+          "is_formula": true,
+          "is_array": true
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),6),\"\")",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": true
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "Tanggal Negosiasi ",
+          "value": "Tanggal Negosiasi ",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=\"Waktu Pengerjaan Pesanan  : \"&H11&\"\"",
+          "value": "Waktu Pengerjaan Pesanan  :  06 Januari 2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "No. BPU",
+          "value": "No. BPU",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=M19",
+          "value": "BPU07",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=M20",
+          "value": "BPU07",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=M21",
+          "value": "BPU07",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=M22",
+          "value": "BPU07",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "=IFERROR(LEFT(M10; 2) & TEXT(VALUE(RIGHT(M10; LEN(M10)-2))+1;\"000\"); \"\")",
+          "value": "=IFERROR(LEFT(M10; 2) & TEXT(VALUE(RIGHT(M10; LEN(M10)-2))+1;\"000\"); \"\")",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "Hrg Satuan",
+          "value": "Hrg Satuan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "Total Hrg",
+          "value": "Total Hrg",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=\"Waktu Pemrosesan Pesanan : \"&H11&\"\"",
+          "value": "Waktu Pemrosesan Pesanan :  06 Januari 2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=M23",
+          "value": "BPU07",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=M24",
+          "value": "BPU07",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=O23",
+          "value": "0",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=P23",
+          "value": "0",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "=IFERROR(#REF!/F19,0)",
+          "value": "0",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=IFERROR(AA14*F19,0)",
+          "value": "0",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=\"Waktu Penyelesaian Pesanan : \"&TEXT(IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),9),\"\"), \"[$-421] dd mmmm yyyy\")",
+          "value": "Waktu Penyelesaian Pesanan :  23 Januari 2025",
+          "is_formula": true,
+          "is_array": true
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "Catatan Pengiriman Untuk Penyedia:",
+          "value": "Catatan Pengiriman Untuk Penyedia:",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    }
+  ],
+  "formulas": [
+    {
+      "cell": "Q3",
+      "row": 3,
+      "col": "Q",
+      "formula": "=P4-1",
+      "value": "6",
+      "type": "normal"
+    },
+    {
+      "cell": "Q5",
+      "row": 5,
+      "col": "Q",
+      "formula": "=P4+1",
+      "value": "8",
+      "type": "normal"
+    },
+    {
+      "cell": "N8",
+      "row": 8,
+      "col": "N",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+      "value": "07",
+      "type": "array"
+    },
+    {
+      "cell": "O8",
+      "row": 8,
+      "col": "O",
+      "formula": "=ROMAN(MONTH(M11))",
+      "value": "I",
+      "type": "normal"
+    },
+    {
+      "cell": "AA8",
+      "row": 8,
+      "col": "AA",
+      "formula": "=IFERROR(INDEX(_xlnm.Database,SMALL(IF(kriteria=$Q$15,ROW(kriteria)),ROW(B8)),5),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "AB8",
+      "row": 8,
+      "col": "AB",
+      "formula": "=IFERROR(INDEX(_xlnm.Database,SMALL(IF(kriteria=$Q$15,ROW(kriteria)),ROW(B8)),6),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "AC8",
+      "row": 8,
+      "col": "AC",
+      "formula": "=ROMAN(MONTH(Z10))",
+      "value": "I",
+      "type": "normal"
+    },
+    {
+      "cell": "N9",
+      "row": 9,
+      "col": "N",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+      "value": "07",
+      "type": "array"
+    },
+    {
+      "cell": "O9",
+      "row": 9,
+      "col": "O",
+      "formula": "=ROMAN(MONTH(M11))",
+      "value": "I",
+      "type": "normal"
+    },
+    {
+      "cell": "H10",
+      "row": 10,
+      "col": "H",
+      "formula": "=\"421.3/\"&N8&\"-P/DB/SMANSATLD/\"&O8&\"/\"&YEAR(M11)&\"\"",
+      "value": "421.3/07-P/DB/SMANSATLD/I/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "N10",
+      "row": 10,
+      "col": "N",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+      "value": "07",
+      "type": "array"
+    },
+    {
+      "cell": "O10",
+      "row": 10,
+      "col": "O",
+      "formula": "=ROMAN(MONTH(M11))",
+      "value": "I",
+      "type": "normal"
+    },
+    {
+      "cell": "A11",
+      "row": 11,
+      "col": "A",
+      "formula": "=\"Kegiatan jual beli dengan mitra \"&IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C8)),20),\"\")",
+      "value": "Kegiatan jual beli dengan mitra UD. JOSUA",
+      "type": "array"
+    },
+    {
+      "cell": "H11",
+      "row": 11,
+      "col": "H",
+      "formula": "=TEXT(IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),6),\"\"), \"[$-421] DD MMMM YYYY\")",
+      "value": " 06 Januari 2025",
+      "type": "array"
+    },
+    {
+      "cell": "M11",
+      "row": 11,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),6),\"\")",
+      "value": "06/01/2025",
+      "type": "array"
+    },
+    {
+      "cell": "A13",
+      "row": 13,
+      "col": "A",
+      "formula": "=\"Waktu Pengerjaan Pesanan  : \"&H11&\"\"",
+      "value": "Waktu Pengerjaan Pesanan  :  06 Januari 2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H13",
+      "row": 13,
+      "col": "H",
+      "formula": "=M19",
+      "value": "BPU07",
+      "type": "normal"
+    },
+    {
+      "cell": "I13",
+      "row": 13,
+      "col": "I",
+      "formula": "=M20",
+      "value": "BPU07",
+      "type": "normal"
+    },
+    {
+      "cell": "J13",
+      "row": 13,
+      "col": "J",
+      "formula": "=M21",
+      "value": "BPU07",
+      "type": "normal"
+    },
+    {
+      "cell": "K13",
+      "row": 13,
+      "col": "K",
+      "formula": "=M22",
+      "value": "BPU07",
+      "type": "normal"
+    },
+    {
+      "cell": "S13",
+      "row": 13,
+      "col": "S",
+      "formula": "=IFERROR(LEFT(M10; 2) & TEXT(VALUE(RIGHT(M10; LEN(M10)-2))+1;\"000\"); \"\")",
+      "value": "=IFERROR(LEFT(M10; 2) & TEXT(VALUE(RIGHT(M10; LEN(M10)-2))+1;\"000\"); \"\")",
+      "type": "normal"
+    },
+    {
+      "cell": "A14",
+      "row": 14,
+      "col": "A",
+      "formula": "=\"Waktu Pemrosesan Pesanan : \"&H11&\"\"",
+      "value": "Waktu Pemrosesan Pesanan :  06 Januari 2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H14",
+      "row": 14,
+      "col": "H",
+      "formula": "=M23",
+      "value": "BPU07",
+      "type": "normal"
+    },
+    {
+      "cell": "I14",
+      "row": 14,
+      "col": "I",
+      "formula": "=M24",
+      "value": "BPU07",
+      "type": "normal"
+    },
+    {
+      "cell": "J14",
+      "row": 14,
+      "col": "J",
+      "formula": "=O23",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "K14",
+      "row": 14,
+      "col": "K",
+      "formula": "=P23",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "AA14",
+      "row": 14,
+      "col": "AA",
+      "formula": "=IFERROR(#REF!/F19,0)",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "AB14",
+      "row": 14,
+      "col": "AB",
+      "formula": "=IFERROR(AA14*F19,0)",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A15",
+      "row": 15,
+      "col": "A",
+      "formula": "=\"Waktu Penyelesaian Pesanan : \"&TEXT(IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),9),\"\"), \"[$-421] dd mmmm yyyy\")",
+      "value": "Waktu Penyelesaian Pesanan :  23 Januari 2025",
+      "type": "array"
+    },
+    {
+      "cell": "S18",
+      "row": 18,
+      "col": "S",
+      "formula": "=IFERROR(LEFT(M12; 3) & TEXT(VALUE(RIGHT(M12; LEN(M12)-3))-1;\"000\"); \"\")",
+      "value": "=IFERROR(LEFT(M12; 3) & TEXT(VALUE(RIGHT(M12; LEN(M12)-3))-1;\"000\"); \"\")",
+      "type": "normal"
+    },
+    {
+      "cell": "A19",
+      "row": 19,
+      "col": "A",
+      "formula": "=IF(B19<>\"\",COUNTA($B$19:B19),\"\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "B19",
+      "row": 19,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),11),\"\")",
+      "value": "Sapu",
+      "type": "array"
+    },
+    {
+      "cell": "F19",
+      "row": 19,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),12),\"\")",
+      "value": "60",
+      "type": "array"
+    },
+    {
+      "cell": "G19",
+      "row": 19,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H19",
+      "row": 19,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),14),\"\")",
+      "value": "65000",
+      "type": "array"
+    },
+    {
+      "cell": "J19",
+      "row": 19,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),15),\"\")",
+      "value": "3900000",
+      "type": "array"
+    },
+    {
+      "cell": "L19",
+      "row": 19,
+      "col": "L",
+      "formula": "=IF(B19=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "M19",
+      "row": 19,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),2),\"\")",
+      "value": "BPU07",
+      "type": "array"
+    },
+    {
+      "cell": "O19",
+      "row": 19,
+      "col": "O",
+      "formula": "=F19*H19",
+      "value": "3900000",
+      "type": "normal"
+    },
+    {
+      "cell": "A20",
+      "row": 20,
+      "col": "A",
+      "formula": "=IF(B20<>\"\",COUNTA($B$19:B20),\"\")",
+      "value": "2",
+      "type": "normal"
+    },
+    {
+      "cell": "B20",
+      "row": 20,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C2)),11),\"\")",
+      "value": "Sapu Lidi",
+      "type": "array"
+    },
+    {
+      "cell": "F20",
+      "row": 20,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C2)),12),\"\")",
+      "value": "15",
+      "type": "array"
+    },
+    {
+      "cell": "G20",
+      "row": 20,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C2)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H20",
+      "row": 20,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C2)),14),\"\")",
+      "value": "25000",
+      "type": "array"
+    },
+    {
+      "cell": "J20",
+      "row": 20,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C2)),15),\"\")",
+      "value": "375000",
+      "type": "array"
+    },
+    {
+      "cell": "L20",
+      "row": 20,
+      "col": "L",
+      "formula": "=IF(B20=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "M20",
+      "row": 20,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C2)),2),\"\")",
+      "value": "BPU07",
+      "type": "array"
+    },
+    {
+      "cell": "A21",
+      "row": 21,
+      "col": "A",
+      "formula": "=IF(B21<>\"\",COUNTA($B$19:B21),\"\")",
+      "value": "3",
+      "type": "normal"
+    },
+    {
+      "cell": "B21",
+      "row": 21,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C3)),11),\"\")",
+      "value": "Sikat Pembersih",
+      "type": "array"
+    },
+    {
+      "cell": "F21",
+      "row": 21,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C3)),12),\"\")",
+      "value": "15",
+      "type": "array"
+    },
+    {
+      "cell": "G21",
+      "row": 21,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C3)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H21",
+      "row": 21,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C3)),14),\"\")",
+      "value": "60000",
+      "type": "array"
+    },
+    {
+      "cell": "J21",
+      "row": 21,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C3)),15),\"\")",
+      "value": "900000",
+      "type": "array"
+    },
+    {
+      "cell": "L21",
+      "row": 21,
+      "col": "L",
+      "formula": "=IF(B21=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "M21",
+      "row": 21,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C3)),2),\"\")",
+      "value": "BPU07",
+      "type": "array"
+    },
+    {
+      "cell": "A22",
+      "row": 22,
+      "col": "A",
+      "formula": "=IF(B22<>\"\",COUNTA($B$19:B22),\"\")",
+      "value": "4",
+      "type": "normal"
+    },
+    {
+      "cell": "B22",
+      "row": 22,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C4)),11),\"\")",
+      "value": "Sikat WC Type : Gagang Panjang",
+      "type": "array"
+    },
+    {
+      "cell": "F22",
+      "row": 22,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C4)),12),\"\")",
+      "value": "15",
+      "type": "array"
+    },
+    {
+      "cell": "G22",
+      "row": 22,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C4)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H22",
+      "row": 22,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C4)),14),\"\")",
+      "value": "34000",
+      "type": "array"
+    },
+    {
+      "cell": "J22",
+      "row": 22,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C4)),15),\"\")",
+      "value": "510000",
+      "type": "array"
+    },
+    {
+      "cell": "L22",
+      "row": 22,
+      "col": "L",
+      "formula": "=IF(B22=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "M22",
+      "row": 22,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C4)),2),\"\")",
+      "value": "BPU07",
+      "type": "array"
+    },
+    {
+      "cell": "A23",
+      "row": 23,
+      "col": "A",
+      "formula": "=IF(B23<>\"\",COUNTA($B$19:B23),\"\")",
+      "value": "5",
+      "type": "normal"
+    },
+    {
+      "cell": "B23",
+      "row": 23,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C5)),11),\"\")",
+      "value": "Alat Pel",
+      "type": "array"
+    },
+    {
+      "cell": "F23",
+      "row": 23,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C5)),12),\"\")",
+      "value": "25",
+      "type": "array"
+    },
+    {
+      "cell": "G23",
+      "row": 23,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C5)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H23",
+      "row": 23,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C5)),14),\"\")",
+      "value": "35000",
+      "type": "array"
+    },
+    {
+      "cell": "J23",
+      "row": 23,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C5)),15),\"\")",
+      "value": "875000",
+      "type": "array"
+    },
+    {
+      "cell": "L23",
+      "row": 23,
+      "col": "L",
+      "formula": "=IF(B23=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "M23",
+      "row": 23,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C5)),2),\"\")",
+      "value": "BPU07",
+      "type": "array"
+    },
+    {
+      "cell": "A24",
+      "row": 24,
+      "col": "A",
+      "formula": "=IF(B24<>\"\",COUNTA($B$19:B24),\"\")",
+      "value": "6",
+      "type": "normal"
+    },
+    {
+      "cell": "B24",
+      "row": 24,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C6)),11),\"\")",
+      "value": "Alat Pel lantai besar",
+      "type": "array"
+    },
+    {
+      "cell": "F24",
+      "row": 24,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C6)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "G24",
+      "row": 24,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C6)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H24",
+      "row": 24,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C6)),14),\"\")",
+      "value": "169000",
+      "type": "array"
+    },
+    {
+      "cell": "J24",
+      "row": 24,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C6)),15),\"\")",
+      "value": "845000",
+      "type": "array"
+    },
+    {
+      "cell": "L24",
+      "row": 24,
+      "col": "L",
+      "formula": "=IF(B24=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "M24",
+      "row": 24,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C6)),2),\"\")",
+      "value": "BPU07",
+      "type": "array"
+    },
+    {
+      "cell": "R24",
+      "row": 24,
+      "col": "R",
+      "formula": "=IFERROR(INDEX(MASTERKU,SMALL(IF(KRITERIAKU=$P$15,ROW(KRITERIAKU)),ROW(H8)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "S24",
+      "row": 24,
+      "col": "S",
+      "formula": "=IFERROR(F19*R24,0)",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A25",
+      "row": 25,
+      "col": "A",
+      "formula": "=IF(B25<>\"\",COUNTA($B$19:B25),\"\")",
+      "value": "7",
+      "type": "normal"
+    },
+    {
+      "cell": "B25",
+      "row": 25,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C7)),11),\"\")",
+      "value": "Serok Air Besar--",
+      "type": "array"
+    },
+    {
+      "cell": "F25",
+      "row": 25,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C7)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "G25",
+      "row": 25,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C7)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H25",
+      "row": 25,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C7)),14),\"\")",
+      "value": "40000",
+      "type": "array"
+    },
+    {
+      "cell": "J25",
+      "row": 25,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C7)),15),\"\")",
+      "value": "200000",
+      "type": "array"
+    },
+    {
+      "cell": "L25",
+      "row": 25,
+      "col": "L",
+      "formula": "=IF(B25=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "M25",
+      "row": 25,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C7)),2),\"\")",
+      "value": "BPU07",
+      "type": "array"
+    },
+    {
+      "cell": "A26",
+      "row": 26,
+      "col": "A",
+      "formula": "=IF(B26<>\"\",COUNTA($B$19:B26),\"\")",
+      "value": "8",
+      "type": "normal"
+    },
+    {
+      "cell": "B26",
+      "row": 26,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C8)),11),\"\")",
+      "value": "Kain Lap  Bahan : Katun bermotif kotak-kotak",
+      "type": "array"
+    },
+    {
+      "cell": "F26",
+      "row": 26,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C8)),12),\"\")",
+      "value": "10",
+      "type": "array"
+    },
+    {
+      "cell": "G26",
+      "row": 26,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C8)),13),\"\")",
+      "value": "lusin",
+      "type": "array"
+    },
+    {
+      "cell": "H26",
+      "row": 26,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C8)),14),\"\")",
+      "value": "75000",
+      "type": "array"
+    },
+    {
+      "cell": "J26",
+      "row": 26,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C8)),15),\"\")",
+      "value": "750000",
+      "type": "array"
+    },
+    {
+      "cell": "L26",
+      "row": 26,
+      "col": "L",
+      "formula": "=IF(B26=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "M26",
+      "row": 26,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C8)),2),\"\")",
+      "value": "BPU07",
+      "type": "array"
+    },
+    {
+      "cell": "A27",
+      "row": 27,
+      "col": "A",
+      "formula": "=IF(B27<>\"\",COUNTA($B$19:B27),\"\")",
+      "value": "9",
+      "type": "normal"
+    },
+    {
+      "cell": "B27",
+      "row": 27,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C9)),11),\"\")",
+      "value": "Serok Sampah--",
+      "type": "array"
+    },
+    {
+      "cell": "F27",
+      "row": 27,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C9)),12),\"\")",
+      "value": "15",
+      "type": "array"
+    },
+    {
+      "cell": "G27",
+      "row": 27,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C9)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H27",
+      "row": 27,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C9)),14),\"\")",
+      "value": "25000",
+      "type": "array"
+    },
+    {
+      "cell": "J27",
+      "row": 27,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C9)),15),\"\")",
+      "value": "375000",
+      "type": "array"
+    },
+    {
+      "cell": "L27",
+      "row": 27,
+      "col": "L",
+      "formula": "=IF(B27=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "M27",
+      "row": 27,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C9)),2),\"\")",
+      "value": "BPU07",
+      "type": "array"
+    },
+    {
+      "cell": "A28",
+      "row": 28,
+      "col": "A",
+      "formula": "=IF(B28<>\"\",COUNTA($B$19:B28),\"\")",
+      "value": "10",
+      "type": "normal"
+    },
+    {
+      "cell": "B28",
+      "row": 28,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C10)),11),\"\")",
+      "value": "Tempat sampah",
+      "type": "array"
+    },
+    {
+      "cell": "F28",
+      "row": 28,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C10)),12),\"\")",
+      "value": "35",
+      "type": "array"
+    },
+    {
+      "cell": "G28",
+      "row": 28,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C10)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H28",
+      "row": 28,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C10)),14),\"\")",
+      "value": "20000",
+      "type": "array"
+    },
+    {
+      "cell": "J28",
+      "row": 28,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C10)),15),\"\")",
+      "value": "700000",
+      "type": "array"
+    },
+    {
+      "cell": "L28",
+      "row": 28,
+      "col": "L",
+      "formula": "=IF(B28=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "M28",
+      "row": 28,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C10)),2),\"\")",
+      "value": "BPU07",
+      "type": "array"
+    },
+    {
+      "cell": "A29",
+      "row": 29,
+      "col": "A",
+      "formula": "=IF(B29<>\"\",COUNTA($B$19:B29),\"\")",
+      "value": "11",
+      "type": "normal"
+    },
+    {
+      "cell": "B29",
+      "row": 29,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C11)),11),\"\")",
+      "value": "Gayung",
+      "type": "array"
+    },
+    {
+      "cell": "F29",
+      "row": 29,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C11)),12),\"\")",
+      "value": "10",
+      "type": "array"
+    },
+    {
+      "cell": "G29",
+      "row": 29,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C11)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H29",
+      "row": 29,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C11)),14),\"\")",
+      "value": "34500",
+      "type": "array"
+    },
+    {
+      "cell": "J29",
+      "row": 29,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C11)),15),\"\")",
+      "value": "345000",
+      "type": "array"
+    },
+    {
+      "cell": "L29",
+      "row": 29,
+      "col": "L",
+      "formula": "=IF(B29=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A30",
+      "row": 30,
+      "col": "A",
+      "formula": "=IF(B30<>\"\",COUNTA($B$19:B30),\"\")",
+      "value": "12",
+      "type": "normal"
+    },
+    {
+      "cell": "B30",
+      "row": 30,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C12)),11),\"\")",
+      "value": "Tisu--",
+      "type": "array"
+    },
+    {
+      "cell": "F30",
+      "row": 30,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C12)),12),\"\")",
+      "value": "12",
+      "type": "array"
+    },
+    {
+      "cell": "G30",
+      "row": 30,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C12)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H30",
+      "row": 30,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C12)),14),\"\")",
+      "value": "12500",
+      "type": "array"
+    },
+    {
+      "cell": "J30",
+      "row": 30,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C12)),15),\"\")",
+      "value": "150000",
+      "type": "array"
+    },
+    {
+      "cell": "L30",
+      "row": 30,
+      "col": "L",
+      "formula": "=IF(B30=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A31",
+      "row": 31,
+      "col": "A",
+      "formula": "=IF(B31<>\"\",COUNTA($B$19:B31),\"\")",
+      "value": "13",
+      "type": "normal"
+    },
+    {
+      "cell": "B31",
+      "row": 31,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C13)),11),\"\")",
+      "value": "vixal 500ml",
+      "type": "array"
+    },
+    {
+      "cell": "F31",
+      "row": 31,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C13)),12),\"\")",
+      "value": "10",
+      "type": "array"
+    },
+    {
+      "cell": "G31",
+      "row": 31,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C13)),13),\"\")",
+      "value": "botol",
+      "type": "array"
+    },
+    {
+      "cell": "H31",
+      "row": 31,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C13)),14),\"\")",
+      "value": "30000",
+      "type": "array"
+    },
+    {
+      "cell": "J31",
+      "row": 31,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C13)),15),\"\")",
+      "value": "300000",
+      "type": "array"
+    },
+    {
+      "cell": "L31",
+      "row": 31,
+      "col": "L",
+      "formula": "=IF(B31=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A32",
+      "row": 32,
+      "col": "A",
+      "formula": "=IF(B32<>\"\",COUNTA($B$19:B32),\"\")",
+      "value": "14",
+      "type": "normal"
+    },
+    {
+      "cell": "B32",
+      "row": 32,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C14)),11),\"\")",
+      "value": "Perlengkapan Kebersihan Pembersih Lantai Super Pel Varian 800ml",
+      "type": "array"
+    },
+    {
+      "cell": "F32",
+      "row": 32,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C14)),12),\"\")",
+      "value": "15",
+      "type": "array"
+    },
+    {
+      "cell": "G32",
+      "row": 32,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C14)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H32",
+      "row": 32,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C14)),14),\"\")",
+      "value": "13500",
+      "type": "array"
+    },
+    {
+      "cell": "J32",
+      "row": 32,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C14)),15),\"\")",
+      "value": "202500",
+      "type": "array"
+    },
+    {
+      "cell": "L32",
+      "row": 32,
+      "col": "L",
+      "formula": "=IF(B32=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A33",
+      "row": 33,
+      "col": "A",
+      "formula": "=IF(B33<>\"\",COUNTA($B$19:B33),\"\")",
+      "value": "15",
+      "type": "normal"
+    },
+    {
+      "cell": "B33",
+      "row": 33,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C15)),11),\"\")",
+      "value": "Cairan Pembersih Kaca",
+      "type": "array"
+    },
+    {
+      "cell": "F33",
+      "row": 33,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C15)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "G33",
+      "row": 33,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C15)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H33",
+      "row": 33,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C15)),14),\"\")",
+      "value": "12000",
+      "type": "array"
+    },
+    {
+      "cell": "J33",
+      "row": 33,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C15)),15),\"\")",
+      "value": "60000",
+      "type": "array"
+    },
+    {
+      "cell": "L33",
+      "row": 33,
+      "col": "L",
+      "formula": "=IF(B33=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A34",
+      "row": 34,
+      "col": "A",
+      "formula": "=IF(B34<>\"\",COUNTA($B$19:B34),\"\")",
+      "value": "16",
+      "type": "normal"
+    },
+    {
+      "cell": "B34",
+      "row": 34,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C16)),11),\"\")",
+      "value": "Perlengkapan Kebersihan Pembersih Pakaian Sunlight Refil 800ml",
+      "type": "array"
+    },
+    {
+      "cell": "F34",
+      "row": 34,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C16)),12),\"\")",
+      "value": "3",
+      "type": "array"
+    },
+    {
+      "cell": "G34",
+      "row": 34,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C16)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H34",
+      "row": 34,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C16)),14),\"\")",
+      "value": "15000",
+      "type": "array"
+    },
+    {
+      "cell": "J34",
+      "row": 34,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C16)),15),\"\")",
+      "value": "45000",
+      "type": "array"
+    },
+    {
+      "cell": "L34",
+      "row": 34,
+      "col": "L",
+      "formula": "=IF(B34=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A35",
+      "row": 35,
+      "col": "A",
+      "formula": "=IF(B35<>\"\",COUNTA($B$19:B35),\"\")",
+      "value": "17",
+      "type": "normal"
+    },
+    {
+      "cell": "B35",
+      "row": 35,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C17)),11),\"\")",
+      "value": "Spon Cuci",
+      "type": "array"
+    },
+    {
+      "cell": "F35",
+      "row": 35,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C17)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "G35",
+      "row": 35,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C17)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H35",
+      "row": 35,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C17)),14),\"\")",
+      "value": "12000",
+      "type": "array"
+    },
+    {
+      "cell": "J35",
+      "row": 35,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C17)),15),\"\")",
+      "value": "60000",
+      "type": "array"
+    },
+    {
+      "cell": "L35",
+      "row": 35,
+      "col": "L",
+      "formula": "=IF(B35=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A36",
+      "row": 36,
+      "col": "A",
+      "formula": "=IF(B36<>\"\",COUNTA($B$19:B36),\"\")",
+      "value": "18",
+      "type": "normal"
+    },
+    {
+      "cell": "B36",
+      "row": 36,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C18)),11),\"\")",
+      "value": "Handsoap/Pencuci Tangan",
+      "type": "array"
+    },
+    {
+      "cell": "F36",
+      "row": 36,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C18)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "G36",
+      "row": 36,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C18)),13),\"\")",
+      "value": "botol",
+      "type": "array"
+    },
+    {
+      "cell": "H36",
+      "row": 36,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C18)),14),\"\")",
+      "value": "67000",
+      "type": "array"
+    },
+    {
+      "cell": "J36",
+      "row": 36,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C18)),15),\"\")",
+      "value": "335000",
+      "type": "array"
+    },
+    {
+      "cell": "L36",
+      "row": 36,
+      "col": "L",
+      "formula": "=IF(B36=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A37",
+      "row": 37,
+      "col": "A",
+      "formula": "=IF(B37<>\"\",COUNTA($B$19:B37),\"\")",
+      "value": "19",
+      "type": "normal"
+    },
+    {
+      "cell": "B37",
+      "row": 37,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C19)),11),\"\")",
+      "value": "Pengharum Ruangan",
+      "type": "array"
+    },
+    {
+      "cell": "F37",
+      "row": 37,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C19)),12),\"\")",
+      "value": "10",
+      "type": "array"
+    },
+    {
+      "cell": "G37",
+      "row": 37,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C19)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "H37",
+      "row": 37,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C19)),14),\"\")",
+      "value": "12100",
+      "type": "array"
+    },
+    {
+      "cell": "J37",
+      "row": 37,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C19)),15),\"\")",
+      "value": "121000",
+      "type": "array"
+    },
+    {
+      "cell": "L37",
+      "row": 37,
+      "col": "L",
+      "formula": "=IF(B37=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A38",
+      "row": 38,
+      "col": "A",
+      "formula": "=IF(B38<>\"\",COUNTA($B$19:B38),\"\")",
+      "value": "20",
+      "type": "normal"
+    },
+    {
+      "cell": "B38",
+      "row": 38,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C20)),11),\"\")",
+      "value": "Hand Sanitizer-Unit",
+      "type": "array"
+    },
+    {
+      "cell": "F38",
+      "row": 38,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C20)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "G38",
+      "row": 38,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C20)),13),\"\")",
+      "value": "unit",
+      "type": "array"
+    },
+    {
+      "cell": "H38",
+      "row": 38,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C20)),14),\"\")",
+      "value": "70000",
+      "type": "array"
+    },
+    {
+      "cell": "J38",
+      "row": 38,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C20)),15),\"\")",
+      "value": "350000",
+      "type": "array"
+    },
+    {
+      "cell": "L38",
+      "row": 38,
+      "col": "L",
+      "formula": "=IF(B38=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A39",
+      "row": 39,
+      "col": "A",
+      "formula": "=IF(B39<>\"\",COUNTA($B$19:B39),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B39",
+      "row": 39,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C21)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F39",
+      "row": 39,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C21)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G39",
+      "row": 39,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C21)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H39",
+      "row": 39,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C21)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J39",
+      "row": 39,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C21)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L39",
+      "row": 39,
+      "col": "L",
+      "formula": "=IF(B39=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A40",
+      "row": 40,
+      "col": "A",
+      "formula": "=IF(B40<>\"\",COUNTA($B$19:B40),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B40",
+      "row": 40,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C22)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F40",
+      "row": 40,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C22)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G40",
+      "row": 40,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C22)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H40",
+      "row": 40,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C22)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J40",
+      "row": 40,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C22)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L40",
+      "row": 40,
+      "col": "L",
+      "formula": "=IF(B40=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A41",
+      "row": 41,
+      "col": "A",
+      "formula": "=IF(B41<>\"\",COUNTA($B$19:B41),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B41",
+      "row": 41,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C23)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F41",
+      "row": 41,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C23)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G41",
+      "row": 41,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C23)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H41",
+      "row": 41,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C23)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J41",
+      "row": 41,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C23)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L41",
+      "row": 41,
+      "col": "L",
+      "formula": "=IF(B41=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A42",
+      "row": 42,
+      "col": "A",
+      "formula": "=IF(B42<>\"\",COUNTA($B$19:B42),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B42",
+      "row": 42,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C24)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F42",
+      "row": 42,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C24)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G42",
+      "row": 42,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C24)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H42",
+      "row": 42,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C24)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J42",
+      "row": 42,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C24)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L42",
+      "row": 42,
+      "col": "L",
+      "formula": "=IF(B42=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A43",
+      "row": 43,
+      "col": "A",
+      "formula": "=IF(B43<>\"\",COUNTA($B$19:B43),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B43",
+      "row": 43,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C25)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F43",
+      "row": 43,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C25)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G43",
+      "row": 43,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C25)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H43",
+      "row": 43,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C25)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J43",
+      "row": 43,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C25)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L43",
+      "row": 43,
+      "col": "L",
+      "formula": "=IF(B43=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A44",
+      "row": 44,
+      "col": "A",
+      "formula": "=IF(B44<>\"\",COUNTA($B$19:B44),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B44",
+      "row": 44,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C26)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F44",
+      "row": 44,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C26)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G44",
+      "row": 44,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C26)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H44",
+      "row": 44,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C26)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J44",
+      "row": 44,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C26)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L44",
+      "row": 44,
+      "col": "L",
+      "formula": "=IF(B44=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A45",
+      "row": 45,
+      "col": "A",
+      "formula": "=IF(B45<>\"\",COUNTA($B$19:B45),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B45",
+      "row": 45,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C27)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F45",
+      "row": 45,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C27)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G45",
+      "row": 45,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C27)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H45",
+      "row": 45,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C27)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J45",
+      "row": 45,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C27)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L45",
+      "row": 45,
+      "col": "L",
+      "formula": "=IF(B45=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A46",
+      "row": 46,
+      "col": "A",
+      "formula": "=IF(B46<>\"\",COUNTA($B$19:B46),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B46",
+      "row": 46,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C28)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F46",
+      "row": 46,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C28)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G46",
+      "row": 46,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C28)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H46",
+      "row": 46,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C28)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J46",
+      "row": 46,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C28)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L46",
+      "row": 46,
+      "col": "L",
+      "formula": "=IF(B46=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A47",
+      "row": 47,
+      "col": "A",
+      "formula": "=IF(B47<>\"\",COUNTA($B$19:B47),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B47",
+      "row": 47,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C29)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F47",
+      "row": 47,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C29)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G47",
+      "row": 47,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C29)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H47",
+      "row": 47,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C29)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J47",
+      "row": 47,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C29)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L47",
+      "row": 47,
+      "col": "L",
+      "formula": "=IF(B47=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A48",
+      "row": 48,
+      "col": "A",
+      "formula": "=IF(B48<>\"\",COUNTA($B$19:B48),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B48",
+      "row": 48,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C30)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F48",
+      "row": 48,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C30)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G48",
+      "row": 48,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C30)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H48",
+      "row": 48,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C30)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J48",
+      "row": 48,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C30)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L48",
+      "row": 48,
+      "col": "L",
+      "formula": "=IF(B48=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A49",
+      "row": 49,
+      "col": "A",
+      "formula": "=IF(B49<>\"\",COUNTA($B$19:B49),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B49",
+      "row": 49,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C31)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F49",
+      "row": 49,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C31)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G49",
+      "row": 49,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C31)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H49",
+      "row": 49,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C31)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J49",
+      "row": 49,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C31)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L49",
+      "row": 49,
+      "col": "L",
+      "formula": "=IF(B49=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A50",
+      "row": 50,
+      "col": "A",
+      "formula": "=IF(B50<>\"\",COUNTA($B$19:B50),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B50",
+      "row": 50,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C32)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F50",
+      "row": 50,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C32)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G50",
+      "row": 50,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C32)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H50",
+      "row": 50,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C32)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J50",
+      "row": 50,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C32)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L50",
+      "row": 50,
+      "col": "L",
+      "formula": "=IF(B50=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A51",
+      "row": 51,
+      "col": "A",
+      "formula": "=IF(B51<>\"\",COUNTA($B$19:B51),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B51",
+      "row": 51,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C33)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F51",
+      "row": 51,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C33)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G51",
+      "row": 51,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C33)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H51",
+      "row": 51,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C33)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J51",
+      "row": 51,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C33)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L51",
+      "row": 51,
+      "col": "L",
+      "formula": "=IF(B51=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A52",
+      "row": 52,
+      "col": "A",
+      "formula": "=IF(B52<>\"\",COUNTA($B$19:B52),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B52",
+      "row": 52,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C34)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F52",
+      "row": 52,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C34)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G52",
+      "row": 52,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C34)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H52",
+      "row": 52,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C34)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J52",
+      "row": 52,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C34)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L52",
+      "row": 52,
+      "col": "L",
+      "formula": "=IF(B52=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A53",
+      "row": 53,
+      "col": "A",
+      "formula": "=IF(B53<>\"\",COUNTA($B$19:B53),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B53",
+      "row": 53,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C35)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F53",
+      "row": 53,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C35)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G53",
+      "row": 53,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C35)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H53",
+      "row": 53,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C35)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J53",
+      "row": 53,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C35)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L53",
+      "row": 53,
+      "col": "L",
+      "formula": "=IF(B53=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A54",
+      "row": 54,
+      "col": "A",
+      "formula": "=IF(B54<>\"\",COUNTA($B$19:B54),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B54",
+      "row": 54,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C36)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F54",
+      "row": 54,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C36)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G54",
+      "row": 54,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C36)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H54",
+      "row": 54,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C36)),14),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "J54",
+      "row": 54,
+      "col": "J",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C36)),15),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "L54",
+      "row": 54,
+      "col": "L",
+      "formula": "=IF(B54=\"\",\"0\",\"1\")",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "A55",
+      "row": 55,
+      "col": "A",
+      "formula": "=IF(B55<>\"\",COUNTA($B$19:B55),\"\")",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "B55",
+      "row": 55,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C37)),11),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "F55",
+      "row": 55,
+      "col": "F",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C37)),12),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "G55",
+      "row": 55,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C37)),13),\"\")",
+      "value": "",
+      "type": "array"
+    },
+    {
+      "cell": "H55",
+      "row": 55,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C37)),14),\"\")",
+      "value": "",
+      "type": "array"
+    }
+  ]
+}

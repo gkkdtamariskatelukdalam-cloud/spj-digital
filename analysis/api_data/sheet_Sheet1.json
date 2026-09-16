@@ -1,0 +1,1135 @@
+{
+  "name": "Sheet1",
+  "max_row": 101,
+  "max_col": 5,
+  "non_empty_cells": 371,
+  "formulas_count": 68,
+  "type": "Other",
+  "purpose": "Auxiliary sheet (calculations)",
+  "category": "other",
+  "headers": [
+    {
+      "col": "A",
+      "col_idx": 1,
+      "header": "1"
+    },
+    {
+      "col": "B",
+      "col_idx": 2,
+      "header": "=Master!J4"
+    },
+    {
+      "col": "C",
+      "col_idx": 3,
+      "header": "Amplop Coklat Merk : Garda Ukuran Cabinet"
+    },
+    {
+      "col": "D",
+      "col_idx": 4,
+      "header": "Amplop (Merk\u00a0: Amplop\u00a0Garda Ukuran\u00a0: Super\u00a0Kabinet\u00a0Warna : Coklat polos Isi / Pa"
+    }
+  ],
+  "sample_rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J4",
+          "value": "Air Mineral pada pelaksanaan kegiatan bulanan Gerakan Bersih Lingkungan Sekolah",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Amplop Coklat Merk : Garda Ukuran Cabinet",
+          "value": "Amplop Coklat Merk : Garda Ukuran Cabinet",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Amplop (Merk\u00a0: Amplop\u00a0Garda Ukuran\u00a0: Super\u00a0Kabinet\u00a0Warna : Coklat polos Isi / Pack :100 pcs\u00a0Ukuran\u00a0: 14 cm x 27 cm)",
+          "value": "Amplop (Merk\u00a0: Amplop\u00a0Garda Ukuran\u00a0: Super\u00a0Kabinet\u00a0Warna : Coklat polos Isi / Pack :100 pcs\u00a0Ukuran\u00a0: 14 cm x 27 cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "2",
+          "value": "2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J5",
+          "value": "Perbaikan dan Pengaspalan Jalan Sekolah",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris",
+          "value": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Amplop Coklat (Merk : GSU Ukuran : 1/2 folio, bergaris)",
+          "value": "Amplop Coklat (Merk : GSU Ukuran : 1/2 folio, bergaris)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "3",
+          "value": "3",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J6",
+          "value": "bola lampu hannock-45 watt",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+          "value": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Amplop Coklat Folio (Berat: 1000 gram. Panjang: 25 cm. Lebar: 5 cm. Tinggi: 35 cm)",
+          "value": "Amplop Coklat Folio (Berat: 1000 gram. Panjang: 25 cm. Lebar: 5 cm. Tinggi: 35 cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J7",
+          "value": "Plastik Mika",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Amplop Panjang Putih Polos Merk : Jaya Ukuran : 11 x 23 cm",
+          "value": "Amplop Panjang Putih Polos Merk : Jaya Ukuran : 11 x 23 cm",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": " Amplop Panjang Putih Polos (Merk : Jaya Ukuran : 11 x 23 cm)",
+          "value": " Amplop Panjang Putih Polos (Merk : Jaya Ukuran : 11 x 23 cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J8",
+          "value": "Kertas Warna Blank Folio, Ukuran : 8,5 x 14\",  70 gram",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Ballpoint Boldiner Standar",
+          "value": "Ballpoint Boldiner Standar",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Ballpoint Boldiner Standar  (Satuan. 300 Gram ; Dimensi Ukuran. 15X5X7.5Cm. (Berat Volume: 0.09Kg) ",
+          "value": "Ballpoint Boldiner Standar  (Satuan. 300 Gram ; Dimensi Ukuran. 15X5X7.5Cm. (Berat Volume: 0.09Kg) ",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "6",
+          "value": "6",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J9",
+          "value": "Kertas Lain-Lain Kertas Buffalo",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Ballpoint Drawing Pen 0,1 Snowman",
+          "value": "Ballpoint Drawing Pen 0,1 Snowman",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Ballpoint Drawing Pen 0,5 Snowman (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Ballpoint Drawing Pen 0,5 Snowman (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "7",
+          "value": "7",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J10",
+          "value": "Kertas Post-It Warna Warni  Sign Here",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Ballpoint Pilot G2",
+          "value": "Ballpoint Pilot G2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Ballpoint Pilot G2 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Ballpoint Pilot G2 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "8",
+          "value": "8",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J11",
+          "value": "Kertas HVS 60 gram Merk : Paper One HVS F4 uk. 8.27\"x11.69\"",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Ballpoint Standard AE7",
+          "value": "Ballpoint Standard AE7",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Ballpoint Standard AE7 (Jenis Barang: Pulpen Merk:\u00a0Standard\u00a0Tipe:\u00a0AE-7\u00a0Ukuran: 0.5 mm; Warna Tinta, hitam)",
+          "value": "Ballpoint Standard AE7 (Jenis Barang: Pulpen Merk:\u00a0Standard\u00a0Tipe:\u00a0AE-7\u00a0Ukuran: 0.5 mm; Warna Tinta, hitam)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "9",
+          "value": "9",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J12",
+          "value": "Kertas HVS 80 gram Merk : Paper One A4, Ukuran : 8,27\" x 11,69\", Isi : 500 lembar",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Bantalan Cap Besar",
+          "value": "Bantalan Cap Besar",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Bantalan Cap Besar (Berat Produk 1 Kg, Panjang Produk 12 Cm, Lebar Produk 8 Cm, Tinggi Produk 12 Cm)",
+          "value": "Bantalan Cap Besar (Berat Produk 1 Kg, Panjang Produk 12 Cm, Lebar Produk 8 Cm, Tinggi Produk 12 Cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "10",
+          "value": "10",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J13",
+          "value": "Kertas StensiI",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Bantalan Cap Kecil",
+          "value": "Bantalan Cap Kecil",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Bantalan Cap Kecil (Ukuran: \u00b1 10cm x 7cm x 1cm)",
+          "value": "Bantalan Cap Kecil (Ukuran: \u00b1 10cm x 7cm x 1cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "11",
+          "value": "11",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J14",
+          "value": "Kertas Label",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Baterey Kecil",
+          "value": "Baterey Kecil",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Baterey Kecil (Type: Aa; Tegangan: 1.5 Volt; Ukuran: 14 X 50 Mm)",
+          "value": "Baterey Kecil (Type: Aa; Tegangan: 1.5 Volt; Ukuran: 14 X 50 Mm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "12",
+          "value": "12",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J15",
+          "value": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Baterey Tanggung",
+          "value": "Baterey Tanggung",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Baterey Tanggung (Ukuran Sedang Tanggung R14C Biru 1.5V Brand : ABC Type : R14C 1.5V ukuran : tanggung Panjang : 5cm.)",
+          "value": "Baterey Tanggung (Ukuran Sedang Tanggung R14C Biru 1.5V Brand : ABC Type : R14C 1.5V ukuran : tanggung Panjang : 5cm.)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "13",
+          "value": "13",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J16",
+          "value": "Amplop Coklat Merk : Garda Ukuran Cabinet",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Binder Klip  nomor 107",
+          "value": "Binder Klip  nomor 107",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Binder Clip N0 107 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Binder Clip N0 107 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "14",
+          "value": "14",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J17",
+          "value": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Binder Klip  nomor 111",
+          "value": "Binder Klip  nomor 111",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Binder Clip No 111 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Binder Clip No 111 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "15",
+          "value": "15",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Master!J18",
+          "value": "Amplop Panjang Putih Polos Merk : Jaya Ukuran : 11 x 23 cm",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Binder Klip  nomor 200",
+          "value": "Binder Klip  nomor 200",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Binder Clip Nomor 200 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Binder Clip Nomor 200 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    }
+  ],
+  "formulas": [
+    {
+      "cell": "B1",
+      "row": 1,
+      "col": "B",
+      "formula": "=Master!J4",
+      "value": "Air Mineral pada pelaksanaan kegiatan bulanan Gerakan Bersih Lingkungan Sekolah",
+      "type": "normal"
+    },
+    {
+      "cell": "B2",
+      "row": 2,
+      "col": "B",
+      "formula": "=Master!J5",
+      "value": "Perbaikan dan Pengaspalan Jalan Sekolah",
+      "type": "normal"
+    },
+    {
+      "cell": "B3",
+      "row": 3,
+      "col": "B",
+      "formula": "=Master!J6",
+      "value": "bola lampu hannock-45 watt",
+      "type": "normal"
+    },
+    {
+      "cell": "B4",
+      "row": 4,
+      "col": "B",
+      "formula": "=Master!J7",
+      "value": "Plastik Mika",
+      "type": "normal"
+    },
+    {
+      "cell": "B5",
+      "row": 5,
+      "col": "B",
+      "formula": "=Master!J8",
+      "value": "Kertas Warna Blank Folio, Ukuran : 8,5 x 14\",  70 gram",
+      "type": "normal"
+    },
+    {
+      "cell": "B6",
+      "row": 6,
+      "col": "B",
+      "formula": "=Master!J9",
+      "value": "Kertas Lain-Lain Kertas Buffalo",
+      "type": "normal"
+    },
+    {
+      "cell": "B7",
+      "row": 7,
+      "col": "B",
+      "formula": "=Master!J10",
+      "value": "Kertas Post-It Warna Warni  Sign Here",
+      "type": "normal"
+    },
+    {
+      "cell": "B8",
+      "row": 8,
+      "col": "B",
+      "formula": "=Master!J11",
+      "value": "Kertas HVS 60 gram Merk : Paper One HVS F4 uk. 8.27\"x11.69\"",
+      "type": "normal"
+    },
+    {
+      "cell": "B9",
+      "row": 9,
+      "col": "B",
+      "formula": "=Master!J12",
+      "value": "Kertas HVS 80 gram Merk : Paper One A4, Ukuran : 8,27\" x 11,69\", Isi : 500 lembar",
+      "type": "normal"
+    },
+    {
+      "cell": "B10",
+      "row": 10,
+      "col": "B",
+      "formula": "=Master!J13",
+      "value": "Kertas StensiI",
+      "type": "normal"
+    },
+    {
+      "cell": "B11",
+      "row": 11,
+      "col": "B",
+      "formula": "=Master!J14",
+      "value": "Kertas Label",
+      "type": "normal"
+    },
+    {
+      "cell": "B12",
+      "row": 12,
+      "col": "B",
+      "formula": "=Master!J15",
+      "value": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris",
+      "type": "normal"
+    },
+    {
+      "cell": "B13",
+      "row": 13,
+      "col": "B",
+      "formula": "=Master!J16",
+      "value": "Amplop Coklat Merk : Garda Ukuran Cabinet",
+      "type": "normal"
+    },
+    {
+      "cell": "B14",
+      "row": 14,
+      "col": "B",
+      "formula": "=Master!J17",
+      "value": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+      "type": "normal"
+    },
+    {
+      "cell": "B15",
+      "row": 15,
+      "col": "B",
+      "formula": "=Master!J18",
+      "value": "Amplop Panjang Putih Polos Merk : Jaya Ukuran : 11 x 23 cm",
+      "type": "normal"
+    },
+    {
+      "cell": "B16",
+      "row": 16,
+      "col": "B",
+      "formula": "=Master!J19",
+      "value": "Ballpoint Boldiner Standar",
+      "type": "normal"
+    },
+    {
+      "cell": "B17",
+      "row": 17,
+      "col": "B",
+      "formula": "=Master!J20",
+      "value": "Ballpoint Drawing Pen 0,1 Snowman",
+      "type": "normal"
+    },
+    {
+      "cell": "B18",
+      "row": 18,
+      "col": "B",
+      "formula": "=Master!J21",
+      "value": "Ballpoint Standard AE7",
+      "type": "normal"
+    },
+    {
+      "cell": "B19",
+      "row": 19,
+      "col": "B",
+      "formula": "=Master!J22",
+      "value": "Ballpoint Pilot G2",
+      "type": "normal"
+    },
+    {
+      "cell": "B20",
+      "row": 20,
+      "col": "B",
+      "formula": "=Master!J23",
+      "value": "Binder Klip  nomor 107",
+      "type": "normal"
+    },
+    {
+      "cell": "B21",
+      "row": 21,
+      "col": "B",
+      "formula": "=Master!J24",
+      "value": "Binder Klip  nomor 111",
+      "type": "normal"
+    },
+    {
+      "cell": "B22",
+      "row": 22,
+      "col": "B",
+      "formula": "=Master!J25",
+      "value": "Binder Klip  nomor 200",
+      "type": "normal"
+    },
+    {
+      "cell": "B23",
+      "row": 23,
+      "col": "B",
+      "formula": "=Master!J26",
+      "value": "Binder Klip  nomor 260",
+      "type": "normal"
+    },
+    {
+      "cell": "B24",
+      "row": 24,
+      "col": "B",
+      "formula": "=Master!J27",
+      "value": "Binder Klip Merk : KENKO nomor 105",
+      "type": "normal"
+    },
+    {
+      "cell": "B25",
+      "row": 25,
+      "col": "B",
+      "formula": "=Master!J28",
+      "value": "Map Binder",
+      "type": "normal"
+    },
+    {
+      "cell": "B26",
+      "row": 26,
+      "col": "B",
+      "formula": "=Master!J29",
+      "value": "Stofmap Kertas",
+      "type": "normal"
+    },
+    {
+      "cell": "B27",
+      "row": 27,
+      "col": "B",
+      "formula": "=Master!J30",
+      "value": "Stofmap Transparan tali",
+      "type": "normal"
+    },
+    {
+      "cell": "B28",
+      "row": 28,
+      "col": "B",
+      "formula": "=Master!J31",
+      "value": "Stofmap Transparan",
+      "type": "normal"
+    },
+    {
+      "cell": "B29",
+      "row": 29,
+      "col": "B",
+      "formula": "=Master!J32",
+      "value": "Binder Klip Ordner",
+      "type": "normal"
+    },
+    {
+      "cell": "B30",
+      "row": 30,
+      "col": "B",
+      "formula": "=Master!J33",
+      "value": "Box File Merk : Bantex Ukuran : 115x270x325 mm",
+      "type": "normal"
+    },
+    {
+      "cell": "B31",
+      "row": 31,
+      "col": "B",
+      "formula": "=Master!J34",
+      "value": "Sampul Plastik",
+      "type": "normal"
+    },
+    {
+      "cell": "B32",
+      "row": 32,
+      "col": "B",
+      "formula": "=Master!J35",
+      "value": "Tinta Printer Canon 740 Hitam-740 Hitam",
+      "type": "normal"
+    },
+    {
+      "cell": "B33",
+      "row": 33,
+      "col": "B",
+      "formula": "=Master!J36",
+      "value": "Tinta Printer Canon 741 Warna-741 Warna",
+      "type": "normal"
+    },
+    {
+      "cell": "B34",
+      "row": 34,
+      "col": "B",
+      "formula": "=Master!J37",
+      "value": "C. Tinta Printer EPSON Toner Epson 664 Black",
+      "type": "normal"
+    },
+    {
+      "cell": "B35",
+      "row": 35,
+      "col": "B",
+      "formula": "=Master!J38",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Yellow",
+      "type": "normal"
+    },
+    {
+      "cell": "B36",
+      "row": 36,
+      "col": "B",
+      "formula": "=Master!J39",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Blue",
+      "type": "normal"
+    },
+    {
+      "cell": "B37",
+      "row": 37,
+      "col": "B",
+      "formula": "=Master!J40",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Read",
+      "type": "normal"
+    },
+    {
+      "cell": "B38",
+      "row": 38,
+      "col": "B",
+      "formula": "=Master!J41",
+      "value": "canon catridge 741-catridge 741",
+      "type": "normal"
+    },
+    {
+      "cell": "B39",
+      "row": 39,
+      "col": "B",
+      "formula": "=Master!J42",
+      "value": "Catridge Printer Epson T 014--",
+      "type": "normal"
+    },
+    {
+      "cell": "B40",
+      "row": 40,
+      "col": "B",
+      "formula": "=Master!J43",
+      "value": "Lakban Besar",
+      "type": "normal"
+    },
+    {
+      "cell": "B41",
+      "row": 41,
+      "col": "B",
+      "formula": "=Master!J44",
+      "value": "Lakban Bening Sedang",
+      "type": "normal"
+    },
+    {
+      "cell": "B42",
+      "row": 42,
+      "col": "B",
+      "formula": "=Master!J45",
+      "value": "Lakban Bening",
+      "type": "normal"
+    },
+    {
+      "cell": "B43",
+      "row": 43,
+      "col": "B",
+      "formula": "=Master!J46",
+      "value": "Lakban Hitam--",
+      "type": "normal"
+    },
+    {
+      "cell": "B44",
+      "row": 44,
+      "col": "B",
+      "formula": "=Master!J47",
+      "value": "lakban hitam-ukuran : lebar 2 inch, panjang 12m, bahan : kain",
+      "type": "normal"
+    },
+    {
+      "cell": "B45",
+      "row": 45,
+      "col": "B",
+      "formula": "=Master!J48",
+      "value": "Lakban Hitam uk 2 \" Warna hitam uk. 2 \"",
+      "type": "normal"
+    },
+    {
+      "cell": "B46",
+      "row": 46,
+      "col": "B",
+      "formula": "=Master!J49",
+      "value": "Lakban warna Uk 2\" Warna Coklat Cofiie",
+      "type": "normal"
+    },
+    {
+      "cell": "B47",
+      "row": 47,
+      "col": "B",
+      "formula": "=Master!J50",
+      "value": "Spidol Refil Spidol White Board Snowman",
+      "type": "normal"
+    },
+    {
+      "cell": "B48",
+      "row": 48,
+      "col": "B",
+      "formula": "=Master!J51",
+      "value": "Spidol White board",
+      "type": "normal"
+    },
+    {
+      "cell": "B49",
+      "row": 49,
+      "col": "B",
+      "formula": "=Master!J52",
+      "value": "Stapler HD-10--",
+      "type": "normal"
+    },
+    {
+      "cell": "B50",
+      "row": 50,
+      "col": "B",
+      "formula": "=Master!J53",
+      "value": "Stapler Stapler No, 50 MAX",
+      "type": "normal"
+    },
+    {
+      "cell": "B51",
+      "row": 51,
+      "col": "B",
+      "formula": "=Master!J54",
+      "value": "Lem Fox isi 500 gram--",
+      "type": "normal"
+    },
+    {
+      "cell": "B52",
+      "row": 52,
+      "col": "B",
+      "formula": "=Master!J55",
+      "value": "PAPER CLIP  Paper Clip No 1",
+      "type": "normal"
+    },
+    {
+      "cell": "B53",
+      "row": 53,
+      "col": "B",
+      "formula": "=Master!J56",
+      "value": "Paper Clip No 1  Paper Clip No 3",
+      "type": "normal"
+    },
+    {
+      "cell": "B54",
+      "row": 54,
+      "col": "B",
+      "formula": "=Master!J57",
+      "value": "Penghapus White Board",
+      "type": "normal"
+    },
+    {
+      "cell": "B55",
+      "row": 55,
+      "col": "B",
+      "formula": "=Master!J58",
+      "value": "Isi Staples Sedang",
+      "type": "normal"
+    },
+    {
+      "cell": "B56",
+      "row": 56,
+      "col": "B",
+      "formula": "=Master!J59",
+      "value": "Isi Staples besar",
+      "type": "normal"
+    },
+    {
+      "cell": "B57",
+      "row": 57,
+      "col": "B",
+      "formula": "=Master!J60",
+      "value": "gunting kertas-ukuran : panjang 21cm x lebar 8cm, stainless steel",
+      "type": "normal"
+    },
+    {
+      "cell": "B58",
+      "row": 58,
+      "col": "B",
+      "formula": "=Master!J61",
+      "value": "Pisau Cutter Kenko L-500",
+      "type": "normal"
+    },
+    {
+      "cell": "B59",
+      "row": 59,
+      "col": "B",
+      "formula": "=Master!J62",
+      "value": "Buku Induk/Inventaris 35 cm x 50 cm",
+      "type": "normal"
+    },
+    {
+      "cell": "B60",
+      "row": 60,
+      "col": "B",
+      "formula": "=Master!J63",
+      "value": "Buku Ekspedisi 100",
+      "type": "normal"
+    },
+    {
+      "cell": "B61",
+      "row": 61,
+      "col": "B",
+      "formula": "=Master!J64",
+      "value": "Baterey Kecil",
+      "type": "normal"
+    },
+    {
+      "cell": "B62",
+      "row": 62,
+      "col": "B",
+      "formula": "=Master!J65",
+      "value": "Baterey Tanggung",
+      "type": "normal"
+    },
+    {
+      "cell": "B63",
+      "row": 63,
+      "col": "B",
+      "formula": "=Master!J66",
+      "value": "Bantalan Cap Besar",
+      "type": "normal"
+    },
+    {
+      "cell": "B64",
+      "row": 64,
+      "col": "B",
+      "formula": "=Master!J67",
+      "value": "Bantalan Cap Kecil",
+      "type": "normal"
+    },
+    {
+      "cell": "B65",
+      "row": 65,
+      "col": "B",
+      "formula": "=Master!J68",
+      "value": "USB FLASH DISK USB/Flash Disk 4GB",
+      "type": "normal"
+    },
+    {
+      "cell": "B66",
+      "row": 66,
+      "col": "B",
+      "formula": "=Master!J69",
+      "value": "Stempel Manual",
+      "type": "normal"
+    },
+    {
+      "cell": "B67",
+      "row": 67,
+      "col": "B",
+      "formula": "=Master!J70",
+      "value": "Stempel Cap",
+      "type": "normal"
+    },
+    {
+      "cell": "E90",
+      "row": 90,
+      "col": "E",
+      "formula": "=PROPER(D89)",
+      "value": "Isolasi Bening Sedang Mpi Solatip 24 X 72 Yard 1 Inc",
+      "type": "normal"
+    }
+  ]
+}

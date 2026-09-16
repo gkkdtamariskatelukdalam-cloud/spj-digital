@@ -1,0 +1,6336 @@
+{
+  "name": "Master",
+  "max_row": 1581,
+  "max_col": 38,
+  "non_empty_cells": 46336,
+  "formulas_count": 26335,
+  "type": "Master Data",
+  "purpose": "Main master database (38 columns, 1581 rows) - links to Tabel Bantu",
+  "category": "data",
+  "headers": [
+    {
+      "col": "A",
+      "col_idx": 1,
+      "header": "B E L A N J A   S E T A H U N   S M A    N E G E R I   1   T E L U K D A L  A M "
+    }
+  ],
+  "sample_rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "B E L A N J A   S E T A H U N   S M A    N E G E R I   1   T E L U K D A L  A M    2 0 2 4",
+          "value": "B E L A N J A   S E T A H U N   S M A    N E G E R I   1   T E L U K D A L  A M    2 0 2 4",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "No. Surat Pesan",
+          "value": "No. Surat Pesan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "No BKU",
+          "value": "No BKU",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Kode Program",
+          "value": "Kode Program",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Kode Rekening",
+          "value": "Kode Rekening",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Tanggal Perencanaan",
+          "value": "Tanggal Perencanaan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "Tanggal Pesanan",
+          "value": "Tanggal Pesanan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Tanggal BAST",
+          "value": "Tanggal BAST",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "Tanggal Pemeriksaan",
+          "value": "Tanggal Pemeriksaan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Tanggal Bayar",
+          "value": "Tanggal Bayar",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Uraian Kegiatan",
+          "value": "Uraian Kegiatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Nama Barang",
+          "value": "Nama Barang",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Volume",
+          "value": "Volume",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Satuan",
+          "value": "Satuan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "Harga Satuan",
+          "value": "Harga Satuan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Jumlah",
+          "value": "Jumlah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Kategori Belanja",
+          "value": "Kategori Belanja",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Spesifikasi Barang",
+          "value": "Spesifikasi Barang",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Harga Toko 1",
+          "value": "Harga Toko 1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "Harga Toko 2",
+          "value": "Harga Toko 2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "Nama Toko 1",
+          "value": "Nama Toko 1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "Nama Toko 2",
+          "value": "Nama Toko 2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Direktur Toko 1",
+          "value": "Direktur Toko 1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Alamat Toko 1",
+          "value": "Alamat Toko 1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Alamat Toko 2",
+          "value": "Alamat Toko 2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "Uraian Kwitansi",
+          "value": "Uraian Kwitansi",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Nama Pekerjaan / Kategori",
+          "value": "Nama Pekerjaan / Kategori",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "Satuan",
+          "value": "Satuan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "Harga Satuan sebelum pajak",
+          "value": "Harga Satuan sebelum pajak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "Jumlah Harga Sebelum Pajak",
+          "value": "Jumlah Harga Sebelum Pajak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "Harga Total Asli ",
+          "value": "Harga Total Asli ",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "Total Harga Sebelum DPP",
+          "value": "Total Harga Sebelum DPP",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "Total Harga Asli",
+          "value": "Total Harga Asli",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Alamat Surat Balasan Toko",
+          "value": "Alamat Surat Balasan Toko",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "NO HP",
+          "value": "NO HP",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "2",
+          "value": "2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "3",
+          "value": "3",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "6",
+          "value": "6",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "7",
+          "value": "7",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "8",
+          "value": "8",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "9",
+          "value": "9",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "10",
+          "value": "10",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "11",
+          "value": "11",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "12",
+          "value": "12",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "13",
+          "value": "13",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "14",
+          "value": "14",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "15",
+          "value": "15",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "16",
+          "value": "16",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "17",
+          "value": "17",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "18",
+          "value": "18",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "19",
+          "value": "19",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "20",
+          "value": "20",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "21",
+          "value": "21",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "22",
+          "value": "22",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "23",
+          "value": "23",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "24",
+          "value": "24",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "25",
+          "value": "25",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "26",
+          "value": "26",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "27",
+          "value": "27",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "28",
+          "value": "28",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "29",
+          "value": "29",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "30",
+          "value": "30",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "31",
+          "value": "31",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "32",
+          "value": "32",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "33",
+          "value": "33",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "34",
+          "value": "34",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=Data2025!G3",
+          "value": "01",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Data2025!K3",
+          "value": "BPU01",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "=Data2025!D3",
+          "value": "05.05.02.",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=Data2025!C3",
+          "value": "5.1.02.01.01.0052",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "=Data2025!E3",
+          "value": "2025-01-04T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=Data2025!F3",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=Data2025!H3",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G4",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=Data2025!J3",
+          "value": "23/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=Data2025!L3",
+          "value": "Air Mineral pada pelaksanaan kegiatan bulanan Gerakan Bersih Lingkungan Sekolah",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=Data2025!M3",
+          "value": "Aqua Cup",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=Data2025!N3",
+          "value": "25",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=Data2025!O3",
+          "value": "dus",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=Data2025!P3",
+          "value": "50000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=Data2025!Q3",
+          "value": "1250000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Air Mineral",
+          "value": "Air Mineral",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=VLOOKUP(K4,Sheet1!$C$1:$D$101,2,)",
+          "value": "Aqua Cup (Diameter: 6.3cm. Tinggi: 9.5cm)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "55000",
+          "value": "55000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "65000",
+          "value": "65000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "=Data2025!T3",
+          "value": "Rumah Roti Helena",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "=Data2025!V3",
+          "value": "Fudi Supiyanto",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "=Data2025!X3",
+          "value": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Selatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=P4",
+          "value": "Air Mineral",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "=Y4",
+          "value": "Air Mineral",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "kotak",
+          "value": "kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "11000",
+          "value": "11000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "55000",
+          "value": "55000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "55000",
+          "value": "55000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "49549.54954954955",
+          "value": "49549.54954954955",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "55000",
+          "value": "55000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Telukdalam",
+          "value": "Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "=Data2025!W3",
+          "value": "082164895397",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=Data2025!G4",
+          "value": "02",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Data2025!K4",
+          "value": "BPU02",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "=Data2025!D4",
+          "value": "05. 08. 01.",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=Data2025!C4",
+          "value": "5.1.02.01.01.0012",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "=Data2025!E4",
+          "value": "2025-01-04T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=Data2025!F4",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=Data2025!H4",
+          "value": "07/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G5",
+          "value": "07/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=Data2025!J4",
+          "value": "23/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=Data2025!L4",
+          "value": "Perbaikan dan Pengaspalan Jalan Sekolah",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=Data2025!M4",
+          "value": "Bayar Jasa Perbaikan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=Data2025!N4",
+          "value": "1",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=Data2025!O4",
+          "value": "kegiatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=Data2025!P4",
+          "value": "37080000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=Data2025!Q4",
+          "value": "37080000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Pemeliharaan",
+          "value": "Pemeliharaan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=VLOOKUP(K5,Sheet1!$C$1:$D$101,2,)",
+          "value": "#N/A",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "95000",
+          "value": "95000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "97000",
+          "value": "97000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "=Data2025!T4",
+          "value": "CV. GORIYAKU WIRATRADE",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "=Data2025!V4",
+          "value": "Wirawan Bazikho",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "=Data2025!X4",
+          "value": "Jl. Diponegoro No. 87, Kel Pasar Telukdalam - Nias Selatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=P5",
+          "value": "Pemeliharaan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "=Y5",
+          "value": "Pemeliharaan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "lusin",
+          "value": "lusin",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "95000",
+          "value": "95000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "95000",
+          "value": "95000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "95000",
+          "value": "95000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "85585.58558558559",
+          "value": "85585.58558558559",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "95000",
+          "value": "95000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Telukdalam",
+          "value": "Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "=Data2025!W4",
+          "value": "082166714290",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=Data2025!G5",
+          "value": "03",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Data2025!K5",
+          "value": "BPU03",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "=Data2025!D5",
+          "value": "05. 08. 10.",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=Data2025!C5",
+          "value": "5.1.02.01.01.0031",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "=Data2025!E5",
+          "value": "2025-01-04T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=Data2025!F5",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=Data2025!H5",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G6",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=Data2025!J5",
+          "value": "23/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=Data2025!L5",
+          "value": "bola lampu hannock-45 watt",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=Data2025!M5",
+          "value": "Bola Lampu",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=Data2025!N5",
+          "value": "23",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=Data2025!O5",
+          "value": "buah",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=Data2025!P5",
+          "value": "77800",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=Data2025!Q5",
+          "value": "1789400",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Peralatan Listrik",
+          "value": "Peralatan Listrik",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=VLOOKUP(K6,Sheet1!$C$1:$D$101,2,)",
+          "value": "#N/A",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "2200000",
+          "value": "2200000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "2202000",
+          "value": "2202000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "=Data2025!T5",
+          "value": "CV. GORIYAKU WIRATRADE",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "=Data2025!V5",
+          "value": "Wirawan Bazikho",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "=Data2025!X5",
+          "value": "Jl. Diponegoro No. 87, Kel Pasar Telukdalam - Nias Selatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=P6",
+          "value": "Peralatan Listrik",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "=Y6",
+          "value": "Peralatan Listrik",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "2200000",
+          "value": "2200000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "2200000",
+          "value": "2200000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "2200000",
+          "value": "2200000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "1981981.981981982",
+          "value": "1981981.981981982",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "2200000",
+          "value": "2200000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Telukdalam",
+          "value": "Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "=Data2025!W5",
+          "value": "082166714290",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=Data2025!G6",
+          "value": "04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Data2025!K6",
+          "value": "BPU04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "=Data2025!D6",
+          "value": "06. 05. 08.",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=Data2025!C6",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "=Data2025!E6",
+          "value": "2025-01-04T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=Data2025!F6",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=Data2025!H6",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G7",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=Data2025!J6",
+          "value": "23/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=Data2025!L6",
+          "value": "Plastik Mika",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=Data2025!M6",
+          "value": "Plastik Mika",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=Data2025!N6",
+          "value": "5",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=Data2025!O6",
+          "value": "bungkus",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=Data2025!P6",
+          "value": "60000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=Data2025!Q6",
+          "value": "300000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=VLOOKUP(K7,Sheet1!$C$1:$D$101,2,)",
+          "value": "Plastik Mika Jilid F4 (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 548Gr)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "360000",
+          "value": "360000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "366000",
+          "value": "366000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "=Data2025!T6",
+          "value": "UD. JOSUA",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "=Data2025!V6",
+          "value": "Gestiwan Bazikho",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "=Data2025!X6",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=P7",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "=Y7",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "120000",
+          "value": "120000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "360000",
+          "value": "360000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "360000",
+          "value": "360000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "324324.3243243243",
+          "value": "324324.3243243243",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "360000",
+          "value": "360000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Telukdalam",
+          "value": "Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "=Data2025!W6",
+          "value": "081375309828",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=Data2025!G7",
+          "value": "04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Data2025!K7",
+          "value": "BPU04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "=Data2025!D7",
+          "value": "06. 05. 08.",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=Data2025!C7",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "=Data2025!E7",
+          "value": "2025-01-04T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=Data2025!F7",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=Data2025!H7",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G8",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=Data2025!J7",
+          "value": "23/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=Data2025!L7",
+          "value": "Kertas Warna Blank Folio, Ukuran : 8,5 x 14\",  70 gram",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=Data2025!M7",
+          "value": "Kertas Warna Blank Folio, Ukuran : 8,5 x 14\",  70 gram",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=Data2025!N7",
+          "value": "2",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=Data2025!O7",
+          "value": "rim",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=Data2025!P7",
+          "value": "90000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=Data2025!Q7",
+          "value": "180000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=VLOOKUP(K8,Sheet1!$C$1:$D$101,2,)",
+          "value": "Kertas Hvs Warna 70 Gsm (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 2400Gr)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "550000",
+          "value": "550000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "750000",
+          "value": "750000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "=Data2025!T7",
+          "value": "UD. JOSUA",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "=Data2025!V7",
+          "value": "Gestiwan Bazikho",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "=Data2025!X7",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=P8",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "=Y8",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "5500",
+          "value": "5500",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "550000",
+          "value": "550000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "550000",
+          "value": "550000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "495495.4954954955",
+          "value": "495495.4954954955",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "550000",
+          "value": "550000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Telukdalam",
+          "value": "Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "=Data2025!W7",
+          "value": "081375309828",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=Data2025!G8",
+          "value": "04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Data2025!K8",
+          "value": "BPU04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "=Data2025!D8",
+          "value": "06. 05. 08.",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=Data2025!C8",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "=Data2025!E8",
+          "value": "2025-01-04T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=Data2025!F8",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=Data2025!H8",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G9",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=Data2025!J8",
+          "value": "23/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=Data2025!L8",
+          "value": "Kertas Lain-Lain Kertas Buffalo",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=Data2025!M8",
+          "value": "Kertas Lain-Lain Kertas Buffalo",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=Data2025!N8",
+          "value": "5",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=Data2025!O8",
+          "value": "bungkus",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=Data2025!P8",
+          "value": "31000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=Data2025!Q8",
+          "value": "155000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=VLOOKUP(K9,Sheet1!$C$1:$D$101,2,)",
+          "value": "Kertas Buffalo F4 (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 1006Gr)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "120000",
+          "value": "120000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "124000",
+          "value": "124000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "=Data2025!T8",
+          "value": "UD. JOSUA",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "=Data2025!V8",
+          "value": "Gestiwan Bazikho",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "=Data2025!X8",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=P9",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "=Y9",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "bungkus",
+          "value": "bungkus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "60000",
+          "value": "60000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "120000",
+          "value": "120000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "120000",
+          "value": "120000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "108108.1081081081",
+          "value": "108108.1081081081",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "120000",
+          "value": "120000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Telukdalam",
+          "value": "Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "=Data2025!W8",
+          "value": "081375309828",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=Data2025!G9",
+          "value": "04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Data2025!K9",
+          "value": "BPU04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "=Data2025!D9",
+          "value": "06. 05. 08.",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=Data2025!C9",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "=Data2025!E9",
+          "value": "2025-01-04T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=Data2025!F9",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=Data2025!H9",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G10",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=Data2025!J9",
+          "value": "23/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=Data2025!L9",
+          "value": "Kertas Post-It Warna Warni  Sign Here",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=Data2025!M9",
+          "value": "Kertas Post-It Warna Warni  Sign Here",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=Data2025!N9",
+          "value": "5",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=Data2025!O9",
+          "value": "buah",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=Data2025!P9",
+          "value": "22800",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=Data2025!Q9",
+          "value": "114000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=VLOOKUP(K10,Sheet1!$C$1:$D$101,2,)",
+          "value": "Post It Warna Warni (Length 7.0Cm, Width 7.0Cm, Height 7.0Cm, Weight 44Gr)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "40000",
+          "value": "40000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "44000",
+          "value": "44000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "=Data2025!T9",
+          "value": "UD. JOSUA",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "=Data2025!V9",
+          "value": "Gestiwan Bazikho",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "=Data2025!X9",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=P10",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "=Y10",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "20000",
+          "value": "20000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "40000",
+          "value": "40000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "40000",
+          "value": "40000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "36036.036036036036",
+          "value": "36036.036036036036",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "40000",
+          "value": "40000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Telukdalam",
+          "value": "Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "=Data2025!W9",
+          "value": "081375309828",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AK",
+          "col_idx": 37,
+          "formula": "08264720368",
+          "value": "08264720368",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=Data2025!G10",
+          "value": "04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Data2025!K10",
+          "value": "BPU04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "=Data2025!D10",
+          "value": "06. 05. 08.",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=Data2025!C10",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "=Data2025!E10",
+          "value": "2025-01-04T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=Data2025!F10",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=Data2025!H10",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G11",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=Data2025!J10",
+          "value": "23/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=Data2025!L10",
+          "value": "Kertas HVS 60 gram Merk : Paper One HVS F4 uk. 8.27\"x11.69\"",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=Data2025!M10",
+          "value": "Kertas HVS 60 gram Merk : Paper One HVS F4 uk. 8.27\"x11.69\"",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=Data2025!N10",
+          "value": "10",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=Data2025!O10",
+          "value": "rim",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=Data2025!P10",
+          "value": "48500",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=Data2025!Q10",
+          "value": "485000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=VLOOKUP(K11,Sheet1!$C$1:$D$101,2,)",
+          "value": "Kertas Hvs 60Gsm Paper One F4 (Length 33.0Cm, Width 21.0Cm, Height 7.0Cm, Weight 1400Gr)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "155000",
+          "value": "155000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "165000",
+          "value": "165000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "=Data2025!T10",
+          "value": "UD. JOSUA",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "=Data2025!V10",
+          "value": "Gestiwan Bazikho",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "=Data2025!X10",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=P11",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "=Y11",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "bungkus",
+          "value": "bungkus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "31000",
+          "value": "31000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "155000",
+          "value": "155000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "155000",
+          "value": "155000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "139639.63963963964",
+          "value": "139639.63963963964",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "155000",
+          "value": "155000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Telukdalam",
+          "value": "Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "=Data2025!W10",
+          "value": "081375309828",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AK",
+          "col_idx": 37,
+          "formula": "082164895397",
+          "value": "082164895397",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=Data2025!G11",
+          "value": "04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Data2025!K11",
+          "value": "BPU04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "=Data2025!D11",
+          "value": "06. 05. 08.",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=Data2025!C11",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "=Data2025!E11",
+          "value": "2025-01-04T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=Data2025!F11",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=Data2025!H11",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G12",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=Data2025!J11",
+          "value": "23/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=Data2025!L11",
+          "value": "Kertas HVS 80 gram Merk : Paper One A4, Ukuran : 8,27\" x 11,69\", Isi : 500 lembar",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=Data2025!M11",
+          "value": "Kertas HVS 80 gram Merk : Paper One A4, Ukuran : 8,27\" x 11,69\", Isi : 500 lembar",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=Data2025!N11",
+          "value": "40",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=Data2025!O11",
+          "value": "rim",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=Data2025!P11",
+          "value": "50000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=Data2025!Q11",
+          "value": "2000000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=VLOOKUP(K12,Sheet1!$C$1:$D$101,2,)",
+          "value": "Kertas Hvs 80 Gram Merk : Paper One A4, Ukuran : 8,27\" X 11,69\", Isi : 500 Lembar",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "50000",
+          "value": "50000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "60000",
+          "value": "60000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "=Data2025!T11",
+          "value": "UD. JOSUA",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "=Data2025!V11",
+          "value": "Gestiwan Bazikho",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "=Data2025!X11",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=P12",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "=Y12",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "10000",
+          "value": "10000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "50000",
+          "value": "50000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "50000",
+          "value": "50000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "45045.045045045044",
+          "value": "45045.045045045044",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "50000",
+          "value": "50000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Telukdalam",
+          "value": "Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "=Data2025!W11",
+          "value": "081375309828",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=Data2025!G12",
+          "value": "04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Data2025!K12",
+          "value": "BPU04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "=Data2025!D12",
+          "value": "06. 05. 08.",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=Data2025!C12",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "=Data2025!E12",
+          "value": "2025-01-04T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=Data2025!F12",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=Data2025!H12",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G13",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=Data2025!J12",
+          "value": "23/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=Data2025!L12",
+          "value": "Kertas StensiI",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=Data2025!M12",
+          "value": "Kertas StensiI",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=Data2025!N12",
+          "value": "10",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=Data2025!O12",
+          "value": "bungkus",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=Data2025!P12",
+          "value": "50000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=Data2025!Q12",
+          "value": "500000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=VLOOKUP(K13,Sheet1!$C$1:$D$101,2,)",
+          "value": "Kertas Stencil Folio (Length 33.0Cm, Width 21.0Cm, Height 5.0Cm, Weight 1400Gr)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "40000",
+          "value": "40000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "44000",
+          "value": "44000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "=Data2025!T12",
+          "value": "UD. JOSUA",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "=Data2025!V12",
+          "value": "Gestiwan Bazikho",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "=Data2025!X12",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=P13",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "=Y13",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "pasang",
+          "value": "pasang",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "20000",
+          "value": "20000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "40000",
+          "value": "40000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "40000",
+          "value": "40000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "36036.036036036036",
+          "value": "36036.036036036036",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "40000",
+          "value": "40000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Telukdalam",
+          "value": "Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "=Data2025!W12",
+          "value": "081375309828",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=Data2025!G13",
+          "value": "04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Data2025!K13",
+          "value": "BPU04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "=Data2025!D13",
+          "value": "06. 05. 08.",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=Data2025!C13",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "=Data2025!E13",
+          "value": "2025-01-04T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=Data2025!F13",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=Data2025!H13",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G14",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=Data2025!J13",
+          "value": "23/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=Data2025!L13",
+          "value": "Kertas Label",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=Data2025!M13",
+          "value": "Kertas Label",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=Data2025!N13",
+          "value": "5",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=Data2025!O13",
+          "value": "lembar",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=Data2025!P13",
+          "value": "25000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=Data2025!Q13",
+          "value": "125000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=VLOOKUP(K14,Sheet1!$C$1:$D$101,2,)",
+          "value": "KERTAS LEBEL KOTAK (Length 5.0cm, Width 5.0cm, Height 7.0cm, Weight 5gr)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "396000",
+          "value": "396000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "420000",
+          "value": "420000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "=Data2025!T13",
+          "value": "UD. JOSUA",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "=Data2025!V13",
+          "value": "Gestiwan Bazikho",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "=Data2025!X13",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=P14",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "=Y14",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "botol",
+          "value": "botol",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "33000",
+          "value": "33000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "396000",
+          "value": "396000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "396000",
+          "value": "396000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "356756.75675675675",
+          "value": "356756.75675675675",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "396000",
+          "value": "396000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Telukdalam",
+          "value": "Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "=Data2025!W13",
+          "value": "081375309828",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AK",
+          "col_idx": 37,
+          "formula": "08264720368",
+          "value": "08264720368",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=Data2025!G14",
+          "value": "04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "=Data2025!K14",
+          "value": "BPU04",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "=Data2025!D14",
+          "value": "06. 05. 08.",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=Data2025!C14",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "=Data2025!E14",
+          "value": "2025-01-04T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "=Data2025!F14",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=Data2025!H14",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G15",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "=Data2025!J14",
+          "value": "23/01/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "=Data2025!L14",
+          "value": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=Data2025!M14",
+          "value": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=Data2025!N14",
+          "value": "1",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=Data2025!O14",
+          "value": "bungkus",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "=Data2025!P14",
+          "value": "45000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=Data2025!Q14",
+          "value": "45000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=VLOOKUP(K15,Sheet1!$C$1:$D$101,2,)",
+          "value": "Amplop Coklat (Merk : GSU Ukuran : 1/2 folio, bergaris)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "75000",
+          "value": "75000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "85000",
+          "value": "85000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "=Data2025!T14",
+          "value": "UD. JOSUA",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "=Data2025!V14",
+          "value": "Gestiwan Bazikho",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "=Data2025!X14",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=P15",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "=Y15",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "15000",
+          "value": "15000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "75000",
+          "value": "75000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "75000",
+          "value": "75000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "67567.56756756757",
+          "value": "67567.56756756757",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "75000",
+          "value": "75000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Telukdalam",
+          "value": "Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "=Data2025!W14",
+          "value": "081375309828",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    }
+  ],
+  "formulas": [
+    {
+      "cell": "A4",
+      "row": 4,
+      "col": "A",
+      "formula": "=Data2025!G3",
+      "value": "01",
+      "type": "normal"
+    },
+    {
+      "cell": "B4",
+      "row": 4,
+      "col": "B",
+      "formula": "=Data2025!K3",
+      "value": "BPU01",
+      "type": "normal"
+    },
+    {
+      "cell": "C4",
+      "row": 4,
+      "col": "C",
+      "formula": "=Data2025!D3",
+      "value": "05.05.02.",
+      "type": "normal"
+    },
+    {
+      "cell": "D4",
+      "row": 4,
+      "col": "D",
+      "formula": "=Data2025!C3",
+      "value": "5.1.02.01.01.0052",
+      "type": "normal"
+    },
+    {
+      "cell": "E4",
+      "row": 4,
+      "col": "E",
+      "formula": "=Data2025!E3",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F4",
+      "row": 4,
+      "col": "F",
+      "formula": "=Data2025!F3",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G4",
+      "row": 4,
+      "col": "G",
+      "formula": "=Data2025!H3",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H4",
+      "row": 4,
+      "col": "H",
+      "formula": "=G4",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I4",
+      "row": 4,
+      "col": "I",
+      "formula": "=Data2025!J3",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J4",
+      "row": 4,
+      "col": "J",
+      "formula": "=Data2025!L3",
+      "value": "Air Mineral pada pelaksanaan kegiatan bulanan Gerakan Bersih Lingkungan Sekolah",
+      "type": "normal"
+    },
+    {
+      "cell": "K4",
+      "row": 4,
+      "col": "K",
+      "formula": "=Data2025!M3",
+      "value": "Aqua Cup",
+      "type": "normal"
+    },
+    {
+      "cell": "L4",
+      "row": 4,
+      "col": "L",
+      "formula": "=Data2025!N3",
+      "value": "25",
+      "type": "normal"
+    },
+    {
+      "cell": "M4",
+      "row": 4,
+      "col": "M",
+      "formula": "=Data2025!O3",
+      "value": "dus",
+      "type": "normal"
+    },
+    {
+      "cell": "N4",
+      "row": 4,
+      "col": "N",
+      "formula": "=Data2025!P3",
+      "value": "50000",
+      "type": "normal"
+    },
+    {
+      "cell": "O4",
+      "row": 4,
+      "col": "O",
+      "formula": "=Data2025!Q3",
+      "value": "1250000",
+      "type": "normal"
+    },
+    {
+      "cell": "Q4",
+      "row": 4,
+      "col": "Q",
+      "formula": "=VLOOKUP(K4,Sheet1!$C$1:$D$101,2,)",
+      "value": "Aqua Cup (Diameter: 6.3cm. Tinggi: 9.5cm)",
+      "type": "normal"
+    },
+    {
+      "cell": "T4",
+      "row": 4,
+      "col": "T",
+      "formula": "=Data2025!T3",
+      "value": "Rumah Roti Helena",
+      "type": "normal"
+    },
+    {
+      "cell": "V4",
+      "row": 4,
+      "col": "V",
+      "formula": "=Data2025!V3",
+      "value": "Fudi Supiyanto",
+      "type": "normal"
+    },
+    {
+      "cell": "W4",
+      "row": 4,
+      "col": "W",
+      "formula": "=Data2025!X3",
+      "value": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y4",
+      "row": 4,
+      "col": "Y",
+      "formula": "=P4",
+      "value": "Air Mineral",
+      "type": "normal"
+    },
+    {
+      "cell": "Z4",
+      "row": 4,
+      "col": "Z",
+      "formula": "=Y4",
+      "value": "Air Mineral",
+      "type": "normal"
+    },
+    {
+      "cell": "AH4",
+      "row": 4,
+      "col": "AH",
+      "formula": "=Data2025!W3",
+      "value": "082164895397",
+      "type": "normal"
+    },
+    {
+      "cell": "A5",
+      "row": 5,
+      "col": "A",
+      "formula": "=Data2025!G4",
+      "value": "02",
+      "type": "normal"
+    },
+    {
+      "cell": "B5",
+      "row": 5,
+      "col": "B",
+      "formula": "=Data2025!K4",
+      "value": "BPU02",
+      "type": "normal"
+    },
+    {
+      "cell": "C5",
+      "row": 5,
+      "col": "C",
+      "formula": "=Data2025!D4",
+      "value": "05. 08. 01.",
+      "type": "normal"
+    },
+    {
+      "cell": "D5",
+      "row": 5,
+      "col": "D",
+      "formula": "=Data2025!C4",
+      "value": "5.1.02.01.01.0012",
+      "type": "normal"
+    },
+    {
+      "cell": "E5",
+      "row": 5,
+      "col": "E",
+      "formula": "=Data2025!E4",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F5",
+      "row": 5,
+      "col": "F",
+      "formula": "=Data2025!F4",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G5",
+      "row": 5,
+      "col": "G",
+      "formula": "=Data2025!H4",
+      "value": "07/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H5",
+      "row": 5,
+      "col": "H",
+      "formula": "=G5",
+      "value": "07/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I5",
+      "row": 5,
+      "col": "I",
+      "formula": "=Data2025!J4",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J5",
+      "row": 5,
+      "col": "J",
+      "formula": "=Data2025!L4",
+      "value": "Perbaikan dan Pengaspalan Jalan Sekolah",
+      "type": "normal"
+    },
+    {
+      "cell": "K5",
+      "row": 5,
+      "col": "K",
+      "formula": "=Data2025!M4",
+      "value": "Bayar Jasa Perbaikan",
+      "type": "normal"
+    },
+    {
+      "cell": "L5",
+      "row": 5,
+      "col": "L",
+      "formula": "=Data2025!N4",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "M5",
+      "row": 5,
+      "col": "M",
+      "formula": "=Data2025!O4",
+      "value": "kegiatan",
+      "type": "normal"
+    },
+    {
+      "cell": "N5",
+      "row": 5,
+      "col": "N",
+      "formula": "=Data2025!P4",
+      "value": "37080000",
+      "type": "normal"
+    },
+    {
+      "cell": "O5",
+      "row": 5,
+      "col": "O",
+      "formula": "=Data2025!Q4",
+      "value": "37080000",
+      "type": "normal"
+    },
+    {
+      "cell": "Q5",
+      "row": 5,
+      "col": "Q",
+      "formula": "=VLOOKUP(K5,Sheet1!$C$1:$D$101,2,)",
+      "value": "#N/A",
+      "type": "normal"
+    },
+    {
+      "cell": "T5",
+      "row": 5,
+      "col": "T",
+      "formula": "=Data2025!T4",
+      "value": "CV. GORIYAKU WIRATRADE",
+      "type": "normal"
+    },
+    {
+      "cell": "V5",
+      "row": 5,
+      "col": "V",
+      "formula": "=Data2025!V4",
+      "value": "Wirawan Bazikho",
+      "type": "normal"
+    },
+    {
+      "cell": "W5",
+      "row": 5,
+      "col": "W",
+      "formula": "=Data2025!X4",
+      "value": "Jl. Diponegoro No. 87, Kel Pasar Telukdalam - Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y5",
+      "row": 5,
+      "col": "Y",
+      "formula": "=P5",
+      "value": "Pemeliharaan",
+      "type": "normal"
+    },
+    {
+      "cell": "Z5",
+      "row": 5,
+      "col": "Z",
+      "formula": "=Y5",
+      "value": "Pemeliharaan",
+      "type": "normal"
+    },
+    {
+      "cell": "AH5",
+      "row": 5,
+      "col": "AH",
+      "formula": "=Data2025!W4",
+      "value": "082166714290",
+      "type": "normal"
+    },
+    {
+      "cell": "A6",
+      "row": 6,
+      "col": "A",
+      "formula": "=Data2025!G5",
+      "value": "03",
+      "type": "normal"
+    },
+    {
+      "cell": "B6",
+      "row": 6,
+      "col": "B",
+      "formula": "=Data2025!K5",
+      "value": "BPU03",
+      "type": "normal"
+    },
+    {
+      "cell": "C6",
+      "row": 6,
+      "col": "C",
+      "formula": "=Data2025!D5",
+      "value": "05. 08. 10.",
+      "type": "normal"
+    },
+    {
+      "cell": "D6",
+      "row": 6,
+      "col": "D",
+      "formula": "=Data2025!C5",
+      "value": "5.1.02.01.01.0031",
+      "type": "normal"
+    },
+    {
+      "cell": "E6",
+      "row": 6,
+      "col": "E",
+      "formula": "=Data2025!E5",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F6",
+      "row": 6,
+      "col": "F",
+      "formula": "=Data2025!F5",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G6",
+      "row": 6,
+      "col": "G",
+      "formula": "=Data2025!H5",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H6",
+      "row": 6,
+      "col": "H",
+      "formula": "=G6",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I6",
+      "row": 6,
+      "col": "I",
+      "formula": "=Data2025!J5",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J6",
+      "row": 6,
+      "col": "J",
+      "formula": "=Data2025!L5",
+      "value": "bola lampu hannock-45 watt",
+      "type": "normal"
+    },
+    {
+      "cell": "K6",
+      "row": 6,
+      "col": "K",
+      "formula": "=Data2025!M5",
+      "value": "Bola Lampu",
+      "type": "normal"
+    },
+    {
+      "cell": "L6",
+      "row": 6,
+      "col": "L",
+      "formula": "=Data2025!N5",
+      "value": "23",
+      "type": "normal"
+    },
+    {
+      "cell": "M6",
+      "row": 6,
+      "col": "M",
+      "formula": "=Data2025!O5",
+      "value": "buah",
+      "type": "normal"
+    },
+    {
+      "cell": "N6",
+      "row": 6,
+      "col": "N",
+      "formula": "=Data2025!P5",
+      "value": "77800",
+      "type": "normal"
+    },
+    {
+      "cell": "O6",
+      "row": 6,
+      "col": "O",
+      "formula": "=Data2025!Q5",
+      "value": "1789400",
+      "type": "normal"
+    },
+    {
+      "cell": "Q6",
+      "row": 6,
+      "col": "Q",
+      "formula": "=VLOOKUP(K6,Sheet1!$C$1:$D$101,2,)",
+      "value": "#N/A",
+      "type": "normal"
+    },
+    {
+      "cell": "T6",
+      "row": 6,
+      "col": "T",
+      "formula": "=Data2025!T5",
+      "value": "CV. GORIYAKU WIRATRADE",
+      "type": "normal"
+    },
+    {
+      "cell": "V6",
+      "row": 6,
+      "col": "V",
+      "formula": "=Data2025!V5",
+      "value": "Wirawan Bazikho",
+      "type": "normal"
+    },
+    {
+      "cell": "W6",
+      "row": 6,
+      "col": "W",
+      "formula": "=Data2025!X5",
+      "value": "Jl. Diponegoro No. 87, Kel Pasar Telukdalam - Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y6",
+      "row": 6,
+      "col": "Y",
+      "formula": "=P6",
+      "value": "Peralatan Listrik",
+      "type": "normal"
+    },
+    {
+      "cell": "Z6",
+      "row": 6,
+      "col": "Z",
+      "formula": "=Y6",
+      "value": "Peralatan Listrik",
+      "type": "normal"
+    },
+    {
+      "cell": "AH6",
+      "row": 6,
+      "col": "AH",
+      "formula": "=Data2025!W5",
+      "value": "082166714290",
+      "type": "normal"
+    },
+    {
+      "cell": "A7",
+      "row": 7,
+      "col": "A",
+      "formula": "=Data2025!G6",
+      "value": "04",
+      "type": "normal"
+    },
+    {
+      "cell": "B7",
+      "row": 7,
+      "col": "B",
+      "formula": "=Data2025!K6",
+      "value": "BPU04",
+      "type": "normal"
+    },
+    {
+      "cell": "C7",
+      "row": 7,
+      "col": "C",
+      "formula": "=Data2025!D6",
+      "value": "06. 05. 08.",
+      "type": "normal"
+    },
+    {
+      "cell": "D7",
+      "row": 7,
+      "col": "D",
+      "formula": "=Data2025!C6",
+      "value": "5.1.02.01.01.0024",
+      "type": "normal"
+    },
+    {
+      "cell": "E7",
+      "row": 7,
+      "col": "E",
+      "formula": "=Data2025!E6",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F7",
+      "row": 7,
+      "col": "F",
+      "formula": "=Data2025!F6",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G7",
+      "row": 7,
+      "col": "G",
+      "formula": "=Data2025!H6",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H7",
+      "row": 7,
+      "col": "H",
+      "formula": "=G7",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I7",
+      "row": 7,
+      "col": "I",
+      "formula": "=Data2025!J6",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J7",
+      "row": 7,
+      "col": "J",
+      "formula": "=Data2025!L6",
+      "value": "Plastik Mika",
+      "type": "normal"
+    },
+    {
+      "cell": "K7",
+      "row": 7,
+      "col": "K",
+      "formula": "=Data2025!M6",
+      "value": "Plastik Mika",
+      "type": "normal"
+    },
+    {
+      "cell": "L7",
+      "row": 7,
+      "col": "L",
+      "formula": "=Data2025!N6",
+      "value": "5",
+      "type": "normal"
+    },
+    {
+      "cell": "M7",
+      "row": 7,
+      "col": "M",
+      "formula": "=Data2025!O6",
+      "value": "bungkus",
+      "type": "normal"
+    },
+    {
+      "cell": "N7",
+      "row": 7,
+      "col": "N",
+      "formula": "=Data2025!P6",
+      "value": "60000",
+      "type": "normal"
+    },
+    {
+      "cell": "O7",
+      "row": 7,
+      "col": "O",
+      "formula": "=Data2025!Q6",
+      "value": "300000",
+      "type": "normal"
+    },
+    {
+      "cell": "Q7",
+      "row": 7,
+      "col": "Q",
+      "formula": "=VLOOKUP(K7,Sheet1!$C$1:$D$101,2,)",
+      "value": "Plastik Mika Jilid F4 (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 548Gr)",
+      "type": "normal"
+    },
+    {
+      "cell": "T7",
+      "row": 7,
+      "col": "T",
+      "formula": "=Data2025!T6",
+      "value": "UD. JOSUA",
+      "type": "normal"
+    },
+    {
+      "cell": "V7",
+      "row": 7,
+      "col": "V",
+      "formula": "=Data2025!V6",
+      "value": "Gestiwan Bazikho",
+      "type": "normal"
+    },
+    {
+      "cell": "W7",
+      "row": 7,
+      "col": "W",
+      "formula": "=Data2025!X6",
+      "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y7",
+      "row": 7,
+      "col": "Y",
+      "formula": "=P7",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "Z7",
+      "row": 7,
+      "col": "Z",
+      "formula": "=Y7",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "AH7",
+      "row": 7,
+      "col": "AH",
+      "formula": "=Data2025!W6",
+      "value": "081375309828",
+      "type": "normal"
+    },
+    {
+      "cell": "A8",
+      "row": 8,
+      "col": "A",
+      "formula": "=Data2025!G7",
+      "value": "04",
+      "type": "normal"
+    },
+    {
+      "cell": "B8",
+      "row": 8,
+      "col": "B",
+      "formula": "=Data2025!K7",
+      "value": "BPU04",
+      "type": "normal"
+    },
+    {
+      "cell": "C8",
+      "row": 8,
+      "col": "C",
+      "formula": "=Data2025!D7",
+      "value": "06. 05. 08.",
+      "type": "normal"
+    },
+    {
+      "cell": "D8",
+      "row": 8,
+      "col": "D",
+      "formula": "=Data2025!C7",
+      "value": "5.1.02.01.01.0024",
+      "type": "normal"
+    },
+    {
+      "cell": "E8",
+      "row": 8,
+      "col": "E",
+      "formula": "=Data2025!E7",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F8",
+      "row": 8,
+      "col": "F",
+      "formula": "=Data2025!F7",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G8",
+      "row": 8,
+      "col": "G",
+      "formula": "=Data2025!H7",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H8",
+      "row": 8,
+      "col": "H",
+      "formula": "=G8",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I8",
+      "row": 8,
+      "col": "I",
+      "formula": "=Data2025!J7",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J8",
+      "row": 8,
+      "col": "J",
+      "formula": "=Data2025!L7",
+      "value": "Kertas Warna Blank Folio, Ukuran : 8,5 x 14\",  70 gram",
+      "type": "normal"
+    },
+    {
+      "cell": "K8",
+      "row": 8,
+      "col": "K",
+      "formula": "=Data2025!M7",
+      "value": "Kertas Warna Blank Folio, Ukuran : 8,5 x 14\",  70 gram",
+      "type": "normal"
+    },
+    {
+      "cell": "L8",
+      "row": 8,
+      "col": "L",
+      "formula": "=Data2025!N7",
+      "value": "2",
+      "type": "normal"
+    },
+    {
+      "cell": "M8",
+      "row": 8,
+      "col": "M",
+      "formula": "=Data2025!O7",
+      "value": "rim",
+      "type": "normal"
+    },
+    {
+      "cell": "N8",
+      "row": 8,
+      "col": "N",
+      "formula": "=Data2025!P7",
+      "value": "90000",
+      "type": "normal"
+    },
+    {
+      "cell": "O8",
+      "row": 8,
+      "col": "O",
+      "formula": "=Data2025!Q7",
+      "value": "180000",
+      "type": "normal"
+    },
+    {
+      "cell": "Q8",
+      "row": 8,
+      "col": "Q",
+      "formula": "=VLOOKUP(K8,Sheet1!$C$1:$D$101,2,)",
+      "value": "Kertas Hvs Warna 70 Gsm (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 2400Gr)",
+      "type": "normal"
+    },
+    {
+      "cell": "T8",
+      "row": 8,
+      "col": "T",
+      "formula": "=Data2025!T7",
+      "value": "UD. JOSUA",
+      "type": "normal"
+    },
+    {
+      "cell": "V8",
+      "row": 8,
+      "col": "V",
+      "formula": "=Data2025!V7",
+      "value": "Gestiwan Bazikho",
+      "type": "normal"
+    },
+    {
+      "cell": "W8",
+      "row": 8,
+      "col": "W",
+      "formula": "=Data2025!X7",
+      "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y8",
+      "row": 8,
+      "col": "Y",
+      "formula": "=P8",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "Z8",
+      "row": 8,
+      "col": "Z",
+      "formula": "=Y8",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "AH8",
+      "row": 8,
+      "col": "AH",
+      "formula": "=Data2025!W7",
+      "value": "081375309828",
+      "type": "normal"
+    },
+    {
+      "cell": "A9",
+      "row": 9,
+      "col": "A",
+      "formula": "=Data2025!G8",
+      "value": "04",
+      "type": "normal"
+    },
+    {
+      "cell": "B9",
+      "row": 9,
+      "col": "B",
+      "formula": "=Data2025!K8",
+      "value": "BPU04",
+      "type": "normal"
+    },
+    {
+      "cell": "C9",
+      "row": 9,
+      "col": "C",
+      "formula": "=Data2025!D8",
+      "value": "06. 05. 08.",
+      "type": "normal"
+    },
+    {
+      "cell": "D9",
+      "row": 9,
+      "col": "D",
+      "formula": "=Data2025!C8",
+      "value": "5.1.02.01.01.0024",
+      "type": "normal"
+    },
+    {
+      "cell": "E9",
+      "row": 9,
+      "col": "E",
+      "formula": "=Data2025!E8",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F9",
+      "row": 9,
+      "col": "F",
+      "formula": "=Data2025!F8",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G9",
+      "row": 9,
+      "col": "G",
+      "formula": "=Data2025!H8",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H9",
+      "row": 9,
+      "col": "H",
+      "formula": "=G9",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I9",
+      "row": 9,
+      "col": "I",
+      "formula": "=Data2025!J8",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J9",
+      "row": 9,
+      "col": "J",
+      "formula": "=Data2025!L8",
+      "value": "Kertas Lain-Lain Kertas Buffalo",
+      "type": "normal"
+    },
+    {
+      "cell": "K9",
+      "row": 9,
+      "col": "K",
+      "formula": "=Data2025!M8",
+      "value": "Kertas Lain-Lain Kertas Buffalo",
+      "type": "normal"
+    },
+    {
+      "cell": "L9",
+      "row": 9,
+      "col": "L",
+      "formula": "=Data2025!N8",
+      "value": "5",
+      "type": "normal"
+    },
+    {
+      "cell": "M9",
+      "row": 9,
+      "col": "M",
+      "formula": "=Data2025!O8",
+      "value": "bungkus",
+      "type": "normal"
+    },
+    {
+      "cell": "N9",
+      "row": 9,
+      "col": "N",
+      "formula": "=Data2025!P8",
+      "value": "31000",
+      "type": "normal"
+    },
+    {
+      "cell": "O9",
+      "row": 9,
+      "col": "O",
+      "formula": "=Data2025!Q8",
+      "value": "155000",
+      "type": "normal"
+    },
+    {
+      "cell": "Q9",
+      "row": 9,
+      "col": "Q",
+      "formula": "=VLOOKUP(K9,Sheet1!$C$1:$D$101,2,)",
+      "value": "Kertas Buffalo F4 (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 1006Gr)",
+      "type": "normal"
+    },
+    {
+      "cell": "T9",
+      "row": 9,
+      "col": "T",
+      "formula": "=Data2025!T8",
+      "value": "UD. JOSUA",
+      "type": "normal"
+    },
+    {
+      "cell": "V9",
+      "row": 9,
+      "col": "V",
+      "formula": "=Data2025!V8",
+      "value": "Gestiwan Bazikho",
+      "type": "normal"
+    },
+    {
+      "cell": "W9",
+      "row": 9,
+      "col": "W",
+      "formula": "=Data2025!X8",
+      "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y9",
+      "row": 9,
+      "col": "Y",
+      "formula": "=P9",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "Z9",
+      "row": 9,
+      "col": "Z",
+      "formula": "=Y9",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "AH9",
+      "row": 9,
+      "col": "AH",
+      "formula": "=Data2025!W8",
+      "value": "081375309828",
+      "type": "normal"
+    },
+    {
+      "cell": "A10",
+      "row": 10,
+      "col": "A",
+      "formula": "=Data2025!G9",
+      "value": "04",
+      "type": "normal"
+    },
+    {
+      "cell": "B10",
+      "row": 10,
+      "col": "B",
+      "formula": "=Data2025!K9",
+      "value": "BPU04",
+      "type": "normal"
+    },
+    {
+      "cell": "C10",
+      "row": 10,
+      "col": "C",
+      "formula": "=Data2025!D9",
+      "value": "06. 05. 08.",
+      "type": "normal"
+    },
+    {
+      "cell": "D10",
+      "row": 10,
+      "col": "D",
+      "formula": "=Data2025!C9",
+      "value": "5.1.02.01.01.0024",
+      "type": "normal"
+    },
+    {
+      "cell": "E10",
+      "row": 10,
+      "col": "E",
+      "formula": "=Data2025!E9",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F10",
+      "row": 10,
+      "col": "F",
+      "formula": "=Data2025!F9",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G10",
+      "row": 10,
+      "col": "G",
+      "formula": "=Data2025!H9",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H10",
+      "row": 10,
+      "col": "H",
+      "formula": "=G10",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I10",
+      "row": 10,
+      "col": "I",
+      "formula": "=Data2025!J9",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J10",
+      "row": 10,
+      "col": "J",
+      "formula": "=Data2025!L9",
+      "value": "Kertas Post-It Warna Warni  Sign Here",
+      "type": "normal"
+    },
+    {
+      "cell": "K10",
+      "row": 10,
+      "col": "K",
+      "formula": "=Data2025!M9",
+      "value": "Kertas Post-It Warna Warni  Sign Here",
+      "type": "normal"
+    },
+    {
+      "cell": "L10",
+      "row": 10,
+      "col": "L",
+      "formula": "=Data2025!N9",
+      "value": "5",
+      "type": "normal"
+    },
+    {
+      "cell": "M10",
+      "row": 10,
+      "col": "M",
+      "formula": "=Data2025!O9",
+      "value": "buah",
+      "type": "normal"
+    },
+    {
+      "cell": "N10",
+      "row": 10,
+      "col": "N",
+      "formula": "=Data2025!P9",
+      "value": "22800",
+      "type": "normal"
+    },
+    {
+      "cell": "O10",
+      "row": 10,
+      "col": "O",
+      "formula": "=Data2025!Q9",
+      "value": "114000",
+      "type": "normal"
+    },
+    {
+      "cell": "Q10",
+      "row": 10,
+      "col": "Q",
+      "formula": "=VLOOKUP(K10,Sheet1!$C$1:$D$101,2,)",
+      "value": "Post It Warna Warni (Length 7.0Cm, Width 7.0Cm, Height 7.0Cm, Weight 44Gr)",
+      "type": "normal"
+    },
+    {
+      "cell": "T10",
+      "row": 10,
+      "col": "T",
+      "formula": "=Data2025!T9",
+      "value": "UD. JOSUA",
+      "type": "normal"
+    },
+    {
+      "cell": "V10",
+      "row": 10,
+      "col": "V",
+      "formula": "=Data2025!V9",
+      "value": "Gestiwan Bazikho",
+      "type": "normal"
+    },
+    {
+      "cell": "W10",
+      "row": 10,
+      "col": "W",
+      "formula": "=Data2025!X9",
+      "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y10",
+      "row": 10,
+      "col": "Y",
+      "formula": "=P10",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "Z10",
+      "row": 10,
+      "col": "Z",
+      "formula": "=Y10",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "AH10",
+      "row": 10,
+      "col": "AH",
+      "formula": "=Data2025!W9",
+      "value": "081375309828",
+      "type": "normal"
+    },
+    {
+      "cell": "A11",
+      "row": 11,
+      "col": "A",
+      "formula": "=Data2025!G10",
+      "value": "04",
+      "type": "normal"
+    },
+    {
+      "cell": "B11",
+      "row": 11,
+      "col": "B",
+      "formula": "=Data2025!K10",
+      "value": "BPU04",
+      "type": "normal"
+    },
+    {
+      "cell": "C11",
+      "row": 11,
+      "col": "C",
+      "formula": "=Data2025!D10",
+      "value": "06. 05. 08.",
+      "type": "normal"
+    },
+    {
+      "cell": "D11",
+      "row": 11,
+      "col": "D",
+      "formula": "=Data2025!C10",
+      "value": "5.1.02.01.01.0024",
+      "type": "normal"
+    },
+    {
+      "cell": "E11",
+      "row": 11,
+      "col": "E",
+      "formula": "=Data2025!E10",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F11",
+      "row": 11,
+      "col": "F",
+      "formula": "=Data2025!F10",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G11",
+      "row": 11,
+      "col": "G",
+      "formula": "=Data2025!H10",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H11",
+      "row": 11,
+      "col": "H",
+      "formula": "=G11",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I11",
+      "row": 11,
+      "col": "I",
+      "formula": "=Data2025!J10",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J11",
+      "row": 11,
+      "col": "J",
+      "formula": "=Data2025!L10",
+      "value": "Kertas HVS 60 gram Merk : Paper One HVS F4 uk. 8.27\"x11.69\"",
+      "type": "normal"
+    },
+    {
+      "cell": "K11",
+      "row": 11,
+      "col": "K",
+      "formula": "=Data2025!M10",
+      "value": "Kertas HVS 60 gram Merk : Paper One HVS F4 uk. 8.27\"x11.69\"",
+      "type": "normal"
+    },
+    {
+      "cell": "L11",
+      "row": 11,
+      "col": "L",
+      "formula": "=Data2025!N10",
+      "value": "10",
+      "type": "normal"
+    },
+    {
+      "cell": "M11",
+      "row": 11,
+      "col": "M",
+      "formula": "=Data2025!O10",
+      "value": "rim",
+      "type": "normal"
+    },
+    {
+      "cell": "N11",
+      "row": 11,
+      "col": "N",
+      "formula": "=Data2025!P10",
+      "value": "48500",
+      "type": "normal"
+    },
+    {
+      "cell": "O11",
+      "row": 11,
+      "col": "O",
+      "formula": "=Data2025!Q10",
+      "value": "485000",
+      "type": "normal"
+    },
+    {
+      "cell": "Q11",
+      "row": 11,
+      "col": "Q",
+      "formula": "=VLOOKUP(K11,Sheet1!$C$1:$D$101,2,)",
+      "value": "Kertas Hvs 60Gsm Paper One F4 (Length 33.0Cm, Width 21.0Cm, Height 7.0Cm, Weight 1400Gr)",
+      "type": "normal"
+    },
+    {
+      "cell": "T11",
+      "row": 11,
+      "col": "T",
+      "formula": "=Data2025!T10",
+      "value": "UD. JOSUA",
+      "type": "normal"
+    },
+    {
+      "cell": "V11",
+      "row": 11,
+      "col": "V",
+      "formula": "=Data2025!V10",
+      "value": "Gestiwan Bazikho",
+      "type": "normal"
+    },
+    {
+      "cell": "W11",
+      "row": 11,
+      "col": "W",
+      "formula": "=Data2025!X10",
+      "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y11",
+      "row": 11,
+      "col": "Y",
+      "formula": "=P11",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "Z11",
+      "row": 11,
+      "col": "Z",
+      "formula": "=Y11",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "AH11",
+      "row": 11,
+      "col": "AH",
+      "formula": "=Data2025!W10",
+      "value": "081375309828",
+      "type": "normal"
+    },
+    {
+      "cell": "A12",
+      "row": 12,
+      "col": "A",
+      "formula": "=Data2025!G11",
+      "value": "04",
+      "type": "normal"
+    },
+    {
+      "cell": "B12",
+      "row": 12,
+      "col": "B",
+      "formula": "=Data2025!K11",
+      "value": "BPU04",
+      "type": "normal"
+    },
+    {
+      "cell": "C12",
+      "row": 12,
+      "col": "C",
+      "formula": "=Data2025!D11",
+      "value": "06. 05. 08.",
+      "type": "normal"
+    },
+    {
+      "cell": "D12",
+      "row": 12,
+      "col": "D",
+      "formula": "=Data2025!C11",
+      "value": "5.1.02.01.01.0024",
+      "type": "normal"
+    },
+    {
+      "cell": "E12",
+      "row": 12,
+      "col": "E",
+      "formula": "=Data2025!E11",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F12",
+      "row": 12,
+      "col": "F",
+      "formula": "=Data2025!F11",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G12",
+      "row": 12,
+      "col": "G",
+      "formula": "=Data2025!H11",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H12",
+      "row": 12,
+      "col": "H",
+      "formula": "=G12",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I12",
+      "row": 12,
+      "col": "I",
+      "formula": "=Data2025!J11",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J12",
+      "row": 12,
+      "col": "J",
+      "formula": "=Data2025!L11",
+      "value": "Kertas HVS 80 gram Merk : Paper One A4, Ukuran : 8,27\" x 11,69\", Isi : 500 lembar",
+      "type": "normal"
+    },
+    {
+      "cell": "K12",
+      "row": 12,
+      "col": "K",
+      "formula": "=Data2025!M11",
+      "value": "Kertas HVS 80 gram Merk : Paper One A4, Ukuran : 8,27\" x 11,69\", Isi : 500 lembar",
+      "type": "normal"
+    },
+    {
+      "cell": "L12",
+      "row": 12,
+      "col": "L",
+      "formula": "=Data2025!N11",
+      "value": "40",
+      "type": "normal"
+    },
+    {
+      "cell": "M12",
+      "row": 12,
+      "col": "M",
+      "formula": "=Data2025!O11",
+      "value": "rim",
+      "type": "normal"
+    },
+    {
+      "cell": "N12",
+      "row": 12,
+      "col": "N",
+      "formula": "=Data2025!P11",
+      "value": "50000",
+      "type": "normal"
+    },
+    {
+      "cell": "O12",
+      "row": 12,
+      "col": "O",
+      "formula": "=Data2025!Q11",
+      "value": "2000000",
+      "type": "normal"
+    },
+    {
+      "cell": "Q12",
+      "row": 12,
+      "col": "Q",
+      "formula": "=VLOOKUP(K12,Sheet1!$C$1:$D$101,2,)",
+      "value": "Kertas Hvs 80 Gram Merk : Paper One A4, Ukuran : 8,27\" X 11,69\", Isi : 500 Lembar",
+      "type": "normal"
+    },
+    {
+      "cell": "T12",
+      "row": 12,
+      "col": "T",
+      "formula": "=Data2025!T11",
+      "value": "UD. JOSUA",
+      "type": "normal"
+    },
+    {
+      "cell": "V12",
+      "row": 12,
+      "col": "V",
+      "formula": "=Data2025!V11",
+      "value": "Gestiwan Bazikho",
+      "type": "normal"
+    },
+    {
+      "cell": "W12",
+      "row": 12,
+      "col": "W",
+      "formula": "=Data2025!X11",
+      "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y12",
+      "row": 12,
+      "col": "Y",
+      "formula": "=P12",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "Z12",
+      "row": 12,
+      "col": "Z",
+      "formula": "=Y12",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "AH12",
+      "row": 12,
+      "col": "AH",
+      "formula": "=Data2025!W11",
+      "value": "081375309828",
+      "type": "normal"
+    },
+    {
+      "cell": "A13",
+      "row": 13,
+      "col": "A",
+      "formula": "=Data2025!G12",
+      "value": "04",
+      "type": "normal"
+    },
+    {
+      "cell": "B13",
+      "row": 13,
+      "col": "B",
+      "formula": "=Data2025!K12",
+      "value": "BPU04",
+      "type": "normal"
+    },
+    {
+      "cell": "C13",
+      "row": 13,
+      "col": "C",
+      "formula": "=Data2025!D12",
+      "value": "06. 05. 08.",
+      "type": "normal"
+    },
+    {
+      "cell": "D13",
+      "row": 13,
+      "col": "D",
+      "formula": "=Data2025!C12",
+      "value": "5.1.02.01.01.0024",
+      "type": "normal"
+    },
+    {
+      "cell": "E13",
+      "row": 13,
+      "col": "E",
+      "formula": "=Data2025!E12",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F13",
+      "row": 13,
+      "col": "F",
+      "formula": "=Data2025!F12",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G13",
+      "row": 13,
+      "col": "G",
+      "formula": "=Data2025!H12",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H13",
+      "row": 13,
+      "col": "H",
+      "formula": "=G13",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I13",
+      "row": 13,
+      "col": "I",
+      "formula": "=Data2025!J12",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J13",
+      "row": 13,
+      "col": "J",
+      "formula": "=Data2025!L12",
+      "value": "Kertas StensiI",
+      "type": "normal"
+    },
+    {
+      "cell": "K13",
+      "row": 13,
+      "col": "K",
+      "formula": "=Data2025!M12",
+      "value": "Kertas StensiI",
+      "type": "normal"
+    },
+    {
+      "cell": "L13",
+      "row": 13,
+      "col": "L",
+      "formula": "=Data2025!N12",
+      "value": "10",
+      "type": "normal"
+    },
+    {
+      "cell": "M13",
+      "row": 13,
+      "col": "M",
+      "formula": "=Data2025!O12",
+      "value": "bungkus",
+      "type": "normal"
+    },
+    {
+      "cell": "N13",
+      "row": 13,
+      "col": "N",
+      "formula": "=Data2025!P12",
+      "value": "50000",
+      "type": "normal"
+    },
+    {
+      "cell": "O13",
+      "row": 13,
+      "col": "O",
+      "formula": "=Data2025!Q12",
+      "value": "500000",
+      "type": "normal"
+    },
+    {
+      "cell": "Q13",
+      "row": 13,
+      "col": "Q",
+      "formula": "=VLOOKUP(K13,Sheet1!$C$1:$D$101,2,)",
+      "value": "Kertas Stencil Folio (Length 33.0Cm, Width 21.0Cm, Height 5.0Cm, Weight 1400Gr)",
+      "type": "normal"
+    },
+    {
+      "cell": "T13",
+      "row": 13,
+      "col": "T",
+      "formula": "=Data2025!T12",
+      "value": "UD. JOSUA",
+      "type": "normal"
+    },
+    {
+      "cell": "V13",
+      "row": 13,
+      "col": "V",
+      "formula": "=Data2025!V12",
+      "value": "Gestiwan Bazikho",
+      "type": "normal"
+    },
+    {
+      "cell": "W13",
+      "row": 13,
+      "col": "W",
+      "formula": "=Data2025!X12",
+      "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y13",
+      "row": 13,
+      "col": "Y",
+      "formula": "=P13",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "Z13",
+      "row": 13,
+      "col": "Z",
+      "formula": "=Y13",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "AH13",
+      "row": 13,
+      "col": "AH",
+      "formula": "=Data2025!W12",
+      "value": "081375309828",
+      "type": "normal"
+    },
+    {
+      "cell": "A14",
+      "row": 14,
+      "col": "A",
+      "formula": "=Data2025!G13",
+      "value": "04",
+      "type": "normal"
+    },
+    {
+      "cell": "B14",
+      "row": 14,
+      "col": "B",
+      "formula": "=Data2025!K13",
+      "value": "BPU04",
+      "type": "normal"
+    },
+    {
+      "cell": "C14",
+      "row": 14,
+      "col": "C",
+      "formula": "=Data2025!D13",
+      "value": "06. 05. 08.",
+      "type": "normal"
+    },
+    {
+      "cell": "D14",
+      "row": 14,
+      "col": "D",
+      "formula": "=Data2025!C13",
+      "value": "5.1.02.01.01.0024",
+      "type": "normal"
+    },
+    {
+      "cell": "E14",
+      "row": 14,
+      "col": "E",
+      "formula": "=Data2025!E13",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F14",
+      "row": 14,
+      "col": "F",
+      "formula": "=Data2025!F13",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G14",
+      "row": 14,
+      "col": "G",
+      "formula": "=Data2025!H13",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H14",
+      "row": 14,
+      "col": "H",
+      "formula": "=G14",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I14",
+      "row": 14,
+      "col": "I",
+      "formula": "=Data2025!J13",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J14",
+      "row": 14,
+      "col": "J",
+      "formula": "=Data2025!L13",
+      "value": "Kertas Label",
+      "type": "normal"
+    },
+    {
+      "cell": "K14",
+      "row": 14,
+      "col": "K",
+      "formula": "=Data2025!M13",
+      "value": "Kertas Label",
+      "type": "normal"
+    },
+    {
+      "cell": "L14",
+      "row": 14,
+      "col": "L",
+      "formula": "=Data2025!N13",
+      "value": "5",
+      "type": "normal"
+    },
+    {
+      "cell": "M14",
+      "row": 14,
+      "col": "M",
+      "formula": "=Data2025!O13",
+      "value": "lembar",
+      "type": "normal"
+    },
+    {
+      "cell": "N14",
+      "row": 14,
+      "col": "N",
+      "formula": "=Data2025!P13",
+      "value": "25000",
+      "type": "normal"
+    },
+    {
+      "cell": "O14",
+      "row": 14,
+      "col": "O",
+      "formula": "=Data2025!Q13",
+      "value": "125000",
+      "type": "normal"
+    },
+    {
+      "cell": "Q14",
+      "row": 14,
+      "col": "Q",
+      "formula": "=VLOOKUP(K14,Sheet1!$C$1:$D$101,2,)",
+      "value": "KERTAS LEBEL KOTAK (Length 5.0cm, Width 5.0cm, Height 7.0cm, Weight 5gr)",
+      "type": "normal"
+    },
+    {
+      "cell": "T14",
+      "row": 14,
+      "col": "T",
+      "formula": "=Data2025!T13",
+      "value": "UD. JOSUA",
+      "type": "normal"
+    },
+    {
+      "cell": "V14",
+      "row": 14,
+      "col": "V",
+      "formula": "=Data2025!V13",
+      "value": "Gestiwan Bazikho",
+      "type": "normal"
+    },
+    {
+      "cell": "W14",
+      "row": 14,
+      "col": "W",
+      "formula": "=Data2025!X13",
+      "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y14",
+      "row": 14,
+      "col": "Y",
+      "formula": "=P14",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "Z14",
+      "row": 14,
+      "col": "Z",
+      "formula": "=Y14",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "AH14",
+      "row": 14,
+      "col": "AH",
+      "formula": "=Data2025!W13",
+      "value": "081375309828",
+      "type": "normal"
+    },
+    {
+      "cell": "A15",
+      "row": 15,
+      "col": "A",
+      "formula": "=Data2025!G14",
+      "value": "04",
+      "type": "normal"
+    },
+    {
+      "cell": "B15",
+      "row": 15,
+      "col": "B",
+      "formula": "=Data2025!K14",
+      "value": "BPU04",
+      "type": "normal"
+    },
+    {
+      "cell": "C15",
+      "row": 15,
+      "col": "C",
+      "formula": "=Data2025!D14",
+      "value": "06. 05. 08.",
+      "type": "normal"
+    },
+    {
+      "cell": "D15",
+      "row": 15,
+      "col": "D",
+      "formula": "=Data2025!C14",
+      "value": "5.1.02.01.01.0024",
+      "type": "normal"
+    },
+    {
+      "cell": "E15",
+      "row": 15,
+      "col": "E",
+      "formula": "=Data2025!E14",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F15",
+      "row": 15,
+      "col": "F",
+      "formula": "=Data2025!F14",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G15",
+      "row": 15,
+      "col": "G",
+      "formula": "=Data2025!H14",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H15",
+      "row": 15,
+      "col": "H",
+      "formula": "=G15",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I15",
+      "row": 15,
+      "col": "I",
+      "formula": "=Data2025!J14",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J15",
+      "row": 15,
+      "col": "J",
+      "formula": "=Data2025!L14",
+      "value": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris",
+      "type": "normal"
+    },
+    {
+      "cell": "K15",
+      "row": 15,
+      "col": "K",
+      "formula": "=Data2025!M14",
+      "value": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris",
+      "type": "normal"
+    },
+    {
+      "cell": "L15",
+      "row": 15,
+      "col": "L",
+      "formula": "=Data2025!N14",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "M15",
+      "row": 15,
+      "col": "M",
+      "formula": "=Data2025!O14",
+      "value": "bungkus",
+      "type": "normal"
+    },
+    {
+      "cell": "N15",
+      "row": 15,
+      "col": "N",
+      "formula": "=Data2025!P14",
+      "value": "45000",
+      "type": "normal"
+    },
+    {
+      "cell": "O15",
+      "row": 15,
+      "col": "O",
+      "formula": "=Data2025!Q14",
+      "value": "45000",
+      "type": "normal"
+    },
+    {
+      "cell": "Q15",
+      "row": 15,
+      "col": "Q",
+      "formula": "=VLOOKUP(K15,Sheet1!$C$1:$D$101,2,)",
+      "value": "Amplop Coklat (Merk : GSU Ukuran : 1/2 folio, bergaris)",
+      "type": "normal"
+    },
+    {
+      "cell": "T15",
+      "row": 15,
+      "col": "T",
+      "formula": "=Data2025!T14",
+      "value": "UD. JOSUA",
+      "type": "normal"
+    },
+    {
+      "cell": "V15",
+      "row": 15,
+      "col": "V",
+      "formula": "=Data2025!V14",
+      "value": "Gestiwan Bazikho",
+      "type": "normal"
+    },
+    {
+      "cell": "W15",
+      "row": 15,
+      "col": "W",
+      "formula": "=Data2025!X14",
+      "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y15",
+      "row": 15,
+      "col": "Y",
+      "formula": "=P15",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "Z15",
+      "row": 15,
+      "col": "Z",
+      "formula": "=Y15",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "AH15",
+      "row": 15,
+      "col": "AH",
+      "formula": "=Data2025!W14",
+      "value": "081375309828",
+      "type": "normal"
+    },
+    {
+      "cell": "A16",
+      "row": 16,
+      "col": "A",
+      "formula": "=Data2025!G15",
+      "value": "04",
+      "type": "normal"
+    },
+    {
+      "cell": "B16",
+      "row": 16,
+      "col": "B",
+      "formula": "=Data2025!K15",
+      "value": "BPU04",
+      "type": "normal"
+    },
+    {
+      "cell": "C16",
+      "row": 16,
+      "col": "C",
+      "formula": "=Data2025!D15",
+      "value": "06. 05. 08.",
+      "type": "normal"
+    },
+    {
+      "cell": "D16",
+      "row": 16,
+      "col": "D",
+      "formula": "=Data2025!C15",
+      "value": "5.1.02.01.01.0024",
+      "type": "normal"
+    },
+    {
+      "cell": "E16",
+      "row": 16,
+      "col": "E",
+      "formula": "=Data2025!E15",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F16",
+      "row": 16,
+      "col": "F",
+      "formula": "=Data2025!F15",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G16",
+      "row": 16,
+      "col": "G",
+      "formula": "=Data2025!H15",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H16",
+      "row": 16,
+      "col": "H",
+      "formula": "=G16",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I16",
+      "row": 16,
+      "col": "I",
+      "formula": "=Data2025!J15",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J16",
+      "row": 16,
+      "col": "J",
+      "formula": "=Data2025!L15",
+      "value": "Amplop Coklat Merk : Garda Ukuran Cabinet",
+      "type": "normal"
+    },
+    {
+      "cell": "K16",
+      "row": 16,
+      "col": "K",
+      "formula": "=Data2025!M15",
+      "value": "Amplop Coklat Merk : Garda Ukuran Cabinet",
+      "type": "normal"
+    },
+    {
+      "cell": "L16",
+      "row": 16,
+      "col": "L",
+      "formula": "=Data2025!N15",
+      "value": "3",
+      "type": "normal"
+    },
+    {
+      "cell": "M16",
+      "row": 16,
+      "col": "M",
+      "formula": "=Data2025!O15",
+      "value": "bungkus",
+      "type": "normal"
+    },
+    {
+      "cell": "N16",
+      "row": 16,
+      "col": "N",
+      "formula": "=Data2025!P15",
+      "value": "23000",
+      "type": "normal"
+    },
+    {
+      "cell": "O16",
+      "row": 16,
+      "col": "O",
+      "formula": "=Data2025!Q15",
+      "value": "69000",
+      "type": "normal"
+    },
+    {
+      "cell": "Q16",
+      "row": 16,
+      "col": "Q",
+      "formula": "=VLOOKUP(K16,Sheet1!$C$1:$D$101,2,)",
+      "value": "Amplop (Merk\u00a0: Amplop\u00a0Garda Ukuran\u00a0: Super\u00a0Kabinet\u00a0Warna : Coklat polos Isi / Pack :100 pcs\u00a0Ukuran\u00a0: 14 cm x 27 cm)",
+      "type": "normal"
+    },
+    {
+      "cell": "T16",
+      "row": 16,
+      "col": "T",
+      "formula": "=Data2025!T15",
+      "value": "UD. JOSUA",
+      "type": "normal"
+    },
+    {
+      "cell": "V16",
+      "row": 16,
+      "col": "V",
+      "formula": "=Data2025!V15",
+      "value": "Gestiwan Bazikho",
+      "type": "normal"
+    },
+    {
+      "cell": "W16",
+      "row": 16,
+      "col": "W",
+      "formula": "=Data2025!X15",
+      "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+      "type": "normal"
+    },
+    {
+      "cell": "Y16",
+      "row": 16,
+      "col": "Y",
+      "formula": "=P16",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "Z16",
+      "row": 16,
+      "col": "Z",
+      "formula": "=Y16",
+      "value": "Alat Tulis Kantor (ATK)",
+      "type": "normal"
+    },
+    {
+      "cell": "AH16",
+      "row": 16,
+      "col": "AH",
+      "formula": "=Data2025!W15",
+      "value": "081375309828",
+      "type": "normal"
+    },
+    {
+      "cell": "A17",
+      "row": 17,
+      "col": "A",
+      "formula": "=Data2025!G16",
+      "value": "04",
+      "type": "normal"
+    },
+    {
+      "cell": "B17",
+      "row": 17,
+      "col": "B",
+      "formula": "=Data2025!K16",
+      "value": "BPU04",
+      "type": "normal"
+    },
+    {
+      "cell": "C17",
+      "row": 17,
+      "col": "C",
+      "formula": "=Data2025!D16",
+      "value": "06. 05. 08.",
+      "type": "normal"
+    },
+    {
+      "cell": "D17",
+      "row": 17,
+      "col": "D",
+      "formula": "=Data2025!C16",
+      "value": "5.1.02.01.01.0024",
+      "type": "normal"
+    },
+    {
+      "cell": "E17",
+      "row": 17,
+      "col": "E",
+      "formula": "=Data2025!E16",
+      "value": "2025-01-04T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "F17",
+      "row": 17,
+      "col": "F",
+      "formula": "=Data2025!F16",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "G17",
+      "row": 17,
+      "col": "G",
+      "formula": "=Data2025!H16",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "H17",
+      "row": 17,
+      "col": "H",
+      "formula": "=G17",
+      "value": "06/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "I17",
+      "row": 17,
+      "col": "I",
+      "formula": "=Data2025!J16",
+      "value": "23/01/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "J17",
+      "row": 17,
+      "col": "J",
+      "formula": "=Data2025!L16",
+      "value": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+      "type": "normal"
+    },
+    {
+      "cell": "K17",
+      "row": 17,
+      "col": "K",
+      "formula": "=Data2025!M16",
+      "value": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+      "type": "normal"
+    },
+    {
+      "cell": "L17",
+      "row": 17,
+      "col": "L",
+      "formula": "=Data2025!N16",
+      "value": "2",
+      "type": "normal"
+    },
+    {
+      "cell": "M17",
+      "row": 17,
+      "col": "M",
+      "formula": "=Data2025!O16",
+      "value": "bungkus",
+      "type": "normal"
+    },
+    {
+      "cell": "N17",
+      "row": 17,
+      "col": "N",
+      "formula": "=Data2025!P16",
+      "value": "60000",
+      "type": "normal"
+    }
+  ]
+}

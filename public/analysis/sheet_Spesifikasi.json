@@ -1,0 +1,215 @@
+{
+  "name": "Spesifikasi",
+  "max_row": 82,
+  "max_col": 10,
+  "non_empty_cells": 80,
+  "formulas_count": 0,
+  "type": "Reference",
+  "purpose": "Product specifications catalog (10 columns of items)",
+  "category": "reference",
+  "headers": [
+    {
+      "col": "A",
+      "col_idx": 1,
+      "header": "ATK"
+    }
+  ],
+  "sample_rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "ATK",
+          "value": "ATK",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Amplop Coklat Aa (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 7Gr)",
+          "value": "Amplop Coklat Aa (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 7Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Amplop Coklat Bertali (Length 5.0Cm, Width 5.0Cm, Height 7.0Cm, Weight 268Gr)",
+          "value": "Amplop Coklat Bertali (Length 5.0Cm, Width 5.0Cm, Height 7.0Cm, Weight 268Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Amplop Coklat Folio (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 7Gr)",
+          "value": "Amplop Coklat Folio (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 7Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Amplop Putih Panjang (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Amplop Putih Panjang (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Ballpoint Boldiner Standar  (Satuan. 300 Gram ; Dimensi Ukuran. 15X5X7.5Cm. (Berat Volume: 0.09Kg) ",
+          "value": "Ballpoint Boldiner Standar  (Satuan. 300 Gram ; Dimensi Ukuran. 15X5X7.5Cm. (Berat Volume: 0.09Kg) ",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Ballpoint Drawing Pen 0,5 Snowman (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Ballpoint Drawing Pen 0,5 Snowman (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Ballpoint Pilot G2 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Ballpoint Pilot G2 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Ballpoint Standard Ae7 (Ukuran: 0.5 Mm Warna: Hitam 1 , Lebar Produk 6 Cm, Tinggi Produk 4 Cm)",
+          "value": "Ballpoint Standard Ae7 (Ukuran: 0.5 Mm Warna: Hitam 1 , Lebar Produk 6 Cm, Tinggi Produk 4 Cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Bantalan Cap Besar (Berat Produk 1 Kg, Panjang Produk 12 Cm, Lebar Produk 8 Cm, Tinggi Produk 12 Cm)",
+          "value": "Bantalan Cap Besar (Berat Produk 1 Kg, Panjang Produk 12 Cm, Lebar Produk 8 Cm, Tinggi Produk 12 Cm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Bantalan Cap Kecil ( Dimensi, 8Cm X 11Cm X 2Cm. Berat, 48G.)",
+          "value": "Bantalan Cap Kecil ( Dimensi, 8Cm X 11Cm X 2Cm. Berat, 48G.)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Baterey Kecil (Type: Aa; Tegangan: 1.5 Volt; Ukuran: 14 X 50 Mm)",
+          "value": "Baterey Kecil (Type: Aa; Tegangan: 1.5 Volt; Ukuran: 14 X 50 Mm)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Baterai Tanggung (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Baterai Tanggung (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Binder Clip N0 107 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Binder Clip N0 107 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Binder Clip No 111 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Binder Clip No 111 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    }
+  ],
+  "formulas": []
+}

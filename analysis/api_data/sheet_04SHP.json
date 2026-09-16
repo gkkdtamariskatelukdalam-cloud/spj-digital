@@ -1,0 +1,2736 @@
+{
+  "name": "04SHP",
+  "max_row": 166,
+  "max_col": 17,
+  "non_empty_cells": 479,
+  "formulas_count": 445,
+  "type": "Print Form",
+  "purpose": "Surat Hasil Pembanding (Comparison Result Letter)",
+  "category": "form",
+  "headers": [
+    {
+      "col": "A",
+      "col_idx": 1,
+      "header": "PEMERINTAH PROVINSI SUMATERA UTARA"
+    }
+  ],
+  "sample_rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "PEMERINTAH PROVINSI SUMATERA UTARA",
+          "value": "PEMERINTAH PROVINSI SUMATERA UTARA",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "DINAS PENDIDIKAN",
+          "value": "DINAS PENDIDIKAN",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "SMA NEGERI 1 TELUKDALAM",
+          "value": "SMA NEGERI 1 TELUKDALAM",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=P4-1",
+          "value": "3",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan, ",
+          "value": "Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan, ",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "04",
+          "value": "04",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Cabdisdik Wil.XIV, Kode Pos 22865",
+          "value": "Cabdisdik Wil.XIV, Kode Pos 22865",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "=P4+1",
+          "value": "5",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com ",
+          "value": "Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com ",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Laman : smansatelukdalam.sch.id",
+          "value": "Laman : smansatelukdalam.sch.id",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "SURAT HASIL PEMERIKSAAN",
+          "value": "SURAT HASIL PEMERIKSAAN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),8),\"\")",
+          "value": "06/01/2025",
+          "is_formula": true,
+          "is_array": true
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+          "value": "04",
+          "is_formula": true,
+          "is_array": true
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=ROMAN(MONTH(K8))",
+          "value": "I",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=\"NOMOR : 421.3/\"&L8&\"-PB/SMANSA-TD/\"&M8&\"/\"&YEAR(K8)&\"\"",
+          "value": "NOMOR : 421.3/04-PB/SMANSA-TD/I/2025",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "PESANAN",
+          "value": "PESANAN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+          "value": "04",
+          "is_formula": true,
+          "is_array": true
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "=\"Pada hari ini, \"&TEXT(K8,\"[$-421] dddd\")&\" tanggal \"&TEXT(K8,\"[$-421] DD\")&\" bulan \"&TEXT(K8,\"[$-421] mmmm\")&\" tahun \"&YEAR(K8)&\", sesuai dengan :\"",
+          "value": "Pada hari ini,  Senin tanggal  06 bulan  Januari tahun 2025, sesuai dengan :",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "BAST",
+          "value": "BAST",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+          "value": "04",
+          "is_formula": true,
+          "is_array": true
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Nomor Surat Pemesanan",
+          "value": "Nomor Surat Pemesanan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=\"421.3/\"&M10&\"-P/DB/SMANSATD/\"&M8&\"/\"&YEAR(K8)&\"\"",
+          "value": "421.3/04-P/DB/SMANSATD/I/2025",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "SHP",
+          "value": "SHP",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+          "value": "04",
+          "is_formula": true,
+          "is_array": true
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Tanggal",
+          "value": "Tanggal",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=TEXT(K8, \"[$-421] dd mmmm yyyy\")",
+          "value": " 06 Januari 2025",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Nama pekerjaan",
+          "value": "Nama pekerjaan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=\"Pengadaan \"&IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),26),\"\")",
+          "value": "Pengadaan Alat Tulis Kantor (ATK)",
+          "is_formula": true,
+          "is_array": true
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Tahun",
+          "value": "Tahun",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "=YEAR(K8)",
+          "value": "2025",
+          "is_formula": true,
+          "is_array": true
+        }
+      ]
+    }
+  ],
+  "formulas": [
+    {
+      "cell": "Q3",
+      "row": 3,
+      "col": "Q",
+      "formula": "=P4-1",
+      "value": "3",
+      "type": "normal"
+    },
+    {
+      "cell": "Q5",
+      "row": 5,
+      "col": "Q",
+      "formula": "=P4+1",
+      "value": "5",
+      "type": "normal"
+    },
+    {
+      "cell": "K8",
+      "row": 8,
+      "col": "K",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),8),\"\")",
+      "value": "06/01/2025",
+      "type": "array"
+    },
+    {
+      "cell": "L8",
+      "row": 8,
+      "col": "L",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+      "value": "04",
+      "type": "array"
+    },
+    {
+      "cell": "M8",
+      "row": 8,
+      "col": "M",
+      "formula": "=ROMAN(MONTH(K8))",
+      "value": "I",
+      "type": "normal"
+    },
+    {
+      "cell": "A9",
+      "row": 9,
+      "col": "A",
+      "formula": "=\"NOMOR : 421.3/\"&L8&\"-PB/SMANSA-TD/\"&M8&\"/\"&YEAR(K8)&\"\"",
+      "value": "NOMOR : 421.3/04-PB/SMANSA-TD/I/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "M10",
+      "row": 10,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+      "value": "04",
+      "type": "array"
+    },
+    {
+      "cell": "A11",
+      "row": 11,
+      "col": "A",
+      "formula": "=\"Pada hari ini, \"&TEXT(K8,\"[$-421] dddd\")&\" tanggal \"&TEXT(K8,\"[$-421] DD\")&\" bulan \"&TEXT(K8,\"[$-421] mmmm\")&\" tahun \"&YEAR(K8)&\", sesuai dengan :\"",
+      "value": "Pada hari ini,  Senin tanggal  06 bulan  Januari tahun 2025, sesuai dengan :",
+      "type": "normal"
+    },
+    {
+      "cell": "M11",
+      "row": 11,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+      "value": "04",
+      "type": "array"
+    },
+    {
+      "cell": "D12",
+      "row": 12,
+      "col": "D",
+      "formula": "=\"421.3/\"&M10&\"-P/DB/SMANSATD/\"&M8&\"/\"&YEAR(K8)&\"\"",
+      "value": "421.3/04-P/DB/SMANSATD/I/2025",
+      "type": "normal"
+    },
+    {
+      "cell": "M12",
+      "row": 12,
+      "col": "M",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),1),\"\")",
+      "value": "04",
+      "type": "array"
+    },
+    {
+      "cell": "D13",
+      "row": 13,
+      "col": "D",
+      "formula": "=TEXT(K8, \"[$-421] dd mmmm yyyy\")",
+      "value": " 06 Januari 2025",
+      "type": "normal"
+    },
+    {
+      "cell": "D14",
+      "row": 14,
+      "col": "D",
+      "formula": "=\"Pengadaan \"&IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),26),\"\")",
+      "value": "Pengadaan Alat Tulis Kantor (ATK)",
+      "type": "array"
+    },
+    {
+      "cell": "D15",
+      "row": 15,
+      "col": "D",
+      "formula": "=YEAR(K8)",
+      "value": "2025",
+      "type": "array"
+    },
+    {
+      "cell": "D17",
+      "row": 17,
+      "col": "D",
+      "formula": "='Data Sekolah'!A12",
+      "value": "Estera Nehe, S.Pd.",
+      "type": "normal"
+    },
+    {
+      "cell": "D18",
+      "row": 18,
+      "col": "D",
+      "formula": "='Data Sekolah'!A11",
+      "value": "Penerima Barang",
+      "type": "normal"
+    },
+    {
+      "cell": "D19",
+      "row": 19,
+      "col": "D",
+      "formula": "='Data Sekolah'!B2",
+      "value": "SMA NEGERI 1 TELUKDALAM",
+      "type": "normal"
+    },
+    {
+      "cell": "D20",
+      "row": 20,
+      "col": "D",
+      "formula": "='Data Sekolah'!B4",
+      "value": "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Teluk Dalam",
+      "type": "normal"
+    },
+    {
+      "cell": "D21",
+      "row": 21,
+      "col": "D",
+      "formula": "='Data Sekolah'!B12",
+      "value": "0823 8612 4861",
+      "type": "normal"
+    },
+    {
+      "cell": "A24",
+      "row": 24,
+      "col": "A",
+      "formula": "=IF(B24<>\"\",COUNTA($B$24:B24),\"\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "B24",
+      "row": 24,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),11),\"\")",
+      "value": "Plastik Mika",
+      "type": "array"
+    },
+    {
+      "cell": "G24",
+      "row": 24,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C1)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "H24",
+      "row": 24,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D1)),13),\"\")",
+      "value": "bungkus",
+      "type": "array"
+    },
+    {
+      "cell": "J24",
+      "row": 24,
+      "col": "J",
+      "formula": "=IF(B24=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K24",
+      "row": 24,
+      "col": "K",
+      "formula": "=IF(B24=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A25",
+      "row": 25,
+      "col": "A",
+      "formula": "=IF(B25<>\"\",COUNTA($B$24:B25),\"\")",
+      "value": "2",
+      "type": "normal"
+    },
+    {
+      "cell": "B25",
+      "row": 25,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C2)),11),\"\")",
+      "value": "Kertas Warna Blank Folio, Ukuran : 8,5 x 14\",  70 gram",
+      "type": "array"
+    },
+    {
+      "cell": "G25",
+      "row": 25,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C2)),12),\"\")",
+      "value": "2",
+      "type": "array"
+    },
+    {
+      "cell": "H25",
+      "row": 25,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D2)),13),\"\")",
+      "value": "rim",
+      "type": "array"
+    },
+    {
+      "cell": "J25",
+      "row": 25,
+      "col": "J",
+      "formula": "=IF(B25=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K25",
+      "row": 25,
+      "col": "K",
+      "formula": "=IF(B25=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A26",
+      "row": 26,
+      "col": "A",
+      "formula": "=IF(B26<>\"\",COUNTA($B$24:B26),\"\")",
+      "value": "3",
+      "type": "normal"
+    },
+    {
+      "cell": "B26",
+      "row": 26,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C3)),11),\"\")",
+      "value": "Kertas Lain-Lain Kertas Buffalo",
+      "type": "array"
+    },
+    {
+      "cell": "G26",
+      "row": 26,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C3)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "H26",
+      "row": 26,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D3)),13),\"\")",
+      "value": "bungkus",
+      "type": "array"
+    },
+    {
+      "cell": "J26",
+      "row": 26,
+      "col": "J",
+      "formula": "=IF(B26=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K26",
+      "row": 26,
+      "col": "K",
+      "formula": "=IF(B26=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A27",
+      "row": 27,
+      "col": "A",
+      "formula": "=IF(B27<>\"\",COUNTA($B$24:B27),\"\")",
+      "value": "4",
+      "type": "normal"
+    },
+    {
+      "cell": "B27",
+      "row": 27,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C4)),11),\"\")",
+      "value": "Kertas Post-It Warna Warni  Sign Here",
+      "type": "array"
+    },
+    {
+      "cell": "G27",
+      "row": 27,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C4)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "H27",
+      "row": 27,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D4)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J27",
+      "row": 27,
+      "col": "J",
+      "formula": "=IF(B27=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K27",
+      "row": 27,
+      "col": "K",
+      "formula": "=IF(B27=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A28",
+      "row": 28,
+      "col": "A",
+      "formula": "=IF(B28<>\"\",COUNTA($B$24:B28),\"\")",
+      "value": "5",
+      "type": "normal"
+    },
+    {
+      "cell": "B28",
+      "row": 28,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C5)),11),\"\")",
+      "value": "Kertas HVS 60 gram Merk : Paper One HVS F4 uk. 8.27\"x11.69\"",
+      "type": "array"
+    },
+    {
+      "cell": "G28",
+      "row": 28,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C5)),12),\"\")",
+      "value": "10",
+      "type": "array"
+    },
+    {
+      "cell": "H28",
+      "row": 28,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D5)),13),\"\")",
+      "value": "rim",
+      "type": "array"
+    },
+    {
+      "cell": "J28",
+      "row": 28,
+      "col": "J",
+      "formula": "=IF(B28=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K28",
+      "row": 28,
+      "col": "K",
+      "formula": "=IF(B28=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A29",
+      "row": 29,
+      "col": "A",
+      "formula": "=IF(B29<>\"\",COUNTA($B$24:B29),\"\")",
+      "value": "6",
+      "type": "normal"
+    },
+    {
+      "cell": "B29",
+      "row": 29,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C6)),11),\"\")",
+      "value": "Kertas HVS 80 gram Merk : Paper One A4, Ukuran : 8,27\" x 11,69\", Isi : 500 lembar",
+      "type": "array"
+    },
+    {
+      "cell": "G29",
+      "row": 29,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C6)),12),\"\")",
+      "value": "40",
+      "type": "array"
+    },
+    {
+      "cell": "H29",
+      "row": 29,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D6)),13),\"\")",
+      "value": "rim",
+      "type": "array"
+    },
+    {
+      "cell": "J29",
+      "row": 29,
+      "col": "J",
+      "formula": "=IF(B29=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K29",
+      "row": 29,
+      "col": "K",
+      "formula": "=IF(B29=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A30",
+      "row": 30,
+      "col": "A",
+      "formula": "=IF(B30<>\"\",COUNTA($B$24:B30),\"\")",
+      "value": "7",
+      "type": "normal"
+    },
+    {
+      "cell": "B30",
+      "row": 30,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C7)),11),\"\")",
+      "value": "Kertas StensiI",
+      "type": "array"
+    },
+    {
+      "cell": "G30",
+      "row": 30,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C7)),12),\"\")",
+      "value": "10",
+      "type": "array"
+    },
+    {
+      "cell": "H30",
+      "row": 30,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D7)),13),\"\")",
+      "value": "bungkus",
+      "type": "array"
+    },
+    {
+      "cell": "J30",
+      "row": 30,
+      "col": "J",
+      "formula": "=IF(B30=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K30",
+      "row": 30,
+      "col": "K",
+      "formula": "=IF(B30=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A31",
+      "row": 31,
+      "col": "A",
+      "formula": "=IF(B31<>\"\",COUNTA($B$24:B31),\"\")",
+      "value": "8",
+      "type": "normal"
+    },
+    {
+      "cell": "B31",
+      "row": 31,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C8)),11),\"\")",
+      "value": "Kertas Label",
+      "type": "array"
+    },
+    {
+      "cell": "G31",
+      "row": 31,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C8)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "H31",
+      "row": 31,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D8)),13),\"\")",
+      "value": "lembar",
+      "type": "array"
+    },
+    {
+      "cell": "J31",
+      "row": 31,
+      "col": "J",
+      "formula": "=IF(B31=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K31",
+      "row": 31,
+      "col": "K",
+      "formula": "=IF(B31=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A32",
+      "row": 32,
+      "col": "A",
+      "formula": "=IF(B32<>\"\",COUNTA($B$24:B32),\"\")",
+      "value": "9",
+      "type": "normal"
+    },
+    {
+      "cell": "B32",
+      "row": 32,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C9)),11),\"\")",
+      "value": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris",
+      "type": "array"
+    },
+    {
+      "cell": "G32",
+      "row": 32,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C9)),12),\"\")",
+      "value": "1",
+      "type": "array"
+    },
+    {
+      "cell": "H32",
+      "row": 32,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D9)),13),\"\")",
+      "value": "bungkus",
+      "type": "array"
+    },
+    {
+      "cell": "J32",
+      "row": 32,
+      "col": "J",
+      "formula": "=IF(B32=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K32",
+      "row": 32,
+      "col": "K",
+      "formula": "=IF(B32=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A33",
+      "row": 33,
+      "col": "A",
+      "formula": "=IF(B33<>\"\",COUNTA($B$24:B33),\"\")",
+      "value": "10",
+      "type": "normal"
+    },
+    {
+      "cell": "B33",
+      "row": 33,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C10)),11),\"\")",
+      "value": "Amplop Coklat Merk : Garda Ukuran Cabinet",
+      "type": "array"
+    },
+    {
+      "cell": "G33",
+      "row": 33,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C10)),12),\"\")",
+      "value": "3",
+      "type": "array"
+    },
+    {
+      "cell": "H33",
+      "row": 33,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D10)),13),\"\")",
+      "value": "bungkus",
+      "type": "array"
+    },
+    {
+      "cell": "J33",
+      "row": 33,
+      "col": "J",
+      "formula": "=IF(B33=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K33",
+      "row": 33,
+      "col": "K",
+      "formula": "=IF(B33=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A34",
+      "row": 34,
+      "col": "A",
+      "formula": "=IF(B34<>\"\",COUNTA($B$24:B34),\"\")",
+      "value": "11",
+      "type": "normal"
+    },
+    {
+      "cell": "B34",
+      "row": 34,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C11)),11),\"\")",
+      "value": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+      "type": "array"
+    },
+    {
+      "cell": "G34",
+      "row": 34,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C11)),12),\"\")",
+      "value": "2",
+      "type": "array"
+    },
+    {
+      "cell": "H34",
+      "row": 34,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D11)),13),\"\")",
+      "value": "bungkus",
+      "type": "array"
+    },
+    {
+      "cell": "J34",
+      "row": 34,
+      "col": "J",
+      "formula": "=IF(B34=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K34",
+      "row": 34,
+      "col": "K",
+      "formula": "=IF(B34=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A35",
+      "row": 35,
+      "col": "A",
+      "formula": "=IF(B35<>\"\",COUNTA($B$24:B35),\"\")",
+      "value": "12",
+      "type": "normal"
+    },
+    {
+      "cell": "B35",
+      "row": 35,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C12)),11),\"\")",
+      "value": "Amplop Panjang Putih Polos Merk : Jaya Ukuran : 11 x 23 cm",
+      "type": "array"
+    },
+    {
+      "cell": "G35",
+      "row": 35,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C12)),12),\"\")",
+      "value": "1",
+      "type": "array"
+    },
+    {
+      "cell": "H35",
+      "row": 35,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D12)),13),\"\")",
+      "value": "kotak",
+      "type": "array"
+    },
+    {
+      "cell": "J35",
+      "row": 35,
+      "col": "J",
+      "formula": "=IF(B35=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K35",
+      "row": 35,
+      "col": "K",
+      "formula": "=IF(B35=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A36",
+      "row": 36,
+      "col": "A",
+      "formula": "=IF(B36<>\"\",COUNTA($B$24:B36),\"\")",
+      "value": "13",
+      "type": "normal"
+    },
+    {
+      "cell": "B36",
+      "row": 36,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C13)),11),\"\")",
+      "value": "Ballpoint Boldiner Standar",
+      "type": "array"
+    },
+    {
+      "cell": "G36",
+      "row": 36,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C13)),12),\"\")",
+      "value": "2",
+      "type": "array"
+    },
+    {
+      "cell": "H36",
+      "row": 36,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D13)),13),\"\")",
+      "value": "lusin",
+      "type": "array"
+    },
+    {
+      "cell": "J36",
+      "row": 36,
+      "col": "J",
+      "formula": "=IF(B36=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K36",
+      "row": 36,
+      "col": "K",
+      "formula": "=IF(B36=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A37",
+      "row": 37,
+      "col": "A",
+      "formula": "=IF(B37<>\"\",COUNTA($B$24:B37),\"\")",
+      "value": "14",
+      "type": "normal"
+    },
+    {
+      "cell": "B37",
+      "row": 37,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C14)),11),\"\")",
+      "value": "Ballpoint Drawing Pen 0,1 Snowman",
+      "type": "array"
+    },
+    {
+      "cell": "G37",
+      "row": 37,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C14)),12),\"\")",
+      "value": "1",
+      "type": "array"
+    },
+    {
+      "cell": "H37",
+      "row": 37,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D14)),13),\"\")",
+      "value": "lusin",
+      "type": "array"
+    },
+    {
+      "cell": "J37",
+      "row": 37,
+      "col": "J",
+      "formula": "=IF(B37=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K37",
+      "row": 37,
+      "col": "K",
+      "formula": "=IF(B37=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A38",
+      "row": 38,
+      "col": "A",
+      "formula": "=IF(B38<>\"\",COUNTA($B$24:B38),\"\")",
+      "value": "15",
+      "type": "normal"
+    },
+    {
+      "cell": "B38",
+      "row": 38,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C15)),11),\"\")",
+      "value": "Ballpoint Standard AE7",
+      "type": "array"
+    },
+    {
+      "cell": "G38",
+      "row": 38,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C15)),12),\"\")",
+      "value": "2",
+      "type": "array"
+    },
+    {
+      "cell": "H38",
+      "row": 38,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D15)),13),\"\")",
+      "value": "lusin",
+      "type": "array"
+    },
+    {
+      "cell": "J38",
+      "row": 38,
+      "col": "J",
+      "formula": "=IF(B38=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K38",
+      "row": 38,
+      "col": "K",
+      "formula": "=IF(B38=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A39",
+      "row": 39,
+      "col": "A",
+      "formula": "=IF(B39<>\"\",COUNTA($B$24:B39),\"\")",
+      "value": "16",
+      "type": "normal"
+    },
+    {
+      "cell": "B39",
+      "row": 39,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C16)),11),\"\")",
+      "value": "Ballpoint Pilot G2",
+      "type": "array"
+    },
+    {
+      "cell": "G39",
+      "row": 39,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C16)),12),\"\")",
+      "value": "1",
+      "type": "array"
+    },
+    {
+      "cell": "H39",
+      "row": 39,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D16)),13),\"\")",
+      "value": "lusin",
+      "type": "array"
+    },
+    {
+      "cell": "J39",
+      "row": 39,
+      "col": "J",
+      "formula": "=IF(B39=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K39",
+      "row": 39,
+      "col": "K",
+      "formula": "=IF(B39=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A40",
+      "row": 40,
+      "col": "A",
+      "formula": "=IF(B40<>\"\",COUNTA($B$24:B40),\"\")",
+      "value": "17",
+      "type": "normal"
+    },
+    {
+      "cell": "B40",
+      "row": 40,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C17)),11),\"\")",
+      "value": "Binder Klip  nomor 107",
+      "type": "array"
+    },
+    {
+      "cell": "G40",
+      "row": 40,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C17)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "H40",
+      "row": 40,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D17)),13),\"\")",
+      "value": "kotak",
+      "type": "array"
+    },
+    {
+      "cell": "J40",
+      "row": 40,
+      "col": "J",
+      "formula": "=IF(B40=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K40",
+      "row": 40,
+      "col": "K",
+      "formula": "=IF(B40=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A41",
+      "row": 41,
+      "col": "A",
+      "formula": "=IF(B41<>\"\",COUNTA($B$24:B41),\"\")",
+      "value": "18",
+      "type": "normal"
+    },
+    {
+      "cell": "B41",
+      "row": 41,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C18)),11),\"\")",
+      "value": "Binder Klip  nomor 111",
+      "type": "array"
+    },
+    {
+      "cell": "G41",
+      "row": 41,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C18)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "H41",
+      "row": 41,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D18)),13),\"\")",
+      "value": "kotak",
+      "type": "array"
+    },
+    {
+      "cell": "J41",
+      "row": 41,
+      "col": "J",
+      "formula": "=IF(B41=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K41",
+      "row": 41,
+      "col": "K",
+      "formula": "=IF(B41=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A42",
+      "row": 42,
+      "col": "A",
+      "formula": "=IF(B42<>\"\",COUNTA($B$24:B42),\"\")",
+      "value": "19",
+      "type": "normal"
+    },
+    {
+      "cell": "B42",
+      "row": 42,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C19)),11),\"\")",
+      "value": "Binder Klip  nomor 200",
+      "type": "array"
+    },
+    {
+      "cell": "G42",
+      "row": 42,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C19)),12),\"\")",
+      "value": "10",
+      "type": "array"
+    },
+    {
+      "cell": "H42",
+      "row": 42,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D19)),13),\"\")",
+      "value": "kotak",
+      "type": "array"
+    },
+    {
+      "cell": "J42",
+      "row": 42,
+      "col": "J",
+      "formula": "=IF(B42=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K42",
+      "row": 42,
+      "col": "K",
+      "formula": "=IF(B42=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A43",
+      "row": 43,
+      "col": "A",
+      "formula": "=IF(B43<>\"\",COUNTA($B$24:B43),\"\")",
+      "value": "20",
+      "type": "normal"
+    },
+    {
+      "cell": "B43",
+      "row": 43,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C20)),11),\"\")",
+      "value": "Binder Klip  nomor 260",
+      "type": "array"
+    },
+    {
+      "cell": "G43",
+      "row": 43,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C20)),12),\"\")",
+      "value": "10",
+      "type": "array"
+    },
+    {
+      "cell": "H43",
+      "row": 43,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D20)),13),\"\")",
+      "value": "kotak",
+      "type": "array"
+    },
+    {
+      "cell": "J43",
+      "row": 43,
+      "col": "J",
+      "formula": "=IF(B43=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K43",
+      "row": 43,
+      "col": "K",
+      "formula": "=IF(B43=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A44",
+      "row": 44,
+      "col": "A",
+      "formula": "=IF(B44<>\"\",COUNTA($B$24:B44),\"\")",
+      "value": "21",
+      "type": "normal"
+    },
+    {
+      "cell": "B44",
+      "row": 44,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C21)),11),\"\")",
+      "value": "Binder Klip Merk : KENKO nomor 105",
+      "type": "array"
+    },
+    {
+      "cell": "G44",
+      "row": 44,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C21)),12),\"\")",
+      "value": "2",
+      "type": "array"
+    },
+    {
+      "cell": "H44",
+      "row": 44,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D21)),13),\"\")",
+      "value": "kotak",
+      "type": "array"
+    },
+    {
+      "cell": "J44",
+      "row": 44,
+      "col": "J",
+      "formula": "=IF(B44=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K44",
+      "row": 44,
+      "col": "K",
+      "formula": "=IF(B44=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A45",
+      "row": 45,
+      "col": "A",
+      "formula": "=IF(B45<>\"\",COUNTA($B$24:B45),\"\")",
+      "value": "22",
+      "type": "normal"
+    },
+    {
+      "cell": "B45",
+      "row": 45,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C22)),11),\"\")",
+      "value": "Map Binder",
+      "type": "array"
+    },
+    {
+      "cell": "G45",
+      "row": 45,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C22)),12),\"\")",
+      "value": "12",
+      "type": "array"
+    },
+    {
+      "cell": "H45",
+      "row": 45,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D22)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J45",
+      "row": 45,
+      "col": "J",
+      "formula": "=IF(B45=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K45",
+      "row": 45,
+      "col": "K",
+      "formula": "=IF(B45=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A46",
+      "row": 46,
+      "col": "A",
+      "formula": "=IF(B46<>\"\",COUNTA($B$24:B46),\"\")",
+      "value": "23",
+      "type": "normal"
+    },
+    {
+      "cell": "B46",
+      "row": 46,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C23)),11),\"\")",
+      "value": "Stofmap Kertas",
+      "type": "array"
+    },
+    {
+      "cell": "G46",
+      "row": 46,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C23)),12),\"\")",
+      "value": "1",
+      "type": "array"
+    },
+    {
+      "cell": "H46",
+      "row": 46,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D23)),13),\"\")",
+      "value": "pak",
+      "type": "array"
+    },
+    {
+      "cell": "J46",
+      "row": 46,
+      "col": "J",
+      "formula": "=IF(B46=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K46",
+      "row": 46,
+      "col": "K",
+      "formula": "=IF(B46=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A47",
+      "row": 47,
+      "col": "A",
+      "formula": "=IF(B47<>\"\",COUNTA($B$24:B47),\"\")",
+      "value": "24",
+      "type": "normal"
+    },
+    {
+      "cell": "B47",
+      "row": 47,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C24)),11),\"\")",
+      "value": "Stofmap Transparan tali",
+      "type": "array"
+    },
+    {
+      "cell": "G47",
+      "row": 47,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C24)),12),\"\")",
+      "value": "100",
+      "type": "array"
+    },
+    {
+      "cell": "H47",
+      "row": 47,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D24)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J47",
+      "row": 47,
+      "col": "J",
+      "formula": "=IF(B47=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K47",
+      "row": 47,
+      "col": "K",
+      "formula": "=IF(B47=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A48",
+      "row": 48,
+      "col": "A",
+      "formula": "=IF(B48<>\"\",COUNTA($B$24:B48),\"\")",
+      "value": "25",
+      "type": "normal"
+    },
+    {
+      "cell": "B48",
+      "row": 48,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C25)),11),\"\")",
+      "value": "Stofmap Transparan",
+      "type": "array"
+    },
+    {
+      "cell": "G48",
+      "row": 48,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C25)),12),\"\")",
+      "value": "100",
+      "type": "array"
+    },
+    {
+      "cell": "H48",
+      "row": 48,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D25)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J48",
+      "row": 48,
+      "col": "J",
+      "formula": "=IF(B48=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K48",
+      "row": 48,
+      "col": "K",
+      "formula": "=IF(B48=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A49",
+      "row": 49,
+      "col": "A",
+      "formula": "=IF(B49<>\"\",COUNTA($B$24:B49),\"\")",
+      "value": "26",
+      "type": "normal"
+    },
+    {
+      "cell": "B49",
+      "row": 49,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C26)),11),\"\")",
+      "value": "Binder Klip Ordner",
+      "type": "array"
+    },
+    {
+      "cell": "G49",
+      "row": 49,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C26)),12),\"\")",
+      "value": "6",
+      "type": "array"
+    },
+    {
+      "cell": "H49",
+      "row": 49,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D26)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J49",
+      "row": 49,
+      "col": "J",
+      "formula": "=IF(B49=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K49",
+      "row": 49,
+      "col": "K",
+      "formula": "=IF(B49=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A50",
+      "row": 50,
+      "col": "A",
+      "formula": "=IF(B50<>\"\",COUNTA($B$24:B50),\"\")",
+      "value": "27",
+      "type": "normal"
+    },
+    {
+      "cell": "B50",
+      "row": 50,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C27)),11),\"\")",
+      "value": "Box File Merk : Bantex Ukuran : 115x270x325 mm",
+      "type": "array"
+    },
+    {
+      "cell": "G50",
+      "row": 50,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C27)),12),\"\")",
+      "value": "4",
+      "type": "array"
+    },
+    {
+      "cell": "H50",
+      "row": 50,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D27)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J50",
+      "row": 50,
+      "col": "J",
+      "formula": "=IF(B50=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K50",
+      "row": 50,
+      "col": "K",
+      "formula": "=IF(B50=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A51",
+      "row": 51,
+      "col": "A",
+      "formula": "=IF(B51<>\"\",COUNTA($B$24:B51),\"\")",
+      "value": "28",
+      "type": "normal"
+    },
+    {
+      "cell": "B51",
+      "row": 51,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C28)),11),\"\")",
+      "value": "Sampul Plastik",
+      "type": "array"
+    },
+    {
+      "cell": "G51",
+      "row": 51,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C28)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "H51",
+      "row": 51,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D28)),13),\"\")",
+      "value": "bungkus",
+      "type": "array"
+    },
+    {
+      "cell": "J51",
+      "row": 51,
+      "col": "J",
+      "formula": "=IF(B51=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K51",
+      "row": 51,
+      "col": "K",
+      "formula": "=IF(B51=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A52",
+      "row": 52,
+      "col": "A",
+      "formula": "=IF(B52<>\"\",COUNTA($B$24:B52),\"\")",
+      "value": "29",
+      "type": "normal"
+    },
+    {
+      "cell": "B52",
+      "row": 52,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C29)),11),\"\")",
+      "value": "Tinta Printer Canon 740 Hitam-740 Hitam",
+      "type": "array"
+    },
+    {
+      "cell": "G52",
+      "row": 52,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C29)),12),\"\")",
+      "value": "8",
+      "type": "array"
+    },
+    {
+      "cell": "H52",
+      "row": 52,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D29)),13),\"\")",
+      "value": "botol",
+      "type": "array"
+    },
+    {
+      "cell": "J52",
+      "row": 52,
+      "col": "J",
+      "formula": "=IF(B52=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K52",
+      "row": 52,
+      "col": "K",
+      "formula": "=IF(B52=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A53",
+      "row": 53,
+      "col": "A",
+      "formula": "=IF(B53<>\"\",COUNTA($B$24:B53),\"\")",
+      "value": "30",
+      "type": "normal"
+    },
+    {
+      "cell": "B53",
+      "row": 53,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C30)),11),\"\")",
+      "value": "Tinta Printer Canon 741 Warna-741 Warna",
+      "type": "array"
+    },
+    {
+      "cell": "G53",
+      "row": 53,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C30)),12),\"\")",
+      "value": "12",
+      "type": "array"
+    },
+    {
+      "cell": "H53",
+      "row": 53,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D30)),13),\"\")",
+      "value": "botol",
+      "type": "array"
+    },
+    {
+      "cell": "J53",
+      "row": 53,
+      "col": "J",
+      "formula": "=IF(B53=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K53",
+      "row": 53,
+      "col": "K",
+      "formula": "=IF(B53=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A54",
+      "row": 54,
+      "col": "A",
+      "formula": "=IF(B54<>\"\",COUNTA($B$24:B54),\"\")",
+      "value": "31",
+      "type": "normal"
+    },
+    {
+      "cell": "B54",
+      "row": 54,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C31)),11),\"\")",
+      "value": "C. Tinta Printer EPSON Toner Epson 664 Black",
+      "type": "array"
+    },
+    {
+      "cell": "G54",
+      "row": 54,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C31)),12),\"\")",
+      "value": "6",
+      "type": "array"
+    },
+    {
+      "cell": "H54",
+      "row": 54,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D31)),13),\"\")",
+      "value": "botol",
+      "type": "array"
+    },
+    {
+      "cell": "J54",
+      "row": 54,
+      "col": "J",
+      "formula": "=IF(B54=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K54",
+      "row": 54,
+      "col": "K",
+      "formula": "=IF(B54=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A55",
+      "row": 55,
+      "col": "A",
+      "formula": "=IF(B55<>\"\",COUNTA($B$24:B55),\"\")",
+      "value": "32",
+      "type": "normal"
+    },
+    {
+      "cell": "B55",
+      "row": 55,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C32)),11),\"\")",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Yellow",
+      "type": "array"
+    },
+    {
+      "cell": "G55",
+      "row": 55,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C32)),12),\"\")",
+      "value": "4",
+      "type": "array"
+    },
+    {
+      "cell": "H55",
+      "row": 55,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D32)),13),\"\")",
+      "value": "botol",
+      "type": "array"
+    },
+    {
+      "cell": "J55",
+      "row": 55,
+      "col": "J",
+      "formula": "=IF(B55=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K55",
+      "row": 55,
+      "col": "K",
+      "formula": "=IF(B55=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A56",
+      "row": 56,
+      "col": "A",
+      "formula": "=IF(B56<>\"\",COUNTA($B$24:B56),\"\")",
+      "value": "33",
+      "type": "normal"
+    },
+    {
+      "cell": "B56",
+      "row": 56,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C33)),11),\"\")",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Blue",
+      "type": "array"
+    },
+    {
+      "cell": "G56",
+      "row": 56,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C33)),12),\"\")",
+      "value": "4",
+      "type": "array"
+    },
+    {
+      "cell": "H56",
+      "row": 56,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D33)),13),\"\")",
+      "value": "botol",
+      "type": "array"
+    },
+    {
+      "cell": "J56",
+      "row": 56,
+      "col": "J",
+      "formula": "=IF(B56=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K56",
+      "row": 56,
+      "col": "K",
+      "formula": "=IF(B56=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A57",
+      "row": 57,
+      "col": "A",
+      "formula": "=IF(B57<>\"\",COUNTA($B$24:B57),\"\")",
+      "value": "34",
+      "type": "normal"
+    },
+    {
+      "cell": "B57",
+      "row": 57,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C34)),11),\"\")",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Read",
+      "type": "array"
+    },
+    {
+      "cell": "G57",
+      "row": 57,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C34)),12),\"\")",
+      "value": "4",
+      "type": "array"
+    },
+    {
+      "cell": "H57",
+      "row": 57,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D34)),13),\"\")",
+      "value": "botol",
+      "type": "array"
+    },
+    {
+      "cell": "J57",
+      "row": 57,
+      "col": "J",
+      "formula": "=IF(B57=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K57",
+      "row": 57,
+      "col": "K",
+      "formula": "=IF(B57=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A58",
+      "row": 58,
+      "col": "A",
+      "formula": "=IF(B58<>\"\",COUNTA($B$24:B58),\"\")",
+      "value": "35",
+      "type": "normal"
+    },
+    {
+      "cell": "B58",
+      "row": 58,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C35)),11),\"\")",
+      "value": "canon catridge 741-catridge 741",
+      "type": "array"
+    },
+    {
+      "cell": "G58",
+      "row": 58,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C35)),12),\"\")",
+      "value": "4",
+      "type": "array"
+    },
+    {
+      "cell": "H58",
+      "row": 58,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D35)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J58",
+      "row": 58,
+      "col": "J",
+      "formula": "=IF(B58=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K58",
+      "row": 58,
+      "col": "K",
+      "formula": "=IF(B58=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A59",
+      "row": 59,
+      "col": "A",
+      "formula": "=IF(B59<>\"\",COUNTA($B$24:B59),\"\")",
+      "value": "36",
+      "type": "normal"
+    },
+    {
+      "cell": "B59",
+      "row": 59,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C36)),11),\"\")",
+      "value": "Catridge Printer Epson T 014--",
+      "type": "array"
+    },
+    {
+      "cell": "G59",
+      "row": 59,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C36)),12),\"\")",
+      "value": "4",
+      "type": "array"
+    },
+    {
+      "cell": "H59",
+      "row": 59,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D36)),13),\"\")",
+      "value": "botol",
+      "type": "array"
+    },
+    {
+      "cell": "J59",
+      "row": 59,
+      "col": "J",
+      "formula": "=IF(B59=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K59",
+      "row": 59,
+      "col": "K",
+      "formula": "=IF(B59=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A60",
+      "row": 60,
+      "col": "A",
+      "formula": "=IF(B60<>\"\",COUNTA($B$24:B60),\"\")",
+      "value": "37",
+      "type": "normal"
+    },
+    {
+      "cell": "B60",
+      "row": 60,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C37)),11),\"\")",
+      "value": "Lakban Besar",
+      "type": "array"
+    },
+    {
+      "cell": "G60",
+      "row": 60,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C37)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "H60",
+      "row": 60,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D37)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J60",
+      "row": 60,
+      "col": "J",
+      "formula": "=IF(B60=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K60",
+      "row": 60,
+      "col": "K",
+      "formula": "=IF(B60=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A61",
+      "row": 61,
+      "col": "A",
+      "formula": "=IF(B61<>\"\",COUNTA($B$24:B61),\"\")",
+      "value": "38",
+      "type": "normal"
+    },
+    {
+      "cell": "B61",
+      "row": 61,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C38)),11),\"\")",
+      "value": "Lakban Bening Sedang",
+      "type": "array"
+    },
+    {
+      "cell": "G61",
+      "row": 61,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C38)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "H61",
+      "row": 61,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D38)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J61",
+      "row": 61,
+      "col": "J",
+      "formula": "=IF(B61=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K61",
+      "row": 61,
+      "col": "K",
+      "formula": "=IF(B61=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A62",
+      "row": 62,
+      "col": "A",
+      "formula": "=IF(B62<>\"\",COUNTA($B$24:B62),\"\")",
+      "value": "39",
+      "type": "normal"
+    },
+    {
+      "cell": "B62",
+      "row": 62,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C39)),11),\"\")",
+      "value": "Lakban Bening",
+      "type": "array"
+    },
+    {
+      "cell": "G62",
+      "row": 62,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C39)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "H62",
+      "row": 62,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D39)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J62",
+      "row": 62,
+      "col": "J",
+      "formula": "=IF(B62=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K62",
+      "row": 62,
+      "col": "K",
+      "formula": "=IF(B62=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A63",
+      "row": 63,
+      "col": "A",
+      "formula": "=IF(B63<>\"\",COUNTA($B$24:B63),\"\")",
+      "value": "40",
+      "type": "normal"
+    },
+    {
+      "cell": "B63",
+      "row": 63,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C40)),11),\"\")",
+      "value": "Lakban Hitam--",
+      "type": "array"
+    },
+    {
+      "cell": "G63",
+      "row": 63,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C40)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "H63",
+      "row": 63,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D40)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J63",
+      "row": 63,
+      "col": "J",
+      "formula": "=IF(B63=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K63",
+      "row": 63,
+      "col": "K",
+      "formula": "=IF(B63=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A64",
+      "row": 64,
+      "col": "A",
+      "formula": "=IF(B64<>\"\",COUNTA($B$24:B64),\"\")",
+      "value": "41",
+      "type": "normal"
+    },
+    {
+      "cell": "B64",
+      "row": 64,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C41)),11),\"\")",
+      "value": "lakban hitam-ukuran : lebar 2 inch, panjang 12m, bahan : kain",
+      "type": "array"
+    },
+    {
+      "cell": "G64",
+      "row": 64,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C41)),12),\"\")",
+      "value": "4",
+      "type": "array"
+    },
+    {
+      "cell": "H64",
+      "row": 64,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D41)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J64",
+      "row": 64,
+      "col": "J",
+      "formula": "=IF(B64=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K64",
+      "row": 64,
+      "col": "K",
+      "formula": "=IF(B64=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A65",
+      "row": 65,
+      "col": "A",
+      "formula": "=IF(B65<>\"\",COUNTA($B$24:B65),\"\")",
+      "value": "42",
+      "type": "normal"
+    },
+    {
+      "cell": "B65",
+      "row": 65,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C42)),11),\"\")",
+      "value": "Lakban Hitam uk 2 \" Warna hitam uk. 2 \"",
+      "type": "array"
+    },
+    {
+      "cell": "G65",
+      "row": 65,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C42)),12),\"\")",
+      "value": "5",
+      "type": "array"
+    },
+    {
+      "cell": "H65",
+      "row": 65,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D42)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J65",
+      "row": 65,
+      "col": "J",
+      "formula": "=IF(B65=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K65",
+      "row": 65,
+      "col": "K",
+      "formula": "=IF(B65=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A66",
+      "row": 66,
+      "col": "A",
+      "formula": "=IF(B66<>\"\",COUNTA($B$24:B66),\"\")",
+      "value": "43",
+      "type": "normal"
+    },
+    {
+      "cell": "B66",
+      "row": 66,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C43)),11),\"\")",
+      "value": "Lakban warna Uk 2\" Warna Coklat Cofiie",
+      "type": "array"
+    },
+    {
+      "cell": "G66",
+      "row": 66,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C43)),12),\"\")",
+      "value": "3",
+      "type": "array"
+    },
+    {
+      "cell": "H66",
+      "row": 66,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D43)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J66",
+      "row": 66,
+      "col": "J",
+      "formula": "=IF(B66=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K66",
+      "row": 66,
+      "col": "K",
+      "formula": "=IF(B66=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A67",
+      "row": 67,
+      "col": "A",
+      "formula": "=IF(B67<>\"\",COUNTA($B$24:B67),\"\")",
+      "value": "44",
+      "type": "normal"
+    },
+    {
+      "cell": "B67",
+      "row": 67,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C44)),11),\"\")",
+      "value": "Spidol Refil Spidol White Board Snowman",
+      "type": "array"
+    },
+    {
+      "cell": "G67",
+      "row": 67,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C44)),12),\"\")",
+      "value": "10",
+      "type": "array"
+    },
+    {
+      "cell": "H67",
+      "row": 67,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D44)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J67",
+      "row": 67,
+      "col": "J",
+      "formula": "=IF(B67=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K67",
+      "row": 67,
+      "col": "K",
+      "formula": "=IF(B67=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A68",
+      "row": 68,
+      "col": "A",
+      "formula": "=IF(B68<>\"\",COUNTA($B$24:B68),\"\")",
+      "value": "45",
+      "type": "normal"
+    },
+    {
+      "cell": "B68",
+      "row": 68,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C45)),11),\"\")",
+      "value": "Spidol White board",
+      "type": "array"
+    },
+    {
+      "cell": "G68",
+      "row": 68,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C45)),12),\"\")",
+      "value": "2",
+      "type": "array"
+    },
+    {
+      "cell": "H68",
+      "row": 68,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D45)),13),\"\")",
+      "value": "lusin",
+      "type": "array"
+    },
+    {
+      "cell": "J68",
+      "row": 68,
+      "col": "J",
+      "formula": "=IF(B68=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K68",
+      "row": 68,
+      "col": "K",
+      "formula": "=IF(B68=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A69",
+      "row": 69,
+      "col": "A",
+      "formula": "=IF(B69<>\"\",COUNTA($B$24:B69),\"\")",
+      "value": "46",
+      "type": "normal"
+    },
+    {
+      "cell": "B69",
+      "row": 69,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C46)),11),\"\")",
+      "value": "Stapler HD-10--",
+      "type": "array"
+    },
+    {
+      "cell": "G69",
+      "row": 69,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C46)),12),\"\")",
+      "value": "2",
+      "type": "array"
+    },
+    {
+      "cell": "H69",
+      "row": 69,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D46)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J69",
+      "row": 69,
+      "col": "J",
+      "formula": "=IF(B69=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    },
+    {
+      "cell": "K69",
+      "row": 69,
+      "col": "K",
+      "formula": "=IF(B69=\"\",\"0\",\"1\")",
+      "value": "1",
+      "type": "normal"
+    },
+    {
+      "cell": "A70",
+      "row": 70,
+      "col": "A",
+      "formula": "=IF(B70<>\"\",COUNTA($B$24:B70),\"\")",
+      "value": "47",
+      "type": "normal"
+    },
+    {
+      "cell": "B70",
+      "row": 70,
+      "col": "B",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C47)),11),\"\")",
+      "value": "Stapler Stapler No, 50 MAX",
+      "type": "array"
+    },
+    {
+      "cell": "G70",
+      "row": 70,
+      "col": "G",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(C47)),12),\"\")",
+      "value": "2",
+      "type": "array"
+    },
+    {
+      "cell": "H70",
+      "row": 70,
+      "col": "H",
+      "formula": "=IFERROR(INDEX(Masteratk2024,SMALL(IF(Kriteriaatk2024=$P$4,ROW(Kriteriaatk2024)),ROW(D47)),13),\"\")",
+      "value": "buah",
+      "type": "array"
+    },
+    {
+      "cell": "J70",
+      "row": 70,
+      "col": "J",
+      "formula": "=IF(B70=\"\",\"\",\"Baik\")",
+      "value": "Baik",
+      "type": "normal"
+    }
+  ]
+}

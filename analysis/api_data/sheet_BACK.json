@@ -1,0 +1,164 @@
+{
+  "name": "BACK",
+  "max_row": 9,
+  "max_col": 18,
+  "non_empty_cells": 13,
+  "formulas_count": 0,
+  "type": "Header",
+  "purpose": "Header/cover sheet - school identity (SMA Negeri 1 Telukdalam)",
+  "category": "info",
+  "headers": [
+    {
+      "col": "K",
+      "col_idx": 11,
+      "header": "PEMERINTAH PROVINSI SUMATERA UTARA"
+    }
+  ],
+  "sample_rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "PEMERINTAH PROVINSI SUMATERA UTARA",
+          "value": "PEMERINTAH PROVINSI SUMATERA UTARA",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "SMA NEGERI 1 TELUKDALAM",
+          "value": "SMA NEGERI 1 TELUKDALAM",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "DINAS PENDIDIKAN ",
+          "value": "DINAS PENDIDIKAN ",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "JL. PENDIDIKAN NO. 13, KELURAHAN PASAR TELUKDALAM",
+          "value": "JL. PENDIDIKAN NO. 13, KELURAHAN PASAR TELUKDALAM",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "SMA NEGERI 1 TELUKDALAM",
+          "value": "SMA NEGERI 1 TELUKDALAM",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "TELUKDALAM",
+          "value": "TELUKDALAM",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "NIS: 300010              NPSN: 10258246            Terakreditasi A               NSS: 301071701001\n",
+          "value": "NIS: 300010              NPSN: 10258246            Terakreditasi A               NSS: 301071701001\n",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "KABUPATEN NIAS SELATAN",
+          "value": "KABUPATEN NIAS SELATAN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865",
+          "value": "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "SUMATERA UTARA",
+          "value": "SUMATERA UTARA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Email: smansatelukdalam@ymail.com; Website: www.smansatelukdalam.sch.id",
+          "value": "Email: smansatelukdalam@ymail.com; Website: www.smansatelukdalam.sch.id",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "2024",
+          "value": "2024",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "KELENGKAPAN PELAPORAN PERTANGGUNGJAWABAN BOPS",
+          "value": "KELENGKAPAN PELAPORAN PERTANGGUNGJAWABAN BOPS",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    }
+  ],
+  "formulas": []
+}

@@ -1,0 +1,6093 @@
+{
+  "BACK": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "K",
+          "val": "PEMERINTAH PROVINSI SUMATERA UTARA"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "val": "SMA NEGERI 1 TELUKDALAM"
+        },
+        {
+          "col": "K",
+          "val": "DINAS PENDIDIKAN "
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "val": "JL. PENDIDIKAN NO. 13, KELURAHAN PASAR TELUKDALAM"
+        },
+        {
+          "col": "K",
+          "val": "SMA NEGERI 1 TELUKDALAM"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "val": "TELUKDALAM"
+        },
+        {
+          "col": "K",
+          "val": "NIS: 300010              NPSN: 10258246            Terakreditasi A               NSS: 301071701001\n"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "val": "KABUPATEN NIAS SELATAN"
+        },
+        {
+          "col": "K",
+          "val": "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "val": "SUMATERA UTARA"
+        },
+        {
+          "col": "K",
+          "val": "Email: smansatelukdalam@ymail.com; Website: www.smansatelukdalam.sch.id"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "val": "2024"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "val": "KELENGKAPAN PELAPORAN PERTANGGUNGJAWABAN BOPS"
+        }
+      ]
+    }
+  ],
+  "Data Sekolah": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Data Sekolah"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Nama Sekolah"
+        },
+        {
+          "col": "B",
+          "val": "SMA NEGERI 1 TELUKDALAM"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "val": "NPSN"
+        },
+        {
+          "col": "B",
+          "val": "10258246"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Alamat Sekolah"
+        },
+        {
+          "col": "B",
+          "val": "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Teluk Dalam"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Kepala Sekolah"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Nursari Rindu Simanullang, S.Pd., M.M."
+        },
+        {
+          "col": "B",
+          "val": "19691208 200502 2 001"
+        },
+        {
+          "col": "C",
+          "val": "Pembina Tk I"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Bendahara"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Riama Tiodora Siahaan, S.Pd"
+        },
+        {
+          "col": "B",
+          "val": "19800301 201001 2 016"
+        },
+        {
+          "col": "C",
+          "val": "Penata TK. I"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Pengurus Barang"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Radius S. K. Siburian, S.Pd"
+        },
+        {
+          "col": "B",
+          "val": "19861005 201903 1 009"
+        },
+        {
+          "col": "C",
+          "val": "Penata Muda"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Penerima Barang"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Estera Nehe, S.Pd."
+        },
+        {
+          "col": "B",
+          "val": "0823 8612 4861"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Bantuan Operasional Satuan Pendidikan (BOSP) 2025"
+        }
+      ]
+    }
+  ],
+  "Spesifikasi": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "A",
+          "val": "ATK"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Amplop Coklat Aa (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 7Gr)"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Amplop Coklat Bertali (Length 5.0Cm, Width 5.0Cm, Height 7.0Cm, Weight 268Gr)"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Amplop Coklat Folio (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 7Gr)"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Amplop Putih Panjang (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Ballpoint Boldiner Standar  (Satuan. 300 Gram ; Dimensi Ukuran. 15X5X7.5Cm. (Berat Volume: 0.09Kg) "
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Ballpoint Drawing Pen 0,5 Snowman (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Ballpoint Pilot G2 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Ballpoint Standard Ae7 (Ukuran: 0.5 Mm Warna: Hitam 1 , Lebar Produk 6 Cm, Tinggi Produk 4 Cm)"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Bantalan Cap Besar (Berat Produk 1 Kg, Panjang Produk 12 Cm, Lebar Produk 8 Cm, Tinggi Produk 12 Cm)"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Bantalan Cap Kecil ( Dimensi, 8Cm X 11Cm X 2Cm. Berat, 48G.)"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Baterey Kecil (Type: Aa; Tegangan: 1.5 Volt; Ukuran: 14 X 50 Mm)"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Baterai Tanggung (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Binder Clip N0 107 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Binder Clip No 111 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Binder Clip Nomor 200 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Binder Clip No 260 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Binder Clip No 105 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)  "
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Binder Klip Ordner (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Box File (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Buku Ekspedisi 100 (Berat Satuan. 400 Gram ; Dimensi Ukuran. 32X11X1Cm)"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Buku Induk/Inventaris 35 Cm X 50 Cm (Lebar : 50 Cm, Tinggi : 4 Cm, Berat : 1000 Gr)"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Tinta Printer Epson 664 Biru (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Tnta Printer Epson 664 Merah (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Tinta Printer Epson 664 Kuning (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Tinta Printer Epson 664 Hitam (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Canon Catridge 741 ((Cyan, Magenta, Yellow). Daya Tampung Tinta: 4 Ml. Berat Produk: 160 Gr)"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Catridge Printer Epson T 014 (Tipe: T6641 Black, T6642 Cyan, T6643 Magenta, T6644 Yellow; Isi: 70 Ml)"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Gunting Sedang (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Hardisk (Dimensi: P X L X T /80.0 Mm \u00d7 0.583Inci/14.8Mm Bobot : 170 G)"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Isi Staples Besar (Ukuran 10 Mm (3/8\u2033)Isi Kemasan 1000 Staples/Box)"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Isi Staples Sedang (Dimensi, 2Cm X 4Cm X 1Cm. Berat, 5G.)"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Kertas Hvs 60Gsm Paper One F4 (Length 33.0Cm, Width 21.0Cm, Height 7.0Cm, Weight 1400Gr)"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "col": "A",
+          "val": " Kertas Hvs A4 80Gsm Paper One (Length 30.0Cm, Width 21.0Cm, Height 7.0Cm, Weight 2394Gr)"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Kertas Lebel Kotak (Length 5.0Cm, Width 5.0Cm, Height 7.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Kertas Buffalo F4 (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 1006Gr)"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Post It Warna Warni (Length 7.0Cm, Width 7.0Cm, Height 7.0Cm, Weight 44Gr)"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Kertas Stencil Folio (Length 33.0Cm, Width 21.0Cm, Height 5.0Cm, Weight 1400Gr)"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Kertas Hvs Warna 70 Gsm (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 2400Gr)"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Lakban Bening Kecil (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Lakban Bening Sedang (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Lakban Bening Besar (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Lakban Hitam (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Lakban Hitam Bahan Kain (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Lakban Hitam Besar (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Lakban Warna Uk 2\" Warna Coklat Cofiie (Ukuran 90Yard Lebar : 48Mm)"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Lem Fox Isi 500 Gram (Bahan Pvc, Berat 500Gr, Ukuran Botol Putih 500Gr)"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Map Binder (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Materai (Dimensi, 3.2Cm X 4.7Cm X 0Cm. Berat, 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Paper Clip No 1 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Paper Clip No 3 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Penghapus White Board (Ukuran : 55 X 120 X 38 Mm - Berat : 30 Gram)"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Keter L500 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Plastik Mika Jilid F4 (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 548Gr)"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Sampul Plastik (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Spidol Refil Spidol White Board Snowman (Panjang. : 10 Cm ; Lebar. : 5 Cm ; Tinggi. : 7 Cm ; Berat. : 500 Gr)"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Spidol White Board (Berat Produk 0.5 Kg, Panjang Produk 10 Cm, Lebar Produk 3 Cm, Tinggi Produk 10 Cm)"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Stapler Hd-10 (Size : 9.1 X 4.2 X 1.8 Cm, Berat. 0.07 Kg. Lebar. 10.0 Cm. Tinggi. 3.5 Cm)"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Stapler 50 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Stempel Cap (Ukuran 4,2Cm, Bentuk Bulat, Berat 50Gr)"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Stempel Manual (Berat Produk, 0.1 Kg ; Panjang Produk, 12 Cm ; Lebar Produk, 7 Cm ; Tinggi Produk, 9 Cm)"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Stofmap Kertas (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Stofmap Transparan (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Stofmap Transparan Tali (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Tinta Printer Cano Aiflo Hitam (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Tinta Printer Canon Aiflo Warna (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Tinta Stempel (Ukuran Produk 105 X 35 X 35 Mm, Isi 1 Botol 50 Ml, Berat Satuan 85 Gram)"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Usb Flash Disk Usb/Flash Disk 4Gb (Ukuran 50 X 15 X 6 Mm, Berat 26 Gr)"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Konsumsi"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Aqua Cup (Diameter: 6.3cm. Tinggi: 9.5cm)"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Aqua Botol (Berat Satuan 600 gram; Dimensi Ukuran 2x3x2cm; Berat volume: 0.00kg)"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Kue (bahan tepung terigu, gula, telur, mentega; berat 100gr, panjang 15cm, lebar 8 cm)"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Obat"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Panadol (Mengandung Paracetamol 500 mg dan caffeine 65 mg)"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Diapet (Tiap kapsul Diapet mengandung 240 mg daun jambu biji, 204 mg rimpang kunyit, 84 mg buah mojokeling, dan 72 mg kulit buah delima)"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Promaag (Mengandung 200 mg hydrotalcite, 150 mg magnesium hidroksida, dan 50 mg simethicone)"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Betadine"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Kapas Pembalut 1000 gr"
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Perban Kain Kasa"
+        }
+      ]
+    }
+  ],
+  "NO BPU": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "C",
+          "val": "NO. BPU 2024"
+        },
+        {
+          "col": "E",
+          "val": "NO Pesanan 2023"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU001"
+        },
+        {
+          "col": "E",
+          "val": "01"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU002"
+        },
+        {
+          "col": "E",
+          "val": "02"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU003"
+        },
+        {
+          "col": "E",
+          "val": "03"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU004"
+        },
+        {
+          "col": "E",
+          "val": "04"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU005"
+        },
+        {
+          "col": "E",
+          "val": "05"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU006"
+        },
+        {
+          "col": "E",
+          "val": "06"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU007"
+        },
+        {
+          "col": "E",
+          "val": "07"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU008"
+        },
+        {
+          "col": "E",
+          "val": "08"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU009"
+        },
+        {
+          "col": "E",
+          "val": "09"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU010"
+        },
+        {
+          "col": "E",
+          "val": "10"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU011"
+        },
+        {
+          "col": "E",
+          "val": "11"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU012"
+        },
+        {
+          "col": "E",
+          "val": "12"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU013"
+        },
+        {
+          "col": "E",
+          "val": "13"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU014"
+        },
+        {
+          "col": "E",
+          "val": "14"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU015"
+        },
+        {
+          "col": "E",
+          "val": "15"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU016"
+        },
+        {
+          "col": "E",
+          "val": "16"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU017"
+        },
+        {
+          "col": "E",
+          "val": "17"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU018"
+        },
+        {
+          "col": "E",
+          "val": "18"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU019"
+        },
+        {
+          "col": "E",
+          "val": "19"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU020"
+        },
+        {
+          "col": "E",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU021"
+        },
+        {
+          "col": "E",
+          "val": "21"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU022"
+        },
+        {
+          "col": "E",
+          "val": "22"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU023"
+        },
+        {
+          "col": "E",
+          "val": "23"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU024"
+        },
+        {
+          "col": "E",
+          "val": "24"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU025"
+        },
+        {
+          "col": "E",
+          "val": "25"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU026"
+        },
+        {
+          "col": "E",
+          "val": "26"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU027"
+        },
+        {
+          "col": "E",
+          "val": "27"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU028"
+        },
+        {
+          "col": "E",
+          "val": "28"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU029"
+        },
+        {
+          "col": "E",
+          "val": "29"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU030"
+        },
+        {
+          "col": "E",
+          "val": "30"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU031"
+        },
+        {
+          "col": "E",
+          "val": "31"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU032"
+        },
+        {
+          "col": "E",
+          "val": "32"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU033"
+        },
+        {
+          "col": "E",
+          "val": "33"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU034"
+        },
+        {
+          "col": "E",
+          "val": "34"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU035"
+        },
+        {
+          "col": "E",
+          "val": "35"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU036"
+        },
+        {
+          "col": "E",
+          "val": "36"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU037"
+        },
+        {
+          "col": "E",
+          "val": "37"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU038"
+        },
+        {
+          "col": "E",
+          "val": "38"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU039"
+        },
+        {
+          "col": "E",
+          "val": "39"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU040"
+        },
+        {
+          "col": "E",
+          "val": "40"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU041"
+        },
+        {
+          "col": "E",
+          "val": "41"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU042"
+        },
+        {
+          "col": "E",
+          "val": "42"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU043"
+        },
+        {
+          "col": "E",
+          "val": "43"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU044"
+        },
+        {
+          "col": "E",
+          "val": "44"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU045"
+        },
+        {
+          "col": "E",
+          "val": "45"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU046"
+        },
+        {
+          "col": "E",
+          "val": "46"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU047"
+        },
+        {
+          "col": "E",
+          "val": "47"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU048"
+        },
+        {
+          "col": "E",
+          "val": "48"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU049"
+        },
+        {
+          "col": "E",
+          "val": "49"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU050"
+        },
+        {
+          "col": "E",
+          "val": "50"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU051"
+        },
+        {
+          "col": "E",
+          "val": "51"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU052"
+        },
+        {
+          "col": "E",
+          "val": "52"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU053"
+        },
+        {
+          "col": "E",
+          "val": "53"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU054"
+        },
+        {
+          "col": "E",
+          "val": "54"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU055"
+        },
+        {
+          "col": "E",
+          "val": "55"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU056"
+        },
+        {
+          "col": "E",
+          "val": "56"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU057"
+        },
+        {
+          "col": "E",
+          "val": "57"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU058"
+        },
+        {
+          "col": "E",
+          "val": "58"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU059"
+        },
+        {
+          "col": "E",
+          "val": "59"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU060"
+        },
+        {
+          "col": "E",
+          "val": "60"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU061"
+        },
+        {
+          "col": "E",
+          "val": "61"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU062"
+        },
+        {
+          "col": "E",
+          "val": "62"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU063"
+        },
+        {
+          "col": "E",
+          "val": "63"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU064"
+        },
+        {
+          "col": "E",
+          "val": "64"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU065"
+        },
+        {
+          "col": "E",
+          "val": "65"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU066"
+        },
+        {
+          "col": "E",
+          "val": "66"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU067"
+        },
+        {
+          "col": "E",
+          "val": "67"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU068"
+        },
+        {
+          "col": "E",
+          "val": "68"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU069"
+        },
+        {
+          "col": "E",
+          "val": "69"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU070"
+        },
+        {
+          "col": "E",
+          "val": "70"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU071"
+        },
+        {
+          "col": "E",
+          "val": "71"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU072"
+        },
+        {
+          "col": "E",
+          "val": "72"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU073"
+        },
+        {
+          "col": "E",
+          "val": "73"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU074"
+        },
+        {
+          "col": "E",
+          "val": "74"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU075"
+        },
+        {
+          "col": "E",
+          "val": "75"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU076"
+        },
+        {
+          "col": "E",
+          "val": "76"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU077"
+        },
+        {
+          "col": "E",
+          "val": "77"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU078"
+        },
+        {
+          "col": "E",
+          "val": "78"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU079"
+        },
+        {
+          "col": "E",
+          "val": "79"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU080"
+        },
+        {
+          "col": "E",
+          "val": "80"
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU081"
+        },
+        {
+          "col": "E",
+          "val": "81"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU082"
+        },
+        {
+          "col": "E",
+          "val": "82"
+        }
+      ]
+    },
+    {
+      "row": 84,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU083"
+        },
+        {
+          "col": "E",
+          "val": "83"
+        }
+      ]
+    },
+    {
+      "row": 85,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU084"
+        },
+        {
+          "col": "E",
+          "val": "84"
+        }
+      ]
+    },
+    {
+      "row": 86,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU085"
+        },
+        {
+          "col": "E",
+          "val": "85"
+        }
+      ]
+    },
+    {
+      "row": 87,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU086"
+        },
+        {
+          "col": "E",
+          "val": "86"
+        }
+      ]
+    },
+    {
+      "row": 88,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU087"
+        },
+        {
+          "col": "E",
+          "val": "87"
+        }
+      ]
+    },
+    {
+      "row": 89,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU088"
+        },
+        {
+          "col": "E",
+          "val": "88"
+        }
+      ]
+    },
+    {
+      "row": 90,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU089"
+        },
+        {
+          "col": "E",
+          "val": "89"
+        }
+      ]
+    },
+    {
+      "row": 91,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU090"
+        },
+        {
+          "col": "E",
+          "val": "90"
+        }
+      ]
+    },
+    {
+      "row": 92,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU091"
+        },
+        {
+          "col": "E",
+          "val": "91"
+        }
+      ]
+    },
+    {
+      "row": 93,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU092"
+        },
+        {
+          "col": "E",
+          "val": "92"
+        }
+      ]
+    },
+    {
+      "row": 94,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU093"
+        },
+        {
+          "col": "E",
+          "val": "93"
+        }
+      ]
+    },
+    {
+      "row": 95,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU094"
+        },
+        {
+          "col": "E",
+          "val": "94"
+        }
+      ]
+    },
+    {
+      "row": 96,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU095"
+        },
+        {
+          "col": "E",
+          "val": "95"
+        }
+      ]
+    },
+    {
+      "row": 97,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU096"
+        },
+        {
+          "col": "E",
+          "val": "96"
+        }
+      ]
+    },
+    {
+      "row": 98,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU097"
+        },
+        {
+          "col": "E",
+          "val": "97"
+        }
+      ]
+    },
+    {
+      "row": 99,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU098"
+        },
+        {
+          "col": "E",
+          "val": "98"
+        }
+      ]
+    },
+    {
+      "row": 100,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU099"
+        },
+        {
+          "col": "E",
+          "val": "99"
+        }
+      ]
+    },
+    {
+      "row": 101,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU100"
+        },
+        {
+          "col": "E",
+          "val": "100"
+        }
+      ]
+    },
+    {
+      "row": 102,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU101"
+        },
+        {
+          "col": "E",
+          "val": "101"
+        }
+      ]
+    },
+    {
+      "row": 103,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU102"
+        },
+        {
+          "col": "E",
+          "val": "102"
+        }
+      ]
+    },
+    {
+      "row": 104,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU103"
+        },
+        {
+          "col": "E",
+          "val": "103"
+        }
+      ]
+    },
+    {
+      "row": 105,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU104"
+        },
+        {
+          "col": "E",
+          "val": "104"
+        }
+      ]
+    },
+    {
+      "row": 106,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU105"
+        },
+        {
+          "col": "E",
+          "val": "105"
+        }
+      ]
+    },
+    {
+      "row": 107,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU106"
+        },
+        {
+          "col": "E",
+          "val": "106"
+        }
+      ]
+    },
+    {
+      "row": 108,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU107"
+        },
+        {
+          "col": "E",
+          "val": "107"
+        }
+      ]
+    },
+    {
+      "row": 109,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU108"
+        },
+        {
+          "col": "E",
+          "val": "108"
+        }
+      ]
+    },
+    {
+      "row": 110,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU109"
+        },
+        {
+          "col": "E",
+          "val": "109"
+        }
+      ]
+    },
+    {
+      "row": 111,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU110"
+        },
+        {
+          "col": "E",
+          "val": "110"
+        }
+      ]
+    },
+    {
+      "row": 112,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU111"
+        },
+        {
+          "col": "E",
+          "val": "111"
+        }
+      ]
+    },
+    {
+      "row": 113,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU112"
+        },
+        {
+          "col": "E",
+          "val": "112"
+        }
+      ]
+    },
+    {
+      "row": 114,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU113"
+        },
+        {
+          "col": "E",
+          "val": "113"
+        }
+      ]
+    },
+    {
+      "row": 115,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU114"
+        },
+        {
+          "col": "E",
+          "val": "114"
+        }
+      ]
+    },
+    {
+      "row": 116,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU115"
+        },
+        {
+          "col": "E",
+          "val": "115"
+        }
+      ]
+    },
+    {
+      "row": 117,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU116"
+        },
+        {
+          "col": "E",
+          "val": "116"
+        }
+      ]
+    },
+    {
+      "row": 118,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU117"
+        },
+        {
+          "col": "E",
+          "val": "117"
+        }
+      ]
+    },
+    {
+      "row": 119,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU118"
+        },
+        {
+          "col": "E",
+          "val": "118"
+        }
+      ]
+    },
+    {
+      "row": 120,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU119"
+        },
+        {
+          "col": "E",
+          "val": "119"
+        }
+      ]
+    },
+    {
+      "row": 121,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU120"
+        },
+        {
+          "col": "E",
+          "val": "120"
+        }
+      ]
+    },
+    {
+      "row": 122,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU121"
+        },
+        {
+          "col": "E",
+          "val": "121"
+        }
+      ]
+    },
+    {
+      "row": 123,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU122"
+        },
+        {
+          "col": "E",
+          "val": "122"
+        }
+      ]
+    },
+    {
+      "row": 124,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU123"
+        },
+        {
+          "col": "E",
+          "val": "123"
+        }
+      ]
+    },
+    {
+      "row": 125,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU124"
+        },
+        {
+          "col": "E",
+          "val": "124"
+        }
+      ]
+    },
+    {
+      "row": 126,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU125"
+        },
+        {
+          "col": "E",
+          "val": "125"
+        }
+      ]
+    },
+    {
+      "row": 127,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU126"
+        },
+        {
+          "col": "E",
+          "val": "126"
+        }
+      ]
+    },
+    {
+      "row": 128,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU127"
+        },
+        {
+          "col": "E",
+          "val": "127"
+        }
+      ]
+    },
+    {
+      "row": 129,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU128"
+        },
+        {
+          "col": "E",
+          "val": "128"
+        }
+      ]
+    },
+    {
+      "row": 130,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU129"
+        },
+        {
+          "col": "E",
+          "val": "129"
+        }
+      ]
+    },
+    {
+      "row": 131,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU130"
+        },
+        {
+          "col": "E",
+          "val": "130"
+        }
+      ]
+    },
+    {
+      "row": 132,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU131"
+        },
+        {
+          "col": "E",
+          "val": "131"
+        }
+      ]
+    },
+    {
+      "row": 133,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU132"
+        },
+        {
+          "col": "E",
+          "val": "132"
+        }
+      ]
+    },
+    {
+      "row": 134,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU133"
+        },
+        {
+          "col": "E",
+          "val": "133"
+        }
+      ]
+    },
+    {
+      "row": 135,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU134"
+        },
+        {
+          "col": "E",
+          "val": "134"
+        }
+      ]
+    },
+    {
+      "row": 136,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU135"
+        },
+        {
+          "col": "E",
+          "val": "135"
+        }
+      ]
+    },
+    {
+      "row": 137,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU136"
+        },
+        {
+          "col": "E",
+          "val": "136"
+        }
+      ]
+    },
+    {
+      "row": 138,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU137"
+        },
+        {
+          "col": "E",
+          "val": "137"
+        }
+      ]
+    },
+    {
+      "row": 139,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU138"
+        },
+        {
+          "col": "E",
+          "val": "138"
+        }
+      ]
+    },
+    {
+      "row": 140,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU139"
+        },
+        {
+          "col": "E",
+          "val": "139"
+        }
+      ]
+    },
+    {
+      "row": 141,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU140"
+        },
+        {
+          "col": "E",
+          "val": "140"
+        }
+      ]
+    },
+    {
+      "row": 142,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU141"
+        },
+        {
+          "col": "E",
+          "val": "141"
+        }
+      ]
+    },
+    {
+      "row": 143,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU142"
+        },
+        {
+          "col": "E",
+          "val": "142"
+        }
+      ]
+    },
+    {
+      "row": 144,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU143"
+        },
+        {
+          "col": "E",
+          "val": "143"
+        }
+      ]
+    },
+    {
+      "row": 145,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU144"
+        },
+        {
+          "col": "E",
+          "val": "144"
+        }
+      ]
+    },
+    {
+      "row": 146,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU145"
+        },
+        {
+          "col": "E",
+          "val": "145"
+        }
+      ]
+    },
+    {
+      "row": 147,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU146"
+        },
+        {
+          "col": "E",
+          "val": "146"
+        }
+      ]
+    },
+    {
+      "row": 148,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU147"
+        },
+        {
+          "col": "E",
+          "val": "147"
+        }
+      ]
+    },
+    {
+      "row": 149,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU148"
+        },
+        {
+          "col": "E",
+          "val": "148"
+        }
+      ]
+    },
+    {
+      "row": 150,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU149"
+        },
+        {
+          "col": "E",
+          "val": "149"
+        }
+      ]
+    },
+    {
+      "row": 151,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU150"
+        },
+        {
+          "col": "E",
+          "val": "150"
+        }
+      ]
+    },
+    {
+      "row": 152,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU151"
+        },
+        {
+          "col": "E",
+          "val": "151"
+        }
+      ]
+    },
+    {
+      "row": 153,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU152"
+        },
+        {
+          "col": "E",
+          "val": "152"
+        }
+      ]
+    },
+    {
+      "row": 154,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU153"
+        },
+        {
+          "col": "E",
+          "val": "153"
+        }
+      ]
+    },
+    {
+      "row": 155,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU154"
+        },
+        {
+          "col": "E",
+          "val": "154"
+        }
+      ]
+    },
+    {
+      "row": 156,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU155"
+        },
+        {
+          "col": "E",
+          "val": "155"
+        }
+      ]
+    },
+    {
+      "row": 157,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU156"
+        },
+        {
+          "col": "E",
+          "val": "156"
+        }
+      ]
+    },
+    {
+      "row": 158,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU157"
+        },
+        {
+          "col": "E",
+          "val": "157"
+        }
+      ]
+    },
+    {
+      "row": 159,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU158"
+        },
+        {
+          "col": "E",
+          "val": "158"
+        }
+      ]
+    },
+    {
+      "row": 160,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU159"
+        },
+        {
+          "col": "E",
+          "val": "159"
+        }
+      ]
+    },
+    {
+      "row": 161,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU160"
+        },
+        {
+          "col": "E",
+          "val": "160"
+        }
+      ]
+    },
+    {
+      "row": 162,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU161"
+        },
+        {
+          "col": "E",
+          "val": "161"
+        }
+      ]
+    },
+    {
+      "row": 163,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU162"
+        },
+        {
+          "col": "E",
+          "val": "162"
+        }
+      ]
+    },
+    {
+      "row": 164,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU163"
+        },
+        {
+          "col": "E",
+          "val": "163"
+        }
+      ]
+    },
+    {
+      "row": 165,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU164"
+        },
+        {
+          "col": "E",
+          "val": "164"
+        }
+      ]
+    },
+    {
+      "row": 166,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU165"
+        },
+        {
+          "col": "E",
+          "val": "165"
+        }
+      ]
+    },
+    {
+      "row": 167,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU166"
+        },
+        {
+          "col": "E",
+          "val": "166"
+        }
+      ]
+    },
+    {
+      "row": 168,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU167"
+        },
+        {
+          "col": "E",
+          "val": "167"
+        }
+      ]
+    },
+    {
+      "row": 169,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU168"
+        },
+        {
+          "col": "E",
+          "val": "168"
+        }
+      ]
+    },
+    {
+      "row": 170,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU169"
+        },
+        {
+          "col": "E",
+          "val": "169"
+        }
+      ]
+    },
+    {
+      "row": 171,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU170"
+        },
+        {
+          "col": "E",
+          "val": "170"
+        }
+      ]
+    },
+    {
+      "row": 172,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU171"
+        },
+        {
+          "col": "E",
+          "val": "171"
+        }
+      ]
+    },
+    {
+      "row": 173,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU172"
+        },
+        {
+          "col": "E",
+          "val": "172"
+        }
+      ]
+    },
+    {
+      "row": 174,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU173"
+        },
+        {
+          "col": "E",
+          "val": "173"
+        }
+      ]
+    },
+    {
+      "row": 175,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU174"
+        },
+        {
+          "col": "E",
+          "val": "174"
+        }
+      ]
+    },
+    {
+      "row": 176,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU175"
+        },
+        {
+          "col": "E",
+          "val": "175"
+        }
+      ]
+    },
+    {
+      "row": 177,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU176"
+        },
+        {
+          "col": "E",
+          "val": "176"
+        }
+      ]
+    },
+    {
+      "row": 178,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU177"
+        },
+        {
+          "col": "E",
+          "val": "177"
+        }
+      ]
+    },
+    {
+      "row": 179,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU178"
+        },
+        {
+          "col": "E",
+          "val": "178"
+        }
+      ]
+    },
+    {
+      "row": 180,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU179"
+        },
+        {
+          "col": "E",
+          "val": "179"
+        }
+      ]
+    },
+    {
+      "row": 181,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU180"
+        },
+        {
+          "col": "E",
+          "val": "180"
+        }
+      ]
+    },
+    {
+      "row": 182,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU181"
+        },
+        {
+          "col": "E",
+          "val": "181"
+        }
+      ]
+    },
+    {
+      "row": 183,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU182"
+        },
+        {
+          "col": "E",
+          "val": "182"
+        }
+      ]
+    },
+    {
+      "row": 184,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU183"
+        },
+        {
+          "col": "E",
+          "val": "183"
+        }
+      ]
+    },
+    {
+      "row": 185,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU184"
+        },
+        {
+          "col": "E",
+          "val": "184"
+        }
+      ]
+    },
+    {
+      "row": 186,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU185"
+        },
+        {
+          "col": "E",
+          "val": "185"
+        }
+      ]
+    },
+    {
+      "row": 187,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU186"
+        },
+        {
+          "col": "E",
+          "val": "186"
+        }
+      ]
+    },
+    {
+      "row": 188,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU187"
+        },
+        {
+          "col": "E",
+          "val": "187"
+        }
+      ]
+    },
+    {
+      "row": 189,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU188"
+        },
+        {
+          "col": "E",
+          "val": "188"
+        }
+      ]
+    },
+    {
+      "row": 190,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU189"
+        },
+        {
+          "col": "E",
+          "val": "189"
+        }
+      ]
+    },
+    {
+      "row": 191,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU190"
+        },
+        {
+          "col": "E",
+          "val": "190"
+        }
+      ]
+    },
+    {
+      "row": 192,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU191"
+        },
+        {
+          "col": "E",
+          "val": "191"
+        }
+      ]
+    },
+    {
+      "row": 193,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU192"
+        },
+        {
+          "col": "E",
+          "val": "192"
+        }
+      ]
+    },
+    {
+      "row": 194,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU193"
+        },
+        {
+          "col": "E",
+          "val": "193"
+        }
+      ]
+    },
+    {
+      "row": 195,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU194"
+        },
+        {
+          "col": "E",
+          "val": "194"
+        }
+      ]
+    },
+    {
+      "row": 196,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU195"
+        },
+        {
+          "col": "E",
+          "val": "195"
+        }
+      ]
+    },
+    {
+      "row": 197,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU196"
+        },
+        {
+          "col": "E",
+          "val": "196"
+        }
+      ]
+    },
+    {
+      "row": 198,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU197"
+        },
+        {
+          "col": "E",
+          "val": "197"
+        }
+      ]
+    },
+    {
+      "row": 199,
+      "cells": [
+        {
+          "col": "C",
+          "val": "BPU198"
+        },
+        {
+          "col": "E",
+          "val": "198"
+        }
+      ]
+    }
+  ],
+  "Toko": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "A",
+          "val": "UD. JOSUA"
+        },
+        {
+          "col": "M",
+          "val": "Pesanan"
+        },
+        {
+          "col": "N",
+          "val": "06/01/2025"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "Q",
+          "val": "3"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "G",
+          "val": "Telukdalam, 06 Januari 2025"
+        },
+        {
+          "col": "P",
+          "val": "04"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "Q",
+          "val": "5"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Kepada Yth."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Kepala SMA Negeri 1 Telukdalam"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Cq. Penanggungjawab Kegiatan"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "val": "di "
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "B",
+          "val": "Tempat"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Perihal"
+        },
+        {
+          "col": "B",
+          "val": "Pesanan Barang"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "B",
+          "val": "Dengan hormat,"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "B",
+          "val": "Memenuhi maksud surat permohonan Ibu kepada kami untuk menyediakan Alat Tulis Kantor (ATK) sesuai dengan pesanan Nomor: 421.3/07-P/DB/SMANSATLD/I/2025, Tanggal  06 Januari 2025 , bersama ini kami bers"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "col": "G",
+          "val": "UD. JOSUA"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "col": "G",
+          "val": "Gestiwan Bazikho"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "col": "G",
+          "val": "Direktur"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "col": "A",
+          "val": "UD. JOSUA"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "col": "A",
+          "val": "DAFTAR KUANTITAS DAN HARGA"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "col": "A",
+          "val": "No"
+        },
+        {
+          "col": "B",
+          "val": "Uraian"
+        },
+        {
+          "col": "F",
+          "val": "Volume"
+        },
+        {
+          "col": "G",
+          "val": "Satuan"
+        },
+        {
+          "col": "H",
+          "val": "Harga Satuan "
+        },
+        {
+          "col": "I",
+          "val": "Jumlah"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "col": "A",
+          "val": "1"
+        },
+        {
+          "col": "B",
+          "val": "2"
+        },
+        {
+          "col": "F",
+          "val": "3"
+        },
+        {
+          "col": "G",
+          "val": "4"
+        },
+        {
+          "col": "H",
+          "val": "5"
+        },
+        {
+          "col": "I",
+          "val": "6"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "col": "A",
+          "val": "1"
+        },
+        {
+          "col": "B",
+          "val": "Plastik Mika"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "bungkus"
+        },
+        {
+          "col": "H",
+          "val": "60000"
+        },
+        {
+          "col": "I",
+          "val": "300000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "col": "A",
+          "val": "2"
+        },
+        {
+          "col": "B",
+          "val": "Kertas Warna Blank Folio, Ukuran : 8,5 x 14\",  70 gram"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "rim"
+        },
+        {
+          "col": "H",
+          "val": "90000"
+        },
+        {
+          "col": "I",
+          "val": "180000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "col": "A",
+          "val": "3"
+        },
+        {
+          "col": "B",
+          "val": "Kertas Lain-Lain Kertas Buffalo"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "bungkus"
+        },
+        {
+          "col": "H",
+          "val": "31000"
+        },
+        {
+          "col": "I",
+          "val": "155000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "col": "A",
+          "val": "4"
+        },
+        {
+          "col": "B",
+          "val": "Kertas Post-It Warna Warni  Sign Here"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "22800"
+        },
+        {
+          "col": "I",
+          "val": "114000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "col": "A",
+          "val": "5"
+        },
+        {
+          "col": "B",
+          "val": "Kertas HVS 60 gram Merk : Paper One HVS F4 uk. 8.27\"x11.69\""
+        },
+        {
+          "col": "F",
+          "val": "10"
+        },
+        {
+          "col": "G",
+          "val": "rim"
+        },
+        {
+          "col": "H",
+          "val": "48500"
+        },
+        {
+          "col": "I",
+          "val": "485000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "col": "A",
+          "val": "6"
+        },
+        {
+          "col": "B",
+          "val": "Kertas HVS 80 gram Merk : Paper One A4, Ukuran : 8,27\" x 11,69\", Isi : 500 lembar"
+        },
+        {
+          "col": "F",
+          "val": "40"
+        },
+        {
+          "col": "G",
+          "val": "rim"
+        },
+        {
+          "col": "H",
+          "val": "50000"
+        },
+        {
+          "col": "I",
+          "val": "2000000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "col": "A",
+          "val": "7"
+        },
+        {
+          "col": "B",
+          "val": "Kertas StensiI"
+        },
+        {
+          "col": "F",
+          "val": "10"
+        },
+        {
+          "col": "G",
+          "val": "bungkus"
+        },
+        {
+          "col": "H",
+          "val": "50000"
+        },
+        {
+          "col": "I",
+          "val": "500000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "col": "A",
+          "val": "8"
+        },
+        {
+          "col": "B",
+          "val": "Kertas Label"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "lembar"
+        },
+        {
+          "col": "H",
+          "val": "25000"
+        },
+        {
+          "col": "I",
+          "val": "125000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "col": "A",
+          "val": "9"
+        },
+        {
+          "col": "B",
+          "val": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris"
+        },
+        {
+          "col": "F",
+          "val": "1"
+        },
+        {
+          "col": "G",
+          "val": "bungkus"
+        },
+        {
+          "col": "H",
+          "val": "45000"
+        },
+        {
+          "col": "I",
+          "val": "45000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "col": "A",
+          "val": "10"
+        },
+        {
+          "col": "B",
+          "val": "Amplop Coklat Merk : Garda Ukuran Cabinet"
+        },
+        {
+          "col": "F",
+          "val": "3"
+        },
+        {
+          "col": "G",
+          "val": "bungkus"
+        },
+        {
+          "col": "H",
+          "val": "23000"
+        },
+        {
+          "col": "I",
+          "val": "69000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "col": "A",
+          "val": "11"
+        },
+        {
+          "col": "B",
+          "val": "Amplop Coklat Merk : GSU Ukuran Folio polos"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "bungkus"
+        },
+        {
+          "col": "H",
+          "val": "60000"
+        },
+        {
+          "col": "I",
+          "val": "120000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "col": "A",
+          "val": "12"
+        },
+        {
+          "col": "B",
+          "val": "Amplop Panjang Putih Polos Merk : Jaya Ukuran : 11 x 23 cm"
+        },
+        {
+          "col": "F",
+          "val": "1"
+        },
+        {
+          "col": "G",
+          "val": "kotak"
+        },
+        {
+          "col": "H",
+          "val": "48000"
+        },
+        {
+          "col": "I",
+          "val": "48000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "col": "A",
+          "val": "13"
+        },
+        {
+          "col": "B",
+          "val": "Ballpoint Boldiner Standar"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "lusin"
+        },
+        {
+          "col": "H",
+          "val": "225000"
+        },
+        {
+          "col": "I",
+          "val": "450000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "col": "A",
+          "val": "14"
+        },
+        {
+          "col": "B",
+          "val": "Ballpoint Drawing Pen 0,1 Snowman"
+        },
+        {
+          "col": "F",
+          "val": "1"
+        },
+        {
+          "col": "G",
+          "val": "lusin"
+        },
+        {
+          "col": "H",
+          "val": "95000"
+        },
+        {
+          "col": "I",
+          "val": "95000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "col": "A",
+          "val": "15"
+        },
+        {
+          "col": "B",
+          "val": "Ballpoint Standard AE7"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "lusin"
+        },
+        {
+          "col": "H",
+          "val": "20000"
+        },
+        {
+          "col": "I",
+          "val": "40000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "col": "A",
+          "val": "16"
+        },
+        {
+          "col": "B",
+          "val": "Ballpoint Pilot G2"
+        },
+        {
+          "col": "F",
+          "val": "1"
+        },
+        {
+          "col": "G",
+          "val": "lusin"
+        },
+        {
+          "col": "H",
+          "val": "235000"
+        },
+        {
+          "col": "I",
+          "val": "235000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "col": "A",
+          "val": "17"
+        },
+        {
+          "col": "B",
+          "val": "Binder Klip  nomor 107"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "kotak"
+        },
+        {
+          "col": "H",
+          "val": "7800"
+        },
+        {
+          "col": "I",
+          "val": "39000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "col": "A",
+          "val": "18"
+        },
+        {
+          "col": "B",
+          "val": "Binder Klip  nomor 111"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "kotak"
+        },
+        {
+          "col": "H",
+          "val": "11000"
+        },
+        {
+          "col": "I",
+          "val": "55000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "col": "A",
+          "val": "19"
+        },
+        {
+          "col": "B",
+          "val": "Binder Klip  nomor 200"
+        },
+        {
+          "col": "F",
+          "val": "10"
+        },
+        {
+          "col": "G",
+          "val": "kotak"
+        },
+        {
+          "col": "H",
+          "val": "16500"
+        },
+        {
+          "col": "I",
+          "val": "165000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "col": "A",
+          "val": "20"
+        },
+        {
+          "col": "B",
+          "val": "Binder Klip  nomor 260"
+        },
+        {
+          "col": "F",
+          "val": "10"
+        },
+        {
+          "col": "G",
+          "val": "kotak"
+        },
+        {
+          "col": "H",
+          "val": "20000"
+        },
+        {
+          "col": "I",
+          "val": "200000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "col": "A",
+          "val": "21"
+        },
+        {
+          "col": "B",
+          "val": "Binder Klip Merk : KENKO nomor 105"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "kotak"
+        },
+        {
+          "col": "H",
+          "val": "5000"
+        },
+        {
+          "col": "I",
+          "val": "10000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "col": "A",
+          "val": "22"
+        },
+        {
+          "col": "B",
+          "val": "Map Binder"
+        },
+        {
+          "col": "F",
+          "val": "12"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "35500"
+        },
+        {
+          "col": "I",
+          "val": "426000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "col": "A",
+          "val": "23"
+        },
+        {
+          "col": "B",
+          "val": "Stofmap Kertas"
+        },
+        {
+          "col": "F",
+          "val": "1"
+        },
+        {
+          "col": "G",
+          "val": "pak"
+        },
+        {
+          "col": "H",
+          "val": "88000"
+        },
+        {
+          "col": "I",
+          "val": "88000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "col": "A",
+          "val": "24"
+        },
+        {
+          "col": "B",
+          "val": "Stofmap Transparan tali"
+        },
+        {
+          "col": "F",
+          "val": "100"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "5500"
+        },
+        {
+          "col": "I",
+          "val": "550000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "col": "A",
+          "val": "25"
+        },
+        {
+          "col": "B",
+          "val": "Stofmap Transparan"
+        },
+        {
+          "col": "F",
+          "val": "100"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "5500"
+        },
+        {
+          "col": "I",
+          "val": "550000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "col": "A",
+          "val": "26"
+        },
+        {
+          "col": "B",
+          "val": "Binder Klip Ordner"
+        },
+        {
+          "col": "F",
+          "val": "6"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "49500"
+        },
+        {
+          "col": "I",
+          "val": "297000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "col": "A",
+          "val": "27"
+        },
+        {
+          "col": "B",
+          "val": "Box File Merk : Bantex Ukuran : 115x270x325 mm"
+        },
+        {
+          "col": "F",
+          "val": "4"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "59000"
+        },
+        {
+          "col": "I",
+          "val": "236000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "col": "A",
+          "val": "28"
+        },
+        {
+          "col": "B",
+          "val": "Sampul Plastik"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "bungkus"
+        },
+        {
+          "col": "H",
+          "val": "65000"
+        },
+        {
+          "col": "I",
+          "val": "325000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "col": "A",
+          "val": "29"
+        },
+        {
+          "col": "B",
+          "val": "Tinta Printer Canon 740 Hitam-740 Hitam"
+        },
+        {
+          "col": "F",
+          "val": "8"
+        },
+        {
+          "col": "G",
+          "val": "botol"
+        },
+        {
+          "col": "H",
+          "val": "30000"
+        },
+        {
+          "col": "I",
+          "val": "240000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "col": "A",
+          "val": "30"
+        },
+        {
+          "col": "B",
+          "val": "Tinta Printer Canon 741 Warna-741 Warna"
+        },
+        {
+          "col": "F",
+          "val": "12"
+        },
+        {
+          "col": "G",
+          "val": "botol"
+        },
+        {
+          "col": "H",
+          "val": "33000"
+        },
+        {
+          "col": "I",
+          "val": "396000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "col": "A",
+          "val": "31"
+        },
+        {
+          "col": "B",
+          "val": "C. Tinta Printer EPSON Toner Epson 664 Black"
+        },
+        {
+          "col": "F",
+          "val": "6"
+        },
+        {
+          "col": "G",
+          "val": "botol"
+        },
+        {
+          "col": "H",
+          "val": "85000"
+        },
+        {
+          "col": "I",
+          "val": "510000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "col": "A",
+          "val": "32"
+        },
+        {
+          "col": "B",
+          "val": "C. Tinta Printer EPSON Tinta Printer Epson Yellow"
+        },
+        {
+          "col": "F",
+          "val": "4"
+        },
+        {
+          "col": "G",
+          "val": "botol"
+        },
+        {
+          "col": "H",
+          "val": "110000"
+        },
+        {
+          "col": "I",
+          "val": "440000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "col": "A",
+          "val": "33"
+        },
+        {
+          "col": "B",
+          "val": "C. Tinta Printer EPSON Tinta Printer Epson Blue"
+        },
+        {
+          "col": "F",
+          "val": "4"
+        },
+        {
+          "col": "G",
+          "val": "botol"
+        },
+        {
+          "col": "H",
+          "val": "110000"
+        },
+        {
+          "col": "I",
+          "val": "440000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "col": "A",
+          "val": "34"
+        },
+        {
+          "col": "B",
+          "val": "C. Tinta Printer EPSON Tinta Printer Epson Read"
+        },
+        {
+          "col": "F",
+          "val": "4"
+        },
+        {
+          "col": "G",
+          "val": "botol"
+        },
+        {
+          "col": "H",
+          "val": "110000"
+        },
+        {
+          "col": "I",
+          "val": "440000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "col": "A",
+          "val": "35"
+        },
+        {
+          "col": "B",
+          "val": "canon catridge 741-catridge 741"
+        },
+        {
+          "col": "F",
+          "val": "4"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "425000"
+        },
+        {
+          "col": "I",
+          "val": "1700000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "col": "A",
+          "val": "36"
+        },
+        {
+          "col": "B",
+          "val": "Catridge Printer Epson T 014--"
+        },
+        {
+          "col": "F",
+          "val": "4"
+        },
+        {
+          "col": "G",
+          "val": "botol"
+        },
+        {
+          "col": "H",
+          "val": "310000"
+        },
+        {
+          "col": "I",
+          "val": "1240000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "col": "A",
+          "val": "37"
+        },
+        {
+          "col": "B",
+          "val": "Lakban Besar"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "25000"
+        },
+        {
+          "col": "I",
+          "val": "125000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "cells": [
+        {
+          "col": "A",
+          "val": "38"
+        },
+        {
+          "col": "B",
+          "val": "Lakban Bening Sedang"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "15000"
+        },
+        {
+          "col": "I",
+          "val": "75000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "cells": [
+        {
+          "col": "A",
+          "val": "39"
+        },
+        {
+          "col": "B",
+          "val": "Lakban Bening"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "10000"
+        },
+        {
+          "col": "I",
+          "val": "50000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "col": "A",
+          "val": "40"
+        },
+        {
+          "col": "B",
+          "val": "Lakban Hitam--"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "15000"
+        },
+        {
+          "col": "I",
+          "val": "75000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "col": "A",
+          "val": "41"
+        },
+        {
+          "col": "B",
+          "val": "lakban hitam-ukuran : lebar 2 inch, panjang 12m, bahan : kain"
+        },
+        {
+          "col": "F",
+          "val": "4"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "12500"
+        },
+        {
+          "col": "I",
+          "val": "50000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "col": "A",
+          "val": "42"
+        },
+        {
+          "col": "B",
+          "val": "Lakban Hitam uk 2 \" Warna hitam uk. 2 \""
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "25000"
+        },
+        {
+          "col": "I",
+          "val": "125000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "col": "A",
+          "val": "43"
+        },
+        {
+          "col": "B",
+          "val": "Lakban warna Uk 2\" Warna Coklat Cofiie"
+        },
+        {
+          "col": "F",
+          "val": "3"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "20000"
+        },
+        {
+          "col": "I",
+          "val": "60000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "cells": [
+        {
+          "col": "A",
+          "val": "44"
+        },
+        {
+          "col": "B",
+          "val": "Spidol Refil Spidol White Board Snowman"
+        },
+        {
+          "col": "F",
+          "val": "10"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "20900"
+        },
+        {
+          "col": "I",
+          "val": "209000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "cells": [
+        {
+          "col": "A",
+          "val": "45"
+        },
+        {
+          "col": "B",
+          "val": "Spidol White board"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "lusin"
+        },
+        {
+          "col": "H",
+          "val": "120000"
+        },
+        {
+          "col": "I",
+          "val": "240000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 84,
+      "cells": [
+        {
+          "col": "A",
+          "val": "46"
+        },
+        {
+          "col": "B",
+          "val": "Stapler HD-10--"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "20000"
+        },
+        {
+          "col": "I",
+          "val": "40000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 85,
+      "cells": [
+        {
+          "col": "A",
+          "val": "47"
+        },
+        {
+          "col": "B",
+          "val": "Stapler Stapler No, 50 MAX"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "25000"
+        },
+        {
+          "col": "I",
+          "val": "50000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 86,
+      "cells": [
+        {
+          "col": "A",
+          "val": "48"
+        },
+        {
+          "col": "B",
+          "val": "Lem Fox isi 500 gram--"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "37000"
+        },
+        {
+          "col": "I",
+          "val": "74000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 87,
+      "cells": [
+        {
+          "col": "A",
+          "val": "49"
+        },
+        {
+          "col": "B",
+          "val": "PAPER CLIP  Paper Clip No 1"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "kotak"
+        },
+        {
+          "col": "H",
+          "val": "6000"
+        },
+        {
+          "col": "I",
+          "val": "30000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 88,
+      "cells": [
+        {
+          "col": "A",
+          "val": "50"
+        },
+        {
+          "col": "B",
+          "val": "Paper Clip No 1  Paper Clip No 3"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "kotak"
+        },
+        {
+          "col": "H",
+          "val": "6000"
+        },
+        {
+          "col": "I",
+          "val": "30000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 89,
+      "cells": [
+        {
+          "col": "A",
+          "val": "51"
+        },
+        {
+          "col": "B",
+          "val": "Penghapus White Board"
+        },
+        {
+          "col": "F",
+          "val": "30"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "10000"
+        },
+        {
+          "col": "I",
+          "val": "300000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 90,
+      "cells": [
+        {
+          "col": "A",
+          "val": "52"
+        },
+        {
+          "col": "B",
+          "val": "Isi Staples Sedang"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "kotak"
+        },
+        {
+          "col": "H",
+          "val": "40000"
+        },
+        {
+          "col": "I",
+          "val": "80000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 91,
+      "cells": [
+        {
+          "col": "A",
+          "val": "53"
+        },
+        {
+          "col": "B",
+          "val": "Isi Staples besar"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "kotak"
+        },
+        {
+          "col": "H",
+          "val": "80000"
+        },
+        {
+          "col": "I",
+          "val": "160000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 92,
+      "cells": [
+        {
+          "col": "A",
+          "val": "54"
+        },
+        {
+          "col": "B",
+          "val": "gunting kertas-ukuran : panjang 21cm x lebar 8cm, stainless steel"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "20000"
+        },
+        {
+          "col": "I",
+          "val": "40000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 93,
+      "cells": [
+        {
+          "col": "A",
+          "val": "55"
+        },
+        {
+          "col": "B",
+          "val": "Pisau Cutter Kenko L-500"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "15000"
+        },
+        {
+          "col": "I",
+          "val": "30000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 94,
+      "cells": [
+        {
+          "col": "A",
+          "val": "56"
+        },
+        {
+          "col": "B",
+          "val": "Buku Induk/Inventaris 35 cm x 50 cm"
+        },
+        {
+          "col": "F",
+          "val": "2"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "58000"
+        },
+        {
+          "col": "I",
+          "val": "116000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 95,
+      "cells": [
+        {
+          "col": "A",
+          "val": "57"
+        },
+        {
+          "col": "B",
+          "val": "Buku Ekspedisi 100"
+        },
+        {
+          "col": "F",
+          "val": "6"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "15000"
+        },
+        {
+          "col": "I",
+          "val": "90000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 96,
+      "cells": [
+        {
+          "col": "A",
+          "val": "58"
+        },
+        {
+          "col": "B",
+          "val": "Baterey Kecil"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "pasang"
+        },
+        {
+          "col": "H",
+          "val": "20000"
+        },
+        {
+          "col": "I",
+          "val": "100000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 97,
+      "cells": [
+        {
+          "col": "A",
+          "val": "59"
+        },
+        {
+          "col": "B",
+          "val": "Baterey Tanggung"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "pasang"
+        },
+        {
+          "col": "H",
+          "val": "30000"
+        },
+        {
+          "col": "I",
+          "val": "150000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 98,
+      "cells": [
+        {
+          "col": "A",
+          "val": "60"
+        },
+        {
+          "col": "B",
+          "val": "Bantalan Cap Besar"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "15000"
+        },
+        {
+          "col": "I",
+          "val": "75000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 99,
+      "cells": [
+        {
+          "col": "A",
+          "val": "61"
+        },
+        {
+          "col": "B",
+          "val": "Bantalan Cap Kecil"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "10000"
+        },
+        {
+          "col": "I",
+          "val": "50000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 100,
+      "cells": [
+        {
+          "col": "A",
+          "val": "62"
+        },
+        {
+          "col": "B",
+          "val": "USB FLASH DISK USB/Flash Disk 4GB"
+        },
+        {
+          "col": "F",
+          "val": "1"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "80000"
+        },
+        {
+          "col": "I",
+          "val": "80000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 101,
+      "cells": [
+        {
+          "col": "A",
+          "val": "63"
+        },
+        {
+          "col": "B",
+          "val": "Stempel Manual"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "100000"
+        },
+        {
+          "col": "I",
+          "val": "500000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 102,
+      "cells": [
+        {
+          "col": "A",
+          "val": "64"
+        },
+        {
+          "col": "B",
+          "val": "Stempel Cap"
+        },
+        {
+          "col": "F",
+          "val": "3"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "120000"
+        },
+        {
+          "col": "I",
+          "val": "360000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 103,
+      "cells": [
+        {
+          "col": "A",
+          "val": "65"
+        },
+        {
+          "col": "B",
+          "val": "Tinta Stempel"
+        },
+        {
+          "col": "F",
+          "val": "5"
+        },
+        {
+          "col": "G",
+          "val": "botol"
+        },
+        {
+          "col": "H",
+          "val": "20000"
+        },
+        {
+          "col": "I",
+          "val": "100000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 104,
+      "cells": [
+        {
+          "col": "A",
+          "val": "66"
+        },
+        {
+          "col": "B",
+          "val": "Materai 10.000"
+        },
+        {
+          "col": "F",
+          "val": "100"
+        },
+        {
+          "col": "G",
+          "val": "buah"
+        },
+        {
+          "col": "H",
+          "val": "12000"
+        },
+        {
+          "col": "I",
+          "val": "1200000"
+        },
+        {
+          "col": "K",
+          "val": "1"
+        }
+      ]
+    },
+    {
+      "row": 105,
+      "cells": [
+        {
+          "col": "K",
+          "val": "0"
+        }
+      ]
+    },
+    {
+      "row": 106,
+      "cells": [
+        {
+          "col": "K",
+          "val": "0"
+        }
+      ]
+    },
+    {
+      "row": 107,
+      "cells": [
+        {
+          "col": "K",
+          "val": "0"
+        }
+      ]
+    },
+    {
+      "row": 108,
+      "cells": [
+        {
+          "col": "K",
+          "val": "0"
+        }
+      ]
+    },
+    {
+      "row": 109,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Total Harga"
+        },
+        {
+          "col": "I",
+          "val": "17972000"
+        }
+      ]
+    },
+    {
+      "row": 110,
+      "cells": [
+        {
+          "col": "A",
+          "val": "Terbilang : "
+        },
+        {
+          "col": "D",
+          "val": "Tujuh Belas Juta Sembilan Ratus Tujuh Puluh Dua Ribu Rupiah"
+        }
+      ]
+    },
+    {
+      "row": 114,
+      "cells": [
+        {
+          "col": "G",
+          "val": "Telukdalam, 06 Januari 2025"
+        }
+      ]
+    },
+    {
+      "row": 115,
+      "cells": [
+        {
+          "col": "D",
+          "val": " "
+        },
+        {
+          "col": "G",
+          "val": "UD. JOSUA"
+        }
+      ]
+    },
+    {
+      "row": 120,
+      "cells": [
+        {
+          "col": "G",
+          "val": "Gestiwan Bazikho"
+        }
+      ]
+    },
+    {
+      "row": 121,
+      "cells": [
+        {
+          "col": "G",
+          "val": "Direktur"
+        }
+      ]
+    }
+  ]
+}

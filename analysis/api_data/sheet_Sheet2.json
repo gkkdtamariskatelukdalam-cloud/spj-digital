@@ -1,0 +1,727 @@
+{
+  "name": "Sheet2",
+  "max_row": 32,
+  "max_col": 13,
+  "non_empty_cells": 146,
+  "formulas_count": 0,
+  "type": "Other",
+  "purpose": "Auxiliary sheet",
+  "category": "other",
+  "headers": [],
+  "sample_rows": [
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "NAMA TOKO DAN ALAMAT DAN JENIS BELANJA",
+          "value": "NAMA TOKO DAN ALAMAT DAN JENIS BELANJA",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Gestiwan Bazikho",
+          "value": "Gestiwan Bazikho",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "Sinadodo Laia",
+          "value": "Sinadodo Laia",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Konsumsi",
+          "value": "Konsumsi",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Bahan dan Alat Kebersihan",
+          "value": "Bahan dan Alat Kebersihan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Gestiwan Bazikho",
+          "value": "Gestiwan Bazikho",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "Sinadodo Laia",
+          "value": "Sinadodo Laia",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Peralatan Kebersihan",
+          "value": "Peralatan Kebersihan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Air Mineral",
+          "value": "Air Mineral",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Obat-obatan",
+          "value": "Obat-obatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Obat-obatan untuk Persediaan UKS",
+          "value": "Obat-obatan untuk Persediaan UKS",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Kudapan",
+          "value": "Kudapan",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Kue",
+          "value": "Kue",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Rumah Roti Helena",
+          "value": "Rumah Roti Helena",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Toko Kue Neng Geulis",
+          "value": "Toko Kue Neng Geulis",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Fudi Supiyanto",
+          "value": "Fudi Supiyanto",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "value": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "Jl. Imam Bonjol, Ps. Tlk. Dalam, Kec. Tlk. Dalam, Kabupaten Nias Selatan, Sumatera Utara 22865",
+          "value": "Jl. Imam Bonjol, Ps. Tlk. Dalam, Kec. Tlk. Dalam, Kabupaten Nias Selatan, Sumatera Utara 22865",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Kudapan",
+          "value": "Kudapan",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Nasi kotak",
+          "value": "Nasi kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Resto JFC Esther",
+          "value": "Resto JFC Esther",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Rumah Makan Imanuel",
+          "value": "Rumah Makan Imanuel",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Limaati Daeli",
+          "value": "Limaati Daeli",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "Dolli Sinaga",
+          "value": "Dolli Sinaga",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Jl. Saonigeho Km. 2 Telukdalam",
+          "value": "Jl. Saonigeho Km. 2 Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "Jl. Saonigeho Km. 1 Kel. Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Saonigeho Km. 1 Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Konsumsi",
+          "value": "Konsumsi",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Peralatan Kebersihan",
+          "value": "Peralatan Kebersihan",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Aqua Cup",
+          "value": "Aqua Cup",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Rumah Roti Helena",
+          "value": "Rumah Roti Helena",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Toko Kue Neng Geulis",
+          "value": "Toko Kue Neng Geulis",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Fudi Supiyanto",
+          "value": "Fudi Supiyanto",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "value": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "Jl. Imam Bonjol, Ps. Tlk. Dalam, Kec. Tlk. Dalam, Kabupaten Nias Selatan, Sumatera Utara 22865",
+          "value": "Jl. Imam Bonjol, Ps. Tlk. Dalam, Kec. Tlk. Dalam, Kabupaten Nias Selatan, Sumatera Utara 22865",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Air Mineral",
+          "value": "Air Mineral",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Bahan dan Peralatan Listrik",
+          "value": "Bahan dan Peralatan Listrik",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "CV. Goriyaku Wiratrade",
+          "value": "CV. Goriyaku Wiratrade",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "CV. Goriyaku Wiratrade",
+          "value": "CV. Goriyaku Wiratrade",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Wirawan Bazikho",
+          "value": "Wirawan Bazikho",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "Wirawan Bazikho",
+          "value": "Wirawan Bazikho",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Jl. Diponegoro No. 87, Kel Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Diponegoro No. 87, Kel Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "Jl. Diponegoro No. 87, Kel Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Diponegoro No. 87, Kel Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Peralatan Listrik",
+          "value": "Peralatan Listrik",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Jasa Operator Dapodik",
+          "value": "Jasa Operator Dapodik",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Penggandaan dan Percetakan (ATK)",
+          "value": "Penggandaan dan Percetakan (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "UD. JESSLYN",
+          "value": "UD. JESSLYN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Gestiwan Bazikho",
+          "value": "Gestiwan Bazikho",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "Sinadodo Laia",
+          "value": "Sinadodo Laia",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "value": "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Penggandaan dan Percetakan (ATK)",
+          "value": "Penggandaan dan Percetakan (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Jasa Iuran Paket Internet",
+          "value": "Jasa Iuran Paket Internet",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Jasa Sewa Gedung",
+          "value": "Jasa Sewa Gedung",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Jasa Langganan Daya dan Jasa Isi ulang aqua galon",
+          "value": "Jasa Langganan Daya dan Jasa Isi ulang aqua galon",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Langganan Listrik",
+          "value": "Langganan Listrik",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BANK SUMUT",
+          "value": "BANK SUMUT",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BANK SUMUT",
+          "value": "BANK SUMUT",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Langganan Listrik",
+          "value": "Langganan Listrik",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Kue",
+          "value": "Kue",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Langganan Indihome",
+          "value": "Langganan Indihome",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BANK SUMUT",
+          "value": "BANK SUMUT",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BANK SUMUT",
+          "value": "BANK SUMUT",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Langganan Indihome",
+          "value": "Langganan Indihome",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Peralatan Pertukangan",
+          "value": "Peralatan Pertukangan",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Jasa Operator Dapodik",
+          "value": "Jasa Operator Dapodik",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "David J. Sitinjak, S.Pd",
+          "value": "David J. Sitinjak, S.Pd",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "David J. Sitinjak, S.Pd",
+          "value": "David J. Sitinjak, S.Pd",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Jasa Operator Sekolah",
+          "value": "Jasa Operator Sekolah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Peralatan Olahraga",
+          "value": "Peralatan Olahraga",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    }
+  ],
+  "formulas": []
+}

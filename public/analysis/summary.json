@@ -1,0 +1,757 @@
+{
+  "file_info": {
+    "name": "Cetak ATK_2025.xlsm",
+    "type": "Excel Macro-Enabled Workbook (.xlsm)",
+    "password_protected": true,
+    "password": "88dina",
+    "sheets_count": 18,
+    "vba_modules_count": 27,
+    "total_formulas": 38300,
+    "total_cells": 123936,
+    "organization": "SMA Negeri 1 Telukdalam",
+    "purpose": "Sistem Pengadaan ATK (Alat Tulis Kantor) - Office Stationery Procurement System",
+    "year": "2025"
+  },
+  "sheets": [
+    {
+      "name": "BACK",
+      "max_row": 9,
+      "max_col": 18,
+      "non_empty_cells": 13,
+      "formulas_count": 0,
+      "type": "Header",
+      "purpose": "Header/cover sheet - school identity (SMA Negeri 1 Telukdalam)",
+      "category": "info",
+      "headers": [
+        {
+          "col": "K",
+          "col_idx": 11,
+          "header": "PEMERINTAH PROVINSI SUMATERA UTARA"
+        }
+      ]
+    },
+    {
+      "name": "Master Januari-Desemebr 2024",
+      "max_row": 1258,
+      "max_col": 33,
+      "non_empty_cells": 30541,
+      "formulas_count": 1064,
+      "type": "Master Data",
+      "purpose": "Historical ATK procurement data Jan-Dec 2024 (source: Masteratk2024 named range)",
+      "category": "data",
+      "headers": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "header": "No"
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "header": "Tabel Bantu"
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "header": "NO Pesan"
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "header": "No BKU"
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "header": "No. Urut"
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "header": "No BAST"
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "header": "Tanggal Perencanaan"
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "header": "Tanggal Pesanan"
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "header": "Tanggal BAST"
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "header": "Tanggal Pemeriksaan"
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "header": "Tanggal Bayar"
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "header": "Kode Rekening"
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "header": "Kode Kegiatan"
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "header": "Kode Program"
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "header": "Uraian"
+        }
+      ]
+    },
+    {
+      "name": "NO BPU",
+      "max_row": 653,
+      "max_col": 5,
+      "non_empty_cells": 1306,
+      "formulas_count": 0,
+      "type": "Reference",
+      "purpose": "List of BPU (Bendahara Pengguna Anggaran) numbers for ordering",
+      "category": "reference",
+      "headers": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "header": "NO. BPU 2024"
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "header": "NO Pesanan 2023"
+        }
+      ]
+    },
+    {
+      "name": "Spesifikasi",
+      "max_row": 82,
+      "max_col": 10,
+      "non_empty_cells": 80,
+      "formulas_count": 0,
+      "type": "Reference",
+      "purpose": "Product specifications catalog (10 columns of items)",
+      "category": "reference",
+      "headers": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "header": "ATK"
+        }
+      ]
+    },
+    {
+      "name": "01PESAN",
+      "max_row": 159,
+      "max_col": 29,
+      "non_empty_cells": 644,
+      "formulas_count": 573,
+      "type": "Print Form",
+      "purpose": "Surat Pesanan (Order Letter) - main procurement order document",
+      "category": "form",
+      "headers": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "header": "PEMERINTAH PROVINSI SUMATERA UTARA"
+        }
+      ]
+    },
+    {
+      "name": "Toko",
+      "max_row": 121,
+      "max_col": 17,
+      "non_empty_cells": 534,
+      "formulas_count": 508,
+      "type": "Print Form",
+      "purpose": "Vendor/Shop data and invoice form",
+      "category": "form",
+      "headers": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "header": "<openpyxl.worksheet.formula.ArrayFormula object at 0x7f1a31a31640>"
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "header": "Pesanan"
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "header": "<openpyxl.worksheet.formula.ArrayFormula object at 0x7f1a31a316d0>"
+        }
+      ]
+    },
+    {
+      "name": "03RENCANA",
+      "max_row": 247,
+      "max_col": 20,
+      "non_empty_cells": 579,
+      "formulas_count": 468,
+      "type": "Print Form",
+      "purpose": "Rencana Pembelian (Purchase Plan) document",
+      "category": "form",
+      "headers": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "header": "DOKUMEN PERENCANAAN"
+        }
+      ]
+    },
+    {
+      "name": "04SHP",
+      "max_row": 166,
+      "max_col": 17,
+      "non_empty_cells": 479,
+      "formulas_count": 445,
+      "type": "Print Form",
+      "purpose": "Surat Hasil Pembanding (Comparison Result Letter)",
+      "category": "form",
+      "headers": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "header": "PEMERINTAH PROVINSI SUMATERA UTARA"
+        }
+      ]
+    },
+    {
+      "name": "05BAT",
+      "max_row": 363,
+      "max_col": 17,
+      "non_empty_cells": 1035,
+      "formulas_count": 939,
+      "type": "Print Form",
+      "purpose": "Berita Acara Pemeriksaan (Inspection Report) document",
+      "category": "form",
+      "headers": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "header": "PEMERINTAH PROVINSI SUMATERA UTARA"
+        }
+      ]
+    },
+    {
+      "name": "02BANDING",
+      "max_row": 140,
+      "max_col": 14,
+      "non_empty_cells": 503,
+      "formulas_count": 343,
+      "type": "Print Form",
+      "purpose": "Dokumen Hasil Pembanding (Comparison Result Document)",
+      "category": "form",
+      "headers": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "header": "DOKUMEN HASIL PEMBANDING"
+        }
+      ]
+    },
+    {
+      "name": "Master",
+      "max_row": 1581,
+      "max_col": 38,
+      "non_empty_cells": 46336,
+      "formulas_count": 26335,
+      "type": "Master Data",
+      "purpose": "Main master database (38 columns, 1581 rows) - links to Tabel Bantu",
+      "category": "data",
+      "headers": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "header": "B E L A N J A   S E T A H U N   S M A    N E G E R I   1   T E L U K D A L  A M "
+        }
+      ]
+    },
+    {
+      "name": "Data2025",
+      "max_row": 426,
+      "max_col": 24,
+      "non_empty_cells": 8663,
+      "formulas_count": 2699,
+      "type": "Master Data",
+      "purpose": "2025 procurement transaction data (24 columns)",
+      "category": "data",
+      "headers": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "header": "No. Urut"
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "header": "Kode Rekening"
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "header": "Kode Program"
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "header": "Tgl Perencanaan"
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "header": "Tgl Pesan"
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "header": "No Pesan"
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "header": "Tgl BAST"
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "header": "No BAST"
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "header": "Tgl Bayar"
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "header": "No BKU"
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "header": "Uraian"
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "header": "Nama Barang"
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "header": "Rincian Perhitungan"
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "header": "Jumlah"
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "header": "Realisasi"
+        }
+      ]
+    },
+    {
+      "name": "Tabel Bantu",
+      "max_row": 1200,
+      "max_col": 38,
+      "non_empty_cells": 32237,
+      "formulas_count": 4845,
+      "type": "Helper",
+      "purpose": "Helper table for Master sheet (mirror with change tracking via colors)",
+      "category": "helper",
+      "headers": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "header": "No. Surat Pesan"
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "header": "No BKU"
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "header": "Kode Program"
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "header": "Kode Rekening"
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "header": "Tanggal Perencanaan"
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "header": "Tanggal Pesanan"
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "header": "Tanggal BAST"
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "header": "Tanggal Pemeriksaan"
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "header": "Tanggal Bayar"
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "header": "Uraia Kagiatan"
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "header": "Nama Barang"
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "header": "Volume"
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "header": "Satuan"
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "header": "Harga Satuan"
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "header": "Jumlah"
+        }
+      ]
+    },
+    {
+      "name": "Data Sekolah",
+      "max_row": 14,
+      "max_col": 3,
+      "non_empty_cells": 23,
+      "formulas_count": 0,
+      "type": "Reference",
+      "purpose": "School official data (name, NIP, positions) for document headers/signatures",
+      "category": "reference",
+      "headers": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "header": "Data Sekolah"
+        }
+      ]
+    },
+    {
+      "name": "Sheet1",
+      "max_row": 101,
+      "max_col": 5,
+      "non_empty_cells": 371,
+      "formulas_count": 68,
+      "type": "Other",
+      "purpose": "Auxiliary sheet (calculations)",
+      "category": "other",
+      "headers": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "header": "1"
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "header": "=Master!J4"
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "header": "Amplop Coklat Merk : Garda Ukuran Cabinet"
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "header": "Amplop (Merk\u00a0: Amplop\u00a0Garda Ukuran\u00a0: Super\u00a0Kabinet\u00a0Warna : Coklat polos Isi / Pa"
+        }
+      ]
+    },
+    {
+      "name": "Sheet3",
+      "max_row": 170,
+      "max_col": 12,
+      "non_empty_cells": 429,
+      "formulas_count": 13,
+      "type": "Other",
+      "purpose": "Auxiliary sheet",
+      "category": "other",
+      "headers": [
+        {
+          "col": "B",
+          "col_idx": 2,
+          "header": "Telepon"
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "header": "Toko 1"
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "header": "Direktur"
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "header": "Alamat"
+        }
+      ]
+    },
+    {
+      "name": "Sheet2",
+      "max_row": 32,
+      "max_col": 13,
+      "non_empty_cells": 146,
+      "formulas_count": 0,
+      "type": "Other",
+      "purpose": "Auxiliary sheet",
+      "category": "other",
+      "headers": []
+    },
+    {
+      "name": "Gagal Cetak",
+      "max_row": 11,
+      "max_col": 6,
+      "non_empty_cells": 17,
+      "formulas_count": 0,
+      "type": "Log",
+      "purpose": "Failed print jobs log",
+      "category": "log",
+      "headers": []
+    }
+  ],
+  "vba_modules": [
+    {
+      "name": "Module1.bas",
+      "sheet_target": "01PESAN",
+      "purpose": "SavePDF: Export 01PESAN sheet to PDF file named 01PESAN_<P4 value>_2025.pdf",
+      "is_empty": false,
+      "code_length": 1317
+    },
+    {
+      "name": "Module2.bas",
+      "sheet_target": "02BANDING",
+      "purpose": "SavePDF: Export 02BANDING sheet to PDF file named 02BANDING_<M3 value>_2024.pdf",
+      "is_empty": false,
+      "code_length": 1322
+    },
+    {
+      "name": "Module3.bas",
+      "sheet_target": "03RENCANA",
+      "purpose": "SavePDF: Export 03RENCANA sheet to PDF file named 03RENCANA_<P4 value>_2025.pdf",
+      "is_empty": false,
+      "code_length": 1322
+    },
+    {
+      "name": "Module4.bas",
+      "sheet_target": "(general)",
+      "purpose": "PrintPreviewAndPrint: Show print preview then print active sheet",
+      "is_empty": false,
+      "code_length": 251
+    },
+    {
+      "name": "Module5.bas",
+      "sheet_target": "04SHP",
+      "purpose": "SavePDF: Export 04SHP sheet to PDF file named 04SHP_<P4 value>_2025.pdf",
+      "is_empty": false,
+      "code_length": 1310
+    },
+    {
+      "name": "Module6.bas",
+      "sheet_target": "05BAT",
+      "purpose": "SavePDF: Export 05BAT sheet to PDF file named 05BAT_<P4 value>_2025.pdf",
+      "is_empty": false,
+      "code_length": 1311
+    },
+    {
+      "name": "Module7.bas",
+      "sheet_target": "Toko",
+      "purpose": "SavePDF: Export Toko sheet to PDF file named Toko_<P4 value>_2025.pdf",
+      "is_empty": false,
+      "code_length": 1227
+    },
+    {
+      "name": "Sheet10.cls",
+      "sheet_target": "01PESAN",
+      "purpose": "SumRangeJ19toJ88 + HideEmptyRowsBasedOnColumnB: Sum J19:J88 to P19 and hide empty rows in 01PESAN",
+      "is_empty": false,
+      "code_length": 2157
+    },
+    {
+      "name": "Sheet12.cls",
+      "sheet_target": "03RENCANA",
+      "purpose": "HideEmptyRowsBasedOnColumnE: Hide empty rows in 03RENCANA based on column E (rows 8-77)",
+      "is_empty": false,
+      "code_length": 1400
+    },
+    {
+      "name": "Sheet14.cls",
+      "sheet_target": "02BANDING",
+      "purpose": "HideEmptyRowsBasedOnColumnD: Hide empty rows in 02BANDING based on column D (rows 7-126)",
+      "is_empty": false,
+      "code_length": 1405
+    },
+    {
+      "name": "Sheet15.cls",
+      "sheet_target": "Toko",
+      "purpose": "HideEmptyRowsBasedOnColumnB: Hide empty rows in Toko based on column B (rows 39-108)",
+      "is_empty": false,
+      "code_length": 1388
+    },
+    {
+      "name": "Sheet2.cls",
+      "sheet_target": "Master",
+      "purpose": "Worksheet_Change: Color-code cells in Tabel Bantu (yellow=changed, red=deleted)",
+      "is_empty": false,
+      "code_length": 991
+    },
+    {
+      "name": "Sheet4.cls",
+      "sheet_target": "Spesifikasi",
+      "purpose": "Worksheet_Change: Copy changes from Spesifikasi sheet to Master sheet",
+      "is_empty": false,
+      "code_length": 497
+    },
+    {
+      "name": "Sheet6.cls",
+      "sheet_target": "05BAT",
+      "purpose": "HideEmptyRowsBasedOnColumnC: Hide empty rows in 05BAT based on column C (rows 31-101)",
+      "is_empty": false,
+      "code_length": 1391
+    },
+    {
+      "name": "Sheet9.cls",
+      "sheet_target": "04SHP",
+      "purpose": "HideEmptyRowsBasedOnColumnB: Hide empty rows in 04SHP based on column B (rows 24-93)",
+      "is_empty": false,
+      "code_length": 1388
+    },
+    {
+      "name": "Sheet1.cls",
+      "sheet_target": "(general)",
+      "purpose": "Empty macro - no code",
+      "is_empty": true,
+      "code_length": 93
+    },
+    {
+      "name": "Sheet11.cls",
+      "sheet_target": "Master (dup)",
+      "purpose": "Empty macro - no code",
+      "is_empty": true,
+      "code_length": 93
+    },
+    {
+      "name": "Sheet13.cls",
+      "sheet_target": "Tabel Bantu",
+      "purpose": "Empty macro - no code",
+      "is_empty": true,
+      "code_length": 93
+    },
+    {
+      "name": "Sheet16.cls",
+      "sheet_target": "Data Sekolah",
+      "purpose": "Empty macro - no code",
+      "is_empty": true,
+      "code_length": 93
+    },
+    {
+      "name": "Sheet17.cls",
+      "sheet_target": "(unknown)",
+      "purpose": "Empty macro - no code",
+      "is_empty": true,
+      "code_length": 93
+    },
+    {
+      "name": "Sheet18.cls",
+      "sheet_target": "Gagal Cetak",
+      "purpose": "Empty macro - no code",
+      "is_empty": true,
+      "code_length": 93
+    },
+    {
+      "name": "Sheet3.cls",
+      "sheet_target": "NO BPU",
+      "purpose": "Empty macro - no code",
+      "is_empty": true,
+      "code_length": 93
+    },
+    {
+      "name": "Sheet5.cls",
+      "sheet_target": "BACK",
+      "purpose": "Empty macro - no code",
+      "is_empty": true,
+      "code_length": 93
+    },
+    {
+      "name": "Sheet7.cls",
+      "sheet_target": "(unknown)",
+      "purpose": "Empty macro - no code",
+      "is_empty": true,
+      "code_length": 93
+    },
+    {
+      "name": "Sheet8.cls",
+      "sheet_target": "(unknown)",
+      "purpose": "Empty macro - no code",
+      "is_empty": true,
+      "code_length": 93
+    },
+    {
+      "name": "ThisWorkbook.cls",
+      "sheet_target": "(workbook events)",
+      "purpose": "Empty macro - no code",
+      "is_empty": true,
+      "code_length": 93
+    },
+    {
+      "name": "UserForm1.frm",
+      "sheet_target": "(user form)",
+      "purpose": "Empty macro - no code",
+      "is_empty": true,
+      "code_length": 93
+    }
+  ]
+}

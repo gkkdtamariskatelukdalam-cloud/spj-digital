@@ -1,0 +1,6216 @@
+{
+  "name": "Tabel Bantu",
+  "max_row": 1200,
+  "max_col": 38,
+  "non_empty_cells": 32237,
+  "formulas_count": 4845,
+  "type": "Helper",
+  "purpose": "Helper table for Master sheet (mirror with change tracking via colors)",
+  "category": "helper",
+  "headers": [
+    {
+      "col": "A",
+      "col_idx": 1,
+      "header": "No. Surat Pesan"
+    },
+    {
+      "col": "B",
+      "col_idx": 2,
+      "header": "No BKU"
+    },
+    {
+      "col": "C",
+      "col_idx": 3,
+      "header": "Kode Program"
+    },
+    {
+      "col": "D",
+      "col_idx": 4,
+      "header": "Kode Rekening"
+    },
+    {
+      "col": "E",
+      "col_idx": 5,
+      "header": "Tanggal Perencanaan"
+    },
+    {
+      "col": "F",
+      "col_idx": 6,
+      "header": "Tanggal Pesanan"
+    },
+    {
+      "col": "G",
+      "col_idx": 7,
+      "header": "Tanggal BAST"
+    },
+    {
+      "col": "H",
+      "col_idx": 8,
+      "header": "Tanggal Pemeriksaan"
+    },
+    {
+      "col": "I",
+      "col_idx": 9,
+      "header": "Tanggal Bayar"
+    },
+    {
+      "col": "J",
+      "col_idx": 10,
+      "header": "Uraia Kagiatan"
+    },
+    {
+      "col": "K",
+      "col_idx": 11,
+      "header": "Nama Barang"
+    },
+    {
+      "col": "L",
+      "col_idx": 12,
+      "header": "Volume"
+    },
+    {
+      "col": "M",
+      "col_idx": 13,
+      "header": "Satuan"
+    },
+    {
+      "col": "N",
+      "col_idx": 14,
+      "header": "Harga Satuan"
+    },
+    {
+      "col": "O",
+      "col_idx": 15,
+      "header": "Jumlah"
+    },
+    {
+      "col": "Q",
+      "col_idx": 17,
+      "header": "Spesifikasi Barang"
+    },
+    {
+      "col": "R",
+      "col_idx": 18,
+      "header": "Harga Toko 1"
+    },
+    {
+      "col": "S",
+      "col_idx": 19,
+      "header": "Harga Toko 2"
+    },
+    {
+      "col": "T",
+      "col_idx": 20,
+      "header": "Nama Toko 1"
+    },
+    {
+      "col": "U",
+      "col_idx": 21,
+      "header": "Nama Toko 2"
+    },
+    {
+      "col": "V",
+      "col_idx": 22,
+      "header": "Direktur Toko 1"
+    },
+    {
+      "col": "W",
+      "col_idx": 23,
+      "header": "Alamat Toko 1"
+    },
+    {
+      "col": "X",
+      "col_idx": 24,
+      "header": "Alamat Toko 2"
+    },
+    {
+      "col": "Y",
+      "col_idx": 25,
+      "header": "Uraian Kwitansi"
+    },
+    {
+      "col": "Z",
+      "col_idx": 26,
+      "header": "Nama Pekerjaan / Kategori"
+    }
+  ],
+  "sample_rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "No. Surat Pesan",
+          "value": "No. Surat Pesan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "No BKU",
+          "value": "No BKU",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Kode Program",
+          "value": "Kode Program",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "Kode Rekening",
+          "value": "Kode Rekening",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "Tanggal Perencanaan",
+          "value": "Tanggal Perencanaan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "Tanggal Pesanan",
+          "value": "Tanggal Pesanan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Tanggal BAST",
+          "value": "Tanggal BAST",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "Tanggal Pemeriksaan",
+          "value": "Tanggal Pemeriksaan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Tanggal Bayar",
+          "value": "Tanggal Bayar",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Uraia Kagiatan",
+          "value": "Uraia Kagiatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Nama Barang",
+          "value": "Nama Barang",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Volume",
+          "value": "Volume",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Satuan",
+          "value": "Satuan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "Harga Satuan",
+          "value": "Harga Satuan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Jumlah",
+          "value": "Jumlah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Spesifikasi Barang",
+          "value": "Spesifikasi Barang",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Harga Toko 1",
+          "value": "Harga Toko 1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "Harga Toko 2",
+          "value": "Harga Toko 2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "Nama Toko 1",
+          "value": "Nama Toko 1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "Nama Toko 2",
+          "value": "Nama Toko 2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Direktur Toko 1",
+          "value": "Direktur Toko 1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Alamat Toko 1",
+          "value": "Alamat Toko 1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Alamat Toko 2",
+          "value": "Alamat Toko 2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "Uraian Kwitansi",
+          "value": "Uraian Kwitansi",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Nama Pekerjaan / Kategori",
+          "value": "Nama Pekerjaan / Kategori",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "Satuan",
+          "value": "Satuan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "Harga Satuan sebelum pajak",
+          "value": "Harga Satuan sebelum pajak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "Jumlah Harga Sebelum Pajak",
+          "value": "Jumlah Harga Sebelum Pajak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "Harga Total Asli ",
+          "value": "Harga Total Asli ",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "Total Harga Sebelum DPP",
+          "value": "Total Harga Sebelum DPP",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "Total Harga Asli",
+          "value": "Total Harga Asli",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Harga satuan asli",
+          "value": "Harga satuan asli",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "NO HP",
+          "value": "NO HP",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "2",
+          "value": "2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "3",
+          "value": "3",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "6",
+          "value": "6",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "7",
+          "value": "7",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "8",
+          "value": "8",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "9",
+          "value": "9",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "10",
+          "value": "10",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "11",
+          "value": "11",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "12",
+          "value": "12",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "13",
+          "value": "13",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "14",
+          "value": "14",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "15",
+          "value": "15",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "16",
+          "value": "16",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "17",
+          "value": "17",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "18",
+          "value": "18",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "19",
+          "value": "19",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "20",
+          "value": "20",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "21",
+          "value": "21",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "22",
+          "value": "22",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "23",
+          "value": "23",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "24",
+          "value": "24",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "25",
+          "value": "25",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "26",
+          "value": "26",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "27",
+          "value": "27",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "28",
+          "value": "28",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "29",
+          "value": "29",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "30",
+          "value": "30",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "31",
+          "value": "31",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "32",
+          "value": "32",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "33",
+          "value": "33",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "34",
+          "value": "34",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "02.03.65.",
+          "value": "02.03.65.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "5.1.02.01.01.00\n55",
+          "value": "5.1.02.01.01.00\n55",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "2023-01-04 00:00:00",
+          "value": "2023-01-04T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "05/01/2023",
+          "value": "05/01/2023",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=F3",
+          "value": "05/01/2023",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G3",
+          "value": "05/01/2023",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2023-04-18 00:00:00",
+          "value": "2023-04-18T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "konsumsi pada kegiatan penyusunan program kurikulum semester genap TP. 2023/2024",
+          "value": "konsumsi pada kegiatan penyusunan program kurikulum semester genap TP. 2023/2024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Nasi Kotak",
+          "value": "Nasi Kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "110",
+          "value": "110",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "kotak",
+          "value": "kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "35000",
+          "value": "35000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "3850000",
+          "value": "3850000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "value": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "3850000",
+          "value": "3850000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "=L3*(N3+2000)",
+          "value": "4070000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "RM. Immanuel",
+          "value": "RM. Immanuel",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "=IF(K3=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K3=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+          "value": "Resto JFC Esther",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Dolli Sinaga",
+          "value": "Dolli Sinaga",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Jl. Saonigeho Km.1 Telukdalam",
+          "value": "Jl. Saonigeho Km.1 Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Saonigeho Km.1 Telukdalam",
+          "value": "Jl. Saonigeho Km.1 Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=J3",
+          "value": "konsumsi pada kegiatan penyusunan program kurikulum semester genap TP. 2023/2024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Konsumsi",
+          "value": "Konsumsi",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "kotak",
+          "value": "kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=100/111*N3",
+          "value": "31531.53153153153",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "=AB3*L3",
+          "value": "3468468.4684684686",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "3850000",
+          "value": "3850000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "3468468.4684684686",
+          "value": "3468468.4684684686",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "3850000",
+          "value": "3850000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "3850000",
+          "value": "3850000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "08264720368",
+          "value": "08264720368",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "02",
+          "value": "02",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU02",
+          "value": "BPU02",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "02.03.65.",
+          "value": "02.03.65.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "5.1.02.01.01.00\n55",
+          "value": "5.1.02.01.01.00\n55",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "2023-01-04 00:00:00",
+          "value": "2023-01-04T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "2023-01-05 00:00:00",
+          "value": "2023-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=F4",
+          "value": "2023-01-05T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G4",
+          "value": "2023-01-05T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2023-04-18 00:00:00",
+          "value": "2023-04-18T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Air Mineral botol 600ml pada kegiatan penyusunan program kurikulum semester ganjil TP. 2023/2024",
+          "value": "Air Mineral botol 600ml pada kegiatan penyusunan program kurikulum semester ganjil TP. 2023/2024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Aqua Botol 600 ml",
+          "value": "Aqua Botol 600 ml",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Dus",
+          "value": "Dus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "70000",
+          "value": "70000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Aqua Botol (Berat Satuan 600 gram; Dimensi Ukuran 2x3x2cm; Berat volume: 0.00kg)",
+          "value": "Aqua Botol (Berat Satuan 600 gram; Dimensi Ukuran 2x3x2cm; Berat volume: 0.00kg)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "=L4*(N4+2000)",
+          "value": "288000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "Rumah Roti Helena",
+          "value": "Rumah Roti Helena",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "=IF(K4=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K4=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+          "value": "UD. USAHA JAYA",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Fudi Supiyanto",
+          "value": "Fudi Supiyanto",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "value": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jln. Simpang 5 Kelurahan Pasar Telukdalam, Nias Selatan",
+          "value": "Jln. Simpang 5 Kelurahan Pasar Telukdalam, Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=J4",
+          "value": "Air Mineral botol 600ml pada kegiatan penyusunan program kurikulum semester ganjil TP. 2023/2024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Air Mineral",
+          "value": "Air Mineral",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "Dus",
+          "value": "Dus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=100/111*N4",
+          "value": "63063.06306306306",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "=AB4*L4",
+          "value": "252252.25225225225",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "252252.252252252",
+          "value": "252252.252252252",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "082164895397",
+          "value": "082164895397",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "03",
+          "value": "03",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU03",
+          "value": "BPU03",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "02.06.51.",
+          "value": "02.06.51.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "5.1.02.01.01.00\n55",
+          "value": "5.1.02.01.01.00\n55",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "05/01/2023",
+          "value": "05/01/2023",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "2023-01-06 00:00:00",
+          "value": "2023-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=F5",
+          "value": "2023-01-06T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G5",
+          "value": "2023-01-06T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2023-04-18 00:00:00",
+          "value": "2023-04-18T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Konsumsi pada kegiatan penyusunan program kesiswaan semester genap TP. 2023/2024",
+          "value": "Konsumsi pada kegiatan penyusunan program kesiswaan semester genap TP. 2023/2024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Nasi Kotak",
+          "value": "Nasi Kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "40",
+          "value": "40",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "kotak",
+          "value": "kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "35000",
+          "value": "35000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "1400000",
+          "value": "1400000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "value": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "1400000",
+          "value": "1400000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "=L5*(N5+2000)",
+          "value": "1480000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "RM. Immanuel",
+          "value": "RM. Immanuel",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "=IF(K5=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K5=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+          "value": "Resto JFC Esther",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Dolli Sinaga",
+          "value": "Dolli Sinaga",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Jl. Saonigeho Km.1 Telukdalam",
+          "value": "Jl. Saonigeho Km.1 Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Saonigeho Km.1 Telukdalam",
+          "value": "Jl. Saonigeho Km.1 Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=J5",
+          "value": "Konsumsi pada kegiatan penyusunan program kesiswaan semester genap TP. 2023/2024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Konsumsi",
+          "value": "Konsumsi",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "kotak",
+          "value": "kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=100/111*N5",
+          "value": "31531.53153153153",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "=AB5*L5",
+          "value": "1261261.2612612613",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "1400000",
+          "value": "1400000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "1261261.2612612613",
+          "value": "1261261.2612612613",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "1400000",
+          "value": "1400000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1400000",
+          "value": "1400000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "08264720368",
+          "value": "08264720368",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "04",
+          "value": "04",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU04",
+          "value": "BPU04",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "02.06.51.",
+          "value": "02.06.51.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "5.1.02.01.01.00\n55",
+          "value": "5.1.02.01.01.00\n55",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "05/01/2023",
+          "value": "05/01/2023",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "2023-01-06 00:00:00",
+          "value": "2023-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=F6",
+          "value": "2023-01-06T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G6",
+          "value": "2023-01-06T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2023-04-18 00:00:00",
+          "value": "2023-04-18T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Air mineral botol 600 ml pada kegiatan penyusunan program kesiswaan semester genap TP. 2023/2024",
+          "value": "Air mineral botol 600 ml pada kegiatan penyusunan program kesiswaan semester genap TP. 2023/2024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Aqua Botol 600 ml",
+          "value": "Aqua Botol 600 ml",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "2",
+          "value": "2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Dus",
+          "value": "Dus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "70000",
+          "value": "70000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "140000",
+          "value": "140000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Aqua Botol (Berat Satuan 600 gram; Dimensi Ukuran 2x3x2cm; Berat volume: 0.00kg)",
+          "value": "Aqua Botol (Berat Satuan 600 gram; Dimensi Ukuran 2x3x2cm; Berat volume: 0.00kg)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "140000",
+          "value": "140000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "=L6*(N6+2000)",
+          "value": "144000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "Rumah Roti Helena",
+          "value": "Rumah Roti Helena",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "=IF(K6=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K6=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+          "value": "UD. USAHA JAYA",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Fudi Supiyanto",
+          "value": "Fudi Supiyanto",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "value": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jln. Simpang 5 Kelurahan Pasar Telukdalam, Nias Selatan",
+          "value": "Jln. Simpang 5 Kelurahan Pasar Telukdalam, Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=J6",
+          "value": "Air mineral botol 600 ml pada kegiatan penyusunan program kesiswaan semester genap TP. 2023/2024",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Air Mineral",
+          "value": "Air Mineral",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "Dus",
+          "value": "Dus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=100/111*N6",
+          "value": "63063.06306306306",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "=AB6*L6",
+          "value": "126126.12612612612",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "140000",
+          "value": "140000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "126126.12612612612",
+          "value": "126126.12612612612",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "140000",
+          "value": "140000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "140000",
+          "value": "140000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "082164895397",
+          "value": "082164895397",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AI",
+          "col_idx": 35,
+          "formula": "=SUM(AC7:AC8)",
+          "value": "6306306.306306306",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AJ",
+          "col_idx": 36,
+          "formula": "=SUM(AD7:AD8)",
+          "value": "7000000",
+          "is_formula": true,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "05",
+          "value": "05",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU05",
+          "value": "BPU05",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "03.03.16.",
+          "value": "03.03.16.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "5.1.02.01.01.00\n55",
+          "value": "5.1.02.01.01.00\n55",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "08/01/2023",
+          "value": "08/01/2023",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "2023-01-09 00:00:00",
+          "value": "2023-01-09T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=F7",
+          "value": "2023-01-09T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G7",
+          "value": "2023-01-09T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2023-04-18 00:00:00",
+          "value": "2023-04-18T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Air Mineral wadah gelaspada kegiatan rubrik/ibadah bulanan",
+          "value": "Air Mineral wadah gelaspada kegiatan rubrik/ibadah bulanan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Aqua Cup  ",
+          "value": "Aqua Cup  ",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "20",
+          "value": "20",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Dus",
+          "value": "Dus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "50000",
+          "value": "50000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "1000000",
+          "value": "1000000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Aqua Cup (Diameter: 6.3cm. Tinggi: 9.5cm)",
+          "value": "Aqua Cup (Diameter: 6.3cm. Tinggi: 9.5cm)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "1000000",
+          "value": "1000000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "=L7*(N7+2000)",
+          "value": "1040000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "Rumah Roti Helena",
+          "value": "Rumah Roti Helena",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "=IF(K7=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K7=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+          "value": "",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Fudi Supiyanto",
+          "value": "Fudi Supiyanto",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "value": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jln. Simpang 5 Kelurahan Pasar Telukdalam, Nias Selatan",
+          "value": "Jln. Simpang 5 Kelurahan Pasar Telukdalam, Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=J7",
+          "value": "Air Mineral wadah gelaspada kegiatan rubrik/ibadah bulanan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Air Mineral",
+          "value": "Air Mineral",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "Dus",
+          "value": "Dus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=100/111*N7",
+          "value": "45045.045045045044",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "=AB7*L7",
+          "value": "900900.9009009008",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "1000000",
+          "value": "1000000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "6306306.306306306",
+          "value": "6306306.306306306",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "7000000",
+          "value": "7000000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1000000",
+          "value": "1000000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "082164895397",
+          "value": "082164895397",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "05",
+          "value": "05",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU06",
+          "value": "BPU06",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "03.03.16.",
+          "value": "03.03.16.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "5.1.02.01.01.00\n55",
+          "value": "5.1.02.01.01.00\n55",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "08/01/2023",
+          "value": "08/01/2023",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "2023-01-09 00:00:00",
+          "value": "2023-01-09T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=F8",
+          "value": "2023-01-09T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G8",
+          "value": "2023-01-09T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2023-04-18 00:00:00",
+          "value": "2023-04-18T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Snack Kegiatan rubrik/Ibadah Bulanan",
+          "value": "Snack Kegiatan rubrik/Ibadah Bulanan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Kue ",
+          "value": "Kue ",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "750",
+          "value": "750",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Buah",
+          "value": "Buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "8000",
+          "value": "8000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "6000000",
+          "value": "6000000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Kue (bahan tepung terigu, gula, telur, mentega; berat 100gr, panjang 15cm, lebar 8 cm)",
+          "value": "Kue (bahan tepung terigu, gula, telur, mentega; berat 100gr, panjang 15cm, lebar 8 cm)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "6000000",
+          "value": "6000000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "=L8*(N8+2000)",
+          "value": "7500000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "Rumah Roti Helena",
+          "value": "Rumah Roti Helena",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "=IF(K8=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K8=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+          "value": "",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Fudi Supiyanto",
+          "value": "Fudi Supiyanto",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Jl. Ahmad Yani No. 89 Kel. Psr Telukdalam",
+          "value": "Jl. Ahmad Yani No. 89 Kel. Psr Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Imam bonjol Kel. Psr Telukdalam",
+          "value": "Jl. Imam bonjol Kel. Psr Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=J8",
+          "value": "Snack Kegiatan rubrik/Ibadah Bulanan",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Kudapan",
+          "value": "Kudapan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "Buah",
+          "value": "Buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=100/111*N8",
+          "value": "7207.207207207207",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "=AB8*L8",
+          "value": "5405405.405405405",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "6000000",
+          "value": "6000000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "6306306.306306306",
+          "value": "6306306.306306306",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "7000000",
+          "value": "7000000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "6000000",
+          "value": "6000000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "082164895397",
+          "value": "082164895397",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "06",
+          "value": "06",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU18",
+          "value": "BPU18",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "06.03.56.",
+          "value": "06.03.56.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "5.1.02.01.01.00\n55",
+          "value": "5.1.02.01.01.00\n55",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "13/01/2023",
+          "value": "13/01/2023",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "2023-01-14 00:00:00",
+          "value": "2023-01-14T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=F9",
+          "value": "2023-01-14T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G9",
+          "value": "2023-01-14T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2023-04-18 00:00:00",
+          "value": "2023-04-18T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Konsumsi pembina pada kegiatan Persiapan Lomba FLSSN",
+          "value": "Konsumsi pembina pada kegiatan Persiapan Lomba FLSSN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Nasi Kotak",
+          "value": "Nasi Kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "6",
+          "value": "6",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "kotak",
+          "value": "kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "35000",
+          "value": "35000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "210000",
+          "value": "210000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "value": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "210000",
+          "value": "210000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "=L9*(N9+2000)",
+          "value": "222000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "RM. Immanuel",
+          "value": "RM. Immanuel",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "=IF(K9=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K9=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+          "value": "Resto JFC Esther",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Dolli Sinaga",
+          "value": "Dolli Sinaga",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Jl. Saonigeho Km.1 Telukdalam",
+          "value": "Jl. Saonigeho Km.1 Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Saonigeho Km.1 Telukdalam",
+          "value": "Jl. Saonigeho Km.1 Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=J9",
+          "value": "Konsumsi pembina pada kegiatan Persiapan Lomba FLSSN",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Konsumsi",
+          "value": "Konsumsi",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "kotak",
+          "value": "kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=100/111*N9",
+          "value": "31531.53153153153",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "=AB9*L9",
+          "value": "189189.18918918917",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "210000",
+          "value": "210000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "189189.18918918917",
+          "value": "189189.18918918917",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "210000",
+          "value": "210000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "210000",
+          "value": "210000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "08264720368",
+          "value": "08264720368",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AK",
+          "col_idx": 37,
+          "formula": "08264720368",
+          "value": "08264720368",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "07",
+          "value": "07",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU19",
+          "value": "BPU19",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "06.03.56.",
+          "value": "06.03.56.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "5.1.02.01.01.00\n55",
+          "value": "5.1.02.01.01.00\n55",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "13/01/2023",
+          "value": "13/01/2023",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "2023-01-14 00:00:00",
+          "value": "2023-01-14T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=F10",
+          "value": "2023-01-14T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G10",
+          "value": "2023-01-14T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2023-04-18 00:00:00",
+          "value": "2023-04-18T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Air Mineral Pembina dan Peserta Lomba FLSSN",
+          "value": "Air Mineral Pembina dan Peserta Lomba FLSSN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Aqua Botol 600 ml",
+          "value": "Aqua Botol 600 ml",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Dus",
+          "value": "Dus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "70000",
+          "value": "70000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Aqua Botol (Berat Satuan 600 gram; Dimensi Ukuran 2x3x2cm; Berat volume: 0.00kg)",
+          "value": "Aqua Botol (Berat Satuan 600 gram; Dimensi Ukuran 2x3x2cm; Berat volume: 0.00kg)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "=L10*(N10+2000)",
+          "value": "288000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "Rumah Roti Helena",
+          "value": "Rumah Roti Helena",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "=IF(K10=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K10=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+          "value": "UD. USAHA JAYA",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Fudi Supiyanto",
+          "value": "Fudi Supiyanto",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "value": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jln. Simpang 5 Kelurahan Pasar Telukdalam, Nias Selatan",
+          "value": "Jln. Simpang 5 Kelurahan Pasar Telukdalam, Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=J10",
+          "value": "Air Mineral Pembina dan Peserta Lomba FLSSN",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Air Mineral",
+          "value": "Air Mineral",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "Dus",
+          "value": "Dus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=100/111*N10",
+          "value": "63063.06306306306",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "=AB10*L10",
+          "value": "252252.25225225225",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "252252.25225225225",
+          "value": "252252.25225225225",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "082164895397",
+          "value": "082164895397",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AK",
+          "col_idx": 37,
+          "formula": "082164895397",
+          "value": "082164895397",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "08",
+          "value": "08",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU08",
+          "value": "BPU08",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "03.03.44.",
+          "value": "03.03.44.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "5.1.02.01.01.00\n55",
+          "value": "5.1.02.01.01.00\n55",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "10/01/2023",
+          "value": "10/01/2023",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "2023-01-11 00:00:00",
+          "value": "2023-01-11T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=F11",
+          "value": "2023-01-11T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G11",
+          "value": "2023-01-11T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2023-04-18 00:00:00",
+          "value": "2023-04-18T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Konsumsi Pembina pramuka Putera/Puteri",
+          "value": "Konsumsi Pembina pramuka Putera/Puteri",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Nasi Kotak",
+          "value": "Nasi Kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "8",
+          "value": "8",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "kotak",
+          "value": "kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "35000",
+          "value": "35000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "value": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "=L11*(N11+2000)",
+          "value": "296000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "RM. Immanuel",
+          "value": "RM. Immanuel",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "=IF(K11=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K11=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+          "value": "Resto JFC Esther",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Dolli Sinaga",
+          "value": "Dolli Sinaga",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Jl. Saonigeho Km.1 Telukdalam",
+          "value": "Jl. Saonigeho Km.1 Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Saonigeho Km.1 Telukdalam",
+          "value": "Jl. Saonigeho Km.1 Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=J11",
+          "value": "Konsumsi Pembina pramuka Putera/Puteri",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Konsumsi",
+          "value": "Konsumsi",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "kotak",
+          "value": "kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=100/111*N11",
+          "value": "31531.53153153153",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "=AB11*L11",
+          "value": "252252.25225225225",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "252252.25225225225",
+          "value": "252252.25225225225",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "280000",
+          "value": "280000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "08264720368",
+          "value": "08264720368",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "09",
+          "value": "09",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU09",
+          "value": "BPU09",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "03.03.44.",
+          "value": "03.03.44.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "5.1.02.01.01.00\n55",
+          "value": "5.1.02.01.01.00\n55",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "10/01/2023",
+          "value": "10/01/2023",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "2023-01-11 00:00:00",
+          "value": "2023-01-11T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=F12",
+          "value": "2023-01-11T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G12",
+          "value": "2023-01-11T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2023-04-18 00:00:00",
+          "value": "2023-04-18T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Aqua gelas siwa/i pada kegiatan ekstrakurikuler pramuka",
+          "value": "Aqua gelas siwa/i pada kegiatan ekstrakurikuler pramuka",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Aqua Cup  ",
+          "value": "Aqua Cup  ",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "8",
+          "value": "8",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Dus",
+          "value": "Dus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "50000",
+          "value": "50000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "400000",
+          "value": "400000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Aqua Cup (Diameter: 6.3cm. Tinggi: 9.5cm)",
+          "value": "Aqua Cup (Diameter: 6.3cm. Tinggi: 9.5cm)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "400000",
+          "value": "400000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "=L12*(N12+2000)",
+          "value": "416000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "Rumah Roti Helena",
+          "value": "Rumah Roti Helena",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "=IF(K12=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K12=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+          "value": "",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Fudi Supiyanto",
+          "value": "Fudi Supiyanto",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "value": "Jln Ahmad Yani No.89 Kel. Pasar Telukdalam, Nias Sealatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jln. Simpang 5 Kelurahan Pasar Telukdalam, Nias Selatan",
+          "value": "Jln. Simpang 5 Kelurahan Pasar Telukdalam, Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=J12",
+          "value": "Aqua gelas siwa/i pada kegiatan ekstrakurikuler pramuka",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Air Mineral",
+          "value": "Air Mineral",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "Dus",
+          "value": "Dus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=100/111*N12",
+          "value": "45045.045045045044",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "=AB12*L12",
+          "value": "360360.36036036036",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "400000",
+          "value": "400000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "360360.36036036036",
+          "value": "360360.36036036036",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "400000",
+          "value": "400000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "400000",
+          "value": "400000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "082164895397",
+          "value": "082164895397",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "10",
+          "value": "10",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU10",
+          "value": "BPU10",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "03.03.45.",
+          "value": "03.03.45.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "5.1.02.01.01.00\n55",
+          "value": "5.1.02.01.01.00\n55",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "12/01/2023",
+          "value": "12/01/2023",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "2023-01-13 00:00:00",
+          "value": "2023-01-13T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "=F13",
+          "value": "2023-01-13T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "=G13",
+          "value": "2023-01-13T00:00:00",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2023-04-18 00:00:00",
+          "value": "2023-04-18T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Konsumsi pembina pada kegiatan ekstrakurikuler seni dan budaya (paduan suara), paskibra, dan band musik",
+          "value": "Konsumsi pembina pada kegiatan ekstrakurikuler seni dan budaya (paduan suara), paskibra, dan band musik",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Nasi Kotak",
+          "value": "Nasi Kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "11",
+          "value": "11",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "kotak",
+          "value": "kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "35000",
+          "value": "35000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "=L13*N13",
+          "value": "385000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "value": "Nasi Kotak (isi: Nasi putih;Sop daging; Sayur; Berat 1000gr; Dimensi; (PxLxT) 25cmx25cmx10cm)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "140000",
+          "value": "140000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "=L13*(N13+2000)",
+          "value": "407000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "RM. Immanuel",
+          "value": "RM. Immanuel",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "=IF(K13=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K13=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+          "value": "Resto JFC Esther",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Dolli Sinaga",
+          "value": "Dolli Sinaga",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Jl. Saonigeho Km.1 Telukdalam",
+          "value": "Jl. Saonigeho Km.1 Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Jl. Saonigeho Km.1 Telukdalam",
+          "value": "Jl. Saonigeho Km.1 Telukdalam",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "=J13",
+          "value": "Konsumsi pembina pada kegiatan ekstrakurikuler seni dan budaya (paduan suara), paskibra, dan band musik",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Konsumsi",
+          "value": "Konsumsi",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "kotak",
+          "value": "kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "=100/111*N13",
+          "value": "31531.53153153153",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "=AB13*L13",
+          "value": "346846.84684684686",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "=O13",
+          "value": "385000",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "346846.84684684686",
+          "value": "346846.84684684686",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "385000",
+          "value": "385000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "385000",
+          "value": "385000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AH",
+          "col_idx": 34,
+          "formula": "08264720368",
+          "value": "08264720368",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AK",
+          "col_idx": 37,
+          "formula": "08264720368",
+          "value": "08264720368",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "10",
+          "value": "10",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU13",
+          "value": "BPU13",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "10",
+          "value": "10",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "BPU16",
+          "value": "BPU16",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    }
+  ],
+  "formulas": [
+    {
+      "cell": "G3",
+      "row": 3,
+      "col": "G",
+      "formula": "=F3",
+      "value": "05/01/2023",
+      "type": "normal"
+    },
+    {
+      "cell": "H3",
+      "row": 3,
+      "col": "H",
+      "formula": "=G3",
+      "value": "05/01/2023",
+      "type": "normal"
+    },
+    {
+      "cell": "S3",
+      "row": 3,
+      "col": "S",
+      "formula": "=L3*(N3+2000)",
+      "value": "4070000",
+      "type": "normal"
+    },
+    {
+      "cell": "U3",
+      "row": 3,
+      "col": "U",
+      "formula": "=IF(K3=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K3=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "Resto JFC Esther",
+      "type": "normal"
+    },
+    {
+      "cell": "Y3",
+      "row": 3,
+      "col": "Y",
+      "formula": "=J3",
+      "value": "konsumsi pada kegiatan penyusunan program kurikulum semester genap TP. 2023/2024",
+      "type": "normal"
+    },
+    {
+      "cell": "AB3",
+      "row": 3,
+      "col": "AB",
+      "formula": "=100/111*N3",
+      "value": "31531.53153153153",
+      "type": "normal"
+    },
+    {
+      "cell": "AC3",
+      "row": 3,
+      "col": "AC",
+      "formula": "=AB3*L3",
+      "value": "3468468.4684684686",
+      "type": "normal"
+    },
+    {
+      "cell": "G4",
+      "row": 4,
+      "col": "G",
+      "formula": "=F4",
+      "value": "2023-01-05T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H4",
+      "row": 4,
+      "col": "H",
+      "formula": "=G4",
+      "value": "2023-01-05T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S4",
+      "row": 4,
+      "col": "S",
+      "formula": "=L4*(N4+2000)",
+      "value": "288000",
+      "type": "normal"
+    },
+    {
+      "cell": "U4",
+      "row": 4,
+      "col": "U",
+      "formula": "=IF(K4=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K4=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "UD. USAHA JAYA",
+      "type": "normal"
+    },
+    {
+      "cell": "Y4",
+      "row": 4,
+      "col": "Y",
+      "formula": "=J4",
+      "value": "Air Mineral botol 600ml pada kegiatan penyusunan program kurikulum semester ganjil TP. 2023/2024",
+      "type": "normal"
+    },
+    {
+      "cell": "AB4",
+      "row": 4,
+      "col": "AB",
+      "formula": "=100/111*N4",
+      "value": "63063.06306306306",
+      "type": "normal"
+    },
+    {
+      "cell": "AC4",
+      "row": 4,
+      "col": "AC",
+      "formula": "=AB4*L4",
+      "value": "252252.25225225225",
+      "type": "normal"
+    },
+    {
+      "cell": "G5",
+      "row": 5,
+      "col": "G",
+      "formula": "=F5",
+      "value": "2023-01-06T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H5",
+      "row": 5,
+      "col": "H",
+      "formula": "=G5",
+      "value": "2023-01-06T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S5",
+      "row": 5,
+      "col": "S",
+      "formula": "=L5*(N5+2000)",
+      "value": "1480000",
+      "type": "normal"
+    },
+    {
+      "cell": "U5",
+      "row": 5,
+      "col": "U",
+      "formula": "=IF(K5=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K5=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "Resto JFC Esther",
+      "type": "normal"
+    },
+    {
+      "cell": "Y5",
+      "row": 5,
+      "col": "Y",
+      "formula": "=J5",
+      "value": "Konsumsi pada kegiatan penyusunan program kesiswaan semester genap TP. 2023/2024",
+      "type": "normal"
+    },
+    {
+      "cell": "AB5",
+      "row": 5,
+      "col": "AB",
+      "formula": "=100/111*N5",
+      "value": "31531.53153153153",
+      "type": "normal"
+    },
+    {
+      "cell": "AC5",
+      "row": 5,
+      "col": "AC",
+      "formula": "=AB5*L5",
+      "value": "1261261.2612612613",
+      "type": "normal"
+    },
+    {
+      "cell": "G6",
+      "row": 6,
+      "col": "G",
+      "formula": "=F6",
+      "value": "2023-01-06T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H6",
+      "row": 6,
+      "col": "H",
+      "formula": "=G6",
+      "value": "2023-01-06T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S6",
+      "row": 6,
+      "col": "S",
+      "formula": "=L6*(N6+2000)",
+      "value": "144000",
+      "type": "normal"
+    },
+    {
+      "cell": "U6",
+      "row": 6,
+      "col": "U",
+      "formula": "=IF(K6=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K6=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "UD. USAHA JAYA",
+      "type": "normal"
+    },
+    {
+      "cell": "Y6",
+      "row": 6,
+      "col": "Y",
+      "formula": "=J6",
+      "value": "Air mineral botol 600 ml pada kegiatan penyusunan program kesiswaan semester genap TP. 2023/2024",
+      "type": "normal"
+    },
+    {
+      "cell": "AB6",
+      "row": 6,
+      "col": "AB",
+      "formula": "=100/111*N6",
+      "value": "63063.06306306306",
+      "type": "normal"
+    },
+    {
+      "cell": "AC6",
+      "row": 6,
+      "col": "AC",
+      "formula": "=AB6*L6",
+      "value": "126126.12612612612",
+      "type": "normal"
+    },
+    {
+      "cell": "AI6",
+      "row": 6,
+      "col": "AI",
+      "formula": "=SUM(AC7:AC8)",
+      "value": "6306306.306306306",
+      "type": "normal"
+    },
+    {
+      "cell": "AJ6",
+      "row": 6,
+      "col": "AJ",
+      "formula": "=SUM(AD7:AD8)",
+      "value": "7000000",
+      "type": "normal"
+    },
+    {
+      "cell": "G7",
+      "row": 7,
+      "col": "G",
+      "formula": "=F7",
+      "value": "2023-01-09T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H7",
+      "row": 7,
+      "col": "H",
+      "formula": "=G7",
+      "value": "2023-01-09T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S7",
+      "row": 7,
+      "col": "S",
+      "formula": "=L7*(N7+2000)",
+      "value": "1040000",
+      "type": "normal"
+    },
+    {
+      "cell": "U7",
+      "row": 7,
+      "col": "U",
+      "formula": "=IF(K7=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K7=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y7",
+      "row": 7,
+      "col": "Y",
+      "formula": "=J7",
+      "value": "Air Mineral wadah gelaspada kegiatan rubrik/ibadah bulanan",
+      "type": "normal"
+    },
+    {
+      "cell": "AB7",
+      "row": 7,
+      "col": "AB",
+      "formula": "=100/111*N7",
+      "value": "45045.045045045044",
+      "type": "normal"
+    },
+    {
+      "cell": "AC7",
+      "row": 7,
+      "col": "AC",
+      "formula": "=AB7*L7",
+      "value": "900900.9009009008",
+      "type": "normal"
+    },
+    {
+      "cell": "G8",
+      "row": 8,
+      "col": "G",
+      "formula": "=F8",
+      "value": "2023-01-09T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H8",
+      "row": 8,
+      "col": "H",
+      "formula": "=G8",
+      "value": "2023-01-09T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S8",
+      "row": 8,
+      "col": "S",
+      "formula": "=L8*(N8+2000)",
+      "value": "7500000",
+      "type": "normal"
+    },
+    {
+      "cell": "U8",
+      "row": 8,
+      "col": "U",
+      "formula": "=IF(K8=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K8=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y8",
+      "row": 8,
+      "col": "Y",
+      "formula": "=J8",
+      "value": "Snack Kegiatan rubrik/Ibadah Bulanan",
+      "type": "normal"
+    },
+    {
+      "cell": "AB8",
+      "row": 8,
+      "col": "AB",
+      "formula": "=100/111*N8",
+      "value": "7207.207207207207",
+      "type": "normal"
+    },
+    {
+      "cell": "AC8",
+      "row": 8,
+      "col": "AC",
+      "formula": "=AB8*L8",
+      "value": "5405405.405405405",
+      "type": "normal"
+    },
+    {
+      "cell": "G9",
+      "row": 9,
+      "col": "G",
+      "formula": "=F9",
+      "value": "2023-01-14T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H9",
+      "row": 9,
+      "col": "H",
+      "formula": "=G9",
+      "value": "2023-01-14T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S9",
+      "row": 9,
+      "col": "S",
+      "formula": "=L9*(N9+2000)",
+      "value": "222000",
+      "type": "normal"
+    },
+    {
+      "cell": "U9",
+      "row": 9,
+      "col": "U",
+      "formula": "=IF(K9=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K9=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "Resto JFC Esther",
+      "type": "normal"
+    },
+    {
+      "cell": "Y9",
+      "row": 9,
+      "col": "Y",
+      "formula": "=J9",
+      "value": "Konsumsi pembina pada kegiatan Persiapan Lomba FLSSN",
+      "type": "normal"
+    },
+    {
+      "cell": "AB9",
+      "row": 9,
+      "col": "AB",
+      "formula": "=100/111*N9",
+      "value": "31531.53153153153",
+      "type": "normal"
+    },
+    {
+      "cell": "AC9",
+      "row": 9,
+      "col": "AC",
+      "formula": "=AB9*L9",
+      "value": "189189.18918918917",
+      "type": "normal"
+    },
+    {
+      "cell": "G10",
+      "row": 10,
+      "col": "G",
+      "formula": "=F10",
+      "value": "2023-01-14T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H10",
+      "row": 10,
+      "col": "H",
+      "formula": "=G10",
+      "value": "2023-01-14T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S10",
+      "row": 10,
+      "col": "S",
+      "formula": "=L10*(N10+2000)",
+      "value": "288000",
+      "type": "normal"
+    },
+    {
+      "cell": "U10",
+      "row": 10,
+      "col": "U",
+      "formula": "=IF(K10=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K10=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "UD. USAHA JAYA",
+      "type": "normal"
+    },
+    {
+      "cell": "Y10",
+      "row": 10,
+      "col": "Y",
+      "formula": "=J10",
+      "value": "Air Mineral Pembina dan Peserta Lomba FLSSN",
+      "type": "normal"
+    },
+    {
+      "cell": "AB10",
+      "row": 10,
+      "col": "AB",
+      "formula": "=100/111*N10",
+      "value": "63063.06306306306",
+      "type": "normal"
+    },
+    {
+      "cell": "AC10",
+      "row": 10,
+      "col": "AC",
+      "formula": "=AB10*L10",
+      "value": "252252.25225225225",
+      "type": "normal"
+    },
+    {
+      "cell": "G11",
+      "row": 11,
+      "col": "G",
+      "formula": "=F11",
+      "value": "2023-01-11T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H11",
+      "row": 11,
+      "col": "H",
+      "formula": "=G11",
+      "value": "2023-01-11T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S11",
+      "row": 11,
+      "col": "S",
+      "formula": "=L11*(N11+2000)",
+      "value": "296000",
+      "type": "normal"
+    },
+    {
+      "cell": "U11",
+      "row": 11,
+      "col": "U",
+      "formula": "=IF(K11=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K11=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "Resto JFC Esther",
+      "type": "normal"
+    },
+    {
+      "cell": "Y11",
+      "row": 11,
+      "col": "Y",
+      "formula": "=J11",
+      "value": "Konsumsi Pembina pramuka Putera/Puteri",
+      "type": "normal"
+    },
+    {
+      "cell": "AB11",
+      "row": 11,
+      "col": "AB",
+      "formula": "=100/111*N11",
+      "value": "31531.53153153153",
+      "type": "normal"
+    },
+    {
+      "cell": "AC11",
+      "row": 11,
+      "col": "AC",
+      "formula": "=AB11*L11",
+      "value": "252252.25225225225",
+      "type": "normal"
+    },
+    {
+      "cell": "G12",
+      "row": 12,
+      "col": "G",
+      "formula": "=F12",
+      "value": "2023-01-11T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H12",
+      "row": 12,
+      "col": "H",
+      "formula": "=G12",
+      "value": "2023-01-11T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S12",
+      "row": 12,
+      "col": "S",
+      "formula": "=L12*(N12+2000)",
+      "value": "416000",
+      "type": "normal"
+    },
+    {
+      "cell": "U12",
+      "row": 12,
+      "col": "U",
+      "formula": "=IF(K12=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K12=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y12",
+      "row": 12,
+      "col": "Y",
+      "formula": "=J12",
+      "value": "Aqua gelas siwa/i pada kegiatan ekstrakurikuler pramuka",
+      "type": "normal"
+    },
+    {
+      "cell": "AB12",
+      "row": 12,
+      "col": "AB",
+      "formula": "=100/111*N12",
+      "value": "45045.045045045044",
+      "type": "normal"
+    },
+    {
+      "cell": "AC12",
+      "row": 12,
+      "col": "AC",
+      "formula": "=AB12*L12",
+      "value": "360360.36036036036",
+      "type": "normal"
+    },
+    {
+      "cell": "G13",
+      "row": 13,
+      "col": "G",
+      "formula": "=F13",
+      "value": "2023-01-13T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H13",
+      "row": 13,
+      "col": "H",
+      "formula": "=G13",
+      "value": "2023-01-13T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "O13",
+      "row": 13,
+      "col": "O",
+      "formula": "=L13*N13",
+      "value": "385000",
+      "type": "normal"
+    },
+    {
+      "cell": "S13",
+      "row": 13,
+      "col": "S",
+      "formula": "=L13*(N13+2000)",
+      "value": "407000",
+      "type": "normal"
+    },
+    {
+      "cell": "U13",
+      "row": 13,
+      "col": "U",
+      "formula": "=IF(K13=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K13=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "Resto JFC Esther",
+      "type": "normal"
+    },
+    {
+      "cell": "Y13",
+      "row": 13,
+      "col": "Y",
+      "formula": "=J13",
+      "value": "Konsumsi pembina pada kegiatan ekstrakurikuler seni dan budaya (paduan suara), paskibra, dan band musik",
+      "type": "normal"
+    },
+    {
+      "cell": "AB13",
+      "row": 13,
+      "col": "AB",
+      "formula": "=100/111*N13",
+      "value": "31531.53153153153",
+      "type": "normal"
+    },
+    {
+      "cell": "AC13",
+      "row": 13,
+      "col": "AC",
+      "formula": "=AB13*L13",
+      "value": "346846.84684684686",
+      "type": "normal"
+    },
+    {
+      "cell": "AD13",
+      "row": 13,
+      "col": "AD",
+      "formula": "=O13",
+      "value": "385000",
+      "type": "normal"
+    },
+    {
+      "cell": "G16",
+      "row": 16,
+      "col": "G",
+      "formula": "=F16",
+      "value": "2023-01-13T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H16",
+      "row": 16,
+      "col": "H",
+      "formula": "=G16",
+      "value": "2023-01-13T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "O16",
+      "row": 16,
+      "col": "O",
+      "formula": "=L16*N16",
+      "value": "2250000",
+      "type": "normal"
+    },
+    {
+      "cell": "S16",
+      "row": 16,
+      "col": "S",
+      "formula": "=L16*(N16+2000)",
+      "value": "2340000",
+      "type": "normal"
+    },
+    {
+      "cell": "U16",
+      "row": 16,
+      "col": "U",
+      "formula": "=IF(K16=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K16=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y16",
+      "row": 16,
+      "col": "Y",
+      "formula": "=J16",
+      "value": "Air mineral/Aqua gelas siswa/i peserta kegiatan ekstrakurikuler seni dan budaya (paduan suara)",
+      "type": "normal"
+    },
+    {
+      "cell": "AB16",
+      "row": 16,
+      "col": "AB",
+      "formula": "=100/111*N16",
+      "value": "45045.045045045044",
+      "type": "normal"
+    },
+    {
+      "cell": "AC16",
+      "row": 16,
+      "col": "AC",
+      "formula": "=AB16*L16",
+      "value": "2027027.027027027",
+      "type": "normal"
+    },
+    {
+      "cell": "AD16",
+      "row": 16,
+      "col": "AD",
+      "formula": "=O16",
+      "value": "2250000",
+      "type": "normal"
+    },
+    {
+      "cell": "S17",
+      "row": 17,
+      "col": "S",
+      "formula": "=L17*(N17+2000)",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "U17",
+      "row": 17,
+      "col": "U",
+      "formula": "=IF(K17=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K17=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "AB17",
+      "row": 17,
+      "col": "AB",
+      "formula": "=100/111*N17",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "AC17",
+      "row": 17,
+      "col": "AC",
+      "formula": "=AB17*L17",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "AI17",
+      "row": 17,
+      "col": "AI",
+      "formula": "=SUM(AC17:AC25)",
+      "value": "1563063.0630630632",
+      "type": "normal"
+    },
+    {
+      "cell": "AJ17",
+      "row": 17,
+      "col": "AJ",
+      "formula": "=SUM(AD17:AD25)",
+      "value": "8600000",
+      "type": "normal"
+    },
+    {
+      "cell": "S18",
+      "row": 18,
+      "col": "S",
+      "formula": "=L18*(N18+2000)",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "U18",
+      "row": 18,
+      "col": "U",
+      "formula": "=IF(K18=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K18=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "AB18",
+      "row": 18,
+      "col": "AB",
+      "formula": "=100/111*N18",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "AC18",
+      "row": 18,
+      "col": "AC",
+      "formula": "=AB18*L18",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "S19",
+      "row": 19,
+      "col": "S",
+      "formula": "=L19*(N19+2000)",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "U19",
+      "row": 19,
+      "col": "U",
+      "formula": "=IF(K19=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K19=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "AB19",
+      "row": 19,
+      "col": "AB",
+      "formula": "=100/111*N19",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "AC19",
+      "row": 19,
+      "col": "AC",
+      "formula": "=AB19*L19",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "S20",
+      "row": 20,
+      "col": "S",
+      "formula": "=L20*(N20+2000)",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "U20",
+      "row": 20,
+      "col": "U",
+      "formula": "=IF(K20=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K20=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "AB20",
+      "row": 20,
+      "col": "AB",
+      "formula": "=100/111*N20",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "AC20",
+      "row": 20,
+      "col": "AC",
+      "formula": "=AB20*L20",
+      "value": "0",
+      "type": "normal"
+    },
+    {
+      "cell": "G21",
+      "row": 21,
+      "col": "G",
+      "formula": "=F21",
+      "value": "2023-01-14T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H21",
+      "row": 21,
+      "col": "H",
+      "formula": "=G21",
+      "value": "2023-01-14T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S21",
+      "row": 21,
+      "col": "S",
+      "formula": "=L21*(N21+2000)",
+      "value": "222000",
+      "type": "normal"
+    },
+    {
+      "cell": "U21",
+      "row": 21,
+      "col": "U",
+      "formula": "=IF(K21=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K21=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "Resto JFC Esther",
+      "type": "normal"
+    },
+    {
+      "cell": "AB21",
+      "row": 21,
+      "col": "AB",
+      "formula": "=100/111*N21",
+      "value": "31531.53153153153",
+      "type": "normal"
+    },
+    {
+      "cell": "AC21",
+      "row": 21,
+      "col": "AC",
+      "formula": "=AB21*L21",
+      "value": "189189.18918918917",
+      "type": "normal"
+    },
+    {
+      "cell": "G22",
+      "row": 22,
+      "col": "G",
+      "formula": "=F22",
+      "value": "2023-01-14T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H22",
+      "row": 22,
+      "col": "H",
+      "formula": "=G22",
+      "value": "2023-01-14T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S22",
+      "row": 22,
+      "col": "S",
+      "formula": "=L22*(N22+2000)",
+      "value": "216000",
+      "type": "normal"
+    },
+    {
+      "cell": "U22",
+      "row": 22,
+      "col": "U",
+      "formula": "=IF(K22=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K22=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "UD. USAHA JAYA",
+      "type": "normal"
+    },
+    {
+      "cell": "AB22",
+      "row": 22,
+      "col": "AB",
+      "formula": "=100/111*N22",
+      "value": "63063.06306306306",
+      "type": "normal"
+    },
+    {
+      "cell": "AC22",
+      "row": 22,
+      "col": "AC",
+      "formula": "=AB22*L22",
+      "value": "189189.18918918917",
+      "type": "normal"
+    },
+    {
+      "cell": "G23",
+      "row": 23,
+      "col": "G",
+      "formula": "=F23",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H23",
+      "row": 23,
+      "col": "H",
+      "formula": "=G23",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S23",
+      "row": 23,
+      "col": "S",
+      "formula": "=L23*(N23+2000)",
+      "value": "280000",
+      "type": "normal"
+    },
+    {
+      "cell": "U23",
+      "row": 23,
+      "col": "U",
+      "formula": "=IF(K23=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K23=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "AB23",
+      "row": 23,
+      "col": "AB",
+      "formula": "=100/111*N23",
+      "value": "10810.810810810812",
+      "type": "normal"
+    },
+    {
+      "cell": "AC23",
+      "row": 23,
+      "col": "AC",
+      "formula": "=AB23*L23",
+      "value": "216216.21621621624",
+      "type": "normal"
+    },
+    {
+      "cell": "G24",
+      "row": 24,
+      "col": "G",
+      "formula": "=F24",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H24",
+      "row": 24,
+      "col": "H",
+      "formula": "=G24",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S24",
+      "row": 24,
+      "col": "S",
+      "formula": "=L24*(N24+2000)",
+      "value": "380000",
+      "type": "normal"
+    },
+    {
+      "cell": "U24",
+      "row": 24,
+      "col": "U",
+      "formula": "=IF(K24=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K24=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "AB24",
+      "row": 24,
+      "col": "AB",
+      "formula": "=100/111*N24",
+      "value": "66666.66666666667",
+      "type": "normal"
+    },
+    {
+      "cell": "AC24",
+      "row": 24,
+      "col": "AC",
+      "formula": "=AB24*L24",
+      "value": "333333.3333333334",
+      "type": "normal"
+    },
+    {
+      "cell": "G25",
+      "row": 25,
+      "col": "G",
+      "formula": "=F25",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H25",
+      "row": 25,
+      "col": "H",
+      "formula": "=G25",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S25",
+      "row": 25,
+      "col": "S",
+      "formula": "=L25*(N25+2000)",
+      "value": "735000",
+      "type": "normal"
+    },
+    {
+      "cell": "U25",
+      "row": 25,
+      "col": "U",
+      "formula": "=IF(K25=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K25=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "AB25",
+      "row": 25,
+      "col": "AB",
+      "formula": "=100/111*N25",
+      "value": "42342.342342342345",
+      "type": "normal"
+    },
+    {
+      "cell": "AC25",
+      "row": 25,
+      "col": "AC",
+      "formula": "=AB25*L25",
+      "value": "635135.1351351351",
+      "type": "normal"
+    },
+    {
+      "cell": "G26",
+      "row": 26,
+      "col": "G",
+      "formula": "=F26",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H26",
+      "row": 26,
+      "col": "H",
+      "formula": "=G26",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S26",
+      "row": 26,
+      "col": "S",
+      "formula": "=L26*(N26+2000)",
+      "value": "4020000",
+      "type": "normal"
+    },
+    {
+      "cell": "U26",
+      "row": 26,
+      "col": "U",
+      "formula": "=IF(K26=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K26=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y26",
+      "row": 26,
+      "col": "Y",
+      "formula": "=J26",
+      "value": "Sapu",
+      "type": "normal"
+    },
+    {
+      "cell": "AB26",
+      "row": 26,
+      "col": "AB",
+      "formula": "=100/111*N26",
+      "value": "58558.55855855856",
+      "type": "normal"
+    },
+    {
+      "cell": "AC26",
+      "row": 26,
+      "col": "AC",
+      "formula": "=AB26*L26",
+      "value": "3513513.5135135134",
+      "type": "normal"
+    },
+    {
+      "cell": "G27",
+      "row": 27,
+      "col": "G",
+      "formula": "=F27",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H27",
+      "row": 27,
+      "col": "H",
+      "formula": "=G27",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S27",
+      "row": 27,
+      "col": "S",
+      "formula": "=L27*(N27+2000)",
+      "value": "100000",
+      "type": "normal"
+    },
+    {
+      "cell": "U27",
+      "row": 27,
+      "col": "U",
+      "formula": "=IF(K27=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K27=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y27",
+      "row": 27,
+      "col": "Y",
+      "formula": "=J27",
+      "value": "vixal 500ml",
+      "type": "normal"
+    },
+    {
+      "cell": "AB27",
+      "row": 27,
+      "col": "AB",
+      "formula": "=100/111*N27",
+      "value": "16216.216216216217",
+      "type": "normal"
+    },
+    {
+      "cell": "AC27",
+      "row": 27,
+      "col": "AC",
+      "formula": "=AB27*L27",
+      "value": "81081.08108108108",
+      "type": "normal"
+    },
+    {
+      "cell": "G28",
+      "row": 28,
+      "col": "G",
+      "formula": "=F28",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H28",
+      "row": 28,
+      "col": "H",
+      "formula": "=G28",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S28",
+      "row": 28,
+      "col": "S",
+      "formula": "=L28*(N28+2000)",
+      "value": "270000",
+      "type": "normal"
+    },
+    {
+      "cell": "U28",
+      "row": 28,
+      "col": "U",
+      "formula": "=IF(K28=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K28=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y28",
+      "row": 28,
+      "col": "Y",
+      "formula": "=J28",
+      "value": "Sapu Closet",
+      "type": "normal"
+    },
+    {
+      "cell": "AB28",
+      "row": 28,
+      "col": "AB",
+      "formula": "=100/111*N28",
+      "value": "22522.522522522522",
+      "type": "normal"
+    },
+    {
+      "cell": "AC28",
+      "row": 28,
+      "col": "AC",
+      "formula": "=AB28*L28",
+      "value": "225225.2252252252",
+      "type": "normal"
+    },
+    {
+      "cell": "G29",
+      "row": 29,
+      "col": "G",
+      "formula": "=F29",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H29",
+      "row": 29,
+      "col": "H",
+      "formula": "=G29",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S29",
+      "row": 29,
+      "col": "S",
+      "formula": "=L29*(N29+2000)",
+      "value": "220000",
+      "type": "normal"
+    },
+    {
+      "cell": "U29",
+      "row": 29,
+      "col": "U",
+      "formula": "=IF(K29=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K29=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y29",
+      "row": 29,
+      "col": "Y",
+      "formula": "=J29",
+      "value": "Sapu Lidi",
+      "type": "normal"
+    },
+    {
+      "cell": "Z29",
+      "row": 29,
+      "col": "Z",
+      "formula": "=K29",
+      "value": "Sapu Lidi",
+      "type": "normal"
+    },
+    {
+      "cell": "AB29",
+      "row": 29,
+      "col": "AB",
+      "formula": "=100/111*N29",
+      "value": "18018.018018018018",
+      "type": "normal"
+    },
+    {
+      "cell": "AC29",
+      "row": 29,
+      "col": "AC",
+      "formula": "=AB29*L29",
+      "value": "180180.18018018018",
+      "type": "normal"
+    },
+    {
+      "cell": "G30",
+      "row": 30,
+      "col": "G",
+      "formula": "=F30",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H30",
+      "row": 30,
+      "col": "H",
+      "formula": "=G30",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S30",
+      "row": 30,
+      "col": "S",
+      "formula": "=L30*(N30+2000)",
+      "value": "1730000",
+      "type": "normal"
+    },
+    {
+      "cell": "U30",
+      "row": 30,
+      "col": "U",
+      "formula": "=IF(K30=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K30=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y30",
+      "row": 30,
+      "col": "Y",
+      "formula": "=J30",
+      "value": "Alat Pel lantai besar",
+      "type": "normal"
+    },
+    {
+      "cell": "AB30",
+      "row": 30,
+      "col": "AB",
+      "formula": "=100/111*N30",
+      "value": "309909.90990990994",
+      "type": "normal"
+    },
+    {
+      "cell": "AC30",
+      "row": 30,
+      "col": "AC",
+      "formula": "=AB30*L30",
+      "value": "1549549.5495495498",
+      "type": "normal"
+    },
+    {
+      "cell": "G31",
+      "row": 31,
+      "col": "G",
+      "formula": "=F31",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H31",
+      "row": 31,
+      "col": "H",
+      "formula": "=G31",
+      "value": "2023-01-16T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S31",
+      "row": 31,
+      "col": "S",
+      "formula": "=L31*(N31+2000)",
+      "value": "1175000",
+      "type": "normal"
+    },
+    {
+      "cell": "U31",
+      "row": 31,
+      "col": "U",
+      "formula": "=IF(K31=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K31=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y31",
+      "row": 31,
+      "col": "Y",
+      "formula": "=J31",
+      "value": "Tempat sampah",
+      "type": "normal"
+    },
+    {
+      "cell": "AB31",
+      "row": 31,
+      "col": "AB",
+      "formula": "=100/111*N31",
+      "value": "40540.54054054054",
+      "type": "normal"
+    },
+    {
+      "cell": "AC31",
+      "row": 31,
+      "col": "AC",
+      "formula": "=AB31*L31",
+      "value": "1013513.5135135135",
+      "type": "normal"
+    },
+    {
+      "cell": "G32",
+      "row": 32,
+      "col": "G",
+      "formula": "=F32",
+      "value": "2023-01-17T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H32",
+      "row": 32,
+      "col": "H",
+      "formula": "=G32",
+      "value": "2023-01-17T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S32",
+      "row": 32,
+      "col": "S",
+      "formula": "=L32*(N32+2000)",
+      "value": "1110000",
+      "type": "normal"
+    },
+    {
+      "cell": "U32",
+      "row": 32,
+      "col": "U",
+      "formula": "=IF(K32=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K32=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "Resto JFC Esther",
+      "type": "normal"
+    },
+    {
+      "cell": "Y32",
+      "row": 32,
+      "col": "Y",
+      "formula": "=J32",
+      "value": "Konsumsi Penyusunan dan pelaporan RKAS",
+      "type": "normal"
+    },
+    {
+      "cell": "Z32",
+      "row": 32,
+      "col": "Z",
+      "formula": "=K32",
+      "value": "Nasi Kotak",
+      "type": "normal"
+    },
+    {
+      "cell": "AB32",
+      "row": 32,
+      "col": "AB",
+      "formula": "=100/111*N32",
+      "value": "31531.53153153153",
+      "type": "normal"
+    },
+    {
+      "cell": "AC32",
+      "row": 32,
+      "col": "AC",
+      "formula": "=AB32*L32",
+      "value": "945945.9459459459",
+      "type": "normal"
+    },
+    {
+      "cell": "G33",
+      "row": 33,
+      "col": "G",
+      "formula": "=F33",
+      "value": "2023-01-17T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H33",
+      "row": 33,
+      "col": "H",
+      "formula": "=G33",
+      "value": "2023-01-17T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S33",
+      "row": 33,
+      "col": "S",
+      "formula": "=L33*(N33+2000)",
+      "value": "144000",
+      "type": "normal"
+    },
+    {
+      "cell": "U33",
+      "row": 33,
+      "col": "U",
+      "formula": "=IF(K33=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K33=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "UD. USAHA JAYA",
+      "type": "normal"
+    },
+    {
+      "cell": "Y33",
+      "row": 33,
+      "col": "Y",
+      "formula": "=J33",
+      "value": "Air Mineral pada kegiatan Penyusunan dan Pelaporan RKAS",
+      "type": "normal"
+    },
+    {
+      "cell": "AB33",
+      "row": 33,
+      "col": "AB",
+      "formula": "=100/111*N33",
+      "value": "63063.06306306306",
+      "type": "normal"
+    },
+    {
+      "cell": "AC33",
+      "row": 33,
+      "col": "AC",
+      "formula": "=AB33*L33",
+      "value": "126126.12612612612",
+      "type": "normal"
+    },
+    {
+      "cell": "G34",
+      "row": 34,
+      "col": "G",
+      "formula": "=F34",
+      "value": "2023-01-17T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H34",
+      "row": 34,
+      "col": "H",
+      "formula": "=G34",
+      "value": "2023-01-17T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S34",
+      "row": 34,
+      "col": "S",
+      "formula": "=L34*(N34+2000)",
+      "value": "300000",
+      "type": "normal"
+    },
+    {
+      "cell": "U34",
+      "row": 34,
+      "col": "U",
+      "formula": "=IF(K34=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K34=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y34",
+      "row": 34,
+      "col": "Y",
+      "formula": "=J34",
+      "value": "Snack pada kegiatan penyusunan dan pelaporan RKAS",
+      "type": "normal"
+    },
+    {
+      "cell": "AB34",
+      "row": 34,
+      "col": "AB",
+      "formula": "=100/111*N34",
+      "value": "7207.207207207207",
+      "type": "normal"
+    },
+    {
+      "cell": "AC34",
+      "row": 34,
+      "col": "AC",
+      "formula": "=AB34*L34",
+      "value": "216216.2162162162",
+      "type": "normal"
+    },
+    {
+      "cell": "G35",
+      "row": 35,
+      "col": "G",
+      "formula": "=F35",
+      "value": "2023-01-19T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H35",
+      "row": 35,
+      "col": "H",
+      "formula": "=G35",
+      "value": "2023-01-19T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S35",
+      "row": 35,
+      "col": "S",
+      "formula": "=L35*(N35+2000)",
+      "value": "8050000",
+      "type": "normal"
+    },
+    {
+      "cell": "U35",
+      "row": 35,
+      "col": "U",
+      "formula": "=IF(K35=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K35=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y35",
+      "row": 35,
+      "col": "Y",
+      "formula": "=J35",
+      "value": "Foto Copy Filio dan Kuarto",
+      "type": "normal"
+    },
+    {
+      "cell": "AB35",
+      "row": 35,
+      "col": "AB",
+      "formula": "=100/111*N35",
+      "value": "270.27027027027026",
+      "type": "normal"
+    },
+    {
+      "cell": "AC35",
+      "row": 35,
+      "col": "AC",
+      "formula": "=AB35*L35",
+      "value": "945945.9459459459",
+      "type": "normal"
+    },
+    {
+      "cell": "AI35",
+      "row": 35,
+      "col": "AI",
+      "formula": "=SUM(AC35:AC36)",
+      "value": "1702702.7027027025",
+      "type": "normal"
+    },
+    {
+      "cell": "AJ35",
+      "row": 35,
+      "col": "AJ",
+      "formula": "=SUM(AD35:AD36)",
+      "value": "1680000",
+      "type": "normal"
+    },
+    {
+      "cell": "G36",
+      "row": 36,
+      "col": "G",
+      "formula": "=F36",
+      "value": "2023-01-21T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H36",
+      "row": 36,
+      "col": "H",
+      "formula": "=G36",
+      "value": "2023-01-21T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S36",
+      "row": 36,
+      "col": "S",
+      "formula": "=L36*(N36+2000)",
+      "value": "888000",
+      "type": "normal"
+    },
+    {
+      "cell": "U36",
+      "row": 36,
+      "col": "U",
+      "formula": "=IF(K36=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K36=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "Resto JFC Esther",
+      "type": "normal"
+    },
+    {
+      "cell": "Y36",
+      "row": 36,
+      "col": "Y",
+      "formula": "=J36",
+      "value": "Konsumsi kegiatan penyusunan program ketatausahaan",
+      "type": "normal"
+    },
+    {
+      "cell": "AB36",
+      "row": 36,
+      "col": "AB",
+      "formula": "=100/111*N36",
+      "value": "31531.53153153153",
+      "type": "normal"
+    },
+    {
+      "cell": "AC36",
+      "row": 36,
+      "col": "AC",
+      "formula": "=AB36*L36",
+      "value": "756756.7567567567",
+      "type": "normal"
+    },
+    {
+      "cell": "G37",
+      "row": 37,
+      "col": "G",
+      "formula": "=F37",
+      "value": "2023-01-21T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H37",
+      "row": 37,
+      "col": "H",
+      "formula": "=G37",
+      "value": "2023-01-21T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S37",
+      "row": 37,
+      "col": "S",
+      "formula": "=L37*(N37+2000)",
+      "value": "144000",
+      "type": "normal"
+    },
+    {
+      "cell": "U37",
+      "row": 37,
+      "col": "U",
+      "formula": "=IF(K37=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K37=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "UD. USAHA JAYA",
+      "type": "normal"
+    },
+    {
+      "cell": "Y37",
+      "row": 37,
+      "col": "Y",
+      "formula": "=J37",
+      "value": "Air Mineral pada kegiatan penyusunan program ketatausahaan",
+      "type": "normal"
+    },
+    {
+      "cell": "AB37",
+      "row": 37,
+      "col": "AB",
+      "formula": "=100/111*N37",
+      "value": "63063.06306306306",
+      "type": "normal"
+    },
+    {
+      "cell": "AC37",
+      "row": 37,
+      "col": "AC",
+      "formula": "=AB37*L37",
+      "value": "126126.12612612612",
+      "type": "normal"
+    },
+    {
+      "cell": "G38",
+      "row": 38,
+      "col": "G",
+      "formula": "=F38",
+      "value": "2023-01-21T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H38",
+      "row": 38,
+      "col": "H",
+      "formula": "=G38",
+      "value": "2023-01-21T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S38",
+      "row": 38,
+      "col": "S",
+      "formula": "=L38*(N38+2000)",
+      "value": "1477600",
+      "type": "normal"
+    },
+    {
+      "cell": "U38",
+      "row": 38,
+      "col": "U",
+      "formula": "=IF(K38=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K38=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y38",
+      "row": 38,
+      "col": "Y",
+      "formula": "=J38",
+      "value": "Pembayaran Langganan Daya dan Jasa listrik Januari",
+      "type": "normal"
+    },
+    {
+      "cell": "AB38",
+      "row": 38,
+      "col": "AB",
+      "formula": "=100/111*N38",
+      "value": "1329369.3693693695",
+      "type": "normal"
+    },
+    {
+      "cell": "AC38",
+      "row": 38,
+      "col": "AC",
+      "formula": "=AB38*L38",
+      "value": "1329369.3693693695",
+      "type": "normal"
+    },
+    {
+      "cell": "G39",
+      "row": 39,
+      "col": "G",
+      "formula": "=F39",
+      "value": "2023-01-21T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H39",
+      "row": 39,
+      "col": "H",
+      "formula": "=G39",
+      "value": "2023-01-21T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S39",
+      "row": 39,
+      "col": "S",
+      "formula": "=L39*(N39+2000)",
+      "value": "34787500",
+      "type": "normal"
+    },
+    {
+      "cell": "U39",
+      "row": 39,
+      "col": "U",
+      "formula": "=IF(K39=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K39=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y39",
+      "row": 39,
+      "col": "Y",
+      "formula": "=J39",
+      "value": "Foto Copy Filio dan Kuarto",
+      "type": "normal"
+    },
+    {
+      "cell": "AB39",
+      "row": 39,
+      "col": "AB",
+      "formula": "=100/111*N39",
+      "value": "270.27027027027026",
+      "type": "normal"
+    },
+    {
+      "cell": "AC39",
+      "row": 39,
+      "col": "AC",
+      "formula": "=AB39*L39",
+      "value": "4087837.8378378376",
+      "type": "normal"
+    },
+    {
+      "cell": "G40",
+      "row": 40,
+      "col": "G",
+      "formula": "=F40",
+      "value": "2023-01-21T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H40",
+      "row": 40,
+      "col": "H",
+      "formula": "=G40",
+      "value": "2023-01-21T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S40",
+      "row": 40,
+      "col": "S",
+      "formula": "=L40*(N40+2000)",
+      "value": "1386700",
+      "type": "normal"
+    },
+    {
+      "cell": "U40",
+      "row": 40,
+      "col": "U",
+      "formula": "=IF(K40=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K40=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y40",
+      "row": 40,
+      "col": "Y",
+      "formula": "=J40",
+      "value": "Pembayaran Langganan Daya dan Jasa Internet Indihome Januari",
+      "type": "normal"
+    },
+    {
+      "cell": "AB40",
+      "row": 40,
+      "col": "AB",
+      "formula": "=100/111*N40",
+      "value": "1247477.4774774774",
+      "type": "normal"
+    },
+    {
+      "cell": "AC40",
+      "row": 40,
+      "col": "AC",
+      "formula": "=AB40*L40",
+      "value": "1247477.4774774774",
+      "type": "normal"
+    },
+    {
+      "cell": "G41",
+      "row": 41,
+      "col": "G",
+      "formula": "=F41",
+      "value": "2023-01-23T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H41",
+      "row": 41,
+      "col": "H",
+      "formula": "=G41",
+      "value": "2023-01-23T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S41",
+      "row": 41,
+      "col": "S",
+      "formula": "=L41*(N41+2000)",
+      "value": "2590000",
+      "type": "normal"
+    },
+    {
+      "cell": "U41",
+      "row": 41,
+      "col": "U",
+      "formula": "=IF(K41=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K41=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "Resto JFC Esther",
+      "type": "normal"
+    },
+    {
+      "cell": "Y41",
+      "row": 41,
+      "col": "Y",
+      "formula": "=J41",
+      "value": "Konsumsi rapat rutin sekolah",
+      "type": "normal"
+    },
+    {
+      "cell": "AB41",
+      "row": 41,
+      "col": "AB",
+      "formula": "=100/111*N41",
+      "value": "31531.53153153153",
+      "type": "normal"
+    },
+    {
+      "cell": "AC41",
+      "row": 41,
+      "col": "AC",
+      "formula": "=AB41*L41",
+      "value": "2207207.207207207",
+      "type": "normal"
+    },
+    {
+      "cell": "G42",
+      "row": 42,
+      "col": "G",
+      "formula": "=F42",
+      "value": "2023-01-23T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H42",
+      "row": 42,
+      "col": "H",
+      "formula": "=G42",
+      "value": "2023-01-23T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S42",
+      "row": 42,
+      "col": "S",
+      "formula": "=L42*(N42+2000)",
+      "value": "576000",
+      "type": "normal"
+    },
+    {
+      "cell": "U42",
+      "row": 42,
+      "col": "U",
+      "formula": "=IF(K42=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K42=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "UD. USAHA JAYA",
+      "type": "normal"
+    },
+    {
+      "cell": "Y42",
+      "row": 42,
+      "col": "Y",
+      "formula": "=J42",
+      "value": "Air mineral botol 600 ml rapat rutin sekolah",
+      "type": "normal"
+    },
+    {
+      "cell": "AB42",
+      "row": 42,
+      "col": "AB",
+      "formula": "=100/111*N42",
+      "value": "63063.06306306306",
+      "type": "normal"
+    },
+    {
+      "cell": "AC42",
+      "row": 42,
+      "col": "AC",
+      "formula": "=AB42*L42",
+      "value": "504504.5045045045",
+      "type": "normal"
+    },
+    {
+      "cell": "G43",
+      "row": 43,
+      "col": "G",
+      "formula": "=F43",
+      "value": "2023-01-23T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H43",
+      "row": 43,
+      "col": "H",
+      "formula": "=G43",
+      "value": "2023-01-23T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S43",
+      "row": 43,
+      "col": "S",
+      "formula": "=L43*(N43+2000)",
+      "value": "1400000",
+      "type": "normal"
+    },
+    {
+      "cell": "U43",
+      "row": 43,
+      "col": "U",
+      "formula": "=IF(K43=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K43=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y43",
+      "row": 43,
+      "col": "Y",
+      "formula": "=J43",
+      "value": "Snack rapat rutin sekolah",
+      "type": "normal"
+    },
+    {
+      "cell": "AB43",
+      "row": 43,
+      "col": "AB",
+      "formula": "=100/111*N43",
+      "value": "7207.207207207207",
+      "type": "normal"
+    },
+    {
+      "cell": "AC43",
+      "row": 43,
+      "col": "AC",
+      "formula": "=AB43*L43",
+      "value": "1009009.009009009",
+      "type": "normal"
+    },
+    {
+      "cell": "G44",
+      "row": 44,
+      "col": "G",
+      "formula": "=F44",
+      "value": "2023-01-25T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H44",
+      "row": 44,
+      "col": "H",
+      "formula": "=G44",
+      "value": "2023-01-25T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S44",
+      "row": 44,
+      "col": "S",
+      "formula": "=L44*(N44+2000)",
+      "value": "127000",
+      "type": "normal"
+    },
+    {
+      "cell": "U44",
+      "row": 44,
+      "col": "U",
+      "formula": "=IF(K44=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K44=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y44",
+      "row": 44,
+      "col": "Y",
+      "formula": "=J44",
+      "value": "Jasa pada pemeliharaan Instalasi air",
+      "type": "normal"
+    },
+    {
+      "cell": "AB44",
+      "row": 44,
+      "col": "AB",
+      "formula": "=100/111*N44",
+      "value": "112612.61261261262",
+      "type": "normal"
+    },
+    {
+      "cell": "AC44",
+      "row": 44,
+      "col": "AC",
+      "formula": "=AB44*L44",
+      "value": "112612.61261261262",
+      "type": "normal"
+    },
+    {
+      "cell": "G45",
+      "row": 45,
+      "col": "G",
+      "formula": "=F45",
+      "value": "2023-01-25T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H45",
+      "row": 45,
+      "col": "H",
+      "formula": "=G45",
+      "value": "2023-01-25T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S45",
+      "row": 45,
+      "col": "S",
+      "formula": "=L45*(N45+2000)",
+      "value": "1002000",
+      "type": "normal"
+    },
+    {
+      "cell": "U45",
+      "row": 45,
+      "col": "U",
+      "formula": "=IF(K45=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K45=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y45",
+      "row": 45,
+      "col": "Y",
+      "formula": "=J45",
+      "value": "Belanja jasa pendataan dapodik",
+      "type": "normal"
+    },
+    {
+      "cell": "AB45",
+      "row": 45,
+      "col": "AB",
+      "formula": "=100/111*N45",
+      "value": "900900.900900901",
+      "type": "normal"
+    },
+    {
+      "cell": "AC45",
+      "row": 45,
+      "col": "AC",
+      "formula": "=AB45*L45",
+      "value": "900900.900900901",
+      "type": "normal"
+    },
+    {
+      "cell": "G46",
+      "row": 46,
+      "col": "G",
+      "formula": "=F46",
+      "value": "2023-01-25T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H46",
+      "row": 46,
+      "col": "H",
+      "formula": "=G46",
+      "value": "2023-01-25T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S46",
+      "row": 46,
+      "col": "S",
+      "formula": "=L46*(N46+2000)",
+      "value": "1110000",
+      "type": "normal"
+    },
+    {
+      "cell": "U46",
+      "row": 46,
+      "col": "U",
+      "formula": "=IF(K46=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K46=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "Resto JFC Esther",
+      "type": "normal"
+    },
+    {
+      "cell": "Y46",
+      "row": 46,
+      "col": "Y",
+      "formula": "=J46",
+      "value": "konsumsi selama proses kegiatan pengayaan dan pendampingan karir calon lulusan tahun 2023",
+      "type": "normal"
+    },
+    {
+      "cell": "AB46",
+      "row": 46,
+      "col": "AB",
+      "formula": "=100/111*N46",
+      "value": "31531.53153153153",
+      "type": "normal"
+    },
+    {
+      "cell": "AC46",
+      "row": 46,
+      "col": "AC",
+      "formula": "=AB46*L46",
+      "value": "945945.9459459459",
+      "type": "normal"
+    },
+    {
+      "cell": "G47",
+      "row": 47,
+      "col": "G",
+      "formula": "=F47",
+      "value": "2023-01-25T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H47",
+      "row": 47,
+      "col": "H",
+      "formula": "=G47",
+      "value": "2023-01-25T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S47",
+      "row": 47,
+      "col": "S",
+      "formula": "=L47*(N47+2000)",
+      "value": "416000",
+      "type": "normal"
+    },
+    {
+      "cell": "U47",
+      "row": 47,
+      "col": "U",
+      "formula": "=IF(K47=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K47=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "",
+      "type": "normal"
+    },
+    {
+      "cell": "Y47",
+      "row": 47,
+      "col": "Y",
+      "formula": "=J47",
+      "value": "Belanja aqua gelas selama proses kegiatan pengayaan dan pendampingan karir calon lulusan tahun 2023",
+      "type": "normal"
+    },
+    {
+      "cell": "AB47",
+      "row": 47,
+      "col": "AB",
+      "formula": "=100/111*N47",
+      "value": "45045.045045045044",
+      "type": "normal"
+    },
+    {
+      "cell": "AC47",
+      "row": 47,
+      "col": "AC",
+      "formula": "=AB47*L47",
+      "value": "360360.36036036036",
+      "type": "normal"
+    },
+    {
+      "cell": "G48",
+      "row": 48,
+      "col": "G",
+      "formula": "=F48",
+      "value": "2023-01-28T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "H48",
+      "row": 48,
+      "col": "H",
+      "formula": "=G48",
+      "value": "2023-01-28T00:00:00",
+      "type": "normal"
+    },
+    {
+      "cell": "S48",
+      "row": 48,
+      "col": "S",
+      "formula": "=L48*(N48+2000)",
+      "value": "144000",
+      "type": "normal"
+    },
+    {
+      "cell": "U48",
+      "row": 48,
+      "col": "U",
+      "formula": "=IF(K48=\"Nasi Kotak\",\"Resto JFC Esther\",IF(K48=\"Aqua Botol 600 ml\",\"UD. USAHA JAYA\",\"\"))",
+      "value": "UD. USAHA JAYA",
+      "type": "normal"
+    }
+  ]
+}

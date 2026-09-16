@@ -1,0 +1,269 @@
+{
+  "name": "Data Sekolah",
+  "max_row": 14,
+  "max_col": 3,
+  "non_empty_cells": 23,
+  "formulas_count": 0,
+  "type": "Reference",
+  "purpose": "School official data (name, NIP, positions) for document headers/signatures",
+  "category": "reference",
+  "headers": [
+    {
+      "col": "A",
+      "col_idx": 1,
+      "header": "Data Sekolah"
+    }
+  ],
+  "sample_rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Data Sekolah",
+          "value": "Data Sekolah",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Nama Sekolah",
+          "value": "Nama Sekolah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "SMA NEGERI 1 TELUKDALAM",
+          "value": "SMA NEGERI 1 TELUKDALAM",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "NPSN",
+          "value": "NPSN",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "10258246",
+          "value": "10258246",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Alamat Sekolah",
+          "value": "Alamat Sekolah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Teluk Dalam",
+          "value": "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Teluk Dalam",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Kepala Sekolah",
+          "value": "Kepala Sekolah",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Nursari Rindu Simanullang, S.Pd., M.M.",
+          "value": "Nursari Rindu Simanullang, S.Pd., M.M.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "19691208 200502 2 001",
+          "value": "19691208 200502 2 001",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Pembina Tk I",
+          "value": "Pembina Tk I",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Bendahara",
+          "value": "Bendahara",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Riama Tiodora Siahaan, S.Pd",
+          "value": "Riama Tiodora Siahaan, S.Pd",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "19800301 201001 2 016",
+          "value": "19800301 201001 2 016",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Penata TK. I",
+          "value": "Penata TK. I",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Pengurus Barang",
+          "value": "Pengurus Barang",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Radius S. K. Siburian, S.Pd",
+          "value": "Radius S. K. Siburian, S.Pd",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "19861005 201903 1 009",
+          "value": "19861005 201903 1 009",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "Penata Muda",
+          "value": "Penata Muda",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Penerima Barang",
+          "value": "Penerima Barang",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Estera Nehe, S.Pd.",
+          "value": "Estera Nehe, S.Pd.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "0823 8612 4861",
+          "value": "0823 8612 4861",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "Bantuan Operasional Satuan Pendidikan (BOSP) 2025",
+          "value": "Bantuan Operasional Satuan Pendidikan (BOSP) 2025",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    }
+  ],
+  "formulas": []
+}

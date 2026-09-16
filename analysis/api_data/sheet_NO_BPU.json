@@ -1,0 +1,340 @@
+{
+  "name": "NO BPU",
+  "max_row": 653,
+  "max_col": 5,
+  "non_empty_cells": 1306,
+  "formulas_count": 0,
+  "type": "Reference",
+  "purpose": "List of BPU (Bendahara Pengguna Anggaran) numbers for ordering",
+  "category": "reference",
+  "headers": [
+    {
+      "col": "C",
+      "col_idx": 3,
+      "header": "NO. BPU 2024"
+    },
+    {
+      "col": "E",
+      "col_idx": 5,
+      "header": "NO Pesanan 2023"
+    }
+  ],
+  "sample_rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "NO. BPU 2024",
+          "value": "NO. BPU 2024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "NO Pesanan 2023",
+          "value": "NO Pesanan 2023",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU001",
+          "value": "BPU001",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU002",
+          "value": "BPU002",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "02",
+          "value": "02",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU003",
+          "value": "BPU003",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "03",
+          "value": "03",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU004",
+          "value": "BPU004",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "04",
+          "value": "04",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU005",
+          "value": "BPU005",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "05",
+          "value": "05",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU006",
+          "value": "BPU006",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "06",
+          "value": "06",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU007",
+          "value": "BPU007",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "07",
+          "value": "07",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU008",
+          "value": "BPU008",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "08",
+          "value": "08",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU009",
+          "value": "BPU009",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "09",
+          "value": "09",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU010",
+          "value": "BPU010",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "10",
+          "value": "10",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU011",
+          "value": "BPU011",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "11",
+          "value": "11",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU012",
+          "value": "BPU012",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "12",
+          "value": "12",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU013",
+          "value": "BPU013",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "13",
+          "value": "13",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "BPU014",
+          "value": "BPU014",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "14",
+          "value": "14",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    }
+  ],
+  "formulas": []
+}

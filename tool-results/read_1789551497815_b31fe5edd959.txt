@@ -1,0 +1,654 @@
+     1→     1→olevba 0.60.2 on Python 3.13.5 - http://decalage.info/python/oletools
+     2→     2→===============================================================================
+     3→     3→FILE: /home/z/my-project/analysis/Cetak_ATK_2025_decrypted.xlsm
+     4→     4→Type: OpenXML
+     5→     5→WARNING  For now, VBA stomping cannot be detected for files in memory
+     6→     6→-------------------------------------------------------------------------------
+     7→     7→VBA MACRO Sheet1.cls 
+     8→     8→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet1'
+     9→     9→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    10→    10→(empty macro)
+    11→    11→-------------------------------------------------------------------------------
+    12→    12→VBA MACRO ThisWorkbook.cls 
+    13→    13→in file: xl/vbaProject.bin - OLE stream: 'VBA/ThisWorkbook'
+    14→    14→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    15→    15→(empty macro)
+    16→    16→-------------------------------------------------------------------------------
+    17→    17→VBA MACRO UserForm1.frm 
+    18→    18→in file: xl/vbaProject.bin - OLE stream: 'VBA/UserForm1'
+    19→    19→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    20→    20→(empty macro)
+    21→    21→-------------------------------------------------------------------------------
+    22→    22→VBA MACRO Sheet4.cls 
+    23→    23→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet4'
+    24→    24→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    25→    25→Private Sub Worksheet_Change(ByVal Target As Range)
+    26→    26→    On Error GoTo ErrHandler
+    27→    27→    Dim wsMaster As Worksheet
+    28→    28→    Set wsMaster = ThisWorkbook.Sheets("Master")
+    29→    29→    Application.EnableEvents = False
+    30→    30→    Target.Copy Destination:=wsMaster.Cells(Target.Row, Target.Column)
+    31→    31→    Application.EnableEvents = True
+    32→    32→    Exit Sub
+    33→    33→    
+    34→    34→ErrHandler:
+    35→    35→    MsgBox "Error: " & Err.Description
+    36→    36→    Application.EnableEvents = True
+    37→    37→End Sub
+    38→    38→
+    39→    39→-------------------------------------------------------------------------------
+    40→    40→VBA MACRO Sheet3.cls 
+    41→    41→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet3'
+    42→    42→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    43→    43→(empty macro)
+    44→    44→-------------------------------------------------------------------------------
+    45→    45→VBA MACRO Sheet2.cls 
+    46→    46→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet2'
+    47→    47→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    48→    48→Private Sub Worksheet_Change(ByVal Target As Range)
+    49→    49→    On Error GoTo ErrHandler
+    50→    50→    Dim wsBantu As Worksheet
+    51→    51→    Set wsBantu = ThisWorkbook.Sheets("Tabel Bantu")
+    52→    52→    Dim cell As Range
+    53→    53→    
+    54→    54→    Application.EnableEvents = False
+    55→    55→    For Each cell In Target
+    56→    56→        If cell.Value <> wsBantu.Cells(cell.Row, cell.Column).Value Then
+    57→    57→            If Len(cell.Value) = 0 Then ' Cell di "Master" terhapus
+    58→    58→                wsBantu.Cells(cell.Row, cell.Column).Interior.Color = RGB(255, 0, 0) ' Merah
+    59→    59→            Else
+    60→    60→                wsBantu.Cells(cell.Row, cell.Column).Interior.Color = RGB(255, 255, 0) ' Kuning
+    61→    61→            End If
+    62→    62→        Else
+    63→    63→            wsBantu.Cells(cell.Row, cell.Column).Interior.ColorIndex = 0 ' Kembali ke warna semula
+    64→    64→        End If
+    65→    65→    Next cell
+    66→    66→    Application.EnableEvents = True
+    67→    67→    Exit Sub
+    68→    68→    
+    69→    69→ErrHandler:
+    70→    70→    MsgBox "Error: " & Err.Description
+    71→    71→    Application.EnableEvents = True
+    72→    72→End Sub
+    73→    73→
+    74→    74→-------------------------------------------------------------------------------
+    75→    75→VBA MACRO Sheet9.cls 
+    76→    76→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet9'
+    77→    77→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    78→    78→Private Sub Worksheet_Change(ByVal Target As Range)
+    79→    79→    ' Periksa apakah perubahan terjadi pada cell target di sheet "04SHP"
+    80→    80→    If Me.Name = "04SHP" And Not Intersect(Target, Me.Range("P4")) Is Nothing Then
+    81→    81→        ' Panggil macro HideEmptyRowsBasedOnColumnB
+    82→    82→        Call HideEmptyRowsBasedOnColumnB
+    83→    83→    End If
+    84→    84→End Sub
+    85→    85→
+    86→    86→Sub HideEmptyRowsBasedOnColumnB()
+    87→    87→    Dim ws As Worksheet
+    88→    88→    Dim lastRow As Long
+    89→    89→    Dim k As Long
+    90→    90→    
+    91→    91→    ' Set worksheet "04SHP" sebagai worksheet target
+    92→    92→    Set ws = ThisWorkbook.Sheets("04SHP")
+    93→    93→    
+    94→    94→    ' Hanya proses lembar kerja yang tidak dilindungi
+    95→    95→    If Not ws.ProtectContents Then
+    96→    96→        ' Tentukan baris terakhir dengan data di kolom B
+    97→    97→        lastRow = ws.Cells(ws.Rows.Count, "B").End(xlUp).Row
+    98→    98→        
+    99→    99→        ' Batasan untuk loop dari baris 24 hingga 93
+   100→   100→        If lastRow > 93 Then lastRow = 93
+   101→   101→        
+   102→   102→        ' Loop melalui setiap baris dari baris 24 hingga lastRow
+   103→   103→        For k = 24 To 93
+   104→   104→            ' Cek jika kolom B pada baris tersebut tidak kosong
+   105→   105→            If Len(ws.Range("B" & k).Value) > 0 Then
+   106→   106→                ' Jika tidak kosong, tampilkan baris
+   107→   107→                ws.Rows(k).Hidden = False
+   108→   108→            Else
+   109→   109→                ' Jika kosong, sembunyikan baris
+   110→   110→                ws.Rows(k).Hidden = True
+   111→   111→            End If
+   112→   112→        Next k
+   113→   113→    End If
+   114→   114→End Sub
+   115→   115→
+   116→   116→-------------------------------------------------------------------------------
+   117→   117→VBA MACRO Sheet11.cls 
+   118→   118→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet11'
+   119→   119→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   120→   120→(empty macro)
+   121→   121→-------------------------------------------------------------------------------
+   122→   122→VBA MACRO Sheet10.cls 
+   123→   123→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet10'
+   124→   124→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   125→   125→Private Sub Worksheet_Change(ByVal Target As Range)
+   126→   126→    ' Cek apakah perubahan terjadi pada P4
+   127→   127→    If Not Intersect(Target, Me.Range("P4")) Is Nothing Then
+   128→   128→        ' Matikan pembaruan layar untuk meningkatkan kecepatan
+   129→   129→        Application.ScreenUpdating = False
+   130→   130→        Application.Calculation = xlCalculationManual
+   131→   131→
+   132→   132→        ' Panggil prosedur untuk menghitung jumlah rentang J19toJ88
+   133→   133→        Call SumRangeJ19toJ88
+   134→   134→        
+   135→   135→        ' Panggil prosedur untuk menyembunyikan baris kosong di kolom B
+   136→   136→        Call HideEmptyRowsBasedOnColumnB
+   137→   137→
+   138→   138→        ' Hidupkan kembali pembaruan layar dan perhitungan otomatis
+   139→   139→        Application.ScreenUpdating = True
+   140→   140→        Application.Calculation = xlCalculationAutomatic
+   141→   141→    End If
+   142→   142→End Sub
+   143→   143→
+   144→   144→Sub SumRangeJ19toJ88()
+   145→   145→    Dim ws As Worksheet
+   146→   146→    Dim dataRange As Range
+   147→   147→    Dim cell As Range
+   148→   148→    Dim sum As Double
+   149→   149→    
+   150→   150→    ' Set worksheet "01PESAN" sebagai worksheet target
+   151→   151→    Set ws = ThisWorkbook.Sheets("01PESAN")
+   152→   152→    
+   153→   153→    ' Ambil data dari J19 hingga J88 dalam bentuk array
+   154→   154→    Set dataRange = ws.Range("J19:J88")
+   155→   155→    sum = 0
+   156→   156→    
+   157→   157→    ' Loop melalui setiap sel dalam range dan hitung jumlah
+   158→   158→    For Each cell In dataRange
+   159→   159→        If IsNumeric(cell.Value) Then
+   160→   160→            sum = sum + cell.Value
+   161→   161→        End If
+   162→   162→    Next cell
+   163→   163→    
+   164→   164→    ' Menyimpan hasil di P19
+   165→   165→    ws.Range("P19").Value = sum
+   166→   166→End Sub
+   167→   167→
+   168→   168→Sub HideEmptyRowsBasedOnColumnB()
+   169→   169→    Dim ws As Worksheet
+   170→   170→    Dim lastRow As Long
+   171→   171→    Dim i As Long
+   172→   172→    
+   173→   173→    ' Set worksheet "01PESAN" sebagai worksheet target
+   174→   174→    Set ws = ThisWorkbook.Sheets("01PESAN")
+   175→   175→    
+   176→   176→    ' Tentukan baris terakhir dengan data di kolom B (berdasarkan data di B19:B88)
+   177→   177→    lastRow = ws.Cells(88, "B").Row
+   178→   178→    
+   179→   179→    ' Loop melalui setiap baris dari baris 19 hingga LastRow
+   180→   180→    For l = 19 To lastRow
+   181→   181→        ' Cek jika kolom B pada baris tersebut tidak kosong
+   182→   182→        If Len(ws.Cells(l, "B").Value) > 0 Then
+   183→   183→            ' Jika tidak kosong, tampilkan baris
+   184→   184→            ws.Rows(l).Hidden = False
+   185→   185→        Else
+   186→   186→            ' Jika kosong, sembunyikan baris
+   187→   187→            ws.Rows(l).Hidden = True
+   188→   188→        End If
+   189→   189→    Next l
+   190→   190→End Sub
+   191→   191→
+   192→   192→-------------------------------------------------------------------------------
+   193→   193→VBA MACRO Module4.bas 
+   194→   194→in file: xl/vbaProject.bin - OLE stream: 'VBA/Module4'
+   195→   195→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   196→   196→Sub PrintPreviewAndPrint()
+   197→   197→    ' Menampilkan pratinjau cetak
+   198→   198→    ActiveWindow.SelectedSheets.PrintPreview
+   199→   199→    
+   200→   200→    ' Mencetak sheet aktif
+   201→   201→    ActiveSheet.PrintOut
+   202→   202→End Sub
+   203→   203→
+   204→   204→-------------------------------------------------------------------------------
+   205→   205→VBA MACRO Sheet12.cls 
+   206→   206→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet12'
+   207→   207→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   208→   208→Private Sub Worksheet_Change(ByVal Target As Range)
+   209→   209→    ' Periksa apakah perubahan terjadi pada cell target di sheet "03RENCANA"
+   210→   210→    If Me.Name = "03RENCANA" And Not Intersect(Target, Me.Range("P4")) Is Nothing Then
+   211→   211→        ' Panggil macro HideEmptyRowsBasedOnColumnE
+   212→   212→        Call HideEmptyRowsBasedOnColumnE
+   213→   213→    End If
+   214→   214→End Sub
+   215→   215→
+   216→   216→Sub HideEmptyRowsBasedOnColumnE()
+   217→   217→    Dim ws As Worksheet
+   218→   218→    Dim lastRow As Long
+   219→   219→    Dim o As Long
+   220→   220→    
+   221→   221→    ' Set worksheet "03RENCANA" sebagai worksheet target
+   222→   222→    Set ws = ThisWorkbook.Sheets("03RENCANA")
+   223→   223→    
+   224→   224→    ' Hanya proses lembar kerja yang tidak dilindungi
+   225→   225→    If Not ws.ProtectContents Then
+   226→   226→        ' Tentukan baris terakhir dengan data di kolom E
+   227→   227→        lastRow = ws.Cells(ws.Rows.Count, "E").End(xlUp).Row
+   228→   228→        
+   229→   229→        ' Batasan untuk loop dari baris 8 hingga 77
+   230→   230→        If lastRow > 77 Then lastRow = 77
+   231→   231→        
+   232→   232→        ' Loop melalui setiap baris dari baris 8 hingga lastRow
+   233→   233→        For o = 8 To 77
+   234→   234→            ' Cek jika kolom E pada baris tersebut tidak kosong
+   235→   235→            If Len(ws.Range("E" & o).Value) > 0 Then
+   236→   236→                ' Jika tidak kosong, tampilkan baris
+   237→   237→                ws.Rows(o).Hidden = False
+   238→   238→            Else
+   239→   239→                ' Jika kosong, sembunyikan baris
+   240→   240→                ws.Rows(o).Hidden = True
+   241→   241→            End If
+   242→   242→        Next o
+   243→   243→    End If
+   244→   244→End Sub
+   245→   245→-------------------------------------------------------------------------------
+   246→   246→VBA MACRO Sheet14.cls 
+   247→   247→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet14'
+   248→   248→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   249→   249→Private Sub Worksheet_Change(ByVal Target As Range)
+   250→   250→    ' Periksa apakah perubahan terjadi pada cell target di sheet "02BANDING"
+   251→   251→    If Me.Name = "02BANDING" And Not Intersect(Target, Me.Range("M3")) Is Nothing Then
+   252→   252→        ' Panggil macro HideEmptyRowsBasedOnColumnD
+   253→   253→        Call HideEmptyRowsBasedOnColumnD
+   254→   254→    End If
+   255→   255→End Sub
+   256→   256→
+   257→   257→Sub HideEmptyRowsBasedOnColumnD()
+   258→   258→    Dim ws As Worksheet
+   259→   259→    Dim lastRow As Long
+   260→   260→    Dim j As Long
+   261→   261→    
+   262→   262→    ' Set worksheet "02BANDING" sebagai worksheet target
+   263→   263→    Set ws = ThisWorkbook.Sheets("02BANDING")
+   264→   264→    
+   265→   265→    ' Hanya proses lembar kerja yang tidak dilindungi
+   266→   266→    If Not ws.ProtectContents Then
+   267→   267→        ' Tentukan baris terakhir dengan data di kolom D
+   268→   268→        lastRow = ws.Cells(ws.Rows.Count, "D").End(xlUp).Row
+   269→   269→        
+   270→   270→        ' Batasan untuk loop dari baris 7 hingga 126
+   271→   271→        If lastRow > 126 Then lastRow = 126
+   272→   272→        
+   273→   273→        ' Loop melalui setiap baris dari baris 7 hingga lastRow
+   274→   274→        For j = 7 To 126
+   275→   275→            ' Cek jika kolom D pada baris tersebut tidak kosong
+   276→   276→            If Len(ws.Range("D" & j).Value) > 0 Then
+   277→   277→                ' Jika tidak kosong, tampilkan baris
+   278→   278→                ws.Rows(j).Hidden = False
+   279→   279→            Else
+   280→   280→                ' Jika kosong, sembunyikan baris
+   281→   281→                ws.Rows(j).Hidden = True
+   282→   282→            End If
+   283→   283→        Next j
+   284→   284→    End If
+   285→   285→End Sub
+   286→   286→
+   287→   287→-------------------------------------------------------------------------------
+   288→   288→VBA MACRO Sheet6.cls 
+   289→   289→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet6'
+   290→   290→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   291→   291→Private Sub Worksheet_Change(ByVal Target As Range)
+   292→   292→    ' Periksa apakah perubahan terjadi pada cell target di sheet "05BAT"
+   293→   293→    If Me.Name = "05BAT" And Not Intersect(Target, Me.Range("P4")) Is Nothing Then
+   294→   294→        ' Panggil macro HideEmptyRowsBasedOnColumnC
+   295→   295→        Call HideEmptyRowsBasedOnColumnC
+   296→   296→    End If
+   297→   297→End Sub
+   298→   298→
+   299→   299→Sub HideEmptyRowsBasedOnColumnC()
+   300→   300→    Dim ws As Worksheet
+   301→   301→    Dim lastRow As Long
+   302→   302→    Dim i As Long
+   303→   303→    
+   304→   304→    ' Set worksheet "05BAT" sebagai worksheet target
+   305→   305→    Set ws = ThisWorkbook.Sheets("05BAT")
+   306→   306→    
+   307→   307→    ' Hanya proses lembar kerja yang tidak dilindungi
+   308→   308→    If Not ws.ProtectContents Then
+   309→   309→        ' Tentukan baris terakhir dengan data di kolom C
+   310→   310→        lastRow = ws.Cells(ws.Rows.Count, "C").End(xlUp).Row
+   311→   311→        
+   312→   312→        ' Batasan untuk loop dari baris 31 hingga 101
+   313→   313→        If lastRow > 101 Then lastRow = 101
+   314→   314→        
+   315→   315→        ' Loop melalui setiap baris dari baris 24 hingga lastRow
+   316→   316→        For i = 31 To 101
+   317→   317→            ' Cek jika kolom C pada baris tersebut tidak kosong
+   318→   318→            If Len(ws.Range("C" & i).Value) > 0 Then
+   319→   319→                ' Jika tidak kosong, tampilkan baris
+   320→   320→                ws.Rows(i).Hidden = False
+   321→   321→            Else
+   322→   322→                ' Jika kosong, sembunyikan baris
+   323→   323→                ws.Rows(i).Hidden = True
+   324→   324→            End If
+   325→   325→        Next i
+   326→   326→    End If
+   327→   327→End Sub
+   328→   328→-------------------------------------------------------------------------------
+   329→   329→VBA MACRO Module1.bas 
+   330→   330→in file: xl/vbaProject.bin - OLE stream: 'VBA/Module1'
+   331→   331→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   332→   332→Sub SavePDF()
+   333→   333→    Dim ws As Worksheet
+   334→   334→    Dim fileName As String
+   335→   335→    
+   336→   336→    ' Tentukan worksheet "01PESAN" sebagai worksheet target
+   337→   337→    Set ws = ThisWorkbook.Sheets("01PESAN")
+   338→   338→    
+   339→   339→    ' Periksa nilai di cell P4 untuk mendapatkan bagian tengah nama file
+   340→   340→    Dim middleName As String
+   341→   341→    middleName = ws.Range("P4").Value
+   342→   342→    
+   343→   343→    ' Periksa apakah cell P4 tidak kosong
+   344→   344→    If Len(middleName) > 0 Then
+   345→   345→        ' Bangun nama file PDF
+   346→   346→        fileName = "01PESAN_" & middleName & "_2025.pdf"
+   347→   347→        
+   348→   348→        ' Simpan file PDF
+   349→   349→        ws.ExportAsFixedFormat Type:=xlTypePDF, fileName:=ThisWorkbook.Path & "\" & fileName, Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas:=False, OpenAfterPublish:=False
+   350→   350→        
+   351→   351→        ' Beri pesan berhasil
+   352→   352→        MsgBox "File PDF berhasil disimpan dengan nama: " & fileName, vbInformation
+   353→   353→    Else
+   354→   354→        ' Beri pesan gagal karena cell P4 kosong
+   355→   355→        MsgBox "Gagal menyimpan file PDF karena cell P4 kosong.", vbExclamation
+   356→   356→    End If
+   357→   357→End Sub
+   358→   358→Private Sub Worksheet_Change(ByVal Target As Range)
+   359→   359→    ' Periksa apakah perubahan terjadi pada cell P4
+   360→   360→    If Not Intersect(Target, Me.Range("P4")) Is Nothing Then
+   361→   361→        ' Panggil macro SavePDF
+   362→   362→        Call SavePDF
+   363→   363→    End If
+   364→   364→End Sub
+   365→   365→
+   366→   366→-------------------------------------------------------------------------------
+   367→   367→VBA MACRO Module2.bas 
+   368→   368→in file: xl/vbaProject.bin - OLE stream: 'VBA/Module2'
+   369→   369→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   370→   370→Sub SavePDF()
+   371→   371→    Dim ws As Worksheet
+   372→   372→    Dim fileName As String
+   373→   373→    
+   374→   374→    ' Tentukan worksheet "02BANDING" sebagai worksheet target
+   375→   375→    Set ws = ThisWorkbook.Sheets("02BANDING")
+   376→   376→    
+   377→   377→    ' Periksa nilai di cell M3 untuk mendapatkan bagian tengah nama file
+   378→   378→    Dim middleName As String
+   379→   379→    middleName = ws.Range("M3").Value
+   380→   380→    
+   381→   381→    ' Periksa apakah cell M3 tidak kosong
+   382→   382→    If Len(middleName) > 0 Then
+   383→   383→        ' Bangun nama file PDF
+   384→   384→        fileName = "02BANDING_" & middleName & "_2024.pdf"
+   385→   385→        
+   386→   386→        ' Simpan file PDF
+   387→   387→        ws.ExportAsFixedFormat Type:=xlTypePDF, fileName:=ThisWorkbook.Path & "\" & fileName, Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas:=False, OpenAfterPublish:=False
+   388→   388→        
+   389→   389→        ' Beri pesan berhasil
+   390→   390→        MsgBox "File PDF berhasil disimpan dengan nama: " & fileName, vbInformation
+   391→   391→    Else
+   392→   392→        ' Beri pesan gagal karena cell M3 kosong
+   393→   393→        MsgBox "Gagal menyimpan file PDF karena cell M3 kosong.", vbExclamation
+   394→   394→    End If
+   395→   395→End Sub
+   396→   396→Private Sub Worksheet_Change(ByVal Target As Range)
+   397→   397→    ' Periksa apakah perubahan terjadi pada cell M3
+   398→   398→    If Not Intersect(Target, Me.Range("M3")) Is Nothing Then
+   399→   399→        ' Panggil macro SavePDF
+   400→   400→        Call SavePDF
+   401→   401→    End If
+   402→   402→End Sub
+   403→   403→-------------------------------------------------------------------------------
+   404→   404→VBA MACRO Module3.bas 
+   405→   405→in file: xl/vbaProject.bin - OLE stream: 'VBA/Module3'
+   406→   406→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   407→   407→Sub SavePDF()
+   408→   408→    Dim ws As Worksheet
+   409→   409→    Dim fileName As String
+   410→   410→    
+   411→   411→    ' Tentukan worksheet "03RENCANA" sebagai worksheet target
+   412→   412→    Set ws = ThisWorkbook.Sheets("03RENCANA")
+   413→   413→    
+   414→   414→    ' Periksa nilai di cell P4 untuk mendapatkan bagian tengah nama file
+   415→   415→    Dim middleName As String
+   416→   416→    middleName = ws.Range("P4").Value
+   417→   417→    
+   418→   418→    ' Periksa apakah cell P4 tidak kosong
+   419→   419→    If Len(middleName) > 0 Then
+   420→   420→        ' Bangun nama file PDF
+   421→   421→        fileName = "03RENCANA_" & middleName & "_2025.pdf"
+   422→   422→        
+   423→   423→        ' Simpan file PDF
+   424→   424→        ws.ExportAsFixedFormat Type:=xlTypePDF, fileName:=ThisWorkbook.Path & "\" & fileName, Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas:=False, OpenAfterPublish:=False
+   425→   425→        
+   426→   426→        ' Beri pesan berhasil
+   427→   427→        MsgBox "File PDF berhasil disimpan dengan nama: " & fileName, vbInformation
+   428→   428→    Else
+   429→   429→        ' Beri pesan gagal karena cell P4 kosong
+   430→   430→        MsgBox "Gagal menyimpan file PDF karena cell P4 kosong.", vbExclamation
+   431→   431→    End If
+   432→   432→End Sub
+   433→   433→Private Sub Worksheet_Change(ByVal Target As Range)
+   434→   434→    ' Periksa apakah perubahan terjadi pada cell P4
+   435→   435→    If Not Intersect(Target, Me.Range("P6")) Is Nothing Then
+   436→   436→        ' Panggil macro SavePDF
+   437→   437→        Call SavePDF
+   438→   438→    End If
+   439→   439→End Sub
+   440→   440→-------------------------------------------------------------------------------
+   441→   441→VBA MACRO Module5.bas 
+   442→   442→in file: xl/vbaProject.bin - OLE stream: 'VBA/Module5'
+   443→   443→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   444→   444→Sub SavePDF()
+   445→   445→    Dim ws As Worksheet
+   446→   446→    Dim fileName As String
+   447→   447→    
+   448→   448→    ' Tentukan worksheet "04SHP" sebagai worksheet target
+   449→   449→    Set ws = ThisWorkbook.Sheets("04SHP")
+   450→   450→    
+   451→   451→    ' Periksa nilai di cell P4 untuk mendapatkan bagian tengah nama file
+   452→   452→    Dim middleName As String
+   453→   453→    middleName = ws.Range("P4").Value
+   454→   454→    
+   455→   455→    ' Periksa apakah cell P4 tidak kosong
+   456→   456→    If Len(middleName) > 0 Then
+   457→   457→        ' Bangun nama file PDF
+   458→   458→        fileName = "04SHP_" & middleName & "_2025.pdf"
+   459→   459→        
+   460→   460→        ' Simpan file PDF
+   461→   461→        ws.ExportAsFixedFormat Type:=xlTypePDF, fileName:=ThisWorkbook.Path & "\" & fileName, Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas:=False, OpenAfterPublish:=False
+   462→   462→        
+   463→   463→        ' Beri pesan berhasil
+   464→   464→        MsgBox "File PDF berhasil disimpan dengan nama: " & fileName, vbInformation
+   465→   465→    Else
+   466→   466→        ' Beri pesan gagal karena cell P4 kosong
+   467→   467→        MsgBox "Gagal menyimpan file PDF karena cell P4 kosong.", vbExclamation
+   468→   468→    End If
+   469→   469→End Sub
+   470→   470→Private Sub Worksheet_Change(ByVal Target As Range)
+   471→   471→    ' Periksa apakah perubahan terjadi pada cell P4
+   472→   472→    If Not Intersect(Target, Me.Range("P4")) Is Nothing Then
+   473→   473→        ' Panggil macro SavePDF
+   474→   474→        Call SavePDF
+   475→   475→    End If
+   476→   476→End Sub
+   477→   477→-------------------------------------------------------------------------------
+   478→   478→VBA MACRO Module6.bas 
+   479→   479→in file: xl/vbaProject.bin - OLE stream: 'VBA/Module6'
+   480→   480→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   481→   481→Sub SavePDF()
+   482→   482→    Dim ws As Worksheet
+   483→   483→    Dim fileName As String
+   484→   484→    
+   485→   485→    ' Tentukan worksheet "05BAT" sebagai worksheet target
+   486→   486→    Set ws = ThisWorkbook.Sheets("05BAT")
+   487→   487→    
+   488→   488→    ' Periksa nilai di cell P4 untuk mendapatkan bagian tengah nama file
+   489→   489→    Dim middleName As String
+   490→   490→    middleName = ws.Range("P4").Value
+   491→   491→    
+   492→   492→    ' Periksa apakah cell P4 tidak kosong
+   493→   493→    If Len(middleName) > 0 Then
+   494→   494→        ' Bangun nama file PDF
+   495→   495→        fileName = "05BAT_" & middleName & "_2025.pdf"
+   496→   496→        
+   497→   497→        ' Simpan file PDF
+   498→   498→        ws.ExportAsFixedFormat Type:=xlTypePDF, fileName:=ThisWorkbook.Path & "\" & fileName, Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas:=False, OpenAfterPublish:=False
+   499→   499→        
+   500→   500→        ' Beri pesan berhasil
+   501→   501→        MsgBox "File PDF berhasil disimpan dengan nama: " & fileName, vbInformation
+   502→   502→    Else
+   503→   503→        ' Beri pesan gagal karena cell P4 kosong
+   504→   504→        MsgBox "Gagal menyimpan file PDF karena cell P4 kosong.", vbExclamation
+   505→   505→    End If
+   506→   506→End Sub
+   507→   507→Private Sub Worksheet_Change(ByVal Target As Range)
+   508→   508→    ' Periksa apakah perubahan terjadi pada cell P4
+   509→   509→    If Not Intersect(Target, Me.Range("P4")) Is Nothing Then
+   510→   510→        ' Panggil macro SavePDF
+   511→   511→        Call SavePDF
+   512→   512→    End If
+   513→   513→End Sub
+   514→   514→
+   515→   515→-------------------------------------------------------------------------------
+   516→   516→VBA MACRO Sheet5.cls 
+   517→   517→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet5'
+   518→   518→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   519→   519→(empty macro)
+   520→   520→-------------------------------------------------------------------------------
+   521→   521→VBA MACRO Sheet7.cls 
+   522→   522→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet7'
+   523→   523→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   524→   524→(empty macro)
+   525→   525→-------------------------------------------------------------------------------
+   526→   526→VBA MACRO Sheet8.cls 
+   527→   527→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet8'
+   528→   528→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   529→   529→(empty macro)
+   530→   530→-------------------------------------------------------------------------------
+   531→   531→VBA MACRO Sheet13.cls 
+   532→   532→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet13'
+   533→   533→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   534→   534→(empty macro)
+   535→   535→-------------------------------------------------------------------------------
+   536→   536→VBA MACRO Sheet15.cls 
+   537→   537→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet15'
+   538→   538→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   539→   539→Private Sub Worksheet_Change(ByVal Target As Range)
+   540→   540→    ' Periksa apakah perubahan terjadi pada cell target di sheet "Toko"
+   541→   541→    If Me.Name = "Toko" And Not Intersect(Target, Me.Range("P4")) Is Nothing Then
+   542→   542→        ' Panggil macro HideEmptyRowsBasedOnColumnB
+   543→   543→        Call HideEmptyRowsBasedOnColumnB
+   544→   544→    End If
+   545→   545→End Sub
+   546→   546→
+   547→   547→Sub HideEmptyRowsBasedOnColumnB()
+   548→   548→    Dim ws As Worksheet
+   549→   549→    Dim lastRow As Long
+   550→   550→    Dim k As Long
+   551→   551→    
+   552→   552→    ' Set worksheet "Toko" sebagai worksheet target
+   553→   553→    Set ws = ThisWorkbook.Sheets("Toko")
+   554→   554→    
+   555→   555→    ' Hanya proses lembar kerja yang tidak dilindungi
+   556→   556→    If Not ws.ProtectContents Then
+   557→   557→        ' Tentukan baris terakhir dengan data di kolom B
+   558→   558→        lastRow = ws.Cells(ws.Rows.Count, "B").End(xlUp).Row
+   559→   559→        
+   560→   560→        ' Batasan untuk loop dari baris 39 hingga 108
+   561→   561→        If lastRow > 108 Then lastRow = 108
+   562→   562→        
+   563→   563→        ' Loop melalui setiap baris dari baris 39 hingga lastRow
+   564→   564→        For k = 39 To 108
+   565→   565→            ' Cek jika kolom B pada baris tersebut tidak kosong
+   566→   566→            If Len(ws.Range("B" & k).Value) > 0 Then
+   567→   567→                ' Jika tidak kosong, tampilkan baris
+   568→   568→                ws.Rows(k).Hidden = False
+   569→   569→            Else
+   570→   570→                ' Jika kosong, sembunyikan baris
+   571→   571→                ws.Rows(k).Hidden = True
+   572→   572→            End If
+   573→   573→        Next k
+   574→   574→    End If
+   575→   575→End Sub
+   576→   576→
+   577→   577→-------------------------------------------------------------------------------
+   578→   578→VBA MACRO Sheet16.cls 
+   579→   579→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet16'
+   580→   580→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   581→   581→(empty macro)
+   582→   582→-------------------------------------------------------------------------------
+   583→   583→VBA MACRO Sheet17.cls 
+   584→   584→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet17'
+   585→   585→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   586→   586→(empty macro)
+   587→   587→-------------------------------------------------------------------------------
+   588→   588→VBA MACRO Sheet18.cls 
+   589→   589→in file: xl/vbaProject.bin - OLE stream: 'VBA/Sheet18'
+   590→   590→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   591→   591→(empty macro)
+   592→   592→-------------------------------------------------------------------------------
+   593→   593→VBA MACRO Module7.bas 
+   594→   594→in file: xl/vbaProject.bin - OLE stream: 'VBA/Module7'
+   595→   595→- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+   596→   596→Sub SavePDF()
+   597→   597→    Dim ws As Worksheet
+   598→   598→    Dim fileName As String
+   599→   599→    
+   600→   600→    ' Tentukan worksheet "Toko" sebagai worksheet target
+   601→   601→    Set ws = ThisWorkbook.Sheets("Toko")
+   602→   602→    
+   603→   603→    ' Periksa nilai di cell P4 untuk mendapatkan bagian tengah nama file
+   604→   604→    Dim middleName As String
+   605→   605→    middleName = ws.Range("P4").Value
+   606→   606→    
+   607→   607→    ' Periksa apakah cell P4 tidak kosong
+   608→   608→    If Len(middleName) > 0 Then
+   609→   609→        ' Bangun nama file PDF
+   610→   610→        fileName = "Toko_" & middleName & "_2025.pdf"
+   611→   611→        
+   612→   612→        ' Simpan file PDF
+   613→   613→        ws.ExportAsFixedFormat Type:=xlTypePDF, fileName:=ThisWorkbook.Path & "\" & fileName, Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas:=False, OpenAfterPublish:=False
+   614→   614→        
+   615→   615→        ' Beri pesan berhasil
+   616→   616→        MsgBox "File PDF berhasil disimpan dengan nama: " & fileName, vbInformation
+   617→   617→    Else
+   618→   618→        ' Beri pesan gagal karena cell P4 kosong
+   619→   619→        MsgBox "Gagal menyimpan file PDF karena cell P4 kosong.", vbExclamation
+   620→   620→    End If
+   621→   621→End Sub
+   622→   622→Private Sub Worksheet_Change(ByVal Target As Range)
+   623→   623→    ' Periksa apakah perubahan terjadi pada cell P4
+   624→   624→    If Not Intersect(Target, Me.Range("P4")) Is Nothing Then
+   625→   625→        ' Panggil macro SavePDF
+   626→   626→        Call SavePDF
+   627→   627→    End If
+   628→   628→End Sub
+   629→   629→
+   630→   630→+----------+--------------------+---------------------------------------------+
+   631→   631→|Type      |Keyword             |Description                                  |
+   632→   632→+----------+--------------------+---------------------------------------------+
+   633→   633→|AutoExec  |Worksheet_Change    |Runs when the file is opened and ActiveX     |
+   634→   634→|          |                    |objects trigger events                       |
+   635→   635→|Suspicious|Call                |May call a DLL using Excel 4 Macros (XLM/XLF)|
+   636→   636→|Suspicious|Hex Strings         |Hex-encoded strings were detected, may be    |
+   637→   637→|          |                    |used to obfuscate strings (option --decode to|
+   638→   638→|          |                    |see all)                                     |
+   639→   639→|Suspicious|Base64 Strings      |Base64-encoded strings were detected, may be |
+   640→   640→|          |                    |used to obfuscate strings (option --decode to|
+   641→   641→|          |                    |see all)                                     |
+   642→   642→|Hex String|'\x00\x02\x08 '     |00020820                                     |
+   643→   643→|Hex String|'\x00\x00\x00\x00\x0|000000000046                                 |
+   644→   644→|          |0F'                 |                                             |
+   645→   645→|Hex String|'\x00\x02\x08\x19'  |00020819                                     |
+   646→   646→|Hex String|'\x04E'           |04459799                                     |
+   647→   647→|Hex String|'dJ\x01'         |64F24A9701DE                                 |
+   648→   648→|Hex String|'\x18'           |C4DAE218                                     |
+   649→   649→|Hex String|'m\x1f\x18'      |6DDA1F18EFFA                                 |
+   650→   650→|Base64    |'N('               |Toko                                         |
+   651→   651→|String    |                    |                                             |
+   652→   652→+----------+--------------------+---------------------------------------------+
+   653→   653→
+   654→   654→

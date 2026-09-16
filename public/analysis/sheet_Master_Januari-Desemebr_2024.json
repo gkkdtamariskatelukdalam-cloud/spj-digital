@@ -1,0 +1,5952 @@
+{
+  "name": "Master Januari-Desemebr 2024",
+  "max_row": 1258,
+  "max_col": 33,
+  "non_empty_cells": 30541,
+  "formulas_count": 1064,
+  "type": "Master Data",
+  "purpose": "Historical ATK procurement data Jan-Dec 2024 (source: Masteratk2024 named range)",
+  "category": "data",
+  "headers": [
+    {
+      "col": "A",
+      "col_idx": 1,
+      "header": "No"
+    },
+    {
+      "col": "B",
+      "col_idx": 2,
+      "header": "Tabel Bantu"
+    },
+    {
+      "col": "C",
+      "col_idx": 3,
+      "header": "NO Pesan"
+    },
+    {
+      "col": "D",
+      "col_idx": 4,
+      "header": "No BKU"
+    },
+    {
+      "col": "E",
+      "col_idx": 5,
+      "header": "No. Urut"
+    },
+    {
+      "col": "F",
+      "col_idx": 6,
+      "header": "No BAST"
+    },
+    {
+      "col": "G",
+      "col_idx": 7,
+      "header": "Tanggal Perencanaan"
+    },
+    {
+      "col": "H",
+      "col_idx": 8,
+      "header": "Tanggal Pesanan"
+    },
+    {
+      "col": "I",
+      "col_idx": 9,
+      "header": "Tanggal BAST"
+    },
+    {
+      "col": "J",
+      "col_idx": 10,
+      "header": "Tanggal Pemeriksaan"
+    },
+    {
+      "col": "K",
+      "col_idx": 11,
+      "header": "Tanggal Bayar"
+    },
+    {
+      "col": "L",
+      "col_idx": 12,
+      "header": "Kode Rekening"
+    },
+    {
+      "col": "M",
+      "col_idx": 13,
+      "header": "Kode Kegiatan"
+    },
+    {
+      "col": "N",
+      "col_idx": 14,
+      "header": "Kode Program"
+    },
+    {
+      "col": "O",
+      "col_idx": 15,
+      "header": "Uraian"
+    },
+    {
+      "col": "P",
+      "col_idx": 16,
+      "header": "Nama Barang"
+    },
+    {
+      "col": "Q",
+      "col_idx": 17,
+      "header": "Kategori"
+    },
+    {
+      "col": "R",
+      "col_idx": 18,
+      "header": "Spesiifikasi"
+    },
+    {
+      "col": "S",
+      "col_idx": 19,
+      "header": "Volume"
+    },
+    {
+      "col": "T",
+      "col_idx": 20,
+      "header": "Satuan"
+    },
+    {
+      "col": "U",
+      "col_idx": 21,
+      "header": "Tarif Harga"
+    },
+    {
+      "col": "V",
+      "col_idx": 22,
+      "header": "Jumlah"
+    },
+    {
+      "col": "W",
+      "col_idx": 23,
+      "header": "Toko"
+    },
+    {
+      "col": "X",
+      "col_idx": 24,
+      "header": "Direktur"
+    },
+    {
+      "col": "Y",
+      "col_idx": 25,
+      "header": "No. Hp"
+    }
+  ],
+  "sample_rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "No",
+          "value": "No",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "Tabel Bantu",
+          "value": "Tabel Bantu",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "NO Pesan",
+          "value": "NO Pesan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "No BKU",
+          "value": "No BKU",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "No. Urut",
+          "value": "No. Urut",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "No BAST",
+          "value": "No BAST",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "Tanggal Perencanaan",
+          "value": "Tanggal Perencanaan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "Tanggal Pesanan",
+          "value": "Tanggal Pesanan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "Tanggal BAST",
+          "value": "Tanggal BAST",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "Tanggal Pemeriksaan",
+          "value": "Tanggal Pemeriksaan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "Tanggal Bayar",
+          "value": "Tanggal Bayar",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "Kode Rekening",
+          "value": "Kode Rekening",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "Kode Kegiatan",
+          "value": "Kode Kegiatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "Kode Program",
+          "value": "Kode Program",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Uraian",
+          "value": "Uraian",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Nama Barang",
+          "value": "Nama Barang",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Kategori",
+          "value": "Kategori",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Spesiifikasi",
+          "value": "Spesiifikasi",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "Volume",
+          "value": "Volume",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "Satuan",
+          "value": "Satuan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "Tarif Harga",
+          "value": "Tarif Harga",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "Jumlah",
+          "value": "Jumlah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "Toko",
+          "value": "Toko",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Direktur",
+          "value": "Direktur",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "No. Hp",
+          "value": "No. Hp",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Alamat",
+          "value": "Alamat",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "Harga Satuan sebelum pajak",
+          "value": "Harga Satuan sebelum pajak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "Jumlah Harga Sebelum Pajak",
+          "value": "Jumlah Harga Sebelum Pajak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "Harga Total Asli ",
+          "value": "Harga Total Asli ",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "Total Harga DPP",
+          "value": "Total Harga DPP",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "Total Harga Asli",
+          "value": "Total Harga Asli",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "Harga satuan asli",
+          "value": "Harga satuan asli",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "Bulan",
+          "value": "Bulan",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "2",
+          "value": "2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "3",
+          "value": "3",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "6",
+          "value": "6",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "7",
+          "value": "7",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "8",
+          "value": "8",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "9",
+          "value": "9",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "10",
+          "value": "10",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "11",
+          "value": "11",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "12",
+          "value": "12",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "13",
+          "value": "13",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "14",
+          "value": "14",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "15",
+          "value": "15",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "16",
+          "value": "16",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "17",
+          "value": "17",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "18",
+          "value": "18",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "19",
+          "value": "19",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "20",
+          "value": "20",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "21",
+          "value": "21",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "22",
+          "value": "22",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "23",
+          "value": "23",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "24",
+          "value": "24",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "25",
+          "value": "25",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "26",
+          "value": "26",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AA",
+          "col_idx": 27,
+          "formula": "27",
+          "value": "27",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AB",
+          "col_idx": 28,
+          "formula": "28",
+          "value": "28",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AC",
+          "col_idx": 29,
+          "formula": "29",
+          "value": "29",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AD",
+          "col_idx": 30,
+          "formula": "30",
+          "value": "30",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AE",
+          "col_idx": 31,
+          "formula": "31",
+          "value": "31",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AF",
+          "col_idx": 32,
+          "formula": "32",
+          "value": "32",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "33",
+          "value": "33",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Binder Klip  nomor 111",
+          "value": "Binder Klip  nomor 111",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "=O3",
+          "value": "Binder Klip  nomor 111",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Binder Clip No 111 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Binder Clip No 111 (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "kotak",
+          "value": "kotak",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "11000",
+          "value": "11000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "55000",
+          "value": "55000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "2",
+          "value": "2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "2",
+          "value": "2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Ballpoint Drawing Pen 0,1 Snowman",
+          "value": "Ballpoint Drawing Pen 0,1 Snowman",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "=O4",
+          "value": "Ballpoint Drawing Pen 0,1 Snowman",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Ballpoint Drawing Pen 0,1 Snowman (Dimensi, 1cm x 1cm x 1cm. Berat, 50g)",
+          "value": "Ballpoint Drawing Pen 0,1 Snowman (Dimensi, 1cm x 1cm x 1cm. Berat, 50g)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "lusin",
+          "value": "lusin",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "95000",
+          "value": "95000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "95000",
+          "value": "95000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "3",
+          "value": "3",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "3",
+          "value": "3",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "hardisk",
+          "value": "hardisk",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "=O5",
+          "value": "hardisk",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Hardisk Siagate (Kapasitas\u00a02TB\u00a0-Port USB 3.0 -2.5 Inch)",
+          "value": "Hardisk Siagate (Kapasitas\u00a02TB\u00a0-Port USB 3.0 -2.5 Inch)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "2200000",
+          "value": "2200000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "2200000",
+          "value": "2200000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "4",
+          "value": "4",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Stempel Cap",
+          "value": "Stempel Cap",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "=O6",
+          "value": "Stempel Cap",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Stempel Otomatis Diameter 40mm",
+          "value": "Stempel Otomatis Diameter 40mm",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "3",
+          "value": "3",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "120000",
+          "value": "120000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "360000",
+          "value": "360000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Stofmap Transparan tali",
+          "value": "Stofmap Transparan tali",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "=O7",
+          "value": "Stofmap Transparan tali",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Stofmap Transparan Tali (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Stofmap Transparan Tali (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "100",
+          "value": "100",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "5500",
+          "value": "5500",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "550000",
+          "value": "550000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "6",
+          "value": "6",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "6",
+          "value": "6",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+          "value": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "=O8",
+          "value": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Amplop Coklat GSU Polos (Panjang: 25 cm. Lebar: 5 cm. Tinggi: 35 cm. Berat: 1000 gram)",
+          "value": "Amplop Coklat GSU Polos (Panjang: 25 cm. Lebar: 5 cm. Tinggi: 35 cm. Berat: 1000 gram)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "2",
+          "value": "2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "bungkus",
+          "value": "bungkus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "60000",
+          "value": "60000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "120000",
+          "value": "120000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "7",
+          "value": "7",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "7",
+          "value": "7",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Stapler HD-10--",
+          "value": "Stapler HD-10--",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "=O9",
+          "value": "Stapler HD-10--",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Stapler Hd-10 (Size : 9.1 X 4.2 X 1.8 Cm, Berat. 0.07 Kg. Lebar. 10.0 Cm. Tinggi. 3.5 Cm)",
+          "value": "Stapler Hd-10 (Size : 9.1 X 4.2 X 1.8 Cm, Berat. 0.07 Kg. Lebar. 10.0 Cm. Tinggi. 3.5 Cm)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "2",
+          "value": "2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "20000",
+          "value": "20000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "40000",
+          "value": "40000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "8",
+          "value": "8",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "8",
+          "value": "8",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Kertas Lain-Lain Kertas Buffalo",
+          "value": "Kertas Lain-Lain Kertas Buffalo",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "=O10",
+          "value": "Kertas Lain-Lain Kertas Buffalo",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Kertas Buffalo F4 (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 1006Gr)",
+          "value": "Kertas Buffalo F4 (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 1006Gr)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "bungkus",
+          "value": "bungkus",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "31000",
+          "value": "31000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "155000",
+          "value": "155000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "9",
+          "value": "9",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "9",
+          "value": "9",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Bantalan Cap Kecil",
+          "value": "Bantalan Cap Kecil",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "=O11",
+          "value": "Bantalan Cap Kecil",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Bantalan Cap Kecil ( Dimensi, 8Cm X 11Cm X 2Cm. Berat, 48G.)",
+          "value": "Bantalan Cap Kecil ( Dimensi, 8Cm X 11Cm X 2Cm. Berat, 48G.)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "10000",
+          "value": "10000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "50000",
+          "value": "50000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "10",
+          "value": "10",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "10",
+          "value": "10",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Baterey Kecil",
+          "value": "Baterey Kecil",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "=O12",
+          "value": "Baterey Kecil",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Baterey Kecil (Type: Aa; Tegangan: 1.5 Volt; Ukuran: 14 X 50 Mm)",
+          "value": "Baterey Kecil (Type: Aa; Tegangan: 1.5 Volt; Ukuran: 14 X 50 Mm)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "2",
+          "value": "2",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "pasang",
+          "value": "pasang",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "20000",
+          "value": "20000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "40000",
+          "value": "40000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "11",
+          "value": "11",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "11",
+          "value": "11",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Tinta Printer Canon 741 Warna-741 Warna",
+          "value": "Tinta Printer Canon 741 Warna-741 Warna",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "=O13",
+          "value": "Tinta Printer Canon 741 Warna-741 Warna",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Tinta Printer Canon Aiflo Warna (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Tinta Printer Canon Aiflo Warna (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "12",
+          "value": "12",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "botol",
+          "value": "botol",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "33000",
+          "value": "33000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "396000",
+          "value": "396000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "12",
+          "value": "12",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "12",
+          "value": "12",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Lakban Bening ",
+          "value": "Lakban Bening ",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "Lakban Bening Besar",
+          "value": "Lakban Bening Besar",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Lakban Bening Besar (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "value": "Lakban Bening Besar (Length 5.0Cm, Width 5.0Cm, Height 5.0Cm, Weight 5Gr)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "15000",
+          "value": "15000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "75000",
+          "value": "75000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "col": "A",
+          "col_idx": 1,
+          "formula": "13",
+          "value": "13",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "B",
+          "col_idx": 2,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "C",
+          "col_idx": 3,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "D",
+          "col_idx": 4,
+          "formula": "BPU01",
+          "value": "BPU01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "E",
+          "col_idx": 5,
+          "formula": "13",
+          "value": "13",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "F",
+          "col_idx": 6,
+          "formula": "01",
+          "value": "01",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "G",
+          "col_idx": 7,
+          "formula": "2024-01-05 00:00:00",
+          "value": "2024-01-05T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "H",
+          "col_idx": 8,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "I",
+          "col_idx": 9,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "J",
+          "col_idx": 10,
+          "formula": "2024-01-06 00:00:00",
+          "value": "2024-01-06T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "K",
+          "col_idx": 11,
+          "formula": "2024-01-23 00:00:00",
+          "value": "2024-01-23T00:00:00",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "L",
+          "col_idx": 12,
+          "formula": "5.1.02.01.01.0024",
+          "value": "5.1.02.01.01.0024",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "M",
+          "col_idx": 13,
+          "formula": "06.05.",
+          "value": "06.05.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "N",
+          "col_idx": 14,
+          "formula": "06.05.08.",
+          "value": "06.05.08.",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "O",
+          "col_idx": 15,
+          "formula": "Plastik Mika",
+          "value": "Plastik Mika",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "P",
+          "col_idx": 16,
+          "formula": "=O15",
+          "value": "Plastik Mika",
+          "is_formula": true,
+          "is_array": false
+        },
+        {
+          "col": "Q",
+          "col_idx": 17,
+          "formula": "Alat Tulis Kantor (ATK)",
+          "value": "Alat Tulis Kantor (ATK)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "R",
+          "col_idx": 18,
+          "formula": "Plastik Mika Jilid F4 (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 548Gr)",
+          "value": "Plastik Mika Jilid F4 (Length 21.0Cm, Width 33.0Cm, Height 7.0Cm, Weight 548Gr)",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "S",
+          "col_idx": 19,
+          "formula": "5",
+          "value": "5",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "T",
+          "col_idx": 20,
+          "formula": "buah",
+          "value": "buah",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "U",
+          "col_idx": 21,
+          "formula": "10000",
+          "value": "10000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "V",
+          "col_idx": 22,
+          "formula": "300000",
+          "value": "300000",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "W",
+          "col_idx": 23,
+          "formula": "UD. JOSUA",
+          "value": "UD. JOSUA",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "X",
+          "col_idx": 24,
+          "formula": "Gestiwan Zebua",
+          "value": "Gestiwan Zebua",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Y",
+          "col_idx": 25,
+          "formula": "082166506229",
+          "value": "082166506229",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "Z",
+          "col_idx": 26,
+          "formula": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "value": "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan",
+          "is_formula": false,
+          "is_array": false
+        },
+        {
+          "col": "AG",
+          "col_idx": 33,
+          "formula": "1",
+          "value": "1",
+          "is_formula": false,
+          "is_array": false
+        }
+      ]
+    }
+  ],
+  "formulas": [
+    {
+      "cell": "P3",
+      "row": 3,
+      "col": "P",
+      "formula": "=O3",
+      "value": "Binder Klip  nomor 111",
+      "type": "normal"
+    },
+    {
+      "cell": "P4",
+      "row": 4,
+      "col": "P",
+      "formula": "=O4",
+      "value": "Ballpoint Drawing Pen 0,1 Snowman",
+      "type": "normal"
+    },
+    {
+      "cell": "P5",
+      "row": 5,
+      "col": "P",
+      "formula": "=O5",
+      "value": "hardisk",
+      "type": "normal"
+    },
+    {
+      "cell": "P6",
+      "row": 6,
+      "col": "P",
+      "formula": "=O6",
+      "value": "Stempel Cap",
+      "type": "normal"
+    },
+    {
+      "cell": "P7",
+      "row": 7,
+      "col": "P",
+      "formula": "=O7",
+      "value": "Stofmap Transparan tali",
+      "type": "normal"
+    },
+    {
+      "cell": "P8",
+      "row": 8,
+      "col": "P",
+      "formula": "=O8",
+      "value": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+      "type": "normal"
+    },
+    {
+      "cell": "P9",
+      "row": 9,
+      "col": "P",
+      "formula": "=O9",
+      "value": "Stapler HD-10--",
+      "type": "normal"
+    },
+    {
+      "cell": "P10",
+      "row": 10,
+      "col": "P",
+      "formula": "=O10",
+      "value": "Kertas Lain-Lain Kertas Buffalo",
+      "type": "normal"
+    },
+    {
+      "cell": "P11",
+      "row": 11,
+      "col": "P",
+      "formula": "=O11",
+      "value": "Bantalan Cap Kecil",
+      "type": "normal"
+    },
+    {
+      "cell": "P12",
+      "row": 12,
+      "col": "P",
+      "formula": "=O12",
+      "value": "Baterey Kecil",
+      "type": "normal"
+    },
+    {
+      "cell": "P13",
+      "row": 13,
+      "col": "P",
+      "formula": "=O13",
+      "value": "Tinta Printer Canon 741 Warna-741 Warna",
+      "type": "normal"
+    },
+    {
+      "cell": "P15",
+      "row": 15,
+      "col": "P",
+      "formula": "=O15",
+      "value": "Plastik Mika",
+      "type": "normal"
+    },
+    {
+      "cell": "P16",
+      "row": 16,
+      "col": "P",
+      "formula": "=O16",
+      "value": "Bantalan Cap Besar",
+      "type": "normal"
+    },
+    {
+      "cell": "P17",
+      "row": 17,
+      "col": "P",
+      "formula": "=O17",
+      "value": "Binder Klip  nomor 107",
+      "type": "normal"
+    },
+    {
+      "cell": "P18",
+      "row": 18,
+      "col": "P",
+      "formula": "=O18",
+      "value": "Amplop Coklat Merk : Garda Ukuran Cabinet",
+      "type": "normal"
+    },
+    {
+      "cell": "P19",
+      "row": 19,
+      "col": "P",
+      "formula": "=O19",
+      "value": "Kertas Label",
+      "type": "normal"
+    },
+    {
+      "cell": "P20",
+      "row": 20,
+      "col": "P",
+      "formula": "=O20",
+      "value": "Spidol Refil Spidol White Board Snowman",
+      "type": "normal"
+    },
+    {
+      "cell": "P21",
+      "row": 21,
+      "col": "P",
+      "formula": "=O21",
+      "value": "Binder Klip Merk : KENKO nomor 105",
+      "type": "normal"
+    },
+    {
+      "cell": "P22",
+      "row": 22,
+      "col": "P",
+      "formula": "=O22",
+      "value": "Ballpoint Pilot G2",
+      "type": "normal"
+    },
+    {
+      "cell": "P23",
+      "row": 23,
+      "col": "P",
+      "formula": "=O23",
+      "value": "Ballpoint Boldiner Standar",
+      "type": "normal"
+    },
+    {
+      "cell": "P24",
+      "row": 24,
+      "col": "P",
+      "formula": "=O24",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Blue",
+      "type": "normal"
+    },
+    {
+      "cell": "P25",
+      "row": 25,
+      "col": "P",
+      "formula": "=O25",
+      "value": "Map Binder",
+      "type": "normal"
+    },
+    {
+      "cell": "P26",
+      "row": 26,
+      "col": "P",
+      "formula": "=O26",
+      "value": "Stempel Manual",
+      "type": "normal"
+    },
+    {
+      "cell": "P27",
+      "row": 27,
+      "col": "P",
+      "formula": "=O27",
+      "value": "Stapler Stapler No, 50 MAX",
+      "type": "normal"
+    },
+    {
+      "cell": "P28",
+      "row": 28,
+      "col": "P",
+      "formula": "=O28",
+      "value": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris",
+      "type": "normal"
+    },
+    {
+      "cell": "P29",
+      "row": 29,
+      "col": "P",
+      "formula": "=O29",
+      "value": "Lakban Hitam--",
+      "type": "normal"
+    },
+    {
+      "cell": "P30",
+      "row": 30,
+      "col": "P",
+      "formula": "=O30",
+      "value": "Paper Clip No 1  Paper Clip No 3",
+      "type": "normal"
+    },
+    {
+      "cell": "P31",
+      "row": 31,
+      "col": "P",
+      "formula": "=O31",
+      "value": "Lakban Hitam uk 2 \" Warna hitam uk. 2 \"",
+      "type": "normal"
+    },
+    {
+      "cell": "P32",
+      "row": 32,
+      "col": "P",
+      "formula": "=O32",
+      "value": "Kertas StensiI",
+      "type": "normal"
+    },
+    {
+      "cell": "P33",
+      "row": 33,
+      "col": "P",
+      "formula": "=O33",
+      "value": "Spidol White board",
+      "type": "normal"
+    },
+    {
+      "cell": "P34",
+      "row": 34,
+      "col": "P",
+      "formula": "=O34",
+      "value": "Pisau Cutter Kenko L-500",
+      "type": "normal"
+    },
+    {
+      "cell": "P35",
+      "row": 35,
+      "col": "P",
+      "formula": "=O35",
+      "value": "Lem Fox isi 500 gram--",
+      "type": "normal"
+    },
+    {
+      "cell": "P36",
+      "row": 36,
+      "col": "P",
+      "formula": "=O36",
+      "value": "Buku Ekspedisi 100",
+      "type": "normal"
+    },
+    {
+      "cell": "P37",
+      "row": 37,
+      "col": "P",
+      "formula": "=O37",
+      "value": "Binder Klip  nomor 260",
+      "type": "normal"
+    },
+    {
+      "cell": "P38",
+      "row": 38,
+      "col": "P",
+      "formula": "=O38",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Yellow",
+      "type": "normal"
+    },
+    {
+      "cell": "P39",
+      "row": 39,
+      "col": "P",
+      "formula": "=O39",
+      "value": "PAPER CLIP  Paper Clip No 1",
+      "type": "normal"
+    },
+    {
+      "cell": "P40",
+      "row": 40,
+      "col": "P",
+      "formula": "=O40",
+      "value": "Tinta Stempel",
+      "type": "normal"
+    },
+    {
+      "cell": "P41",
+      "row": 41,
+      "col": "P",
+      "formula": "=O41",
+      "value": "Kertas HVS 80 gram Merk : Paper One A4, Ukuran : 8,27\" x 11,69\", Isi : 500 lembar",
+      "type": "normal"
+    },
+    {
+      "cell": "P42",
+      "row": 42,
+      "col": "P",
+      "formula": "=O42",
+      "value": "Materai 10.000",
+      "type": "normal"
+    },
+    {
+      "cell": "P43",
+      "row": 43,
+      "col": "P",
+      "formula": "=O43",
+      "value": "Stofmap Transparan",
+      "type": "normal"
+    },
+    {
+      "cell": "P44",
+      "row": 44,
+      "col": "P",
+      "formula": "=O44",
+      "value": "Amplop Panjang Putih Polos Merk : Jaya Ukuran : 11 x 23 cm",
+      "type": "normal"
+    },
+    {
+      "cell": "P45",
+      "row": 45,
+      "col": "P",
+      "formula": "=O45",
+      "value": "canon catridge 741-catridge 741",
+      "type": "normal"
+    },
+    {
+      "cell": "P46",
+      "row": 46,
+      "col": "P",
+      "formula": "=O46",
+      "value": "Kertas Post-It Warna Warni  Sign Here",
+      "type": "normal"
+    },
+    {
+      "cell": "P48",
+      "row": 48,
+      "col": "P",
+      "formula": "=O48",
+      "value": "Binder Klip  nomor 200",
+      "type": "normal"
+    },
+    {
+      "cell": "P49",
+      "row": 49,
+      "col": "P",
+      "formula": "=O49",
+      "value": "Baterey Tanggung",
+      "type": "normal"
+    },
+    {
+      "cell": "P50",
+      "row": 50,
+      "col": "P",
+      "formula": "=O50",
+      "value": "C. Tinta Printer EPSON Toner Epson 664 Black",
+      "type": "normal"
+    },
+    {
+      "cell": "P51",
+      "row": 51,
+      "col": "P",
+      "formula": "=O51",
+      "value": "Isi Staples Sedang",
+      "type": "normal"
+    },
+    {
+      "cell": "P52",
+      "row": 52,
+      "col": "P",
+      "formula": "=O52",
+      "value": "Kertas Warna Blank Folio, Ukuran : 8,5 x 14\",  70 gram",
+      "type": "normal"
+    },
+    {
+      "cell": "P53",
+      "row": 53,
+      "col": "P",
+      "formula": "=O53",
+      "value": "Sampul Plastik",
+      "type": "normal"
+    },
+    {
+      "cell": "P54",
+      "row": 54,
+      "col": "P",
+      "formula": "=O54",
+      "value": "Box File Merk : Bantex Ukuran : 115x270x325 mm",
+      "type": "normal"
+    },
+    {
+      "cell": "P55",
+      "row": 55,
+      "col": "P",
+      "formula": "=O55",
+      "value": "Catridge Printer Epson T 014--",
+      "type": "normal"
+    },
+    {
+      "cell": "P56",
+      "row": 56,
+      "col": "P",
+      "formula": "=O56",
+      "value": "USB FLASH DISK USB/Flash Disk 4GB",
+      "type": "normal"
+    },
+    {
+      "cell": "P57",
+      "row": 57,
+      "col": "P",
+      "formula": "=O57",
+      "value": "Lakban warna Uk 2\" Warna Coklat Cofiie",
+      "type": "normal"
+    },
+    {
+      "cell": "P58",
+      "row": 58,
+      "col": "P",
+      "formula": "=O58",
+      "value": "gunting kertas-ukuran : panjang 21cm x lebar 8cm, stainless steel",
+      "type": "normal"
+    },
+    {
+      "cell": "P59",
+      "row": 59,
+      "col": "P",
+      "formula": "=O59",
+      "value": "Penghapus White Board",
+      "type": "normal"
+    },
+    {
+      "cell": "P60",
+      "row": 60,
+      "col": "P",
+      "formula": "=O60",
+      "value": "Ballpoint Standard AE7",
+      "type": "normal"
+    },
+    {
+      "cell": "P61",
+      "row": 61,
+      "col": "P",
+      "formula": "=O61",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Read",
+      "type": "normal"
+    },
+    {
+      "cell": "P62",
+      "row": 62,
+      "col": "P",
+      "formula": "=O62",
+      "value": "Stofmap Kertas",
+      "type": "normal"
+    },
+    {
+      "cell": "P63",
+      "row": 63,
+      "col": "P",
+      "formula": "=O63",
+      "value": "lakban hitam-ukuran : lebar 2 inch, panjang 12m, bahan : kain",
+      "type": "normal"
+    },
+    {
+      "cell": "P64",
+      "row": 64,
+      "col": "P",
+      "formula": "=O64",
+      "value": "Lakban Besar",
+      "type": "normal"
+    },
+    {
+      "cell": "P65",
+      "row": 65,
+      "col": "P",
+      "formula": "=O65",
+      "value": "Buku Induk/Inventaris 35 cm x 50 cm",
+      "type": "normal"
+    },
+    {
+      "cell": "P66",
+      "row": 66,
+      "col": "P",
+      "formula": "=O66",
+      "value": "Tinta Printer Canon 740 Hitam-740 Hitam",
+      "type": "normal"
+    },
+    {
+      "cell": "P67",
+      "row": 67,
+      "col": "P",
+      "formula": "=O67",
+      "value": "Kertas HVS 60 gram Merk : Paper One HVS F4 uk. 8.27\"x11.69\"",
+      "type": "normal"
+    },
+    {
+      "cell": "P68",
+      "row": 68,
+      "col": "P",
+      "formula": "=O68",
+      "value": "Binder Klip Ordner",
+      "type": "normal"
+    },
+    {
+      "cell": "P69",
+      "row": 69,
+      "col": "P",
+      "formula": "=O69",
+      "value": "Isi Staples besar",
+      "type": "normal"
+    },
+    {
+      "cell": "P70",
+      "row": 70,
+      "col": "P",
+      "formula": "=O70",
+      "value": "Gayung",
+      "type": "normal"
+    },
+    {
+      "cell": "P71",
+      "row": 71,
+      "col": "P",
+      "formula": "=O71",
+      "value": "Handsoap/Pencuci Tangan",
+      "type": "normal"
+    },
+    {
+      "cell": "P72",
+      "row": 72,
+      "col": "P",
+      "formula": "=O72",
+      "value": "Kain Lap  Bahan : Katun bermotif kotak-kotak",
+      "type": "normal"
+    },
+    {
+      "cell": "P73",
+      "row": 73,
+      "col": "P",
+      "formula": "=O73",
+      "value": "Serok Sampah--",
+      "type": "normal"
+    },
+    {
+      "cell": "P74",
+      "row": 74,
+      "col": "P",
+      "formula": "=O74",
+      "value": "Alat Pel lantai besar",
+      "type": "normal"
+    },
+    {
+      "cell": "P75",
+      "row": 75,
+      "col": "P",
+      "formula": "=O75",
+      "value": "Sapu",
+      "type": "normal"
+    },
+    {
+      "cell": "P76",
+      "row": 76,
+      "col": "P",
+      "formula": "=O76",
+      "value": "Perlengkapan Kebersihan Pembersih Lantai Super Pel Varian 800ml",
+      "type": "normal"
+    },
+    {
+      "cell": "P77",
+      "row": 77,
+      "col": "P",
+      "formula": "=O77",
+      "value": "Serok Air Besar--",
+      "type": "normal"
+    },
+    {
+      "cell": "P78",
+      "row": 78,
+      "col": "P",
+      "formula": "=O78",
+      "value": "Pengharum Ruangan",
+      "type": "normal"
+    },
+    {
+      "cell": "P79",
+      "row": 79,
+      "col": "P",
+      "formula": "=O79",
+      "value": "Perlengkapan Kebersihan Pembersih Pakaian Sunlight Refil 800ml",
+      "type": "normal"
+    },
+    {
+      "cell": "P80",
+      "row": 80,
+      "col": "P",
+      "formula": "=O80",
+      "value": "vixal 500ml",
+      "type": "normal"
+    },
+    {
+      "cell": "P81",
+      "row": 81,
+      "col": "P",
+      "formula": "=O81",
+      "value": "Spon Cuci",
+      "type": "normal"
+    },
+    {
+      "cell": "P82",
+      "row": 82,
+      "col": "P",
+      "formula": "=O82",
+      "value": "Tisu--",
+      "type": "normal"
+    },
+    {
+      "cell": "P83",
+      "row": 83,
+      "col": "P",
+      "formula": "=O83",
+      "value": "Cairan Pembersih Kaca",
+      "type": "normal"
+    },
+    {
+      "cell": "P84",
+      "row": 84,
+      "col": "P",
+      "formula": "=O84",
+      "value": "Tempat sampah",
+      "type": "normal"
+    },
+    {
+      "cell": "P85",
+      "row": 85,
+      "col": "P",
+      "formula": "=O85",
+      "value": "Alat Pel",
+      "type": "normal"
+    },
+    {
+      "cell": "P86",
+      "row": 86,
+      "col": "P",
+      "formula": "=O86",
+      "value": "Sikat Pembersih",
+      "type": "normal"
+    },
+    {
+      "cell": "P87",
+      "row": 87,
+      "col": "P",
+      "formula": "=O87",
+      "value": "Hand Sanitizer-Unit",
+      "type": "normal"
+    },
+    {
+      "cell": "P88",
+      "row": 88,
+      "col": "P",
+      "formula": "=O88",
+      "value": "Sapu Lidi",
+      "type": "normal"
+    },
+    {
+      "cell": "P89",
+      "row": 89,
+      "col": "P",
+      "formula": "=O89",
+      "value": "Sikat WC Type : Gagang Panjang",
+      "type": "normal"
+    },
+    {
+      "cell": "P90",
+      "row": 90,
+      "col": "P",
+      "formula": "=O90",
+      "value": "Obat Magh",
+      "type": "normal"
+    },
+    {
+      "cell": "P91",
+      "row": 91,
+      "col": "P",
+      "formula": "=O91",
+      "value": "Perban Kain Kasa",
+      "type": "normal"
+    },
+    {
+      "cell": "P92",
+      "row": 92,
+      "col": "P",
+      "formula": "=O92",
+      "value": "Obat Diare/sakit perut",
+      "type": "normal"
+    },
+    {
+      "cell": "P93",
+      "row": 93,
+      "col": "P",
+      "formula": "=O93",
+      "value": "Antiseptic Obat Luar",
+      "type": "normal"
+    },
+    {
+      "cell": "P94",
+      "row": 94,
+      "col": "P",
+      "formula": "=O94",
+      "value": "Kapas Pembalut 1000 gr",
+      "type": "normal"
+    },
+    {
+      "cell": "P105",
+      "row": 105,
+      "col": "P",
+      "formula": "=O105",
+      "value": "bola lampu hannock-45 watt",
+      "type": "normal"
+    },
+    {
+      "cell": "P106",
+      "row": 106,
+      "col": "P",
+      "formula": "=O106",
+      "value": "Spanduk Uk. 1 x 6 meter-",
+      "type": "normal"
+    },
+    {
+      "cell": "P109",
+      "row": 109,
+      "col": "P",
+      "formula": "=O109",
+      "value": "Sewa Gedung Pada Kegiatan Syukuran Hari Raya Natal dan Tahun Baru 2024",
+      "type": "normal"
+    },
+    {
+      "cell": "P110",
+      "row": 110,
+      "col": "P",
+      "formula": "=O110",
+      "value": "Biaya Rekening Listrik--",
+      "type": "normal"
+    },
+    {
+      "cell": "P111",
+      "row": 111,
+      "col": "P",
+      "formula": "=O111",
+      "value": "Biaya Langganan Internet--",
+      "type": "normal"
+    },
+    {
+      "cell": "P113",
+      "row": 113,
+      "col": "P",
+      "formula": "=O113",
+      "value": "Belanja Jasa Tenaga Operator Komputer--",
+      "type": "normal"
+    },
+    {
+      "cell": "P114",
+      "row": 114,
+      "col": "P",
+      "formula": "=O114",
+      "value": "Foto Copy Filio dan Kuarto",
+      "type": "normal"
+    },
+    {
+      "cell": "P115",
+      "row": 115,
+      "col": "P",
+      "formula": "=O115",
+      "value": "Selatieli Nehe",
+      "type": "normal"
+    },
+    {
+      "cell": "P116",
+      "row": 116,
+      "col": "P",
+      "formula": "=O116",
+      "value": "Arifin Metodi Bate'e",
+      "type": "normal"
+    },
+    {
+      "cell": "P117",
+      "row": 117,
+      "col": "P",
+      "formula": "=O117",
+      "value": "Ferdiwati Wau",
+      "type": "normal"
+    },
+    {
+      "cell": "P118",
+      "row": 118,
+      "col": "P",
+      "formula": "=O118",
+      "value": "Noni Alfanita Sarumaha, S.Pd",
+      "type": "normal"
+    },
+    {
+      "cell": "P119",
+      "row": 119,
+      "col": "P",
+      "formula": "=O119",
+      "value": "EMILA HAFO",
+      "type": "normal"
+    },
+    {
+      "cell": "P120",
+      "row": 120,
+      "col": "P",
+      "formula": "=O120",
+      "value": "Asep Nurhidayat",
+      "type": "normal"
+    },
+    {
+      "cell": "P121",
+      "row": 121,
+      "col": "P",
+      "formula": "=O121",
+      "value": "Estera Nehe",
+      "type": "normal"
+    },
+    {
+      "cell": "P122",
+      "row": 122,
+      "col": "P",
+      "formula": "=O122",
+      "value": "Hatieli Buulolo",
+      "type": "normal"
+    },
+    {
+      "cell": "P123",
+      "row": 123,
+      "col": "P",
+      "formula": "=O123",
+      "value": "David J. Sitinjak",
+      "type": "normal"
+    },
+    {
+      "cell": "P124",
+      "row": 124,
+      "col": "P",
+      "formula": "=O124",
+      "value": "Siona Ziraluo",
+      "type": "normal"
+    },
+    {
+      "cell": "P125",
+      "row": 125,
+      "col": "P",
+      "formula": "=O125",
+      "value": "Merdina Ziraluo",
+      "type": "normal"
+    },
+    {
+      "cell": "P126",
+      "row": 126,
+      "col": "P",
+      "formula": "=O126",
+      "value": "Fransiskus Lombu",
+      "type": "normal"
+    },
+    {
+      "cell": "P130",
+      "row": 130,
+      "col": "P",
+      "formula": "=O130",
+      "value": "Laptop",
+      "type": "normal"
+    },
+    {
+      "cell": "P131",
+      "row": 131,
+      "col": "P",
+      "formula": "=O131",
+      "value": "Proyektor",
+      "type": "normal"
+    },
+    {
+      "cell": "P132",
+      "row": 132,
+      "col": "P",
+      "formula": "=O132",
+      "value": "Binder Klip  nomor 111",
+      "type": "normal"
+    },
+    {
+      "cell": "P133",
+      "row": 133,
+      "col": "P",
+      "formula": "=O133",
+      "value": "Ballpoint Drawing Pen 0,1 Snowman",
+      "type": "normal"
+    },
+    {
+      "cell": "P134",
+      "row": 134,
+      "col": "P",
+      "formula": "=O134",
+      "value": "Stofmap Transparan tali",
+      "type": "normal"
+    },
+    {
+      "cell": "P135",
+      "row": 135,
+      "col": "P",
+      "formula": "=O135",
+      "value": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+      "type": "normal"
+    },
+    {
+      "cell": "P136",
+      "row": 136,
+      "col": "P",
+      "formula": "=O136",
+      "value": "Stapler HD-10--",
+      "type": "normal"
+    },
+    {
+      "cell": "P137",
+      "row": 137,
+      "col": "P",
+      "formula": "=O137",
+      "value": "Kertas Lain-Lain Kertas Buffalo",
+      "type": "normal"
+    },
+    {
+      "cell": "P138",
+      "row": 138,
+      "col": "P",
+      "formula": "=O138",
+      "value": "Baterey Kecil",
+      "type": "normal"
+    },
+    {
+      "cell": "P139",
+      "row": 139,
+      "col": "P",
+      "formula": "=O139",
+      "value": "Tinta Printer Canon 741 Warna-741 Warna",
+      "type": "normal"
+    },
+    {
+      "cell": "P141",
+      "row": 141,
+      "col": "P",
+      "formula": "=O141",
+      "value": "Plastik Mika",
+      "type": "normal"
+    },
+    {
+      "cell": "P142",
+      "row": 142,
+      "col": "P",
+      "formula": "=O142",
+      "value": "Binder Klip  nomor 107",
+      "type": "normal"
+    },
+    {
+      "cell": "P143",
+      "row": 143,
+      "col": "P",
+      "formula": "=O143",
+      "value": "Amplop Coklat Merk : Garda Ukuran Cabinet",
+      "type": "normal"
+    },
+    {
+      "cell": "P144",
+      "row": 144,
+      "col": "P",
+      "formula": "=O144",
+      "value": "Kertas Label",
+      "type": "normal"
+    },
+    {
+      "cell": "P145",
+      "row": 145,
+      "col": "P",
+      "formula": "=O145",
+      "value": "Spidol Refil Spidol White Board Snowman",
+      "type": "normal"
+    },
+    {
+      "cell": "P146",
+      "row": 146,
+      "col": "P",
+      "formula": "=O146",
+      "value": "Binder Klip Merk : KENKO nomor 105",
+      "type": "normal"
+    },
+    {
+      "cell": "P147",
+      "row": 147,
+      "col": "P",
+      "formula": "=O147",
+      "value": "Ballpoint Pilot G2",
+      "type": "normal"
+    },
+    {
+      "cell": "P148",
+      "row": 148,
+      "col": "P",
+      "formula": "=O148",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Blue",
+      "type": "normal"
+    },
+    {
+      "cell": "P149",
+      "row": 149,
+      "col": "P",
+      "formula": "=O149",
+      "value": "Map Binder",
+      "type": "normal"
+    },
+    {
+      "cell": "P150",
+      "row": 150,
+      "col": "P",
+      "formula": "=O150",
+      "value": "Stapler Stapler No, 50 MAX",
+      "type": "normal"
+    },
+    {
+      "cell": "P151",
+      "row": 151,
+      "col": "P",
+      "formula": "=O151",
+      "value": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris",
+      "type": "normal"
+    },
+    {
+      "cell": "P152",
+      "row": 152,
+      "col": "P",
+      "formula": "=O152",
+      "value": "Lakban Hitam--",
+      "type": "normal"
+    },
+    {
+      "cell": "P153",
+      "row": 153,
+      "col": "P",
+      "formula": "=O153",
+      "value": "Paper Clip No 1  Paper Clip No 3",
+      "type": "normal"
+    },
+    {
+      "cell": "P154",
+      "row": 154,
+      "col": "P",
+      "formula": "=O154",
+      "value": "Lakban Hitam uk 2 \" Warna hitam uk. 2 \"",
+      "type": "normal"
+    },
+    {
+      "cell": "P155",
+      "row": 155,
+      "col": "P",
+      "formula": "=O155",
+      "value": "Kertas StensiI",
+      "type": "normal"
+    },
+    {
+      "cell": "P156",
+      "row": 156,
+      "col": "P",
+      "formula": "=O156",
+      "value": "Spidol White board",
+      "type": "normal"
+    },
+    {
+      "cell": "P157",
+      "row": 157,
+      "col": "P",
+      "formula": "=O157",
+      "value": "Pisau Cutter Kenko L-500",
+      "type": "normal"
+    },
+    {
+      "cell": "P158",
+      "row": 158,
+      "col": "P",
+      "formula": "=O158",
+      "value": "Binder Klip  nomor 260",
+      "type": "normal"
+    },
+    {
+      "cell": "P159",
+      "row": 159,
+      "col": "P",
+      "formula": "=O159",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Yellow",
+      "type": "normal"
+    },
+    {
+      "cell": "P160",
+      "row": 160,
+      "col": "P",
+      "formula": "=O160",
+      "value": "PAPER CLIP  Paper Clip No 1",
+      "type": "normal"
+    },
+    {
+      "cell": "P161",
+      "row": 161,
+      "col": "P",
+      "formula": "=O161",
+      "value": "Kertas HVS 80 gram Merk : Paper One A4, Ukuran : 8,27\" x 11,69\", Isi : 500 lembar",
+      "type": "normal"
+    },
+    {
+      "cell": "P162",
+      "row": 162,
+      "col": "P",
+      "formula": "=O162",
+      "value": "Stofmap Transparan",
+      "type": "normal"
+    },
+    {
+      "cell": "P163",
+      "row": 163,
+      "col": "P",
+      "formula": "=O163",
+      "value": "Amplop Panjang Putih Polos Merk : Jaya Ukuran : 11 x 23 cm",
+      "type": "normal"
+    },
+    {
+      "cell": "P164",
+      "row": 164,
+      "col": "P",
+      "formula": "=O164",
+      "value": "Kertas Post-It Warna Warni  Sign Here",
+      "type": "normal"
+    },
+    {
+      "cell": "P166",
+      "row": 166,
+      "col": "P",
+      "formula": "=O166",
+      "value": "Binder Klip  nomor 200",
+      "type": "normal"
+    },
+    {
+      "cell": "P167",
+      "row": 167,
+      "col": "P",
+      "formula": "=O167",
+      "value": "C. Tinta Printer EPSON Toner Epson 664 Black",
+      "type": "normal"
+    },
+    {
+      "cell": "P168",
+      "row": 168,
+      "col": "P",
+      "formula": "=O168",
+      "value": "Kertas Warna Blank Folio, Ukuran : 8,5 x 14\",  70 gram",
+      "type": "normal"
+    },
+    {
+      "cell": "P169",
+      "row": 169,
+      "col": "P",
+      "formula": "=O169",
+      "value": "Sampul Plastik",
+      "type": "normal"
+    },
+    {
+      "cell": "P170",
+      "row": 170,
+      "col": "P",
+      "formula": "=O170",
+      "value": "Box File Merk : Bantex Ukuran : 115x270x325 mm",
+      "type": "normal"
+    },
+    {
+      "cell": "P171",
+      "row": 171,
+      "col": "P",
+      "formula": "=O171",
+      "value": "Lakban warna Uk 2\" Warna Coklat Cofiie",
+      "type": "normal"
+    },
+    {
+      "cell": "P172",
+      "row": 172,
+      "col": "P",
+      "formula": "=O172",
+      "value": "gunting kertas-ukuran : panjang 21cm x lebar 8cm, stainless steel",
+      "type": "normal"
+    },
+    {
+      "cell": "P173",
+      "row": 173,
+      "col": "P",
+      "formula": "=O173",
+      "value": "Ballpoint Standard AE7",
+      "type": "normal"
+    },
+    {
+      "cell": "P174",
+      "row": 174,
+      "col": "P",
+      "formula": "=O174",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Read",
+      "type": "normal"
+    },
+    {
+      "cell": "P175",
+      "row": 175,
+      "col": "P",
+      "formula": "=O175",
+      "value": "Stofmap Kertas",
+      "type": "normal"
+    },
+    {
+      "cell": "P176",
+      "row": 176,
+      "col": "P",
+      "formula": "=O176",
+      "value": "lakban hitam-ukuran : lebar 2 inch, panjang 12m, bahan : kain",
+      "type": "normal"
+    },
+    {
+      "cell": "P177",
+      "row": 177,
+      "col": "P",
+      "formula": "=O177",
+      "value": "Lakban Besar",
+      "type": "normal"
+    },
+    {
+      "cell": "P178",
+      "row": 178,
+      "col": "P",
+      "formula": "=O178",
+      "value": "Tinta Printer Canon 740 Hitam-740 Hitam",
+      "type": "normal"
+    },
+    {
+      "cell": "P179",
+      "row": 179,
+      "col": "P",
+      "formula": "=O179",
+      "value": "Kertas HVS 60 gram Merk : Paper One HVS F4 uk. 8.27\"x11.69\"",
+      "type": "normal"
+    },
+    {
+      "cell": "P180",
+      "row": 180,
+      "col": "P",
+      "formula": "=O180",
+      "value": "Binder Klip Ordner",
+      "type": "normal"
+    },
+    {
+      "cell": "P181",
+      "row": 181,
+      "col": "P",
+      "formula": "=O181",
+      "value": "Handsoap/Pencuci Tangan",
+      "type": "normal"
+    },
+    {
+      "cell": "P182",
+      "row": 182,
+      "col": "P",
+      "formula": "=O182",
+      "value": "Perlengkapan Kebersihan Pembersih Lantai Super Pel Varian 800ml",
+      "type": "normal"
+    },
+    {
+      "cell": "P183",
+      "row": 183,
+      "col": "P",
+      "formula": "=O183",
+      "value": "Pengharum Ruangan",
+      "type": "normal"
+    },
+    {
+      "cell": "P184",
+      "row": 184,
+      "col": "P",
+      "formula": "=O184",
+      "value": "Perlengkapan Kebersihan Pembersih Pakaian Sunlight Refil 800ml",
+      "type": "normal"
+    },
+    {
+      "cell": "P185",
+      "row": 185,
+      "col": "P",
+      "formula": "=O185",
+      "value": "vixal 500ml",
+      "type": "normal"
+    },
+    {
+      "cell": "P186",
+      "row": 186,
+      "col": "P",
+      "formula": "=O186",
+      "value": "Spon Cuci",
+      "type": "normal"
+    },
+    {
+      "cell": "P187",
+      "row": 187,
+      "col": "P",
+      "formula": "=O187",
+      "value": "Tisu--",
+      "type": "normal"
+    },
+    {
+      "cell": "P188",
+      "row": 188,
+      "col": "P",
+      "formula": "=O188",
+      "value": "Cairan Pembersih Kaca",
+      "type": "normal"
+    },
+    {
+      "cell": "P189",
+      "row": 189,
+      "col": "P",
+      "formula": "=O189",
+      "value": "Hand Sanitizer-Unit",
+      "type": "normal"
+    },
+    {
+      "cell": "P190",
+      "row": 190,
+      "col": "P",
+      "formula": "=O190",
+      "value": "Passive Speaker",
+      "type": "normal"
+    },
+    {
+      "cell": "P191",
+      "row": 191,
+      "col": "P",
+      "formula": "=O191",
+      "value": "microphone wireless-mic sennheiser skm 5300 wireless microphone ( gold edition )",
+      "type": "normal"
+    },
+    {
+      "cell": "P192",
+      "row": 192,
+      "col": "P",
+      "formula": "=O192",
+      "value": "Dispencer",
+      "type": "normal"
+    },
+    {
+      "cell": "P193",
+      "row": 193,
+      "col": "P",
+      "formula": "=O193",
+      "value": "Pengadaan Gagang Pintu Satu Set",
+      "type": "normal"
+    },
+    {
+      "cell": "P196",
+      "row": 196,
+      "col": "P",
+      "formula": "=O196",
+      "value": "Spanduk Uk. 1 x 6 meter-",
+      "type": "normal"
+    },
+    {
+      "cell": "P199",
+      "row": 199,
+      "col": "P",
+      "formula": "=O199",
+      "value": "Biaya Rekening Listrik--",
+      "type": "normal"
+    },
+    {
+      "cell": "P200",
+      "row": 200,
+      "col": "P",
+      "formula": "=O200",
+      "value": "Biaya Langganan Internet--",
+      "type": "normal"
+    },
+    {
+      "cell": "P201",
+      "row": 201,
+      "col": "P",
+      "formula": "=O201",
+      "value": "Foto Copy Filio dan Kuarto",
+      "type": "normal"
+    },
+    {
+      "cell": "P203",
+      "row": 203,
+      "col": "P",
+      "formula": "=O203",
+      "value": "Belanja Jasa Tenaga Operator Komputer--",
+      "type": "normal"
+    },
+    {
+      "cell": "P204",
+      "row": 204,
+      "col": "P",
+      "formula": "=O204",
+      "value": "Selatieli Nehe",
+      "type": "normal"
+    },
+    {
+      "cell": "P205",
+      "row": 205,
+      "col": "P",
+      "formula": "=O205",
+      "value": "Arifin Metodi Bate'e",
+      "type": "normal"
+    },
+    {
+      "cell": "P206",
+      "row": 206,
+      "col": "P",
+      "formula": "=O206",
+      "value": "Ferdiwati Wau",
+      "type": "normal"
+    },
+    {
+      "cell": "P207",
+      "row": 207,
+      "col": "P",
+      "formula": "=O207",
+      "value": "Noni Alfanita Sarumaha, S.Pd",
+      "type": "normal"
+    },
+    {
+      "cell": "P208",
+      "row": 208,
+      "col": "P",
+      "formula": "=O208",
+      "value": "EMILA HAFO",
+      "type": "normal"
+    },
+    {
+      "cell": "P209",
+      "row": 209,
+      "col": "P",
+      "formula": "=O209",
+      "value": "Asep Nurhidayat",
+      "type": "normal"
+    },
+    {
+      "cell": "P210",
+      "row": 210,
+      "col": "P",
+      "formula": "=O210",
+      "value": "Estera Nehe",
+      "type": "normal"
+    },
+    {
+      "cell": "P211",
+      "row": 211,
+      "col": "P",
+      "formula": "=O211",
+      "value": "Hatieli Buulolo",
+      "type": "normal"
+    },
+    {
+      "cell": "P212",
+      "row": 212,
+      "col": "P",
+      "formula": "=O212",
+      "value": "David J. Sitinjak",
+      "type": "normal"
+    },
+    {
+      "cell": "P213",
+      "row": 213,
+      "col": "P",
+      "formula": "=O213",
+      "value": "Siona Ziraluo",
+      "type": "normal"
+    },
+    {
+      "cell": "P214",
+      "row": 214,
+      "col": "P",
+      "formula": "=O214",
+      "value": "Merdina Ziraluo",
+      "type": "normal"
+    },
+    {
+      "cell": "P215",
+      "row": 215,
+      "col": "P",
+      "formula": "=O215",
+      "value": "Fransiskus Lombu",
+      "type": "normal"
+    },
+    {
+      "cell": "P216",
+      "row": 216,
+      "col": "P",
+      "formula": "=O216",
+      "value": "Upah Tukang Perbaikan Pintu dan Jendela Kelas",
+      "type": "normal"
+    },
+    {
+      "cell": "P218",
+      "row": 218,
+      "col": "P",
+      "formula": "=O218",
+      "value": "Materai 10.000",
+      "type": "normal"
+    },
+    {
+      "cell": "P219",
+      "row": 219,
+      "col": "P",
+      "formula": "=O219",
+      "value": "Foto Copy Filio dan Kuarto",
+      "type": "normal"
+    },
+    {
+      "cell": "P220",
+      "row": 220,
+      "col": "P",
+      "formula": "=O220",
+      "value": "Handsoap/Pencuci Tangan",
+      "type": "normal"
+    },
+    {
+      "cell": "P221",
+      "row": 221,
+      "col": "P",
+      "formula": "=O221",
+      "value": "Perlengkapan Kebersihan Pembersih Lantai Super Pel Varian 800ml",
+      "type": "normal"
+    },
+    {
+      "cell": "P222",
+      "row": 222,
+      "col": "P",
+      "formula": "=O222",
+      "value": "Pengharum Ruangan",
+      "type": "normal"
+    },
+    {
+      "cell": "P223",
+      "row": 223,
+      "col": "P",
+      "formula": "=O223",
+      "value": "Perlengkapan Kebersihan Pembersih Pakaian Sunlight Refil 800ml",
+      "type": "normal"
+    },
+    {
+      "cell": "P224",
+      "row": 224,
+      "col": "P",
+      "formula": "=O224",
+      "value": "vixal 500ml",
+      "type": "normal"
+    },
+    {
+      "cell": "P225",
+      "row": 225,
+      "col": "P",
+      "formula": "=O225",
+      "value": "Spon Cuci",
+      "type": "normal"
+    },
+    {
+      "cell": "P226",
+      "row": 226,
+      "col": "P",
+      "formula": "=O226",
+      "value": "Tisu--",
+      "type": "normal"
+    },
+    {
+      "cell": "P227",
+      "row": 227,
+      "col": "P",
+      "formula": "=O227",
+      "value": "Cairan Pembersih Kaca",
+      "type": "normal"
+    },
+    {
+      "cell": "P228",
+      "row": 228,
+      "col": "P",
+      "formula": "=O228",
+      "value": "Hand Sanitizer-Unit",
+      "type": "normal"
+    },
+    {
+      "cell": "P231",
+      "row": 231,
+      "col": "P",
+      "formula": "=O231",
+      "value": "Binder Klip  nomor 111",
+      "type": "normal"
+    },
+    {
+      "cell": "P232",
+      "row": 232,
+      "col": "P",
+      "formula": "=O232",
+      "value": "Ballpoint Drawing Pen 0,1 Snowman",
+      "type": "normal"
+    },
+    {
+      "cell": "P233",
+      "row": 233,
+      "col": "P",
+      "formula": "=O233",
+      "value": "Stofmap Transparan tali",
+      "type": "normal"
+    },
+    {
+      "cell": "P234",
+      "row": 234,
+      "col": "P",
+      "formula": "=O234",
+      "value": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+      "type": "normal"
+    },
+    {
+      "cell": "P235",
+      "row": 235,
+      "col": "P",
+      "formula": "=O235",
+      "value": "Stapler HD-10--",
+      "type": "normal"
+    },
+    {
+      "cell": "P236",
+      "row": 236,
+      "col": "P",
+      "formula": "=O236",
+      "value": "Kertas Lain-Lain Kertas Buffalo",
+      "type": "normal"
+    },
+    {
+      "cell": "P237",
+      "row": 237,
+      "col": "P",
+      "formula": "=O237",
+      "value": "Baterey Kecil",
+      "type": "normal"
+    },
+    {
+      "cell": "P238",
+      "row": 238,
+      "col": "P",
+      "formula": "=O238",
+      "value": "Tinta Printer Canon 741 Warna-741 Warna",
+      "type": "normal"
+    },
+    {
+      "cell": "P240",
+      "row": 240,
+      "col": "P",
+      "formula": "=O240",
+      "value": "Plastik Mika",
+      "type": "normal"
+    },
+    {
+      "cell": "P241",
+      "row": 241,
+      "col": "P",
+      "formula": "=O241",
+      "value": "Binder Klip  nomor 107",
+      "type": "normal"
+    },
+    {
+      "cell": "P242",
+      "row": 242,
+      "col": "P",
+      "formula": "=O242",
+      "value": "Amplop Coklat Merk : Garda Ukuran Cabinet",
+      "type": "normal"
+    },
+    {
+      "cell": "P243",
+      "row": 243,
+      "col": "P",
+      "formula": "=O243",
+      "value": "Kertas Label",
+      "type": "normal"
+    },
+    {
+      "cell": "P244",
+      "row": 244,
+      "col": "P",
+      "formula": "=O244",
+      "value": "Spidol Refil Spidol White Board Snowman",
+      "type": "normal"
+    },
+    {
+      "cell": "P245",
+      "row": 245,
+      "col": "P",
+      "formula": "=O245",
+      "value": "Binder Klip Merk : KENKO nomor 105",
+      "type": "normal"
+    },
+    {
+      "cell": "P246",
+      "row": 246,
+      "col": "P",
+      "formula": "=O246",
+      "value": "Ballpoint Pilot G2",
+      "type": "normal"
+    },
+    {
+      "cell": "P247",
+      "row": 247,
+      "col": "P",
+      "formula": "=O247",
+      "value": "Ballpoint Boldiner Standar",
+      "type": "normal"
+    },
+    {
+      "cell": "P248",
+      "row": 248,
+      "col": "P",
+      "formula": "=O248",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Blue",
+      "type": "normal"
+    },
+    {
+      "cell": "P249",
+      "row": 249,
+      "col": "P",
+      "formula": "=O249",
+      "value": "Map Binder",
+      "type": "normal"
+    },
+    {
+      "cell": "P250",
+      "row": 250,
+      "col": "P",
+      "formula": "=O250",
+      "value": "Stapler Stapler No, 50 MAX",
+      "type": "normal"
+    },
+    {
+      "cell": "P251",
+      "row": 251,
+      "col": "P",
+      "formula": "=O251",
+      "value": "Amplop Coklat Merk : GSU Ukuran : 1/2 folio, bergaris",
+      "type": "normal"
+    },
+    {
+      "cell": "P252",
+      "row": 252,
+      "col": "P",
+      "formula": "=O252",
+      "value": "Lakban Hitam--",
+      "type": "normal"
+    },
+    {
+      "cell": "P253",
+      "row": 253,
+      "col": "P",
+      "formula": "=O253",
+      "value": "Paper Clip No 1  Paper Clip No 3",
+      "type": "normal"
+    },
+    {
+      "cell": "P254",
+      "row": 254,
+      "col": "P",
+      "formula": "=O254",
+      "value": "Lakban Hitam uk 2 \" Warna hitam uk. 2 \"",
+      "type": "normal"
+    },
+    {
+      "cell": "P255",
+      "row": 255,
+      "col": "P",
+      "formula": "=O255",
+      "value": "Kertas StensiI",
+      "type": "normal"
+    },
+    {
+      "cell": "P256",
+      "row": 256,
+      "col": "P",
+      "formula": "=O256",
+      "value": "Spidol White board",
+      "type": "normal"
+    },
+    {
+      "cell": "P257",
+      "row": 257,
+      "col": "P",
+      "formula": "=O257",
+      "value": "Pisau Cutter Kenko L-500",
+      "type": "normal"
+    },
+    {
+      "cell": "P258",
+      "row": 258,
+      "col": "P",
+      "formula": "=O258",
+      "value": "Binder Klip  nomor 260",
+      "type": "normal"
+    },
+    {
+      "cell": "P259",
+      "row": 259,
+      "col": "P",
+      "formula": "=O259",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Yellow",
+      "type": "normal"
+    },
+    {
+      "cell": "P260",
+      "row": 260,
+      "col": "P",
+      "formula": "=O260",
+      "value": "PAPER CLIP  Paper Clip No 1",
+      "type": "normal"
+    },
+    {
+      "cell": "P261",
+      "row": 261,
+      "col": "P",
+      "formula": "=O261",
+      "value": "Tinta Stempel",
+      "type": "normal"
+    },
+    {
+      "cell": "P262",
+      "row": 262,
+      "col": "P",
+      "formula": "=O262",
+      "value": "Kertas HVS 80 gram Merk : Paper One A4, Ukuran : 8,27\" x 11,69\", Isi : 500 lembar",
+      "type": "normal"
+    },
+    {
+      "cell": "P263",
+      "row": 263,
+      "col": "P",
+      "formula": "=O263",
+      "value": "Stofmap Transparan",
+      "type": "normal"
+    },
+    {
+      "cell": "P264",
+      "row": 264,
+      "col": "P",
+      "formula": "=O264",
+      "value": "Amplop Panjang Putih Polos Merk : Jaya Ukuran : 11 x 23 cm",
+      "type": "normal"
+    },
+    {
+      "cell": "P265",
+      "row": 265,
+      "col": "P",
+      "formula": "=O265",
+      "value": "Kertas Post-It Warna Warni  Sign Here",
+      "type": "normal"
+    },
+    {
+      "cell": "P267",
+      "row": 267,
+      "col": "P",
+      "formula": "=O267",
+      "value": "Binder Klip  nomor 200",
+      "type": "normal"
+    },
+    {
+      "cell": "P268",
+      "row": 268,
+      "col": "P",
+      "formula": "=O268",
+      "value": "Baterey Tanggung",
+      "type": "normal"
+    },
+    {
+      "cell": "P269",
+      "row": 269,
+      "col": "P",
+      "formula": "=O269",
+      "value": "C. Tinta Printer EPSON Toner Epson 664 Black",
+      "type": "normal"
+    },
+    {
+      "cell": "P270",
+      "row": 270,
+      "col": "P",
+      "formula": "=O270",
+      "value": "Isi Staples Sedang",
+      "type": "normal"
+    },
+    {
+      "cell": "P271",
+      "row": 271,
+      "col": "P",
+      "formula": "=O271",
+      "value": "Kertas Warna Blank Folio, Ukuran : 8,5 x 14\",  70 gram",
+      "type": "normal"
+    },
+    {
+      "cell": "P272",
+      "row": 272,
+      "col": "P",
+      "formula": "=O272",
+      "value": "Sampul Plastik",
+      "type": "normal"
+    },
+    {
+      "cell": "P273",
+      "row": 273,
+      "col": "P",
+      "formula": "=O273",
+      "value": "Box File Merk : Bantex Ukuran : 115x270x325 mm",
+      "type": "normal"
+    },
+    {
+      "cell": "P274",
+      "row": 274,
+      "col": "P",
+      "formula": "=O274",
+      "value": "Catridge Printer Epson T 014--",
+      "type": "normal"
+    },
+    {
+      "cell": "P275",
+      "row": 275,
+      "col": "P",
+      "formula": "=O275",
+      "value": "USB FLASH DISK USB/Flash Disk 4GB",
+      "type": "normal"
+    },
+    {
+      "cell": "P276",
+      "row": 276,
+      "col": "P",
+      "formula": "=O276",
+      "value": "Lakban warna Uk 2\" Warna Coklat Cofiie",
+      "type": "normal"
+    },
+    {
+      "cell": "P277",
+      "row": 277,
+      "col": "P",
+      "formula": "=O277",
+      "value": "gunting kertas-ukuran : panjang 21cm x lebar 8cm, stainless steel",
+      "type": "normal"
+    },
+    {
+      "cell": "P278",
+      "row": 278,
+      "col": "P",
+      "formula": "=O278",
+      "value": "Ballpoint Standard AE7",
+      "type": "normal"
+    },
+    {
+      "cell": "P279",
+      "row": 279,
+      "col": "P",
+      "formula": "=O279",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Read",
+      "type": "normal"
+    },
+    {
+      "cell": "P280",
+      "row": 280,
+      "col": "P",
+      "formula": "=O280",
+      "value": "Stofmap Kertas",
+      "type": "normal"
+    },
+    {
+      "cell": "P281",
+      "row": 281,
+      "col": "P",
+      "formula": "=O281",
+      "value": "lakban hitam-ukuran : lebar 2 inch, panjang 12m, bahan : kain",
+      "type": "normal"
+    },
+    {
+      "cell": "P282",
+      "row": 282,
+      "col": "P",
+      "formula": "=O282",
+      "value": "Lakban Besar",
+      "type": "normal"
+    },
+    {
+      "cell": "P283",
+      "row": 283,
+      "col": "P",
+      "formula": "=O283",
+      "value": "Tinta Printer Canon 740 Hitam-740 Hitam",
+      "type": "normal"
+    },
+    {
+      "cell": "P284",
+      "row": 284,
+      "col": "P",
+      "formula": "=O284",
+      "value": "Kertas HVS 60 gram Merk : Paper One HVS F4 uk. 8.27\"x11.69\"",
+      "type": "normal"
+    },
+    {
+      "cell": "P285",
+      "row": 285,
+      "col": "P",
+      "formula": "=O285",
+      "value": "Binder Klip Ordner",
+      "type": "normal"
+    },
+    {
+      "cell": "P286",
+      "row": 286,
+      "col": "P",
+      "formula": "=O286",
+      "value": "Isi Staples besar",
+      "type": "normal"
+    },
+    {
+      "cell": "P287",
+      "row": 287,
+      "col": "P",
+      "formula": "=O287",
+      "value": "Lemari Besi/ Metal/ Lemari Arsip 4 Laci-",
+      "type": "normal"
+    },
+    {
+      "cell": "P288",
+      "row": 288,
+      "col": "P",
+      "formula": "=O288",
+      "value": "Printer Epson 2 Unit",
+      "type": "normal"
+    },
+    {
+      "cell": "P289",
+      "row": 289,
+      "col": "P",
+      "formula": "=O289",
+      "value": "Pantograf",
+      "type": "normal"
+    },
+    {
+      "cell": "P290",
+      "row": 290,
+      "col": "P",
+      "formula": "=O290",
+      "value": "Pasir",
+      "type": "normal"
+    },
+    {
+      "cell": "P291",
+      "row": 291,
+      "col": "P",
+      "formula": "=O291",
+      "value": "Batu Kerikil",
+      "type": "normal"
+    },
+    {
+      "cell": "P292",
+      "row": 292,
+      "col": "P",
+      "formula": "=O292",
+      "value": "Semen",
+      "type": "normal"
+    },
+    {
+      "cell": "P293",
+      "row": 293,
+      "col": "P",
+      "formula": "=O293",
+      "value": "Biaya Rekening Listrik--",
+      "type": "normal"
+    },
+    {
+      "cell": "P294",
+      "row": 294,
+      "col": "P",
+      "formula": "=O294",
+      "value": "Biaya Langganan Internet--",
+      "type": "normal"
+    },
+    {
+      "cell": "P295",
+      "row": 295,
+      "col": "P",
+      "formula": "=O295",
+      "value": "kursi--",
+      "type": "normal"
+    },
+    {
+      "cell": "P296",
+      "row": 296,
+      "col": "P",
+      "formula": "=O296",
+      "value": "Selatieli Nehe",
+      "type": "normal"
+    },
+    {
+      "cell": "P297",
+      "row": 297,
+      "col": "P",
+      "formula": "=O297",
+      "value": "Arifin Metodi Bate'e",
+      "type": "normal"
+    },
+    {
+      "cell": "P298",
+      "row": 298,
+      "col": "P",
+      "formula": "=O298",
+      "value": "Ferdiwati Wau",
+      "type": "normal"
+    },
+    {
+      "cell": "P299",
+      "row": 299,
+      "col": "P",
+      "formula": "=O299",
+      "value": "Noni Alfanita Sarumaha, S.Pd",
+      "type": "normal"
+    },
+    {
+      "cell": "P300",
+      "row": 300,
+      "col": "P",
+      "formula": "=O300",
+      "value": "EMILA HAFO",
+      "type": "normal"
+    },
+    {
+      "cell": "P301",
+      "row": 301,
+      "col": "P",
+      "formula": "=O301",
+      "value": "Asep Nurhidayat",
+      "type": "normal"
+    },
+    {
+      "cell": "P302",
+      "row": 302,
+      "col": "P",
+      "formula": "=O302",
+      "value": "Estera Nehe",
+      "type": "normal"
+    },
+    {
+      "cell": "P303",
+      "row": 303,
+      "col": "P",
+      "formula": "=O303",
+      "value": "Hatieli Buulolo",
+      "type": "normal"
+    },
+    {
+      "cell": "P304",
+      "row": 304,
+      "col": "P",
+      "formula": "=O304",
+      "value": "David J. Sitinjak",
+      "type": "normal"
+    },
+    {
+      "cell": "P305",
+      "row": 305,
+      "col": "P",
+      "formula": "=O305",
+      "value": "Siona Ziraluo",
+      "type": "normal"
+    },
+    {
+      "cell": "P306",
+      "row": 306,
+      "col": "P",
+      "formula": "=O306",
+      "value": "Merdina Ziraluo",
+      "type": "normal"
+    },
+    {
+      "cell": "P307",
+      "row": 307,
+      "col": "P",
+      "formula": "=O307",
+      "value": "Fransiskus Lombu",
+      "type": "normal"
+    },
+    {
+      "cell": "P308",
+      "row": 308,
+      "col": "P",
+      "formula": "=O308",
+      "value": "Spanduk Uk. 1 x 6 meter-",
+      "type": "normal"
+    },
+    {
+      "cell": "P310",
+      "row": 310,
+      "col": "P",
+      "formula": "=O310",
+      "value": "Belanja Jasa Tenaga Operator Komputer--",
+      "type": "normal"
+    },
+    {
+      "cell": "P313",
+      "row": 313,
+      "col": "P",
+      "formula": "=O313",
+      "value": "Biaya Transportasi darat Lomba FLSSN Tingkat Propinsi 2023",
+      "type": "normal"
+    },
+    {
+      "cell": "P314",
+      "row": 314,
+      "col": "P",
+      "formula": "=O314",
+      "value": "Biaya Transportasi Udara Lomba FLSSN Tingkat Propinsi 2023",
+      "type": "normal"
+    },
+    {
+      "cell": "P315",
+      "row": 315,
+      "col": "P",
+      "formula": "=O315",
+      "value": "Biaya Penginapan Peserta Lomba FLSSN Tingkat Propinsi 2023 Selama 4 Hari",
+      "type": "normal"
+    },
+    {
+      "cell": "P316",
+      "row": 316,
+      "col": "P",
+      "formula": "=O316",
+      "value": "Honor Pembimbing Lomba FLSSN Tingkat Propinsi 2023 Selama 4 Hari",
+      "type": "normal"
+    },
+    {
+      "cell": "P317",
+      "row": 317,
+      "col": "P",
+      "formula": "=O317",
+      "value": "Uang Saku Siswa Peserta Lomba FLSSN Tingkat Propinsi 2023 Selama 4 Hari",
+      "type": "normal"
+    },
+    {
+      "cell": "P318",
+      "row": 318,
+      "col": "P",
+      "formula": "=O318",
+      "value": "Biaya Lomba OSN 2024",
+      "type": "normal"
+    },
+    {
+      "cell": "P320",
+      "row": 320,
+      "col": "P",
+      "formula": "=O320",
+      "value": "Binder Klip  nomor 111",
+      "type": "normal"
+    },
+    {
+      "cell": "P321",
+      "row": 321,
+      "col": "P",
+      "formula": "=O321",
+      "value": "Ballpoint Drawing Pen 0,1 Snowman",
+      "type": "normal"
+    },
+    {
+      "cell": "P322",
+      "row": 322,
+      "col": "P",
+      "formula": "=O322",
+      "value": "Stofmap Transparan tali",
+      "type": "normal"
+    },
+    {
+      "cell": "P323",
+      "row": 323,
+      "col": "P",
+      "formula": "=O323",
+      "value": "Amplop Coklat Merk : GSU Ukuran Folio polos",
+      "type": "normal"
+    },
+    {
+      "cell": "P324",
+      "row": 324,
+      "col": "P",
+      "formula": "=O324",
+      "value": "Stapler HD-10--",
+      "type": "normal"
+    },
+    {
+      "cell": "P325",
+      "row": 325,
+      "col": "P",
+      "formula": "=O325",
+      "value": "Kertas Lain-Lain Kertas Buffalo",
+      "type": "normal"
+    },
+    {
+      "cell": "P326",
+      "row": 326,
+      "col": "P",
+      "formula": "=O326",
+      "value": "Baterey Kecil",
+      "type": "normal"
+    },
+    {
+      "cell": "P327",
+      "row": 327,
+      "col": "P",
+      "formula": "=O327",
+      "value": "Tinta Printer Canon 741 Warna-741 Warna",
+      "type": "normal"
+    },
+    {
+      "cell": "P329",
+      "row": 329,
+      "col": "P",
+      "formula": "=O329",
+      "value": "Plastik Mika",
+      "type": "normal"
+    },
+    {
+      "cell": "P330",
+      "row": 330,
+      "col": "P",
+      "formula": "=O330",
+      "value": "Binder Klip  nomor 107",
+      "type": "normal"
+    },
+    {
+      "cell": "P331",
+      "row": 331,
+      "col": "P",
+      "formula": "=O331",
+      "value": "Amplop Coklat Merk : Garda Ukuran Cabinet",
+      "type": "normal"
+    },
+    {
+      "cell": "P332",
+      "row": 332,
+      "col": "P",
+      "formula": "=O332",
+      "value": "Kertas Label",
+      "type": "normal"
+    },
+    {
+      "cell": "P333",
+      "row": 333,
+      "col": "P",
+      "formula": "=O333",
+      "value": "Spidol Refil Spidol White Board Snowman",
+      "type": "normal"
+    },
+    {
+      "cell": "P334",
+      "row": 334,
+      "col": "P",
+      "formula": "=O334",
+      "value": "Binder Klip Merk : KENKO nomor 105",
+      "type": "normal"
+    },
+    {
+      "cell": "P335",
+      "row": 335,
+      "col": "P",
+      "formula": "=O335",
+      "value": "Ballpoint Pilot G2",
+      "type": "normal"
+    },
+    {
+      "cell": "P336",
+      "row": 336,
+      "col": "P",
+      "formula": "=O336",
+      "value": "C. Tinta Printer EPSON Tinta Printer Epson Blue",
+      "type": "normal"
+    },
+    {
+      "cell": "P337",
+      "row": 337,
+      "col": "P",
+      "formula": "=O337",
+      "value": "Map Binder",
+      "type": "normal"
+    }
+  ]
+}
