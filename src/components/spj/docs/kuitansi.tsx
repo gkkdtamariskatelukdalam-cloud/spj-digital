@@ -1,0 +1,222 @@
+"use client";
+
+import type { DocumentGroup, School } from "@/lib/types/spj";
+import { Letterhead } from "@/components/spj/letterhead";
+import { formatDate, formatRupiah, terbilang } from "@/lib/format";
+import { capitalize, orDash, toRoman } from "@/components/spj/docs/_helpers";
+
+const tableStyle: React.CSSProperties = {
+  borderCollapse: "collapse",
+  width: "100%",
+  border: "1px solid #000",
+};
+
+const cellStyle: React.CSSProperties = {
+  border: "1px solid #000",
+  padding: "4px 8px",
+  fontSize: "12px",
+};
+
+const nameStyle: React.CSSProperties = {
+  fontWeight: 700,
+  textDecoration: "underline",
+};
+
+const borderlessTableStyle: React.CSSProperties = {
+  borderCollapse: "collapse",
+  width: "100%",
+  border: "none",
+};
+
+export function Kuitansi({
+  group,
+  school,
+}: {
+  group: DocumentGroup;
+  school: School | null;
+}) {
+  const total = group.totalJumlah || 0;
+  const tglPesan = group.tglPesan;
+  const tglBayar = group.tglBayar;
+  const noPesan = group.noPesan || "";
+  const noBku = group.noBku || group.bpuCode || "";
+  const vendorName = group.vendorName || "—";
+  const vendorOwner = group.vendorOwner || "—";
+
+  // School officials
+  const principalName = school?.principalName || "—";
+  const principalNip = school?.principalNip || "—";
+  const principalRank = school?.principalRank || "Pembina Tk I";
+  const treasurerName = school?.treasurerName || "—";
+  const treasurerNip = school?.treasurerNip || "—";
+  const treasurerRank = school?.treasurerRank || "Penata TK. I";
+  const goodsManagerName = school?.goodsManagerName || "—";
+  const goodsManagerNip = school?.goodsManagerNip || "—";
+  const goodsManagerRank = school?.goodsManagerRank || "Penata Muda";
+
+  // First item uraian for "Untuk pembayaran"
+  const firstUraian = group.items[0]?.uraian || "Pengadaan ATK";
+
+  // Nomor surat
+  const romanMonth = toRoman(group.bulan || 1);
+  const tahun = group.tahun || 2025;
+  const nomorSurat = `421.3/${noPesan}-P/DB/SMANSATLD/${romanMonth}/${tahun}`;
+
+  // Terbilang
+  const terbilangText = capitalize(terbilang(total));
+
+  return (
+    <div
+      className="spj-doc"
+      style={{
+        fontFamily: '"Times New Roman", Times, serif',
+        fontSize: "12px",
+        lineHeight: 1.5,
+        padding: "2rem 2.5rem",
+        color: "#000",
+      }}
+    >
+      {/* === INFO TABLE (with borders) === */}
+      <table style={tableStyle}>
+        <tbody>
+          <tr>
+            <td style={cellStyle} colSpan={2}>
+              Sumber Anggaran : Dana BOSP {tahun}
+            </td>
+            <td style={cellStyle}>
+              Program : -
+            </td>
+          </tr>
+          <tr>
+            <td style={cellStyle} colSpan={2}>
+              Kas/Pos Tanggal : {tglBayar ? formatDate(tglBayar) : "—"}
+            </td>
+            <td style={cellStyle}>
+              Kegiatan : -
+            </td>
+          </tr>
+          <tr>
+            <td style={cellStyle} colSpan={2}>
+              Nomor : {noBku || "—"}
+            </td>
+            <td style={cellStyle}>
+              Kode Rek : -
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      {/* === TITLE === */}
+      <div
+        style={{
+          textAlign: "center",
+          fontWeight: 700,
+          fontSize: "14px",
+          textDecoration: "underline",
+          margin: "16px 0 12px 0",
+        }}
+      >
+        TANDA PEMBAYARAN
+      </div>
+
+      {/* === BODY BLOCK (plain text, no border) === */}
+      <div style={{ marginBottom: "16px", fontSize: "12px" }}>
+        <div style={{ marginBottom: "4px" }}>
+          Sudah terima dari : Bendahara SMA Negeri 1 Telukdalam
+        </div>
+        <div style={{ marginBottom: "4px" }}>
+          Uang sebesar : <span style={{ fontWeight: 700 }}>{formatRupiah(total)}</span>
+        </div>
+        <div style={{ marginBottom: "4px" }}>
+          Terbilang :{" "}
+          <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+            {terbilangText}
+          </span>
+        </div>
+        <div style={{ marginBottom: "4px" }}>
+          Nomor Surat persetujuan penyediaan barang
+        </div>
+        <div style={{ marginBottom: "4px" }}>
+          dan jasa : {nomorSurat}
+        </div>
+        <div style={{ marginBottom: "4px" }}>
+          Untuk pembayaran : {firstUraian}
+        </div>
+      </div>
+
+      {/* === 3-COLUMN SIGNATURE TABLE (borderless) === */}
+      <table style={borderlessTableStyle}>
+        <tbody>
+          <tr>
+            {/* Kolom 1: Mengetahui / Pengurus Barang */}
+            <td
+              style={{
+                width: "33%",
+                textAlign: "left",
+                verticalAlign: "top",
+                padding: "0 8px",
+                fontSize: "12px",
+              }}
+            >
+              <div>Mengetahui :</div>
+              <div>Pengurus Barang</div>
+              <div style={{ height: "56px" }} />
+              <div style={nameStyle}>{goodsManagerName}</div>
+              <div>{goodsManagerRank}</div>
+              <div>NIP. {goodsManagerNip}</div>
+            </td>
+            {/* Kolom 2: Lunas Bayar Oleh / Bendahara */}
+            <td
+              style={{
+                width: "34%",
+                textAlign: "left",
+                verticalAlign: "top",
+                padding: "0 8px",
+                fontSize: "12px",
+              }}
+            >
+              <div>Lunas Bayar Oleh :</div>
+              <div>Bendahara SMA Negeri 1 Telukdalam</div>
+              <div style={{ height: "56px" }} />
+              <div style={nameStyle}>{treasurerName}</div>
+              <div>{treasurerRank}</div>
+              <div>NIP. {treasurerNip}</div>
+            </td>
+            {/* Kolom 3: Diterima oleh / Vendor */}
+            <td
+              style={{
+                width: "33%",
+                textAlign: "left",
+                verticalAlign: "top",
+                padding: "0 8px",
+                fontSize: "12px",
+              }}
+            >
+              <div>Diterima oleh :</div>
+              <div>{vendorName}</div>
+              <div style={{ height: "56px" }} />
+              <div style={nameStyle}>{vendorOwner}</div>
+              <div>Direktur</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      {/* === Menyetujui block (center) === */}
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: "20px",
+          fontSize: "12px",
+        }}
+      >
+        <div>Menyetujui :</div>
+        <div>Kepala Sekolah SMA Negeri 1 Telukdalam</div>
+        <div style={{ height: "56px" }} />
+        <div style={nameStyle}>{principalName}</div>
+        <div>{principalRank}</div>
+        <div>NIP. {principalNip}</div>
+      </div>
+    </div>
+  );
+}

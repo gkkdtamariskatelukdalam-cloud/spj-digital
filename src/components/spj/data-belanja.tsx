@@ -722,6 +722,7 @@ const DOC_LABELS: Array<{ id: string; short: string }> = [
   { id: "berita-acara-serah-terima", short: "BAST" },
   { id: "surat-penawaran-toko", short: "TOKO" },
   { id: "surat-pertanggungjawaban", short: "SPJ" },
+  { id: "kuitansi", short: "KUITANSI" },
 ];
 
 function PrintStatusBadges({
