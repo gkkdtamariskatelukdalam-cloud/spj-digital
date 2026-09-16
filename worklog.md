@@ -1414,3 +1414,140 @@ Stage Summary:
 - Doc type picker: ✓ hijau + teks "Sudah dicetak" untuk dokumen yang sudah dicetak
 - Auto-mark saat klik "Cetak Dokumen" di Documents
 - Auto-refresh: status update real-time setelah cetak
+
+---
+Task ID: 20-letterhead-dual-logo
+Agent: Sub Agent (general-purpose)
+Task: Update LetterheadSettings component untuk mendukung 2 mode KOP (single logo & dual logo) dengan toggle dan section Logo 2
+
+Work Log:
+- Baca worklog.md sebelumnya untuk memahami konteks (Task 19: tracking status cetak, Task 18: dedup import, etc.)
+- Baca file letterhead-settings.tsx (657 lines), letterhead.tsx (244 lines), spj.ts types (246 lines), use-spj.ts hooks (500 lines)
+- Konfirmasi struktur: LetterheadSettings type sudah memiliki field logo2Path, logo2Width, logo2Height, logo2OffsetX, logo2OffsetY, kopMode
+- LetterheadStatic component sudah support dual mode (logo kiri + teks tengah + logo kanan)
+- useUploadLogo hook sudah accept { file, isLogo2?: boolean }
+- useUpdateLetterhead hook generic, bisa update field apapun
+
+Changes ke /home/z/my-project/src/components/spj/letterhead-settings.tsx:
+
+1. DEFAULT_SETTINGS update - tambah 6 field baru setelah logoOffsetY:
+   - logo2Path: null
+   - logo2Width: 110
+   - logo2Height: 110
+   - logo2OffsetX: 0
+   - logo2OffsetY: 0
+   - kopMode: "single"
+
+2. Tambah fileInputRef2 = useRef<HTMLInputElement>(null) untuk upload Logo 2
+
+3. Update handleFileUpload signature dari (e) menjadi (e, isLogo2 = false):
+   - Call uploadMutation.mutateAsync({ file, isLogo2 })
+   - Toast message conditional: "Logo 2 berhasil diunggah" / "Logo berhasil diunggah"
+   - Clear correct input ref berdasarkan isLogo2 flag
+
+4. Tambah KOP Mode Toggle Card di ATAS settings (setelah header card, sebelum grid 2 kolom):
+   - Card dengan border-l-4 border-l-blue-500
+   - Title "Mode KOP Surat" dengan ImageIcon
+   - Deskripsi: "Pilih tampilan KOP: 1 logo di kiri, atau 2 logo (kiri + kanan) dengan teks di tengah. Berlaku untuk semua dokumen SPJ."
+   - Grid 2 kolom dengan 2 big toggle buttons:
+     * KOP 1 Logo (blue accent) → update("kopMode", "single")
+       - "Logo di kiri, teks di kanan"
+     * KOP 2 Logo (violet accent) → update("kopMode", "dual")
+       - "Logo kiri + kanan, teks di tengah"
+   - Active button: ring-2 + bg color tinted + border colored
+   - Inactive button: opacity-60, hover:opacity-100
+   - Switch langsung trigger update() → scheduleSave (debounced 800ms) → mutate ke API
+
+5. Update Logo 1 CardTitle jadi conditional:
+   - single mode: "Logo" (seperti sebelumnya)
+   - dual mode: "Logo Kiri (Logo 1)"
+
+6. Tambah Logo 2 Card section SETELAH Logo 1 Card, hanya muncul saat local.kopMode === "dual":
+   - Title "Logo Kanan (Logo 2)" dengan ImageIcon violet
+   - Deskripsi: "Upload logo kanan dan atur posisi & ukurannya"
+   - Upload area:
+     * Preview thumbnail (h-16 w-16) dari local.logo2Path
+     * Hidden input ref={fileInputRef2}
+     * onChange={(e) => handleFileUpload(e, true)}
+     * Button "Upload Logo 2" → trigger fileInputRef2.current?.click()
+   - Position controls (mirror dari Logo 1):
+     * Grid 3x3 dengan tombol ArrowUp/Left/Reset/Right/Down
+     * update("logo2OffsetX", local.logo2OffsetX - 5) etc.
+     * Reset button: set logo2OffsetX=0 dan logo2OffsetY=0
+   - Offset X/Y sliders (min=-100, max=100, step=1) → update("logo2OffsetX"/"logo2OffsetY", v[0])
+   - Size section: "Ukuran Logo 2" dengan display "{width}x{height}px"
+     * Lebar slider: min=40, max=250, step=5 → update("logo2Width", v[0])
+     * Tinggi slider: min=40, max=250, step=5 → update("logo2Height", v[0])
+
+7. Live preview (Live Preview card) tidak diubah:
+   - Tetap menggunakan <LetterheadStatic settings={local} />
+   - LetterheadStatic akan otomatis render mode single/dual berdasarkan local.kopMode
+   - Toggle kopMode → preview langsung update (state local sudah berubah)
+
+Behavior yang diharapkan:
+- User buka pengaturan KOP → lihat toggle di atas
+- Klik "KOP 2 Logo" → local.kopMode = "dual" (langsung tersimpan debounced 800ms)
+- Logo 1 section title berubah jadi "Logo Kiri (Logo 1)"
+- Logo 2 section muncul dengan controls lengkap
+- Live preview langsung menampilkan layout 2 logo
+- Semua dokumen SPJ lain (Surat Pesanan, SHP, BAST, SPJ) yang pakai <Letterhead /> juga auto-update via React Query invalidation
+
+Test hasil:
+- Lint: bun run lint → exit code 0, no errors
+- File size: 657 → ~920 lines
+
+Stage Summary:
+- Komponen LetterheadSettings sekarang punya 2 mode: "KOP 1 Logo" (default, existing) dan "KOP 2 Logo" (new)
+- Toggle visual prominent di atas settings dengan 2 big buttons
+- Logo 1 section: conditional title ("Logo" vs "Logo Kiri (Logo 1)")
+- Logo 2 section: full controls (upload, position arrows, size sliders), hanya tampil saat dual mode
+- Live preview otomatis switch layout berdasarkan kopMode
+- Save debounced 800ms, all changes auto-persist ke API
+- Lint clean, no TypeScript errors
+
+---
+Task ID: 20-LETTERHEAD-DUAL-LOGO
+Agent: Main (Claude)
+Task: Buat KOP surat centered + tambah KOP 2 logo (kiri+kanan) dengan toggle
+
+Work Log:
+- User upload gambar KOP baru dengan 2 logo (kiri = lambang Provinsi, kanan = logo sekolah)
+- Analisa gambar KOP dengan VLM: 2 logo simetris, teks centered di tengah, garis bawah tebal
+- Tambah 6 field baru ke Prisma schema LetterheadSettings:
+  - logo2Path, logo2Width, logo2Height, logo2OffsetX, logo2OffsetY
+  - kopMode ("single" atau "dual")
+- Push schema ke DB, regenerate Prisma client
+- Update LetterheadSettings type dengan field baru
+- Update API letterhead PUT: tambah field baru ke allowedFields
+- Update API upload-logo: support ?logo=2 query param untuk upload logo 2
+- Update hook useUploadLogo: terima parameter { file, isLogo2?: boolean }
+- Rebuild komponen Letterhead (letterhead.tsx):
+  - LetterheadStatic: 2 mode render
+    - Single mode: logo kiri + teks kanan (existing)
+    - Dual mode: logo kiri + teks tengah (flex:1, text-align center) + logo kanan
+  - Gunakan flexbox dengan alignItems: center untuk dual mode
+  - Logo kiri dan kanan dengan transform translate untuk offset
+  - Teks di tengah dengan textAlign: center, flex: 1
+- Update LetterheadSettings UI:
+  - Tambah KOP Mode Toggle di bagian atas (2 tombol besar)
+    - "KOP 1 Logo" (logo kiri, teks kanan)
+    - "KOP 2 Logo" (logo kiri + kanan, teks tengah)
+  - Saat klik toggle → update("kopMode", ...) langsung tersimpan & diterapkan
+  - Section Logo 1: judul berubah "Logo" → "Logo Kiri (Logo 1)" saat dual mode
+  - Section Logo 2 (hanya tampil saat dual mode): upload, position arrows, size sliders
+  - Live preview otomatis render sesuai kopMode
+- Verifikasi Agent Browser:
+  - Toggle "KOP 1 Logo" / "KOP 2 Logo" muncul di bagian atas
+  - Klik "KOP 2 Logo" → section "Logo Kanan (Logo 2)" muncul dengan upload + controls
+  - Upload logo 2 berhasil (POST /api/spj/letterhead/upload-logo?logo=2 → 200)
+  - Live preview menampilkan 2 logo (kiri + kanan) dengan teks di tengah
+  - Buka Dokumen SPJ → pilih pesanan → KOP dokumen otomatis pakai 2 logo
+  - "Logo Kiri" dan "Logo Kanan" muncul di dokumen
+  - Tidak ada error, lint clean
+
+Stage Summary:
+- 2 mode KOP: Single (1 logo kiri) dan Dual (2 logo kiri+kanan, teks centered)
+- Toggle langsung diterapkan ke semua dokumen
+- Upload logo 2 dengan controls lengkap (position, size)
+- KOP centered di dual mode (teks di tengah antara 2 logo)
+- Auto-save dengan debounce

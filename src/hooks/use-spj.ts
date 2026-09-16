@@ -461,10 +461,13 @@ export function useUpdateLetterhead() {
 export function useUploadLogo() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (file: File) => {
+    mutationFn: async ({ file, isLogo2 }: { file: File; isLogo2?: boolean }) => {
       const formData = new FormData();
       formData.append("logo", file);
-      const res = await fetch("/api/spj/letterhead/upload-logo", {
+      const url = isLogo2
+        ? "/api/spj/letterhead/upload-logo?logo=2"
+        : "/api/spj/letterhead/upload-logo";
+      const res = await fetch(url, {
         method: "POST",
         body: formData,
       });

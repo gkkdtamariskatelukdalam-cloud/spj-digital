@@ -206,6 +206,16 @@ model LetterheadSettings {
   logoOffsetX     Int      @default(0)     // horizontal shift: negative=left, positive=right
   logoOffsetY     Int      @default(0)     // vertical shift: negative=up, positive=down
   
+  // Logo 2 settings (for KOP with 2 logos - left and right)
+  logo2Path       String?
+  logo2Width      Int      @default(110)
+  logo2Height     Int      @default(110)
+  logo2OffsetX    Int      @default(0)
+  logo2OffsetY    Int      @default(0)
+  
+  // KOP mode: "single" (1 logo left) or "dual" (2 logos left+right, text centered)
+  kopMode         String   @default("single")
+  
   // Font settings
   fontFamily      String   @default("Arial")
   lineSpacing     Int      @default(6)     // extra spacing between lines in px

@@ -33,6 +33,8 @@ export async function PUT(req: Request) {
     const body = await req.json();
     const allowedFields = [
       "logoPath", "logoWidth", "logoHeight", "logoOffsetX", "logoOffsetY",
+      "logo2Path", "logo2Width", "logo2Height", "logo2OffsetX", "logo2OffsetY",
+      "kopMode",
       "fontFamily", "lineSpacing",
       "line1Text", "line1Bold", "line1Size",
       "line2Text", "line2Bold", "line2Size",

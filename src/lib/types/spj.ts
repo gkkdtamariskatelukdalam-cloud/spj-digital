@@ -211,6 +211,12 @@ export interface LetterheadSettings {
   logoHeight: number;
   logoOffsetX: number;
   logoOffsetY: number;
+  logo2Path: string | null;
+  logo2Width: number;
+  logo2Height: number;
+  logo2OffsetX: number;
+  logo2OffsetY: number;
+  kopMode: string; // "single" or "dual"
   fontFamily: string;
   lineSpacing: number;
   line1Text: string;

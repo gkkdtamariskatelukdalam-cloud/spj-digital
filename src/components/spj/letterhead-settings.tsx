@@ -71,6 +71,12 @@ const DEFAULT_SETTINGS: LetterheadSettings = {
   logoHeight: 110,
   logoOffsetX: 0,
   logoOffsetY: 0,
+  logo2Path: null,
+  logo2Width: 110,
+  logo2Height: 110,
+  logo2OffsetX: 0,
+  logo2OffsetY: 0,
+  kopMode: "single",
   fontFamily: "Arial",
   lineSpacing: 6,
   line1Text: "PEMERINTAH PROVINSI SUMATERA UTARA",
@@ -105,6 +111,7 @@ export function LetterheadSettingsPanel() {
 
   const [local, setLocal] = useState<LetterheadSettings>(DEFAULT_SETTINGS);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef2 = useRef<HTMLInputElement>(null);
   // Ref to always hold the latest settings (avoids stale closure in rapid updates)
   const localRef = useRef<LetterheadSettings>(DEFAULT_SETTINGS);
 
@@ -152,16 +159,22 @@ export function LetterheadSettingsPanel() {
     scheduleSave({ ...localRef.current, [key]: value } as LetterheadSettings);
   };
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    isLogo2 = false
+  ) => {
     const file = e.target.files?.[0];
     if (!file) return;
     try {
-      await uploadMutation.mutateAsync(file);
-      toast.success("Logo berhasil diunggah");
+      await uploadMutation.mutateAsync({ file, isLogo2 });
+      toast.success(
+        isLogo2 ? "Logo 2 berhasil diunggah" : "Logo berhasil diunggah"
+      );
     } catch (err) {
       toast.error("Gagal upload: " + (err as Error).message);
     }
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    const ref = isLogo2 ? fileInputRef2 : fileInputRef;
+    if (ref.current) ref.current.value = "";
   };
 
   const handleReset = () => {
@@ -244,6 +257,58 @@ export function LetterheadSettingsPanel() {
         </CardHeader>
       </Card>
 
+      {/* KOP Mode Toggle */}
+      <Card className="border-l-4 border-l-blue-500">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base flex items-center gap-2">
+            <ImageIcon className="h-4 w-4 text-blue-600" />
+            Mode KOP Surat
+          </CardTitle>
+          <CardDescription className="text-xs">
+            Pilih tampilan KOP: 1 logo di kiri, atau 2 logo (kiri + kanan)
+            dengan teks di tengah. Berlaku untuk semua dokumen SPJ.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={() => update("kopMode", "single")}
+              className={`flex flex-col items-start gap-1 rounded-lg border p-3 text-left transition-all ${
+                local.kopMode === "single"
+                  ? "border-blue-500 bg-blue-50 ring-2 ring-blue-500 dark:bg-blue-950/30"
+                  : "border-muted bg-muted/30 opacity-60 hover:opacity-100"
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                <ImageIcon className="h-4 w-4 text-blue-600" />
+                <span className="text-sm font-semibold">KOP 1 Logo</span>
+              </div>
+              <span className="text-[10px] text-muted-foreground">
+                Logo di kiri, teks di kanan
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => update("kopMode", "dual")}
+              className={`flex flex-col items-start gap-1 rounded-lg border p-3 text-left transition-all ${
+                local.kopMode === "dual"
+                  ? "border-violet-500 bg-violet-50 ring-2 ring-violet-500 dark:bg-violet-950/30"
+                  : "border-muted bg-muted/30 opacity-60 hover:opacity-100"
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                <ImageIcon className="h-4 w-4 text-violet-600" />
+                <span className="text-sm font-semibold">KOP 2 Logo</span>
+              </div>
+              <span className="text-[10px] text-muted-foreground">
+                Logo kiri + kanan, teks di tengah
+              </span>
+            </button>
+          </div>
+        </CardContent>
+      </Card>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* LEFT: Settings */}
         <div className="space-y-4">
@@ -252,7 +317,7 @@ export function LetterheadSettingsPanel() {
             <CardHeader className="pb-3">
               <CardTitle className="text-base flex items-center gap-2">
                 <ImageIcon className="h-4 w-4 text-violet-600" />
-                Logo
+                {local.kopMode === "dual" ? "Logo Kiri (Logo 1)" : "Logo"}
               </CardTitle>
               <CardDescription className="text-xs">
                 Upload logo dan atur posisi & ukurannya
@@ -428,6 +493,198 @@ export function LetterheadSettingsPanel() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Logo 2 Settings (only in dual mode) */}
+          {local.kopMode === "dual" && (
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <ImageIcon className="h-4 w-4 text-violet-600" />
+                  Logo Kanan (Logo 2)
+                </CardTitle>
+                <CardDescription className="text-xs">
+                  Upload logo kanan dan atur posisi & ukurannya
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {/* Upload */}
+                <div className="flex items-center gap-3">
+                  <div className="h-16 w-16 rounded-md border bg-muted/30 overflow-hidden flex items-center justify-center flex-shrink-0">
+                    {local.logo2Path ? (
+                      <img
+                        src={local.logo2Path}
+                        alt="Logo 2 preview"
+                        className="h-full w-full object-contain"
+                      />
+                    ) : (
+                      <ImageIcon className="h-6 w-6 text-muted-foreground" />
+                    )}
+                  </div>
+                  <div className="flex-1 space-y-1">
+                    <input
+                      ref={fileInputRef2}
+                      type="file"
+                      accept="image/png,image/jpeg,image/jpg,image/webp,image/gif"
+                      onChange={(e) => handleFileUpload(e, true)}
+                      className="hidden"
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => fileInputRef2.current?.click()}
+                      disabled={uploadMutation.isPending}
+                      className="w-full h-8 text-xs"
+                    >
+                      {uploadMutation.isPending ? (
+                        <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+                      ) : (
+                        <Upload className="h-3 w-3 mr-1" />
+                      )}
+                      Upload Logo 2
+                    </Button>
+                    <p className="text-[10px] text-muted-foreground">
+                      PNG/JPG/WebP/GIF, max 5MB
+                    </p>
+                  </div>
+                </div>
+
+                {/* Logo 2 position controls */}
+                <Separator />
+                <div className="space-y-2">
+                  <Label className="text-xs font-semibold">
+                    Posisi Logo 2 (Geser)
+                  </Label>
+                  <div className="grid grid-cols-3 gap-1.5 max-w-[200px] mx-auto">
+                    <div />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8"
+                      onClick={() =>
+                        update("logo2OffsetY", local.logo2OffsetY - 5)
+                      }
+                      title="Geser ke atas"
+                    >
+                      <ArrowUp className="h-3.5 w-3.5" />
+                    </Button>
+                    <div />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8"
+                      onClick={() =>
+                        update("logo2OffsetX", local.logo2OffsetX - 5)
+                      }
+                      title="Geser ke kiri"
+                    >
+                      <ArrowLeft className="h-3.5 w-3.5" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8"
+                      onClick={() => {
+                        update("logo2OffsetX", 0);
+                        update("logo2OffsetY", 0);
+                      }}
+                      title="Reset posisi"
+                    >
+                      <RotateCcw className="h-3 w-3" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8"
+                      onClick={() =>
+                        update("logo2OffsetX", local.logo2OffsetX + 5)
+                      }
+                      title="Geser ke kanan"
+                    >
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Button>
+                    <div />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8"
+                      onClick={() =>
+                        update("logo2OffsetY", local.logo2OffsetY + 5)
+                      }
+                      title="Geser ke bawah"
+                    >
+                      <ArrowDown className="h-3.5 w-3.5" />
+                    </Button>
+                    <div />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 mt-2">
+                    <div>
+                      <Label className="text-[10px] text-muted-foreground">
+                        Offset X: {local.logo2OffsetX}px
+                      </Label>
+                      <Slider
+                        value={[local.logo2OffsetX]}
+                        min={-100}
+                        max={100}
+                        step={1}
+                        onValueChange={(v) => update("logo2OffsetX", v[0])}
+                        className="mt-1"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-[10px] text-muted-foreground">
+                        Offset Y: {local.logo2OffsetY}px
+                      </Label>
+                      <Slider
+                        value={[local.logo2OffsetY]}
+                        min={-100}
+                        max={100}
+                        step={1}
+                        onValueChange={(v) => update("logo2OffsetY", v[0])}
+                        className="mt-1"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Logo 2 size */}
+                <Separator />
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <Label className="text-xs font-semibold">Ukuran Logo 2</Label>
+                    <span className="text-[10px] font-mono text-muted-foreground">
+                      {local.logo2Width}×{local.logo2Height}px
+                    </span>
+                  </div>
+                  <div>
+                    <Label className="text-[10px] text-muted-foreground">
+                      Lebar
+                    </Label>
+                    <Slider
+                      value={[local.logo2Width]}
+                      min={40}
+                      max={250}
+                      step={5}
+                      onValueChange={(v) => update("logo2Width", v[0])}
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-[10px] text-muted-foreground">
+                      Tinggi
+                    </Label>
+                    <Slider
+                      value={[local.logo2Height]}
+                      min={40}
+                      max={250}
+                      step={5}
+                      onValueChange={(v) => update("logo2Height", v[0])}
+                      className="mt-1"
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Font Settings */}
           <Card>

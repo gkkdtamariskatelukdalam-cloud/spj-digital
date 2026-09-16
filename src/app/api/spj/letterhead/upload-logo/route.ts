@@ -49,27 +49,33 @@ export async function POST(req: Request) {
     
     const logoPath = `/uploads/${filename}`;
     
+    // Check if this is logo2 upload (via query param ?logo=2)
+    const url = new URL(req.url);
+    const isLogo2 = url.searchParams.get("logo") === "2";
+    const pathField = isLogo2 ? "logo2Path" : "logoPath";
+    
     // Update letterhead settings with new logo path
     const existing = await db.letterheadSettings.findFirst();
     if (existing) {
       // Delete old logo file if it's a custom upload (not the default)
-      if (existing.logoPath && existing.logoPath.startsWith("/uploads/logo-") && existing.logoPath !== logoPath) {
-        const oldPath = path.join(process.cwd(), "public", existing.logoPath);
+      const oldLogoPath = isLogo2 ? existing.logo2Path : existing.logoPath;
+      if (oldLogoPath && oldLogoPath.startsWith("/uploads/logo-") && oldLogoPath !== logoPath) {
+        const oldPath = path.join(process.cwd(), "public", oldLogoPath);
         if (fs.existsSync(oldPath)) {
           try { fs.unlinkSync(oldPath); } catch {}
         }
       }
       await db.letterheadSettings.update({
         where: { id: existing.id },
-        data: { logoPath },
+        data: { [pathField]: logoPath },
       });
     } else {
       await db.letterheadSettings.create({
-        data: { logoPath },
+        data: { [pathField]: logoPath },
       });
     }
     
-    return NextResponse.json({ logoPath, size: file.size });
+    return NextResponse.json({ logoPath, size: file.size, isLogo2 });
   } catch (e) {
     console.error("Upload logo error:", e);
     return NextResponse.json(
