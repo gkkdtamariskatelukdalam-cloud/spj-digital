@@ -969,3 +969,55 @@ Stage Summary:
 - Tambah tombol Reset Database untuk hapus semua transaksi/vendor/BPU
 - API reset-data: /api/spj/reset-data (POST, scope: transactions/vendors/bpu/all)
 - Database state: 1257 transaksi valid, 9 vendor, 157 BPU, Rp 1.658.960.400
+
+---
+Task ID: 12-DATA-BELANJA
+Agent: Main (Claude)
+Task: Buat fitur Data Belanja - tempat SEMUA hasil import masuk (termasuk draft/belum lengkap)
+
+Work Log:
+- User menjelaskan: data kosong BUKAN error, tapi data belanja yang belum terisi lengkap (draft). Itu juga harus masuk saat import.
+- User minta buat fitur "Data Belanja" terpisah untuk menampung semua hasil import
+- Revert fix parseStr: "0" sekarang diperlakukan sebagai data belum diisi (empty string), bukan error
+- Update skip logic di import API: hanya skip baris yang BENAR-BENAR kosong (semua kolom null/0/"#N/A")
+- Update status determination: 
+  - draft = missing uraian AND namaBarang, atau jumlah = 0
+  - lunas = has tglBayar (sudah bayar)
+  - pending = complete data tapi belum bayar
+- Fix parseDate: skip tanggal dengan year < 2000 (e.g. Excel 1899-12-30 = empty date)
+- Re-import: 780 baris masuk (0 skip), breakdown:
+  - 361 Draft (belum lengkap)
+  - 324 Lunas (sudah bayar)
+  - 95 Pending (lengkap belum bayar)
+- Update API /api/spj/transactions GET: support filter status=draft, pending, lunas, not-draft
+- Buat komponen DataBelanja (data-belanja.tsx):
+  - Header dengan tombol "Tambah Belanja"
+  - 4 stat cards: Total, Draft (Belum Lengkap), Pending, Lunas
+  - Filter bar: search, bulan, status (Semua/Draft/Pending/Lunas)
+  - Table: No, BKU, Tanggal, Uraian/Nama Barang, Volume, Harga, Jumlah, Vendor, Status, Aksi
+  - Baris draft di-highlight dengan background amber
+  - Badge status: Draft (amber), Pending (cyan), Lunas (emerald)
+  - Tombol "Lengkapi data" untuk draft, "Edit" untuk data lengkap
+  - Edit Dialog dengan semua field (No BKU, No Pesan, Uraian, Nama Barang, Volume, Satuan, Harga, Vendor, Bulan, Tgl Pesan/BAST/Bayar, Status)
+  - Add Dialog untuk tambah belanja manual
+  - Delete dengan konfirmasi
+- Tambah tab "Data Belanja" (icon ShoppingCart, warna violet) di navigasi utama, posisi ke-2 setelah Dashboard
+- Fix bug: SelectItem dengan value="" (empty string) tidak diperbolehkan di Radix Select, ganti dengan "__none__"
+- Fix bug: tx.tglPesan?.includes() error ketika tglPesan null, ganti dengan null check
+- Verifikasi Agent Browser:
+  - Tab "Data Belanja" muncul di navigasi
+  - 4 stat cards: Total 500 (limit), Draft 361, Pending 0, Lunas 139
+  - Filter status "Draft (Belum Lengkap)" bekerja - menampilkan 361 data draft
+  - Tombol "Lengkapi data" muncul untuk baris draft
+  - Edit dialog berfungsi: menampilkan "Edit Data Belanja Draft - Lengkapi data" dengan semua field
+  - Tidak ada error setelah fix SelectItem value
+  - Lint clean
+
+Stage Summary:
+- 1 komponen baru: DataBelanja (data-belanja.tsx)
+- 1 tab baru "Data Belanja" di navigasi
+- Import API fix: semua baris Excel masuk (780/780), 0 skip
+- Status 3-level: draft (belum lengkap), pending (lengkap belum bayar), lunas (sudah bayar)
+- Edit dialog untuk melengkapi data draft
+- Add dialog untuk tambah belanja manual
+- Filter by status (draft/pending/lunas) bekerja

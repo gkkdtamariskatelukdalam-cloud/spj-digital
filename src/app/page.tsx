@@ -8,6 +8,7 @@ import { Reports } from "@/components/spj/reports";
 import { Documents } from "@/components/spj/documents";
 import { LetterheadSettingsPanel } from "@/components/spj/letterhead-settings";
 import { ImportExcel } from "@/components/spj/import-excel";
+import { DataBelanja } from "@/components/spj/data-belanja";
 import { Toaster } from "@/components/ui/sonner";
 import {
   LayoutDashboard,
@@ -19,11 +20,12 @@ import {
   Lock,
   Image as ImageIcon,
   Upload,
+  ShoppingCart,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 
-type View = "dashboard" | "transactions" | "documents" | "reports" | "master" | "letterhead" | "import";
+type View = "dashboard" | "transactions" | "documents" | "reports" | "master" | "letterhead" | "import" | "belanja";
 
 interface NavItem {
   id: View;
@@ -40,6 +42,13 @@ const navItems: NavItem[] = [
     icon: <LayoutDashboard className="h-4 w-4" />,
     description: "Ringkasan & statistik",
     color: "rose",
+  },
+  {
+    id: "belanja",
+    label: "Data Belanja",
+    icon: <ShoppingCart className="h-4 w-4" />,
+    description: "Semua hasil import",
+    color: "violet",
   },
   {
     id: "transactions",
@@ -151,6 +160,7 @@ export default function Home() {
       <main className="flex-1 min-w-0 overflow-x-hidden">
         <div className="container mx-auto p-3 sm:p-4 lg:p-6 max-w-[1500px]">
           {view === "dashboard" && <Dashboard />}
+          {view === "belanja" && <DataBelanja />}
           {view === "transactions" && <Transactions />}
           {view === "documents" && <Documents />}
           {view === "reports" && <Reports />}

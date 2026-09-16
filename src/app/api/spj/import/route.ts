@@ -119,25 +119,36 @@ export async function POST(req: Request) {
     // Helper: parse date from various formats
     function parseDate(val: unknown): string | null {
       if (val === null || val === undefined || val === "") return null;
-      if (val instanceof Date) return val.toISOString().split("T")[0];
+      if (val instanceof Date) {
+        // Excel empty date serial 0 = 1899-12-30, treat as null
+        if (val.getFullYear() <= 1900) return null;
+        return val.toISOString().split("T")[0];
+      }
       if (typeof val === "number") {
-        // Excel serial date
+        // Excel serial date - 0 or very small = empty
+        if (val <= 60) return null;
         const date = XLSX.SSF.parse_date_code(val);
-        if (date && date.y) {
+        if (date && date.y && date.y > 1900) {
           return `${date.y}-${String(date.m).padStart(2, "0")}-${String(date.d).padStart(2, "0")}`;
         }
+        return null;
       }
       const str = String(val).trim();
+      if (str === "" || str === "0") return null;
       // Try dd/mm/yyyy
       if (str.includes("/")) {
         const parts = str.split("/");
         if (parts.length === 3) {
           const [d, m, y] = parts;
+          const year = parseInt(y);
+          if (year < 2000) return null; // invalid year
           return `${y}-${m.padStart(2, "0")}-${d.padStart(2, "0")}`;
         }
       }
       // Try ISO
       if (str.includes("-") && str.length >= 10) {
+        const year = parseInt(str.substring(0, 4));
+        if (year < 2000) return null; // invalid year (e.g. 1899)
         return str.substring(0, 10);
       }
       return str;
@@ -152,11 +163,10 @@ export async function POST(req: Request) {
       return isNaN(num) ? 0 : num;
     }
 
-    // Helper: parse string - treats 0, "0", empty as empty string
+    // Helper: parse string - treat "0", "#N/A", "#REF!" as empty (data belum diisi)
+    // In the Excel, "0" in text columns means the cell hasn't been filled yet
     function parseStr(val: unknown): string {
       if (val === null || val === undefined) return "";
-      // Numeric 0 or string "0" means empty in this Excel context
-      if (val === 0 || val === "0") return "";
       const str = String(val).trim();
       if (str === "" || str === "0" || str === "#N/A" || str === "#N/a" || str === "#n/a" || str === "#REF!") return "";
       return str;
@@ -198,10 +208,22 @@ export async function POST(req: Request) {
       const noBku = parseStr(cells[colMap.noBku]);
       const uraian = parseStr(cells[colMap.uraian]);
       const namaBarang = parseStr(cells[colMap.namaBarang]);
+      const volume = parseNum(cells[colMap.volume]);
+      const tarifHarga = parseNum(cells[colMap.hargaSatuan]);
       const jumlah = parseNum(cells[colMap.jumlah]);
 
-      // Skip rows without essential data - need at least uraian OR namaBarang, AND jumlah > 0
-      if ((!uraian && !namaBarang) || jumlah <= 0) continue;
+      // Skip ONLY rows that have NO meaningful data at all
+      // Rows with partial data (e.g. has vendor but no uraian) are kept as "draft"
+      // Meaningful data = any text field that's not null/empty/"0"/"#N/A"
+      const hasAnyTextData = cells.some((c) => {
+        if (c === null || c === undefined || c === "" || c === "0" || c === 0) return false;
+        if (typeof c === "string") {
+          const s = c.trim();
+          return s !== "" && s !== "0" && s !== "#N/A" && s !== "#N/a" && s !== "#n/a" && s !== "#REF!";
+        }
+        return true; // numbers, dates
+      });
+      if (!hasAnyTextData) continue;
 
       const vendorName = parseStr(cells[colMap.namaToko1]);
       const vendorOwner = parseStr(cells[colMap.direkturToko1]);
@@ -245,10 +267,10 @@ export async function POST(req: Request) {
         tglBayar: tglBayar,
         uraian: uraian,
         namaBarang: namaBarang,
-        volume: parseNum(cells[colMap.volume]),
+        volume: volume,
         satuan: parseStr(cells[colMap.satuan]),
-        tarifHarga: parseNum(cells[colMap.hargaSatuan]),
-        jumlah: parseNum(cells[colMap.jumlah]),
+        tarifHarga: tarifHarga,
+        jumlah: jumlah,
         kategori: parseStr(cells[colMap.kategori]),
         vendorName: vendorName,
       });
@@ -288,15 +310,25 @@ export async function POST(req: Request) {
     let txCreated = 0;
     let txSkipped = 0;
     for (const tx of transactions) {
-      // Skip if essential fields missing
-      if (!tx.uraian && !tx.namaBarang) {
-        txSkipped++;
-        continue;
-      }
+      // Keep ALL rows that have any meaningful data, even incomplete ones (draft belanja)
+      // Status determination:
+      // - draft: missing uraian AND namaBarang, or jumlah = 0
+      // - lunas: has tglBayar (already paid)
+      // - pending: complete data but not yet paid
+      const isComplete = tx.uraian || tx.namaBarang;
+      const hasAmount = tx.jumlah > 0;
 
       const vendorId = tx.vendorName
         ? vendorIdMap.get(tx.vendorName) || null
         : null;
+
+      // Determine status
+      let status = "pending";
+      if (!isComplete || !hasAmount) {
+        status = "draft";
+      } else if (tx.tglBayar) {
+        status = "lunas";
+      }
 
       await db.transaction.create({
         data: {
@@ -308,7 +340,7 @@ export async function POST(req: Request) {
           tglBayar: tx.tglBayar,
           noBku: tx.noBku || null,
           bpuCode: tx.bpuCode || null,
-          uraian: tx.uraian || tx.namaBarang || "",
+          uraian: tx.uraian || "",
           namaBarang: tx.namaBarang || null,
           volume: tx.volume,
           satuan: tx.satuan || null,
@@ -318,7 +350,7 @@ export async function POST(req: Request) {
           bulan: tx.bulan,
           tahun: 2025,
           masukBku: tx.tglBayar ? "MASUK BKU" : null,
-          status: tx.tglBayar ? "lunas" : "pending",
+          status: status,
           vendorId: vendorId,
         },
       });

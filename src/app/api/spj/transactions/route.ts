@@ -17,8 +17,11 @@ export async function GET(req: Request) {
     if (bulan) where.bulan = parseInt(bulan);
     if (tahun) where.tahun = parseInt(tahun);
     if (vendorId) where.vendorId = vendorId;
-    if (status === "lunas") where.masukBku = "MASUK BKU";
-    if (status === "pending") where.masukBku = { not: "MASUK BKU" };
+    // Status filter: draft (belum lengkap), pending (belum bayar), lunas (sudah bayar)
+    if (status === "lunas") where.status = "lunas";
+    if (status === "pending") where.status = "pending";
+    if (status === "draft") where.status = "draft";
+    if (status === "not-draft") where.status = { not: "draft" };
     if (q) {
       where.OR = [
         { uraian: { contains: q } },
