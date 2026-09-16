@@ -1202,3 +1202,51 @@ Stage Summary:
 - Expand/collapse per pesanan + Buka/Tutup Semua
 - Klik Nama Barang untuk edit (bukan tombol di kanan)
 - Edit dialog dengan 34 field Excel
+
+---
+Task ID: 15-CETAK-FEATURE
+Agent: Main (Claude)
+Task: Buat fitur cetak dengan preview, unduh PDF, dan cetak langsung - per pesanan dan semua SPJ
+
+Work Log:
+- User konfirmasi: 1) preview dulu sebelum cetak, 2) multi cetak (unduh PDF + cetak langsung), 3) cetak semua SPJ sama ketentuan
+- Install html2pdf.js library untuk generate PDF
+- Buat komponen DocumentPreview (document-preview.tsx):
+  - Modal preview dengan navigasi antar dokumen (7 tabs: 01 PESAN, 02 BANDING, 03 RENCANA, 04 SHP, 05 BAST, TOKO, SPJ)
+  - Tombol "Unduh PDF" - generate PDF menggunakan html2pdf.js
+  - Tombol "Cetak" - print langsung via window.open + window.print
+  - Navigasi Sebelumnya/Selanjutnya untuk browse semua dokumen
+  - Mode "single" (1 pesanan, 7 dokumen) atau "all" (semua pesanan, semua dokumen)
+  - Dropdown untuk pilih pesanan mana (mode "all")
+  - Step counter: "Pesanan X dari Y · Dokumen Z dari 7"
+- Buat komponen CetakMenuButton - dropdown menu untuk setiap baris pesanan:
+  - "Kelengkapan SPJ Pesanan #XX" header
+  - Preview Semua Dokumen (lihat semua 7 dokumen sebelum cetak)
+  - Unduh PDF (download semua 7 dokumen sebagai PDF)
+  - Cetak Langsung (print semua 7 dokumen)
+  - "Cetak Dokumen Individual" section dengan 7 pilihan dokumen individual
+- Update DataBelanja:
+  - Tambah state untuk preview (previewGroup, previewMode, previewAllGroups, previewDocId, showPreview)
+  - Tambah fungsi pesananGroupToDocGroup untuk convert PesananGroup ke DocumentGroup
+  - Tambah kolom "Cetak" di tabel master dengan CetakMenuButton di setiap baris
+  - Tambah tombol "Cetak Semua SPJ" di header (mode "all", 574 pesanan × 7 dokumen)
+  - Export PesananGroup interface untuk dipakai di document-preview
+- Verifikasi Agent Browser:
+  - Tombol "Cetak Semua SPJ" muncul di header
+  - Tombol "Cetak" muncul di setiap baris pesanan (kolom Cetak)
+  - Klik "Cetak" → dropdown menu dengan 3 opsi + 7 dokumen individual
+  - Klik "Preview Semua Dokumen" → modal preview muncul
+  - Modal menampilkan: Title "Preview Dokumen Pesanan #01", tombol Unduh PDF + Cetak
+  - 7 tab navigasi dokumen: 01 PESAN, 02 BANDING, 03 RENCANA, 04 SHP, 05 BAST, TOKO, SPJ
+  - Dokumen Surat Pesanan menampilkan KOP, judul, data lengkap (Rumah Roti Helena, BPU01, Terbilang)
+  - Klik tab SPJ → dokumen SPJ muncul dengan JUMLAH TOTAL, Terbilang, 3 signature blocks
+  - Klik "Cetak Semua SPJ" → modal "Cetak Semua SPJ" muncul
+  - Modal all mode: "Pesanan 1 dari 574 · Dokumen 1 dari 7"
+  - Tidak ada error, lint clean
+
+Stage Summary:
+- 2 komponen baru: DocumentPreview (modal preview), CetakMenuButton (dropdown menu)
+- 3 fitur cetak: Preview, Unduh PDF (html2pdf.js), Cetak Langsung (window.print)
+- 2 mode: single (per pesanan) dan all (semua 574 pesanan)
+- Per pesanan: 7 dokumen (Surat Pesanan, Pembanding, Rencana, SHP, BAST, Toko, SPJ)
+- Navigasi: Sebelumnya/Selanjutnya, tab dokumen, dropdown pilih pesanan

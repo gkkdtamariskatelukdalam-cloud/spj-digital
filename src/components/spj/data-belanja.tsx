@@ -45,8 +45,11 @@ import {
   Store,
   CalendarDays,
   Hash,
+  Printer,
+  Download,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { DocumentPreview, CetakMenuButton } from "@/components/spj/document-preview";
 import {
   useTransactions,
   useUpdateTransaction,
@@ -58,7 +61,7 @@ import type { Transaction } from "@/lib/types/spj";
 import { formatRupiah, formatDate, formatDateShort, getMonthName } from "@/lib/format";
 
 // === Group type: 1 No. Pesanan = 1 group with multiple items ===
-interface PesananGroup {
+export interface PesananGroup {
   key: string;
   noPesan: string;
   noBku: string;
@@ -72,6 +75,42 @@ interface PesananGroup {
   bulan: number | null;
 }
 
+// Convert PesananGroup to DocumentGroup (for document preview)
+function pesananGroupToDocGroup(g: PesananGroup): import("@/lib/types/spj").DocumentGroup {
+  return {
+    key: g.key,
+    noPesan: g.noPesan,
+    noBku: g.noBku,
+    bpuCode: g.noBku,
+    tglPesan: g.tglPesan,
+    tglBast: g.items[0]?.tglBast || null,
+    tglBayar: g.tglBayar,
+    bulan: g.bulan,
+    tahun: g.items[0]?.tahun || 2025,
+    vendorId: g.items[0]?.vendorId || null,
+    vendorName: g.vendorName,
+    vendorOwner: g.items[0]?.direkturToko1 || g.items[0]?.vendor?.owner || null,
+    vendorPhone: g.items[0]?.noHp || g.items[0]?.vendor?.phone || null,
+    vendorAddress: g.items[0]?.alamatToko1 || g.items[0]?.vendor?.address || null,
+    items: g.items.map((t) => ({
+      id: t.id,
+      uraian: t.uraian,
+      namaBarang: t.namaBarang,
+      volume: t.volume,
+      satuan: t.satuan,
+      tarifHarga: t.tarifHarga,
+      jumlah: t.jumlah,
+      realisasi: t.realisasi,
+      noBku: t.noBku,
+      noBast: t.noBast,
+      tglBayar: t.tglBayar,
+    })),
+    totalJumlah: g.totalJumlah,
+    totalRealisasi: g.totalJumlah,
+    itemCount: g.itemCount,
+  };
+}
+
 export function DataBelanja() {
   const [search, setSearch] = useState("");
   const [bulanFilter, setBulanFilter] = useState("all");
@@ -79,6 +118,13 @@ export function DataBelanja() {
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(new Set());
   const [editingTx, setEditingTx] = useState<Transaction | null>(null);
   const [showAdd, setShowAdd] = useState(false);
+  
+  // Preview state
+  const [previewGroup, setPreviewGroup] = useState<PesananGroup | null>(null);
+  const [previewMode, setPreviewMode] = useState<"single" | "all">("single");
+  const [previewAllGroups, setPreviewAllGroups] = useState<PesananGroup[]>([]);
+  const [previewDocId, setPreviewDocId] = useState<string | undefined>(undefined);
+  const [showPreview, setShowPreview] = useState(false);
 
   const bulan = bulanFilter === "all" ? undefined : parseInt(bulanFilter);
   const status = statusFilter === "all" ? undefined : statusFilter;
@@ -183,10 +229,28 @@ export function DataBelanja() {
  barang di dalam setiap pesanan.
               </CardDescription>
             </div>
-            <Button onClick={() => setShowAdd(true)} size="sm">
-              <Plus className="h-3.5 w-3.5 mr-1" />
-              Tambah Belanja
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setPreviewGroup(null);
+                  setPreviewMode("all");
+                  setPreviewAllGroups(groups);
+                  setPreviewDocId(undefined);
+                  setShowPreview(true);
+                }}
+                disabled={groups.length === 0}
+                className="h-8 text-xs border-rose-300 text-rose-700 hover:bg-rose-50 dark:text-rose-300"
+              >
+                <Printer className="h-3.5 w-3.5 mr-1" />
+                Cetak Semua SPJ
+              </Button>
+              <Button onClick={() => setShowAdd(true)} size="sm">
+                <Plus className="h-3.5 w-3.5 mr-1" />
+                Tambah Belanja
+              </Button>
+            </div>
           </div>
         </CardHeader>
       </Card>
@@ -315,6 +379,7 @@ export function DataBelanja() {
                     <th className="w-24 p-2 border-b text-center font-semibold">Jumlah Barang</th>
                     <th className="w-36 p-2 border-b text-right font-semibold">Total Nilai</th>
                     <th className="w-24 p-2 border-b text-center font-semibold">Status</th>
+                    <th className="w-32 p-2 border-b text-center font-semibold">Cetak</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -328,6 +393,13 @@ export function DataBelanja() {
                         isExpanded={isExpanded}
                         onToggle={() => toggleExpand(group.key)}
                         onEditItem={(tx) => setEditingTx(tx)}
+                        onCetakPreview={(g, docId) => {
+                          setPreviewGroup(g);
+                          setPreviewMode("single");
+                          setPreviewAllGroups([]);
+                          setPreviewDocId(docId);
+                          setShowPreview(true);
+                        }}
                       />
                     );
                   })}
@@ -345,6 +417,16 @@ export function DataBelanja() {
 
       {/* Add Dialog */}
       {showAdd && <AddBelanjaDialog onClose={() => setShowAdd(false)} />}
+
+      {/* Document Preview Modal */}
+      <DocumentPreview
+        open={showPreview}
+        onClose={() => setShowPreview(false)}
+        group={previewGroup ? pesananGroupToDocGroup(previewGroup) : null}
+        mode={previewMode}
+        allGroups={previewAllGroups.map(pesananGroupToDocGroup)}
+        initialDocId={previewDocId}
+      />
     </div>
   );
 }
@@ -356,12 +438,14 @@ function PesananRow({
   isExpanded,
   onToggle,
   onEditItem,
+  onCetakPreview,
 }: {
   group: PesananGroup;
   index: number;
   isExpanded: boolean;
   onToggle: () => void;
   onEditItem: (tx: Transaction) => void;
+  onCetakPreview: (group: PesananGroup, docId?: string) => void;
 }) {
   const isDraft = group.status === "draft";
   const isLunas = group.status === "lunas";
@@ -460,12 +544,21 @@ function PesananRow({
             </Badge>
           )}
         </td>
+        {/* Cetak button cell */}
+        <td className="p-2 border-b text-center" onClick={(e) => e.stopPropagation()}>
+          <CetakMenuButton
+            group={group}
+            onPreview={(g, docId) => onCetakPreview(g, docId)}
+            onDownload={(g) => onCetakPreview(g)}
+            onPrint={(g) => onCetakPreview(g)}
+          />
+        </td>
       </tr>
 
       {/* === Detail Items (expanded) === */}
       {isExpanded && (
         <tr>
-          <td colSpan={9} className="p-0 border-b">
+          <td colSpan={10} className="p-0 border-b">
             <div className="bg-slate-50/50 dark:bg-slate-900/30 p-3">
               <div className="mb-2 flex items-center gap-2 text-xs text-muted-foreground">
                 <Package className="h-3.5 w-3.5" />
