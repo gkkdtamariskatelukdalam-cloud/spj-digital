@@ -220,7 +220,7 @@ model LetterheadSettings {
   fontFamily      String   @default("Arial")
   lineSpacing     Int      @default(6)     // extra spacing between lines in px
   
-  // 7 text lines (KOP structure)
+  // 9 text lines (KOP structure - expanded for 2-logo KOP with CABDIS + NIS/NPSN row)
   line1Text       String   @default("PEMERINTAH PROVINSI SUMATERA UTARA")
   line1Bold       Boolean  @default(true)
   line1Size       Int      @default(14)
@@ -229,23 +229,23 @@ model LetterheadSettings {
   line2Bold       Boolean  @default(true)
   line2Size       Int      @default(14)
   
-  line3Text       String   @default("SMA NEGERI 1 TELUKDALAM")
+  line3Text       String   @default("CABDIS PENDIDIKAN WILAYAH XIV")
   line3Bold       Boolean  @default(true)
-  line3Size       Int      @default(20)
+  line3Size       Int      @default(13)
   
-  line4Text       String   @default("Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan,")
-  line4Bold       Boolean  @default(false)
-  line4Size       Int      @default(11)
+  line4Text       String   @default("SMA NEGERI 1 TELUKDALAM")
+  line4Bold       Boolean  @default(true)
+  line4Size       Int      @default(20)
   
-  line5Text       String   @default("Cabdisdik Wil XIV, Kode Pos 22865")
+  line5Text       String   @default("NIS : 300010         NPSN : 10258246        Terakreditasi A           NSS: 301071701001")
   line5Bold       Boolean  @default(false)
   line5Size       Int      @default(11)
   
-  line6Text       String   @default("Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com")
+  line6Text       String   @default("Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865")
   line6Bold       Boolean  @default(false)
   line6Size       Int      @default(11)
   
-  line7Text       String   @default("Laman : smansatelukdalam.sch.id")
+  line7Text       String   @default("Email: smansatelukdalam1987@gmail.com ; website: www.smansatelukdalam.sch.id")
   line7Bold       Boolean  @default(false)
   line7Size       Int      @default(11)
   
