@@ -340,10 +340,10 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                 verticalAlign: "top",
               }}
             >
-              <div>Penyedia,</div>
-              <div>UD. JOSUA</div>
+              <div>Penyedia</div>
+              <div>{vendorName || "—"}</div>
               <div style={{ height: "64px" }} />
-              <div style={nameStyle}>{vendorOwner}</div>
+              <div style={{ fontWeight: 400 }}>{vendorOwner || "—"}</div>
               <div>Direktur</div>
             </td>
             <td
@@ -354,8 +354,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                 verticalAlign: "top",
               }}
             >
-              <div>Pelaksana,</div>
-              <div style={{ height: "16px" }} />
+              <div>Pelaksana</div>
               <div style={{ height: "64px" }} />
               <div style={nameStyle}>{principalName}</div>
               <div>NIP. {principalNip}</div>
