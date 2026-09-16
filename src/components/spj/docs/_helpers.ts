@@ -167,8 +167,8 @@ export function pickGroupDate(group: DocumentGroup): string {
 }
 
 /**
- * Estimated completion date (tglPesan + 7 days). Returns the raw date string
- * or null when the source date is missing.
+ * Estimated completion date (tglPesan + 17 days, per spec). Returns the raw
+ * date string or null when the source date is missing.
  */
 export function estimateCompletionDate(
   group: DocumentGroup,
@@ -176,6 +176,6 @@ export function estimateCompletionDate(
   if (!group.tglPesan) return null;
   const d = parseDate(group.tglPesan);
   if (!d) return null;
-  d.setDate(d.getDate() + 7);
+  d.setDate(d.getDate() + 17);
   return d.toISOString();
 }

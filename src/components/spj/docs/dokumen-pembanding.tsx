@@ -17,6 +17,7 @@ interface DokumenPembandingProps {
 const cellStyle: CSSProperties = {
   border: "1px solid #000",
   padding: "4px 6px",
+  verticalAlign: "top",
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
@@ -27,35 +28,52 @@ const headerCellStyle: CSSProperties = {
   ...cellStyle,
   background: "#e2e8f0",
   fontWeight: 700,
+  textAlign: "center",
+};
+const borderlessTableStyle: CSSProperties = {
+  borderCollapse: "collapse",
+  width: "100%",
+};
+const labelCellNoBorder: CSSProperties = {
+  padding: "1px 6px",
+  verticalAlign: "top",
+  whiteSpace: "nowrap",
 };
 
 export function DokumenPembanding({ group, school }: DokumenPembandingProps) {
-  const vendorName = group.vendorName || "—";
+  const vendorName = orDash(group.vendorName);
   const tglPesan = group.tglPesan;
   const formattedDate = formatDate(tglPesan);
 
   return (
     <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
-      {/* === Title === */}
+      {/* === Title (centered, bold, NO underline, 14pt) === */}
       <div className="text-center mb-5">
-        <h1 className="font-bold uppercase text-[14px] underline underline-offset-4">
-          DOKUMEN HASIL PEMBANDING
-        </h1>
+        <h1 className="font-bold text-[14px]">DOKUMEN HASIL PEMBANDING</h1>
       </div>
 
-      {/* === Meta block === */}
-      <div className="mb-4 space-y-1 text-[12px]">
-        <div>
-          <span className="font-semibold">Satuan Pendidikan:</span>{" "}
-          {schoolName(school)}
-        </div>
-        <div>
-          <span className="font-semibold">Hasil pembanding:</span> Tercapai
-          kesepakatan pembelian dengan {vendorName}
-        </div>
-        <div>
-          <span className="font-semibold">Tanggal:</span> {formattedDate}
-        </div>
+      {/* === Plain-text info (borderless 2-col table) === */}
+      <div className="mb-4">
+        <table style={borderlessTableStyle}>
+          <tbody>
+            <tr>
+              <td style={{ ...labelCellNoBorder, width: "180px" }}>
+                Satuan Pendidikan
+              </td>
+              <td style={labelCellNoBorder}>: {schoolName(school)}</td>
+            </tr>
+            <tr>
+              <td style={labelCellNoBorder}>Hasil pembanding</td>
+              <td style={labelCellNoBorder}>
+                : Tercapai kesepakatan pembelian dengan {vendorName}
+              </td>
+            </tr>
+            <tr>
+              <td style={labelCellNoBorder}>Tanggal</td>
+              <td style={labelCellNoBorder}>: {formattedDate}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       {/* === Comparison table === */}
@@ -63,14 +81,12 @@ export function DokumenPembanding({ group, school }: DokumenPembandingProps) {
         <table style={tableStyle}>
           <thead>
             <tr>
-              <th style={{ ...headerCellStyle, textAlign: "center", width: "40px" }}>
-                No
-              </th>
+              <th style={{ ...headerCellStyle, width: "40px" }}>No</th>
               <th style={{ ...headerCellStyle, textAlign: "left" }}>
                 Nama Produk
               </th>
               <th style={{ ...headerCellStyle, textAlign: "right", width: "180px" }}>
-                Harga ({vendorName})
+                Estimasi Harga
               </th>
             </tr>
           </thead>
@@ -111,25 +127,19 @@ export function DokumenPembanding({ group, school }: DokumenPembandingProps) {
         beberapa penyedia.
       </p>
 
-      {/* === Date & signature === */}
-      <div className="flex justify-end mb-4">
-        <div className="text-right text-[12px]">
-          <div>Telukdalam, {formattedDate}</div>
-        </div>
+      {/* === Right-aligned date & signature === */}
+      <div className="text-right text-[12px] mb-3">
+        <div>Telukdalam, {formattedDate}</div>
+        <div>Mengetahui,</div>
+        <div>Kepala Sekolah</div>
       </div>
 
-      <div className="flex justify-center text-center text-[12px]">
-        <div>
-          <div className="font-medium">Mengetahui,</div>
-          <div>Kepala Sekolah</div>
-          <div className="h-16" />
-          <div className="font-semibold underline underline-offset-4">
-            {orDash(school?.principalName)}
-          </div>
-          <div className="text-[11px]">
-            NIP. <span className="font-mono">{orDash(school?.principalNip)}</span>
-          </div>
+      <div className="text-right text-[12px]">
+        <div style={{ height: "56px" }} />
+        <div style={{ fontWeight: 700, textDecoration: "underline" }}>
+          {orDash(school?.principalName)}
         </div>
+        <div>NIP. {orDash(school?.principalNip)}</div>
       </div>
     </div>
   );

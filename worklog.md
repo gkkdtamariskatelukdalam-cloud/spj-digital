@@ -795,3 +795,89 @@ Stage Summary:
 - Toko template: 2-row numbered header (1-6) sesuai format RAB Indonesia
 - BAST template: 3rd signature "Pemeriksa Barang" dengan goodsManagerName + NIP
 - Semua dokumen siap dicetak dengan format yang sama persis dengan PDF output Excel
+
+---
+Task ID: 9-exact-pdf-match
+Agent: Sub-agent (general-purpose)
+Task: Rebuild all 7 SPJ templates to EXACT PDF format — every detail (info-as-table vs plain-text, merged header rows, signature block layout, alignment, page break, completion date +17 days) must match the user's actual PDF output.
+
+Work Log:
+- Read worklog.md to understand previous work (Task 1 main app, Task 2-a SPJ APIs, Task 3-a/b/c/d/e UI, Task 4-fix, Task 5-templates initial layout, Task 6-letterhead-update, Task 7-KOP-SETTINGS, Task 8-PDF-MATCH-FIRST PASS which already added borders & Times New Roman but kept `<div>` info blocks and wrong signatures).
+- Read all 7 existing template files + `_helpers.ts` + `letterhead.tsx` + `globals.css` + `/lib/format.ts` to understand current state and helpers available.
+- KEY DIFFERENCES from previous version that this task fixes:
+  1. `surat-pesanan.tsx` — info block was `<div>` list, now proper 3-col TABLE with merged "Catatan Pengiriman" cell; "RINCIAN PEKERJAAN" was OUTSIDE table, now MERGED HEADER ROW INSIDE; "Total Pembayaran"/"Terbilang" were a JUMLAH row IN table, now OUTSIDE the table (bold + italic); "Telukdalam, {date}" was right-aligned, now CENTERED; signatures were "Kepala Sekolah/Bendahara" WRONG, now "Direktur (vendor) / Pelaksana (principal) + NIP" per spec; completion date was +7 days, now +17 days.
+  2. `surat-penawaran-toko.tsx` — vendor letterhead was small text, now HUGE (26px) centered title + centered address + thick (3px) horizontal rule; body text was generic, now EXACT spec text with doc-number/date injected; ADDED page-break-after:always between letter and DAFTAR KUANTITAS DAN HARGA; title now UNDERLINED + thick rule below; "Total Harga"/"Terbilang" now RIGHT-aligned (was left); added final right-aligned signature block on page 2.
+  3. `dokumen-rencana.tsx` — was title `<h1>` + plain `<div>` meta + small 3-col items table, now ONE BIG TABLE (3 cols, 2px outer / 1px inner border) with: merged "DOKUMEN PERENCANAAN" title row, info rows (Nama/Alamat/Kategori/Jenis+KETERANGAN sub-header/Jumlah), then spesifikasi section using rowspan for the merged label cell + ✓ | No | uraian rows; signature changed from "Mengetahui/Kepala Sekolah" to "Pelaksana," + principalName (bold underline) + NIP, all right-aligned.
+  4. `surat-hasil-pemeriksaan.tsx` — info block was `<ul>` list with bullets, now PLAIN TEXT in borderless 2-col table (label : value) matching PDF exactly; "Yang bertandatangan di bawah ini:" is bold; receiver info also as plain text table; signature was single-column "Pemeriksa, Penerima Barang", now proper 3-COLUMN table: PIHAK KEDUA (receiver) | PEMERIKSA BARANG (goodsManager + Penata Muda + NIP) | PIHAK PERTAMA (vendor/Direktur); title underline removed (just bold per spec).
+  5. `berita-acara-serah-terima.tsx` — info block was `<ul>` list, now plain-text table; numbered list (1, 2) now uses proper indentation (24px) + nested borderless tables for label:value rows; signature was 2-col + bottom-center, now proper 3-COLUMN table (same as SHP); title underline removed.
+  6. `dokumen-pembanding.tsx` — title underline removed (just bold per spec); table header changed from "Harga ({vendorName})" to "Estimasi Harga" per spec; info kept as plain text; signature kept right-aligned "Mengetahui/Kepala Sekolah" + bold underlined name + NIP.
+  7. `surat-pertanggungjawaban.tsx` — title underline removed (just bold per spec); JUMLAH TOTAL row changed from colspan=5 to colspan=4 (label spans No+Uraian+Vol+Satuan) + empty Tarif cell + value in Jumlah cell, matching the 3-cell layout shown in spec ascii art; "Terbilang :" line is italic (was mixed font-semibold+italic, now pure italic per spec); signature block refactored to use borderless `<table>` for proper 3-col layout (Mengetahui/Kepala Sekolah | Bendahara | Penerima/vendor) with bold-underlined names.
+- Also updated `_helpers.ts`: changed `estimateCompletionDate` from +7 days to +17 days per spec (only used in surat-pesanan).
+- GLOBAL PATTERNS applied across all 7 files:
+  - Tables: 1px solid #000 borders on every cell, border-collapse:collapse, padding 4px 6px
+  - Headers: bold + center-aligned + light gray background (#e2e8f0)
+  - Signature blocks: borderless `<table>` (no border on cells) for proper multi-column layout
+  - Signature names: fontWeight:700 + textDecoration:underline (inline style, not Tailwind)
+  - Numeric columns: text-align:right; No columns: text-align:center; text columns: text-align:left
+  - Date "Telukdalam, {date}": right-aligned EXCEPT in surat-pesanan (centered per spec)
+  - Multi-line cells (e.g., "Waktu Pengerjaan Pesanan:\n   {date}"): use nested `<div>` with paddingLeft:12px for indentation
+- Verified all components still match the existing signature `{ group: DocumentGroup; school: School | null }` used by `documents.tsx`.
+- Lint: `bun run lint` passes with 0 errors.
+- TypeScript: `npx tsc --noEmit` shows no errors in `src/components/spj/docs/*` (the 5 errors reported are all pre-existing in unrelated files: `examples/websocket/*`, `skills/image-edit/*`, `skills/stock-analysis-skill/*`, and `src/app/api/spj/document-groups/route.ts`).
+
+Stage Summary:
+- All 7 SPJ templates rebuilt to EXACT PDF format per user spec.
+- KEY fixes vs previous version:
+  - `surat-pesanan`: info TABLE + RINCIAN merged-header + OUTSIDE-table total + centered date + Direktur/Pelaksana signature (was wrong before).
+  - `surat-penawaran-toko`: HUGE vendor letterhead + page break + UNDERLINED title + right-aligned total/terbilang + final signature on page 2.
+  - `dokumen-rencana`: ONE big table with merged title + rowspan spesifikasi label + right-aligned Pelaksana signature.
+  - `surat-hasil-pemeriksaan`: PLAIN TEXT info (was `<ul>`) + proper 3-col signature with goodsManager in center column.
+  - `berita-acara-serah-terima`: PLAIN TEXT info + numbered indented list + proper 3-col signature (was 2-col + bottom-center).
+  - `dokumen-pembanding`: removed title underline + renamed "Harga ({vendor})" → "Estimasi Harga".
+  - `surat-pertanggungjawaban`: removed title underline + JUMLAH TOTAL colspan=4 (was 5) + italic-only Terbilang + borderless 3-col signature table.
+- _helpers.ts: `estimateCompletionDate` now +17 days (was +7).
+- Lint clean, TypeScript clean for spj/docs/* files.
+- Ready for user to verify visually against the PDFs.
+
+---
+Task ID: 9-EXACT-PDF-MATCH
+Agent: Main (Claude)
+Task: Membuat semua template dokumen SAMA PERSIS dengan format PDF output dari Excel user
+
+Work Log:
+- Analisa ulang SEMUA 5 PDF dengan high-res images (200 DPI) menggunakan VLM skill:
+  - Toko_04_2025.pdf: UD. JOSUA header besar (26px centered) + 2-row header tabel (1-6) + total+terbilang di bawah tabel
+  - 01PESAN_07_2025.pdf: KOP + info block dalam TABEL 3-col + RINCIAN PEKERJAAN header merged + 2-col signature (Direktur vendor / Pelaksana sekolah)
+  - 03RENCANA_07_2025.pdf: NO KOP, langsung tabel besar dengan border tebal + signature kanan (Pelaksana)
+  - 04SHP_04_2025.pdf: KOP + plain text info (NOT tabel) + 5-col tabel + 3-col signature (PIHAK KEDUA / PEMERIKSA BARANG / PIHAK PERTAMA)
+  - 05BAT_08_2025.pdf: KOP + numbered list (1,2) plain text + 5-col tabel + 3-col signature
+- Rebuild semua 7 template dengan format EXACT:
+  1. surat-pesanan.tsx: info block TABLE 3-col dengan merge cells + RINCIAN PEKERJAAN inside table + Total Pembayaran + Terbilang outside + 2-col signature (Direktur/Pelaksana)
+  2. surat-penawaran-toko.tsx: UD. JOSUA 26px centered + page break + DAFTAR KUANTITAS + 2-row header (1-6) + Total+Terbilang right-aligned
+  3. dokumen-rencana.tsx: NO KOP, one big table 2px outer border + "Pelaksana," signature
+  4. surat-hasil-pemeriksaan.tsx: plain text info (NOT tabel) + 5-col tabel + 3-col signature
+  5. berita-acara-serah-terima.tsx: plain text + numbered list + 5-col tabel + 3-col signature
+  6. dokumen-pembanding.tsx: title + plain text + 3-col tabel + 1-col signature
+  7. surat-pertanggungjawaban.tsx: KOP + 6-col tabel + JUMLAH TOTAL + Terbilang + 3-col signature
+- Fix duplicate uraian/namaBarang text di SEMUA 7 template:
+  - Sebelumnya: menampilkan {item.uraian} + {item.namaBarang} secara duplikat
+  - Sekarang: menampilkan {item.namaBarang || item.uraian} (hanya satu)
+- Fix spacing nomor di dokumen-rencana.tsx: tambah paddingRight 8px pada span nomor
+- Verifikasi Agent Browser:
+  - Toko: UD. JOSUA header + 2-row header (1-6) + Total Harga + Terbilang + signature, NO duplicate text
+  - 01PESAN: info block TABLE + RINCIAN PEKERJAAN + Total Pembayaran + Terbilang + 2-col signature (Gestiwan Bazikho/Direktur | Nursari/Pelaksana/NIP)
+  - 03RENCANA: NO KOP, big table with DOKUMEN PERENCANAAN + info + spesifikasi with ✓ + Pelaksana signature
+  - 04SHP: KOP + plain text info + 5-col tabel (66 items, Kondisi=Baik) + 3-col signature (PIHAK KEDUA | PEMERIKSA BARANG | PIHAK PERTAMA)
+  - 05BAT: KOP + numbered list + 5-col tabel + 3-col signature (same as SHP)
+  - SPJ: KOP + 6-col tabel + JUMLAH TOTAL + Terbilang + 3-col signature (Kepala Sekolah | Bendahara | Penerima)
+- Lint clean, no console errors, semua API 200 OK
+
+Stage Summary:
+- 7 template dokumen di-rebuild dengan format EXACT sesuai PDF output Excel user
+- Border tabel: 1px solid black di setiap cell, border-collapse: collapse
+- Font: Times New Roman untuk semua dokumen
+- Signature blocks match PDF: 2-col (Pesanan), 3-col (SHP/BAST/SPJ), 1-col (Toko/Pembanding), 1-col right (Rencana)
+- Info block: TABEL untuk Pesanan, PLAIN TEXT untuk SHP/BAST
+- Toko: UD. JOSUA header besar (bukan KOP sekolah) + 2-row numbered header (1-6)
+- Rencana: NO KOP, langsung tabel besar dengan border tebal
+- Fix duplicate text: hanya tampilkan namaBarang || uraian (tidak keduanya)

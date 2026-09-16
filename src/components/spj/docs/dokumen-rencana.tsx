@@ -7,6 +7,7 @@ import { orDash, schoolAddress, schoolName } from "./_helpers";
 
 // ============================================================
 // 03RENCANA — Dokumen Perencanaan
+// Entire document is ONE big table (3 cols, 2px outer / 1px inner).
 // ============================================================
 
 interface DokumenRencanaProps {
@@ -17,123 +18,142 @@ interface DokumenRencanaProps {
 const cellStyle: CSSProperties = {
   border: "1px solid #000",
   padding: "4px 6px",
+  verticalAlign: "top",
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
   width: "100%",
-  border: "1px solid #000",
+  border: "2px solid #000",
 };
-const headerCellStyle: CSSProperties = {
+const titleCellStyle: CSSProperties = {
   ...cellStyle,
-  background: "#e2e8f0",
+  textAlign: "center",
   fontWeight: 700,
+  fontSize: "14px",
+  padding: "8px 6px",
+};
+const labelCellStyle: CSSProperties = {
+  ...cellStyle,
+  fontWeight: 600,
+};
+const subHeaderCellStyle: CSSProperties = {
+  ...cellStyle,
+  fontWeight: 700,
+  textAlign: "center",
 };
 
 export function DokumenRencana({ group, school }: DokumenRencanaProps) {
+  const itemCount = group.itemCount;
+  const items = group.items;
+
   return (
     <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
-      {/* === Title === */}
-      <div className="text-center mb-5">
-        <h1 className="font-bold uppercase text-[14px] underline underline-offset-4">
-          DOKUMEN PERENCANAAN
-        </h1>
-      </div>
+      {/* === ONE big table === */}
+      <table style={tableStyle}>
+        <tbody>
+          {/* Title row (merged across all 3 cols) */}
+          <tr>
+            <td style={titleCellStyle} colSpan={3}>
+              DOKUMEN PERENCANAAN
+            </td>
+          </tr>
 
-      {/* === Meta block === */}
-      <div className="mb-4 space-y-1 text-[12px]">
-        <div>
-          <span className="font-semibold">Nama Satuan Pendidikan:</span>{" "}
-          {schoolName(school)}
-        </div>
-        <div>
-          <span className="font-semibold">Alamat Satuan Pendidikan:</span>{" "}
-          {schoolAddress(school)}
-        </div>
-        <div>
-          <span className="font-semibold">Kategori Barang/Jasa:</span> Alat
-          Tulis Kantor (ATK)
-        </div>
-        <div>
-          <span className="font-semibold">Jenis:</span> KETERANGAN
-        </div>
-        <div>
-          <span className="font-semibold">Jumlah Barang/Jasa:</span>{" "}
-          {group.itemCount}
-        </div>
-      </div>
+          {/* Nama Satuan Pendidikan */}
+          <tr>
+            <td style={{ ...labelCellStyle, width: "30%" }}>
+              Nama Satuan Pendidikan
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              {schoolName(school)}
+            </td>
+          </tr>
 
-      {/* === Spesifikasi table === */}
-      <div className="mb-4">
-        <div className="font-semibold text-[12px] mb-2">
-          Spesifikasi/ruang lingkup barang/jasa:
-        </div>
-        <table style={tableStyle}>
-          <thead>
+          {/* Alamat Satuan Pendidikan */}
+          <tr>
+            <td style={labelCellStyle}>Alamat Satuan Pendidikan</td>
+            <td style={cellStyle} colSpan={2}>
+              {schoolAddress(school)}
+            </td>
+          </tr>
+
+          {/* Kategori Barang/Jasa */}
+          <tr>
+            <td style={labelCellStyle}>Kategori Barang/Jasa</td>
+            <td style={cellStyle} colSpan={2}>
+              Alat Tulis Kantor (ATK)
+            </td>
+          </tr>
+
+          {/* Jenis + KETERANGAN (sub-header, col 2-3 merged) */}
+          <tr>
+            <td style={labelCellStyle}>Jenis</td>
+            <td style={subHeaderCellStyle} colSpan={2}>
+              KETERANGAN
+            </td>
+          </tr>
+
+          {/* Jumlah Barang/Jasa */}
+          <tr>
+            <td style={labelCellStyle}>Jumlah Barang/Jasa</td>
+            <td style={{ ...cellStyle, textAlign: "center", width: "10%" }}>
+              {itemCount}
+            </td>
+            <td style={cellStyle}>&nbsp;</td>
+          </tr>
+
+          {/* Spesifikasi section: col 1 = label (rowspan), col 2 = ✓, col 3 = item */}
+          {items.length === 0 ? (
             <tr>
-              <th style={{ ...headerCellStyle, textAlign: "center", width: "32px" }}>
-                ✓
-              </th>
-              <th style={{ ...headerCellStyle, textAlign: "center", width: "40px" }}>
-                No
-              </th>
-              <th style={{ ...headerCellStyle, textAlign: "left" }}>
-                Spesifikasi Barang/Jasa
-              </th>
+              <td style={labelCellStyle}>Spesifikasi/ruang lingkup barang/jasa:</td>
+              <td style={cellStyle} colSpan={2}>
+                Tidak ada item.
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {group.items.length === 0 ? (
+          ) : (
+            <>
               <tr>
                 <td
-                  colSpan={3}
-                  style={{ ...cellStyle, textAlign: "center", color: "#64748b" }}
+                  style={labelCellStyle}
+                  rowSpan={items.length}
                 >
-                  Tidak ada item.
+                  Spesifikasi/ruang lingkup barang/jasa:
+                </td>
+                <td style={{ ...cellStyle, textAlign: "center" }}>✓</td>
+                <td style={cellStyle}>
+                  <span style={{ display: "inline-block", width: "30px", textAlign: "right", paddingRight: "8px" }}>
+                    1
+                  </span>
+                  {items[0].namaBarang || items[0].uraian}
                 </td>
               </tr>
-            ) : (
-              group.items.map((item, idx) => (
+              {items.slice(1).map((item, idx) => (
                 <tr key={item.id}>
-                  <td style={{ ...cellStyle, textAlign: "center" }}>
-                    ✓
-                  </td>
-                  <td style={{ ...cellStyle, textAlign: "center" }}>
-                    {idx + 1}
-                  </td>
-                  <td style={{ ...cellStyle, textAlign: "left" }}>
-                    <div className="font-medium">{item.uraian}</div>
-                    {item.namaBarang && (
-                      <div className="text-[10px] italic text-slate-600">
-                        {item.namaBarang}
-                      </div>
-                    )}
+                  <td style={{ ...cellStyle, textAlign: "center" }}>✓</td>
+                  <td style={cellStyle}>
+                    <span style={{ display: "inline-block", width: "30px", textAlign: "right", paddingRight: "8px" }}>
+                      {idx + 2}
+                    </span>
+                    {item.namaBarang || item.uraian}
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ))}
+            </>
+          )}
+        </tbody>
+      </table>
+
+      {/* === Right-aligned date & signature === */}
+      <div className="text-right mt-6 mb-3 text-[12px]">
+        <div>Telukdalam, {formatDate(group.tglPesan)}</div>
+        <div>Pelaksana,</div>
       </div>
 
-      {/* === Date & signature === */}
-      <div className="flex justify-end mb-4 mt-6">
-        <div className="text-right text-[12px]">
-          <div>Telukdalam, {formatDate(group.tglPesan)}</div>
+      <div className="text-right text-[12px]">
+        <div style={{ height: "56px" }} />
+        <div style={{ fontWeight: 700, textDecoration: "underline" }}>
+          {orDash(school?.principalName)}
         </div>
-      </div>
-
-      <div className="flex justify-center text-center text-[12px]">
-        <div>
-          <div className="font-medium">Mengetahui,</div>
-          <div>Kepala Sekolah</div>
-          <div className="h-16" />
-          <div className="font-semibold underline underline-offset-4">
-            {orDash(school?.principalName)}
-          </div>
-          <div className="text-[11px]">
-            NIP. <span className="font-mono">{orDash(school?.principalNip)}</span>
-          </div>
-        </div>
+        <div>NIP. {orDash(school?.principalNip)}</div>
       </div>
     </div>
   );

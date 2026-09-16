@@ -3,10 +3,11 @@
 import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate, formatNumber, terbilang } from "@/lib/format";
-import { capitalize, orDash } from "./_helpers";
+import { capitalize, groupRomanMonth, orDash } from "./_helpers";
 
 // ============================================================
 // Toko — Surat Penawaran Toko / Penyedia
+// Uses VENDOR letterhead (no school KOP).
 // ============================================================
 
 interface SuratPenawaranTokoProps {
@@ -17,6 +18,7 @@ interface SuratPenawaranTokoProps {
 const cellStyle: CSSProperties = {
   border: "1px solid #000",
   padding: "4px 6px",
+  verticalAlign: "top",
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
@@ -27,71 +29,109 @@ const headerCellStyle: CSSProperties = {
   ...cellStyle,
   background: "#e2e8f0",
   fontWeight: 700,
+  textAlign: "center",
 };
 
 export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
-  const vendorName = group.vendorName || "—";
-  const vendorAddress = group.vendorAddress || "—";
-  const vendorOwner = group.vendorOwner || "—";
+  const vendorName = orDash(group.vendorName);
+  const vendorAddress = orDash(group.vendorAddress);
+  const vendorOwner = orDash(group.vendorOwner);
   const tglPesan = group.tglPesan;
   const total = group.totalJumlah;
+  const romanMonth = groupRomanMonth(group);
+  const docNumber = `421.3/${group.noPesan || "—"}-P/DB/SMANSATLD/${romanMonth}/${group.tahun}`;
 
-  // School name from prop or default; we only need it for the recipient address
-  const schoolName = school?.name ?? "SMA Negeri 1 Telukdalam";
+  // School name from prop or default; only used for the recipient address
+  const schoolNameStr = school?.name ?? "SMA Negeri 1 Telukdalam";
 
   return (
     <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
-      {/* === Letterhead (vendor) === */}
-      <div className="mb-4">
-        <div className="font-bold uppercase text-[14px]">{vendorName}</div>
-        <div className="text-[11px]">{vendorAddress}</div>
-      </div>
-
-      {/* === Date === */}
-      <div className="flex justify-end mb-4">
-        <div className="text-right text-[12px]">
-          <div>Telukdalam, {formatDate(tglPesan)}</div>
+      {/* === VENDOR Letterhead === */}
+      <div className="text-center mb-2">
+        <div
+          className="font-bold uppercase"
+          style={{ fontSize: "26px", letterSpacing: "1px" }}
+        >
+          {vendorName}
         </div>
+        <div style={{ fontSize: "11px", marginTop: "2px" }}>{vendorAddress}</div>
+        <div
+          style={{
+            borderTop: "3px solid #000",
+            marginTop: "6px",
+          }}
+        />
       </div>
 
-      {/* === Recipient === */}
-      <div className="mb-4 text-[12px]">
+      {/* === Right-aligned date === */}
+      <div className="text-right mb-4 text-[12px]">
+        Telukdalam, {formatDate(tglPesan)}
+      </div>
+
+      {/* === Recipient (left-aligned) === */}
+      <div className="mb-4 text-[12px] leading-relaxed">
         <div>Kepada Yth.</div>
-        <div>Kepala {schoolName}</div>
+        <div>Kepala {schoolNameStr}</div>
         <div>Cq. Penanggungjawab Kegiatan</div>
-        <div>di Tempat</div>
+        <div>di</div>
+        <div style={{ paddingLeft: "24px" }}>Tempat</div>
       </div>
 
-      {/* === Subject & greeting === */}
-      <div className="mb-3 text-[12px]">
-        <span className="font-semibold">Perihal: Pesanan Barang</span>
-      </div>
-      <p className="text-justify mb-4 text-[12px]">
-        Dengan hormat, Memenuhi maksud surat permohonan Ibu kepada kami untuk
-        menyediakan Alat Tulis Kantor (ATK), maka berikut ini kami sampaikan
-        daftar kuantitas dan harga:
+      {/* === Subject (bold) === */}
+      <div className="mb-3 text-[12px] font-bold">Perihal : Pesanan Barang</div>
+
+      {/* === Greeting + body === */}
+      <p className="text-justify mb-5 text-[12px] leading-relaxed">
+        Dengan hormat,
+        <br />
+        Memenuhi maksud surat permohonan Ibu kepada kami untuk menyediakan Alat
+        Tulis Kantor (ATK) sesuai dengan pesanan Nomor: {docNumber}, Tanggal{" "}
+        {formatDate(tglPesan)}, bersama ini kami bersedia untuk mengadakannya.
+        Bon faktur turut terlampir. Demikian, atas perhatian diucapkan terima
+        kasih.
       </p>
 
-      {/* === Items table === */}
-      <div className="mb-4">
-        <div className="font-semibold text-[12px] mb-2">
-          DAFTAR KUANTITAS DAN HARGA
+      {/* === Right-aligned signature === */}
+      <div className="text-right mb-2 text-[12px]">
+        <div className="font-bold uppercase">{vendorName}</div>
+        <div style={{ height: "56px" }} />
+        <div style={{ fontWeight: 700, textDecoration: "underline" }}>
+          {vendorOwner}
         </div>
+        <div>Direktur</div>
+      </div>
+
+      {/* === PAGE BREAK === */}
+      <div style={{ pageBreakAfter: "always" }} />
+
+      {/* === Second page: DAFTAR KUANTITAS DAN HARGA === */}
+      <div className="text-center mb-4">
+        <h1
+          className="font-bold uppercase"
+          style={{ fontSize: "14px", textDecoration: "underline" }}
+        >
+          DAFTAR KUANTITAS DAN HARGA
+        </h1>
+        <div
+          style={{
+            borderTop: "3px solid #000",
+            marginTop: "6px",
+            width: "60%",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        />
+      </div>
+
+      {/* === Items table with 2-row header === */}
+      <div className="mb-4">
         <table style={tableStyle}>
           <thead>
             <tr>
-              <th style={{ ...headerCellStyle, textAlign: "center", width: "40px" }}>
-                No
-              </th>
-              <th style={{ ...headerCellStyle, textAlign: "left" }}>
-                Uraian
-              </th>
-              <th style={{ ...headerCellStyle, textAlign: "center", width: "70px" }}>
-                Volume
-              </th>
-              <th style={{ ...headerCellStyle, textAlign: "center", width: "90px" }}>
-                Satuan
-              </th>
+              <th style={{ ...headerCellStyle, width: "40px" }}>No</th>
+              <th style={{ ...headerCellStyle, textAlign: "left" }}>Uraian</th>
+              <th style={{ ...headerCellStyle, width: "70px" }}>Volume</th>
+              <th style={{ ...headerCellStyle, width: "90px" }}>Satuan</th>
               <th style={{ ...headerCellStyle, textAlign: "right", width: "130px" }}>
                 Harga Satuan
               </th>
@@ -100,12 +140,12 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
               </th>
             </tr>
             <tr>
-              <th style={{ ...headerCellStyle, textAlign: "center" }}>1</th>
-              <th style={{ ...headerCellStyle, textAlign: "center" }}>2</th>
-              <th style={{ ...headerCellStyle, textAlign: "center" }}>3</th>
-              <th style={{ ...headerCellStyle, textAlign: "center" }}>4</th>
-              <th style={{ ...headerCellStyle, textAlign: "center" }}>5</th>
-              <th style={{ ...headerCellStyle, textAlign: "center" }}>6</th>
+              <th style={headerCellStyle}>1</th>
+              <th style={headerCellStyle}>2</th>
+              <th style={headerCellStyle}>3</th>
+              <th style={headerCellStyle}>4</th>
+              <th style={headerCellStyle}>5</th>
+              <th style={headerCellStyle}>6</th>
             </tr>
           </thead>
           <tbody>
@@ -125,12 +165,7 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
                     {idx + 1}
                   </td>
                   <td style={{ ...cellStyle, textAlign: "left" }}>
-                    <div className="font-medium">{item.uraian}</div>
-                    {item.namaBarang && (
-                      <div className="text-[10px] italic text-slate-600">
-                        {item.namaBarang}
-                      </div>
-                    )}
+                    <div className="font-medium">{item.namaBarang || item.uraian}</div>
                   </td>
                   <td style={{ ...cellStyle, textAlign: "center" }}>
                     {formatNumber(item.volume)}
@@ -141,7 +176,7 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
                   <td style={{ ...cellStyle, textAlign: "right" }}>
                     Rp {formatNumber(item.tarifHarga)}
                   </td>
-                  <td style={{ ...cellStyle, textAlign: "right", fontWeight: 500 }}>
+                  <td style={{ ...cellStyle, textAlign: "right" }}>
                     Rp {formatNumber(item.jumlah)}
                   </td>
                 </tr>
@@ -151,28 +186,25 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
         </table>
       </div>
 
-      {/* === Total & Terbilang (below table, not in table) === */}
-      <div className="mb-5 text-[12px] space-y-1">
-        <div>
-          <span className="font-semibold">Total Harga:</span>{" "}
-          Rp {formatNumber(total)}
+      {/* === Total & Terbilang (OUTSIDE table, right-aligned) === */}
+      <div className="mb-5 text-[12px] text-right space-y-1">
+        <div className="font-bold">
+          Total Harga : Rp {formatNumber(total)}
         </div>
-        <div>
-          <span className="font-semibold">Terbilang:</span>{" "}
-          <span className="italic">{capitalize(terbilang(total))}</span>
+        <div className="italic">
+          Terbilang : {capitalize(terbilang(total))}
         </div>
       </div>
 
-      {/* === Signature === */}
-      <div className="flex justify-end mt-6">
-        <div className="text-center text-[12px]">
-          <div className="font-semibold uppercase">{vendorName}</div>
-          <div className="h-20" />
-          <div className="font-semibold underline underline-offset-4">
-            {vendorOwner}
-          </div>
-          <div>Direktur</div>
+      {/* === Final right-aligned signature === */}
+      <div className="text-right text-[12px]">
+        <div>Telukdalam, {formatDate(tglPesan)}</div>
+        <div className="font-bold uppercase mt-1">{vendorName}</div>
+        <div style={{ height: "56px" }} />
+        <div style={{ fontWeight: 700, textDecoration: "underline" }}>
+          {vendorOwner}
         </div>
+        <div>Direktur</div>
       </div>
     </div>
   );

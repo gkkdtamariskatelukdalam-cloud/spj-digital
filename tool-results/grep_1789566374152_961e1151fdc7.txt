@@ -1,0 +1,192 @@
+/home/z/my-project/src/app/globals.css:133:  #spj-document-print,
+/home/z/my-project/src/app/globals.css:134:  #spj-document-print * {
+/home/z/my-project/src/app/globals.css:137:  #spj-document-print {
+/home/z/my-project/src/components/spj/documents.tsx:41:import { SuratPesanan } from "@/components/spj/docs/surat-pesanan";
+/home/z/my-project/src/components/spj/documents.tsx:42:import { DokumenPembanding } from "@/components/spj/docs/dokumen-pembanding";
+/home/z/my-project/src/components/spj/documents.tsx:43:import { DokumenRencana } from "@/components/spj/docs/dokumen-rencana";
+/home/z/my-project/src/components/spj/documents.tsx:44:import { SuratHasilPemeriksaan } from "@/components/spj/docs/surat-hasil-pemeriksaan";
+/home/z/my-project/src/components/spj/documents.tsx:45:import { BeritaAcaraSerahTerima } from "@/components/spj/docs/berita-acara-serah-terima";
+/home/z/my-project/src/components/spj/documents.tsx:46:import { SuratPenawaranToko } from "@/components/spj/docs/surat-penawaran-toko";
+/home/z/my-project/src/components/spj/documents.tsx:47:import { SuratPertanggungjawaban } from "@/components/spj/docs/surat-pertanggungjawaban";
+/home/z/my-project/src/components/spj/documents.tsx:345:                <div id="spj-document-print" className="bg-white text-slate-900">
+/home/z/my-project/src/components/spj/documents.tsx:347:                    <SuratPesanan group={selectedGroup} school={school} />
+/home/z/my-project/src/components/spj/documents.tsx:350:                    <DokumenPembanding group={selectedGroup} school={school} />
+/home/z/my-project/src/components/spj/documents.tsx:353:                    <DokumenRencana group={selectedGroup} school={school} />
+/home/z/my-project/src/components/spj/documents.tsx:356:                    <SuratHasilPemeriksaan group={selectedGroup} school={school} />
+/home/z/my-project/src/components/spj/documents.tsx:359:                    <BeritaAcaraSerahTerima group={selectedGroup} school={school} />
+/home/z/my-project/src/components/spj/documents.tsx:362:                    <SuratPenawaranToko group={selectedGroup} school={school} />
+/home/z/my-project/src/components/spj/documents.tsx:365:                    <SuratPertanggungjawaban group={selectedGroup} school={school} />
+/home/z/my-project/src/components/spj/docs/surat-pesanan.tsx:18:interface SuratPesananProps {
+/home/z/my-project/src/components/spj/docs/surat-pesanan.tsx:43:export function SuratPesanan({ group, school }: SuratPesananProps) {
+/home/z/my-project/src/components/spj/docs/surat-penawaran-toko.tsx:12:interface SuratPenawaranTokoProps {
+/home/z/my-project/src/components/spj/docs/surat-penawaran-toko.tsx:32:export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
+/home/z/my-project/src/components/spj/docs/surat-hasil-pemeriksaan.tsx:21:interface SuratHasilPemeriksaanProps {
+/home/z/my-project/src/components/spj/docs/surat-hasil-pemeriksaan.tsx:41:export function SuratHasilPemeriksaan({
+/home/z/my-project/src/components/spj/docs/surat-hasil-pemeriksaan.tsx:44:}: SuratHasilPemeriksaanProps) {
+/home/z/my-project/src/components/spj/docs/dokumen-pembanding.tsx:12:interface DokumenPembandingProps {
+/home/z/my-project/src/components/spj/docs/dokumen-pembanding.tsx:32:export function DokumenPembanding({ group, school }: DokumenPembandingProps) {
+/home/z/my-project/src/components/spj/docs/berita-acara-serah-terima.tsx:21:interface BeritaAcaraSerahTerimaProps {
+/home/z/my-project/src/components/spj/docs/berita-acara-serah-terima.tsx:41:export function BeritaAcaraSerahTerima({
+/home/z/my-project/src/components/spj/docs/berita-acara-serah-terima.tsx:44:}: BeritaAcaraSerahTerimaProps) {
+/home/z/my-project/src/components/spj/docs/surat-pertanggungjawaban.tsx:18:interface SuratPertanggungjawabanProps {
+/home/z/my-project/src/components/spj/docs/surat-pertanggungjawaban.tsx:43:export function SuratPertanggungjawaban({
+/home/z/my-project/src/components/spj/docs/surat-pertanggungjawaban.tsx:46:}: SuratPertanggungjawabanProps) {
+/home/z/my-project/src/components/spj/docs/dokumen-rencana.tsx:12:interface DokumenRencanaProps {
+/home/z/my-project/src/components/spj/docs/dokumen-rencana.tsx:32:export function DokumenRencana({ group, school }: DokumenRencanaProps) {
+/home/z/my-project/tool-results/read_1789561581328_9327e9bcf95d.txt:445:   445→   445→                <div id="spj-document-print" className="bg-white text-slate-900">
+/home/z/my-project/tool-results/read_1789561581328_9327e9bcf95d.txt:805:   805→   805→  #spj-document-print,
+/home/z/my-project/tool-results/read_1789561581328_9327e9bcf95d.txt:806:   806→   806→  #spj-document-print * {
+/home/z/my-project/tool-results/read_1789561581328_9327e9bcf95d.txt:810:   810→   810→  #spj-document-print {
+/home/z/my-project/tool-results/read_1789561581328_9327e9bcf95d.txt:825:   825→   825→  #spj-document-print,
+/home/z/my-project/tool-results/read_1789561581328_9327e9bcf95d.txt:826:   826→   826→  #spj-document-print * {
+/home/z/my-project/tool-results/read_1789561581328_9327e9bcf95d.txt:831:   831→   831→  #spj-document-print table thead tr,
+/home/z/my-project/tool-results/read_1789561581328_9327e9bcf95d.txt:832:   832→   832→  #spj-document-print table tbody tr.total-row {
+/home/z/my-project/tool-results/read_1789561581328_9327e9bcf95d.txt:836:   836→   836→  #spj-document-print .signature-block {
+/home/z/my-project/tool-results/read_1789556378611_ba7065a2253c.txt:316:   445→                <div id="spj-document-print" className="bg-white text-slate-900">
+/home/z/my-project/tool-results/read_1789556378611_ba7065a2253c.txt:676:   805→  #spj-document-print,
+/home/z/my-project/tool-results/read_1789556378611_ba7065a2253c.txt:677:   806→  #spj-document-print * {
+/home/z/my-project/tool-results/read_1789556378611_ba7065a2253c.txt:681:   810→  #spj-document-print {
+/home/z/my-project/tool-results/read_1789556378611_ba7065a2253c.txt:696:   825→  #spj-document-print,
+/home/z/my-project/tool-results/read_1789556378611_ba7065a2253c.txt:697:   826→  #spj-document-print * {
+/home/z/my-project/tool-results/read_1789556378611_ba7065a2253c.txt:702:   831→  #spj-document-print table thead tr,
+/home/z/my-project/tool-results/read_1789556378611_ba7065a2253c.txt:703:   832→  #spj-document-print table tbody tr.total-row {
+/home/z/my-project/tool-results/read_1789556378611_ba7065a2253c.txt:707:   836→  #spj-document-print .signature-block {
+/home/z/my-project/tool-results/read_1789561577604_4381552df74c.txt:445:   445→                <div id="spj-document-print" className="bg-white text-slate-900">
+/home/z/my-project/tool-results/read_1789561577604_4381552df74c.txt:805:   805→  #spj-document-print,
+/home/z/my-project/tool-results/read_1789561577604_4381552df74c.txt:806:   806→  #spj-document-print * {
+/home/z/my-project/tool-results/read_1789561577604_4381552df74c.txt:810:   810→  #spj-document-print {
+/home/z/my-project/tool-results/read_1789561577604_4381552df74c.txt:825:   825→  #spj-document-print,
+/home/z/my-project/tool-results/read_1789561577604_4381552df74c.txt:826:   826→  #spj-document-print * {
+/home/z/my-project/tool-results/read_1789561577604_4381552df74c.txt:831:   831→  #spj-document-print table thead tr,
+/home/z/my-project/tool-results/read_1789561577604_4381552df74c.txt:832:   832→  #spj-document-print table tbody tr.total-row {
+/home/z/my-project/tool-results/read_1789561577604_4381552df74c.txt:836:   836→  #spj-document-print .signature-block {
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:288:   288→     - **Preview Card**: When no transaction selected → dashed-border empty state with FileText icon. When loading → spinner. When error → rose-bordered error card. When ready → renders the printable `#spj-document-print` div containing the `<SpjDocument>` sub-component.
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:300:   300→     - Sets `visibility: visible` on `#spj-document-print` and its descendants.
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:301:   301→     - Positions `#spj-document-print` absolutely at top-left of the page (full width, zero margin/padding).
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:318:   318→- Print strategy: inject `<style dangerouslySetInnerHTML>` with `@media print` rules (visibility trick + `@page A4 portrait margin 1.2cm` + force colors to black-on-white + break-inside:avoid for signatures). Wrapping `<div id="spj-document-print">` around the printable area. All non-document Cards have `print:hidden` as a fallback safeguard.
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:417:   417→2. `src/components/spj/docs/surat-pesanan.tsx` (212 lines) — export `SuratPesanan`
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:426:   426→3. `src/components/spj/docs/dokumen-pembanding.tsx` (117 lines) — export `DokumenPembanding`
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:433:   433→4. `src/components/spj/docs/dokumen-rencana.tsx` (121 lines) — export `DokumenRencana`
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:439:   439→5. `src/components/spj/docs/surat-hasil-pemeriksaan.tsx` (191 lines) — export `SuratHasilPemeriksaan`
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:440:   440→   - Sheet 04SHP. Kop surat (same as SuratPesanan).
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:448:   448→6. `src/components/spj/docs/berita-acara-serah-terima.tsx` (222 lines) — export `BeritaAcaraSerahTerima`
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:457:   457→7. `src/components/spj/docs/surat-penawaran-toko.tsx` (149 lines) — export `SuratPenawaranToko`
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:464:   464→8. `src/components/spj/docs/surat-pertanggungjawaban.tsx` (196 lines) — export `SuratPertanggungjawaban`
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:488:   488→- Build a `DocTemplateRegistry` / picker UI that maps a doc-type key (e.g. `"surat-pesanan"`, `"berita-acara-serah-terima"`, …) to its component, then mount the right component inside the existing Documents view's `<div id="spj-document-print">` so `window.print()` works against each template.
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:507:   507→  1. surat-pesanan.tsx - SuratPesanan (212 lines)
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:508:   508→  2. dokumen-pembanding.tsx - DokumenPembanding (117 lines)
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:509:   509→  3. dokumen-rencana.tsx - DokumenRencana (121 lines)
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:510:   510→  4. surat-hasil-pemeriksaan.tsx - SuratHasilPemeriksaan (191 lines)
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:511:   511→  5. berita-acara-serah-terima.tsx - BeritaAcaraSerahTerima (222 lines)
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:512:   512→  6. surat-penawaran-toko.tsx - SuratPenawaranToko (149 lines)
+/home/z/my-project/tool-results/read_1789564789531_dd64b46b3f2a.txt:513:   513→  7. surat-pertanggungjawaban.tsx - SuratPertanggungjawaban (196 lines)
+/home/z/my-project/tool-results/read_1789556364373_2efb6ff130bd.txt:445:   445→                <div id="spj-document-print" className="bg-white text-slate-900">
+/home/z/my-project/tool-results/read_1789556364373_2efb6ff130bd.txt:805:   805→  #spj-document-print,
+/home/z/my-project/tool-results/read_1789556364373_2efb6ff130bd.txt:806:   806→  #spj-document-print * {
+/home/z/my-project/tool-results/read_1789556364373_2efb6ff130bd.txt:810:   810→  #spj-document-print {
+/home/z/my-project/tool-results/read_1789556364373_2efb6ff130bd.txt:825:   825→  #spj-document-print,
+/home/z/my-project/tool-results/read_1789556364373_2efb6ff130bd.txt:826:   826→  #spj-document-print * {
+/home/z/my-project/tool-results/read_1789556364373_2efb6ff130bd.txt:831:   831→  #spj-document-print table thead tr,
+/home/z/my-project/tool-results/read_1789556364373_2efb6ff130bd.txt:832:   832→  #spj-document-print table tbody tr.total-row {
+/home/z/my-project/tool-results/read_1789556364373_2efb6ff130bd.txt:836:   836→  #spj-document-print .signature-block {
+/home/z/my-project/tool-results/read_1789561568713_5ca3fb499465.txt:288:   288→     - **Preview Card**: When no transaction selected → dashed-border empty state with FileText icon. When loading → spinner. When error → rose-bordered error card. When ready → renders the printable `#spj-document-print` div containing the `<SpjDocument>` sub-component.
+/home/z/my-project/tool-results/read_1789561568713_5ca3fb499465.txt:300:   300→     - Sets `visibility: visible` on `#spj-document-print` and its descendants.
+/home/z/my-project/tool-results/read_1789561568713_5ca3fb499465.txt:301:   301→     - Positions `#spj-document-print` absolutely at top-left of the page (full width, zero margin/padding).
+/home/z/my-project/tool-results/read_1789561568713_5ca3fb499465.txt:318:   318→- Print strategy: inject `<style dangerouslySetInnerHTML>` with `@media print` rules (visibility trick + `@page A4 portrait margin 1.2cm` + force colors to black-on-white + break-inside:avoid for signatures). Wrapping `<div id="spj-document-print">` around the printable area. All non-document Cards have `print:hidden` as a fallback safeguard.
+/home/z/my-project/tool-results/read_1789556367560_bf8c203643c6.txt:366:   445→                <div id="spj-document-print" className="bg-white text-slate-900">
+/home/z/my-project/tool-results/read_1789556367560_bf8c203643c6.txt:726:   805→  #spj-document-print,
+/home/z/my-project/tool-results/read_1789556367560_bf8c203643c6.txt:727:   806→  #spj-document-print * {
+/home/z/my-project/tool-results/read_1789556367560_bf8c203643c6.txt:731:   810→  #spj-document-print {
+/home/z/my-project/tool-results/read_1789556367560_bf8c203643c6.txt:746:   825→  #spj-document-print,
+/home/z/my-project/tool-results/read_1789556367560_bf8c203643c6.txt:747:   826→  #spj-document-print * {
+/home/z/my-project/tool-results/read_1789556367560_bf8c203643c6.txt:752:   831→  #spj-document-print table thead tr,
+/home/z/my-project/tool-results/read_1789556367560_bf8c203643c6.txt:753:   832→  #spj-document-print table tbody tr.total-row {
+/home/z/my-project/tool-results/read_1789556367560_bf8c203643c6.txt:757:   836→  #spj-document-print .signature-block {
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:288:   288→   288→     - **Preview Card**: When no transaction selected → dashed-border empty state with FileText icon. When loading → spinner. When error → rose-bordered error card. When ready → renders the printable `#spj-document-print` div containing the `<SpjDocument>` sub-component.
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:300:   300→   300→     - Sets `visibility: visible` on `#spj-document-print` and its descendants.
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:301:   301→   301→     - Positions `#spj-document-print` absolutely at top-left of the page (full width, zero margin/padding).
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:318:   318→   318→- Print strategy: inject `<style dangerouslySetInnerHTML>` with `@media print` rules (visibility trick + `@page A4 portrait margin 1.2cm` + force colors to black-on-white + break-inside:avoid for signatures). Wrapping `<div id="spj-document-print">` around the printable area. All non-document Cards have `print:hidden` as a fallback safeguard.
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:417:   417→   417→2. `src/components/spj/docs/surat-pesanan.tsx` (212 lines) — export `SuratPesanan`
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:426:   426→   426→3. `src/components/spj/docs/dokumen-pembanding.tsx` (117 lines) — export `DokumenPembanding`
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:433:   433→   433→4. `src/components/spj/docs/dokumen-rencana.tsx` (121 lines) — export `DokumenRencana`
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:439:   439→   439→5. `src/components/spj/docs/surat-hasil-pemeriksaan.tsx` (191 lines) — export `SuratHasilPemeriksaan`
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:440:   440→   440→   - Sheet 04SHP. Kop surat (same as SuratPesanan).
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:448:   448→   448→6. `src/components/spj/docs/berita-acara-serah-terima.tsx` (222 lines) — export `BeritaAcaraSerahTerima`
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:457:   457→   457→7. `src/components/spj/docs/surat-penawaran-toko.tsx` (149 lines) — export `SuratPenawaranToko`
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:464:   464→   464→8. `src/components/spj/docs/surat-pertanggungjawaban.tsx` (196 lines) — export `SuratPertanggungjawaban`
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:488:   488→   488→- Build a `DocTemplateRegistry` / picker UI that maps a doc-type key (e.g. `"surat-pesanan"`, `"berita-acara-serah-terima"`, …) to its component, then mount the right component inside the existing Documents view's `<div id="spj-document-print">` so `window.print()` works against each template.
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:507:   507→   507→  1. surat-pesanan.tsx - SuratPesanan (212 lines)
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:508:   508→   508→  2. dokumen-pembanding.tsx - DokumenPembanding (117 lines)
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:509:   509→   509→  3. dokumen-rencana.tsx - DokumenRencana (121 lines)
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:510:   510→   510→  4. surat-hasil-pemeriksaan.tsx - SuratHasilPemeriksaan (191 lines)
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:511:   511→   511→  5. berita-acara-serah-terima.tsx - BeritaAcaraSerahTerima (222 lines)
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:512:   512→   512→  6. surat-penawaran-toko.tsx - SuratPenawaranToko (149 lines)
+/home/z/my-project/tool-results/read_1789563166211_635fc3dc9d13.txt:513:   513→   513→  7. surat-pertanggungjawaban.tsx - SuratPertanggungjawaban (196 lines)
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:288:   288→     - **Preview Card**: When no transaction selected → dashed-border empty state with FileText icon. When loading → spinner. When error → rose-bordered error card. When ready → renders the printable `#spj-document-print` div containing the `<SpjDocument>` sub-component.
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:300:   300→     - Sets `visibility: visible` on `#spj-document-print` and its descendants.
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:301:   301→     - Positions `#spj-document-print` absolutely at top-left of the page (full width, zero margin/padding).
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:318:   318→- Print strategy: inject `<style dangerouslySetInnerHTML>` with `@media print` rules (visibility trick + `@page A4 portrait margin 1.2cm` + force colors to black-on-white + break-inside:avoid for signatures). Wrapping `<div id="spj-document-print">` around the printable area. All non-document Cards have `print:hidden` as a fallback safeguard.
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:417:   417→2. `src/components/spj/docs/surat-pesanan.tsx` (212 lines) — export `SuratPesanan`
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:426:   426→3. `src/components/spj/docs/dokumen-pembanding.tsx` (117 lines) — export `DokumenPembanding`
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:433:   433→4. `src/components/spj/docs/dokumen-rencana.tsx` (121 lines) — export `DokumenRencana`
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:439:   439→5. `src/components/spj/docs/surat-hasil-pemeriksaan.tsx` (191 lines) — export `SuratHasilPemeriksaan`
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:440:   440→   - Sheet 04SHP. Kop surat (same as SuratPesanan).
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:448:   448→6. `src/components/spj/docs/berita-acara-serah-terima.tsx` (222 lines) — export `BeritaAcaraSerahTerima`
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:457:   457→7. `src/components/spj/docs/surat-penawaran-toko.tsx` (149 lines) — export `SuratPenawaranToko`
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:464:   464→8. `src/components/spj/docs/surat-pertanggungjawaban.tsx` (196 lines) — export `SuratPertanggungjawaban`
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:488:   488→- Build a `DocTemplateRegistry` / picker UI that maps a doc-type key (e.g. `"surat-pesanan"`, `"berita-acara-serah-terima"`, …) to its component, then mount the right component inside the existing Documents view's `<div id="spj-document-print">` so `window.print()` works against each template.
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:507:   507→  1. surat-pesanan.tsx - SuratPesanan (212 lines)
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:508:   508→  2. dokumen-pembanding.tsx - DokumenPembanding (117 lines)
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:509:   509→  3. dokumen-rencana.tsx - DokumenRencana (121 lines)
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:510:   510→  4. surat-hasil-pemeriksaan.tsx - SuratHasilPemeriksaan (191 lines)
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:511:   511→  5. berita-acara-serah-terima.tsx - BeritaAcaraSerahTerima (222 lines)
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:512:   512→  6. surat-penawaran-toko.tsx - SuratPenawaranToko (149 lines)
+/home/z/my-project/tool-results/read_1789566170258_922c7566c412.txt:513:   513→  7. surat-pertanggungjawaban.tsx - SuratPertanggungjawaban (196 lines)
+/home/z/my-project/tool-results/read_1789556681316_de088a8ed22f.txt:288:   288→     - **Preview Card**: When no transaction selected → dashed-border empty state with FileText icon. When loading → spinner. When error → rose-bordered error card. When ready → renders the printable `#spj-document-print` div containing the `<SpjDocument>` sub-component.
+/home/z/my-project/tool-results/read_1789556681316_de088a8ed22f.txt:300:   300→     - Sets `visibility: visible` on `#spj-document-print` and its descendants.
+/home/z/my-project/tool-results/read_1789556681316_de088a8ed22f.txt:301:   301→     - Positions `#spj-document-print` absolutely at top-left of the page (full width, zero margin/padding).
+/home/z/my-project/tool-results/read_1789556681316_de088a8ed22f.txt:318:   318→- Print strategy: inject `<style dangerouslySetInnerHTML>` with `@media print` rules (visibility trick + `@page A4 portrait margin 1.2cm` + force colors to black-on-white + break-inside:avoid for signatures). Wrapping `<div id="spj-document-print">` around the printable area. All non-document Cards have `print:hidden` as a fallback safeguard.
+/home/z/my-project/tool-results/read_1789561574158_d0367777c2ae.txt:288:   288→   288→     - **Preview Card**: When no transaction selected → dashed-border empty state with FileText icon. When loading → spinner. When error → rose-bordered error card. When ready → renders the printable `#spj-document-print` div containing the `<SpjDocument>` sub-component.
+/home/z/my-project/tool-results/read_1789561574158_d0367777c2ae.txt:300:   300→   300→     - Sets `visibility: visible` on `#spj-document-print` and its descendants.
+/home/z/my-project/tool-results/read_1789561574158_d0367777c2ae.txt:301:   301→   301→     - Positions `#spj-document-print` absolutely at top-left of the page (full width, zero margin/padding).
+/home/z/my-project/tool-results/read_1789561574158_d0367777c2ae.txt:318:   318→   318→- Print strategy: inject `<style dangerouslySetInnerHTML>` with `@media print` rules (visibility trick + `@page A4 portrait margin 1.2cm` + force colors to black-on-white + break-inside:avoid for signatures). Wrapping `<div id="spj-document-print">` around the printable area. All non-document Cards have `print:hidden` as a fallback safeguard.
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:288:   288→     - **Preview Card**: When no transaction selected → dashed-border empty state with FileText icon. When loading → spinner. When error → rose-bordered error card. When ready → renders the printable `#spj-document-print` div containing the `<SpjDocument>` sub-component.
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:300:   300→     - Sets `visibility: visible` on `#spj-document-print` and its descendants.
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:301:   301→     - Positions `#spj-document-print` absolutely at top-left of the page (full width, zero margin/padding).
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:318:   318→- Print strategy: inject `<style dangerouslySetInnerHTML>` with `@media print` rules (visibility trick + `@page A4 portrait margin 1.2cm` + force colors to black-on-white + break-inside:avoid for signatures). Wrapping `<div id="spj-document-print">` around the printable area. All non-document Cards have `print:hidden` as a fallback safeguard.
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:417:   417→2. `src/components/spj/docs/surat-pesanan.tsx` (212 lines) — export `SuratPesanan`
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:426:   426→3. `src/components/spj/docs/dokumen-pembanding.tsx` (117 lines) — export `DokumenPembanding`
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:433:   433→4. `src/components/spj/docs/dokumen-rencana.tsx` (121 lines) — export `DokumenRencana`
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:439:   439→5. `src/components/spj/docs/surat-hasil-pemeriksaan.tsx` (191 lines) — export `SuratHasilPemeriksaan`
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:440:   440→   - Sheet 04SHP. Kop surat (same as SuratPesanan).
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:448:   448→6. `src/components/spj/docs/berita-acara-serah-terima.tsx` (222 lines) — export `BeritaAcaraSerahTerima`
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:457:   457→7. `src/components/spj/docs/surat-penawaran-toko.tsx` (149 lines) — export `SuratPenawaranToko`
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:464:   464→8. `src/components/spj/docs/surat-pertanggungjawaban.tsx` (196 lines) — export `SuratPertanggungjawaban`
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:488:   488→- Build a `DocTemplateRegistry` / picker UI that maps a doc-type key (e.g. `"surat-pesanan"`, `"berita-acara-serah-terima"`, …) to its component, then mount the right component inside the existing Documents view's `<div id="spj-document-print">` so `window.print()` works against each template.
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:507:   507→  1. surat-pesanan.tsx - SuratPesanan (212 lines)
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:508:   508→  2. dokumen-pembanding.tsx - DokumenPembanding (117 lines)
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:509:   509→  3. dokumen-rencana.tsx - DokumenRencana (121 lines)
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:510:   510→  4. surat-hasil-pemeriksaan.tsx - SuratHasilPemeriksaan (191 lines)
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:511:   511→  5. berita-acara-serah-terima.tsx - BeritaAcaraSerahTerima (222 lines)
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:512:   512→  6. surat-penawaran-toko.tsx - SuratPenawaranToko (149 lines)
+/home/z/my-project/tool-results/read_1789563161903_51778cc34801.txt:513:   513→  7. surat-pertanggungjawaban.tsx - SuratPertanggungjawaban (196 lines)
+/home/z/my-project/worklog.md:288:     - **Preview Card**: When no transaction selected → dashed-border empty state with FileText icon. When loading → spinner. When error → rose-bordered error card. When ready → renders the printable `#spj-document-print` div containing the `<SpjDocument>` sub-component.
+/home/z/my-project/worklog.md:300:     - Sets `visibility: visible` on `#spj-document-print` and its descendants.
+/home/z/my-project/worklog.md:301:     - Positions `#spj-document-print` absolutely at top-left of the page (full width, zero margin/padding).
+/home/z/my-project/worklog.md:318:- Print strategy: inject `<style dangerouslySetInnerHTML>` with `@media print` rules (visibility trick + `@page A4 portrait margin 1.2cm` + force colors to black-on-white + break-inside:avoid for signatures). Wrapping `<div id="spj-document-print">` around the printable area. All non-document Cards have `print:hidden` as a fallback safeguard.
+/home/z/my-project/worklog.md:417:2. `src/components/spj/docs/surat-pesanan.tsx` (212 lines) — export `SuratPesanan`
+/home/z/my-project/worklog.md:426:3. `src/components/spj/docs/dokumen-pembanding.tsx` (117 lines) — export `DokumenPembanding`
+/home/z/my-project/worklog.md:433:4. `src/components/spj/docs/dokumen-rencana.tsx` (121 lines) — export `DokumenRencana`
+/home/z/my-project/worklog.md:439:5. `src/components/spj/docs/surat-hasil-pemeriksaan.tsx` (191 lines) — export `SuratHasilPemeriksaan`
+/home/z/my-project/worklog.md:440:   - Sheet 04SHP. Kop surat (same as SuratPesanan).
+/home/z/my-project/worklog.md:448:6. `src/components/spj/docs/berita-acara-serah-terima.tsx` (222 lines) — export `BeritaAcaraSerahTerima`
+/home/z/my-project/worklog.md:457:7. `src/components/spj/docs/surat-penawaran-toko.tsx` (149 lines) — export `SuratPenawaranToko`
+/home/z/my-project/worklog.md:464:8. `src/components/spj/docs/surat-pertanggungjawaban.tsx` (196 lines) — export `SuratPertanggungjawaban`
+/home/z/my-project/worklog.md:488:- Build a `DocTemplateRegistry` / picker UI that maps a doc-type key (e.g. `"surat-pesanan"`, `"berita-acara-serah-terima"`, …) to its component, then mount the right component inside the existing Documents view's `<div id="spj-document-print">` so `window.print()` works against each template.
+/home/z/my-project/worklog.md:507:  1. surat-pesanan.tsx - SuratPesanan (212 lines)
+/home/z/my-project/worklog.md:508:  2. dokumen-pembanding.tsx - DokumenPembanding (117 lines)
+/home/z/my-project/worklog.md:509:  3. dokumen-rencana.tsx - DokumenRencana (121 lines)
+/home/z/my-project/worklog.md:510:  4. surat-hasil-pemeriksaan.tsx - SuratHasilPemeriksaan (191 lines)
+/home/z/my-project/worklog.md:511:  5. berita-acara-serah-terima.tsx - BeritaAcaraSerahTerima (222 lines)
+/home/z/my-project/worklog.md:512:  6. surat-penawaran-toko.tsx - SuratPenawaranToko (149 lines)
+/home/z/my-project/worklog.md:513:  7. surat-pertanggungjawaban.tsx - SuratPertanggungjawaban (196 lines)

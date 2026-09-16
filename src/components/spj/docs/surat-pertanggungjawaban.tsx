@@ -23,6 +23,7 @@ interface SuratPertanggungjawabanProps {
 const cellStyle: CSSProperties = {
   border: "1px solid #000",
   padding: "4px 6px",
+  verticalAlign: "top",
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
@@ -33,11 +34,16 @@ const headerCellStyle: CSSProperties = {
   ...cellStyle,
   background: "#e2e8f0",
   fontWeight: 700,
+  textAlign: "center",
 };
 const totalCellStyle: CSSProperties = {
   ...cellStyle,
   background: "#f8fafc",
   fontWeight: 700,
+};
+const borderlessTableStyle: CSSProperties = {
+  borderCollapse: "collapse",
+  width: "100%",
 };
 
 export function SuratPertanggungjawaban({
@@ -47,6 +53,10 @@ export function SuratPertanggungjawaban({
   const total = group.totalJumlah;
   const docNumber = buildSpjNumber(group);
   const spjDate = pickGroupDate(group);
+  const vendorOwner = group.vendorOwner && group.vendorOwner.trim()
+    ? group.vendorOwner
+    : "—";
+  const vendorName = orDash(group.vendorName);
 
   return (
     <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
@@ -55,14 +65,10 @@ export function SuratPertanggungjawaban({
         <Letterhead />
       </div>
 
-      {/* === Title === */}
+      {/* === Title (centered, bold, NO underline, 14pt) === */}
       <div className="text-center mb-4">
-        <h1 className="font-bold uppercase text-[14px] underline underline-offset-4">
-          SURAT PERTANGGUNGJAWABAN (SPJ)
-        </h1>
-        <p className="text-[12px] mt-1">
-          Nomor: <span className="font-mono font-semibold">{docNumber}</span>
-        </p>
+        <h1 className="font-bold text-[14px]">SURAT PERTANGGUNGJAWABAN (SPJ)</h1>
+        <div className="text-[12px] mt-1">Nomor: {docNumber}</div>
       </div>
 
       {/* === Opening paragraph === */}
@@ -78,22 +84,14 @@ export function SuratPertanggungjawaban({
         <table style={tableStyle}>
           <thead>
             <tr>
-              <th style={{ ...headerCellStyle, textAlign: "center", width: "40px" }}>
-                No
-              </th>
-              <th style={{ ...headerCellStyle, textAlign: "left" }}>
-                Uraian
-              </th>
-              <th style={{ ...headerCellStyle, textAlign: "center", width: "70px" }}>
-                Vol
-              </th>
-              <th style={{ ...headerCellStyle, textAlign: "center", width: "90px" }}>
-                Satuan
-              </th>
-              <th style={{ ...headerCellStyle, textAlign: "right", width: "130px" }}>
+              <th style={{ ...headerCellStyle, width: "40px" }}>No</th>
+              <th style={{ ...headerCellStyle, textAlign: "left" }}>Uraian</th>
+              <th style={{ ...headerCellStyle, width: "60px" }}>Vol</th>
+              <th style={{ ...headerCellStyle, width: "80px" }}>Satuan</th>
+              <th style={{ ...headerCellStyle, textAlign: "right", width: "120px" }}>
                 Tarif (Rp)
               </th>
-              <th style={{ ...headerCellStyle, textAlign: "right", width: "150px" }}>
+              <th style={{ ...headerCellStyle, textAlign: "right", width: "140px" }}>
                 Jumlah (Rp)
               </th>
             </tr>
@@ -115,12 +113,7 @@ export function SuratPertanggungjawaban({
                     {idx + 1}
                   </td>
                   <td style={{ ...cellStyle, textAlign: "left" }}>
-                    <div className="font-medium">{item.uraian}</div>
-                    {item.namaBarang && (
-                      <div className="text-[10px] italic text-slate-600">
-                        {item.namaBarang}
-                      </div>
-                    )}
+                    <div className="font-medium">{item.namaBarang || item.uraian}</div>
                   </td>
                   <td style={{ ...cellStyle, textAlign: "center" }}>
                     {formatNumber(item.volume)}
@@ -131,17 +124,18 @@ export function SuratPertanggungjawaban({
                   <td style={{ ...cellStyle, textAlign: "right" }}>
                     {formatNumber(item.tarifHarga)}
                   </td>
-                  <td style={{ ...cellStyle, textAlign: "right", fontWeight: 500 }}>
+                  <td style={{ ...cellStyle, textAlign: "right" }}>
                     {formatNumber(item.jumlah)}
                   </td>
                 </tr>
               ))
             )}
-            {/* Total row */}
+            {/* Total row: label colspan=4 (No, Uraian, Vol, Satuan), col 5 empty, col 6 = total */}
             <tr>
-              <td style={totalCellStyle} colSpan={5}>
+              <td style={totalCellStyle} colSpan={4}>
                 JUMLAH TOTAL
               </td>
+              <td style={totalCellStyle}>&nbsp;</td>
               <td style={{ ...totalCellStyle, textAlign: "right" }}>
                 {formatNumber(total)}
               </td>
@@ -150,10 +144,9 @@ export function SuratPertanggungjawaban({
         </table>
       </div>
 
-      {/* === Terbilang === */}
-      <div className="mb-4 text-[12px]">
-        <span className="font-semibold">Terbilang:</span>{" "}
-        <span className="italic">{capitalize(terbilang(total))}</span>
+      {/* === Terbilang (italic) === */}
+      <div className="mb-4 text-[12px] italic">
+        Terbilang : {capitalize(terbilang(total))}
       </div>
 
       {/* === Closing paragraph === */}
@@ -162,48 +155,48 @@ export function SuratPertanggungjawaban({
         dapat dipergunakan sebagai mestinya.
       </p>
 
-      {/* === Date === */}
-      <div className="flex justify-end mb-4">
-        <div className="text-right text-[12px]">
-          <div>Telukdalam, {formatDate(spjDate)}</div>
-        </div>
+      {/* === Right-aligned date === */}
+      <div className="text-right mb-4 text-[12px]">
+        Telukdalam, {formatDate(spjDate)}
       </div>
 
-      {/* === Three-column signature block === */}
-      <div className="grid grid-cols-3 gap-4 text-center text-[12px]">
-        {/* Mengetahui - Kepala Sekolah */}
-        <div>
-          <div className="font-medium">Mengetahui,</div>
-          <div>Kepala Sekolah</div>
-          <div className="h-16" />
-          <div className="font-semibold underline underline-offset-4">
-            {orDash(school?.principalName)}
-          </div>
-          <div className="text-[11px]">
-            NIP. <span className="font-mono">{orDash(school?.principalNip)}</span>
-          </div>
-        </div>
-        {/* Bendahara */}
-        <div>
-          <div className="font-medium">Bendahara,</div>
-          <div className="h-16" />
-          <div className="font-semibold underline underline-offset-4">
-            {orDash(school?.treasurerName)}
-          </div>
-          <div className="text-[11px]">
-            NIP. <span className="font-mono">{orDash(school?.treasurerNip)}</span>
-          </div>
-        </div>
-        {/* Penerima (Vendor) */}
-        <div>
-          <div className="font-medium">Penerima,</div>
-          <div className="h-16" />
-          <div className="font-semibold underline underline-offset-4">
-            {orDash(group.vendorOwner)}
-          </div>
-          <div className="text-[11px]">{orDash(group.vendorName)}</div>
-        </div>
-      </div>
+      {/* === 3-COLUMN signature block (borderless table) === */}
+      <table style={borderlessTableStyle}>
+        <tbody>
+          <tr>
+            {/* LEFT: Mengetahui - Kepala Sekolah */}
+            <td style={{ width: "33%", textAlign: "center", padding: "0 6px", verticalAlign: "top" }}>
+              <div>Mengetahui,</div>
+              <div>Kepala Sekolah</div>
+              <div style={{ height: "64px" }} />
+              <div style={{ fontWeight: 700, textDecoration: "underline" }}>
+                {orDash(school?.principalName)}
+              </div>
+              <div>NIP. {orDash(school?.principalNip)}</div>
+            </td>
+
+            {/* CENTER: Bendahara */}
+            <td style={{ width: "34%", textAlign: "center", padding: "0 6px", verticalAlign: "top" }}>
+              <div>Bendahara,</div>
+              <div style={{ height: "64px" }} />
+              <div style={{ fontWeight: 700, textDecoration: "underline" }}>
+                {orDash(school?.treasurerName)}
+              </div>
+              <div>NIP. {orDash(school?.treasurerNip)}</div>
+            </td>
+
+            {/* RIGHT: Penerima (Vendor) */}
+            <td style={{ width: "33%", textAlign: "center", padding: "0 6px", verticalAlign: "top" }}>
+              <div>Penerima,</div>
+              <div style={{ height: "64px" }} />
+              <div style={{ fontWeight: 700, textDecoration: "underline" }}>
+                {vendorOwner}
+              </div>
+              <div>{vendorName}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }

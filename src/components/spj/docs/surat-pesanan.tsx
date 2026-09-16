@@ -23,6 +23,7 @@ interface SuratPesananProps {
 const cellStyle: CSSProperties = {
   border: "1px solid #000",
   padding: "4px 6px",
+  verticalAlign: "top",
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
@@ -33,11 +34,7 @@ const headerCellStyle: CSSProperties = {
   ...cellStyle,
   background: "#e2e8f0",
   fontWeight: 700,
-};
-const totalCellStyle: CSSProperties = {
-  ...cellStyle,
-  background: "#f8fafc",
-  fontWeight: 700,
+  textAlign: "center",
 };
 
 export function SuratPesanan({ group, school }: SuratPesananProps) {
@@ -46,7 +43,10 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
   const tglPesan = group.tglPesan;
   const completion = estimateCompletionDate(group);
   const total = group.totalJumlah;
-  const uraianHeader = "Pengadaan Alat Tulis Kantor (ATK)";
+  const vendorName = orDash(group.vendorName);
+  const vendorOwner = orDash(group.vendorOwner);
+  const principalName = orDash(school?.principalName);
+  const principalNip = orDash(school?.principalNip);
 
   return (
     <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
@@ -56,61 +56,81 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
       </div>
 
       {/* === Title === */}
-      <div className="text-center mb-5">
-        <h1 className="font-bold uppercase text-[14px] underline underline-offset-4">
-          SURAT PESANAN
-        </h1>
+      <div className="text-center mb-4">
+        <h1 className="font-bold text-[14px]">SURAT PESANAN</h1>
       </div>
 
-      {/* === Meta block === */}
-      <div className="mb-4 space-y-1 text-[12px]">
-        <div>
-          <span className="font-semibold">Paket Pesanan:</span> {uraianHeader}
-        </div>
-        <div>
-          <span className="font-semibold">Nomor Surat Pesanan:</span>{" "}
-          <span className="font-mono">{docNumber}</span>
-        </div>
-        <div>
-          <span className="font-semibold">Tanggal Pesanan:</span>{" "}
-          {formatDate(tglPesan)}
-        </div>
-        <div>
-          <span className="font-semibold">Waktu Pengerjaan Pesanan:</span>{" "}
-          {formatDate(tglPesan)}
-        </div>
-        <div>
-          <span className="font-semibold">Waktu Pemrosesan Pesanan:</span>{" "}
-          {formatDate(tglPesan)}
-        </div>
-        <div>
-          <span className="font-semibold">Waktu Penyelesaian Pesanan:</span>{" "}
-          {completion ? formatDate(completion) : "—"}
-        </div>
-        <div>
-          <span className="font-semibold">No. BPU:</span>{" "}
-          <span className="font-mono">{orDash(group.bpuCode)}</span>
-        </div>
+      {/* === Info TABLE (3 cols, all cells bordered) === */}
+      <div className="mb-4">
+        <table style={tableStyle}>
+          <tbody>
+            <tr>
+              <td style={{ ...cellStyle, width: "33%" }}>Paket Pesanan :</td>
+              <td style={{ ...cellStyle, width: "25%" }}>Nomor Surat Pesanan</td>
+              <td style={{ ...cellStyle, width: "42%" }}>{docNumber}</td>
+            </tr>
+            <tr>
+              <td style={cellStyle}>
+                Kegiatan jual beli dengan mitra {vendorName}
+              </td>
+              <td style={cellStyle}>Tanggal Pesanan</td>
+              <td style={cellStyle}>{formatDate(tglPesan)}</td>
+            </tr>
+            <tr>
+              <td style={cellStyle}>&nbsp;</td>
+              <td style={cellStyle}>Tanggal Negosiasi</td>
+              <td style={cellStyle}>&nbsp;</td>
+            </tr>
+            <tr>
+              <td style={cellStyle}>
+                <div>Waktu Pengerjaan Pesanan:</div>
+                <div style={{ paddingLeft: "12px" }}>{formatDate(tglPesan)}</div>
+              </td>
+              <td style={cellStyle}>No. BPU</td>
+              <td style={cellStyle}>{orDash(group.bpuCode)}</td>
+            </tr>
+            <tr>
+              <td style={cellStyle}>
+                <div>Waktu Pemrosesan Pesanan:</div>
+                <div style={{ paddingLeft: "12px" }}>{formatDate(tglPesan)}</div>
+              </td>
+              <td style={cellStyle}>&nbsp;</td>
+              <td style={cellStyle}>&nbsp;</td>
+            </tr>
+            <tr>
+              <td style={cellStyle}>
+                <div>Waktu Penyelesaian Pesanan:</div>
+                <div style={{ paddingLeft: "12px" }}>
+                  {completion ? formatDate(completion) : "—"}
+                </div>
+              </td>
+              <td style={cellStyle} colSpan={2}>
+                Catatan Pengiriman Untuk Penyedia:
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      {/* === Items table === */}
+      {/* === Items table (with RINCIAN PEKERJAAN as merged header row inside) === */}
       <div className="mb-3">
-        <div className="font-semibold text-[12px] mb-2">
-          RINCIAN PEKERJAAN
-        </div>
         <table style={tableStyle}>
           <thead>
             <tr>
-              <th style={{ ...headerCellStyle, textAlign: "center", width: "40px" }}>
-                No
+              <th
+                style={{ ...headerCellStyle, textAlign: "center" }}
+                colSpan={6}
+              >
+                RINCIAN PEKERJAAN
               </th>
+            </tr>
+            <tr>
+              <th style={{ ...headerCellStyle, width: "40px" }}>No</th>
               <th style={{ ...headerCellStyle, textAlign: "left" }}>
                 Uraian Barang / Jasa
               </th>
-              <th style={{ ...headerCellStyle, textAlign: "center", width: "70px" }}>
-                Jumlah
-              </th>
-              <th style={{ ...headerCellStyle, textAlign: "center", width: "90px" }}>
+              <th style={{ ...headerCellStyle, width: "70px" }}>Jumlah</th>
+              <th style={{ ...headerCellStyle, width: "90px" }}>
                 Satuan Ukuran
               </th>
               <th style={{ ...headerCellStyle, textAlign: "right", width: "130px" }}>
@@ -138,12 +158,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                     {idx + 1}
                   </td>
                   <td style={{ ...cellStyle, textAlign: "left" }}>
-                    <div className="font-medium">{item.uraian}</div>
-                    {item.namaBarang && (
-                      <div className="text-[10px] italic text-slate-600">
-                        {item.namaBarang}
-                      </div>
-                    )}
+                    <div className="font-medium">{item.namaBarang || item.uraian}</div>
                   </td>
                   <td style={{ ...cellStyle, textAlign: "center" }}>
                     {formatNumber(item.volume)}
@@ -154,62 +169,58 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                   <td style={{ ...cellStyle, textAlign: "right" }}>
                     Rp {formatNumber(item.tarifHarga)}
                   </td>
-                  <td style={{ ...cellStyle, textAlign: "right", fontWeight: 500 }}>
+                  <td style={{ ...cellStyle, textAlign: "right" }}>
                     Rp {formatNumber(item.jumlah)}
                   </td>
                 </tr>
               ))
             )}
-            {/* Total row */}
-            <tr>
-              <td style={totalCellStyle} colSpan={5}>
-                JUMLAH
-              </td>
-              <td style={{ ...totalCellStyle, textAlign: "right" }}>
-                Rp {formatNumber(total)}
-              </td>
-            </tr>
           </tbody>
         </table>
       </div>
 
-      {/* === Terbilang === */}
-      <div className="mb-5 text-[12px]">
-        <span className="font-semibold">Terbilang:</span>{" "}
-        <span className="italic">{capitalize(terbilang(total))}</span>
-      </div>
-
-      {/* === Date & signatures === */}
-      <div className="flex justify-end mb-5">
-        <div className="text-right text-[12px]">
-          <div>Telukdalam, {formatDate(tglPesan)}</div>
+      {/* === Total Pembayaran (OUTSIDE table, bold) + Terbilang (italic) === */}
+      <div className="mb-5 text-[12px] space-y-1">
+        <div className="font-bold">
+          Total Pembayaran : Rp {formatNumber(total)}
+        </div>
+        <div className="italic">
+          Terbilang : {capitalize(terbilang(total))}
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-8 text-center text-[12px]">
-        <div>
-          <div className="font-medium">Mengetahui,</div>
-          <div>Kepala Sekolah</div>
-          <div className="h-16" />
-          <div className="font-semibold underline underline-offset-4">
-            {orDash(school?.principalName)}
-          </div>
-          <div className="text-[11px]">
-            NIP. <span className="font-mono">{orDash(school?.principalNip)}</span>
-          </div>
-        </div>
-        <div>
-          <div className="font-medium">Bendahara Pengeluaran,</div>
-          <div>&nbsp;</div>
-          <div className="h-16" />
-          <div className="font-semibold underline underline-offset-4">
-            {orDash(school?.treasurerName)}
-          </div>
-          <div className="text-[11px]">
-            NIP. <span className="font-mono">{orDash(school?.treasurerNip)}</span>
-          </div>
-        </div>
+      {/* === Date CENTERED === */}
+      <div className="text-center mb-5 text-[12px]">
+        Telukdalam, {formatDate(tglPesan)}
       </div>
+
+      {/* === 2-column borderless signature table === */}
+      <table
+        style={{
+          width: "100%",
+          borderCollapse: "collapse",
+        }}
+      >
+        <tbody>
+          <tr>
+            <td style={{ width: "50%", textAlign: "center", padding: "0 8px" }}>
+              <div style={{ height: "64px" }} />
+              <div style={{ fontWeight: 700, textDecoration: "underline" }}>
+                {vendorOwner}
+              </div>
+              <div>Direktur</div>
+            </td>
+            <td style={{ width: "50%", textAlign: "center", padding: "0 8px" }}>
+              <div style={{ height: "64px" }} />
+              <div style={{ fontWeight: 700, textDecoration: "underline" }}>
+                {principalName}
+              </div>
+              <div>Pelaksana</div>
+              <div>NIP. {principalNip}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
