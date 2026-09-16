@@ -63,6 +63,7 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
   // and split it into evenly distributed segments
   function renderLine(line: { text: string; bold: boolean; size: number }, index: number) {
     const isIdentityRow = line.text.includes("NIS") && line.text.includes("NPSN");
+    const isLongLine = line.text.length > 60; // alamat, email lines - ensure no wrap
     
     if (isIdentityRow) {
       // Split by multiple spaces (2+) and render as flex space-around
@@ -87,7 +88,7 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
       );
     }
 
-    // Normal line render
+    // Normal line render - ensure long lines (alamat, email) stay on 1 line
     return (
       <div
         key={index}
@@ -97,6 +98,7 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
           lineHeight: 1.3,
           marginTop: index > 0 ? `${s.lineSpacing}px` : "0",
           textTransform: line.size >= 14 ? "uppercase" : "none",
+          whiteSpace: isLongLine ? "nowrap" : "normal",
         }}
       >
         {line.text}
