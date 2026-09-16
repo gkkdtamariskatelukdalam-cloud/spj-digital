@@ -59,6 +59,51 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
     { text: s.line7Text, bold: s.line7Bold, size: s.line7Size },
   ].filter((l) => l.text.trim());
 
+  // Helper: detect if a line is the NIS/NPSN/Terakreditasi/NSS row
+  // and split it into evenly distributed segments
+  function renderLine(line: { text: string; bold: boolean; size: number }, index: number) {
+    const isIdentityRow = line.text.includes("NIS") && line.text.includes("NPSN");
+    
+    if (isIdentityRow) {
+      // Split by multiple spaces (2+) and render as flex space-around
+      const segments = line.text.split(/\s{2,}/).filter((seg) => seg.trim());
+      return (
+        <div
+          key={index}
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            width: "100%",
+            fontSize: `${line.size}px`,
+            fontWeight: line.bold ? 700 : 400,
+            lineHeight: 1.3,
+            marginTop: index > 0 ? `${s.lineSpacing}px` : "0",
+          }}
+        >
+          {segments.map((seg, si) => (
+            <span key={si}>{seg.trim()}</span>
+          ))}
+        </div>
+      );
+    }
+
+    // Normal line render
+    return (
+      <div
+        key={index}
+        style={{
+          fontSize: `${line.size}px`,
+          fontWeight: line.bold ? 700 : 400,
+          lineHeight: 1.3,
+          marginTop: index > 0 ? `${s.lineSpacing}px` : "0",
+          textTransform: line.size >= 14 ? "uppercase" : "none",
+        }}
+      >
+        {line.text}
+      </div>
+    );
+  }
+
   if (isDual) {
     // === DUAL LOGO MODE: logo kiri + teks tengah + logo kanan ===
     return (
@@ -95,20 +140,7 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
               justifyContent: "center",
             }}
           >
-            {lines.map((line, i) => (
-              <div
-                key={i}
-                style={{
-                  fontSize: `${line.size}px`,
-                  fontWeight: line.bold ? 700 : 400,
-                  lineHeight: 1.3,
-                  marginTop: i > 0 ? `${s.lineSpacing}px` : "0",
-                  textTransform: line.size >= 14 ? "uppercase" : "none",
-                }}
-              >
-                {line.text}
-              </div>
-            ))}
+            {lines.map((line, i) => renderLine(line, i))}
           </div>
 
           {/* Logo kanan */}
@@ -181,20 +213,7 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
             paddingTop: "4px",
           }}
         >
-          {lines.map((line, i) => (
-            <div
-              key={i}
-              style={{
-                fontSize: `${line.size}px`,
-                fontWeight: line.bold ? 700 : 400,
-                lineHeight: 1.3,
-                marginTop: i > 0 ? `${s.lineSpacing}px` : "0",
-                textTransform: line.size >= 14 ? "uppercase" : "none",
-              }}
-            >
-              {line.text}
-            </div>
-          ))}
+          {lines.map((line, i) => renderLine(line, i))}
         </div>
       </div>
 
