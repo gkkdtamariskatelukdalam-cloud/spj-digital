@@ -1,9 +1,8 @@
 "use client";
 
 import type { DocumentGroup, School } from "@/lib/types/spj";
-import { Letterhead } from "@/components/spj/letterhead";
 import { formatDate, formatRupiah, terbilang } from "@/lib/format";
-import { capitalize, orDash, toRoman } from "@/components/spj/docs/_helpers";
+import { capitalize, toRoman } from "@/components/spj/docs/_helpers";
 
 const tableStyle: React.CSSProperties = {
   borderCollapse: "collapse",
@@ -28,6 +27,22 @@ const borderlessTableStyle: React.CSSProperties = {
   border: "none",
 };
 
+// Body label column: right-aligned, fixed width so all ':' align
+const bodyLabelStyle: React.CSSProperties = {
+  width: "40%",
+  textAlign: "right",
+  padding: "1px 4px",
+  fontSize: "12px",
+  verticalAlign: "top",
+  whiteSpace: "nowrap",
+};
+
+const bodyValueStyle: React.CSSProperties = {
+  padding: "1px 4px",
+  fontSize: "12px",
+  verticalAlign: "top",
+};
+
 export function Kuitansi({
   group,
   school,
@@ -36,7 +51,6 @@ export function Kuitansi({
   school: School | null;
 }) {
   const total = group.totalJumlah || 0;
-  const tglPesan = group.tglPesan;
   const tglBayar = group.tglBayar;
   const noPesan = group.noPesan || "";
   const noBku = group.noBku || group.bpuCode || "";
@@ -76,37 +90,25 @@ export function Kuitansi({
         color: "#000",
       }}
     >
-      {/* === INFO TABLE (with borders) === */}
+      {/* === INFO TABLE (with borders, 4 columns) === */}
       <table style={tableStyle}>
         <tbody>
           <tr>
-            <td style={cellStyle} colSpan={2}>
-              Sumber Anggaran : Dana BOSP {tahun}
-            </td>
-            <td style={cellStyle}>
-              Program : -
-            </td>
+            <td style={cellStyle}>Sumber Anggaran : Dana BOSP {tahun}</td>
+            <td style={cellStyle}>Program : -</td>
           </tr>
           <tr>
-            <td style={cellStyle} colSpan={2}>
-              Kas/Pos Tanggal : {tglBayar ? formatDate(tglBayar) : "—"}
-            </td>
-            <td style={cellStyle}>
-              Kegiatan : -
-            </td>
+            <td style={cellStyle}>Kas/Pos Tanggal : {tglBayar ? formatDate(tglBayar) : "—"}</td>
+            <td style={cellStyle}>Kegiatan : -</td>
           </tr>
           <tr>
-            <td style={cellStyle} colSpan={2}>
-              Nomor : {noBku || "—"}
-            </td>
-            <td style={cellStyle}>
-              Kode Rek : -
-            </td>
+            <td style={cellStyle}>Nomor : {noBku || "—"}</td>
+            <td style={cellStyle}>Kode Rek : -</td>
           </tr>
         </tbody>
       </table>
 
-      {/* === TITLE === */}
+      {/* === TITLE (centered, bold, underlined) === */}
       <div
         style={{
           textAlign: "center",
@@ -119,50 +121,41 @@ export function Kuitansi({
         TANDA PEMBAYARAN
       </div>
 
-      {/* === BODY BLOCK (borderless 2-col table for aligned ':') === */}
+      {/* === BODY BLOCK === */}
+      {/* Sudah terima dari */}
       <table style={borderlessTableStyle}>
         <tbody>
           <tr>
-            <td style={{ width: "42%", textAlign: "right", padding: "2px 4px", fontSize: "12px", verticalAlign: "top" }}>
-              Sudah terima dari :
-            </td>
-            <td style={{ padding: "2px 4px", fontSize: "12px", verticalAlign: "top" }}>
-              Bendahara SMA Negeri 1 Telukdalam
-            </td>
+            <td style={bodyLabelStyle}>Sudah terima dari :</td>
+            <td style={bodyValueStyle}>Bendahara SMA Negeri 1 Telukdalam</td>
           </tr>
           <tr>
-            <td style={{ width: "42%", textAlign: "right", padding: "2px 4px", fontSize: "12px", verticalAlign: "top" }}>
-              Uang sebesar :
-            </td>
-            <td style={{ padding: "2px 4px", fontSize: "12px", verticalAlign: "top" }}>
+            <td style={bodyLabelStyle}>Uang sebesar :</td>
+            <td style={bodyValueStyle}>
               <span style={{ fontWeight: 700 }}>{formatRupiah(total)}</span>
             </td>
           </tr>
           <tr>
-            <td style={{ width: "42%", textAlign: "right", padding: "2px 4px", fontSize: "12px", verticalAlign: "top" }}>
-              Terbilang :
-            </td>
-            <td style={{ padding: "2px 4px", fontSize: "12px", verticalAlign: "top" }}>
+            <td style={bodyLabelStyle}>Terbilang :</td>
+            <td style={bodyValueStyle}>
               <span style={{ fontStyle: "italic", fontWeight: 700 }}>{terbilangText}</span>
             </td>
           </tr>
+        </tbody>
+      </table>
+
+      {/* Nomor Surat - OUTSIDE the aligned table (label on its own, value below) */}
+      <div style={{ fontSize: "12px", padding: "1px 4px", marginTop: "4px" }}>
+        Nomor Surat persetujuan penyediaan barang<br />
+        dan jasa : {nomorSurat}
+      </div>
+
+      {/* Untuk pembayaran - back in aligned table */}
+      <table style={borderlessTableStyle}>
+        <tbody>
           <tr>
-            <td style={{ width: "42%", textAlign: "right", padding: "2px 4px", fontSize: "12px", verticalAlign: "top" }}>
-              Nomor Surat persetujuan penyediaan barang
-              <br />
-              dan jasa :
-            </td>
-            <td style={{ padding: "2px 4px", fontSize: "12px", verticalAlign: "top" }}>
-              {nomorSurat}
-            </td>
-          </tr>
-          <tr>
-            <td style={{ width: "42%", textAlign: "right", padding: "2px 4px", fontSize: "12px", verticalAlign: "top" }}>
-              Untuk pembayaran :
-            </td>
-            <td style={{ padding: "2px 4px", fontSize: "12px", verticalAlign: "top" }}>
-              {firstUraian}
-            </td>
+            <td style={bodyLabelStyle}>Untuk pembayaran :</td>
+            <td style={bodyValueStyle}>{firstUraian}</td>
           </tr>
         </tbody>
       </table>
@@ -177,7 +170,7 @@ export function Kuitansi({
                 width: "33%",
                 textAlign: "left",
                 verticalAlign: "top",
-                padding: "0 8px",
+                padding: "8px 8px 0 0",
                 fontSize: "12px",
               }}
             >
@@ -194,7 +187,7 @@ export function Kuitansi({
                 width: "34%",
                 textAlign: "left",
                 verticalAlign: "top",
-                padding: "0 8px",
+                padding: "8px 8px 0 8px",
                 fontSize: "12px",
               }}
             >
@@ -211,7 +204,7 @@ export function Kuitansi({
                 width: "33%",
                 textAlign: "left",
                 verticalAlign: "top",
-                padding: "0 8px",
+                padding: "8px 0 0 8px",
                 fontSize: "12px",
               }}
             >
@@ -225,11 +218,11 @@ export function Kuitansi({
         </tbody>
       </table>
 
-      {/* === Menyetujui block (center) === */}
+      {/* === Menyetujui block (centered, below 3 columns) === */}
       <div
         style={{
           textAlign: "center",
-          marginTop: "20px",
+          marginTop: "24px",
           fontSize: "12px",
         }}
       >
