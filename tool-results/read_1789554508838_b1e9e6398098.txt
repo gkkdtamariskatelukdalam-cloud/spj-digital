@@ -1,0 +1,1074 @@
+     1→     1→"use client";
+     2→     2→
+     3→     3→import { useEffect, useMemo, useState } from "react";
+     4→     4→import {
+     5→     5→  AlertCircle,
+     6→     6→  AlertTriangle,
+     7→     7→  CalendarDays,
+     8→     8→  CheckCircle2,
+     9→     9→  ClipboardList,
+    10→    10→  Eye,
+    11→    11→  Layers,
+    12→    12→  Loader2,
+    13→    13→  MoreHorizontal,
+    14→    14→  Pencil,
+    15→    15→  Plus,
+    16→    16→  Receipt,
+    17→    17→  Search,
+    18→    18→  Store,
+    19→    19→  Tag,
+    20→    20→  Trash2,
+    21→    21→  Wallet,
+    22→    22→} from "lucide-react";
+    23→    23→import { toast } from "sonner";
+    24→    24→
+    25→    25→import { Badge } from "@/components/ui/badge";
+    26→    26→import { Button } from "@/components/ui/button";
+    27→    27→import {
+    28→    28→  Card,
+    29→    29→  CardContent,
+    30→    30→  CardHeader,
+    31→    31→  CardTitle,
+    32→    32→} from "@/components/ui/card";
+    33→    33→import {
+    34→    34→  Dialog,
+    35→    35→  DialogContent,
+    36→    36→  DialogDescription,
+    37→    37→  DialogFooter,
+    38→    38→  DialogHeader,
+    39→    39→  DialogTitle,
+    40→    40→} from "@/components/ui/dialog";
+    41→    41→import {
+    42→    42→  AlertDialog,
+    43→    43→  AlertDialogAction,
+    44→    44→  AlertDialogCancel,
+    45→    45→  AlertDialogContent,
+    46→    46→  AlertDialogDescription,
+    47→    47→  AlertDialogFooter,
+    48→    48→  AlertDialogHeader,
+    49→    49→  AlertDialogTitle,
+    50→    50→} from "@/components/ui/alert-dialog";
+    51→    51→import {
+    52→    52→  DropdownMenu,
+    53→    53→  DropdownMenuContent,
+    54→    54→  DropdownMenuItem,
+    55→    55→  DropdownMenuLabel,
+    56→    56→  DropdownMenuSeparator,
+    57→    57→  DropdownMenuTrigger,
+    58→    58→} from "@/components/ui/dropdown-menu";
+    59→    59→import { Input } from "@/components/ui/input";
+    60→    60→import { Label } from "@/components/ui/label";
+    61→    61→import {
+    62→    62→  Select,
+    63→    63→  SelectContent,
+    64→    64→  SelectItem,
+    65→    65→  SelectTrigger,
+    66→    66→  SelectValue,
+    67→    67→} from "@/components/ui/select";
+    68→    68→import {
+    69→    69→  Table,
+    70→    70→  TableBody,
+    71→    71→  TableCell,
+    72→    72→  TableHead,
+    73→    73→  TableHeader,
+    74→    74→  TableRow,
+    75→    75→} from "@/components/ui/table";
+    76→    76→import { Textarea } from "@/components/ui/textarea";
+    77→    77→import {
+    78→    78→  Tooltip,
+    79→    79→  TooltipContent,
+    80→    80→  TooltipTrigger,
+    81→    81→} from "@/components/ui/tooltip";
+    82→    82→import {
+    83→    83→  useCreateTransaction,
+    84→    84→  useDeleteTransaction,
+    85→    85→  useTransactions,
+    86→    86→  useUpdateTransaction,
+    87→    87→  useVendors,
+    88→    88→} from "@/hooks/use-spj";
+    89→    89→import type { Transaction } from "@/lib/types/spj";
+    90→    90→import {
+    91→    91→  formatDateShort,
+    92→    92→  formatNumber,
+    93→    93→  formatRupiah,
+    94→    94→  getMonthName,
+    95→    95→} from "@/lib/format";
+    96→    96→
+    97→    97→// ============ Form state ============
+    98→    98→interface FormState {
+    99→    99→  noBku: string;
+   100→   100→  uraian: string;
+   101→   101→  namaBarang: string;
+   102→   102→  vendorId: string;
+   103→   103→  vendorNewName: string;
+   104→   104→  volume: string;
+   105→   105→  satuan: string;
+   106→   106→  tarifHarga: string;
+   107→   107→  tglPesan: string;
+   108→   108→  tglBast: string;
+   109→   109→  tglBayar: string;
+   110→   110→  bulan: string;
+   111→   111→  status: "lunas" | "pending";
+   112→   112→  noPesan: string;
+   113→   113→  noBast: string;
+   114→   114→}
+   115→   115→
+   116→   116→const emptyForm: FormState = {
+   117→   117→  noBku: "",
+   118→   118→  uraian: "",
+   119→   119→  namaBarang: "",
+   120→   120→  vendorId: "__none__",
+   121→   121→  vendorNewName: "",
+   122→   122→  volume: "1",
+   123→   123→  satuan: "unit",
+   124→   124→  tarifHarga: "0",
+   125→   125→  tglPesan: "",
+   126→   126→  tglBast: "",
+   127→   127→  tglBayar: "",
+   128→   128→  bulan: String(new Date().getMonth() + 1),
+   129→   129→  status: "pending",
+   130→   130→  noPesan: "",
+   131→   131→  noBast: "",
+   132→   132→};
+   133→   133→
+   134→   134→const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1);
+   135→   135→
+   136→   136→export function Transactions() {
+   137→   137→  // ============ Filter state ============
+   138→   138→  const [q, setQ] = useState("");
+   139→   139→  const [bulan, setBulan] = useState<string>("all");
+   140→   140→  const [status, setStatus] = useState<string>("all");
+   141→   141→  const [vendorId, setVendorId] = useState<string>("all");
+   142→   142→
+   143→   143→  // Debounced-ish search via state (search on type, but use latest)
+   144→   144→  const [searchInput, setSearchInput] = useState("");
+   145→   145→  useEffect(() => {
+   146→   146→    const t = setTimeout(() => setQ(searchInput), 300);
+   147→   147→    return () => clearTimeout(t);
+   148→   148→  }, [searchInput]);
+   149→   149→
+   150→   150→  // ============ Query ============
+   151→   151→  const query = useMemo(
+   152→   152→    () => ({
+   153→   153→      q: q || undefined,
+   154→   154→      bulan: bulan !== "all" ? Number(bulan) : undefined,
+   155→   155→      status: status !== "all" ? status : undefined,
+   156→   156→      vendorId: vendorId !== "all" ? vendorId : undefined,
+   157→   157→      limit: 100,
+   158→   158→    }),
+   159→   159→    [q, bulan, status, vendorId]
+   160→   160→  );
+   161→   161→
+   162→   162→  const { data, isLoading, isError, error, refetch } = useTransactions(query);
+   163→   163→  const { data: vendorsData } = useVendors();
+   164→   164→
+   165→   165→  const transactions = data?.transactions ?? [];
+   166→   166→  const totalRows = data?.total ?? 0;
+   167→   167→  const totalAmount = data?.totalAmount ?? 0;
+   168→   168→  const totalRealisasi = transactions.reduce(
+   169→   169→    (sum, t) => sum + (t.realisasi || 0),
+   170→   170→    0
+   171→   171→  );
+   172→   172→  const shown = transactions.length;
+   173→   173→
+   174→   174→  // ============ Dialog state ============
+   175→   175→  const [dialogOpen, setDialogOpen] = useState(false);
+   176→   176→  const [editingId, setEditingId] = useState<string | null>(null);
+   177→   177→  const [form, setForm] = useState<FormState>(emptyForm);
+   178→   178→
+   179→   179→  // ============ Delete dialog state ============
+   180→   180→  const [deleteTarget, setDeleteTarget] = useState<Transaction | null>(null);
+   181→   181→  const [deleteOpen, setDeleteOpen] = useState(false);
+   182→   182→
+   183→   183→  // ============ Mutations ============
+   184→   184→  const createMut = useCreateTransaction();
+   185→   185→  const updateMut = useUpdateTransaction();
+   186→   186→  const deleteMut = useDeleteTransaction();
+   187→   187→
+   188→   188→  // ============ Computed jumlah ============
+   189→   189→  const computedJumlah = useMemo(() => {
+   190→   190→    const v = parseFloat(form.volume) || 0;
+   191→   191→    const t = parseFloat(form.tarifHarga) || 0;
+   192→   192→    return v * t;
+   193→   193→  }, [form.volume, form.tarifHarga]);
+   194→   194→
+   195→   195→  // ============ Form helpers ============
+   196→   196→  function openCreate() {
+   197→   197→    setEditingId(null);
+   198→   198→    setForm({
+   199→   199→      ...emptyForm,
+   200→   200→      bulan: bulan !== "all" ? bulan : String(new Date().getMonth() + 1),
+   201→   201→    });
+   202→   202→    setDialogOpen(true);
+   203→   203→  }
+   204→   204→
+   205→   205→  function openEdit(tx: Transaction) {
+   206→   206→    setEditingId(tx.id);
+   207→   207→    setForm({
+   208→   208→      noBku: tx.noBku ?? "",
+   209→   209→      uraian: tx.uraian ?? "",
+   210→   210→      namaBarang: tx.namaBarang ?? "",
+   211→   211→      vendorId: tx.vendorId ?? "__none__",
+   212→   212→      vendorNewName: "",
+   213→   213→      volume: String(tx.volume ?? 0),
+   214→   214→      satuan: tx.satuan ?? "",
+   215→   215→      tarifHarga: String(tx.tarifHarga ?? 0),
+   216→   216→      tglPesan: toInputDate(tx.tglPesan),
+   217→   217→      tglBast: toInputDate(tx.tglBast),
+   218→   218→      tglBayar: toInputDate(tx.tglBayar),
+   219→   219→      bulan: tx.bulan ? String(tx.bulan) : String(new Date().getMonth() + 1),
+   220→   220→      status: (tx.status === "lunas" ? "lunas" : "pending"),
+   221→   221→      noPesan: tx.noPesan ?? "",
+   222→   222→      noBast: tx.noBast ?? "",
+   223→   223→    });
+   224→   224→    setDialogOpen(true);
+   225→   225→  }
+   226→   226→
+   227→   227→  function update<K extends keyof FormState>(key: K, value: FormState[K]) {
+   228→   228→    setForm((prev) => ({ ...prev, [key]: value }));
+   229→   229→  }
+   230→   230→
+   231→   231→  function handleSubmit() {
+   232→   232→    if (!form.uraian.trim()) {
+   233→   233→      toast.error("Uraian wajib diisi");
+   234→   234→      return;
+   235→   235→    }
+   236→   236→    // Build payload. Note: API derives status from masukBku field; we set
+   237→   237→    // masukBku = "MASUK BKU" when status is "lunas" so the GET filter works.
+   238→   238→    const payload: Record<string, unknown> = {
+   239→   239→      noBku: form.noBku.trim() || null,
+   240→   240→      uraian: form.uraian.trim(),
+   241→   241→      namaBarang: form.namaBarang.trim() || null,
+   242→   242→      volume: parseFloat(form.volume) || 0,
+   243→   243→      satuan: form.satuan.trim() || null,
+   244→   244→      tarifHarga: parseFloat(form.tarifHarga) || 0,
+   245→   245→      jumlah: computedJumlah,
+   246→   246→      realisasi: computedJumlah,
+   247→   247→      tglPesan: form.tglPesan || null,
+   248→   248→      tglBast: form.tglBast || null,
+   249→   249→      tglBayar: form.tglBayar || null,
+   250→   250→      noPesan: form.noPesan.trim() || null,
+   251→   251→      noBast: form.noBast.trim() || null,
+   252→   252→      bulan: Number(form.bulan),
+   253→   253→      tahun: new Date().getFullYear(),
+   254→   254→      status: form.status,
+   255→   255→      masukBku: form.status === "lunas" ? "MASUK BKU" : null,
+   256→   256→      vendorId: form.vendorId === "__none__" ? null : form.vendorId,
+   257→   257→    };
+   258→   258→
+   259→   259→    if (editingId) {
+   260→   260→      updateMut.mutate(
+   261→   261→        { id: editingId, data: payload },
+   262→   262→        {
+   263→   263→          onSuccess: () => {
+   264→   264→            toast.success("Transaksi diperbarui");
+   265→   265→            setDialogOpen(false);
+   266→   266→          },
+   267→   267→          onError: (e: Error) => toast.error("Gagal memperbarui: " + e.message),
+   268→   268→        }
+   269→   269→      );
+   270→   270→    } else {
+   271→   271→      createMut.mutate(payload, {
+   272→   272→        onSuccess: () => {
+   273→   273→          toast.success("Transaksi ditambahkan");
+   274→   274→          setDialogOpen(false);
+   275→   275→        },
+   276→   276→        onError: (e: Error) => toast.error("Gagal menambah: " + e.message),
+   277→   277→      });
+   278→   278→    }
+   279→   279→  }
+   280→   280→
+   281→   281→  function handleDelete() {
+   282→   282→    if (!deleteTarget) return;
+   283→   283→    deleteMut.mutate(deleteTarget.id, {
+   284→   284→      onSuccess: () => {
+   285→   285→        toast.success("Transaksi dihapus");
+   286→   286→        setDeleteOpen(false);
+   287→   287→        setDeleteTarget(null);
+   288→   288→      },
+   289→   289→      onError: (e: Error) => toast.error("Gagal menghapus: " + e.message),
+   290→   290→    });
+   291→   291→  }
+   292→   292→
+   293→   293→  const isSaving = createMut.isPending || updateMut.isPending;
+   294→   294→
+   295→   295→  // ============ Render ============
+   296→   296→  return (
+   297→   297→    <div className="space-y-4">
+   298→   298→      {/* === Filter bar === */}
+   299→   299→      <Card className="border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/60 backdrop-blur sticky top-0 z-30 rounded-xl shadow-sm">
+   300→   300→        <CardContent className="p-3 sm:p-4 space-y-3">
+   301→   301→          <div className="flex flex-col lg:flex-row gap-3 lg:items-end">
+   302→   302→            {/* Search */}
+   303→   303→            <div className="flex-1 min-w-0">
+   304→   304→              <Label className="text-xs text-slate-500 mb-1 block">
+   305→   305→                Cari transaksi
+   306→   306→              </Label>
+   307→   307→              <div className="relative">
+   308→   308→                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+   309→   309→                <Input
+   310→   310→                  value={searchInput}
+   311→   311→                  onChange={(e) => setSearchInput(e.target.value)}
+   312→   312→                  placeholder="Uraian, nama barang, no. BKU, no. pesan..."
+   313→   313→                  className="pl-8"
+   314→   314→                />
+   315→   315→              </div>
+   316→   316→            </div>
+   317→   317→
+   318→   318→            {/* Bulan */}
+   319→   319→            <div className="w-full sm:w-36">
+   320→   320→              <Label className="text-xs text-slate-500 mb-1 block">Bulan</Label>
+   321→   321→              <Select value={bulan} onValueChange={setBulan}>
+   322→   322→                <SelectTrigger className="w-full">
+   323→   323→                  <SelectValue placeholder="Semua Bulan" />
+   324→   324→                </SelectTrigger>
+   325→   325→                <SelectContent>
+   326→   326→                  <SelectItem value="all">Semua Bulan</SelectItem>
+   327→   327→                  {MONTHS.map((m) => (
+   328→   328→                    <SelectItem key={m} value={String(m)}>
+   329→   329→                      {getMonthName(m)}
+   330→   330→                    </SelectItem>
+   331→   331→                  ))}
+   332→   332→                </SelectContent>
+   333→   333→              </Select>
+   334→   334→            </div>
+   335→   335→
+   336→   336→            {/* Status */}
+   337→   337→            <div className="w-full sm:w-36">
+   338→   338→              <Label className="text-xs text-slate-500 mb-1 block">Status</Label>
+   339→   339→              <Select value={status} onValueChange={setStatus}>
+   340→   340→                <SelectTrigger className="w-full">
+   341→   341→                  <SelectValue placeholder="Semua Status" />
+   342→   342→                </SelectTrigger>
+   343→   343→                <SelectContent>
+   344→   344→                  <SelectItem value="all">Semua Status</SelectItem>
+   345→   345→                  <SelectItem value="lunas">Lunas</SelectItem>
+   346→   346→                  <SelectItem value="pending">Pending</SelectItem>
+   347→   347→                </SelectContent>
+   348→   348→              </Select>
+   349→   349→            </div>
+   350→   350→
+   351→   351→            {/* Vendor */}
+   352→   352→            <div className="w-full sm:w-44">
+   353→   353→              <Label className="text-xs text-slate-500 mb-1 block">Vendor</Label>
+   354→   354→              <Select value={vendorId} onValueChange={setVendorId}>
+   355→   355→                <SelectTrigger className="w-full">
+   356→   356→                  <SelectValue placeholder="Semua Vendor" />
+   357→   357→                </SelectTrigger>
+   358→   358→                <SelectContent>
+   359→   359→                  <SelectItem value="all">Semua Vendor</SelectItem>
+   360→   360→                  {(vendorsData?.items ?? []).map((v) => (
+   361→   361→                    <SelectItem key={v.id} value={v.id}>
+   362→   362→                      {v.name}
+   363→   363→                    </SelectItem>
+   364→   364→                  ))}
+   365→   365→                </SelectContent>
+   366→   366→              </Select>
+   367→   367→            </div>
+   368→   368→
+   369→   369→            {/* Add button */}
+   370→   370→            <Button
+   371→   371→              onClick={openCreate}
+   372→   372→              className="bg-rose-600 hover:bg-rose-700 text-white w-full sm:w-auto"
+   373→   373→            >
+   374→   374→              <Plus className="size-4" />
+   375→   375→              Tambah Transaksi
+   376→   376→            </Button>
+   377→   377→          </div>
+   378→   378→        </CardContent>
+   379→   379→      </Card>
+   380→   380→
+   381→   381→      {/* === Summary bar === */}
+   382→   382→      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+   383→   383→        <SummaryTile
+   384→   384→          icon={<ClipboardList className="size-4" />}
+   385→   385→          label="Total Transaksi"
+   386→   386→          value={formatNumber(totalRows)}
+   387→   387→          tone="violet"
+   388→   388→        />
+   389→   389→        <SummaryTile
+   390→   390→          icon={<Wallet className="size-4" />}
+   391→   391→          label="Total Nilai"
+   392→   392→          value={formatRupiah(totalAmount)}
+   393→   393→          tone="rose"
+   394→   394→        />
+   395→   395→        <SummaryTile
+   396→   396→          icon={<CheckCircle2 className="size-4" />}
+   397→   397→          label="Total Realisasi"
+   398→   398→          value={formatRupiah(totalRealisasi)}
+   399→   399→          tone="emerald"
+   400→   400→        />
+   401→   401→      </div>
+   402→   402→
+   403→   403→      {/* === Loading / Error === */}
+   404→   404→      {isLoading ? (
+   405→   405→        <Card className="border-slate-200 dark:border-slate-800">
+   406→   406→          <CardContent className="py-16 flex flex-col items-center justify-center gap-3 text-slate-500">
+   407→   407→            <Loader2 className="size-6 animate-spin text-rose-500" />
+   408→   408→            <p className="text-sm">Memuat transaksi...</p>
+   409→   409→          </CardContent>
+   410→   410→        </Card>
+   411→   411→      ) : isError ? (
+   412→   412→        <Card className="border-rose-200 dark:border-rose-900">
+   413→   413→          <CardContent className="py-12 flex flex-col items-center gap-3 text-rose-700 dark:text-rose-300">
+   414→   414→            <AlertCircle className="size-6" />
+   415→   415→            <p className="text-sm">Gagal memuat transaksi</p>
+   416→   416→            <p className="text-xs text-slate-500">
+   417→   417→              {(error as Error)?.message ?? "Unknown error"}
+   418→   418→            </p>
+   419→   419→            <Button variant="outline" onClick={() => refetch()}>
+   420→   420→              Coba lagi
+   421→   421→            </Button>
+   422→   422→          </CardContent>
+   423→   423→        </Card>
+   424→   424→      ) : shown === 0 ? (
+   425→   425→        <Card className="border-dashed border-slate-300 dark:border-slate-700">
+   426→   426→          <CardContent className="py-16 flex flex-col items-center gap-3 text-slate-500">
+   427→   427→            <Layers className="size-6 text-slate-400" />
+   428→   428→            <p className="text-sm font-medium">Belum ada transaksi</p>
+   429→   429→            <p className="text-xs">
+   430→   430→              Tambah transaksi pertama dengan tombol di atas.
+   431→   431→            </p>
+   432→   432→          </CardContent>
+   433→   433→        </Card>
+   434→   434→      ) : (
+   435→   435→        <>
+   436→   436→          {/* === Desktop table === */}
+   437→   437→          <Card className="hidden md:block border-slate-200 dark:border-slate-800 overflow-hidden">
+   438→   438→            <div className="max-h-[calc(100vh-22rem)] overflow-auto">
+   439→   439→              <Table>
+   440→   440→                <TableHeader className="sticky top-0 z-10 bg-slate-50 dark:bg-slate-900 shadow-[0_1px_0_0_rgb(0_0_0_/_0.05)]">
+   441→   441→                  <TableRow className="hover:bg-transparent">
+   442→   442→                    <TableHead className="w-10 text-center">No</TableHead>
+   443→   443→                    <TableHead className="min-w-28">No. BKU</TableHead>
+   444→   444→                    <TableHead className="min-w-32">Tgl Pesan / Bayar</TableHead>
+   445→   445→                    <TableHead className="min-w-48">Uraian</TableHead>
+   446→   446→                    <TableHead className="min-w-32">Nama Barang</TableHead>
+   447→   447→                    <TableHead className="min-w-32">Vendor</TableHead>
+   448→   448→                    <TableHead className="text-right min-w-24">Volume</TableHead>
+   449→   449→                    <TableHead className="text-right min-w-28">Tarif</TableHead>
+   450→   450→                    <TableHead className="text-right min-w-32">Jumlah</TableHead>
+   451→   451→                    <TableHead className="text-center min-w-20">Status</TableHead>
+   452→   452→                    <TableHead className="w-10 text-center">Aksi</TableHead>
+   453→   453→                  </TableRow>
+   454→   454→                </TableHeader>
+   455→   455→                <TableBody>
+   456→   456→                  {transactions.map((tx, idx) => (
+   457→   457→                    <TableRow
+   458→   458→                      key={tx.id}
+   459→   459→                      className="hover:bg-rose-50/40 dark:hover:bg-rose-950/10 transition-colors"
+   460→   460→                    >
+   461→   461→                      <TableCell className="text-center text-slate-400 text-xs">
+   462→   462→                        {idx + 1}
+   463→   463→                      </TableCell>
+   464→   464→                      <TableCell>
+   465→   465→                        {tx.noBku ? (
+   466→   466→                          <Badge
+   467→   467→                            variant="outline"
+   468→   468→                            className="font-mono text-[10px] bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+   469→   469→                          >
+   470→   470→                            {tx.noBku}
+   471→   471→                          </Badge>
+   472→   472→                        ) : (
+   473→   473→                          <span className="text-slate-300">—</span>
+   474→   474→                        )}
+   475→   475→                      </TableCell>
+   476→   476→                      <TableCell className="text-xs">
+   477→   477→                        <div className="flex flex-col">
+   478→   478→                          <span>{formatDateShort(tx.tglPesan) || "—"}</span>
+   479→   479→                          {tx.tglBayar && (
+   480→   480→                            <span className="text-emerald-600 dark:text-emerald-400">
+   481→   481→                              ↳ {formatDateShort(tx.tglBayar)}
+   482→   482→                            </span>
+   483→   483→                          )}
+   484→   484→                        </div>
+   485→   485→                      </TableCell>
+   486→   486→                      <TableCell className="max-w-xs">
+   487→   487→                        <Tooltip>
+   488→   488→                          <TooltipTrigger asChild>
+   489→   489→                            <span className="line-clamp-2 cursor-help">
+   490→   490→                              {tx.uraian}
+   491→   491→                            </span>
+   492→   492→                          </TooltipTrigger>
+   493→   493→                          <TooltipContent className="max-w-sm">
+   494→   494→                            {tx.uraian}
+   495→   495→                          </TooltipContent>
+   496→   496→                        </Tooltip>
+   497→   497→                      </TableCell>
+   498→   498→                      <TableCell className="max-w-[10rem] truncate text-slate-600 dark:text-slate-300">
+   499→   499→                        {tx.namaBarang ?? "—"}
+   500→   500→                      </TableCell>
+   501→   501→                      <TableCell className="max-w-[10rem] truncate">
+   502→   502→                        {tx.vendor?.name ?? (
+   503→   503→                          <span className="text-slate-300">—</span>
+   504→   504→                        )}
+   505→   505→                      </TableCell>
+   506→   506→                      <TableCell className="text-right text-xs">
+   507→   507→                        {formatNumber(tx.volume)}{" "}
+   508→   508→                        <span className="text-slate-400">{tx.satuan}</span>
+   509→   509→                      </TableCell>
+   510→   510→                      <TableCell className="text-right text-xs text-slate-600 dark:text-slate-300">
+   511→   511→                        {formatRupiah(tx.tarifHarga)}
+   512→   512→                      </TableCell>
+   513→   513→                      <TableCell className="text-right font-bold text-rose-600 dark:text-rose-400">
+   514→   514→                        {formatRupiah(tx.jumlah)}
+   515→   515→                      </TableCell>
+   516→   516→                      <TableCell className="text-center">
+   517→   517→                        <StatusBadge status={tx.status} />
+   518→   518→                      </TableCell>
+   519→   519→                      <TableCell className="text-center">
+   520→   520→                        <RowActions
+   521→   521→                          onEdit={() => openEdit(tx)}
+   522→   522→                          onDelete={() => {
+   523→   523→                            setDeleteTarget(tx);
+   524→   524→                            setDeleteOpen(true);
+   525→   525→                          }}
+   526→   526→                        />
+   527→   527→                      </TableCell>
+   528→   528→                    </TableRow>
+   529→   529→                  ))}
+   530→   530→                </TableBody>
+   531→   531→              </Table>
+   532→   532→            </div>
+   533→   533→          </Card>
+   534→   534→
+   535→   535→          {/* === Mobile card list === */}
+   536→   536→          <div className="md:hidden space-y-3">
+   537→   537→            {transactions.map((tx, idx) => (
+   538→   538→              <TransactionCard
+   539→   539→                key={tx.id}
+   540→   540→                tx={tx}
+   541→   541→                no={idx + 1}
+   542→   542→                onEdit={() => openEdit(tx)}
+   543→   543→                onDelete={() => {
+   544→   544→                  setDeleteTarget(tx);
+   545→   545→                  setDeleteOpen(true);
+   546→   546→                }}
+   547→   547→              />
+   548→   548→            ))}
+   549→   549→          </div>
+   550→   550→
+   551→   551→          {/* === Footer note === */}
+   552→   552→          <div className="flex items-center justify-between text-xs text-slate-500 px-1">
+   553→   553→            <span>
+   554→   554→              Menampilkan <strong className="text-slate-700 dark:text-slate-300">{shown}</strong>{" "}
+   555→   555→              dari <strong className="text-slate-700 dark:text-slate-300">{formatNumber(totalRows)}</strong>{" "}
+   556→   556→              transaksi
+   557→   557→            </span>
+   558→   558→            {totalRows > 100 && (
+   559→   559→              <Badge
+   560→   560→                variant="outline"
+   561→   561→                className="text-amber-700 border-amber-300 bg-amber-50 dark:bg-amber-950/40 dark:border-amber-900 dark:text-amber-300"
+   562→   562→              >
+   563→   563→                Batas 100 baris — perbaiki filter
+   564→   564→              </Badge>
+   565→   565→            )}
+   566→   566→          </div>
+   567→   567→        </>
+   568→   568→      )}
+   569→   569→
+   570→   570→      {/* === Add/Edit Dialog === */}
+   571→   571→      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+   572→   572→        <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+   573→   573→          <DialogHeader>
+   574→   574→            <DialogTitle className="flex items-center gap-2">
+   575→   575→              <Receipt className="size-5 text-rose-600" />
+   576→   576→              {editingId ? "Edit Transaksi" : "Tambah Transaksi"}
+   577→   577→            </DialogTitle>
+   578→   578→            <DialogDescription>
+   579→   579→              {editingId
+   580→   580→                ? "Perbarui data transaksi SPJ"
+   581→   581→                : "Isi data transaksi SPJ baru"}
+   582→   582→            </DialogDescription>
+   583→   583→          </DialogHeader>
+   584→   584→
+   585→   585→          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+   586→   586→            {/* No BKU */}
+   587→   587→            <Field label="No. BKU" full={false}>
+   588→   588→              <Input
+   589→   589→                value={form.noBku}
+   590→   590→                onChange={(e) => update("noBku", e.target.value)}
+   591→   591→                placeholder="cth. 001/BKU/2025"
+   592→   592→                className="font-mono"
+   593→   593→              />
+   594→   594→            </Field>
+   595→   595→
+   596→   596→            {/* Bulan */}
+   597→   597→            <Field label="Bulan">
+   598→   598→              <Select
+   599→   599→                value={form.bulan}
+   600→   600→                onValueChange={(v) => update("bulan", v)}
+   601→   601→              >
+   602→   602→                <SelectTrigger className="w-full">
+   603→   603→                  <SelectValue />
+   604→   604→                </SelectTrigger>
+   605→   605→                <SelectContent>
+   606→   606→                  {MONTHS.map((m) => (
+   607→   607→                    <SelectItem key={m} value={String(m)}>
+   608→   608→                      {getMonthName(m)}
+   609→   609→                    </SelectItem>
+   610→   610→                  ))}
+   611→   611→                </SelectContent>
+   612→   612→              </Select>
+   613→   613→            </Field>
+   614→   614→
+   615→   615→            {/* Uraian */}
+   616→   616→            <Field label="Uraian *" full>
+   617→   617→              <Textarea
+   618→   618→                value={form.uraian}
+   619→   619→                onChange={(e) => update("uraian", e.target.value)}
+   620→   620→                placeholder="cth. Pembelian kertas A4 80gsm untuk kegiatan KBM"
+   621→   621→                rows={2}
+   622→   622→              />
+   623→   623→            </Field>
+   624→   624→
+   625→   625→            {/* Nama Barang */}
+   626→   626→            <Field label="Nama Barang">
+   627→   627→              <Input
+   628→   628→                value={form.namaBarang}
+   629→   629→                onChange={(e) => update("namaBarang", e.target.value)}
+   630→   630→                placeholder="cth. Kertas A4 80gsm"
+   631→   631→              />
+   632→   632→            </Field>
+   633→   633→
+   634→   634→            {/* Vendor */}
+   635→   635→            <Field label="Vendor">
+   636→   636→              <Select
+   637→   637→                value={form.vendorId}
+   638→   638→                onValueChange={(v) => update("vendorId", v)}
+   639→   639→              >
+   640→   640→                <SelectTrigger className="w-full">
+   641→   641→                  <SelectValue placeholder="Pilih vendor" />
+   642→   642→                </SelectTrigger>
+   643→   643→                <SelectContent>
+   644→   644→                  <SelectItem value="__none__">— Tidak ada —</SelectItem>
+   645→   645→                  {(vendorsData?.items ?? []).map((v) => (
+   646→   646→                    <SelectItem key={v.id} value={v.id}>
+   647→   647→                      {v.name}
+   648→   648→                    </SelectItem>
+   649→   649→                  ))}
+   650→   650→                </SelectContent>
+   651→   651→              </Select>
+   652→   652→            </Field>
+   653→   653→
+   654→   654→            {/* Volume */}
+   655→   655→            <Field label="Volume">
+   656→   656→              <Input
+   657→   657→                type="number"
+   658→   658→                inputMode="decimal"
+   659→   659→                value={form.volume}
+   660→   660→                onChange={(e) => update("volume", e.target.value)}
+   661→   661→                min={0}
+   662→   662→                step="any"
+   663→   663→              />
+   664→   664→            </Field>
+   665→   665→
+   666→   666→            {/* Satuan */}
+   667→   667→            <Field label="Satuan">
+   668→   668→              <Input
+   669→   669→                value={form.satuan}
+   670→   670→                onChange={(e) => update("satuan", e.target.value)}
+   671→   671→                placeholder="cth. dus, pack, unit"
+   672→   672→              />
+   673→   673→            </Field>
+   674→   674→
+   675→   675→            {/* Tarif Harga */}
+   676→   676→            <Field label="Tarif Harga" full>
+   677→   677→              <Input
+   678→   678→                type="number"
+   679→   679→                inputMode="decimal"
+   680→   680→                value={form.tarifHarga}
+   681→   681→                onChange={(e) => update("tarifHarga", e.target.value)}
+   682→   682→                min={0}
+   683→   683→                step="any"
+   684→   684→              />
+   685→   685→            </Field>
+   686→   686→
+   687→   687→            {/* Jumlah (auto-computed) */}
+   688→   688→            <div className="sm:col-span-2">
+   689→   689→              <div className="rounded-lg bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900 px-3 py-2.5 flex items-center justify-between">
+   690→   690→                <span className="text-xs text-rose-700 dark:text-rose-300 font-medium">
+   691→   691→                  Jumlah (Volume × Tarif)
+   692→   692→                </span>
+   693→   693→                <span className="font-bold text-rose-700 dark:text-rose-300">
+   694→   694→                  {formatRupiah(computedJumlah)}
+   695→   695→                </span>
+   696→   696→              </div>
+   697→   697→            </div>
+   698→   698→
+   699→   699→            <div className="sm:col-span-2 my-1 h-px bg-slate-100 dark:bg-slate-800" />
+   700→   700→
+   701→   701→            {/* Tgl Pesan */}
+   702→   702→            <Field label="Tgl Pesan">
+   703→   703→              <Input
+   704→   704→                type="date"
+   705→   705→                value={form.tglPesan}
+   706→   706→                onChange={(e) => update("tglPesan", e.target.value)}
+   707→   707→              />
+   708→   708→            </Field>
+   709→   709→            <Field label="No. Pesan">
+   710→   710→              <Input
+   711→   711→                value={form.noPesan}
+   712→   712→                onChange={(e) => update("noPesan", e.target.value)}
+   713→   713→                placeholder="cth. 001/Pesan/2025"
+   714→   714→                className="font-mono"
+   715→   715→              />
+   716→   716→            </Field>
+   717→   717→
+   718→   718→            {/* Tgl BAST */}
+   719→   719→            <Field label="Tgl BAST">
+   720→   720→              <Input
+   721→   721→                type="date"
+   722→   722→                value={form.tglBast}
+   723→   723→                onChange={(e) => update("tglBast", e.target.value)}
+   724→   724→              />
+   725→   725→            </Field>
+   726→   726→            <Field label="No. BAST">
+   727→   727→              <Input
+   728→   728→                value={form.noBast}
+   729→   729→                onChange={(e) => update("noBast", e.target.value)}
+   730→   730→                placeholder="cth. 001/BAST/2025"
+   731→   731→                className="font-mono"
+   732→   732→              />
+   733→   733→            </Field>
+   734→   734→
+   735→   735→            {/* Tgl Bayar */}
+   736→   736→            <Field label="Tgl Bayar">
+   737→   737→              <Input
+   738→   738→                type="date"
+   739→   739→                value={form.tglBayar}
+   740→   740→                onChange={(e) => update("tglBayar", e.target.value)}
+   741→   741→              />
+   742→   742→            </Field>
+   743→   743→
+   744→   744→            {/* Status */}
+   745→   745→            <Field label="Status">
+   746→   746→              <Select
+   747→   747→                value={form.status}
+   748→   748→                onValueChange={(v) =>
+   749→   749→                  update("status", v as "lunas" | "pending")
+   750→   750→                }
+   751→   751→              >
+   752→   752→                <SelectTrigger className="w-full">
+   753→   753→                  <SelectValue />
+   754→   754→                </SelectTrigger>
+   755→   755→                <SelectContent>
+   756→   756→                  <SelectItem value="pending">Pending</SelectItem>
+   757→   757→                  <SelectItem value="lunas">Lunas</SelectItem>
+   758→   758→                </SelectContent>
+   759→   759→              </Select>
+   760→   760→            </Field>
+   761→   761→          </div>
+   762→   762→
+   763→   763→          <DialogFooter className="gap-2">
+   764→   764→            <Button
+   765→   765→              variant="outline"
+   766→   766→              onClick={() => setDialogOpen(false)}
+   767→   767→              disabled={isSaving}
+   768→   768→            >
+   769→   769→              Batal
+   770→   770→            </Button>
+   771→   771→            <Button
+   772→   772→              onClick={handleSubmit}
+   773→   773→              disabled={isSaving || !form.uraian.trim()}
+   774→   774→              className="bg-rose-600 hover:bg-rose-700 text-white"
+   775→   775→            >
+   776→   776→              {isSaving && <Loader2 className="size-4 animate-spin" />}
+   777→   777→              {editingId ? "Simpan Perubahan" : "Simpan"}
+   778→   778→            </Button>
+   779→   779→          </DialogFooter>
+   780→   780→        </DialogContent>
+   781→   781→      </Dialog>
+   782→   782→
+   783→   783→      {/* === Delete AlertDialog === */}
+   784→   784→      <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+   785→   785→        <AlertDialogContent>
+   786→   786→          <AlertDialogHeader>
+   787→   787→            <AlertDialogTitle className="flex items-center gap-2 text-rose-700 dark:text-rose-400">
+   788→   788→              <AlertTriangle className="size-5" />
+   789→   789→              Hapus transaksi ini?
+   790→   790→            </AlertDialogTitle>
+   791→   791→            <AlertDialogDescription asChild>
+   792→   792→              <div className="space-y-2 text-sm">
+   793→   793→                <p>Transaksi yang dihapus tidak dapat dikembalikan.</p>
+   794→   794→                {deleteTarget && (
+   795→   795→                  <div className="rounded-md bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 space-y-1">
+   796→   796→                    <div className="text-xs text-slate-500">Uraian</div>
+   797→   797→                    <div className="font-medium text-slate-800 dark:text-slate-100">
+   798→   798→                      {deleteTarget.uraian}
+   799→   799→                    </div>
+   800→   800→                    <div className="text-xs text-slate-500 pt-1">Jumlah</div>
+   801→   801→                    <div className="font-bold text-rose-600 dark:text-rose-400">
+   802→   802→                      {formatRupiah(deleteTarget.jumlah)}
+   803→   803→                    </div>
+   804→   804→                  </div>
+   805→   805→                )}
+   806→   806→              </div>
+   807→   807→            </AlertDialogDescription>
+   808→   808→          </AlertDialogHeader>
+   809→   809→          <AlertDialogFooter>
+   810→   810→            <AlertDialogCancel disabled={deleteMut.isPending}>
+   811→   811→              Batal
+   812→   812→            </AlertDialogCancel>
+   813→   813→            <AlertDialogAction
+   814→   814→              onClick={handleDelete}
+   815→   815→              disabled={deleteMut.isPending}
+   816→   816→              className="bg-rose-600 hover:bg-rose-700 text-white"
+   817→   817→            >
+   818→   818→              {deleteMut.isPending && <Loader2 className="size-4 animate-spin" />}
+   819→   819→              Hapus
+   820→   820→            </AlertDialogAction>
+   821→   821→          </AlertDialogFooter>
+   822→   822→        </AlertDialogContent>
+   823→   823→      </AlertDialog>
+   824→   824→    </div>
+   825→   825→  );
+   826→   826→}
+   827→   827→
+   828→   828→// ============ Sub-components ============
+   829→   829→
+   830→   830→function Field({
+   831→   831→  label,
+   832→   832→  children,
+   833→   833→  full,
+   834→   834→}: {
+   835→   835→  label: string;
+   836→   836→  children: React.ReactNode;
+   837→   837→  full?: boolean;
+   838→   838→}) {
+   839→   839→  return (
+   840→   840→    <div className={full ? "sm:col-span-2 space-y-1.5" : "space-y-1.5"}>
+   841→   841→      <Label className="text-xs text-slate-600 dark:text-slate-400">
+   842→   842→        {label}
+   843→   843→      </Label>
+   844→   844→      {children}
+   845→   845→    </div>
+   846→   846→  );
+   847→   847→}
+   848→   848→
+   849→   849→function SummaryTile({
+   850→   850→  icon,
+   851→   851→  label,
+   852→   852→  value,
+   853→   853→  tone,
+   854→   854→}: {
+   855→   855→  icon: React.ReactNode;
+   856→   856→  label: string;
+   857→   857→  value: string;
+   858→   858→  tone: "rose" | "violet" | "emerald";
+   859→   859→}) {
+   860→   860→  const tones: Record<typeof tone, string> = {
+   861→   861→    rose: "border-rose-200 dark:border-rose-900 bg-rose-50/60 dark:bg-rose-950/20 text-rose-700 dark:text-rose-300",
+   862→   862→    violet:
+   863→   863→      "border-violet-200 dark:border-violet-900 bg-violet-50/60 dark:bg-violet-950/20 text-violet-700 dark:text-violet-300",
+   864→   864→    emerald:
+   865→   865→      "border-emerald-200 dark:border-emerald-900 bg-emerald-50/60 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-300",
+   866→   866→  };
+   867→   867→  return (
+   868→   868→    <Card className={`border ${tones[tone]} rounded-xl`}>
+   869→   869→      <CardContent className="py-3 px-4 flex items-center gap-3">
+   870→   870→        <div className="size-9 rounded-lg flex items-center justify-center bg-white/70 dark:bg-black/20">
+   871→   871→          {icon}
+   872→   872→        </div>
+   873→   873→        <div className="min-w-0">
+   874→   874→          <div className="text-xs text-slate-500 dark:text-slate-400 truncate">
+   875→   875→            {label}
+   876→   876→          </div>
+   877→   877→          <div className="font-bold text-lg text-slate-900 dark:text-slate-100 truncate">
+   878→   878→            {value}
+   879→   879→          </div>
+   880→   880→        </div>
+   881→   881→      </CardContent>
+   882→   882→    </Card>
+   883→   883→  );
+   884→   884→}
+   885→   885→
+   886→   886→function StatusBadge({ status }: { status: string }) {
+   887→   887→  const isLunas = status === "lunas";
+   888→   888→  return (
+   889→   889→    <Badge
+   890→   890→      variant="outline"
+   891→   891→      className={
+   892→   892→        isLunas
+   893→   893→          ? "border-emerald-300 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-900 dark:text-emerald-300"
+   894→   894→          : "border-amber-300 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:border-amber-900 dark:text-amber-300"
+   895→   895→      }
+   896→   896→    >
+   897→   897→      {isLunas ? (
+   898→   898→        <>
+   899→   899→          <CheckCircle2 className="size-3" /> Lunas
+   900→   900→        </>
+   901→   901→      ) : (
+   902→   902→        <>
+   903→   903→          <Eye className="size-3" /> Pending
+   904→   904→        </>
+   905→   905→      )}
+   906→   906→    </Badge>
+   907→   907→  );
+   908→   908→}
+   909→   909→
+   910→   910→function RowActions({
+   911→   911→  onEdit,
+   912→   912→  onDelete,
+   913→   913→}: {
+   914→   914→  onEdit: () => void;
+   915→   915→  onDelete: () => void;
+   916→   916→}) {
+   917→   917→  return (
+   918→   918→    <DropdownMenu>
+   919→   919→      <DropdownMenuTrigger asChild>
+   920→   920→        <Button variant="ghost" size="icon" className="size-7">
+   921→   921→          <MoreHorizontal className="size-4" />
+   922→   922→          <span className="sr-only">Aksi</span>
+   923→   923→        </Button>
+   924→   924→      </DropdownMenuTrigger>
+   925→   925→      <DropdownMenuContent align="end">
+   926→   926→        <DropdownMenuLabel>Aksi</DropdownMenuLabel>
+   927→   927→        <DropdownMenuItem onClick={onEdit}>
+   928→   928→          <Pencil className="size-4" />
+   929→   929→          Edit
+   930→   930→        </DropdownMenuItem>
+   931→   931→        <DropdownMenuSeparator />
+   932→   932→        <DropdownMenuItem
+   933→   933→          onClick={onDelete}
+   934→   934→          className="text-rose-600 dark:text-rose-400 focus:text-rose-700 focus:bg-rose-50 dark:focus:bg-rose-950/40"
+   935→   935→        >
+   936→   936→          <Trash2 className="size-4" />
+   937→   937→          Hapus
+   938→   938→        </DropdownMenuItem>
+   939→   939→      </DropdownMenuContent>
+   940→   940→    </DropdownMenu>
+   941→   941→  );
+   942→   942→}
+   943→   943→
+   944→   944→function TransactionCard({
+   945→   945→  tx,
+   946→   946→  no,
+   947→   947→  onEdit,
+   948→   948→  onDelete,
+   949→   949→}: {
+   950→   950→  tx: Transaction;
+   951→   951→  no: number;
+   952→   952→  onEdit: () => void;
+   953→   953→  onDelete: () => void;
+   954→   954→}) {
+   955→   955→  return (
+   956→   956→    <Card className="border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+   957→   957→      <CardHeader className="py-3 px-4 pb-2 flex-row items-center justify-between space-y-0">
+   958→   958→        <div className="flex items-center gap-2 min-w-0">
+   959→   959→          <Badge
+   960→   960→            variant="outline"
+   961→   961→            className="bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300 text-[10px]"
+   962→   962→          >
+   963→   963→            #{no}
+   964→   964→          </Badge>
+   965→   965→          {tx.noBku && (
+   966→   966→            <Badge
+   967→   967→              variant="outline"
+   968→   968→              className="font-mono text-[10px] bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+   969→   969→            >
+   970→   970→              {tx.noBku}
+   971→   971→            </Badge>
+   972→   972→          )}
+   973→   973→          <StatusBadge status={tx.status} />
+   974→   974→        </div>
+   975→   975→        <RowActions onEdit={onEdit} onDelete={onDelete} />
+   976→   976→      </CardHeader>
+   977→   977→      <CardContent className="px-4 py-3 space-y-2.5">
+   978→   978→        <div>
+   979→   979→          <div className="font-medium text-sm text-slate-800 dark:text-slate-100 line-clamp-2">
+   980→   980→            {tx.uraian}
+   981→   981→          </div>
+   982→   982→          {tx.namaBarang && (
+   983→   983→            <div className="text-xs text-slate-500 mt-0.5">
+   984→   984→              <Tag className="inline size-3 mr-1" />
+   985→   985→              {tx.namaBarang}
+   986→   986→            </div>
+   987→   987→          )}
+   988→   988→        </div>
+   989→   989→
+   990→   990→        <div className="grid grid-cols-2 gap-2 text-xs">
+   991→   991→          <Info
+   992→   992→            icon={<CalendarDays className="size-3" />}
+   993→   993→            label="Pesan"
+   994→   994→            value={formatDateShort(tx.tglPesan) || "—"}
+   995→   995→          />
+   996→   996→          <Info
+   997→   997→            icon={<CalendarDays className="size-3" />}
+   998→   998→            label="Bayar"
+   999→   999→            value={formatDateShort(tx.tglBayar) || "—"}
+  1000→  1000→          />
+  1001→  1001→          <Info
+  1002→  1002→            icon={<Store className="size-3" />}
+  1003→  1003→            label="Vendor"
+  1004→  1004→            value={tx.vendor?.name ?? "—"}
+  1005→  1005→          />
+  1006→  1006→          <Info
+  1007→  1007→            icon={<Layers className="size-3" />}
+  1008→  1008→            label="Volume"
+  1009→  1009→            value={`${formatNumber(tx.volume)} ${tx.satuan ?? ""}`}
+  1010→  1010→          />
+  1011→  1011→        </div>
+  1012→  1012→
+  1013→  1013→        <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800">
+  1014→  1014→          <div>
+  1015→  1015→            <div className="text-[10px] text-slate-500 uppercase tracking-wide">
+  1016→  1016→              Tarif
+  1017→  1017→            </div>
+  1018→  1018→            <div className="text-xs text-slate-600 dark:text-slate-300">
+  1019→  1019→              {formatRupiah(tx.tarifHarga)}
+  1020→  1020→            </div>
+  1021→  1021→          </div>
+  1022→  1022→          <div className="text-right">
+  1023→  1023→            <div className="text-[10px] text-slate-500 uppercase tracking-wide">
+  1024→  1024→              Jumlah
+  1025→  1025→            </div>
+  1026→  1026→            <div className="font-bold text-rose-600 dark:text-rose-400">
+  1027→  1027→              {formatRupiah(tx.jumlah)}
+  1028→  1028→            </div>
+  1029→  1029→          </div>
+  1030→  1030→        </div>
+  1031→  1031→      </CardContent>
+  1032→  1032→    </Card>
+  1033→  1033→  );
+  1034→  1034→}
+  1035→  1035→
+  1036→  1036→function Info({
+  1037→  1037→  icon,
+  1038→  1038→  label,
+  1039→  1039→  value,
+  1040→  1040→}: {
+  1041→  1041→  icon: React.ReactNode;
+  1042→  1042→  label: string;
+  1043→  1043→  value: string;
+  1044→  1044→}) {
+  1045→  1045→  return (
+  1046→  1046→    <div className="min-w-0">
+  1047→  1047→      <div className="text-[10px] text-slate-500 uppercase tracking-wide flex items-center gap-1">
+  1048→  1048→        {icon}
+  1049→  1049→        {label}
+  1050→  1050→      </div>
+  1051→  1051→      <div className="text-xs text-slate-700 dark:text-slate-300 truncate">
+  1052→  1052→        {value}
+  1053→  1053→      </div>
+  1054→  1054→    </div>
+  1055→  1055→  );
+  1056→  1056→}
+  1057→  1057→
+  1058→  1058→// ============ Utils ============
+  1059→  1059→
+  1060→  1060→// Convert ISO date string (or other parseable formats) → yyyy-mm-dd for <input type=date>
+  1061→  1061→function toInputDate(dateStr: string | null | undefined): string {
+  1062→  1062→  if (!dateStr) return "";
+  1063→  1063→  try {
+  1064→  1064→    const d = new Date(dateStr);
+  1065→  1065→    if (isNaN(d.getTime())) return "";
+  1066→  1066→    const yyyy = d.getFullYear();
+  1067→  1067→    const mm = String(d.getMonth() + 1).padStart(2, "0");
+  1068→  1068→    const dd = String(d.getDate()).padStart(2, "0");
+  1069→  1069→    return `${yyyy}-${mm}-${dd}`;
+  1070→  1070→  } catch {
+  1071→  1071→    return "";
+  1072→  1072→  }
+  1073→  1073→}
+  1074→  1074→

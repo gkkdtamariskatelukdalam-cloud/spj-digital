@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
 import { ReactQueryProvider } from "@/components/providers";
 
 const geistSans = Geist({
@@ -15,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Analisa Excel Cetak ATK 2025 - SMA Negeri 1 Telukdalam",
-  description: "Aplikasi analisa rumus & macro VBA file Cetak ATK 2025.xlsm (password: 88dina)",
-  keywords: ["Excel", "VBA", "Macro", "ATK", "Pengadaan", "SMA Negeri 1 Telukdalam"],
+  title: "SPJ Digital - SMA Negeri 1 Telukdalam",
+  description: "Sistem Surat Pertanggungjawaban (SPJ) Pengadaan ATK BOSP 2025 - SMA Negeri 1 Telukdalam",
+  keywords: ["SPJ", "Surat Pertanggungjawaban", "ATK", "BOSP", "SMA Negeri 1 Telukdalam", "Pengadaan"],
   authors: [{ name: "Z.ai" }],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
@@ -34,10 +33,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
-        <ReactQueryProvider>
-          {children}
-          <Toaster />
-        </ReactQueryProvider>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );

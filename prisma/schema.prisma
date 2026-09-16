@@ -1,8 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// Prisma schema for SPJ (Surat Pertanggungjawaban) Application
+// Sistem Pertanggungjawaban Pengadaan ATK - SMA Negeri 1 Telukdalam
 
 generator client {
   provider = "prisma-client-js"
@@ -13,20 +10,111 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
+// ============ MASTER DATA ============
+
+model School {
+  id        String  @id @default(cuid())
+  name      String
+  npsn      String?
+  address   String?
+  // Officials
+  principalName      String?
+  principalNip        String?
+  principalRank       String?
+  treasurerName      String?
+  treasurerNip       String?
+  treasurerRank      String?
+  goodsManagerName   String?
+  goodsManagerNip    String?
+  goodsManagerRank   String?
+  receiverName       String?
+  receiverPhone      String?
+  year               Int     @default(2025)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Post {
+model Vendor {
   id        String   @id @default(cuid())
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  authorId  String
+  name      String
+  owner     String?
+  phone     String?
+  address   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  transactions Transaction[]
+}
+
+model Product {
+  id        String   @id @default(cuid())
+  name      String
+  spec      String?
+  unit      String?
+  price     Float    @default(0)
+  category  String   @default("ATK")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Bpu {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  noPesan   String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============ TRANSACTIONS ============
+
+model Transaction {
+  id            String    @id @default(cuid())
+  noUrut        Int?
+  tglPesan      String?   // dd/mm/yyyy or ISO
+  noPesan       String?
+  tglBast       String?
+  noBast        String?
+  tglBayar      String?
+  noBku         String?
+  bpuCode       String?
+  uraian        String
+  namaBarang    String?
+  volume        Float     @default(0)
+  satuan        String?
+  tarifHarga    Float     @default(0)
+  jumlah        Float     @default(0)
+  realisasi     Float     @default(0)
+  bulan         Int?      // 1-12
+  tahun         Int       @default(2025)
+  masukBku      String?
+  status        String    @default("lunas") // lunas, pending, draft
+  vendorId      String?
+  vendor        Vendor?   @relation(fields: [vendorId], references: [id])
+  documents     Document[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  @@index([bulan])
+  @@index([tahun])
+  @@index([vendorId])
+  @@index([noBku])
+}
+
+// ============ DOCUMENTS (SPJ supporting docs) ============
+
+model Document {
+  id            String   @id @default(cuid())
+  transactionId String
+  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  type          String   // PESAN, BANDING, RENCANA, SHP, BAT, SPJ
+  docNumber     String?
+  docDate       String?
+  amount        Float?
+  filePath      String?
+  status        String   @default("generated") // generated, printed, verified
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([transactionId])
+  @@index([type])
 }

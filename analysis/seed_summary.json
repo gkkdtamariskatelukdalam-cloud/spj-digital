@@ -1,0 +1,31 @@
+{
+  "total_transactions": 420,
+  "total_amount": 1105973600,
+  "total_vendors": 9,
+  "by_month": [
+    {
+      "month": 1,
+      "total": 106549900
+    },
+    {
+      "month": 2,
+      "total": 130075500
+    },
+    {
+      "month": 3,
+      "total": 106145500
+    },
+    {
+      "month": 4,
+      "total": 87611900
+    },
+    {
+      "month": 21,
+      "total": 45498000
+    },
+    {
+      "month": 31,
+      "total": 77106000
+    }
+  ]
+}

@@ -1,0 +1,1074 @@
+     1→"use client";
+     2→
+     3→import { useEffect, useMemo, useState } from "react";
+     4→import {
+     5→  AlertCircle,
+     6→  AlertTriangle,
+     7→  CalendarDays,
+     8→  CheckCircle2,
+     9→  ClipboardList,
+    10→  Eye,
+    11→  Layers,
+    12→  Loader2,
+    13→  MoreHorizontal,
+    14→  Pencil,
+    15→  Plus,
+    16→  Receipt,
+    17→  Search,
+    18→  Store,
+    19→  Tag,
+    20→  Trash2,
+    21→  Wallet,
+    22→} from "lucide-react";
+    23→import { toast } from "sonner";
+    24→
+    25→import { Badge } from "@/components/ui/badge";
+    26→import { Button } from "@/components/ui/button";
+    27→import {
+    28→  Card,
+    29→  CardContent,
+    30→  CardHeader,
+    31→  CardTitle,
+    32→} from "@/components/ui/card";
+    33→import {
+    34→  Dialog,
+    35→  DialogContent,
+    36→  DialogDescription,
+    37→  DialogFooter,
+    38→  DialogHeader,
+    39→  DialogTitle,
+    40→} from "@/components/ui/dialog";
+    41→import {
+    42→  AlertDialog,
+    43→  AlertDialogAction,
+    44→  AlertDialogCancel,
+    45→  AlertDialogContent,
+    46→  AlertDialogDescription,
+    47→  AlertDialogFooter,
+    48→  AlertDialogHeader,
+    49→  AlertDialogTitle,
+    50→} from "@/components/ui/alert-dialog";
+    51→import {
+    52→  DropdownMenu,
+    53→  DropdownMenuContent,
+    54→  DropdownMenuItem,
+    55→  DropdownMenuLabel,
+    56→  DropdownMenuSeparator,
+    57→  DropdownMenuTrigger,
+    58→} from "@/components/ui/dropdown-menu";
+    59→import { Input } from "@/components/ui/input";
+    60→import { Label } from "@/components/ui/label";
+    61→import {
+    62→  Select,
+    63→  SelectContent,
+    64→  SelectItem,
+    65→  SelectTrigger,
+    66→  SelectValue,
+    67→} from "@/components/ui/select";
+    68→import {
+    69→  Table,
+    70→  TableBody,
+    71→  TableCell,
+    72→  TableHead,
+    73→  TableHeader,
+    74→  TableRow,
+    75→} from "@/components/ui/table";
+    76→import { Textarea } from "@/components/ui/textarea";
+    77→import {
+    78→  Tooltip,
+    79→  TooltipContent,
+    80→  TooltipTrigger,
+    81→} from "@/components/ui/tooltip";
+    82→import {
+    83→  useCreateTransaction,
+    84→  useDeleteTransaction,
+    85→  useTransactions,
+    86→  useUpdateTransaction,
+    87→  useVendors,
+    88→} from "@/hooks/use-spj";
+    89→import type { Transaction } from "@/lib/types/spj";
+    90→import {
+    91→  formatDateShort,
+    92→  formatNumber,
+    93→  formatRupiah,
+    94→  getMonthName,
+    95→} from "@/lib/format";
+    96→
+    97→// ============ Form state ============
+    98→interface FormState {
+    99→  noBku: string;
+   100→  uraian: string;
+   101→  namaBarang: string;
+   102→  vendorId: string;
+   103→  vendorNewName: string;
+   104→  volume: string;
+   105→  satuan: string;
+   106→  tarifHarga: string;
+   107→  tglPesan: string;
+   108→  tglBast: string;
+   109→  tglBayar: string;
+   110→  bulan: string;
+   111→  status: "lunas" | "pending";
+   112→  noPesan: string;
+   113→  noBast: string;
+   114→}
+   115→
+   116→const emptyForm: FormState = {
+   117→  noBku: "",
+   118→  uraian: "",
+   119→  namaBarang: "",
+   120→  vendorId: "__none__",
+   121→  vendorNewName: "",
+   122→  volume: "1",
+   123→  satuan: "unit",
+   124→  tarifHarga: "0",
+   125→  tglPesan: "",
+   126→  tglBast: "",
+   127→  tglBayar: "",
+   128→  bulan: String(new Date().getMonth() + 1),
+   129→  status: "pending",
+   130→  noPesan: "",
+   131→  noBast: "",
+   132→};
+   133→
+   134→const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1);
+   135→
+   136→export function Transactions() {
+   137→  // ============ Filter state ============
+   138→  const [q, setQ] = useState("");
+   139→  const [bulan, setBulan] = useState<string>("all");
+   140→  const [status, setStatus] = useState<string>("all");
+   141→  const [vendorId, setVendorId] = useState<string>("all");
+   142→
+   143→  // Debounced-ish search via state (search on type, but use latest)
+   144→  const [searchInput, setSearchInput] = useState("");
+   145→  useEffect(() => {
+   146→    const t = setTimeout(() => setQ(searchInput), 300);
+   147→    return () => clearTimeout(t);
+   148→  }, [searchInput]);
+   149→
+   150→  // ============ Query ============
+   151→  const query = useMemo(
+   152→    () => ({
+   153→      q: q || undefined,
+   154→      bulan: bulan !== "all" ? Number(bulan) : undefined,
+   155→      status: status !== "all" ? status : undefined,
+   156→      vendorId: vendorId !== "all" ? vendorId : undefined,
+   157→      limit: 100,
+   158→    }),
+   159→    [q, bulan, status, vendorId]
+   160→  );
+   161→
+   162→  const { data, isLoading, isError, error, refetch } = useTransactions(query);
+   163→  const { data: vendorsData } = useVendors();
+   164→
+   165→  const transactions = data?.transactions ?? [];
+   166→  const totalRows = data?.total ?? 0;
+   167→  const totalAmount = data?.totalAmount ?? 0;
+   168→  const totalRealisasi = transactions.reduce(
+   169→    (sum, t) => sum + (t.realisasi || 0),
+   170→    0
+   171→  );
+   172→  const shown = transactions.length;
+   173→
+   174→  // ============ Dialog state ============
+   175→  const [dialogOpen, setDialogOpen] = useState(false);
+   176→  const [editingId, setEditingId] = useState<string | null>(null);
+   177→  const [form, setForm] = useState<FormState>(emptyForm);
+   178→
+   179→  // ============ Delete dialog state ============
+   180→  const [deleteTarget, setDeleteTarget] = useState<Transaction | null>(null);
+   181→  const [deleteOpen, setDeleteOpen] = useState(false);
+   182→
+   183→  // ============ Mutations ============
+   184→  const createMut = useCreateTransaction();
+   185→  const updateMut = useUpdateTransaction();
+   186→  const deleteMut = useDeleteTransaction();
+   187→
+   188→  // ============ Computed jumlah ============
+   189→  const computedJumlah = useMemo(() => {
+   190→    const v = parseFloat(form.volume) || 0;
+   191→    const t = parseFloat(form.tarifHarga) || 0;
+   192→    return v * t;
+   193→  }, [form.volume, form.tarifHarga]);
+   194→
+   195→  // ============ Form helpers ============
+   196→  function openCreate() {
+   197→    setEditingId(null);
+   198→    setForm({
+   199→      ...emptyForm,
+   200→      bulan: bulan !== "all" ? bulan : String(new Date().getMonth() + 1),
+   201→    });
+   202→    setDialogOpen(true);
+   203→  }
+   204→
+   205→  function openEdit(tx: Transaction) {
+   206→    setEditingId(tx.id);
+   207→    setForm({
+   208→      noBku: tx.noBku ?? "",
+   209→      uraian: tx.uraian ?? "",
+   210→      namaBarang: tx.namaBarang ?? "",
+   211→      vendorId: tx.vendorId ?? "__none__",
+   212→      vendorNewName: "",
+   213→      volume: String(tx.volume ?? 0),
+   214→      satuan: tx.satuan ?? "",
+   215→      tarifHarga: String(tx.tarifHarga ?? 0),
+   216→      tglPesan: toInputDate(tx.tglPesan),
+   217→      tglBast: toInputDate(tx.tglBast),
+   218→      tglBayar: toInputDate(tx.tglBayar),
+   219→      bulan: tx.bulan ? String(tx.bulan) : String(new Date().getMonth() + 1),
+   220→      status: (tx.status === "lunas" ? "lunas" : "pending"),
+   221→      noPesan: tx.noPesan ?? "",
+   222→      noBast: tx.noBast ?? "",
+   223→    });
+   224→    setDialogOpen(true);
+   225→  }
+   226→
+   227→  function update<K extends keyof FormState>(key: K, value: FormState[K]) {
+   228→    setForm((prev) => ({ ...prev, [key]: value }));
+   229→  }
+   230→
+   231→  function handleSubmit() {
+   232→    if (!form.uraian.trim()) {
+   233→      toast.error("Uraian wajib diisi");
+   234→      return;
+   235→    }
+   236→    // Build payload. Note: API derives status from masukBku field; we set
+   237→    // masukBku = "MASUK BKU" when status is "lunas" so the GET filter works.
+   238→    const payload: Record<string, unknown> = {
+   239→      noBku: form.noBku.trim() || null,
+   240→      uraian: form.uraian.trim(),
+   241→      namaBarang: form.namaBarang.trim() || null,
+   242→      volume: parseFloat(form.volume) || 0,
+   243→      satuan: form.satuan.trim() || null,
+   244→      tarifHarga: parseFloat(form.tarifHarga) || 0,
+   245→      jumlah: computedJumlah,
+   246→      realisasi: computedJumlah,
+   247→      tglPesan: form.tglPesan || null,
+   248→      tglBast: form.tglBast || null,
+   249→      tglBayar: form.tglBayar || null,
+   250→      noPesan: form.noPesan.trim() || null,
+   251→      noBast: form.noBast.trim() || null,
+   252→      bulan: Number(form.bulan),
+   253→      tahun: new Date().getFullYear(),
+   254→      status: form.status,
+   255→      masukBku: form.status === "lunas" ? "MASUK BKU" : null,
+   256→      vendorId: form.vendorId === "__none__" ? null : form.vendorId,
+   257→    };
+   258→
+   259→    if (editingId) {
+   260→      updateMut.mutate(
+   261→        { id: editingId, data: payload },
+   262→        {
+   263→          onSuccess: () => {
+   264→            toast.success("Transaksi diperbarui");
+   265→            setDialogOpen(false);
+   266→          },
+   267→          onError: (e: Error) => toast.error("Gagal memperbarui: " + e.message),
+   268→        }
+   269→      );
+   270→    } else {
+   271→      createMut.mutate(payload, {
+   272→        onSuccess: () => {
+   273→          toast.success("Transaksi ditambahkan");
+   274→          setDialogOpen(false);
+   275→        },
+   276→        onError: (e: Error) => toast.error("Gagal menambah: " + e.message),
+   277→      });
+   278→    }
+   279→  }
+   280→
+   281→  function handleDelete() {
+   282→    if (!deleteTarget) return;
+   283→    deleteMut.mutate(deleteTarget.id, {
+   284→      onSuccess: () => {
+   285→        toast.success("Transaksi dihapus");
+   286→        setDeleteOpen(false);
+   287→        setDeleteTarget(null);
+   288→      },
+   289→      onError: (e: Error) => toast.error("Gagal menghapus: " + e.message),
+   290→    });
+   291→  }
+   292→
+   293→  const isSaving = createMut.isPending || updateMut.isPending;
+   294→
+   295→  // ============ Render ============
+   296→  return (
+   297→    <div className="space-y-4">
+   298→      {/* === Filter bar === */}
+   299→      <Card className="border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/60 backdrop-blur sticky top-0 z-30 rounded-xl shadow-sm">
+   300→        <CardContent className="p-3 sm:p-4 space-y-3">
+   301→          <div className="flex flex-col lg:flex-row gap-3 lg:items-end">
+   302→            {/* Search */}
+   303→            <div className="flex-1 min-w-0">
+   304→              <Label className="text-xs text-slate-500 mb-1 block">
+   305→                Cari transaksi
+   306→              </Label>
+   307→              <div className="relative">
+   308→                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+   309→                <Input
+   310→                  value={searchInput}
+   311→                  onChange={(e) => setSearchInput(e.target.value)}
+   312→                  placeholder="Uraian, nama barang, no. BKU, no. pesan..."
+   313→                  className="pl-8"
+   314→                />
+   315→              </div>
+   316→            </div>
+   317→
+   318→            {/* Bulan */}
+   319→            <div className="w-full sm:w-36">
+   320→              <Label className="text-xs text-slate-500 mb-1 block">Bulan</Label>
+   321→              <Select value={bulan} onValueChange={setBulan}>
+   322→                <SelectTrigger className="w-full">
+   323→                  <SelectValue placeholder="Semua Bulan" />
+   324→                </SelectTrigger>
+   325→                <SelectContent>
+   326→                  <SelectItem value="all">Semua Bulan</SelectItem>
+   327→                  {MONTHS.map((m) => (
+   328→                    <SelectItem key={m} value={String(m)}>
+   329→                      {getMonthName(m)}
+   330→                    </SelectItem>
+   331→                  ))}
+   332→                </SelectContent>
+   333→              </Select>
+   334→            </div>
+   335→
+   336→            {/* Status */}
+   337→            <div className="w-full sm:w-36">
+   338→              <Label className="text-xs text-slate-500 mb-1 block">Status</Label>
+   339→              <Select value={status} onValueChange={setStatus}>
+   340→                <SelectTrigger className="w-full">
+   341→                  <SelectValue placeholder="Semua Status" />
+   342→                </SelectTrigger>
+   343→                <SelectContent>
+   344→                  <SelectItem value="all">Semua Status</SelectItem>
+   345→                  <SelectItem value="lunas">Lunas</SelectItem>
+   346→                  <SelectItem value="pending">Pending</SelectItem>
+   347→                </SelectContent>
+   348→              </Select>
+   349→            </div>
+   350→
+   351→            {/* Vendor */}
+   352→            <div className="w-full sm:w-44">
+   353→              <Label className="text-xs text-slate-500 mb-1 block">Vendor</Label>
+   354→              <Select value={vendorId} onValueChange={setVendorId}>
+   355→                <SelectTrigger className="w-full">
+   356→                  <SelectValue placeholder="Semua Vendor" />
+   357→                </SelectTrigger>
+   358→                <SelectContent>
+   359→                  <SelectItem value="all">Semua Vendor</SelectItem>
+   360→                  {(vendorsData?.items ?? []).map((v) => (
+   361→                    <SelectItem key={v.id} value={v.id}>
+   362→                      {v.name}
+   363→                    </SelectItem>
+   364→                  ))}
+   365→                </SelectContent>
+   366→              </Select>
+   367→            </div>
+   368→
+   369→            {/* Add button */}
+   370→            <Button
+   371→              onClick={openCreate}
+   372→              className="bg-rose-600 hover:bg-rose-700 text-white w-full sm:w-auto"
+   373→            >
+   374→              <Plus className="size-4" />
+   375→              Tambah Transaksi
+   376→            </Button>
+   377→          </div>
+   378→        </CardContent>
+   379→      </Card>
+   380→
+   381→      {/* === Summary bar === */}
+   382→      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+   383→        <SummaryTile
+   384→          icon={<ClipboardList className="size-4" />}
+   385→          label="Total Transaksi"
+   386→          value={formatNumber(totalRows)}
+   387→          tone="violet"
+   388→        />
+   389→        <SummaryTile
+   390→          icon={<Wallet className="size-4" />}
+   391→          label="Total Nilai"
+   392→          value={formatRupiah(totalAmount)}
+   393→          tone="rose"
+   394→        />
+   395→        <SummaryTile
+   396→          icon={<CheckCircle2 className="size-4" />}
+   397→          label="Total Realisasi"
+   398→          value={formatRupiah(totalRealisasi)}
+   399→          tone="emerald"
+   400→        />
+   401→      </div>
+   402→
+   403→      {/* === Loading / Error === */}
+   404→      {isLoading ? (
+   405→        <Card className="border-slate-200 dark:border-slate-800">
+   406→          <CardContent className="py-16 flex flex-col items-center justify-center gap-3 text-slate-500">
+   407→            <Loader2 className="size-6 animate-spin text-rose-500" />
+   408→            <p className="text-sm">Memuat transaksi...</p>
+   409→          </CardContent>
+   410→        </Card>
+   411→      ) : isError ? (
+   412→        <Card className="border-rose-200 dark:border-rose-900">
+   413→          <CardContent className="py-12 flex flex-col items-center gap-3 text-rose-700 dark:text-rose-300">
+   414→            <AlertCircle className="size-6" />
+   415→            <p className="text-sm">Gagal memuat transaksi</p>
+   416→            <p className="text-xs text-slate-500">
+   417→              {(error as Error)?.message ?? "Unknown error"}
+   418→            </p>
+   419→            <Button variant="outline" onClick={() => refetch()}>
+   420→              Coba lagi
+   421→            </Button>
+   422→          </CardContent>
+   423→        </Card>
+   424→      ) : shown === 0 ? (
+   425→        <Card className="border-dashed border-slate-300 dark:border-slate-700">
+   426→          <CardContent className="py-16 flex flex-col items-center gap-3 text-slate-500">
+   427→            <Layers className="size-6 text-slate-400" />
+   428→            <p className="text-sm font-medium">Belum ada transaksi</p>
+   429→            <p className="text-xs">
+   430→              Tambah transaksi pertama dengan tombol di atas.
+   431→            </p>
+   432→          </CardContent>
+   433→        </Card>
+   434→      ) : (
+   435→        <>
+   436→          {/* === Desktop table === */}
+   437→          <Card className="hidden md:block border-slate-200 dark:border-slate-800 overflow-hidden">
+   438→            <div className="max-h-[calc(100vh-22rem)] overflow-auto">
+   439→              <Table>
+   440→                <TableHeader className="sticky top-0 z-10 bg-slate-50 dark:bg-slate-900 shadow-[0_1px_0_0_rgb(0_0_0_/_0.05)]">
+   441→                  <TableRow className="hover:bg-transparent">
+   442→                    <TableHead className="w-10 text-center">No</TableHead>
+   443→                    <TableHead className="min-w-28">No. BKU</TableHead>
+   444→                    <TableHead className="min-w-32">Tgl Pesan / Bayar</TableHead>
+   445→                    <TableHead className="min-w-48">Uraian</TableHead>
+   446→                    <TableHead className="min-w-32">Nama Barang</TableHead>
+   447→                    <TableHead className="min-w-32">Vendor</TableHead>
+   448→                    <TableHead className="text-right min-w-24">Volume</TableHead>
+   449→                    <TableHead className="text-right min-w-28">Tarif</TableHead>
+   450→                    <TableHead className="text-right min-w-32">Jumlah</TableHead>
+   451→                    <TableHead className="text-center min-w-20">Status</TableHead>
+   452→                    <TableHead className="w-10 text-center">Aksi</TableHead>
+   453→                  </TableRow>
+   454→                </TableHeader>
+   455→                <TableBody>
+   456→                  {transactions.map((tx, idx) => (
+   457→                    <TableRow
+   458→                      key={tx.id}
+   459→                      className="hover:bg-rose-50/40 dark:hover:bg-rose-950/10 transition-colors"
+   460→                    >
+   461→                      <TableCell className="text-center text-slate-400 text-xs">
+   462→                        {idx + 1}
+   463→                      </TableCell>
+   464→                      <TableCell>
+   465→                        {tx.noBku ? (
+   466→                          <Badge
+   467→                            variant="outline"
+   468→                            className="font-mono text-[10px] bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+   469→                          >
+   470→                            {tx.noBku}
+   471→                          </Badge>
+   472→                        ) : (
+   473→                          <span className="text-slate-300">—</span>
+   474→                        )}
+   475→                      </TableCell>
+   476→                      <TableCell className="text-xs">
+   477→                        <div className="flex flex-col">
+   478→                          <span>{formatDateShort(tx.tglPesan) || "—"}</span>
+   479→                          {tx.tglBayar && (
+   480→                            <span className="text-emerald-600 dark:text-emerald-400">
+   481→                              ↳ {formatDateShort(tx.tglBayar)}
+   482→                            </span>
+   483→                          )}
+   484→                        </div>
+   485→                      </TableCell>
+   486→                      <TableCell className="max-w-xs">
+   487→                        <Tooltip>
+   488→                          <TooltipTrigger asChild>
+   489→                            <span className="line-clamp-2 cursor-help">
+   490→                              {tx.uraian}
+   491→                            </span>
+   492→                          </TooltipTrigger>
+   493→                          <TooltipContent className="max-w-sm">
+   494→                            {tx.uraian}
+   495→                          </TooltipContent>
+   496→                        </Tooltip>
+   497→                      </TableCell>
+   498→                      <TableCell className="max-w-[10rem] truncate text-slate-600 dark:text-slate-300">
+   499→                        {tx.namaBarang ?? "—"}
+   500→                      </TableCell>
+   501→                      <TableCell className="max-w-[10rem] truncate">
+   502→                        {tx.vendor?.name ?? (
+   503→                          <span className="text-slate-300">—</span>
+   504→                        )}
+   505→                      </TableCell>
+   506→                      <TableCell className="text-right text-xs">
+   507→                        {formatNumber(tx.volume)}{" "}
+   508→                        <span className="text-slate-400">{tx.satuan}</span>
+   509→                      </TableCell>
+   510→                      <TableCell className="text-right text-xs text-slate-600 dark:text-slate-300">
+   511→                        {formatRupiah(tx.tarifHarga)}
+   512→                      </TableCell>
+   513→                      <TableCell className="text-right font-bold text-rose-600 dark:text-rose-400">
+   514→                        {formatRupiah(tx.jumlah)}
+   515→                      </TableCell>
+   516→                      <TableCell className="text-center">
+   517→                        <StatusBadge status={tx.status} />
+   518→                      </TableCell>
+   519→                      <TableCell className="text-center">
+   520→                        <RowActions
+   521→                          onEdit={() => openEdit(tx)}
+   522→                          onDelete={() => {
+   523→                            setDeleteTarget(tx);
+   524→                            setDeleteOpen(true);
+   525→                          }}
+   526→                        />
+   527→                      </TableCell>
+   528→                    </TableRow>
+   529→                  ))}
+   530→                </TableBody>
+   531→              </Table>
+   532→            </div>
+   533→          </Card>
+   534→
+   535→          {/* === Mobile card list === */}
+   536→          <div className="md:hidden space-y-3">
+   537→            {transactions.map((tx, idx) => (
+   538→              <TransactionCard
+   539→                key={tx.id}
+   540→                tx={tx}
+   541→                no={idx + 1}
+   542→                onEdit={() => openEdit(tx)}
+   543→                onDelete={() => {
+   544→                  setDeleteTarget(tx);
+   545→                  setDeleteOpen(true);
+   546→                }}
+   547→              />
+   548→            ))}
+   549→          </div>
+   550→
+   551→          {/* === Footer note === */}
+   552→          <div className="flex items-center justify-between text-xs text-slate-500 px-1">
+   553→            <span>
+   554→              Menampilkan <strong className="text-slate-700 dark:text-slate-300">{shown}</strong>{" "}
+   555→              dari <strong className="text-slate-700 dark:text-slate-300">{formatNumber(totalRows)}</strong>{" "}
+   556→              transaksi
+   557→            </span>
+   558→            {totalRows > 100 && (
+   559→              <Badge
+   560→                variant="outline"
+   561→                className="text-amber-700 border-amber-300 bg-amber-50 dark:bg-amber-950/40 dark:border-amber-900 dark:text-amber-300"
+   562→              >
+   563→                Batas 100 baris — perbaiki filter
+   564→              </Badge>
+   565→            )}
+   566→          </div>
+   567→        </>
+   568→      )}
+   569→
+   570→      {/* === Add/Edit Dialog === */}
+   571→      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+   572→        <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+   573→          <DialogHeader>
+   574→            <DialogTitle className="flex items-center gap-2">
+   575→              <Receipt className="size-5 text-rose-600" />
+   576→              {editingId ? "Edit Transaksi" : "Tambah Transaksi"}
+   577→            </DialogTitle>
+   578→            <DialogDescription>
+   579→              {editingId
+   580→                ? "Perbarui data transaksi SPJ"
+   581→                : "Isi data transaksi SPJ baru"}
+   582→            </DialogDescription>
+   583→          </DialogHeader>
+   584→
+   585→          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+   586→            {/* No BKU */}
+   587→            <Field label="No. BKU" full={false}>
+   588→              <Input
+   589→                value={form.noBku}
+   590→                onChange={(e) => update("noBku", e.target.value)}
+   591→                placeholder="cth. 001/BKU/2025"
+   592→                className="font-mono"
+   593→              />
+   594→            </Field>
+   595→
+   596→            {/* Bulan */}
+   597→            <Field label="Bulan">
+   598→              <Select
+   599→                value={form.bulan}
+   600→                onValueChange={(v) => update("bulan", v)}
+   601→              >
+   602→                <SelectTrigger className="w-full">
+   603→                  <SelectValue />
+   604→                </SelectTrigger>
+   605→                <SelectContent>
+   606→                  {MONTHS.map((m) => (
+   607→                    <SelectItem key={m} value={String(m)}>
+   608→                      {getMonthName(m)}
+   609→                    </SelectItem>
+   610→                  ))}
+   611→                </SelectContent>
+   612→              </Select>
+   613→            </Field>
+   614→
+   615→            {/* Uraian */}
+   616→            <Field label="Uraian *" full>
+   617→              <Textarea
+   618→                value={form.uraian}
+   619→                onChange={(e) => update("uraian", e.target.value)}
+   620→                placeholder="cth. Pembelian kertas A4 80gsm untuk kegiatan KBM"
+   621→                rows={2}
+   622→              />
+   623→            </Field>
+   624→
+   625→            {/* Nama Barang */}
+   626→            <Field label="Nama Barang">
+   627→              <Input
+   628→                value={form.namaBarang}
+   629→                onChange={(e) => update("namaBarang", e.target.value)}
+   630→                placeholder="cth. Kertas A4 80gsm"
+   631→              />
+   632→            </Field>
+   633→
+   634→            {/* Vendor */}
+   635→            <Field label="Vendor">
+   636→              <Select
+   637→                value={form.vendorId}
+   638→                onValueChange={(v) => update("vendorId", v)}
+   639→              >
+   640→                <SelectTrigger className="w-full">
+   641→                  <SelectValue placeholder="Pilih vendor" />
+   642→                </SelectTrigger>
+   643→                <SelectContent>
+   644→                  <SelectItem value="__none__">— Tidak ada —</SelectItem>
+   645→                  {(vendorsData?.items ?? []).map((v) => (
+   646→                    <SelectItem key={v.id} value={v.id}>
+   647→                      {v.name}
+   648→                    </SelectItem>
+   649→                  ))}
+   650→                </SelectContent>
+   651→              </Select>
+   652→            </Field>
+   653→
+   654→            {/* Volume */}
+   655→            <Field label="Volume">
+   656→              <Input
+   657→                type="number"
+   658→                inputMode="decimal"
+   659→                value={form.volume}
+   660→                onChange={(e) => update("volume", e.target.value)}
+   661→                min={0}
+   662→                step="any"
+   663→              />
+   664→            </Field>
+   665→
+   666→            {/* Satuan */}
+   667→            <Field label="Satuan">
+   668→              <Input
+   669→                value={form.satuan}
+   670→                onChange={(e) => update("satuan", e.target.value)}
+   671→                placeholder="cth. dus, pack, unit"
+   672→              />
+   673→            </Field>
+   674→
+   675→            {/* Tarif Harga */}
+   676→            <Field label="Tarif Harga" full>
+   677→              <Input
+   678→                type="number"
+   679→                inputMode="decimal"
+   680→                value={form.tarifHarga}
+   681→                onChange={(e) => update("tarifHarga", e.target.value)}
+   682→                min={0}
+   683→                step="any"
+   684→              />
+   685→            </Field>
+   686→
+   687→            {/* Jumlah (auto-computed) */}
+   688→            <div className="sm:col-span-2">
+   689→              <div className="rounded-lg bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900 px-3 py-2.5 flex items-center justify-between">
+   690→                <span className="text-xs text-rose-700 dark:text-rose-300 font-medium">
+   691→                  Jumlah (Volume × Tarif)
+   692→                </span>
+   693→                <span className="font-bold text-rose-700 dark:text-rose-300">
+   694→                  {formatRupiah(computedJumlah)}
+   695→                </span>
+   696→              </div>
+   697→            </div>
+   698→
+   699→            <div className="sm:col-span-2 my-1 h-px bg-slate-100 dark:bg-slate-800" />
+   700→
+   701→            {/* Tgl Pesan */}
+   702→            <Field label="Tgl Pesan">
+   703→              <Input
+   704→                type="date"
+   705→                value={form.tglPesan}
+   706→                onChange={(e) => update("tglPesan", e.target.value)}
+   707→              />
+   708→            </Field>
+   709→            <Field label="No. Pesan">
+   710→              <Input
+   711→                value={form.noPesan}
+   712→                onChange={(e) => update("noPesan", e.target.value)}
+   713→                placeholder="cth. 001/Pesan/2025"
+   714→                className="font-mono"
+   715→              />
+   716→            </Field>
+   717→
+   718→            {/* Tgl BAST */}
+   719→            <Field label="Tgl BAST">
+   720→              <Input
+   721→                type="date"
+   722→                value={form.tglBast}
+   723→                onChange={(e) => update("tglBast", e.target.value)}
+   724→              />
+   725→            </Field>
+   726→            <Field label="No. BAST">
+   727→              <Input
+   728→                value={form.noBast}
+   729→                onChange={(e) => update("noBast", e.target.value)}
+   730→                placeholder="cth. 001/BAST/2025"
+   731→                className="font-mono"
+   732→              />
+   733→            </Field>
+   734→
+   735→            {/* Tgl Bayar */}
+   736→            <Field label="Tgl Bayar">
+   737→              <Input
+   738→                type="date"
+   739→                value={form.tglBayar}
+   740→                onChange={(e) => update("tglBayar", e.target.value)}
+   741→              />
+   742→            </Field>
+   743→
+   744→            {/* Status */}
+   745→            <Field label="Status">
+   746→              <Select
+   747→                value={form.status}
+   748→                onValueChange={(v) =>
+   749→                  update("status", v as "lunas" | "pending")
+   750→                }
+   751→              >
+   752→                <SelectTrigger className="w-full">
+   753→                  <SelectValue />
+   754→                </SelectTrigger>
+   755→                <SelectContent>
+   756→                  <SelectItem value="pending">Pending</SelectItem>
+   757→                  <SelectItem value="lunas">Lunas</SelectItem>
+   758→                </SelectContent>
+   759→              </Select>
+   760→            </Field>
+   761→          </div>
+   762→
+   763→          <DialogFooter className="gap-2">
+   764→            <Button
+   765→              variant="outline"
+   766→              onClick={() => setDialogOpen(false)}
+   767→              disabled={isSaving}
+   768→            >
+   769→              Batal
+   770→            </Button>
+   771→            <Button
+   772→              onClick={handleSubmit}
+   773→              disabled={isSaving || !form.uraian.trim()}
+   774→              className="bg-rose-600 hover:bg-rose-700 text-white"
+   775→            >
+   776→              {isSaving && <Loader2 className="size-4 animate-spin" />}
+   777→              {editingId ? "Simpan Perubahan" : "Simpan"}
+   778→            </Button>
+   779→          </DialogFooter>
+   780→        </DialogContent>
+   781→      </Dialog>
+   782→
+   783→      {/* === Delete AlertDialog === */}
+   784→      <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+   785→        <AlertDialogContent>
+   786→          <AlertDialogHeader>
+   787→            <AlertDialogTitle className="flex items-center gap-2 text-rose-700 dark:text-rose-400">
+   788→              <AlertTriangle className="size-5" />
+   789→              Hapus transaksi ini?
+   790→            </AlertDialogTitle>
+   791→            <AlertDialogDescription asChild>
+   792→              <div className="space-y-2 text-sm">
+   793→                <p>Transaksi yang dihapus tidak dapat dikembalikan.</p>
+   794→                {deleteTarget && (
+   795→                  <div className="rounded-md bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 space-y-1">
+   796→                    <div className="text-xs text-slate-500">Uraian</div>
+   797→                    <div className="font-medium text-slate-800 dark:text-slate-100">
+   798→                      {deleteTarget.uraian}
+   799→                    </div>
+   800→                    <div className="text-xs text-slate-500 pt-1">Jumlah</div>
+   801→                    <div className="font-bold text-rose-600 dark:text-rose-400">
+   802→                      {formatRupiah(deleteTarget.jumlah)}
+   803→                    </div>
+   804→                  </div>
+   805→                )}
+   806→              </div>
+   807→            </AlertDialogDescription>
+   808→          </AlertDialogHeader>
+   809→          <AlertDialogFooter>
+   810→            <AlertDialogCancel disabled={deleteMut.isPending}>
+   811→              Batal
+   812→            </AlertDialogCancel>
+   813→            <AlertDialogAction
+   814→              onClick={handleDelete}
+   815→              disabled={deleteMut.isPending}
+   816→              className="bg-rose-600 hover:bg-rose-700 text-white"
+   817→            >
+   818→              {deleteMut.isPending && <Loader2 className="size-4 animate-spin" />}
+   819→              Hapus
+   820→            </AlertDialogAction>
+   821→          </AlertDialogFooter>
+   822→        </AlertDialogContent>
+   823→      </AlertDialog>
+   824→    </div>
+   825→  );
+   826→}
+   827→
+   828→// ============ Sub-components ============
+   829→
+   830→function Field({
+   831→  label,
+   832→  children,
+   833→  full,
+   834→}: {
+   835→  label: string;
+   836→  children: React.ReactNode;
+   837→  full?: boolean;
+   838→}) {
+   839→  return (
+   840→    <div className={full ? "sm:col-span-2 space-y-1.5" : "space-y-1.5"}>
+   841→      <Label className="text-xs text-slate-600 dark:text-slate-400">
+   842→        {label}
+   843→      </Label>
+   844→      {children}
+   845→    </div>
+   846→  );
+   847→}
+   848→
+   849→function SummaryTile({
+   850→  icon,
+   851→  label,
+   852→  value,
+   853→  tone,
+   854→}: {
+   855→  icon: React.ReactNode;
+   856→  label: string;
+   857→  value: string;
+   858→  tone: "rose" | "violet" | "emerald";
+   859→}) {
+   860→  const tones: Record<typeof tone, string> = {
+   861→    rose: "border-rose-200 dark:border-rose-900 bg-rose-50/60 dark:bg-rose-950/20 text-rose-700 dark:text-rose-300",
+   862→    violet:
+   863→      "border-violet-200 dark:border-violet-900 bg-violet-50/60 dark:bg-violet-950/20 text-violet-700 dark:text-violet-300",
+   864→    emerald:
+   865→      "border-emerald-200 dark:border-emerald-900 bg-emerald-50/60 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-300",
+   866→  };
+   867→  return (
+   868→    <Card className={`border ${tones[tone]} rounded-xl`}>
+   869→      <CardContent className="py-3 px-4 flex items-center gap-3">
+   870→        <div className="size-9 rounded-lg flex items-center justify-center bg-white/70 dark:bg-black/20">
+   871→          {icon}
+   872→        </div>
+   873→        <div className="min-w-0">
+   874→          <div className="text-xs text-slate-500 dark:text-slate-400 truncate">
+   875→            {label}
+   876→          </div>
+   877→          <div className="font-bold text-lg text-slate-900 dark:text-slate-100 truncate">
+   878→            {value}
+   879→          </div>
+   880→        </div>
+   881→      </CardContent>
+   882→    </Card>
+   883→  );
+   884→}
+   885→
+   886→function StatusBadge({ status }: { status: string }) {
+   887→  const isLunas = status === "lunas";
+   888→  return (
+   889→    <Badge
+   890→      variant="outline"
+   891→      className={
+   892→        isLunas
+   893→          ? "border-emerald-300 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-900 dark:text-emerald-300"
+   894→          : "border-amber-300 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:border-amber-900 dark:text-amber-300"
+   895→      }
+   896→    >
+   897→      {isLunas ? (
+   898→        <>
+   899→          <CheckCircle2 className="size-3" /> Lunas
+   900→        </>
+   901→      ) : (
+   902→        <>
+   903→          <Eye className="size-3" /> Pending
+   904→        </>
+   905→      )}
+   906→    </Badge>
+   907→  );
+   908→}
+   909→
+   910→function RowActions({
+   911→  onEdit,
+   912→  onDelete,
+   913→}: {
+   914→  onEdit: () => void;
+   915→  onDelete: () => void;
+   916→}) {
+   917→  return (
+   918→    <DropdownMenu>
+   919→      <DropdownMenuTrigger asChild>
+   920→        <Button variant="ghost" size="icon" className="size-7">
+   921→          <MoreHorizontal className="size-4" />
+   922→          <span className="sr-only">Aksi</span>
+   923→        </Button>
+   924→      </DropdownMenuTrigger>
+   925→      <DropdownMenuContent align="end">
+   926→        <DropdownMenuLabel>Aksi</DropdownMenuLabel>
+   927→        <DropdownMenuItem onClick={onEdit}>
+   928→          <Pencil className="size-4" />
+   929→          Edit
+   930→        </DropdownMenuItem>
+   931→        <DropdownMenuSeparator />
+   932→        <DropdownMenuItem
+   933→          onClick={onDelete}
+   934→          className="text-rose-600 dark:text-rose-400 focus:text-rose-700 focus:bg-rose-50 dark:focus:bg-rose-950/40"
+   935→        >
+   936→          <Trash2 className="size-4" />
+   937→          Hapus
+   938→        </DropdownMenuItem>
+   939→      </DropdownMenuContent>
+   940→    </DropdownMenu>
+   941→  );
+   942→}
+   943→
+   944→function TransactionCard({
+   945→  tx,
+   946→  no,
+   947→  onEdit,
+   948→  onDelete,
+   949→}: {
+   950→  tx: Transaction;
+   951→  no: number;
+   952→  onEdit: () => void;
+   953→  onDelete: () => void;
+   954→}) {
+   955→  return (
+   956→    <Card className="border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+   957→      <CardHeader className="py-3 px-4 pb-2 flex-row items-center justify-between space-y-0">
+   958→        <div className="flex items-center gap-2 min-w-0">
+   959→          <Badge
+   960→            variant="outline"
+   961→            className="bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300 text-[10px]"
+   962→          >
+   963→            #{no}
+   964→          </Badge>
+   965→          {tx.noBku && (
+   966→            <Badge
+   967→              variant="outline"
+   968→              className="font-mono text-[10px] bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+   969→            >
+   970→              {tx.noBku}
+   971→            </Badge>
+   972→          )}
+   973→          <StatusBadge status={tx.status} />
+   974→        </div>
+   975→        <RowActions onEdit={onEdit} onDelete={onDelete} />
+   976→      </CardHeader>
+   977→      <CardContent className="px-4 py-3 space-y-2.5">
+   978→        <div>
+   979→          <div className="font-medium text-sm text-slate-800 dark:text-slate-100 line-clamp-2">
+   980→            {tx.uraian}
+   981→          </div>
+   982→          {tx.namaBarang && (
+   983→            <div className="text-xs text-slate-500 mt-0.5">
+   984→              <Tag className="inline size-3 mr-1" />
+   985→              {tx.namaBarang}
+   986→            </div>
+   987→          )}
+   988→        </div>
+   989→
+   990→        <div className="grid grid-cols-2 gap-2 text-xs">
+   991→          <Info
+   992→            icon={<CalendarDays className="size-3" />}
+   993→            label="Pesan"
+   994→            value={formatDateShort(tx.tglPesan) || "—"}
+   995→          />
+   996→          <Info
+   997→            icon={<CalendarDays className="size-3" />}
+   998→            label="Bayar"
+   999→            value={formatDateShort(tx.tglBayar) || "—"}
+  1000→          />
+  1001→          <Info
+  1002→            icon={<Store className="size-3" />}
+  1003→            label="Vendor"
+  1004→            value={tx.vendor?.name ?? "—"}
+  1005→          />
+  1006→          <Info
+  1007→            icon={<Layers className="size-3" />}
+  1008→            label="Volume"
+  1009→            value={`${formatNumber(tx.volume)} ${tx.satuan ?? ""}`}
+  1010→          />
+  1011→        </div>
+  1012→
+  1013→        <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800">
+  1014→          <div>
+  1015→            <div className="text-[10px] text-slate-500 uppercase tracking-wide">
+  1016→              Tarif
+  1017→            </div>
+  1018→            <div className="text-xs text-slate-600 dark:text-slate-300">
+  1019→              {formatRupiah(tx.tarifHarga)}
+  1020→            </div>
+  1021→          </div>
+  1022→          <div className="text-right">
+  1023→            <div className="text-[10px] text-slate-500 uppercase tracking-wide">
+  1024→              Jumlah
+  1025→            </div>
+  1026→            <div className="font-bold text-rose-600 dark:text-rose-400">
+  1027→              {formatRupiah(tx.jumlah)}
+  1028→            </div>
+  1029→          </div>
+  1030→        </div>
+  1031→      </CardContent>
+  1032→    </Card>
+  1033→  );
+  1034→}
+  1035→
+  1036→function Info({
+  1037→  icon,
+  1038→  label,
+  1039→  value,
+  1040→}: {
+  1041→  icon: React.ReactNode;
+  1042→  label: string;
+  1043→  value: string;
+  1044→}) {
+  1045→  return (
+  1046→    <div className="min-w-0">
+  1047→      <div className="text-[10px] text-slate-500 uppercase tracking-wide flex items-center gap-1">
+  1048→        {icon}
+  1049→        {label}
+  1050→      </div>
+  1051→      <div className="text-xs text-slate-700 dark:text-slate-300 truncate">
+  1052→        {value}
+  1053→      </div>
+  1054→    </div>
+  1055→  );
+  1056→}
+  1057→
+  1058→// ============ Utils ============
+  1059→
+  1060→// Convert ISO date string (or other parseable formats) → yyyy-mm-dd for <input type=date>
+  1061→function toInputDate(dateStr: string | null | undefined): string {
+  1062→  if (!dateStr) return "";
+  1063→  try {
+  1064→    const d = new Date(dateStr);
+  1065→    if (isNaN(d.getTime())) return "";
+  1066→    const yyyy = d.getFullYear();
+  1067→    const mm = String(d.getMonth() + 1).padStart(2, "0");
+  1068→    const dd = String(d.getDate()).padStart(2, "0");
+  1069→    return `${yyyy}-${mm}-${dd}`;
+  1070→  } catch {
+  1071→    return "";
+  1072→  }
+  1073→}
+  1074→
