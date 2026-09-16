@@ -121,15 +121,33 @@ export function Kuitansi({
         TANDA PEMBAYARAN
       </div>
 
-      {/* === BODY BLOCK (plain text, rata kiri, ':' menempel di label) === */}
-      <div style={{ fontSize: "12px", lineHeight: 1.8, marginBottom: "16px" }}>
-        <div>Sudah terima dari : Bendahara SMA Negeri 1 Telukdalam</div>
-        <div>Uang sebesar : <span style={{ fontWeight: 700 }}>{formatRupiah(total)}</span></div>
-        <div>Terbilang : <span style={{ fontStyle: "italic", fontWeight: 700 }}>{terbilangText}</span></div>
-        <div>Nomor Surat persetujuan penyediaan barang</div>
-        <div>dan jasa : {nomorSurat}</div>
-        <div>Untuk pembayaran : {firstUraian}</div>
-      </div>
+      {/* === BODY BLOCK (borderless table, ':' sejajar, rata kiri) === */}
+      <table style={{ ...borderlessTableStyle, width: "auto", marginLeft: 0 }}>
+        <tbody>
+          <tr>
+            <td style={{ textAlign: "right", padding: "1px 4px", fontSize: "12px", verticalAlign: "top", whiteSpace: "nowrap" }}>Sudah terima dari :</td>
+            <td style={{ padding: "1px 4px", fontSize: "12px", verticalAlign: "top" }}>Bendahara SMA Negeri 1 Telukdalam</td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "right", padding: "1px 4px", fontSize: "12px", verticalAlign: "top", whiteSpace: "nowrap" }}>Uang sebesar :</td>
+            <td style={{ padding: "1px 4px", fontSize: "12px", verticalAlign: "top" }}><span style={{ fontWeight: 700 }}>{formatRupiah(total)}</span></td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "right", padding: "1px 4px", fontSize: "12px", verticalAlign: "top", whiteSpace: "nowrap" }}>Terbilang :</td>
+            <td style={{ padding: "1px 4px", fontSize: "12px", verticalAlign: "top" }}><span style={{ fontStyle: "italic", fontWeight: 700 }}>{terbilangText}</span></td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "right", padding: "1px 4px", fontSize: "12px", verticalAlign: "top" }}>
+              Nomor Surat persetujuan penyediaan barang<br />dan jasa :
+            </td>
+            <td style={{ padding: "1px 4px", fontSize: "12px", verticalAlign: "bottom" }}>{nomorSurat}</td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "right", padding: "1px 4px", fontSize: "12px", verticalAlign: "top", whiteSpace: "nowrap" }}>Untuk pembayaran :</td>
+            <td style={{ padding: "1px 4px", fontSize: "12px", verticalAlign: "top" }}>{firstUraian}</td>
+          </tr>
+        </tbody>
+      </table>
 
       {/* === 3-COLUMN SIGNATURE TABLE (borderless) === */}
       <table style={borderlessTableStyle}>
