@@ -121,41 +121,15 @@ export function Kuitansi({
         TANDA PEMBAYARAN
       </div>
 
-      {/* === BODY BLOCK (all in one borderless table, ':' sejajar) === */}
-      <table style={borderlessTableStyle}>
-        <tbody>
-          <tr>
-            <td style={bodyLabelStyle}>Sudah terima dari :</td>
-            <td style={bodyValueStyle}>Bendahara SMA Negeri 1 Telukdalam</td>
-          </tr>
-          <tr>
-            <td style={bodyLabelStyle}>Uang sebesar :</td>
-            <td style={bodyValueStyle}>
-              <span style={{ fontWeight: 700 }}>{formatRupiah(total)}</span>
-            </td>
-          </tr>
-          <tr>
-            <td style={bodyLabelStyle}>Terbilang :</td>
-            <td style={bodyValueStyle}>
-              <span style={{ fontStyle: "italic", fontWeight: 700 }}>{terbilangText}</span>
-            </td>
-          </tr>
-          <tr>
-            <td style={bodyLabelStyle}>
-              Nomor Surat persetujuan penyediaan barang
-              <br />
-              dan jasa :
-            </td>
-            <td style={{ ...bodyValueStyle, verticalAlign: "bottom" }}>
-              {nomorSurat}
-            </td>
-          </tr>
-          <tr>
-            <td style={bodyLabelStyle}>Untuk pembayaran :</td>
-            <td style={bodyValueStyle}>{firstUraian}</td>
-          </tr>
-        </tbody>
-      </table>
+      {/* === BODY BLOCK (plain text, rata kiri, ':' menempel di label) === */}
+      <div style={{ fontSize: "12px", lineHeight: 1.8, marginBottom: "16px" }}>
+        <div>Sudah terima dari : Bendahara SMA Negeri 1 Telukdalam</div>
+        <div>Uang sebesar : <span style={{ fontWeight: 700 }}>{formatRupiah(total)}</span></div>
+        <div>Terbilang : <span style={{ fontStyle: "italic", fontWeight: 700 }}>{terbilangText}</span></div>
+        <div>Nomor Surat persetujuan penyediaan barang</div>
+        <div>dan jasa : {nomorSurat}</div>
+        <div>Untuk pembayaran : {firstUraian}</div>
+      </div>
 
       {/* === 3-COLUMN SIGNATURE TABLE (borderless) === */}
       <table style={borderlessTableStyle}>
