@@ -131,3 +131,50 @@ export interface ReportData {
   type: string;
   data: unknown;
 }
+
+// ============ Document Groups ============
+
+export interface DocumentGroupItem {
+  id: string;
+  uraian: string;
+  namaBarang: string | null;
+  volume: number;
+  satuan: string | null;
+  tarifHarga: number;
+  jumlah: number;
+  realisasi: number;
+  noBku: string | null;
+  noBast: string | null;
+  tglBayar: string | null;
+}
+
+export interface DocumentGroup {
+  key: string;
+  noPesan: string;
+  noBku: string;
+  bpuCode: string;
+  tglPesan: string | null;
+  tglBast: string | null;
+  tglBayar: string | null;
+  bulan: number | null;
+  tahun: number;
+  vendorId: string | null;
+  vendorName: string | null;
+  vendorOwner: string | null;
+  vendorPhone: string | null;
+  vendorAddress: string | null;
+  items: DocumentGroupItem[];
+  totalJumlah: number;
+  totalRealisasi: number;
+  itemCount: number;
+}
+
+export interface DocumentGroupsResponse {
+  groups: DocumentGroup[];
+  summary: {
+    totalGroups: number;
+    totalAllAmount: number;
+    withVendor: number;
+    withoutVendor: number;
+  };
+}

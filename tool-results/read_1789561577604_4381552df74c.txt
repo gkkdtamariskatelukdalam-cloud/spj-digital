@@ -1,0 +1,841 @@
+     1→"use client";
+     2→
+     3→import { useEffect, useMemo, useState } from "react";
+     4→import {
+     5→  AlertCircle,
+     6→  CheckCircle2,
+     7→  FileText,
+     8→  Hash,
+     9→  Layers,
+    10→  Loader2,
+    11→  Printer,
+    12→  Search,
+    13→  Stamp,
+    14→  Store,
+    15→} from "lucide-react";
+    16→import { toast } from "sonner";
+    17→
+    18→import { Badge } from "@/components/ui/badge";
+    19→import { Button } from "@/components/ui/button";
+    20→import {
+    21→  Card,
+    22→  CardContent,
+    23→  CardDescription,
+    24→  CardHeader,
+    25→  CardTitle,
+    26→} from "@/components/ui/card";
+    27→import { Input } from "@/components/ui/input";
+    28→import { Label } from "@/components/ui/label";
+    29→import {
+    30→  Select,
+    31→  SelectContent,
+    32→  SelectItem,
+    33→  SelectTrigger,
+    34→  SelectValue,
+    35→} from "@/components/ui/select";
+    36→import {
+    37→  Table,
+    38→  TableBody,
+    39→  TableCell,
+    40→  TableHead,
+    41→  TableHeader,
+    42→  TableRow,
+    43→} from "@/components/ui/table";
+    44→import {
+    45→  useCreateDocument,
+    46→  useSchool,
+    47→  useTransactionDetail,
+    48→  useTransactions,
+    49→} from "@/hooks/use-spj";
+    50→import type { Document, School, Transaction } from "@/lib/types/spj";
+    51→import {
+    52→  formatDate,
+    53→  formatNumber,
+    54→  formatRupiah,
+    55→  getMonthName,
+    56→  terbilang,
+    57→} from "@/lib/format";
+    58→
+    59→// ============================================================
+    60→// Constants & helpers
+    61→// ============================================================
+    62→
+    63→const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1);
+    64→
+    65→const ROMAN: Record<number, string> = {
+    66→  1: "I",
+    67→  2: "II",
+    68→  3: "III",
+    69→  4: "IV",
+    70→  5: "V",
+    71→  6: "VI",
+    72→  7: "VII",
+    73→  8: "VIII",
+    74→  9: "IX",
+    75→  10: "X",
+    76→  11: "XI",
+    77→  12: "XII",
+    78→};
+    79→
+    80→function toRoman(n: number | null | undefined): string {
+    81→  if (!n || n < 1 || n > 12) return "I";
+    82→  return ROMAN[n] ?? "I";
+    83→}
+    84→
+    85→// Build the SPJ document number from a transaction
+    86→function buildSpjNumber(tx: Transaction): string {
+    87→  const bku = tx.noBku?.trim() || String(tx.noUrut ?? tx.id.slice(-6));
+    88→  const roman = toRoman(tx.bulan);
+    89→  return `SPJ-${bku}/${roman}/${tx.tahun}`;
+    90→}
+    91→
+    92→// Pick the most relevant date for the SPJ doc (prefer payment, fallback to BAST/Pesan/today)
+    93→function pickSpjDate(tx: Transaction): string {
+    94→  return tx.tglBayar || tx.tglBast || tx.tglPesan || new Date().toISOString();
+    95→}
+    96→
+    97→// Capitalize first letter (terbilang returns lowercase)
+    98→function capitalize(s: string): string {
+    99→  if (!s) return s;
+   100→  return s.charAt(0).toUpperCase() + s.slice(1);
+   101→}
+   102→
+   103→// ============================================================
+   104→// Main component
+   105→// ============================================================
+   106→
+   107→export function Documents() {
+   108→  // ============ Filter state ============
+   109→  const [searchInput, setSearchInput] = useState("");
+   110→  const [q, setQ] = useState("");
+   111→  const [bulan, setBulan] = useState<string>("all");
+   112→
+   113→  // ============ Selection ============
+   114→  const [selectedId, setSelectedId] = useState<string | null>(null);
+   115→
+   116→  // Debounced search
+   117→  useEffect(() => {
+   118→    const t = setTimeout(() => setQ(searchInput), 300);
+   119→    return () => clearTimeout(t);
+   120→  }, [searchInput]);
+   121→
+   122→  // ============ Queries ============
+   123→  const query = useMemo(
+   124→    () => ({
+   125→      q: q || undefined,
+   126→      bulan: bulan !== "all" ? Number(bulan) : undefined,
+   127→      limit: 100,
+   128→    }),
+   129→    [q, bulan]
+   130→  );
+   131→
+   132→  const { data, isLoading, isError, error, refetch } = useTransactions(query);
+   133→  const { data: schoolData } = useSchool();
+   134→  // Fetch the selected transaction with its documents included
+   135→  const detailQ = useTransactionDetail(selectedId);
+   136→
+   137→  const transactions = data?.transactions ?? [];
+   138→  const school = schoolData?.item ?? null;
+   139→
+   140→  const selected = transactions.find((t) => t.id === selectedId) ?? null;
+   141→  const selectedDetail = detailQ.data?.transaction ?? null;
+   142→  const selectedSpjDocs: Document[] = useMemo(() => {
+   143→    if (!selectedDetail?.documents) return [];
+   144→    return selectedDetail.documents.filter((d) => d.type === "SPJ");
+   145→  }, [selectedDetail]);
+   146→  const hasSpjDoc = selectedSpjDocs.length > 0;
+   147→
+   148→  // ============ Mutation: create SPJ document record ============
+   149→  const createDocMut = useCreateDocument();
+   150→
+   151→  // ============ Handlers ============
+   152→  function handlePrint() {
+   153→    if (!selected) {
+   154→      toast.error("Pilih transaksi dulu untuk mencetak SPJ");
+   155→      return;
+   156→    }
+   157→    window.print();
+   158→  }
+   159→
+   160→  function handleMarkPrinted() {
+   161→    if (!selected) {
+   162→      toast.error("Pilih transaksi dulu");
+   163→      return;
+   164→    }
+   165→    if (!school) {
+   166→      toast.error("Data sekolah belum diisi. Lengkapi di tab Master Data.");
+   167→      return;
+   168→    }
+   169→    const docNumber = buildSpjNumber(selected);
+   170→    createDocMut.mutate(
+   171→      {
+   172→        transactionId: selected.id,
+   173→        type: "SPJ",
+   174→        docNumber,
+   175→        docDate: pickSpjDate(selected),
+   176→        amount: selected.jumlah,
+   177→        status: "printed",
+   178→      },
+   179→      {
+   180→        onSuccess: () =>
+   181→          toast.success("SPJ ditandai sudah dicetak", {
+   182→            description: `No. ${docNumber}`,
+   183→          }),
+   184→        onError: (e: Error) =>
+   185→          toast.error("Gagal menyimpan dokumen", { description: e.message }),
+   186→      }
+   187→    );
+   188→  }
+   189→
+   190→  // ============ Render ============
+   191→  return (
+   192→    <div className="space-y-4">
+   193→      {/* === Inject print CSS (only applies during window.print) === */}
+   194→      <style dangerouslySetInnerHTML={{ __html: PRINT_CSS }} />
+   195→
+   196→      {/* === Header === */}
+   197→      <Card className="print:hidden border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/60 backdrop-blur sticky top-0 z-30 rounded-xl shadow-sm">
+   198→        <CardHeader className="pb-3">
+   199→          <div className="flex items-start justify-between gap-3 flex-wrap">
+   200→            <div className="min-w-0">
+   201→              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+   202→                <span className="inline-flex size-7 items-center justify-center rounded-md bg-rose-100 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300">
+   203→                  <FileText className="size-4" />
+   204→                </span>
+   205→                Dokumen Pertanggungjawaban (SPJ)
+   206→              </CardTitle>
+   207→              <CardDescription className="text-xs sm:text-sm mt-1">
+   208→                Pilih transaksi untuk membuat/melihat dokumen SPJ
+   209→              </CardDescription>
+   210→            </div>
+   211→            <div className="flex items-center gap-2">
+   212→              <Badge
+   213→                variant="outline"
+   214→                className="bg-violet-50 dark:bg-violet-950/30 border-violet-200 dark:border-violet-900 text-violet-700 dark:text-violet-300"
+   215→              >
+   216→                <Layers className="size-3 mr-1" />
+   217→                {transactions.length} transaksi
+   218→              </Badge>
+   219→              {hasSpjDoc && selected && (
+   220→                <Badge
+   221→                  variant="outline"
+   222→                  className="bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900 text-emerald-700 dark:text-emerald-300"
+   223→                >
+   224→                  <CheckCircle2 className="size-3 mr-1" />
+   225→                  SPJ sudah dibuat
+   226→                </Badge>
+   227→              )}
+   228→            </div>
+   229→          </div>
+   230→        </CardHeader>
+   231→        <CardContent className="pt-0 space-y-3">
+   232→          <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
+   233→            {/* Search */}
+   234→            <div className="flex-1 min-w-0">
+   235→              <Label className="text-xs text-slate-500 mb-1 block">
+   236→                Cari transaksi
+   237→              </Label>
+   238→              <div className="relative">
+   239→                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+   240→                <Input
+   241→                  value={searchInput}
+   242→                  onChange={(e) => setSearchInput(e.target.value)}
+   243→                  placeholder="Uraian, nama barang, no. BKU, no. pesan..."
+   244→                  className="pl-8"
+   245→                />
+   246→              </div>
+   247→            </div>
+   248→
+   249→            {/* Bulan */}
+   250→            <div className="w-full sm:w-44">
+   251→              <Label className="text-xs text-slate-500 mb-1 block">
+   252→                Filter Bulan
+   253→              </Label>
+   254→              <Select value={bulan} onValueChange={setBulan}>
+   255→                <SelectTrigger className="w-full">
+   256→                  <SelectValue placeholder="Semua Bulan" />
+   257→                </SelectTrigger>
+   258→                <SelectContent>
+   259→                  <SelectItem value="all">Semua Bulan</SelectItem>
+   260→                  {MONTHS.map((m) => (
+   261→                    <SelectItem key={m} value={String(m)}>
+   262→                      {getMonthName(m)}
+   263→                    </SelectItem>
+   264→                  ))}
+   265→                </SelectContent>
+   266→              </Select>
+   267→            </div>
+   268→          </div>
+   269→        </CardContent>
+   270→      </Card>
+   271→
+   272→      {/* === Main grid: list + preview === */}
+   273→      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+   274→        {/* === Transaction list (left) === */}
+   275→        <div className="print:hidden lg:col-span-1 space-y-2">
+   276→          <Card className="border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+   277→            <CardHeader className="py-3 px-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/40">
+   278→              <CardTitle className="text-sm flex items-center gap-2">
+   279→                <Layers className="size-4 text-slate-500" />
+   280→                Daftar Transaksi
+   281→              </CardTitle>
+   282→            </CardHeader>
+   283→            <CardContent className="p-0">
+   284→              {isLoading ? (
+   285→                <div className="py-16 flex flex-col items-center gap-3 text-slate-500">
+   286→                  <Loader2 className="size-6 animate-spin text-rose-500" />
+   287→                  <p className="text-sm">Memuat transaksi...</p>
+   288→                </div>
+   289→              ) : isError ? (
+   290→                <div className="py-12 flex flex-col items-center gap-3 text-rose-700 dark:text-rose-300">
+   291→                  <AlertCircle className="size-6" />
+   292→                  <p className="text-sm">Gagal memuat transaksi</p>
+   293→                  <p className="text-xs text-slate-500">
+   294→                    {(error as Error)?.message ?? "Unknown error"}
+   295→                  </p>
+   296→                  <Button variant="outline" size="sm" onClick={() => refetch()}>
+   297→                    Coba lagi
+   298→                  </Button>
+   299→                </div>
+   300→              ) : transactions.length === 0 ? (
+   301→                <div className="py-16 flex flex-col items-center gap-3 text-slate-500">
+   302→                  <Layers className="size-6 text-slate-400" />
+   303→                  <p className="text-sm font-medium">Belum ada transaksi</p>
+   304→                  <p className="text-xs">
+   305→                    Tambah transaksi di tab Transaksi terlebih dahulu.
+   306→                  </p>
+   307→                </div>
+   308→              ) : (
+   309→                <div
+   310→                  className="max-h-[calc(100vh-16rem)] overflow-y-auto p-2 space-y-1.5"
+   311→                  // Horizontal scroll strip on mobile
+   312→                  data-list="root"
+   313→                >
+   314→                  <div className="md:hidden flex gap-2 overflow-x-auto pb-2">
+   315→                    {transactions.map((tx) => (
+   316→                      <TransactionChip
+   317→                        key={tx.id}
+   318→                        tx={tx}
+   319→                        active={tx.id === selectedId}
+   320→                        onSelect={() => setSelectedId(tx.id)}
+   321→                      />
+   322→                    ))}
+   323→                  </div>
+   324→                  <div className="hidden md:block space-y-1.5">
+   325→                    {transactions.map((tx) => (
+   326→                      <TransactionListItem
+   327→                        key={tx.id}
+   328→                        tx={tx}
+   329→                        active={tx.id === selectedId}
+   330→                        onSelect={() => setSelectedId(tx.id)}
+   331→                      />
+   332→                    ))}
+   333→                  </div>
+   334→                </div>
+   335→              )}
+   336→            </CardContent>
+   337→          </Card>
+   338→        </div>
+   339→
+   340→        {/* === SPJ preview (right) === */}
+   341→        <div className="lg:col-span-2 space-y-3">
+   342→          {/* Action bar */}
+   343→          <Card className="print:hidden border-slate-200 dark:border-slate-800 rounded-xl">
+   344→            <CardContent className="py-3 px-4 flex items-center justify-between gap-3 flex-wrap">
+   345→              <div className="min-w-0 flex-1">
+   346→                {selected ? (
+   347→                  <div className="flex items-center gap-2 flex-wrap">
+   348→                    <Badge
+   349→                      variant="outline"
+   350→                      className="font-mono text-[10px] bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+   351→                    >
+   352→                      <Hash className="size-3 mr-1" />
+   353→                      {selected.noBku || "tanpa BKU"}
+   354→                    </Badge>
+   355→                    <span className="text-sm font-medium text-slate-700 dark:text-slate-200 truncate">
+   356→                      {selected.uraian}
+   357→                    </span>
+   358→                    <Badge
+   359→                      variant="outline"
+   360→                      className={
+   361→                        selected.status === "lunas"
+   362→                          ? "border-emerald-300 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-900 dark:text-emerald-300"
+   363→                          : "border-amber-300 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:border-amber-900 dark:text-amber-300"
+   364→                      }
+   365→                    >
+   366→                      {selected.status === "lunas" ? "Lunas" : "Pending"}
+   367→                    </Badge>
+   368→                  </div>
+   369→                ) : (
+   370→                  <span className="text-sm text-slate-500">
+   371→                    Belum ada transaksi dipilih
+   372→                  </span>
+   373→                )}
+   374→              </div>
+   375→              <div className="flex items-center gap-2">
+   376→                <Button
+   377→                  variant="outline"
+   378→                  onClick={handlePrint}
+   379→                  disabled={!selected}
+   380→                  className="border-rose-200 text-rose-700 hover:bg-rose-50 dark:border-rose-900 dark:text-rose-300 dark:hover:bg-rose-950/30"
+   381→                >
+   382→                  <Printer className="size-4" />
+   383→                  Cetak SPJ
+   384→                </Button>
+   385→                <Button
+   386→                  onClick={handleMarkPrinted}
+   387→                  disabled={!selected || !school || createDocMut.isPending || hasSpjDoc}
+   388→                  className="bg-rose-600 hover:bg-rose-700 text-white"
+   389→                >
+   390→                  {createDocMut.isPending ? (
+   391→                    <Loader2 className="size-4 animate-spin" />
+   392→                  ) : (
+   393→                    <Stamp className="size-4" />
+   394→                  )}
+   395→                  {hasSpjDoc ? "Sudah Ditandai" : "Tandai Sudah Dicetak"}
+   396→                </Button>
+   397→              </div>
+   398→            </CardContent>
+   399→          </Card>
+   400→
+   401→          {/* Preview / Empty */}
+   402→          {!selected ? (
+   403→            <Card className="print:hidden border-dashed border-slate-300 dark:border-slate-700 rounded-xl">
+   404→              <CardContent className="py-20 flex flex-col items-center gap-3 text-slate-500 text-center">
+   405→                <div className="size-14 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+   406→                  <FileText className="size-7 text-slate-400" />
+   407→                </div>
+   408→                <p className="text-sm font-medium">
+   409→                  Pilih transaksi untuk melihat dokumen SPJ
+   410→                </p>
+   411→                <p className="text-xs max-w-sm">
+   412→                  Klik salah satu item di daftar sebelah kiri untuk memuat
+   413→                  pratinjau Surat Pertanggungjawaban yang siap dicetak.
+   414→                </p>
+   415→              </CardContent>
+   416→            </Card>
+   417→          ) : detailQ.isLoading ? (
+   418→            <Card className="print:hidden border-slate-200 dark:border-slate-800 rounded-xl">
+   419→              <CardContent className="py-20 flex flex-col items-center gap-3 text-slate-500">
+   420→                <Loader2 className="size-6 animate-spin text-rose-500" />
+   421→                <p className="text-sm">Memuat dokumen SPJ...</p>
+   422→              </CardContent>
+   423→            </Card>
+   424→          ) : detailQ.isError ? (
+   425→            <Card className="print:hidden border-rose-200 dark:border-rose-900 rounded-xl">
+   426→              <CardContent className="py-16 flex flex-col items-center gap-3 text-rose-700 dark:text-rose-300">
+   427→                <AlertCircle className="size-6" />
+   428→                <p className="text-sm">Gagal memuat dokumen</p>
+   429→                <p className="text-xs text-slate-500">
+   430→                  {(detailQ.error as Error)?.message ?? "Unknown error"}
+   431→                </p>
+   432→                <Button
+   433→                  variant="outline"
+   434→                  size="sm"
+   435→                  onClick={() => detailQ.refetch()}
+   436→                >
+   437→                  Coba lagi
+   438→                </Button>
+   439→              </CardContent>
+   440→            </Card>
+   441→          ) : (
+   442→            <Card className="border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+   443→              <CardContent className="p-0">
+   444→                {/* === Printable area === */}
+   445→                <div id="spj-document-print" className="bg-white text-slate-900">
+   446→                  <SpjDocument
+   447→                    tx={selected}
+   448→                    school={school}
+   449→                    spjDoc={selectedSpjDocs[0] ?? null}
+   450→                  />
+   451→                </div>
+   452→              </CardContent>
+   453→            </Card>
+   454→          )}
+   455→        </div>
+   456→      </div>
+   457→    </div>
+   458→  );
+   459→}
+   460→
+   461→// ============================================================
+   462→// SPJ Document (the printable area)
+   463→// ============================================================
+   464→
+   465→function SpjDocument({
+   466→  tx,
+   467→  school,
+   468→  spjDoc,
+   469→}: {
+   470→  tx: Transaction;
+   471→  school: School | null;
+   472→  spjDoc: Document | null;
+   473→}) {
+   474→  // School info with sensible fallbacks if not configured yet
+   475→  const schoolName = school?.name ?? "SMA NEGERI 1 TELUKDALAM";
+   476→  const schoolAddress =
+   477→    school?.address ??
+   478→    "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Teluk Dalam";
+   479→  const year = tx.tahun || school?.year || new Date().getFullYear();
+   480→  const docNumber = spjDoc?.docNumber ?? buildSpjNumber(tx);
+   481→  const spjDate = spjDoc?.docDate ?? pickSpjDate(tx);
+   482→  const total = tx.jumlah || tx.volume * tx.tarifHarga || 0;
+   483→
+   484→  return (
+   485→    <div className="px-6 sm:px-10 py-8 sm:py-10 text-[12px] sm:text-[13px] leading-relaxed text-slate-900 print:px-8 print:py-8">
+   486→      {/* === Kop Surat === */}
+   487→      <header className="text-center border-b-2 border-slate-800 pb-3 mb-5">
+   488→        <div className="font-bold uppercase text-[13px] sm:text-[15px] tracking-wide">
+   489→          PEMERINTAH PROVINSI SUMATERA UTARA
+   490→        </div>
+   491→        <div className="font-bold uppercase text-[13px] sm:text-[15px] tracking-wide">
+   492→          DINAS PENDIDIKAN
+   493→        </div>
+   494→        <div className="font-bold uppercase text-[14px] sm:text-[17px] tracking-wide">
+   495→          {schoolName}
+   496→        </div>
+   497→        <div className="text-[11px] sm:text-[12px] text-slate-700 mt-1">
+   498→          {schoolAddress}
+   499→        </div>
+   500→      </header>
+   501→
+   502→      {/* === Title === */}
+   503→      <div className="text-center mb-4">
+   504→        <h1 className="font-bold uppercase text-[14px] sm:text-[16px] underline underline-offset-4">
+   505→          SURAT PERTANGGUNGJAWABAN (SPJ)
+   506→        </h1>
+   507→        <p className="text-[12px] sm:text-[13px] mt-1">
+   508→          Nomor:{" "}
+   509→          <span className="font-mono font-semibold">{docNumber}</span>
+   510→        </p>
+   511→      </div>
+   512→
+   513→      {/* === Opening paragraph === */}
+   514→      <p className="text-justify mb-4">
+   515→        Setelah diperiksa dengan seksama, maka jumlah pengeluaran yang dibebankan
+   516→        pada anggaran BOSP Tahun{" "}
+   517→        <span className="font-semibold">{year}</span> adalah sebagai berikut:
+   518→      </p>
+   519→
+   520→      {/* === Items table === */}
+   521→      <Table className="border-collapse border border-slate-800 text-[11px] sm:text-[12px]">
+   522→        <TableHeader>
+   523→          <TableRow className="border border-slate-800 bg-slate-100 print:bg-slate-100">
+   524→            <TableHead className="border border-slate-800 text-center w-10">
+   525→              No
+   526→            </TableHead>
+   527→            <TableHead className="border border-slate-800 text-center">
+   528→              Uraian
+   529→            </TableHead>
+   530→            <TableHead className="border border-slate-800 text-center w-12">
+   531→              Vol
+   532→            </TableHead>
+   533→            <TableHead className="border border-slate-800 text-center w-20">
+   534→              Satuan
+   535→            </TableHead>
+   536→            <TableHead className="border border-slate-800 text-center w-28">
+   537→              Tarif (Rp)
+   538→            </TableHead>
+   539→            <TableHead className="border border-slate-800 text-center w-32">
+   540→              Jumlah (Rp)
+   541→            </TableHead>
+   542→          </TableRow>
+   543→        </TableHeader>
+   544→        <TableBody>
+   545→          <TableRow className="border border-slate-800">
+   546→            <TableCell className="border border-slate-800 text-center">
+   547→              1
+   548→            </TableCell>
+   549→            <TableCell className="border border-slate-800">
+   550→              <div className="font-medium">{tx.uraian}</div>
+   551→              {tx.namaBarang && (
+   552→                <div className="text-[10px] text-slate-600 italic">
+   553→                  {tx.namaBarang}
+   554→                </div>
+   555→              )}
+   556→            </TableCell>
+   557→            <TableCell className="border border-slate-800 text-center tabular-nums">
+   558→              {formatNumber(tx.volume)}
+   559→            </TableCell>
+   560→            <TableCell className="border border-slate-800 text-center">
+   561→              {tx.satuan ?? "—"}
+   562→            </TableCell>
+   563→            <TableCell className="border border-slate-800 text-right tabular-nums">
+   564→              {formatNumber(tx.tarifHarga)}
+   565→            </TableCell>
+   566→            <TableCell className="border border-slate-800 text-right tabular-nums font-medium">
+   567→              {formatNumber(tx.jumlah)}
+   568→            </TableCell>
+   569→          </TableRow>
+   570→          {/* Total row */}
+   571→          <TableRow className="total-row border border-slate-800 bg-slate-50 font-bold print:bg-slate-50">
+   572→            <TableCell
+   573→              className="border border-slate-800 text-center"
+   574→              colSpan={5}
+   575→            >
+   576→              JUMLAH TOTAL
+   577→            </TableCell>
+   578→            <TableCell className="border border-slate-800 text-right tabular-nums">
+   579→              {formatNumber(total)}
+   580→            </TableCell>
+   581→          </TableRow>
+   582→        </TableBody>
+   583→      </Table>
+   584→
+   585→      {/* === Terbilang === */}
+   586→      <div className="mt-3 mb-4 text-[12px]">
+   587→        <span className="font-semibold">Terbilang:</span>{" "}
+   588→        <span className="italic">{capitalize(terbilang(total))}</span>
+   589→      </div>
+   590→
+   591→      {/* === Closing paragraph === */}
+   592→      <p className="text-justify text-[12px] mb-6">
+   593→        Demikian surat pertanggungjawaban ini dibuat dengan sebenarnya untuk
+   594→        dapat dipergunakan sebagaimana mestinya.
+   595→      </p>
+   596→
+   597→      {/* === Date & signature blocks === */}
+   598→      <div className="flex justify-end mb-4">
+   599→        <div className="text-right text-[12px]">
+   600→          <div>Telukdalam,</div>
+   601→          <div className="font-medium">{formatDate(spjDate)}</div>
+   602→        </div>
+   603→      </div>
+   604→
+   605→      <div className="grid grid-cols-3 gap-4 text-center text-[12px]">
+   606→        {/* Mengetahui - Kepala Sekolah */}
+   607→        <div className="signature-block">
+   608→          <SignatureBlock
+   609→            title="Mengetahui,"
+   610→            role="Kepala Sekolah"
+   611→            name={school?.principalName ?? "—"}
+   612→            nip={school?.principalNip}
+   613→          />
+   614→        </div>
+   615→        {/* Bendahara */}
+   616→        <div className="signature-block">
+   617→          <SignatureBlock
+   618→            title="Bendahara,"
+   619→            role="Bendahara Pengeluaran"
+   620→            name={school?.treasurerName ?? "—"}
+   621→            nip={school?.treasurerNip}
+   622→          />
+   623→        </div>
+   624→        {/* Penerima */}
+   625→        <div className="signature-block">
+   626→          <SignatureBlock
+   627→            title="Penerima,"
+   628→            role={tx.vendor?.name ?? "—"}
+   629→            name={tx.vendor?.owner ?? "—"}
+   630→            phone={tx.vendor?.phone}
+   631→          />
+   632→        </div>
+   633→      </div>
+   634→    </div>
+   635→  );
+   636→}
+   637→
+   638→function SignatureBlock({
+   639→  title,
+   640→  role,
+   641→  name,
+   642→  nip,
+   643→  phone,
+   644→}: {
+   645→  title: string;
+   646→  role: string;
+   647→  name: string;
+   648→  nip?: string | null;
+   649→  phone?: string | null;
+   650→}) {
+   651→  return (
+   652→    <div className="flex flex-col items-center">
+   653→      <div className="font-medium">{title}</div>
+   654→      <div className="text-slate-700">{role}</div>
+   655→      {/* Space for wet signature */}
+   656→      <div className="h-16 sm:h-20" />
+   657→      <div className="font-semibold underline underline-offset-4">
+   658→        {name || "—"}
+   659→      </div>
+   660→      {nip ? (
+   661→        <div className="text-[11px]">
+   662→          NIP. <span className="font-mono">{nip}</span>
+   663→        </div>
+   664→      ) : phone ? (
+   665→        <div className="text-[11px]">
+   666→          HP. <span className="font-mono">{phone}</span>
+   667→        </div>
+   668→      ) : null}
+   669→    </div>
+   670→  );
+   671→}
+   672→
+   673→// ============================================================
+   674→// List item sub-components
+   675→// ============================================================
+   676→
+   677→function TransactionListItem({
+   678→  tx,
+   679→  active,
+   680→  onSelect,
+   681→}: {
+   682→  tx: Transaction;
+   683→  active: boolean;
+   684→  onSelect: () => void;
+   685→}) {
+   686→  return (
+   687→    <button
+   688→      type="button"
+   689→      onClick={onSelect}
+   690→      className={[
+   691→        "w-full text-left rounded-lg border px-3 py-2.5 transition-colors",
+   692→        "focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/40",
+   693→        active
+   694→          ? "border-rose-500 bg-rose-50 dark:bg-rose-950/20 ring-1 ring-rose-500"
+   695→          : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-rose-50/40 dark:hover:bg-rose-950/10",
+   696→      ].join(" ")}
+   697→    >
+   698→      <div className="flex items-center justify-between gap-2 mb-1">
+   699→        <div className="flex items-center gap-1.5 min-w-0">
+   700→          {tx.noBku && (
+   701→            <Badge
+   702→              variant="outline"
+   703→              className="font-mono text-[10px] bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200"
+   704→            >
+   705→              <Hash className="size-2.5 mr-0.5" />
+   706→              {tx.noBku}
+   707→            </Badge>
+   708→          )}
+   709→          {tx.bulan && (
+   710→            <span className="text-[10px] text-slate-500">
+   711→              {getMonthName(tx.bulan).slice(0, 3)}
+   712→            </span>
+   713→          )}
+   714→        </div>
+   715→        <StatusBadge status={tx.status} />
+   716→      </div>
+   717→      <div className="text-sm font-medium text-slate-800 dark:text-slate-100 line-clamp-1">
+   718→        {tx.uraian}
+   719→      </div>
+   720→      <div className="flex items-center justify-between gap-2 mt-1">
+   721→        <div className="flex items-center gap-1 text-[11px] text-slate-500 min-w-0">
+   722→          <Store className="size-3 shrink-0" />
+   723→          <span className="truncate">
+   724→            {tx.vendor?.name ?? "Tanpa vendor"}
+   725→          </span>
+   726→        </div>
+   727→        <div className="text-xs font-bold text-rose-600 dark:text-rose-400 tabular-nums shrink-0">
+   728→          {formatRupiah(tx.jumlah)}
+   729→        </div>
+   730→      </div>
+   731→    </button>
+   732→  );
+   733→}
+   734→
+   735→// Compact chip used in the horizontal mobile strip
+   736→function TransactionChip({
+   737→  tx,
+   738→  active,
+   739→  onSelect,
+   740→}: {
+   741→  tx: Transaction;
+   742→  active: boolean;
+   743→  onSelect: () => void;
+   744→}) {
+   745→  return (
+   746→    <button
+   747→      type="button"
+   748→      onClick={onSelect}
+   749→      className={[
+   750→        "shrink-0 w-56 text-left rounded-lg border px-3 py-2 transition-colors",
+   751→        active
+   752→          ? "border-rose-500 bg-rose-50 dark:bg-rose-950/20 ring-1 ring-rose-500"
+   753→          : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900",
+   754→      ].join(" ")}
+   755→    >
+   756→      <div className="flex items-center gap-1.5 mb-1">
+   757→        {tx.noBku && (
+   758→          <Badge
+   759→            variant="outline"
+   760→            className="font-mono text-[10px] bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+   761→          >
+   762→            {tx.noBku}
+   763→          </Badge>
+   764→        )}
+   765→        <StatusBadge status={tx.status} />
+   766→      </div>
+   767→      <div className="text-xs font-medium text-slate-800 dark:text-slate-100 line-clamp-1">
+   768→        {tx.uraian}
+   769→      </div>
+   770→      <div className="text-xs text-rose-600 dark:text-rose-400 font-bold mt-0.5">
+   771→        {formatRupiah(tx.jumlah)}
+   772→      </div>
+   773→    </button>
+   774→  );
+   775→}
+   776→
+   777→function StatusBadge({ status }: { status: string }) {
+   778→  const isLunas = status === "lunas";
+   779→  return (
+   780→    <Badge
+   781→      variant="outline"
+   782→      className={
+   783→        "text-[10px] " +
+   784→        (isLunas
+   785→          ? "border-emerald-300 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-900 dark:text-emerald-300"
+   786→          : "border-amber-300 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:border-amber-900 dark:text-amber-300")
+   787→      }
+   788→    >
+   789→      {isLunas ? "Lunas" : "Pending"}
+   790→    </Badge>
+   791→  );
+   792→}
+   793→
+   794→// ============================================================
+   795→// Print CSS
+   796→// ============================================================
+   797→
+   798→const PRINT_CSS = `
+   799→@media print {
+   800→  /* Hide every descendant of body... */
+   801→  body * {
+   802→    visibility: hidden;
+   803→  }
+   804→  /* ...but the print container and its descendants. */
+   805→  #spj-document-print,
+   806→  #spj-document-print * {
+   807→    visibility: visible;
+   808→  }
+   809→  /* Position the print container at the top-left of the page. */
+   810→  #spj-document-print {
+   811→    position: absolute;
+   812→    top: 0;
+   813→    left: 0;
+   814→    right: 0;
+   815→    width: 100%;
+   816→    margin: 0;
+   817→    padding: 0;
+   818→  }
+   819→  /* A4 page setup */
+   820→  @page {
+   821→    size: A4 portrait;
+   822→    margin: 1.2cm;
+   823→  }
+   824→  /* Ensure the document prints with dark text on white background */
+   825→  #spj-document-print,
+   826→  #spj-document-print * {
+   827→    color: #000 !important;
+   828→    background: transparent !important;
+   829→    box-shadow: none !important;
+   830→  }
+   831→  #spj-document-print table thead tr,
+   832→  #spj-document-print table tbody tr.total-row {
+   833→    background: #e5e7eb !important;
+   834→  }
+   835→  /* Avoid breaking inside signature blocks */
+   836→  #spj-document-print .signature-block {
+   837→    break-inside: avoid;
+   838→  }
+   839→}
+   840→`.trim();
+   841→

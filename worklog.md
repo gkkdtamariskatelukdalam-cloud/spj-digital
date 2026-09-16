@@ -386,3 +386,156 @@ Stage Summary:
 - SPJ document generation bekerja dengan format surat resmi Indonesia (kop, terbilang, signatures)
 - Dev server jalan di port 3000, lint clean, no console errors
 - Aplikasi siap dipakai untuk mengelola pertanggungjawaban pengadaan ATK SMA Negeri 1 Telukdalam
+
+---
+Task ID: 5-templates
+Agent: Sub-agent (general-purpose)
+Task: Create 7 printable document template components for SPJ app (one per Excel sheet)
+
+Context:
+- Project already had a `Documents` view with a single SPJ document renderer (`SpjDocument`) inside `src/components/spj/documents.tsx`, but it worked off a single `Transaction` rather than a `DocumentGroup`.
+- A `DocumentGroup` type, `/api/spj/document-groups` route, and `useDocumentGroups` hook already existed — they group transactions by `noPesan`/`noBku` and include all items needed to render a multi-row printable document.
+- The user wants ALL Excel sheet print forms (01PESAN, 02BANDING, 03RENCANA, 04SHP, 05BAT, Toko, SPJ) to be printable from the app, each following the EXACT structure of the corresponding Excel sheet.
+
+Files created (8 total, 1,389 lines):
+
+1. `src/components/spj/docs/_helpers.ts` (181 lines)
+   - Shared client utilities for all doc templates (avoids duplicating helpers per file).
+   - `getDayName(dateStr)` → "Senin".."Sabtu" / "—".
+   - `getDayNum(dateStr)` → "1".."31" / "—".
+   - `getYearNum(dateStr)` → "2025" / "—".
+   - `toRoman(num)` → Roman numerals (months 1..12 via lookup; 1..3999 via greedy algorithm).
+   - `capitalize(s)` → first-letter uppercase (for `terbilang` output).
+   - `orDash(value)` → returns value or "—" placeholder for empty strings/null.
+   - `schoolName(school)` / `schoolAddress(school)` → with sensible defaults (SMA NEGERI 1 TELUKDALAM + the Jl. Pendidikan address).
+   - `groupRomanMonth(group)` → Roman numeral for the group's `bulan`.
+   - `buildSpjNumber(group)` → `SPJ-{noBku}/{romanMonth}/{tahun}`.
+   - `pickGroupDate(group)` → prefers `tglBayar` → `tglBast` → `tglPesan` → today ISO.
+   - `estimateCompletionDate(group)` → `tglPesan + 7 days` ISO string (used by Surat Pesanan for "Waktu Penyelesaian Pesanan").
+   - Internal `parseDate()` handles both ISO `yyyy-mm-dd` and `dd/mm/yyyy` strings.
+
+2. `src/components/spj/docs/surat-pesanan.tsx` (212 lines) — export `SuratPesanan`
+   - Sheet 01PESAN. Full kop surat (Pemprov Sumut / Disdik / SMA Negeri 1 Telukdalam / address / Cabdisdik XIV / Kode Pos 22865 / Telp/HP / Pos-el / Laman).
+   - Title "SURAT PESANAN".
+   - Meta block: Paket Pesanan (Pengadaan ATK), Nomor Surat Pesanan (`421.3/{noPesan}-P/DB/SMANSATLD/{romanMonth}/{tahun}`), Tanggal/Waktu Pengerjaan/Pemrosesan/Penyelesaian Pesanan, No. BPU.
+   - Items table: No / Uraian Barang-Jasa / Jumlah / Satuan / Harga Satuan / Total Harga, with "JUMLAH" total row.
+   - `Terbilang: {capitalize(terbilang(total))}` line.
+   - Right-aligned "Telukdalam, {tglPesan}" date.
+   - 2-column signature grid: "Mengetahui, Kepala Sekolah" + "Bendahara Pengeluaran," — names + NIPs.
+
+3. `src/components/spj/docs/dokumen-pembanding.tsx` (117 lines) — export `DokumenPembanding`
+   - Sheet 02BANDING. Title "DOKUMEN HASIL PEMBANDING".
+   - Meta: Satuan Pendidikan, Hasil pembanding ("Tercapai kesepakatan pembelian dengan {vendorName}"), Tanggal.
+   - Comparison table: No / Produk (vendor) / Estimasi Harga (uses `tarifHarga` per the Excel template).
+   - Catatan about best price selection.
+   - Single signature block: "Mengetahui, Kepala Sekolah".
+
+4. `src/components/spj/docs/dokumen-rencana.tsx` (121 lines) — export `DokumenRencana`
+   - Sheet 03RENCANA. Title "DOKUMEN PERENCANAAN".
+   - Meta: Nama Satuan Pendidikan, Alamat, Kategori (ATK), Jenis (KETERANGAN), Jumlah Barang/Jasa (`itemCount`).
+   - Specs table with check-mark column: ✓ / No / Spesifikasi Barang-Jasa (one row per item, showing `uraian` + `namaBarang` italic).
+   - Single signature block: "Mengetahui, Kepala Sekolah".
+
+5. `src/components/spj/docs/surat-hasil-pemeriksaan.tsx` (191 lines) — export `SuratHasilPemeriksaan`
+   - Sheet 04SHP. Kop surat (same as SuratPesanan).
+   - Title "SURAT HASIL PEMERIKSAAN" + nomor (`421.3/{noPesan}-PB/SMANSA-TD/{romanMonth}/{tahun}`).
+   - Opening paragraph: "Pada hari ini, {dayName} tanggal {day} bulan {monthName} tahun {year}…".
+   - Bulleted list of surat pemesanan metadata.
+   - "Yang bertandatangan di bawah ini" section with Penerima Barang (school.receiverName, .receiverPhone, school address).
+   - Items table: No / Nama Barang-Jasa / Jumlah / Satuan / Kondisi ("Baik").
+   - Closing + signature: "Pemeriksa, Penerima Barang" → school.receiverName.
+
+6. `src/components/spj/docs/berita-acara-serah-terima.tsx` (222 lines) — export `BeritaAcaraSerahTerima`
+   - Sheet 05BAT. Kop surat + title "BERITA ACARA SERAH TERIMA" + nomor (`421.3/{noPesan}-BAST/SMANSA-TD/{romanMonth}/{tahun}`).
+   - Opening paragraph with day/date/month/year.
+   - Ordered list (ol) for two parties:
+     • PIHAK PERTAMA: vendorOwner / Direktur / vendorName / vendorAddress / vendorPhone.
+     • PIHAK KEDUA: receiverName / Penerima Barang / school name / address / receiverPhone.
+   - "PIHAK PERTAMA menyerahkan hasil pekerjaan…" intro + items table (No / Nama Barang-Jasa / Diserahkan / Diterima / Kondisi "Baik" — volume+satuan duplicated for Diserahkan & Diterima).
+   - 2-column signature grid: vendorOwner (Direktur) + school.receiverName (Penerima Barang).
+
+7. `src/components/spj/docs/surat-penawaran-toko.tsx` (149 lines) — export `SuratPenawaranToko`
+   - Sheet "Toko". Vendor letterhead (vendorName + vendorAddress), top-right "Telukdalam, {tglPesan}".
+   - Recipient block: "Kepada Yth. Kepala {schoolName} / Cq. Penanggungjawab Kegiatan / di Tempat".
+   - Perihal "Pesanan Barang" + greeting paragraph.
+   - "DAFTAR KUANTITAS DAN HARGA" table: No / Uraian / Volume / Satuan / Harga Satuan / Jumlah, plus "JUMLAH" total row.
+   - Right-aligned signature: vendorName (uppercase) → vendorOwner (underline) → "Direktur".
+
+8. `src/components/spj/docs/surat-pertanggungjawaban.tsx` (196 lines) — export `SuratPertanggungjawaban`
+   - Standard Indonesian SPJ. Kop surat + title "SURAT PERTANGGUNGJAWABAN (SPJ)" + nomor (`SPJ-{noBku}/{romanMonth}/{tahun}`).
+   - Opening paragraph referencing BOSP Tahun {tahun}.
+   - Items table: No / Uraian / Vol / Satuan / Tarif (Rp) / Jumlah (Rp), plus "JUMLAH TOTAL" row.
+   - `Terbilang: {capitalize(terbilang(total))}`.
+   - Closing paragraph + right-aligned date ("Telukdalam, {spjDate}").
+   - 3-column signature grid: "Mengetahui, Kepala Sekolah" (principalName + NIP) / "Bendahara, Bendahara Pengeluaran" (treasurerName + NIP) / "Penerima," (vendorOwner + vendorName).
+
+Implementation conventions:
+- All 7 components are `"use client"` React components.
+- Each component takes `({ group, school }: { group: DocumentGroup; school: School | null })`.
+- Each component renders `<div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">…</div>` as the printable area.
+- All tables use HTML `<table className="w-full border-collapse border border-slate-800 text-[11px]">` with `border border-slate-800` cells, `bg-slate-100` header rows, `bg-slate-50 font-bold` total rows.
+- Signature blocks use `grid grid-cols-{N} gap-{4-8}` with a `h-16`/`h-20` empty space for the wet signature.
+- Each item row shows `uraian` as the main label, with `namaBarang` rendered as a small italic sub-line when present.
+- Helpers from `@/lib/format` (formatDate, formatNumber, terbilang, getMonthName) used throughout; local helpers in `_helpers.ts` for the day name, Roman month, and school fallbacks.
+- Empty items lists render a "Tidak ada item." placeholder row inside the table.
+- All values use `orDash()` for null/empty fallback to "—".
+
+Verification:
+- `bun run lint` → exit 0, no errors, no warnings.
+- `bunx tsc --noEmit` → no errors in any of the new files under `src/components/spj/docs/`. (Pre-existing unrelated errors remain in `examples/websocket/*`, `skills/*`, and the existing `document-groups/route.ts` `noBast` type mismatch — all flagged in earlier worklogs and outside the scope of this task.)
+
+Next actions for downstream agents:
+- Build a `DocTemplateRegistry` / picker UI that maps a doc-type key (e.g. `"surat-pesanan"`, `"berita-acara-serah-terima"`, …) to its component, then mount the right component inside the existing Documents view's `<div id="spj-document-print">` so `window.print()` works against each template.
+- Or extend the existing `useDocumentGroups` hook to power a new "Document Groups" tab that lists groups and lets the user preview/print any of the 7 templates per group.
+
+---
+Task ID: SPJ-ALL-DOCS
+Agent: Main (Claude)
+Task: Rebuild SPJ Documents component to include ALL document types from Excel (Surat Pesanan, BANDING, RENCANA, SHP, BAST, Toko, SPJ)
+
+Work Log:
+- Analisa struktur lengkap setiap sheet dokumen dari Excel terdekripsi:
+  - 01PESAN: Surat Pesanan dengan kop surat, nomor 421.3/07-P/DB/SMANSATLD/I/2025, tabel rincian, terbilang, signatures
+  - 02BANDING: Dokumen Hasil Pembanding dengan perbandingan produk dari multiple vendor
+  - 03RENCANA: Dokumen Perencanaan dengan daftar spesifikasi barang
+  - 04SHP: Surat Hasil Pemeriksaan dengan kop surat, "Pada hari ini...", tabel kondisi barang
+  - 05BAT: Berita Acara Serah Terima dengan PIHAK PERTAMA (vendor) & PIHANG KEDUA (sekolah)
+  - Toko: Surat Penawaran dari vendor dengan kop vendor, "Kepada Yth", "Perihal: Pesanan Barang"
+  - SPJ: Surat Pertanggungjawaban dengan format standar Indonesia
+- Buat API /api/spj/document-groups yang grouping transaksi by noPesan (atau noBku)
+- Buat 7 komponen template dokumen di /src/components/spj/docs/:
+  1. surat-pesanan.tsx - SuratPesanan (212 lines)
+  2. dokumen-pembanding.tsx - DokumenPembanding (117 lines)
+  3. dokumen-rencana.tsx - DokumenRencana (121 lines)
+  4. surat-hasil-pemeriksaan.tsx - SuratHasilPemeriksaan (191 lines)
+  5. berita-acara-serah-terima.tsx - BeritaAcaraSerahTerima (222 lines)
+  6. surat-penawaran-toko.tsx - SuratPenawaranToko (149 lines)
+  7. surat-pertanggungjawaban.tsx - SuratPertanggungjawaban (196 lines)
+- Plus _helpers.ts (181 lines) dengan utility functions: getDayName, toRoman, capitalize, orDash, etc.
+- Rebuild Documents.tsx component:
+  - Sidebar kiri: filter search + bulan + list grup transaksi (grouped by noPesan)
+  - Picker 7 jenis dokumen (cards dengan kode Excel: 01 PESAN, 02 BANDING, 03 RENCANA, 04 SHP, 05 BAST, TOKO, SPJ)
+  - Action bar dengan tombol "Cetak Dokumen"
+  - Preview area menampilkan template sesuai pilihan
+  - Print CSS untuk A4 portrait dengan @page margin 1.2cm
+- Verifikasi Agent Browser end-to-end:
+  - Daftar grup transaksi muncul (419 grup dengan total Rp 552.986.800)
+  - Search filter bekerja (test "JOSUA" → hanya tampil grup JOSUA)
+  - Bulan filter bekerja (test Februari → hanya 3 grup Feb)
+  - Klik grup #04 (UD. JOSUA 66 item) → tombol 7 jenis dokumen aktif
+  - Surat Pesanan: kop surat lengkap, nomor "421.3/04-PB/SMANSA-TD/I/2025", tabel 66 item, terbilang "Tujuh belas juta...", signatures
+  - Dokumen Pembanding: judul "DOKUMEN HASIL PEMBANDING", hasil "Tercapai kesepakatan dengan UD. JOSUA"
+  - Dokumen Rencana: "DOKUMEN PERENCANAAN", 66 item, spesifikasi
+  - Surat Hasil Pemeriksaan: "SURAT HASIL PEMERIKSAAN", "Pada hari ini, Senin tanggal 6...", Penerima Barang
+  - Berita Acara Serah Terima: "BERITA ACARA SERAH TERIMA", PIHAK PERTAMA/KEDUA, Direktur
+  - Surat Penawaran Toko: vendor header, "Kepada Yth", "Perihal: Pesanan Barang", "DAFTAR KUANTITAS DAN HARGA"
+  - SPJ: "SURAT PERTANGGUNGJAWABAN", terbilang, signatures Kepala/Bendahara/Penerima
+- Tidak ada error di console, lint clean, semua API 200 OK
+
+Stage Summary:
+- 7 template dokumen lengkap dengan format persis seperti Excel asli
+- 1 API baru: /api/spj/document-groups (grouping by noPesan)
+- Komponen Documents.tsx di-rebuild dengan picker 7 jenis dokumen + print support
+- Print CSS A4 portrait dengan proper page break
+- Semua dokumen dapat di-cetak via tombol "Cetak Dokumen" (window.print())
+- Data real dari Excel: 419 grup transaksi, 9 vendor, semua pejabat sekolah ter-pre-filled

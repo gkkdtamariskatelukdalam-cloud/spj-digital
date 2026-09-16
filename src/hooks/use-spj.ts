@@ -356,6 +356,23 @@ export function useReport(type: string, extraParams: Record<string, string> = {}
 }
 
 // ============ Documents ============
+export function useDocumentGroups(bulan?: number, q?: string) {
+  const params = new URLSearchParams();
+  if (bulan) params.set("bulan", String(bulan));
+  if (q) params.set("q", q);
+  return useQuery({
+    queryKey: ["spj-doc-groups", bulan, q],
+    queryFn: async (): Promise<import("@/lib/types/spj").DocumentGroupsResponse> => {
+      const res = await fetch(`/api/spj/document-groups?${params}`, {
+        cache: "no-store",
+      });
+      if (!res.ok) throw new Error("Failed");
+      return res.json();
+    },
+    staleTime: 60 * 1000,
+  });
+}
+
 export function useCreateDocument() {
   const qc = useQueryClient();
   return useMutation({

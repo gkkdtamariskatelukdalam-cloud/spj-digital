@@ -120,3 +120,63 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ============ SPJ Document Print Styles ============ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 1.2cm;
+  }
+  body * {
+    visibility: hidden;
+  }
+  #spj-document-print,
+  #spj-document-print * {
+    visibility: visible;
+  }
+  #spj-document-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .spj-doc {
+    color: #000 !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    padding: 0 !important;
+  }
+  .spj-doc table {
+    page-break-inside: auto;
+  }
+  .spj-doc tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  .spj-doc .signature-block {
+    page-break-inside: avoid;
+  }
+  /* Hide non-essential UI elements when printing */
+  .print\:hidden {
+    display: none !important;
+  }
+}
+
+/* Screen-only styling for document preview */
+.spj-doc {
+  background: white;
+  color: #0f172a;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 2rem 2.5rem;
+}
+
+@media (max-width: 640px) {
+  .spj-doc {
+    padding: 1rem;
+    font-size: 11px;
+  }
+}
