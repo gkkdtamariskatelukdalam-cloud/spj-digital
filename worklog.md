@@ -1250,3 +1250,46 @@ Stage Summary:
 - 2 mode: single (per pesanan) dan all (semua 574 pesanan)
 - Per pesanan: 7 dokumen (Surat Pesanan, Pembanding, Rencana, SHP, BAST, Toko, SPJ)
 - Navigasi: Sebelumnya/Selanjutnya, tab dokumen, dropdown pilih pesanan
+
+---
+Task ID: 16-CETAK-PER-TOKO-SCROLL
+Agent: Main (Claude)
+Task: Tambah pilihan cetak per toko + fix scroll di preview modal
+
+Work Log:
+- User minta: 1) tambah pilihan cetak per toko/vendor, 2) fix scroll di preview modal agar bisa lihat keseluruhan dokumen
+- Fix scroll di DocumentPreview:
+  - Ganti ScrollArea (shadcn) dengan div biasa `overflow-y-auto overflow-x-auto`
+  - Tambah `WebkitOverflowScrolling: touch` untuk smooth scroll di mobile
+  - Ubah `maxWidth: "100%"` → `maxWidth: "none"` agar dokumen A4 tidak terpotong
+  - Tambah `min-w-min` pada wrapper agar horizontal scroll bekerja
+  - Hasil: scrollTop bisa dari 0 sampai 2503 (scrollHeight 2855) - dokumen bisa di-scroll penuh
+- Tambah mode "vendor" di DocumentPreview:
+  - Update props: mode sekarang "single" | "all" | "vendor"
+  - Tambah prop vendorName untuk display title
+  - Update title: "Cetak SPJ per Toko: {vendorName}" untuk mode vendor
+  - Update filename PDF: "SPJ-Toko-{vendorName}.pdf" untuk mode vendor
+  - Update navigation (prev/next), totalSteps, groupSelector untuk support mode vendor
+- Tambah tombol "Cetak per Toko" di header DataBelanja:
+  - Tombol amber dengan icon Store
+  - Dropdown menu dengan daftar vendor
+  - Setiap vendor menampilkan: nama, jumlah pesanan, total nilai
+  - Klik vendor → filter groups by vendorName → buka preview modal mode "vendor"
+  - Compute vendorList dengan useMemo (sorted by total nilai descending)
+- Verifikasi Agent Browser:
+  - Tombol "Cetak per Toko" muncul di header (amber)
+  - Dropdown menampilkan daftar vendor: UD. JOSUA (67 pesanan), CV. GORIYAKU (6), Resto JFC (15), Rumah Roti Helena (21), dll
+  - Klik "UD. JOSUA" → modal "Cetak SPJ per Toko: UD. JOSUA" muncul
+  - Subtitle: "Pesanan 1 dari 67 · Dokumen 1 dari 7"
+  - Dropdown pilih pesanan: #04, #05, #06, dst
+  - Tombol Unduh PDF + Cetak tersedia
+  - Scroll berfungsi: bisa scroll dari atas (0) sampai bawah (2503/2855)
+  - Dokumen Surat Pesanan terlihat dengan KOP, RINCIAN PEKERJAAN, Terbilang
+  - Tidak ada error, lint clean
+
+Stage Summary:
+- DocumentPreview: support 3 mode (single, all, vendor)
+- Scroll fix: div overflow-y-auto menggantikan ScrollArea, dokumen bisa di-scroll penuh
+- Tombol "Cetak per Toko" dengan dropdown vendor list (nama, jumlah pesanan, total nilai)
+- Mode vendor: preview semua dokumen untuk semua pesanan dari 1 vendor
+- 3 pilihan cetak: per pesanan (existing), per toko (baru), semua SPJ (existing)

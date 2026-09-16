@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   ChevronLeft,
   ChevronRight,
@@ -98,8 +97,9 @@ interface DocumentPreviewProps {
   open: boolean;
   onClose: () => void;
   group: DocumentGroup | null;
-  mode: "single" | "all"; // single = 1 pesanan, all = semua pesanan
+  mode: "single" | "all" | "vendor"; // single = 1 pesanan, all = semua, vendor = per toko
   allGroups?: DocumentGroup[];
+  vendorName?: string | null; // for vendor mode display
   initialDocId?: string; // if specified, start with this doc
 }
 
@@ -109,6 +109,7 @@ export function DocumentPreview({
   group,
   mode,
   allGroups = [],
+  vendorName,
   initialDocId,
 }: DocumentPreviewProps) {
   const { data: schoolData } = useSchool();
@@ -120,8 +121,8 @@ export function DocumentPreview({
   const [downloading, setDownloading] = useState(false);
   const [printing, setPrinting] = useState(false);
 
-  // Determine which groups to show
-  const groups = mode === "all" ? allGroups : group ? [group] : [];
+  // Determine which groups to show (all, vendor, or single)
+  const groups = mode === "all" || mode === "vendor" ? allGroups : group ? [group] : [];
   const currentGroup = groups[currentGroupIdx] || null;
   const currentDoc = DOC_TEMPLATES[currentDocIdx];
 
@@ -143,13 +144,13 @@ export function DocumentPreview({
 
   if (!open || !currentGroup) return null;
 
-  const totalSteps = mode === "all" ? groups.length * DOC_TEMPLATES.length : DOC_TEMPLATES.length;
+  const totalSteps = (mode === "all" || mode === "vendor") ? groups.length * DOC_TEMPLATES.length : DOC_TEMPLATES.length;
   const currentStep = currentGroupIdx * DOC_TEMPLATES.length + currentDocIdx + 1;
 
   const handleNext = () => {
     if (currentDocIdx < DOC_TEMPLATES.length - 1) {
       setCurrentDocIdx(currentDocIdx + 1);
-    } else if (mode === "all" && currentGroupIdx < groups.length - 1) {
+    } else if ((mode === "all" || mode === "vendor") && currentGroupIdx < groups.length - 1) {
       setCurrentGroupIdx(currentGroupIdx + 1);
       setCurrentDocIdx(0);
     }
@@ -158,7 +159,7 @@ export function DocumentPreview({
   const handlePrev = () => {
     if (currentDocIdx > 0) {
       setCurrentDocIdx(currentDocIdx - 1);
-    } else if (mode === "all" && currentGroupIdx > 0) {
+    } else if ((mode === "all" || mode === "vendor") && currentGroupIdx > 0) {
       setCurrentGroupIdx(currentGroupIdx - 1);
       setCurrentDocIdx(DOC_TEMPLATES.length - 1);
     }
@@ -181,7 +182,7 @@ export function DocumentPreview({
       document.body.appendChild(container);
 
       // Render all docs for current group (or all groups)
-      const groupsToRender = mode === "all" ? groups : [currentGroup];
+      const groupsToRender = (mode === "all" || mode === "vendor") ? groups : [currentGroup];
       
       for (const g of groupsToRender) {
         for (const doc of DOC_TEMPLATES) {
@@ -211,8 +212,10 @@ export function DocumentPreview({
       // Generate PDF
       const opt = {
         margin: 0,
-        filename: mode === "all" 
-          ? `SPJ-Semua-${new Date().toISOString().split("T")[0]}.pdf`
+        filename: (mode === "all" || mode === "vendor")
+          ? mode === "vendor"
+            ? `SPJ-Toko-${vendorName || "unknown"}.pdf`
+            : `SPJ-Semua-${new Date().toISOString().split("T")[0]}.pdf`
           : `SPJ-Pesanan-${currentGroup.noPesan || currentGroup.noBku}.pdf`,
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true },
@@ -296,7 +299,7 @@ export function DocumentPreview({
             <div className="space-y-1">
               <DialogTitle className="text-base flex items-center gap-2">
                 <FileText className="h-4 w-4 text-violet-600" />
-                {mode === "all" ? "Cetak Semua SPJ" : "Preview Dokumen"}
+                {mode === "all" ? "Cetak Semua SPJ" : mode === "vendor" ? `Cetak SPJ per Toko: ${vendorName || "—"}` : "Preview Dokumen"}
                 {mode === "single" && currentGroup && (
                   <Badge variant="outline" className="text-[10px] font-mono ml-1">
                     Pesanan #{currentGroup.noPesan || currentGroup.noBku}
@@ -304,7 +307,7 @@ export function DocumentPreview({
                 )}
               </DialogTitle>
               <DialogDescription className="text-xs">
-                {mode === "all" 
+                {(mode === "all" || mode === "vendor")
                   ? `Pesanan ${currentGroupIdx + 1} dari ${groups.length} · Dokumen ${currentDocIdx + 1} dari ${DOC_TEMPLATES.length}`
                   : `Dokumen ${currentDocIdx + 1} dari ${DOC_TEMPLATES.length}`}
               </DialogDescription>
@@ -368,7 +371,7 @@ export function DocumentPreview({
             ))}
             
             {/* Group selector (only in "all" mode) */}
-            {mode === "all" && groups.length > 0 && (
+            {((mode === "all" || mode === "vendor") && groups.length > 0) && (
               <div className="ml-auto flex items-center gap-2">
                 <select
                   value={currentGroupIdx}
@@ -413,22 +416,25 @@ export function DocumentPreview({
           </Button>
         </div>
 
-        {/* Document Preview */}
-        <ScrollArea className="flex-1 bg-slate-100 dark:bg-slate-950">
-          <div className="p-4 flex justify-center">
+        {/* Document Preview - scrollable */}
+        <div 
+          className="flex-1 bg-slate-100 dark:bg-slate-950 overflow-y-auto overflow-x-auto"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
+          <div className="p-4 flex justify-center min-w-min">
             <div
               id="preview-doc-content"
               className="bg-white shadow-lg"
               style={{
                 width: "210mm",
                 minHeight: "297mm",
-                maxWidth: "100%",
+                maxWidth: "none",
               }}
             >
               {currentDoc.render(currentGroup, school)}
             </div>
           </div>
-        </ScrollArea>
+        </div>
       </DialogContent>
     </Dialog>
   );

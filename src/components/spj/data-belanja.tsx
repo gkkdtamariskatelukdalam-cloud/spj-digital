@@ -121,10 +121,12 @@ export function DataBelanja() {
   
   // Preview state
   const [previewGroup, setPreviewGroup] = useState<PesananGroup | null>(null);
-  const [previewMode, setPreviewMode] = useState<"single" | "all">("single");
+  const [previewMode, setPreviewMode] = useState<"single" | "all" | "vendor">("single");
   const [previewAllGroups, setPreviewAllGroups] = useState<PesananGroup[]>([]);
   const [previewDocId, setPreviewDocId] = useState<string | undefined>(undefined);
   const [showPreview, setShowPreview] = useState(false);
+  const [showVendorMenu, setShowVendorMenu] = useState(false);
+  const [previewVendorName, setPreviewVendorName] = useState<string | null>(null);
 
   const bulan = bulanFilter === "all" ? undefined : parseInt(bulanFilter);
   const status = statusFilter === "all" ? undefined : statusFilter;
@@ -192,6 +194,21 @@ export function DataBelanja() {
     return { totalGroups, draftGroups, pendingGroups, lunasGroups, totalNilai };
   }, [groups]);
 
+  // Compute vendor list with stats for "Cetak per Toko"
+  const vendorList = useMemo(() => {
+    const map = new Map<string, { name: string; count: number; total: number }>();
+    for (const g of groups) {
+      const name = g.vendorName || "Tanpa Vendor";
+      if (!map.has(name)) {
+        map.set(name, { name, count: 0, total: 0 });
+      }
+      const v = map.get(name)!;
+      v.count += 1;
+      v.total += g.totalJumlah;
+    }
+    return Array.from(map.values()).sort((a, b) => b.total - a.total);
+  }, [groups]);
+
   const toggleExpand = (key: string) => {
     setExpandedKeys((prev) => {
       const next = new Set(prev);
@@ -229,7 +246,69 @@ export function DataBelanja() {
  barang di dalam setiap pesanan.
               </CardDescription>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              {/* Cetak per Toko dropdown */}
+              <div className="relative inline-block">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-8 text-xs border-amber-300 text-amber-700 hover:bg-amber-50 dark:text-amber-300"
+                  onClick={() => setShowVendorMenu(!showVendorMenu)}
+                >
+                  <Store className="h-3.5 w-3.5 mr-1" />
+                  Cetak per Toko
+                  <ChevronDown className="h-3 w-3 ml-1" />
+                </Button>
+                {showVendorMenu && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setShowVendorMenu(false)}
+                    />
+                    <div className="absolute right-0 top-full mt-1 z-50 w-72 rounded-md border bg-popover shadow-lg max-h-96 overflow-y-auto">
+                      <div className="px-2 py-1.5 border-b">
+                        <p className="text-[10px] font-bold uppercase text-muted-foreground">
+                          Pilih Toko/Vendor
+                        </p>
+                      </div>
+                      {vendorList.length === 0 ? (
+                        <div className="px-3 py-2 text-xs text-muted-foreground">
+                          Tidak ada vendor
+                        </div>
+                      ) : (
+                        vendorList.map((v) => (
+                          <button
+                            key={v.name}
+                            className="w-full text-left px-3 py-2 text-xs hover:bg-muted flex items-center justify-between gap-2"
+                            onClick={() => {
+                              const vendorGroups = groups.filter(
+                                (g) => g.vendorName === v.name
+                              );
+                              setPreviewGroup(null);
+                              setPreviewMode("vendor");
+                              setPreviewAllGroups(vendorGroups);
+                              setPreviewVendorName(v.name);
+                              setPreviewDocId(undefined);
+                              setShowPreview(true);
+                              setShowVendorMenu(false);
+                            }}
+                          >
+                            <div className="flex-1 min-w-0">
+                              <div className="font-medium truncate">{v.name}</div>
+                              <div className="text-[10px] text-muted-foreground">
+                                {v.count} pesanan · {formatRupiah(v.total)}
+                              </div>
+                            </div>
+                            <Printer className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                          </button>
+                        ))
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
+              
+              {/* Cetak Semua SPJ */}
               <Button
                 variant="outline"
                 size="sm"
@@ -425,6 +504,7 @@ export function DataBelanja() {
         group={previewGroup ? pesananGroupToDocGroup(previewGroup) : null}
         mode={previewMode}
         allGroups={previewAllGroups.map(pesananGroupToDocGroup)}
+        vendorName={previewVendorName}
         initialDocId={previewDocId}
       />
     </div>
