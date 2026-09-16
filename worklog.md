@@ -1609,3 +1609,156 @@ Verification:
 Next Actions:
 - Optional: verify in Agent Browser that toggling KOP mode also swaps the per-line editor fields and that editing dual-line text persists and reflects in the live preview / SPJ documents.
 - Optional: consider resetting existing DB rows to apply the new single-mode default text (users who already saved with the previous single-mode defaults will keep the old values until they reset).
+
+---
+Task ID: 23-surat-pesanan-rebuild
+Agent: Sub Agent (general-purpose)
+Task: Rebuild surat-pesanan.tsx template to match the actual PDF output (3 pages: Surat Pesanan + Tanda Pembayaran).
+
+Work Log:
+- Read previous worklog (Task 22-dual-kop-lines) to understand context: LetterheadSettings now has dual-mode KOP, Letterhead component renders accordingly; SPJ docs share helpers in `_helpers.ts` (getDayName, toRoman, capitalize, orDash, groupRomanMonth, estimateCompletionDate, etc.) and `@/lib/format` (formatDate, formatNumber, formatRupiah, terbilang).
+- Read existing surat-pesanan.tsx (226 lines) — old version only had KOP + title + info table + items table + Total/Terbilang outside table + 2-col signature. Missing: PPN calc table, Terbilang bordered table, Instruksi list, page 3 Tanda Pembayaran.
+- Read `_helpers.ts`, `@/lib/format.ts`, `@/lib/types/spj.ts` to confirm helper signatures and field availability (DocumentGroup has noPesan/noBku/bpuCode/tglPesan/tglBayar/bulan/tahun/vendorId/vendorName/vendorOwner/items/totalJumlah; items have uraian/namaBarang/volume/satuan/tarifHarga/jumlah/noBast/tglBayar; School has principal/treasurer/goodsManager name+nip+rank).
+
+Changes to `/home/z/my-project/src/components/spj/docs/surat-pesanan.tsx` (full rewrite, 226 → 484 lines):
+
+1. Imports updated:
+   - Added `formatRupiah` from `@/lib/format` (was already importing `formatDate, formatNumber, terbilang`)
+   - Kept `capitalize, estimateCompletionDate, groupRomanMonth, orDash` from `./_helpers`
+   - Removed unused imports (none — all kept)
+
+2. New shared style constants:
+   - `borderlessTableStyle` (borderCollapse + width 100%, no borders) — used for signature tables
+   - `nameStyle` (fontWeight 700 + textDecoration underline) — for bold+underlined signature names
+   - `pageBreakStyle` ({ pageBreakAfter: "always" }) — for page break between page 2 and 3
+   - Kept existing `cellStyle`, `tableStyle`, `headerCellStyle`
+
+3. PPN calculation logic (per spec):
+   - `dppPpn = Math.round(total / 1.11)` (rounded)
+   - `ppn11 = total - dppPpn`
+   - Total Pembayaran = `total` (bold)
+   - PPh 23 2% = literal "-" (dash, not calculated)
+
+4. Rank fallbacks from School (with sensible defaults per PDF):
+   - `goodsManagerRank = school?.goodsManagerRank || "Penata Muda"`
+   - `treasurerRank = school?.treasurerRank || "Penata TK. I"`
+   - `principalRank = school?.principalRank || "Pembina Tk I"`
+
+5. Items filter: `items = group.items.filter((it) => (it.namaBarang?.trim()) || (it.uraian?.trim()))` — only show items with namaBarang or uraian non-empty.
+
+6. `firstUraian` derived from first non-empty item (fallback "Pengadaan ATK") for Tanda Pembayaran's "Untuk pembayaran" line.
+
+7. `terbilangText = capitalize(terbilang(total))` — precomputed once, used in both Surat Pesanan and Tanda Pembayaran.
+
+8. Instruksi list extracted to `instruksiList` array (6 entries verbatim from spec PDF), rendered as `<ol className="list-decimal pl-6 space-y-1 text-justify">` with `key={idx}`.
+
+9. PAGE 1+2 (Surat Pesanan) structure:
+   - `<Letterhead />` (existing KOP component)
+   - Title "SURAT PESANAN" (centered, bold, 14pt) — unchanged
+   - Info TABLE (3 cols, ALL cells bordered 1px solid #000) — kept identical to old version:
+     - Row 1: "Paket Pesanan :" | "Nomor Surat Pesanan" | docNumber
+     - Row 2: "Kegiatan jual beli dengan mitra {vendorName}" | "Tanggal Pesanan" | formatDate(tglPesan)
+     - Row 3: &nbsp; | "Tanggal Negosiasi" | &nbsp;
+     - Row 4: "Waktu Pengerjaan Pesanan:" + indented date | "No. BPU" | orDash(bpuCode)
+     - Row 5: "Waktu Pemrosesan Pesanan:" + indented date | &nbsp; | &nbsp;
+     - Row 6: "Waktu Penyelesaian Pesanan:" + indented completion date | colSpan=2 "Catatan Pengiriman Untuk Penyedia:"
+   - RINCIAN PEKERJAAN table (6 cols, ALL borders):
+     - Header row 1: merged colSpan=6 "RINCIAN PEKERJAAN" (headerCellStyle, centered)
+     - Header row 2: No | Uraian Barang / Jasa | Jumlah | Satuan Ukuran | Harga Satuan | Total Harga
+     - Alignment: No=center, Uraian=left, Jumlah=center, Satuan=center, Harga Satuan=right (Rp prefix), Total Harga=right (Rp prefix)
+     - Items rendered from filtered `items` array, idx+1 for numbering
+     - Empty fallback row "Tidak ada item." if items.length === 0
+   - PPN CALCULATION TABLE (2 cols, ALL borders, right-aligned on page via width:60% + marginLeft:auto):
+     - "Harga sebelum PPN" | formatRupiah(total)
+     - "DPP PPN :" | formatRupiah(dppPpn)
+     - "PPN 11% :" | formatRupiah(ppn11)
+     - "Total Pembayaran :" (bold) | formatRupiah(total) (bold)
+     - "PPh 23 2% :" | "-"
+   - TERBILANG TABLE (2 cols, ALL borders, value cell italic):
+     - "Terbilang" (width 15%) | terbilangText (italic)
+   - INSTRUKSI section (outside table, no border):
+     - Bold heading "Instruksi ke Penyedia dan Satuan Pendidikan"
+     - Ordered list of 6 numbered instructions (verbatim from PDF spec)
+   - Date centered: "Telukdalam, {formatDate(tglPesan)}"
+   - 2-col borderless signature table (Penyedia | Pelaksana):
+     - Left col (50%): "Penyedia," / "UD. JOSUA" / spacer 64px / vendorOwner (bold+underlined) / "Direktur"
+     - Right col (50%): "Pelaksana," / spacer / spacer 64px / principalName (bold+underlined) / "NIP. {principalNip}"
+
+10. PAGE BREAK via `<div style={pageBreakStyle} />` (pageBreakAfter: "always").
+
+11. PAGE 3 (Tanda Pembayaran) — new section:
+    - Info block (borderless 2-col table):
+      - Row 1: "Sumber Anggaran : Dana BOSP {tahun}" | "Program : -"
+      - Row 2: "Kas/Pos Tanggal : {formatDate(tglBayar)}" | "Kegiatan : -"
+      - Row 3: "Nomor : {orDash(noBku)}" | "Kode Rek : -"
+      - (kodeProgram and kodeRekening are not available on DocumentGroup — rendered as "-")
+    - Title "TANDA PEMBAYARAN" (centered, bold, 14pt, underlined)
+    - Body block (text-justify, space-y-1):
+      - "Sudah terima dari : Bendahara SMA Negeri 1 Telukdalam"
+      - "Uang sebesar : {formatRupiah(total)}"
+      - "Terbilang : {terbilangText}"
+      - "Nomor Surat persetujuan penyediaan barang"
+      - "dan jasa : {docNumber}"
+      - "Untuk pembayaran : {firstUraian}"
+    - 3-column borderless signature row (top):
+      - Col 1: "Mengetahui :" / "Pengurus Barang" / spacer / goodsManagerName (bold+underlined) / goodsManagerRank / "NIP. {goodsManagerNip}"
+      - Col 2: "Lunas Bayar Oleh :" / "Bendahara SMA Negeri" / "1 Telukdalam" / spacer / treasurerName (bold+underlined) / treasurerRank / "NIP. {treasurerNip}"
+      - Col 3: "Diterima oleh :" / vendorName / spacer / vendorOwner (bold+underlined) / "Direktur"
+    - Menyetujui / Kepala Sekolah block (below, centered, mt-8):
+      - "Menyetujui :" / "Kepala Sekolah SMA Negeri 1 Telukdalam" / spacer 64px / principalName (bold+underlined) / principalRank / "NIP. {principalNip}"
+
+Behavior notes:
+- The PDF spec lists 4 signatories for Tanda Pembayaran but visually splits them into a 3-col top row + 1 centered bottom block (Menyetujui/Kepala Sekolah). Implemented as 2 separate elements (3-col table + centered div) for cleaner layout matching the PDF.
+- `formatRupiah(n)` returns "Rp 1.234.567" (no decimals, id-ID locale) — used in PPN table and Tanda Pembayaran body. Items table keeps `Rp {formatNumber(...)}` pattern (matches existing docs).
+- Rank fields use School rank values if present, else spec defaults ("Penata Muda", "Penata TK. I", "Pembina Tk I").
+- Items filter prevents blank rows from showing in the RINCIAN PEKERJAAN table when Excel import produced empty placeholder rows.
+- Page break uses `pageBreakAfter: "always"` so when printed via html2pdf, Surat Pesanan and Tanda Pembayaran land on separate pages.
+
+Verification:
+- `bun run lint` → exit code 0, no errors, no warnings.
+- `bunx tsc --noEmit` → exit code 0; no TypeScript errors in surat-pesanan.tsx (errors reported elsewhere — examples/, skills/, route.ts, data-belanja.tsx, document-preview.tsx — are pre-existing and unrelated to this task).
+
+Next Actions:
+- Optional: verify in Agent Browser by opening a Surat Pesanan doc — confirm 3-page layout renders, PPN table appears right-aligned with correct math, page break splits to Tanda Pembayaran, all signature names show bold+underlined.
+- Optional: if `kodeProgram` and `kodeRekening` become available on `DocumentGroup` later (e.g. added to API route / Prisma), replace the "-" placeholders in Tanda Pembayaran info block.
+
+---
+Task ID: 23-SURAT-PESANAN-REBUILD
+Agent: Main (Claude)
+Task: Rebuild Surat Pesanan template agar sama persis dengan PDF output Excel
+
+Work Log:
+- User minta analisa PDF 01PESAN_07_2025.pdf secara detail sampai ke border, PPN, dan Terbilang
+- Convert PDF ke high-res images (200 DPI) untuk analisa visual
+- Analisa dengan VLM: 3 halaman dengan struktur lengkap
+- Ekstrak text dari PDF untuk verifikasi konten
+- Key findings dari analisa:
+  - Page 1: KOP + info table (3-col, merge cells) + RINCIAN PEKERJAAN (6-col)
+  - Page 2: PPN table (Harga sebelum PPN, DPP PPN, PPN 11%, Total Pembayaran, PPh 23 2%) + Terbilang + Instruksi (6 items) + 2-col signatures
+  - Page 3: TANDA PEMBAYARAN dengan 4-col signatures
+- Rebuild surat-pesanan.tsx (226 → 484 lines):
+  - PPN calculation: DPP PPN = total/1.11, PPN 11% = total - DPP, Total = total (bold), PPh 23 = "-"
+  - Terbilang: 2-col table dengan border, text italic
+  - Instruksi section: 6 numbered items verbatim dari PDF
+  - Signatures: 2-col (Penyedia/Pelaksana) dengan bold+underline
+  - Page break before Tanda Pembayaran
+  - Tanda Pembayaran page: Sumber Anggaran, Sudah terima dari, Uang sebesar, Terbilang, 4-col signatures
+- Verifikasi Agent Browser:
+  - SURAT PESANAN title ✅
+  - Info block table dengan merge cells ✅
+  - RINCIAN PEKERJAAN dengan merged header ✅
+  - PPN table: Harga sebelum PPN Rp 11.398.500, DPP PPN Rp 10.268.919, PPN 11% Rp 1.129.581, Total Rp 11.398.500, PPh 23 "-" ✅
+  - Terbilang: "Sebelas juta tiga ratus sembilan puluh delapan ribu lima ratus rupiah" (italic) ✅
+  - Instruksi: 6 items lengkap ✅
+  - Signatures: Penyedia (Gestiwan Bazikho/Direktur) + Pelaksana (Nursari/NIP) ✅
+  - TANDA PEMBAYARAN page ✅
+  - 4-col signatures: Pengurus Barang (Radius), Bendahara (Riama), Diterima (Gestiwan), Menyetujui (Nursari) ✅
+  - Tidak ada error, lint clean
+
+Stage Summary:
+- Surat Pesanan di-rebuild dengan 3 halaman lengkap sesuai PDF asli
+- PPN calculation otomatis (DPP, PPN 11%, Total, PPh 23)
+- Terbilang dalam table dengan border
+- Instruksi section dengan 6 items
+- Tanda Pembayaran page dengan 4-col signatures
+- Page break antara Surat Pesanan dan Tanda Pembayaran

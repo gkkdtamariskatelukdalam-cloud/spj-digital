@@ -2,7 +2,7 @@
 
 import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
-import { formatDate, formatNumber, terbilang } from "@/lib/format";
+import { formatDate, formatNumber, formatRupiah, terbilang } from "@/lib/format";
 import { Letterhead } from "@/components/spj/letterhead";
 import {
   capitalize,
@@ -12,7 +12,7 @@ import {
 } from "./_helpers";
 
 // ============================================================
-// 01PESAN — Surat Pesanan
+// 01PESAN — Surat Pesanan (pages 1-2) + Tanda Pembayaran (page 3)
 // ============================================================
 
 interface SuratPesananProps {
@@ -36,6 +36,17 @@ const headerCellStyle: CSSProperties = {
   fontWeight: 700,
   textAlign: "center",
 };
+const borderlessTableStyle: CSSProperties = {
+  borderCollapse: "collapse",
+  width: "100%",
+};
+const nameStyle: CSSProperties = {
+  fontWeight: 700,
+  textDecoration: "underline",
+};
+const pageBreakStyle: CSSProperties = {
+  pageBreakAfter: "always",
+};
 
 export function SuratPesanan({ group, school }: SuratPesananProps) {
   const romanMonth = groupRomanMonth(group);
@@ -43,13 +54,56 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
   const tglPesan = group.tglPesan;
   const completion = estimateCompletionDate(group);
   const total = group.totalJumlah;
+
+  // PPN calculation per spec
+  const dppPpn = Math.round(total / 1.11);
+  const ppn11 = total - dppPpn;
+
   const vendorName = orDash(group.vendorName);
   const vendorOwner = orDash(group.vendorOwner);
   const principalName = orDash(school?.principalName);
   const principalNip = orDash(school?.principalNip);
+  const treasurerName = orDash(school?.treasurerName);
+  const treasurerNip = orDash(school?.treasurerNip);
+  const goodsManagerName = orDash(school?.goodsManagerName);
+  const goodsManagerNip = orDash(school?.goodsManagerNip);
+
+  // Rank fallbacks (spec: Penata Muda / Penata TK. I / Pembina Tk I / Direktur)
+  const goodsManagerRank = school?.goodsManagerRank?.trim() || "Penata Muda";
+  const treasurerRank = school?.treasurerRank?.trim() || "Penata TK. I";
+  const principalRank = school?.principalRank?.trim() || "Pembina Tk I";
+
+  // Filter empty items (only show items with namaBarang or uraian)
+  const items = group.items.filter(
+    (it) =>
+      (it.namaBarang && it.namaBarang.trim()) ||
+      (it.uraian && it.uraian.trim()),
+  );
+
+  // First item uraian for "Untuk pembayaran" line on Tanda Pembayaran
+  const firstUraian =
+    items.length > 0
+      ? items[0].uraian || items[0].namaBarang || "Pengadaan ATK"
+      : "Pengadaan ATK";
+
+  const terbilangText = capitalize(terbilang(total));
+
+  // Instruction list (spec text, exact)
+  const instruksiList = [
+    "Penyedia berkewajiban untuk menyediakan barang/jasa sesuai dengan surat pesanan dan dalam jangka waktu transaksi yang berlaku",
+    "Penyedia berhak memintakan pembayaran sesuai total pembayaran setelah penyelesaian pekerjaan yang dimintakan pada Surat Pesanan ini dan dibuktikan dengan Berita Acara Serah Terima.",
+    "Pelaksana dalam kapasitas mewakili Satuan Pendidikan berhak untuk mendapatkan barang atau jasa sesuai Surat Pesanan ini.",
+    "Pelaksana berhak menolak barang/jasa yang tidak sesuai dengan surat pesanan.",
+    "Pelaksana dalam kapasitas mewakili Satuan Pendidikan berkewajiban untuk menyelesaikan pembayaran sesuai dengan mekanisme pembayaran yang berlaku pada sistem.",
+    "Segala perselisihan yang timbul dari Surat Pesanan ini diselesaikan antara para pihak sesuai ketentuan yang berlaku.",
+  ];
 
   return (
     <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
+      {/* ============================================================ */}
+      {/* PAGE 1+2: SURAT PESANAN                                       */}
+      {/* ============================================================ */}
+
       {/* === Kop Surat === */}
       <div className="mb-5">
         <Letterhead />
@@ -60,7 +114,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
         <h1 className="font-bold text-[14px]">SURAT PESANAN</h1>
       </div>
 
-      {/* === Info TABLE (3 cols, all cells bordered) === */}
+      {/* === Info TABLE (3 cols, all cells bordered 1px) === */}
       <div className="mb-4">
         <table style={tableStyle}>
           <tbody>
@@ -112,7 +166,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
         </table>
       </div>
 
-      {/* === Items table (with RINCIAN PEKERJAAN as merged header row inside) === */}
+      {/* === Items table with RINCIAN PEKERJAAN merged header row === */}
       <div className="mb-3">
         <table style={tableStyle}>
           <thead>
@@ -133,16 +187,28 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
               <th style={{ ...headerCellStyle, width: "90px" }}>
                 Satuan Ukuran
               </th>
-              <th style={{ ...headerCellStyle, textAlign: "right", width: "130px" }}>
+              <th
+                style={{
+                  ...headerCellStyle,
+                  textAlign: "right",
+                  width: "130px",
+                }}
+              >
                 Harga Satuan
               </th>
-              <th style={{ ...headerCellStyle, textAlign: "right", width: "150px" }}>
+              <th
+                style={{
+                  ...headerCellStyle,
+                  textAlign: "right",
+                  width: "150px",
+                }}
+              >
                 Total Harga
               </th>
             </tr>
           </thead>
           <tbody>
-            {group.items.length === 0 ? (
+            {items.length === 0 ? (
               <tr>
                 <td
                   colSpan={6}
@@ -152,13 +218,15 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                 </td>
               </tr>
             ) : (
-              group.items.map((item, idx) => (
+              items.map((item, idx) => (
                 <tr key={item.id}>
                   <td style={{ ...cellStyle, textAlign: "center" }}>
                     {idx + 1}
                   </td>
                   <td style={{ ...cellStyle, textAlign: "left" }}>
-                    <div className="font-medium">{item.namaBarang || item.uraian}</div>
+                    <div className="font-medium">
+                      {item.namaBarang || item.uraian}
+                    </div>
                   </td>
                   <td style={{ ...cellStyle, textAlign: "center" }}>
                     {formatNumber(item.volume)}
@@ -179,14 +247,80 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
         </table>
       </div>
 
-      {/* === Total Pembayaran (OUTSIDE table, bold) + Terbilang (italic) === */}
-      <div className="mb-5 text-[12px] space-y-1">
-        <div className="font-bold">
-          Total Pembayaran : Rp {formatNumber(total)}
+      {/* === PPN CALCULATION TABLE (2 cols, ALL borders, right-aligned) === */}
+      <div className="mb-3">
+        <table
+          style={{
+            ...tableStyle,
+            width: "60%",
+            marginLeft: "auto",
+          }}
+        >
+          <tbody>
+            <tr>
+              <td style={cellStyle}>Harga sebelum PPN</td>
+              <td style={{ ...cellStyle, textAlign: "right" }}>
+                {formatRupiah(total)}
+              </td>
+            </tr>
+            <tr>
+              <td style={cellStyle}>DPP PPN :</td>
+              <td style={{ ...cellStyle, textAlign: "right" }}>
+                {formatRupiah(dppPpn)}
+              </td>
+            </tr>
+            <tr>
+              <td style={cellStyle}>PPN 11% :</td>
+              <td style={{ ...cellStyle, textAlign: "right" }}>
+                {formatRupiah(ppn11)}
+              </td>
+            </tr>
+            <tr>
+              <td style={{ ...cellStyle, fontWeight: 700 }}>
+                Total Pembayaran :
+              </td>
+              <td
+                style={{
+                  ...cellStyle,
+                  textAlign: "right",
+                  fontWeight: 700,
+                }}
+              >
+                {formatRupiah(total)}
+              </td>
+            </tr>
+            <tr>
+              <td style={cellStyle}>PPh 23 2% :</td>
+              <td style={{ ...cellStyle, textAlign: "right" }}>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* === TERBILANG TABLE (2 cols, ALL borders, italic value) === */}
+      <div className="mb-4">
+        <table style={tableStyle}>
+          <tbody>
+            <tr>
+              <td style={{ ...cellStyle, width: "15%" }}>Terbilang</td>
+              <td style={{ ...cellStyle, fontStyle: "italic" }}>
+                {terbilangText}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* === INSTRUKSI section (outside table, no border) === */}
+      <div className="mb-5">
+        <div className="font-bold mb-2">
+          Instruksi ke Penyedia dan Satuan Pendidikan
         </div>
-        <div className="italic">
-          Terbilang : {capitalize(terbilang(total))}
-        </div>
+        <ol className="list-decimal pl-6 space-y-1 text-justify">
+          {instruksiList.map((text, idx) => (
+            <li key={idx}>{text}</li>
+          ))}
+        </ol>
       </div>
 
       {/* === Date CENTERED === */}
@@ -194,33 +328,157 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
         Telukdalam, {formatDate(tglPesan)}
       </div>
 
-      {/* === 2-column borderless signature table === */}
-      <table
-        style={{
-          width: "100%",
-          borderCollapse: "collapse",
-        }}
-      >
+      {/* === 2-column borderless signature table (Penyedia | Pelaksana) === */}
+      <table style={borderlessTableStyle}>
         <tbody>
           <tr>
-            <td style={{ width: "50%", textAlign: "center", padding: "0 8px" }}>
+            <td
+              style={{
+                width: "50%",
+                textAlign: "center",
+                padding: "0 8px",
+                verticalAlign: "top",
+              }}
+            >
+              <div>Penyedia,</div>
+              <div>UD. JOSUA</div>
               <div style={{ height: "64px" }} />
-              <div style={{ fontWeight: 700, textDecoration: "underline" }}>
-                {vendorOwner}
-              </div>
+              <div style={nameStyle}>{vendorOwner}</div>
               <div>Direktur</div>
             </td>
-            <td style={{ width: "50%", textAlign: "center", padding: "0 8px" }}>
+            <td
+              style={{
+                width: "50%",
+                textAlign: "center",
+                padding: "0 8px",
+                verticalAlign: "top",
+              }}
+            >
+              <div>Pelaksana,</div>
+              <div style={{ height: "16px" }} />
               <div style={{ height: "64px" }} />
-              <div style={{ fontWeight: 700, textDecoration: "underline" }}>
-                {principalName}
-              </div>
-              <div>Pelaksana</div>
+              <div style={nameStyle}>{principalName}</div>
               <div>NIP. {principalNip}</div>
             </td>
           </tr>
         </tbody>
       </table>
+
+      {/* ============================================================ */}
+      {/* PAGE BREAK → PAGE 3: TANDA PEMBAYARAN                         */}
+      {/* ============================================================ */}
+      <div style={pageBreakStyle} />
+
+      {/* === Info block (borderless 2-col table, top of page 3) === */}
+      <div className="mb-4">
+        <table style={borderlessTableStyle}>
+          <tbody>
+            <tr>
+              <td style={{ width: "50%", padding: "2px 4px 2px 0" }}>
+                Sumber Anggaran : Dana BOSP {group.tahun}
+              </td>
+              <td style={{ width: "50%", padding: "2px 0 2px 4px" }}>
+                Program : -
+              </td>
+            </tr>
+            <tr>
+              <td style={{ padding: "2px 4px 2px 0" }}>
+                Kas/Pos Tanggal : {formatDate(group.tglBayar)}
+              </td>
+              <td style={{ padding: "2px 0 2px 4px" }}>Kegiatan : -</td>
+            </tr>
+            <tr>
+              <td style={{ padding: "2px 4px 2px 0" }}>
+                Nomor : {orDash(group.noBku)}
+              </td>
+              <td style={{ padding: "2px 0 2px 4px" }}>Kode Rek : -</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* === Title TANDA PEMBAYARAN === */}
+      <div className="text-center mb-5 mt-4">
+        <h1 className="font-bold text-[14px] underline">TANDA PEMBAYARAN</h1>
+      </div>
+
+      {/* === Body block === */}
+      <div className="mb-6 text-[12px] space-y-1 text-justify">
+        <div>Sudah terima dari : Bendahara SMA Negeri 1 Telukdalam</div>
+        <div>Uang sebesar : {formatRupiah(total)}</div>
+        <div>Terbilang : {terbilangText}</div>
+        <div style={{ marginTop: "8px" }}>
+          Nomor Surat persetujuan penyediaan barang
+        </div>
+        <div>dan jasa : {docNumber}</div>
+        <div>Untuk pembayaran : {firstUraian}</div>
+      </div>
+
+      {/* === 3-column borderless signature row (top) === */}
+      <table style={borderlessTableStyle}>
+        <tbody>
+          <tr>
+            {/* Col 1: Mengetahui / Pengurus Barang */}
+            <td
+              style={{
+                width: "33.33%",
+                textAlign: "center",
+                padding: "0 6px",
+                verticalAlign: "top",
+              }}
+            >
+              <div>Mengetahui :</div>
+              <div>Pengurus Barang</div>
+              <div style={{ height: "64px" }} />
+              <div style={nameStyle}>{goodsManagerName}</div>
+              <div>{goodsManagerRank}</div>
+              <div>NIP. {goodsManagerNip}</div>
+            </td>
+            {/* Col 2: Lunas Bayar Oleh / Bendahara */}
+            <td
+              style={{
+                width: "33.33%",
+                textAlign: "center",
+                padding: "0 6px",
+                verticalAlign: "top",
+              }}
+            >
+              <div>Lunas Bayar Oleh :</div>
+              <div>Bendahara SMA Negeri</div>
+              <div>1 Telukdalam</div>
+              <div style={{ height: "64px" }} />
+              <div style={nameStyle}>{treasurerName}</div>
+              <div>{treasurerRank}</div>
+              <div>NIP. {treasurerNip}</div>
+            </td>
+            {/* Col 3: Diterima oleh / Vendor */}
+            <td
+              style={{
+                width: "33.34%",
+                textAlign: "center",
+                padding: "0 6px",
+                verticalAlign: "top",
+              }}
+            >
+              <div>Diterima oleh :</div>
+              <div>{vendorName}</div>
+              <div style={{ height: "64px" }} />
+              <div style={nameStyle}>{vendorOwner}</div>
+              <div>Direktur</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      {/* === Menyetujui / Kepala Sekolah (below, centered) === */}
+      <div className="mt-8 text-center">
+        <div>Menyetujui :</div>
+        <div>Kepala Sekolah SMA Negeri 1 Telukdalam</div>
+        <div style={{ height: "64px" }} />
+        <div style={nameStyle}>{principalName}</div>
+        <div>{principalRank}</div>
+        <div>NIP. {principalNip}</div>
+      </div>
     </div>
   );
 }
