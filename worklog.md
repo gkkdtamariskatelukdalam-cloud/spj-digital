@@ -934,3 +934,38 @@ Stage Summary:
 - Library xlsx terinstall untuk parse Excel server-side
 - Format yang didukung: sheet "Master" dengan 38 kolom (sesuai Excel user)
 - Import berhasil: 780 transaksi + 10 vendor + 110 BPU dari 1 file Excel
+
+---
+Task ID: 11-IMPORT-INFO-RESET
+Agent: Main (Claude)
+Task: Menjelaskan kemana data import masuk + tambah tombol Reset Database + fix data kosong
+
+Work Log:
+- User bertanya: "saat di import data masuk kemana?"
+- Analisa database setelah import: ditemukan 722 transaksi kosong (uraian="0", jumlah=0) yang masuk karena parsing Excel salah
+- Fix API import: parseStr sekarang treat "0" sebagai empty string, skip baris jika tidak ada uraian+namaBarang atau jumlah <= 0
+- Bersihkan database: hapus 722 transaksi kosong, 1 vendor kosong, 1 BPU kosong
+- Database setelah cleanup: 1257 transaksi valid, 9 vendor, 157 BPU
+- Buat API /api/spj/reset-data (POST) untuk reset database (transactions, vendors, BPU) - keeps school, products, letterhead
+- Update komponen ImportExcel:
+  - Tambah info card "Saat import, data masuk ke mana?" dengan 6 cards:
+    - Dashboard (statistik & chart update)
+    - Transaksi (daftar lengkap pengeluaran)
+    - Dokumen SPJ (grup transaksi untuk cetak)
+    - Laporan (rekap & analisa update)
+    - Master Data (vendor & BPU baru)
+    - Database SQLite (file: db/custom.db)
+  - Tambah tombol "Reset Database" di header (warna rose, dengan konfirmasi)
+  - Tambah info "Data telah masuk ke aplikasi!" setelah import berhasil, menampilkan 5 tab tempat data muncul
+- Verifikasi Agent Browser:
+  - Info card "Saat import, data masuk ke mana?" tampil di tab Import Excel
+  - 6 cards: Dashboard, Transaksi, Dokumen SPJ, Laporan, Master Data, Database
+  - Tombol "Reset Database" tampil di header
+  - Tidak ada error, lint clean
+
+Stage Summary:
+- Fix import bug: skip baris kosong dengan nilai "0" (722 baris yang sebelumnya masuk kini di-skip)
+- Tambah info card "Kemana Data Masuk" dengan 6 cards penjelasan
+- Tambah tombol Reset Database untuk hapus semua transaksi/vendor/BPU
+- API reset-data: /api/spj/reset-data (POST, scope: transactions/vendors/bpu/all)
+- Database state: 1257 transaksi valid, 9 vendor, 157 BPU, Rp 1.658.960.400

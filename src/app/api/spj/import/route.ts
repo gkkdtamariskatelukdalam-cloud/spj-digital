@@ -152,11 +152,13 @@ export async function POST(req: Request) {
       return isNaN(num) ? 0 : num;
     }
 
-    // Helper: parse string
+    // Helper: parse string - treats 0, "0", empty as empty string
     function parseStr(val: unknown): string {
       if (val === null || val === undefined) return "";
+      // Numeric 0 or string "0" means empty in this Excel context
+      if (val === 0 || val === "0") return "";
       const str = String(val).trim();
-      if (str === "#N/A" || str === "#N/a" || str === "#n/a") return "";
+      if (str === "" || str === "0" || str === "#N/A" || str === "#N/a" || str === "#n/a" || str === "#REF!") return "";
       return str;
     }
 
@@ -196,9 +198,10 @@ export async function POST(req: Request) {
       const noBku = parseStr(cells[colMap.noBku]);
       const uraian = parseStr(cells[colMap.uraian]);
       const namaBarang = parseStr(cells[colMap.namaBarang]);
+      const jumlah = parseNum(cells[colMap.jumlah]);
 
-      // Skip rows without essential data
-      if (!uraian && !namaBarang && !noPesan) continue;
+      // Skip rows without essential data - need at least uraian OR namaBarang, AND jumlah > 0
+      if ((!uraian && !namaBarang) || jumlah <= 0) continue;
 
       const vendorName = parseStr(cells[colMap.namaToko1]);
       const vendorOwner = parseStr(cells[colMap.direkturToko1]);

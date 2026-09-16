@@ -34,6 +34,11 @@ import {
   Hash,
   Wallet,
   RotateCcw,
+  LayoutDashboard,
+  Receipt,
+  Database,
+  FileText,
+  BarChart3,
 } from "lucide-react";
 import { toast } from "sonner";
 import { formatRupiah } from "@/lib/format";
@@ -79,6 +84,7 @@ export function ImportExcel() {
   const [importLoading, setImportLoading] = useState(false);
   const [importResult, setImportResult] = useState<ImportResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [resetLoading, setResetLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -184,6 +190,38 @@ export function ImportExcel() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
+  const handleResetDatabase = async () => {
+    if (
+      !confirm(
+        "Reset SEMUA data transaksi, vendor, dan BPU? Data sekolah, produk, dan pengaturan KOP tidak akan dihapus. Tindakan ini TIDAK BISA dibatalkan."
+      )
+    )
+      return;
+
+    setResetLoading(true);
+    try {
+      const res = await fetch("/api/spj/reset-data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ scope: "all" }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Gagal reset");
+      toast.success(data.message || "Database berhasil di-reset", {
+        duration: 4000,
+      });
+      // Clear local state
+      setImportResult(null);
+      setPreview(null);
+      setFile(null);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    } catch (e) {
+      toast.error("Gagal reset: " + (e as Error).message);
+    } finally {
+      setResetLoading(false);
+    }
+  };
+
   const downloadTemplate = () => {
     // The template is the user's uploaded file format - let's create a simple guide
     toast.info(
@@ -209,17 +247,128 @@ export function ImportExcel() {
                 Volume, Harga, Toko, dll.
               </CardDescription>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={downloadTemplate}
-              className="h-8 text-xs"
-            >
-              <Download className="h-3 w-3 mr-1" />
-              Info Format
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={downloadTemplate}
+                className="h-8 text-xs"
+              >
+                <Download className="h-3 w-3 mr-1" />
+                Info Format
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleResetDatabase}
+                disabled={resetLoading}
+                className="h-8 text-xs border-rose-300 text-rose-700 hover:bg-rose-50 dark:text-rose-300 dark:hover:bg-rose-950/30"
+              >
+                {resetLoading ? (
+                  <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+                ) : (
+                  <Trash2 className="h-3 w-3 mr-1" />
+                )}
+                Reset Database
+              </Button>
+            </div>
           </div>
         </CardHeader>
+      </Card>
+
+      {/* Info: Kemana Data Masuk */}
+      <Card className="border-l-4 border-l-violet-500">
+        <CardContent className="p-4">
+          <div className="flex items-start gap-3">
+            <DatabaseIcon className="h-5 w-5 text-violet-600 flex-shrink-0 mt-0.5" />
+            <div className="space-y-2">
+              <div>
+                <h3 className="text-sm font-semibold text-violet-700 dark:text-violet-300">
+                  Saat import, data masuk ke mana?
+                </h3>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Data hasil import tersimpan di database dan otomatis muncul
+                  di 5 tab berikut:
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                <div className="flex items-start gap-2 p-2 rounded-md bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800">
+                  <LayoutDashboard className="h-4 w-4 text-rose-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="text-xs font-semibold text-rose-700 dark:text-rose-300">
+                      Dashboard
+                    </div>
+                    <div className="text-[10px] text-muted-foreground">
+                      Total pengeluaran, jumlah transaksi, chart bulanan, top
+                      vendor akan update
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2 p-2 rounded-md bg-violet-50 dark:bg-violet-950/30 border border-violet-200 dark:border-violet-800">
+                  <Receipt className="h-4 w-4 text-violet-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="text-xs font-semibold text-violet-700 dark:text-violet-300">
+                      Transaksi
+                    </div>
+                    <div className="text-[10px] text-muted-foreground">
+                      Daftar lengkap pengeluaran dengan filter bulan, vendor,
+                      status
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2 p-2 rounded-md bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800">
+                  <FileText className="h-4 w-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+                      Dokumen SPJ
+                    </div>
+                    <div className="text-[10px] text-muted-foreground">
+                      Grup transaksi siap untuk cetak Surat Pesanan, BAST,
+                      SHP, SPJ
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2 p-2 rounded-md bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800">
+                  <BarChart3 className="h-4 w-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="text-xs font-semibold text-amber-700 dark:text-amber-300">
+                      Laporan
+                    </div>
+                    <div className="text-[10px] text-muted-foreground">
+                      Rekap bulanan, per vendor, per kategori, status SPJ
+                      update
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2 p-2 rounded-md bg-cyan-50 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-800">
+                  <Database className="h-4 w-4 text-cyan-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="text-xs font-semibold text-cyan-700 dark:text-cyan-300">
+                      Master Data
+                    </div>
+                    <div className="text-[10px] text-muted-foreground">
+                      Vendor baru &amp; kode BPU baru otomatis masuk ke daftar
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2 p-2 rounded-md bg-slate-50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800">
+                  <DatabaseIcon className="h-4 w-4 text-slate-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                      Database (SQLite)
+                    </div>
+                    <div className="text-[10px] text-muted-foreground">
+                      File:{" "}
+                      <code className="font-mono text-[9px]">
+                        db/custom.db
+                      </code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
       </Card>
 
       {/* Upload area */}
@@ -296,39 +445,77 @@ export function ImportExcel() {
 
               {/* Import result */}
               {importResult && (
-                <Alert className="border-emerald-500 bg-emerald-50 dark:bg-emerald-950/30">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                  <AlertTitle className="text-emerald-700 dark:text-emerald-300">
-                    Import Berhasil!
-                  </AlertTitle>
-                  <AlertDescription>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2 text-xs">
-                      <div>
-                        <span className="font-bold text-emerald-700 dark:text-emerald-300">
-                          {importResult.summary.transactionsImported}
-                        </span>{" "}
-                        transaksi
+                <div className="space-y-3">
+                  <Alert className="border-emerald-500 bg-emerald-50 dark:bg-emerald-950/30">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                    <AlertTitle className="text-emerald-700 dark:text-emerald-300">
+                      Import Berhasil!
+                    </AlertTitle>
+                    <AlertDescription>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2 text-xs">
+                        <div>
+                          <span className="font-bold text-emerald-700 dark:text-emerald-300">
+                            {importResult.summary.transactionsImported}
+                          </span>{" "}
+                          transaksi
+                        </div>
+                        <div>
+                          <span className="font-bold text-emerald-700 dark:text-emerald-300">
+                            {importResult.summary.vendorsImported}
+                          </span>{" "}
+                          vendor
+                        </div>
+                        <div>
+                          <span className="font-bold text-emerald-700 dark:text-emerald-300">
+                            {importResult.summary.bpuImported}
+                          </span>{" "}
+                          BPU baru
+                        </div>
+                        <div>
+                          <span className="text-muted-foreground">
+                            {importResult.summary.transactionsSkipped} di-skip
+                          </span>
+                        </div>
                       </div>
-                      <div>
-                        <span className="font-bold text-emerald-700 dark:text-emerald-300">
-                          {importResult.summary.vendorsImported}
-                        </span>{" "}
-                        vendor
+                    </AlertDescription>
+                  </Alert>
+
+                  {/* Where data went */}
+                  <Alert className="border-violet-300 bg-violet-50 dark:bg-violet-950/30">
+                    <DatabaseIcon className="h-4 w-4 text-violet-600" />
+                    <AlertTitle className="text-violet-700 dark:text-violet-300 text-sm">
+                      Data telah masuk ke aplikasi!
+                    </AlertTitle>
+                    <AlertDescription>
+                      <p className="text-xs mt-1 mb-2 text-muted-foreground">
+                        Data hasil import sekarang tersimpan di database dan
+                        muncul di tab berikut:
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs">
+                        <div className="flex items-center gap-1.5">
+                          <LayoutDashboard className="h-3 w-3 text-rose-500" />
+                          <span><b>Dashboard</b> — statistik &amp; chart update</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <Receipt className="h-3 w-3 text-violet-500" />
+                          <span><b>Transaksi</b> — daftar lengkap pengeluaran</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <FileText className="h-3 w-3 text-emerald-500" />
+                          <span><b>Dokumen SPJ</b> — grup transaksi untuk cetak</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <BarChart3 className="h-3 w-3 text-amber-500" />
+                          <span><b>Laporan</b> — rekap &amp; analisa</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <Database className="h-3 w-3 text-cyan-500" />
+                          <span><b>Master Data</b> — vendor &amp; BPU baru</span>
+                        </div>
                       </div>
-                      <div>
-                        <span className="font-bold text-emerald-700 dark:text-emerald-300">
-                          {importResult.summary.bpuImported}
-                        </span>{" "}
-                        BPU baru
-                      </div>
-                      <div>
-                        <span className="text-muted-foreground">
-                          {importResult.summary.transactionsSkipped} di-skip
-                        </span>
-                      </div>
-                    </div>
-                  </AlertDescription>
-                </Alert>
+                    </AlertDescription>
+                  </Alert>
+                </div>
               )}
 
               {/* Actions */}
