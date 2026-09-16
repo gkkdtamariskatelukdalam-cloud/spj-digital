@@ -71,13 +71,14 @@ export async function POST(req: Request) {
       h ? String(h).trim() : ""
     );
 
-    // Map column indices based on headers
+    // Map column indices based on headers - ALL 38 Excel columns
     const colMap: Record<string, number> = {};
     headers.forEach((h, i) => {
       const lower = h.toLowerCase();
-      if (lower.includes("no. surat pesan") || lower === "no. surat pesan")
-        colMap.noPesan = i;
+      if (lower.includes("no. surat pesan")) colMap.noPesan = i;
       else if (lower.includes("no bku")) colMap.noBku = i;
+      else if (lower.includes("kode program")) colMap.kodeProgram = i;
+      else if (lower.includes("kode rekening")) colMap.kodeRekening = i;
       else if (lower.includes("tanggal perencanaan")) colMap.tglPerencanaan = i;
       else if (lower.includes("tanggal pesanan")) colMap.tglPesan = i;
       else if (lower.includes("tanggal bast")) colMap.tglBast = i;
@@ -86,18 +87,28 @@ export async function POST(req: Request) {
       else if (lower.includes("uraian kegiatan")) colMap.uraian = i;
       else if (lower.includes("nama barang")) colMap.namaBarang = i;
       else if (lower === "volume") colMap.volume = i;
-      else if (lower === "satuan") colMap.satuan = i;
+      else if (lower === "satuan" && colMap.satuan === undefined) colMap.satuan = i;
+      else if (lower === "satuan") colMap.satuan2 = i;
+      else if (lower.includes("harga satuan sebelum")) colMap.hargaSatuanSebelumPajak = i;
       else if (lower.includes("harga satuan")) colMap.hargaSatuan = i;
-      else if (lower === "jumlah") colMap.jumlah = i;
-      else if (lower.includes("kategori belanja")) colMap.kategori = i;
-      else if (lower.includes("spesifikasi")) colMap.spesifikasi = i;
+      else if (lower === "jumlah" && colMap.jumlah === undefined) colMap.jumlah = i;
+      else if (lower.includes("jumlah harga sebelum")) colMap.jumlahHargaSebelumPajak = i;
+      else if (lower.includes("kategori belanja")) colMap.kategoriBelanja = i;
+      else if (lower.includes("spesifikasi")) colMap.spesifikasiBarang = i;
       else if (lower.includes("harga toko 1")) colMap.hargaToko1 = i;
-      else if (lower.includes("nama toko 1") || lower === "nama toko 1")
-        colMap.namaToko1 = i;
+      else if (lower.includes("harga toko 2")) colMap.hargaToko2 = i;
+      else if (lower.includes("harga total asli")) colMap.hargaTotalAsli = i;
+      else if (lower.includes("total harga sebelum dpp")) colMap.totalHargaSebelumDPP = i;
+      else if (lower.includes("total harga asli")) colMap.totalHargaAsli = i;
+      else if (lower.includes("nama toko 1")) colMap.namaToko1 = i;
+      else if (lower.includes("nama toko 2")) colMap.namaToko2 = i;
       else if (lower.includes("direktur toko 1")) colMap.direkturToko1 = i;
       else if (lower.includes("alamat toko 1")) colMap.alamatToko1 = i;
-      else if (lower.includes("no hp") || lower.includes("no. hp"))
-        colMap.noHp = i;
+      else if (lower.includes("alamat toko 2")) colMap.alamatToko2 = i;
+      else if (lower.includes("uraian kwitansi")) colMap.uraianKwitansi = i;
+      else if (lower.includes("nama pekerjaan")) colMap.namaPekerjaanKategori = i;
+      else if (lower.includes("alamat surat balasan")) colMap.alamatSuratBalasan = i;
+      else if (lower.includes("no hp") || lower.includes("no. hp")) colMap.noHp = i;
     });
 
     // Parse data rows (starting from row 4, index 3)
@@ -181,15 +192,18 @@ export async function POST(req: Request) {
     // Collect BPU codes
     const bpuSet = new Set<string>();
 
-    // Collect transactions
+    // Collect transactions - ALL Excel columns
     const transactions: Array<{
       noUrut: number | null;
       noPesan: string;
       noBku: string;
       bpuCode: string;
+      kodeProgram: string;
+      kodeRekening: string;
       tglPerencanaan: string | null;
       tglPesan: string | null;
       tglBast: string | null;
+      tglPeriksa: string | null;
       tglBayar: string | null;
       uraian: string;
       namaBarang: string;
@@ -197,7 +211,26 @@ export async function POST(req: Request) {
       satuan: string;
       tarifHarga: number;
       jumlah: number;
-      kategori: string;
+      kategoriBelanja: string;
+      spesifikasiBarang: string;
+      hargaToko1: number | null;
+      hargaToko2: number | null;
+      namaToko1: string;
+      namaToko2: string;
+      direkturToko1: string;
+      alamatToko1: string;
+      alamatToko2: string;
+      uraianKwitansi: string;
+      namaPekerjaanKategori: string;
+      satuan2: string;
+      hargaSatuanSebelumPajak: number | null;
+      jumlahHargaSebelumPajak: number | null;
+      hargaTotalAsli: number | null;
+      totalHargaSebelumDPP: number | null;
+      totalHargaAsli: number | null;
+      alamatSuratBalasan: string;
+      noHp: string;
+      bulan: number | null;
       vendorName: string;
     }> = [];
 
@@ -261,9 +294,12 @@ export async function POST(req: Request) {
         noPesan: noPesan,
         noBku: noBku,
         bpuCode: noBku,
+        kodeProgram: parseStr(cells[colMap.kodeProgram]),
+        kodeRekening: parseStr(cells[colMap.kodeRekening]),
         tglPerencanaan: parseDate(cells[colMap.tglPerencanaan]),
         tglPesan: tglPesan,
         tglBast: tglBast,
+        tglPeriksa: parseDate(cells[colMap.tglPeriksa]),
         tglBayar: tglBayar,
         uraian: uraian,
         namaBarang: namaBarang,
@@ -271,7 +307,26 @@ export async function POST(req: Request) {
         satuan: parseStr(cells[colMap.satuan]),
         tarifHarga: tarifHarga,
         jumlah: jumlah,
-        kategori: parseStr(cells[colMap.kategori]),
+        kategoriBelanja: parseStr(cells[colMap.kategoriBelanja]),
+        spesifikasiBarang: parseStr(cells[colMap.spesifikasiBarang]),
+        hargaToko1: colMap.hargaToko1 !== undefined ? parseNum(cells[colMap.hargaToko1]) || null : null,
+        hargaToko2: colMap.hargaToko2 !== undefined ? parseNum(cells[colMap.hargaToko2]) || null : null,
+        namaToko1: vendorName,
+        namaToko2: parseStr(cells[colMap.namaToko2]),
+        direkturToko1: vendorOwner,
+        alamatToko1: vendorAddress,
+        alamatToko2: parseStr(cells[colMap.alamatToko2]),
+        uraianKwitansi: parseStr(cells[colMap.uraianKwitansi]),
+        namaPekerjaanKategori: parseStr(cells[colMap.namaPekerjaanKategori]),
+        satuan2: parseStr(cells[colMap.satuan2]),
+        hargaSatuanSebelumPajak: colMap.hargaSatuanSebelumPajak !== undefined ? parseNum(cells[colMap.hargaSatuanSebelumPajak]) || null : null,
+        jumlahHargaSebelumPajak: colMap.jumlahHargaSebelumPajak !== undefined ? parseNum(cells[colMap.jumlahHargaSebelumPajak]) || null : null,
+        hargaTotalAsli: colMap.hargaTotalAsli !== undefined ? parseNum(cells[colMap.hargaTotalAsli]) || null : null,
+        totalHargaSebelumDPP: colMap.totalHargaSebelumDPP !== undefined ? parseNum(cells[colMap.totalHargaSebelumDPP]) || null : null,
+        totalHargaAsli: colMap.totalHargaAsli !== undefined ? parseNum(cells[colMap.totalHargaAsli]) || null : null,
+        alamatSuratBalasan: parseStr(cells[colMap.alamatSuratBalasan]),
+        noHp: vendorPhone,
+        bulan: bulan,
         vendorName: vendorName,
       });
     }
@@ -333,24 +388,47 @@ export async function POST(req: Request) {
       await db.transaction.create({
         data: {
           noUrut: tx.noUrut,
-          tglPesan: tx.tglPesan,
           noPesan: tx.noPesan || null,
+          noBku: tx.noBku || null,
+          kodeProgram: tx.kodeProgram || null,
+          kodeRekening: tx.kodeRekening || null,
+          tglPerencanaan: tx.tglPerencanaan,
+          tglPesan: tx.tglPesan,
           tglBast: tx.tglBast,
           noBast: null,
+          tglPeriksa: tx.tglPeriksa,
           tglBayar: tx.tglBayar,
-          noBku: tx.noBku || null,
-          bpuCode: tx.bpuCode || null,
           uraian: tx.uraian || "",
           namaBarang: tx.namaBarang || null,
           volume: tx.volume,
           satuan: tx.satuan || null,
           tarifHarga: tx.tarifHarga,
           jumlah: tx.jumlah,
+          kategoriBelanja: tx.kategoriBelanja || null,
+          spesifikasiBarang: tx.spesifikasiBarang || null,
+          hargaToko1: tx.hargaToko1,
+          hargaToko2: tx.hargaToko2,
+          namaToko1: tx.namaToko1 || null,
+          namaToko2: tx.namaToko2 || null,
+          direkturToko1: tx.direkturToko1 || null,
+          alamatToko1: tx.alamatToko1 || null,
+          alamatToko2: tx.alamatToko2 || null,
+          uraianKwitansi: tx.uraianKwitansi || null,
+          namaPekerjaanKategori: tx.namaPekerjaanKategori || null,
+          satuan2: tx.satuan2 || null,
+          hargaSatuanSebelumPajak: tx.hargaSatuanSebelumPajak,
+          jumlahHargaSebelumPajak: tx.jumlahHargaSebelumPajak,
+          hargaTotalAsli: tx.hargaTotalAsli,
+          totalHargaSebelumDPP: tx.totalHargaSebelumDPP,
+          totalHargaAsli: tx.totalHargaAsli,
+          alamatSuratBalasan: tx.alamatSuratBalasan || null,
+          noHp: tx.noHp || null,
           realisasi: tx.jumlah,
           bulan: tx.bulan,
           tahun: 2025,
           masukBku: tx.tglBayar ? "MASUK BKU" : null,
           status: status,
+          bpuCode: tx.bpuCode || null,
           vendorId: vendorId,
         },
       });

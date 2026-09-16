@@ -1021,3 +1021,129 @@ Stage Summary:
 - Edit dialog untuk melengkapi data draft
 - Add dialog untuk tambah belanja manual
 - Filter by status (draft/pending/lunas) bekerja
+
+---
+Task ID: 13-databelanja-rebuild
+Agent: Sub (Claude - general-purpose)
+Task: Rebuild DataBelanja component with ALL 38 Excel columns + clickable Uraian Kegiatan + sticky left columns
+
+Work Log:
+- Read worklog.md and existing data-belanja.tsx (932 lines, basic 10-column table)
+- Read Transaction type (src/lib/types/spj.ts) - confirmed all 38 columns available
+- Read use-spj.ts hooks - confirmed useTransactions/useUpdateTransaction/useCreateTransaction/useDeleteTransaction/useVendors
+- Read format.ts - confirmed formatRupiah, formatNumber, formatDate, formatDateShort, getMonthName available
+- Read table.tsx - found Table component wraps in overflow-x-auto div, so used raw `<table>` with shadcn-free styled `<th>`/`<td>` for full sticky control
+
+Rebuilt data-belanja.tsx (1642 lines) with:
+
+1. Main table - 37 columns total
+   - Column 1: No (row #) - sticky left-0, z-40 header / z-20 body
+   - Columns 2-10: No. Surat Pesan, No BKU, Kode Program, Kode Rekening, Tgl Perencanaan, Tgl Pesanan, Tgl BAST, Tgl Pemeriksaan, Tgl Bayar
+   - Column 11: Uraian Kegiatan - sticky left-10 (40px), CLICKABLE (cursor-pointer, blue text, hover underline, opens edit dialog)
+   - Columns 12-34: Nama Barang (separate column, NOT merged), Volume, Satuan, Harga Satuan, Jumlah, Kategori Belanja, Spesifikasi Barang, Harga Toko 1, Harga Toko 2, Nama Toko 1, Nama Toko 2, Direktur Toko 1, Alamat Toko 1, Alamat Toko 2, Uraian Kwitansi, Nama Pekerjaan/Kategori, Satuan, Harga Satuan Sebelum Pajak, Jumlah Harga Sebelum Pajak, Harga Total Asli, Total Harga Sebelum DPP, Total Harga Asli, Alamat Surat Balasan, NO HP
+   - Column 36: Status (Draft/Pending/Lunas badge)
+   - Column 37: Aksi (small edit button, far right)
+   - Excel column order preserved exactly as spec
+
+2. Sticky positioning
+   - Sticky header row: thead with sticky top-0 z-30
+   - Sticky No column: sticky left-0 z-40 (header) / z-20 (body)
+   - Sticky Uraian Kegiatan column: sticky left-10 z-40 (header) / z-20 (body)
+   - Used border-separate + border-spacing-0 (instead of border-collapse) for reliable sticky rendering
+   - Draft rows apply bg-amber-50/40 also to sticky cells (so the sticky cell doesn't show white bg while the rest is amber)
+
+3. Formatting
+   - Numeric columns right-aligned, text columns left-aligned, No/Status/Aksi center-aligned
+   - Amounts: formatRupiah() (Rp 1.234.567) for currency fields, formatNumber() for plain numbers
+   - Dates: formatDateShort() -> "06/01/2025"
+   - Empty/null cells: "—" in muted color (text-muted-foreground/40)
+   - Cell component truncates long text with max-w-[260px] truncate and title tooltip
+
+4. Edit dialog (EditBelanjaDialog) - all 34 Excel columns organized in 7 sections
+   - Section "Informasi Pesanan": noPesan, noBku, kodeProgram, kodeRekening
+   - Section "Tanggal": tglPerencanaan, tglPesan, tglBast, tglPeriksa, tglBayar
+   - Section "Belanja": uraian, namaBarang, volume, satuan, tarifHarga, jumlah (auto-computed), kategoriBelanja, spesifikasiBarang
+   - Section "Toko 1": namaToko1, direkturToko1, alamatToko1, noHp, hargaToko1
+   - Section "Toko 2": namaToko2, hargaToko2, alamatToko2
+   - Section "Kwitansi & Lainnya": uraianKwitansi, namaPekerjaanKategori, satuan2, hargaSatuanSebelumPajak, jumlahHargaSebelumPajak, hargaTotalAsli, totalHargaSebelumDPP, totalHargaAsli, alamatSuratBalasan
+   - Section "Status & Vendor": vendorId (Select), bulan (Select), status (Select)
+   - Dialog max-w-5xl with overflow-y-auto for tall content
+   - Field component supports `full` prop for col-span-2/3 (textarea fields)
+   - Save handler: converts "__none__" -> null for vendorId/bulan, parses all numeric strings to numbers, preserves null for empty numeric/date fields
+   - Delete with confirm dialog
+   - Toast notifications via sonner
+
+5. Date handling - toDateInput() helper safely extracts yyyy-mm-dd from ISO strings or null
+   `toDateInput(tx.tglPesan)` instead of `tx.tglPesan && tx.tglPesan.includes("-") ? tx.tglPesan.substring(0,10) : ...`
+
+6. Select component fix - empty selection uses value="__none__" (Radix Select doesn't allow value="")
+   - vendorId: tx.vendorId || "__none__"
+   - bulan: tx.bulan ? String(tx.bulan) : "__none__"
+   - On save: form.vendorId !== "__none__" ? form.vendorId : null
+
+7. Kept existing features
+   - 4 Stats cards (Total, Draft, Pending, Lunas) with color-coded icons
+   - Filter bar (search input, bulan Select, status Select)
+   - AddBelanjaDialog (simpler form with 14 basic fields including kodeProgram/kodeRekening)
+   - Delete with confirmation
+   - Toast notifications via sonner
+   - Footer showing total count and total nilai (formatRupiah)
+
+8. Fixed imports
+   - Removed unused: ScrollArea (replaced with raw div), Table/TableBody/TableCell/TableHead/TableHeader/TableRow (replaced with raw th/td for sticky control), formatDate (replaced with formatDateShort)
+   - Added: formatNumber (for plain number formatting)
+
+Verification:
+- `bun run lint` -> 0 errors (eslint .)
+- `npx tsc --noEmit` -> 0 errors in src/components/spj/data-belanja.tsx (pre-existing errors in examples/websocket, skills/image-edit, skills/stock-analysis-skill, src/app/api/spj/document-groups/route.ts remain unrelated)
+
+Stage Summary:
+- data-belanja.tsx completely rebuilt from 932 -> 1642 lines
+- 37 columns in Excel-matching order (34 Excel + Status + Edit button + row number)
+- Uraian Kegiatan cell CLICKABLE (blue text, hover underline, opens edit dialog)
+- Nama Barang is SEPARATE column (not merged with Uraian)
+- Sticky left: No (left-0) and Uraian Kegiatan (left-10)
+- Sticky header row (top-0)
+- Edit dialog has all 34 Excel fields organized in 7 sections
+- Draft rows highlighted amber (bg also applied to sticky cells for visual consistency)
+- Status badges: Draft (amber), Pending (cyan), Lunas (emerald)
+- Lint clean, TypeScript clean for this file
+
+---
+Task ID: 13-DATABELANJA-REBUILD
+Agent: Main (Claude)
+Task: Rebuild Data Belanja - semua kolom Excel, Uraian Kegiatan clickable, Nama Barang dipisah
+
+Work Log:
+- User minta: 1) data belanja bisa di-edit, 2) tombol edit jangan di kanan tapi klik di Uraian Kegiatan, 3) semua kolom Excel muncul sesuai urutan, Nama Barang dipisah dari Uraian Kegiatan
+- Tambah 20+ field baru ke Prisma schema Transaction model (kodeProgram, kodeRekening, tglPerencanaan, tglPeriksa, kategoriBelanja, spesifikasiBarang, hargaToko1/2, namaToko1/2, direkturToko1, alamatToko1/2, uraianKwitansi, namaPekerjaanKategori, satuan2, hargaSatuanSebelumPajak, jumlahHargaSebelumPajak, hargaTotalAsli, totalHargaSebelumDPP, totalHargaAsli, alamatSuratBalasan, noHp)
+- Push schema ke DB, regenerate Prisma client
+- Update Transaction type di spj.ts dengan semua 38 field
+- Update import API: detect dan store semua 38 kolom Excel
+- Reset DB & re-import: 780 baris masuk dengan semua field terisi
+- Rebuild DataBelanja component (932 → 1642 lines):
+  - Table dengan 36 kolom sesuai urutan Excel (horizontal scroll)
+  - Kolom sticky: No (kiri) dan Uraian Kegiatan (kiri, always visible saat scroll)
+  - Uraian Kegiatan CELL IS CLICKABLE (cursor pointer, blue text, hover underline) - bukan tombol di kanan
+  - Nama Barang adalah SEPARATE COLUMN (tidak digabung dengan Uraian)
+  - Sticky header row
+  - Edit Dialog dengan 7 section: Informasi Pesanan, Tanggal, Belanja, Toko 1, Toko 2, Kwitansi & Lainnya, Status & Vendor
+  - Semua 34 field Excel editable di dialog
+  - Draft rows highlighted amber
+  - Status badge: Draft (amber), Pending (cyan), Lunas (emerald)
+  - Empty cells show "—" in muted color
+  - Numeric columns right-aligned
+- Verifikasi Agent Browser:
+  - 36 column headers muncul dalam urutan Excel yang benar
+  - Uraian Kegiatan cell clickable (cursor:pointer, onclick)
+  - Klik Uraian Kegiatan → edit dialog muncul dengan semua field
+  - Filter "Lunas" menampilkan baris dengan data lengkap (Air Mineral, Perbaikan Jalan, dll)
+  - Nama Barang terpisah dari Uraian Kegiatan
+  - Tidak ada error di console, lint clean
+
+Stage Summary:
+- Database: Transaction model sekarang punya 38 field (semua kolom Excel)
+- Import API: store semua 38 kolom dari Excel
+- DataBelanja component: rebuilt dengan 36 kolom, Uraian clickable, Nama Barang dipisah
+- Edit dialog: 7 section dengan 34 field Excel editable
+- 780 baris data terimport dengan semua field terisi

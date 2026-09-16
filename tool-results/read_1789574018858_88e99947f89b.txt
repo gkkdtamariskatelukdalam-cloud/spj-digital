@@ -1,0 +1,933 @@
+     1→"use client";
+     2→
+     3→import { useState, useMemo } from "react";
+     4→import {
+     5→  Card,
+     6→  CardContent,
+     7→  CardHeader,
+     8→  CardTitle,
+     9→  CardDescription,
+    10→} from "@/components/ui/card";
+    11→import { Badge } from "@/components/ui/badge";
+    12→import { Button } from "@/components/ui/button";
+    13→import { ScrollArea } from "@/components/ui/scroll-area";
+    14→import { Input } from "@/components/ui/input";
+    15→import {
+    16→  Select,
+    17→  SelectContent,
+    18→  SelectItem,
+    19→  SelectTrigger,
+    20→  SelectValue,
+    21→} from "@/components/ui/select";
+    22→import {
+    23→  Table,
+    24→  TableBody,
+    25→  TableCell,
+    26→  TableHead,
+    27→  TableHeader,
+    28→  TableRow,
+    29→} from "@/components/ui/table";
+    30→import {
+    31→  Dialog,
+    32→  DialogContent,
+    33→  DialogHeader,
+    34→  DialogTitle,
+    35→  DialogFooter,
+    36→} from "@/components/ui/dialog";
+    37→import { Label } from "@/components/ui/label";
+    38→import { Textarea } from "@/components/ui/textarea";
+    39→import { toast } from "sonner";
+    40→import {
+    41→  ShoppingCart,
+    42→  Search,
+    43→  Plus,
+    44→  Pencil,
+    45→  Trash2,
+    46→  AlertTriangle,
+    47→  CheckCircle2,
+    48→  Clock,
+    49→  FileEdit,
+    50→  Loader2,
+    51→} from "lucide-react";
+    52→import { cn } from "@/lib/utils";
+    53→import {
+    54→  useTransactions,
+    55→  useUpdateTransaction,
+    56→  useDeleteTransaction,
+    57→  useVendors,
+    58→  useCreateTransaction,
+    59→} from "@/hooks/use-spj";
+    60→import type { Transaction } from "@/lib/types/spj";
+    61→import { formatRupiah, formatDate, getMonthName } from "@/lib/format";
+    62→
+    63→export function DataBelanja() {
+    64→  const [search, setSearch] = useState("");
+    65→  const [bulanFilter, setBulanFilter] = useState("all");
+    66→  const [statusFilter, setStatusFilter] = useState("all");
+    67→  const [editingTx, setEditingTx] = useState<Transaction | null>(null);
+    68→  const [showAdd, setShowAdd] = useState(false);
+    69→
+    70→  const bulan = bulanFilter === "all" ? undefined : parseInt(bulanFilter);
+    71→  const status =
+    72→    statusFilter === "all" ? undefined : statusFilter;
+    73→
+    74→  const { data, isLoading, error } = useTransactions({
+    75→    q: search || undefined,
+    76→    bulan,
+    77→    status,
+    78→    limit: 500,
+    79→  });
+    80→
+    81→  const transactions = data?.transactions ?? [];
+    82→
+    83→  // Compute stats
+    84→  const stats = useMemo(() => {
+    85→    const total = transactions.length;
+    86→    const draft = transactions.filter((t) => t.status === "draft").length;
+    87→    const pending = transactions.filter((t) => t.status === "pending").length;
+    88→    const lunas = transactions.filter((t) => t.status === "lunas").length;
+    89→    const totalNilai = transactions.reduce(
+    90→      (s, t) => s + (t.jumlah || 0),
+    91→      0
+    92→    );
+    93→    return { total, draft, pending, lunas, totalNilai };
+    94→  }, [transactions]);
+    95→
+    96→  return (
+    97→    <div className="space-y-4">
+    98→      {/* Header */}
+    99→      <Card className="border-l-4 border-l-violet-500">
+   100→        <CardHeader className="pb-3">
+   101→          <div className="flex items-start justify-between gap-3 flex-wrap">
+   102→            <div className="space-y-1">
+   103→              <CardTitle className="text-xl flex items-center gap-2">
+   104→                <ShoppingCart className="h-5 w-5 text-violet-600" />
+   105→                Data Belanja
+   106→              </CardTitle>
+   107→              <CardDescription className="text-sm">
+   108→                Semua data hasil import Excel - termasuk yang belum lengkap
+   109→                (draft). Lengkapi data draft untuk dipakai di dokumen SPJ.
+   110→              </CardDescription>
+   111→            </div>
+   112→            <Button onClick={() => setShowAdd(true)} size="sm">
+   113→              <Plus className="h-3.5 w-3.5 mr-1" />
+   114→              Tambah Belanja
+   115→            </Button>
+   116→          </div>
+   117→        </CardHeader>
+   118→      </Card>
+   119→
+   120→      {/* Stats */}
+   121→      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+   122→        <StatCard
+   123→          icon={<ShoppingCart className="h-4 w-4" />}
+   124→          label="Total"
+   125→          value={stats.total}
+   126→          color="text-violet-700 dark:text-violet-300"
+   127→          bg="bg-violet-50 dark:bg-violet-950/40"
+   128→        />
+   129→        <StatCard
+   130→          icon={<FileEdit className="h-4 w-4" />}
+   131→          label="Draft (Belum Lengkap)"
+   132→          value={stats.draft}
+   133→          color="text-amber-700 dark:text-amber-300"
+   134→          bg="bg-amber-50 dark:bg-amber-950/40"
+   135→        />
+   136→        <StatCard
+   137→          icon={<Clock className="h-4 w-4" />}
+   138→          label="Pending"
+   139→          value={stats.pending}
+   140→          color="text-cyan-700 dark:text-cyan-300"
+   141→          bg="bg-cyan-50 dark:bg-cyan-950/40"
+   142→        />
+   143→        <StatCard
+   144→          icon={<CheckCircle2 className="h-4 w-4" />}
+   145→          label="Lunas"
+   146→          value={stats.lunas}
+   147→          color="text-emerald-700 dark:text-emerald-300"
+   148→          bg="bg-emerald-50 dark:bg-emerald-950/40"
+   149→        />
+   150→      </div>
+   151→
+   152→      {/* Filters */}
+   153→      <Card>
+   154→        <CardHeader className="pb-2">
+   155→          <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
+   156→            <div className="relative sm:col-span-2">
+   157→              <Search className="absolute left-2.5 top-2 h-4 w-4 text-muted-foreground" />
+   158→              <Input
+   159→                placeholder="Cari uraian, nama barang, no. BKU..."
+   160→                value={search}
+   161→                onChange={(e) => setSearch(e.target.value)}
+   162→                className="pl-9 h-9 text-sm"
+   163→              />
+   164→            </div>
+   165→            <Select value={bulanFilter} onValueChange={setBulanFilter}>
+   166→              <SelectTrigger className="h-9 text-sm">
+   167→                <SelectValue placeholder="Semua Bulan" />
+   168→              </SelectTrigger>
+   169→              <SelectContent>
+   170→                <SelectItem value="all">Semua Bulan</SelectItem>
+   171→                {Array.from({ length: 12 }, (_, i) => (
+   172→                  <SelectItem key={i} value={String(i + 1)}>
+   173→                    {getMonthName(i + 1)}
+   174→                  </SelectItem>
+   175→                ))}
+   176→              </SelectContent>
+   177→            </Select>
+   178→            <Select value={statusFilter} onValueChange={setStatusFilter}>
+   179→              <SelectTrigger className="h-9 text-sm">
+   180→                <SelectValue placeholder="Semua Status" />
+   181→              </SelectTrigger>
+   182→              <SelectContent>
+   183→                <SelectItem value="all">Semua Status</SelectItem>
+   184→                <SelectItem value="draft">
+   185→                  <span className="flex items-center gap-1.5">
+   186→                    <FileEdit className="h-3 w-3 text-amber-600" />
+   187→                    Draft (Belum Lengkap)
+   188→                  </span>
+   189→                </SelectItem>
+   190→                <SelectItem value="pending">
+   191→                  <span className="flex items-center gap-1.5">
+   192→                    <Clock className="h-3 w-3 text-cyan-600" />
+   193→                    Pending
+   194→                  </span>
+   195→                </SelectItem>
+   196→                <SelectItem value="lunas">
+   197→                  <span className="flex items-center gap-1.5">
+   198→                    <CheckCircle2 className="h-3 w-3 text-emerald-600" />
+   199→                    Lunas
+   200→                  </span>
+   201→                </SelectItem>
+   202→              </SelectContent>
+   203→            </Select>
+   204→          </div>
+   205→        </CardHeader>
+   206→        <CardContent className="p-0">
+   207→          {isLoading ? (
+   208→            <div className="flex items-center justify-center py-12">
+   209→              <Loader2 className="h-6 w-6 animate-spin text-violet-600" />
+   210→              <span className="ml-2 text-sm text-muted-foreground">
+   211→                Memuat data belanja...
+   212→              </span>
+   213→            </div>
+   214→          ) : error ? (
+   215→            <div className="p-6 text-center text-sm text-rose-600">
+   216→              <AlertTriangle className="h-5 w-5 mx-auto mb-2" />
+   217→              Gagal memuat data: {error.message}
+   218→            </div>
+   219→          ) : transactions.length === 0 ? (
+   220→            <div className="p-12 text-center">
+   221→              <ShoppingCart className="h-10 w-10 text-muted-foreground/40 mx-auto mb-3" />
+   222→              <p className="text-sm font-medium">Belum ada data belanja</p>
+   223→              <p className="text-xs text-muted-foreground mt-1">
+   224→                Import Excel atau tambah manual untuk mulai
+   225→              </p>
+   226→            </div>
+   227→          ) : (
+   228→            <ScrollArea className="h-[600px]">
+   229→              <Table>
+   230→                <TableHeader className="sticky top-0 bg-card z-10">
+   231→                  <TableRow>
+   232→                    <TableHead className="w-10 text-xs">No</TableHead>
+   233→                    <TableHead className="w-20 text-xs">No. BKU</TableHead>
+   234→                    <TableHead className="w-32 text-xs">Tanggal</TableHead>
+   235→                    <TableHead className="text-xs min-w-[200px]">Uraian / Nama Barang</TableHead>
+   236→                    <TableHead className="w-20 text-xs">Volume</TableHead>
+   237→                    <TableHead className="w-28 text-xs">Harga</TableHead>
+   238→                    <TableHead className="w-32 text-xs">Jumlah</TableHead>
+   239→                    <TableHead className="w-32 text-xs">Vendor</TableHead>
+   240→                    <TableHead className="w-24 text-xs">Status</TableHead>
+   241→                    <TableHead className="w-16 text-xs">Aksi</TableHead>
+   242→                  </TableRow>
+   243→                </TableHeader>
+   244→                <TableBody>
+   245→                  {transactions.map((tx, i) => (
+   246→                    <BelanjaRow
+   247→                      key={tx.id}
+   248→                      tx={tx}
+   249→                      index={i + 1}
+   250→                      onEdit={() => setEditingTx(tx)}
+   251→                    />
+   252→                  ))}
+   253→                </TableBody>
+   254→              </Table>
+   255→            </ScrollArea>
+   256→          )}
+   257→        </CardContent>
+   258→      </Card>
+   259→
+   260→      {transactions.length > 0 && (
+   261→        <div className="text-xs text-muted-foreground text-center">
+   262→          Menampilkan {transactions.length} data belanja · Total Nilai:{" "}
+   263→          <span className="font-mono font-bold text-rose-700 dark:text-rose-300">
+   264→            {formatRupiah(stats.totalNilai)}
+   265→          </span>
+   266→        </div>
+   267→      )}
+   268→
+   269→      {/* Edit Dialog */}
+   270→      {editingTx && (
+   271→        <EditBelanjaDialog
+   272→          tx={editingTx}
+   273→          onClose={() => setEditingTx(null)}
+   274→        />
+   275→      )}
+   276→
+   277→      {/* Add Dialog */}
+   278→      {showAdd && <AddBelanjaDialog onClose={() => setShowAdd(false)} />}
+   279→    </div>
+   280→  );
+   281→}
+   282→
+   283→function BelanjaRow({
+   284→  tx,
+   285→  index,
+   286→  onEdit,
+   287→}: {
+   288→  tx: Transaction;
+   289→  index: number;
+   290→  onEdit: () => void;
+   291→}) {
+   292→  const isDraft = tx.status === "draft";
+   293→  const isLunas = tx.status === "lunas";
+   294→
+   295→  // Check what's missing
+   296→  const missing = [];
+   297→  if (!tx.uraian) missing.push("uraian");
+   298→  if (!tx.namaBarang) missing.push("namaBarang");
+   299→  if (!tx.volume) missing.push("volume");
+   300→  if (!tx.tarifHarga) missing.push("harga");
+   301→  if (!tx.tglPesan) missing.push("tglPesan");
+   302→  if (!tx.vendorId) missing.push("vendor");
+   303→
+   304→  return (
+   305→    <TableRow
+   306→      className={cn(
+   307→        "hover:bg-muted/40",
+   308→        isDraft && "bg-amber-50/40 dark:bg-amber-950/10"
+   309→      )}
+   310→    >
+   311→      <TableCell className="text-xs font-mono text-muted-foreground">
+   312→        {index}
+   313→      </TableCell>
+   314→      <TableCell className="text-xs font-mono">
+   315→        {tx.noBku || <span className="text-muted-foreground/40">—</span>}
+   316→      </TableCell>
+   317→      <TableCell className="text-xs">
+   318→        {tx.tglPesan ? (
+   319→          formatDate(tx.tglPesan)
+   320→        ) : (
+   321→          <span className="text-muted-foreground/40">—</span>
+   322→        )}
+   323→      </TableCell>
+   324→      <TableCell className="text-xs">
+   325→        <div className="font-medium truncate max-w-[200px]" title={tx.uraian}>
+   326→          {tx.uraian || <span className="text-muted-foreground/40 italic">Belum diisi</span>}
+   327→        </div>
+   328→        {tx.namaBarang && (
+   329→          <div className="text-[10px] text-muted-foreground truncate max-w-[200px]">
+   330→            {tx.namaBarang}
+   331→          </div>
+   332→        )}
+   333→      </TableCell>
+   334→      <TableCell className="text-xs font-mono text-center">
+   335→        {tx.volume > 0 ? (
+   336→          `${tx.volume} ${tx.satuan || ""}`
+   337→        ) : (
+   338→          <span className="text-muted-foreground/40">—</span>
+   339→        )}
+   340→      </TableCell>
+   341→      <TableCell className="text-xs font-mono text-right">
+   342→        {tx.tarifHarga > 0 ? (
+   343→          formatRupiah(tx.tarifHarga)
+   344→        ) : (
+   345→          <span className="text-muted-foreground/40">—</span>
+   346→        )}
+   347→      </TableCell>
+   348→      <TableCell className="text-xs font-mono text-right font-semibold">
+   349→        {tx.jumlah > 0 ? (
+   350→          <span className="text-rose-700 dark:text-rose-300">
+   351→            {formatRupiah(tx.jumlah)}
+   352→          </span>
+   353→        ) : (
+   354→          <span className="text-muted-foreground/40">—</span>
+   355→        )}
+   356→      </TableCell>
+   357→      <TableCell className="text-xs">
+   358→        {tx.vendor?.name || (
+   359→          <span className="text-muted-foreground/40">—</span>
+   360→        )}
+   361→      </TableCell>
+   362→      <TableCell>
+   363→        {isDraft ? (
+   364→          <Badge
+   365→            variant="outline"
+   366→            className="text-[9px] border-amber-400 text-amber-700 dark:text-amber-300"
+   367→            title={`Belum lengkap: ${missing.join(", ")}`}
+   368→          >
+   369→            <FileEdit className="h-2.5 w-2.5 mr-0.5" />
+   370→            Draft
+   371→          </Badge>
+   372→        ) : isLunas ? (
+   373→          <Badge
+   374→            variant="outline"
+   375→            className="text-[9px] border-emerald-400 text-emerald-700 dark:text-emerald-300"
+   376→          >
+   377→            <CheckCircle2 className="h-2.5 w-2.5 mr-0.5" />
+   378→            Lunas
+   379→          </Badge>
+   380→        ) : (
+   381→          <Badge
+   382→            variant="outline"
+   383→            className="text-[9px] border-cyan-400 text-cyan-700 dark:text-cyan-300"
+   384→          >
+   385→            <Clock className="h-2.5 w-2.5 mr-0.5" />
+   386→            Pending
+   387→          </Badge>
+   388→        )}
+   389→      </TableCell>
+   390→      <TableCell>
+   391→        <Button
+   392→          variant="ghost"
+   393→          size="sm"
+   394→          onClick={onEdit}
+   395→          className="h-7 w-7 p-0"
+   396→          title={isDraft ? "Lengkapi data" : "Edit data"}
+   397→        >
+   398→          <Pencil className="h-3 w-3" />
+   399→        </Button>
+   400→      </TableCell>
+   401→    </TableRow>
+   402→  );
+   403→}
+   404→
+   405→function EditBelanjaDialog({
+   406→  tx,
+   407→  onClose,
+   408→}: {
+   409→  tx: Transaction;
+   410→  onClose: () => void;
+   411→}) {
+   412→  const updateMutation = useUpdateTransaction();
+   413→  const deleteMutation = useDeleteTransaction();
+   414→  const { data: vendorsData } = useVendors();
+   415→  const vendors = vendorsData?.items ?? [];
+   416→
+   417→  const [form, setForm] = useState({
+   418→    noBku: tx.noBku || "",
+   419→    noPesan: tx.noPesan || "",
+   420→    tglPesan: tx.tglPesan && tx.tglPesan.includes("-")
+   421→      ? tx.tglPesan.substring(0, 10)
+   422→      : tx.tglPesan || "",
+   423→    tglBast: tx.tglBast && tx.tglBast.includes("-")
+   424→      ? tx.tglBast.substring(0, 10)
+   425→      : tx.tglBast || "",
+   426→    tglBayar: tx.tglBayar && tx.tglBayar.includes("-")
+   427→      ? tx.tglBayar.substring(0, 10)
+   428→      : tx.tglBayar || "",
+   429→    uraian: tx.uraian || "",
+   430→    namaBarang: tx.namaBarang || "",
+   431→    volume: String(tx.volume || 0),
+   432→    satuan: tx.satuan || "",
+   433→    tarifHarga: String(tx.tarifHarga || 0),
+   434→    vendorId: tx.vendorId || "__none__",
+   435→    bulan: String(tx.bulan || ""),
+   436→    status: tx.status || "pending",
+   437→  });
+   438→
+   439→  const computedJumlah =
+   440→    (parseFloat(form.volume) || 0) * (parseFloat(form.tarifHarga) || 0);
+   441→
+   442→  const handleSave = async () => {
+   443→    try {
+   444→      await updateMutation.mutateAsync({
+   445→        id: tx.id,
+   446→        data: {
+   447→          noBku: form.noBku || null,
+   448→          noPesan: form.noPesan || null,
+   449→          tglPesan: form.tglPesan || null,
+   450→          tglBast: form.tglBast || null,
+   451→          tglBayar: form.tglBayar || null,
+   452→          uraian: form.uraian,
+   453→          namaBarang: form.namaBarang || null,
+   454→          volume: parseFloat(form.volume) || 0,
+   455→          satuan: form.satuan || null,
+   456→          tarifHarga: parseFloat(form.tarifHarga) || 0,
+   457→          jumlah: computedJumlah,
+   458→          realisasi: computedJumlah,
+   459→          vendorId: form.vendorId && form.vendorId !== "__none__" ? form.vendorId : null,
+   460→          bulan: form.bulan ? parseInt(form.bulan) : null,
+   461→          status: form.status,
+   462→          masukBku: form.status === "lunas" ? "MASUK BKU" : null,
+   463→        },
+   464→      });
+   465→      toast.success("Data belanja berhasil diperbarui");
+   466→      onClose();
+   467→    } catch (e) {
+   468→      toast.error("Gagal menyimpan: " + (e as Error).message);
+   469→    }
+   470→  };
+   471→
+   472→  const handleDelete = async () => {
+   473→    if (!confirm("Hapus data belanja ini?")) return;
+   474→    try {
+   475→      await deleteMutation.mutateAsync(tx.id);
+   476→      toast.success("Data berhasil dihapus");
+   477→      onClose();
+   478→    } catch (e) {
+   479→      toast.error("Gagal menghapus: " + (e as Error).message);
+   480→    }
+   481→  };
+   482→
+   483→  return (
+   484→    <Dialog open onOpenChange={onClose}>
+   485→      <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+   486→        <DialogHeader>
+   487→          <DialogTitle className="flex items-center gap-2">
+   488→            <Pencil className="h-4 w-4 text-violet-600" />
+   489→            Edit Data Belanja
+   490→            {tx.status === "draft" && (
+   491→              <Badge variant="outline" className="text-[10px] border-amber-400 text-amber-700 dark:text-amber-300">
+   492→                Draft - Lengkapi data
+   493→              </Badge>
+   494→            )}
+   495→          </DialogTitle>
+   496→        </DialogHeader>
+   497→
+   498→        <div className="grid grid-cols-2 gap-3 py-2">
+   499→          <div>
+   500→            <Label className="text-xs">No. BKU</Label>
+   501→            <Input
+   502→              value={form.noBku}
+   503→              onChange={(e) => setForm({ ...form, noBku: e.target.value })}
+   504→              placeholder="BPU01"
+   505→              className="h-9 text-sm font-mono"
+   506→            />
+   507→          </div>
+   508→          <div>
+   509→            <Label className="text-xs">No. Pesan</Label>
+   510→            <Input
+   511→              value={form.noPesan}
+   512→              onChange={(e) => setForm({ ...form, noPesan: e.target.value })}
+   513→              placeholder="01"
+   514→              className="h-9 text-sm font-mono"
+   515→            />
+   516→          </div>
+   517→          <div className="col-span-2">
+   518→            <Label className="text-xs">Uraian Kegiatan *</Label>
+   519→            <Textarea
+   520→              value={form.uraian}
+   521→              onChange={(e) => setForm({ ...form, uraian: e.target.value })}
+   522→              placeholder="cth. Pengadaan ATK untuk kegiatan KBM"
+   523→              className="text-sm min-h-[60px]"
+   524→            />
+   525→          </div>
+   526→          <div className="col-span-2">
+   527→            <Label className="text-xs">Nama Barang</Label>
+   528→            <Input
+   529→              value={form.namaBarang}
+   530→              onChange={(e) => setForm({ ...form, namaBarang: e.target.value })}
+   531→              placeholder="cth. Kertas HVS A4 80gsm"
+   532→              className="h-9 text-sm"
+   533→            />
+   534→          </div>
+   535→          <div>
+   536→            <Label className="text-xs">Volume</Label>
+   537→            <Input
+   538→              type="number"
+   539→              value={form.volume}
+   540→              onChange={(e) => setForm({ ...form, volume: e.target.value })}
+   541→              className="h-9 text-sm font-mono"
+   542→            />
+   543→          </div>
+   544→          <div>
+   545→            <Label className="text-xs">Satuan</Label>
+   546→            <Input
+   547→              value={form.satuan}
+   548→              onChange={(e) => setForm({ ...form, satuan: e.target.value })}
+   549→              placeholder="rim, dus, buah"
+   550→              className="h-9 text-sm"
+   551→            />
+   552→          </div>
+   553→          <div>
+   554→            <Label className="text-xs">Harga Satuan (Rp)</Label>
+   555→            <Input
+   556→              type="number"
+   557→              value={form.tarifHarga}
+   558→              onChange={(e) => setForm({ ...form, tarifHarga: e.target.value })}
+   559→              className="h-9 text-sm font-mono"
+   560→            />
+   561→          </div>
+   562→          <div>
+   563→            <Label className="text-xs">Jumlah (auto)</Label>
+   564→            <Input
+   565→              value={formatRupiah(computedJumlah)}
+   566→              readOnly
+   567→              className="h-9 text-sm font-mono bg-muted/50 font-bold text-rose-700 dark:text-rose-300"
+   568→            />
+   569→          </div>
+   570→          <div>
+   571→            <Label className="text-xs">Vendor</Label>
+   572→            <Select
+   573→              value={form.vendorId}
+   574→              onValueChange={(v) => setForm({ ...form, vendorId: v })}
+   575→            >
+   576→              <SelectTrigger className="h-9 text-sm">
+   577→                <SelectValue placeholder="Pilih vendor" />
+   578→              </SelectTrigger>
+   579→              <SelectContent>
+   580→                <SelectItem value="__none__">— Tidak ada —</SelectItem>
+   581→                {vendors.map((v) => (
+   582→                  <SelectItem key={v.id} value={v.id}>
+   583→                    {v.name}
+   584→                  </SelectItem>
+   585→                ))}
+   586→              </SelectContent>
+   587→            </Select>
+   588→          </div>
+   589→          <div>
+   590→            <Label className="text-xs">Bulan</Label>
+   591→            <Select
+   592→              value={form.bulan}
+   593→              onValueChange={(v) => setForm({ ...form, bulan: v })}
+   594→            >
+   595→              <SelectTrigger className="h-9 text-sm">
+   596→                <SelectValue placeholder="Pilih bulan" />
+   597→              </SelectTrigger>
+   598→              <SelectContent>
+   599→                <SelectItem value="__none__">— Tidak ada —</SelectItem>
+   600→                {Array.from({ length: 12 }, (_, i) => (
+   601→                  <SelectItem key={i} value={String(i + 1)}>
+   602→                    {getMonthName(i + 1)}
+   603→                  </SelectItem>
+   604→                ))}
+   605→              </SelectContent>
+   606→            </Select>
+   607→          </div>
+   608→          <div>
+   609→            <Label className="text-xs">Tgl Pesan</Label>
+   610→            <Input
+   611→              type="date"
+   612→              value={form.tglPesan}
+   613→              onChange={(e) => setForm({ ...form, tglPesan: e.target.value })}
+   614→              className="h-9 text-sm"
+   615→            />
+   616→          </div>
+   617→          <div>
+   618→            <Label className="text-xs">Tgl BAST</Label>
+   619→            <Input
+   620→              type="date"
+   621→              value={form.tglBast}
+   622→              onChange={(e) => setForm({ ...form, tglBast: e.target.value })}
+   623→              className="h-9 text-sm"
+   624→            />
+   625→          </div>
+   626→          <div>
+   627→            <Label className="text-xs">Tgl Bayar</Label>
+   628→            <Input
+   629→              type="date"
+   630→              value={form.tglBayar}
+   631→              onChange={(e) => setForm({ ...form, tglBayar: e.target.value })}
+   632→              className="h-9 text-sm"
+   633→            />
+   634→          </div>
+   635→          <div>
+   636→            <Label className="text-xs">Status</Label>
+   637→            <Select
+   638→              value={form.status}
+   639→              onValueChange={(v) => setForm({ ...form, status: v })}
+   640→            >
+   641→              <SelectTrigger className="h-9 text-sm">
+   642→                <SelectValue />
+   643→              </SelectTrigger>
+   644→              <SelectContent>
+   645→                <SelectItem value="draft">Draft (Belum Lengkap)</SelectItem>
+   646→                <SelectItem value="pending">Pending</SelectItem>
+   647→                <SelectItem value="lunas">Lunas</SelectItem>
+   648→              </SelectContent>
+   649→            </Select>
+   650→          </div>
+   651→        </div>
+   652→
+   653→        <DialogFooter className="flex items-center justify-between">
+   654→          <Button
+   655→            variant="outline"
+   656→            size="sm"
+   657→            onClick={handleDelete}
+   658→            className="text-rose-600 border-rose-300 hover:bg-rose-50"
+   659→          >
+   660→            <Trash2 className="h-3.5 w-3.5 mr-1" />
+   661→            Hapus
+   662→          </Button>
+   663→          <div className="flex gap-2">
+   664→            <Button variant="outline" size="sm" onClick={onClose}>
+   665→              Batal
+   666→            </Button>
+   667→            <Button
+   668→              onClick={handleSave}
+   669→              size="sm"
+   670→              disabled={updateMutation.isPending}
+   671→              className="bg-violet-600 hover:bg-violet-700"
+   672→            >
+   673→              {updateMutation.isPending ? (
+   674→                <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />
+   675→              ) : (
+   676→                <CheckCircle2 className="h-3.5 w-3.5 mr-1" />
+   677→              )}
+   678→              Simpan
+   679→            </Button>
+   680→          </div>
+   681→        </DialogFooter>
+   682→      </DialogContent>
+   683→    </Dialog>
+   684→  );
+   685→}
+   686→
+   687→function AddBelanjaDialog({ onClose }: { onClose: () => void }) {
+   688→  const createMutation = useCreateTransaction();
+   689→  const { data: vendorsData } = useVendors();
+   690→  const vendors = vendorsData?.items ?? [];
+   691→
+   692→  const [form, setForm] = useState({
+   693→    noBku: "",
+   694→    noPesan: "",
+   695→    tglPesan: "",
+   696→    uraian: "",
+   697→    namaBarang: "",
+   698→    volume: "0",
+   699→    satuan: "",
+   700→    tarifHarga: "0",
+   701→    vendorId: "__none__",
+   702→    bulan: String(new Date().getMonth() + 1),
+   703→    status: "pending",
+   704→  });
+   705→
+   706→  const computedJumlah =
+   707→    (parseFloat(form.volume) || 0) * (parseFloat(form.tarifHarga) || 0);
+   708→
+   709→  const handleSave = async () => {
+   710→    if (!form.uraian && !form.namaBarang) {
+   711→      toast.error("Isi minimal uraian atau nama barang");
+   712→      return;
+   713→    }
+   714→    try {
+   715→      await createMutation.mutateAsync({
+   716→        noBku: form.noBku || null,
+   717→        noPesan: form.noPesan || null,
+   718→        tglPesan: form.tglPesan || null,
+   719→        uraian: form.uraian,
+   720→        namaBarang: form.namaBarang || null,
+   721→        volume: parseFloat(form.volume) || 0,
+   722→        satuan: form.satuan || null,
+   723→        tarifHarga: parseFloat(form.tarifHarga) || 0,
+   724→        jumlah: computedJumlah,
+   725→        realisasi: computedJumlah,
+   726→        vendorId: form.vendorId && form.vendorId !== "__none__" ? form.vendorId : null,
+   727→        bulan: parseInt(form.bulan),
+   728→        tahun: 2025,
+   729→        status: form.status,
+   730→        masukBku: form.status === "lunas" ? "MASUK BKU" : null,
+   731→      } as Partial<Transaction>);
+   732→      toast.success("Data belanja berhasil ditambahkan");
+   733→      onClose();
+   734→    } catch (e) {
+   735→      toast.error("Gagal menambah: " + (e as Error).message);
+   736→    }
+   737→  };
+   738→
+   739→  return (
+   740→    <Dialog open onOpenChange={onClose}>
+   741→      <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+   742→        <DialogHeader>
+   743→          <DialogTitle className="flex items-center gap-2">
+   744→            <Plus className="h-4 w-4 text-violet-600" />
+   745→            Tambah Data Belanja
+   746→          </DialogTitle>
+   747→        </DialogHeader>
+   748→
+   749→        <div className="grid grid-cols-2 gap-3 py-2">
+   750→          <div>
+   751→            <Label className="text-xs">No. BKU</Label>
+   752→            <Input
+   753→              value={form.noBku}
+   754→              onChange={(e) => setForm({ ...form, noBku: e.target.value })}
+   755→              placeholder="BPU01"
+   756→              className="h-9 text-sm font-mono"
+   757→            />
+   758→          </div>
+   759→          <div>
+   760→            <Label className="text-xs">No. Pesan</Label>
+   761→            <Input
+   762→              value={form.noPesan}
+   763→              onChange={(e) => setForm({ ...form, noPesan: e.target.value })}
+   764→              placeholder="01"
+   765→              className="h-9 text-sm font-mono"
+   766→            />
+   767→          </div>
+   768→          <div className="col-span-2">
+   769→            <Label className="text-xs">Uraian Kegiatan *</Label>
+   770→            <Textarea
+   771→              value={form.uraian}
+   772→              onChange={(e) => setForm({ ...form, uraian: e.target.value })}
+   773→              placeholder="cth. Pengadaan ATK untuk kegiatan KBM"
+   774→              className="text-sm min-h-[60px]"
+   775→            />
+   776→          </div>
+   777→          <div className="col-span-2">
+   778→            <Label className="text-xs">Nama Barang</Label>
+   779→            <Input
+   780→              value={form.namaBarang}
+   781→              onChange={(e) => setForm({ ...form, namaBarang: e.target.value })}
+   782→              placeholder="cth. Kertas HVS A4 80gsm"
+   783→              className="h-9 text-sm"
+   784→            />
+   785→          </div>
+   786→          <div>
+   787→            <Label className="text-xs">Volume</Label>
+   788→            <Input
+   789→              type="number"
+   790→              value={form.volume}
+   791→              onChange={(e) => setForm({ ...form, volume: e.target.value })}
+   792→              className="h-9 text-sm font-mono"
+   793→            />
+   794→          </div>
+   795→          <div>
+   796→            <Label className="text-xs">Satuan</Label>
+   797→            <Input
+   798→              value={form.satuan}
+   799→              onChange={(e) => setForm({ ...form, satuan: e.target.value })}
+   800→              placeholder="rim, dus, buah"
+   801→              className="h-9 text-sm"
+   802→            />
+   803→          </div>
+   804→          <div>
+   805→            <Label className="text-xs">Harga Satuan (Rp)</Label>
+   806→            <Input
+   807→              type="number"
+   808→              value={form.tarifHarga}
+   809→              onChange={(e) => setForm({ ...form, tarifHarga: e.target.value })}
+   810→              className="h-9 text-sm font-mono"
+   811→            />
+   812→          </div>
+   813→          <div>
+   814→            <Label className="text-xs">Jumlah (auto)</Label>
+   815→            <Input
+   816→              value={formatRupiah(computedJumlah)}
+   817→              readOnly
+   818→              className="h-9 text-sm font-mono bg-muted/50 font-bold text-rose-700 dark:text-rose-300"
+   819→            />
+   820→          </div>
+   821→          <div>
+   822→            <Label className="text-xs">Vendor</Label>
+   823→            <Select
+   824→              value={form.vendorId}
+   825→              onValueChange={(v) => setForm({ ...form, vendorId: v })}
+   826→            >
+   827→              <SelectTrigger className="h-9 text-sm">
+   828→                <SelectValue placeholder="Pilih vendor" />
+   829→              </SelectTrigger>
+   830→              <SelectContent>
+   831→                <SelectItem value="__none__">— Tidak ada —</SelectItem>
+   832→                {vendors.map((v) => (
+   833→                  <SelectItem key={v.id} value={v.id}>
+   834→                    {v.name}
+   835→                  </SelectItem>
+   836→                ))}
+   837→              </SelectContent>
+   838→            </Select>
+   839→          </div>
+   840→          <div>
+   841→            <Label className="text-xs">Bulan</Label>
+   842→            <Select
+   843→              value={form.bulan}
+   844→              onValueChange={(v) => setForm({ ...form, bulan: v })}
+   845→            >
+   846→              <SelectTrigger className="h-9 text-sm">
+   847→                <SelectValue />
+   848→              </SelectTrigger>
+   849→              <SelectContent>
+   850→                {Array.from({ length: 12 }, (_, i) => (
+   851→                  <SelectItem key={i} value={String(i + 1)}>
+   852→                    {getMonthName(i + 1)}
+   853→                  </SelectItem>
+   854→                ))}
+   855→              </SelectContent>
+   856→            </Select>
+   857→          </div>
+   858→          <div>
+   859→            <Label className="text-xs">Tgl Pesan</Label>
+   860→            <Input
+   861→              type="date"
+   862→              value={form.tglPesan}
+   863→              onChange={(e) => setForm({ ...form, tglPesan: e.target.value })}
+   864→              className="h-9 text-sm"
+   865→            />
+   866→          </div>
+   867→          <div>
+   868→            <Label className="text-xs">Status</Label>
+   869→            <Select
+   870→              value={form.status}
+   871→              onValueChange={(v) => setForm({ ...form, status: v })}
+   872→            >
+   873→              <SelectTrigger className="h-9 text-sm">
+   874→                <SelectValue />
+   875→              </SelectTrigger>
+   876→              <SelectContent>
+   877→                <SelectItem value="draft">Draft (Belum Lengkap)</SelectItem>
+   878→                <SelectItem value="pending">Pending</SelectItem>
+   879→                <SelectItem value="lunas">Lunas</SelectItem>
+   880→              </SelectContent>
+   881→            </Select>
+   882→          </div>
+   883→        </div>
+   884→
+   885→        <DialogFooter>
+   886→          <Button variant="outline" size="sm" onClick={onClose}>
+   887→            Batal
+   888→          </Button>
+   889→          <Button
+   890→            onClick={handleSave}
+   891→            size="sm"
+   892→            disabled={createMutation.isPending}
+   893→            className="bg-violet-600 hover:bg-violet-700"
+   894→          >
+   895→            {createMutation.isPending ? (
+   896→              <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />
+   897→            ) : (
+   898→              <Plus className="h-3.5 w-3.5 mr-1" />
+   899→            )}
+   900→            Tambah
+   901→          </Button>
+   902→        </DialogFooter>
+   903→      </DialogContent>
+   904→    </Dialog>
+   905→  );
+   906→}
+   907→
+   908→function StatCard({
+   909→  icon,
+   910→  label,
+   911→  value,
+   912→  color,
+   913→  bg,
+   914→}: {
+   915→  icon: React.ReactNode;
+   916→  label: string;
+   917→  value: number;
+   918→  color: string;
+   919→  bg: string;
+   920→}) {
+   921→  return (
+   922→    <div className={cn("rounded-md border px-3 py-2", bg)}>
+   923→      <div className={cn("flex items-center gap-1.5 mb-1", color)}>
+   924→        {icon}
+   925→        <span className="text-[10px] uppercase tracking-wide font-bold">
+   926→          {label}
+   927→        </span>
+   928→      </div>
+   929→      <div className={cn("text-lg font-bold font-mono", color)}>{value}</div>
+   930→    </div>
+   931→  );
+   932→}
+   933→

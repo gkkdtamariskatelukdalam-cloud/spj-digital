@@ -70,24 +70,85 @@ model Bpu {
 model Transaction {
   id            String    @id @default(cuid())
   noUrut        Int?
-  tglPesan      String?   // dd/mm/yyyy or ISO
+  
+  // === Excel columns (in exact order) ===
+  // Col A: No. Surat Pesan
   noPesan       String?
+  // Col B: No BKU
+  noBku         String?
+  // Col C: Kode Program
+  kodeProgram   String?
+  // Col D: Kode Rekening
+  kodeRekening  String?
+  // Col E: Tanggal Perencanaan
+  tglPerencanaan String?
+  // Col F: Tanggal Pesanan
+  tglPesan      String?
+  // Col G: Tanggal BAST
   tglBast       String?
   noBast        String?
+  // Col H: Tanggal Pemeriksaan
+  tglPeriksa    String?
+  // Col I: Tanggal Bayar
   tglBayar      String?
-  noBku         String?
-  bpuCode       String?
+  // Col J: Uraian Kegiatan
   uraian        String
+  // Col K: Nama Barang
   namaBarang    String?
+  // Col L: Volume
   volume        Float     @default(0)
+  // Col M: Satuan
   satuan        String?
+  // Col N: Harga Satuan
   tarifHarga    Float     @default(0)
+  // Col O: Jumlah
   jumlah        Float     @default(0)
+  // Col P: Kategori Belanja
+  kategoriBelanja String?
+  // Col Q: Spesifikasi Barang
+  spesifikasiBarang String?
+  // Col R: Harga Toko 1
+  hargaToko1    Float?
+  // Col S: Harga Toko 2
+  hargaToko2    Float?
+  // Col T: Nama Toko 1 (stored raw text, also linked to Vendor)
+  namaToko1     String?
+  // Col U: Nama Toko 2
+  namaToko2     String?
+  // Col V: Direktur Toko 1
+  direkturToko1 String?
+  // Col W: Alamat Toko 1
+  alamatToko1  String?
+  // Col X: Alamat Toko 2
+  alamatToko2  String?
+  // Col Y: Uraian Kwitansi
+  uraianKwitansi String?
+  // Col Z: Nama Pekerjaan / Kategori
+  namaPekerjaanKategori String?
+  // Col AA: Satuan (second)
+  satuan2      String?
+  // Col AB: Harga Satuan sebelum pajak
+  hargaSatuanSebelumPajak Float?
+  // Col AC: Jumlah Harga Sebelum Pajak
+  jumlahHargaSebelumPajak Float?
+  // Col AD: Harga Total Asli
+  hargaTotalAsli Float?
+  // Col AE: Total Harga Sebelum DPP
+  totalHargaSebelumDPP Float?
+  // Col AF: Total Harga Asli
+  totalHargaAsli Float?
+  // Col AG: Alamat Surat Balasan Toko
+  alamatSuratBalasan String?
+  // Col AH: NO HP
+  noHp         String?
+  
+  // === Computed/derived fields ===
   realisasi     Float     @default(0)
-  bulan         Int?      // 1-12
+  bulan         Int?
   tahun         Int       @default(2025)
   masukBku      String?
   status        String    @default("lunas") // lunas, pending, draft
+  bpuCode       String?
   vendorId      String?
   vendor        Vendor?   @relation(fields: [vendorId], references: [id])
   documents     Document[]
