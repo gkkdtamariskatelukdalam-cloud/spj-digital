@@ -31,9 +31,15 @@ import {
   CalendarDays,
   Store,
   Hash,
+  CheckCircle2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useDocumentGroups, useSchool } from "@/hooks/use-spj";
+import {
+  useDocumentGroups,
+  useSchool,
+  useAllPrintStatuses,
+  useMarkPrinted,
+} from "@/hooks/use-spj";
 import { formatRupiah, formatDate, getMonthName } from "@/lib/format";
 import type { DocumentGroup } from "@/lib/types/spj";
 
@@ -140,9 +146,12 @@ export function Documents() {
   const bulan = bulanFilter === "all" ? undefined : parseInt(bulanFilter);
   const groupsQ = useDocumentGroups(bulan, search || undefined);
   const schoolQ = useSchool();
+  const printStatusQ = useAllPrintStatuses();
+  const markPrintedMutation = useMarkPrinted();
 
   const groups = groupsQ.data?.groups ?? [];
   const school = schoolQ.data?.item ?? null;
+  const printStatuses = printStatusQ.data?.allStatuses ?? {};
   const selectedGroup = useMemo(
     () => groups.find((g) => g.key === selectedKey) ?? null,
     [groups, selectedKey]
@@ -153,6 +162,10 @@ export function Documents() {
       toast.error("Pilih dokumen terlebih dahulu");
       return;
     }
+    // Mark document as printed
+    const gKey = selectedGroup.noPesan || selectedGroup.noBku || selectedGroup.key;
+    markPrintedMutation.mutate({ groupKey: gKey, docType });
+    
     window.print();
   };
 
@@ -236,6 +249,7 @@ export function Documents() {
                         key={g.key}
                         group={g}
                         active={selectedKey === g.key}
+                        printStatuses={printStatuses}
                         onClick={() => setSelectedKey(g.key)}
                       />
                     ))}
@@ -258,32 +272,41 @@ export function Documents() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
-                {DOC_TYPES.map((dt) => (
-                  <button
-                    key={dt.id}
-                    onClick={() => setDocType(dt.id)}
-                    disabled={!selectedGroup}
-                    className={cn(
-                      "text-left rounded-md border px-2.5 py-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed",
-                      docType === dt.id
-                        ? dt.bg + " " + dt.color
-                        : "border-border hover:bg-muted/50"
-                    )}
-                  >
-                    <div className="flex items-center gap-1 mb-1">
-                      {dt.icon}
-                      <span className="text-[9px] font-mono font-bold uppercase tracking-wide">
-                        {dt.short}
-                      </span>
-                    </div>
-                    <div className="text-[11px] font-semibold leading-tight">
-                      {dt.label}
-                    </div>
-                    <div className="text-[9px] text-muted-foreground mt-0.5 line-clamp-1">
-                      {dt.desc}
-                    </div>
-                  </button>
-                ))}
+                {DOC_TYPES.map((dt) => {
+                  const gKey = selectedGroup?.noPesan || selectedGroup?.noBku || selectedGroup?.key || "";
+                  const isDocPrinted = printStatuses[gKey]?.[dt.id]?.printed === true;
+                  
+                  return (
+                    <button
+                      key={dt.id}
+                      onClick={() => setDocType(dt.id)}
+                      disabled={!selectedGroup}
+                      className={cn(
+                        "text-left rounded-md border px-2.5 py-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed relative",
+                        docType === dt.id
+                          ? dt.bg + " " + dt.color
+                          : "border-border hover:bg-muted/50"
+                      )}
+                    >
+                      <div className="flex items-center gap-1 mb-1">
+                        {dt.icon}
+                        <span className="text-[9px] font-mono font-bold uppercase tracking-wide">
+                          {dt.short}
+                        </span>
+                        {/* Print status indicator */}
+                        {isDocPrinted && (
+                          <CheckCircle2 className="h-2.5 w-2.5 text-emerald-500 ml-auto" />
+                        )}
+                      </div>
+                      <div className="text-[11px] font-semibold leading-tight">
+                        {dt.label}
+                      </div>
+                      <div className="text-[9px] text-muted-foreground mt-0.5 line-clamp-1">
+                        {isDocPrinted ? "Sudah dicetak" : dt.desc}
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             </CardContent>
           </Card>
@@ -374,15 +397,33 @@ export function Documents() {
   );
 }
 
+// Doc IDs for print status check
+const DOC_IDS = [
+  "surat-pesanan",
+  "dokumen-pembanding",
+  "dokumen-rencana",
+  "surat-hasil-pemeriksaan",
+  "berita-acara-serah-terima",
+  "surat-penawaran-toko",
+  "surat-pertanggungjawaban",
+];
+
 function GroupButton({
   group: g,
   active,
+  printStatuses,
   onClick,
 }: {
   group: DocumentGroup;
   active: boolean;
+  printStatuses: Record<string, Record<string, { printed: boolean; printedAt: string }>>;
   onClick: () => void;
 }) {
+  const gKey = g.noPesan || g.noBku || g.key;
+  const groupStatuses = printStatuses[gKey] || {};
+  const printedCount = DOC_IDS.filter((d) => groupStatuses[d]?.printed).length;
+  const totalCount = DOC_IDS.length;
+  
   return (
     <button
       onClick={onClick}
@@ -409,6 +450,27 @@ function GroupButton({
             </span>
           )}
         </div>
+        {/* Print status badge */}
+        <span
+          className={cn(
+            "text-[8px] font-mono px-1 py-0.5 rounded",
+            printedCount === totalCount
+              ? "bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300"
+              : printedCount > 0
+              ? "bg-amber-100 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300"
+              : "bg-muted text-muted-foreground"
+          )}
+          title={`${printedCount}/${totalCount} dokumen sudah dicetak`}
+        >
+          {printedCount === totalCount ? (
+            <span className="flex items-center gap-0.5">
+              <CheckCircle2 className="h-2 w-2" />
+              {printedCount}/{totalCount}
+            </span>
+          ) : (
+            `${printedCount}/${totalCount}`
+          )}
+        </span>
         <ChevronRight
           className={cn(
             "h-3 w-3 flex-shrink-0",

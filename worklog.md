@@ -1374,3 +1374,43 @@ Stage Summary:
 - Import ulang file yang sama → semua di-update, tidak duplikat
 - Barang sama di BPU berbeda → tetap masuk sebagai transaksi terpisah
 - UI menampilkan: "X transaksi baru" + "Y diperbarui"
+
+---
+Task ID: 19-PRINT-STATUS-IN-DOCUMENTS
+Agent: Main (Claude)
+Task: Tambah tracking status cetak di tab Dokumen SPJ (komponen Documents)
+
+Work Log:
+- User ingin fitur tracking status cetak juga ada di tab "Dokumen SPJ", bukan hanya di Data Belanja
+- Update komponen Documents (documents.tsx):
+  - Import useAllPrintStatuses, useMarkPrinted dari hooks
+  - Import CheckCircle2 dari lucide
+  - Tambah useAllPrintStatuses dan useMarkPrinted di komponen Documents
+  - Update handlePrint: mark dokumen as printed sebelum window.print()
+  - Pass printStatuses ke GroupButton
+- Update GroupButton:
+  - Tambah prop printStatuses
+  - Hitung printedCount/totalCount (X/7 dokumen sudah dicetak)
+  - Badge status: 
+    - Hijau dengan ✓ jika semua 7 dokumen sudah dicetak (7/7)
+    - Amber jika sebagian sudah dicetak (1-6/7)
+    - Abu-abu jika belum ada yang dicetak (0/7)
+  - Tooltip: "X/7 dokumen sudah dicetak"
+- Update doc type picker (7 tombol dokumen):
+  - Cek status cetak per dokumen untuk grup yang dipilih
+  - Tampilkan icon ✓ hijau di pojok kanan atas jika dokumen sudah dicetak
+  - Ubah deskripsi: "Sudah dicetak" jika sudah, deskripsi normal jika belum
+- Verifikasi Agent Browser:
+  - GroupButton menampilkan "1/7" untuk #01 (Surat Pesanan sudah dicetak sebelumnya)
+  - GroupButton menampilkan "0/7" untuk pesanan lain (belum ada yang dicetak)
+  - Klik #01 → doc type picker menampilkan "01 PESAN: Sudah dicetak" dengan ✓ hijau
+  - Klik "02 BANDING" → klik "Cetak Dokumen" → status berubah menjadi "Sudah dicetak" dengan ✓
+  - GroupButton #01 update dari "1/7" → "2/7" (auto-refresh via React Query)
+  - Tidak ada error, lint clean
+
+Stage Summary:
+- Tracking status cetak sekarang ada di DUA tempat: Data Belanja DAN Dokumen SPJ
+- GroupButton (sidebar): badge "X/7" dengan warna hijau/amber/abu
+- Doc type picker: ✓ hijau + teks "Sudah dicetak" untuk dokumen yang sudah dicetak
+- Auto-mark saat klik "Cetak Dokumen" di Documents
+- Auto-refresh: status update real-time setelah cetak
