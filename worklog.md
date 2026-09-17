@@ -2197,3 +2197,49 @@ Stage Summary:
 - Struktur 2 cell per row dipertahankan (no internal border between label+colon+value)
 - Solusi: flexbox dengan justify-content: space-between + fixed width
 - Lint clean, semua interaksi terverifikasi via Agent Browser
+
+---
+Task ID: 31-kuitansi-shift-diterima-ke-kanan
+Agent: Main (Claude)
+Task: Geser kolom 'Diterima oleh' pada Kuitansi sedikit ke kanan agar block Kepala Sekolah di bawah bisa terlihat di tengah.
+
+Work Log:
+- User feedback: kolom Diterima oleh perlu digeser sedikit ke kanan agar penandatangan Kepala Sekolah di bawah bisa berada di tengah
+- DOM inspection sebelum perubahan:
+  - Table width: 838px, center: 796
+  - Menyetujui block width: 838px, center: 796 (already centered relative to table)
+  - 3 columns equal: Col 1 (0-33%), Col 2 (33-67%), Col 3 (67-100%)
+  - Lunas Bayar Oleh column center: 796 (same as page center)
+  - Diterima oleh column: starts at left edge of Col 3 (67% of table)
+- User's request interpretation:
+  - Shift Diterima oleh column content right
+  - Create visible gap between Lunas Bayar and Diterima oleh
+  - So Kepala Sekolah (already at center=796) visually aligns with Lunas Bayar column, appearing centered in the visible space
+
+- Solution: tambahkan paddingLeft ke Col 3 (Diterima oleh) dari 8px → 50px
+  - Sebelum: `padding: "8px 0 0 8px"`
+  - Sesudah: `padding: "8px 0 0 50px"`
+  - Menambah 42px left padding → content Diterima oleh bergeser ~42px ke kanan
+
+- `bun run lint` → clean, no errors
+
+- Verifikasi end-to-end dengan Agent Browser:
+  - DOM inspection setelah perubahan:
+    - Lunas Bayar Oleh: leftX=662, rightX=930, centerX=796
+    - Menyetujui (Kepala Sekolah): leftX=377, rightX=1215, centerX=796
+    - Diterima oleh: leftX=988, rightX=1215, centerX=1102
+    - Gap antara Lunas Bayar dan Diterima oleh: 58px
+  - Kepala Sekolah (centerX=796) SAMA dengan Lunas Bayar (centerX=796) → aligned ✅
+  - Diterima oleh digeser ke kanan (start at 988, was at ~930) ✅
+  - VLM visual verification:
+    - "Kolom Diterima oleh sudah digeser ke kanan" ✅
+    - "Ada jarak kosong antara Lunas Bayar Oleh dan Diterima oleh" ✅
+    - "Block Menyetujui/Kepala Sekolah terlihat di tengah halaman" ✅
+    - "Block Kepala Sekolah sejajar dengan kolom Lunas Bayar Oleh" ✅
+
+Stage Summary:
+- Kolom Diterima oleh pada Kuitansi sekarang digeser ~42px ke kanan via paddingLeft 50px (sebelumnya 8px)
+- Block Kepala Sekolah (Menyetujui) tetap di tengah halaman (centerX=796)
+- Kepala Sekolah sekarang visually aligned dengan kolom Lunas Bayar Oleh (centerX=796)
+- Gap antara Lunas Bayar dan Diterima oleh: 58px
+- Lint clean, semua interaksi terverifikasi via Agent Browser

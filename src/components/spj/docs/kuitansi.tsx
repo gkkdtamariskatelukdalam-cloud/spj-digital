@@ -320,13 +320,16 @@ export function Kuitansi({
               <div>{treasurerRank}</div>
               <div>NIP. {treasurerNip}</div>
             </td>
-            {/* Kolom 3: Diterima oleh / Vendor */}
+            {/* Kolom 3: Diterima oleh / Vendor — shifted right with extra
+                left padding so the Kepala Sekolah block below (centered
+                on the page) visually sits in the middle of the available
+                space between the Lunas Bayar column and this column. */}
             <td
               style={{
                 width: "33%",
                 textAlign: "left",
                 verticalAlign: "top",
-                padding: "8px 0 0 8px",
+                padding: "8px 0 0 50px",
                 fontSize: "12px",
               }}
             >
