@@ -8,6 +8,7 @@ import { orDash, schoolAddress, schoolName } from "./_helpers";
 // ============================================================
 // 03RENCANA — Dokumen Perencanaan
 // Entire document is ONE big table (3 cols, 2px outer / 1px inner).
+// After table: Waktu/Lokasi serah terima, Alokasi, Persyaratan, signature rata kanan
 // ============================================================
 
 interface DokumenRencanaProps {
@@ -41,10 +42,22 @@ const subHeaderCellStyle: CSSProperties = {
   fontWeight: 700,
   textAlign: "center",
 };
+const boldStyle: CSSProperties = { fontWeight: 700 };
+const nameStyle: CSSProperties = { fontWeight: 700, textDecoration: "underline" };
+const borderlessTableStyle: CSSProperties = {
+  borderCollapse: "collapse",
+  width: "100%",
+  border: "none",
+};
 
 export function DokumenRencana({ group, school }: DokumenRencanaProps) {
   const itemCount = group.itemCount;
   const items = group.items;
+  const tglPesan = group.tglPesan;
+  const tahun = group.tahun || 2025;
+
+  // First item uraian for "Untuk pembayaran" fallback
+  const firstUraian = items[0]?.uraian || "Pengadaan ATK";
 
   return (
     <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
@@ -80,7 +93,7 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
           <tr>
             <td style={labelCellStyle}>Kategori Barang/Jasa</td>
             <td style={cellStyle} colSpan={2}>
-              Alat Tulis Kantor (ATK)
+              {firstUraian}
             </td>
           </tr>
 
@@ -139,20 +152,67 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
               ))}
             </>
           )}
+
+          {/* Waktu serah terima */}
+          <tr>
+            <td style={labelCellStyle}>Waktu serah terima</td>
+            <td style={cellStyle} colSpan={2}>
+              <span style={boldStyle}>{tglPesan ? formatDate(tglPesan) : "—"}</span>
+            </td>
+          </tr>
+
+          {/* Lokasi serah terima */}
+          <tr>
+            <td style={labelCellStyle}>Lokasi serah terima</td>
+            <td style={cellStyle} colSpan={2}>
+              <span style={boldStyle}>{schoolName(school)}</span>
+            </td>
+          </tr>
+
+          {/* Alokasi Anggaran */}
+          <tr>
+            <td style={labelCellStyle}>Alokasi Anggaran</td>
+            <td style={cellStyle} colSpan={2}>
+              <span style={boldStyle}>Bantuan Operasional Satuan Pendidikan (BOSP) {tahun}</span>
+            </td>
+          </tr>
+
+          {/* Perorangan/Badan Usaha + Memenuhi syarat */}
+          <tr>
+            <td style={labelCellStyle}>
+              Perorangan/Badan Usaha
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              <div>Memenuhi syarat sebagai berikut:</div>
+            </td>
+          </tr>
+
+          {/* Persyaratan penyedia */}
+          <tr>
+            <td style={labelCellStyle}>
+              <span style={boldStyle}>Persyaratan penyedia</span>
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              <div>a. Identitas Penyedia</div>
+              <div>b. NPWP;</div>
+            </td>
+          </tr>
         </tbody>
       </table>
 
-      {/* === Right-aligned date & signature === */}
-      <div className="text-right mt-6 mb-3 text-[12px]">
-        <div>Telukdalam, {formatDate(group.tglPesan)}</div>
-        <div>Pelaksana,</div>
+      {/* === Catatan kaki === */}
+      <div style={{ fontSize: "10px", marginTop: "8px", fontStyle: "italic" }}>
+        Misalnya Buku Teks Utama/Buku Teks Pendamping/Buku Nonteks/Kebutuhan dan
+        Perlengkapan Satuan Pendidikan/Alat Peraga Pendidikan/Komputer dan
+        Aksesoris/Elektronik/Jasa lainnya.
       </div>
 
-      <div className="text-right text-[12px]">
+      {/* === Signature block - RATA KANAN === */}
+      <div style={{ marginTop: "20px", textAlign: "right", fontSize: "12px" }}>
+        <div>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
+        <div>Pelaksana</div>
         <div style={{ height: "56px" }} />
-        <div style={{ fontWeight: 700, textDecoration: "underline" }}>
-          {orDash(school?.principalName)}
-        </div>
+        <div style={nameStyle}>{orDash(school?.principalName)}</div>
         <div>NIP. {orDash(school?.principalNip)}</div>
       </div>
     </div>
