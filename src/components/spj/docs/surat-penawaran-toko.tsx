@@ -77,7 +77,7 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
       {/* Recipient (left-aligned) */}
       <div style={{ marginBottom: "12px", fontSize: "12px", lineHeight: 1.6 }}>
         <div>Kepada Yth.</div>
-        <div>Kepala {schoolNameStr}</div>
+        <div>Kepala SMA Negeri 1 Telukdalam</div>
         <div>Cq. Penanggungjawab Kegiatan</div>
         <div>di</div>
         <div style={{ paddingLeft: "24px" }}>Tempat</div>
