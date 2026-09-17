@@ -2,7 +2,7 @@
 
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate, formatRupiah, terbilang } from "@/lib/format";
-import { capitalize, toRoman } from "@/components/spj/docs/_helpers";
+import { toRoman, titleCase } from "@/components/spj/docs/_helpers";
 
 const tableStyle: React.CSSProperties = {
   borderCollapse: "collapse",
@@ -77,7 +77,7 @@ export function Kuitansi({
   const nomorSurat = `421.3/${noPesan}-P/DB/SMANSATLD/${romanMonth}/${tahun}`;
 
   // Terbilang
-  const terbilangText = capitalize(terbilang(total));
+  const terbilangText = titleCase(terbilang(total));
 
   return (
     <div

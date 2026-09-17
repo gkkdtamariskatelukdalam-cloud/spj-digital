@@ -115,6 +115,21 @@ export function capitalize(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+/**
+ * Title Case — uppercase the first letter of EVERY word.
+ * Used for the Terbilang line on official documents (e.g. Surat Pesanan),
+ * which per the PDF spec renders as "Tujuh Belas Juta Sembilan Ratus Tujuh
+ * Puluh Dua Ribu Rupiah" (every word capitalized).
+ */
+export function titleCase(s: string): string {
+  if (!s) return s;
+  return s
+    .trim()
+    .split(/\s+/)
+    .map((w) => (w.length === 0 ? w : w.charAt(0).toUpperCase() + w.slice(1)))
+    .join(" ");
+}
+
 /** Return `value` if truthy else the placeholder (default "—"). */
 export function orDash(value: string | null | undefined): string {
   return value && value.trim() ? value : "—";

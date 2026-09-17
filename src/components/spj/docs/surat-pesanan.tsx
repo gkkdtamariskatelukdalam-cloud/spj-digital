@@ -5,10 +5,10 @@ import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate, formatNumber, formatRupiah, terbilang } from "@/lib/format";
 import { Letterhead } from "@/components/spj/letterhead";
 import {
-  capitalize,
   estimateCompletionDate,
   groupRomanMonth,
   orDash,
+  titleCase,
 } from "./_helpers";
 
 // ============================================================
@@ -86,7 +86,9 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
       ? items[0].uraian || items[0].namaBarang || "Pengadaan ATK"
       : "Pengadaan ATK";
 
-  const terbilangText = capitalize(terbilang(total));
+  // Terbilang in Title Case per PDF spec (e.g. "Tujuh Belas Juta Sembilan
+  // Ratus Tujuh Puluh Dua Ribu Rupiah" — every word capitalized).
+  const terbilangText = titleCase(terbilang(total));
 
   // Instruction list (spec text, exact)
   const instruksiList = [
@@ -302,7 +304,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
         <table style={tableStyle}>
           <tbody>
             <tr>
-              <td style={{ ...cellStyle, width: "15%" }}>Terbilang</td>
+              <td style={{ ...cellStyle, width: "15%" }}>Terbilang :</td>
               <td style={{ ...cellStyle, fontStyle: "italic" }}>
                 {terbilangText}
               </td>

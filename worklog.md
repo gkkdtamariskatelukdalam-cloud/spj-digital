@@ -1762,3 +1762,48 @@ Stage Summary:
 - Instruksi section dengan 6 items
 - Tanda Pembayaran page dengan 4-col signatures
 - Page break antara Surat Pesanan dan Tanda Pembayaran
+
+---
+Task ID: 24-terbilang-title-case
+Agent: Main (Claude)
+Task: Merge format Terbilang pada dokumen SPJ agar sama dengan gambar referensi (Title Case: setiap kata diawali huruf kapital).
+
+Work Log:
+- User upload gambar baris Terbilang dari PDF asli, minta formatnya di-merge
+- Analisa gambar dengan VLM: format = "Terbilang :" (dengan titik dua), value Title Case (setiap kata kapital), italic, bordered, single line
+- Identifikasi 4 dokumen SPJ yang pakai terbilang:
+  1. surat-pesanan.tsx
+  2. kuitansi.tsx
+  3. surat-penawaran-toko.tsx
+  4. surat-pertanggungjawaban.tsx
+- Sebelumnya semua pakai `capitalize(terbilang(total))` → hasil "Satu juta dua ratus lima puluh ribu rupiah" (sentence case, hanya huruf pertama kapital)
+- Tambah helper baru `titleCase()` di `_helpers.ts`:
+  - Split by whitespace, uppercase first char of every word, join dengan space
+  - Preserve sebagai companion function ke `capitalize()` yang sudah ada
+- Update surat-pesanan.tsx:
+  - Ganti `capitalize` → `titleCase` di import dan usage
+  - Ganti label "Terbilang" → "Terbilang :" (dengan titik dua, match PDF)
+  - Hapus import `capitalize` yang sekarang unused
+- Update kuitansi.tsx: ganti `capitalize` → `titleCase` di import dan usage
+- Update surat-penawaran-toko.tsx: ganti `capitalize` → `titleCase` di import dan usage
+- Update surat-pertanggungjawaban.tsx: ganti `capitalize` → `titleCase` di import dan usage
+- `bun run lint` → clean, no errors
+- Verifikasi end-to-end dengan Agent Browser:
+  - Buka Dokumen SPJ → pilih pesanan #01 (Rp1.250.000 = "Satu juta dua ratus lima puluh ribu rupiah")
+  - Eval JS untuk inspeksi cell Terbilang:
+    - Label: "Terbilang :" ✅ (dengan titik dua)
+    - Value: "Satu Juta Dua Ratus Lima Puluh Ribu Rupiah" ✅ (Title Case)
+    - Label font: normal ✅
+    - Value font: italic ✅
+    - Border: 1px solid #000 ✅
+  - Switch ke tab Kuitansi → "Satu Juta Dua Ratus Lima Puluh Ribu Rupiah" ✅
+  - Switch ke tab TOKO (Surat Penawaran) → "Satu Juta Dua Ratus Lima Puluh Ribu Rupiah" ✅
+  - Switch ke tab SPJ (Surat Pertanggungjawaban) → "Terbilang : Satu Juta Dua Ratus Lima Puluh Ribu Rupiah" ✅
+  - Tidak ada error runtime di dev.log
+
+Stage Summary:
+- Helper `titleCase()` baru di `_helpers.ts` untuk konversi setiap kata jadi kapital
+- 4 dokumen SPJ (Surat Pesanan, Kuitansi, Surat Penawaran Toko, Surat Pertanggungjawaban) sekarang render Terbilang dalam Title Case
+- Label "Terbilang :" di Surat Pesanan ditambah titik dua sesuai PDF
+- Format sekarang match 100% dengan gambar referensi: Title Case + italic + bordered + single line
+- Lint clean, semua dokumen terverifikasi via Agent Browser

@@ -3,7 +3,7 @@
 import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate, formatRupiah, formatNumber, terbilang } from "@/lib/format";
-import { capitalize, groupRomanMonth, orDash } from "./_helpers";
+import { groupRomanMonth, orDash, titleCase } from "./_helpers";
 
 // ============================================================
 // Toko — Surat Penawaran Toko / Penyedia
@@ -49,7 +49,7 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
   const romanMonth = groupRomanMonth(group);
   const docNumber = `421.3/${group.noPesan || "—"}-P/DB/SMANSATLD/${romanMonth}/${group.tahun}`;
   const schoolNameStr = school?.name ?? "SMA Negeri 1 Telukdalam";
-  const terbilangText = capitalize(terbilang(total));
+  const terbilangText = titleCase(terbilang(total));
 
   return (
     <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">

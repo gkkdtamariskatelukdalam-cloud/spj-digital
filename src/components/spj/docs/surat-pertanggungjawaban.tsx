@@ -6,9 +6,9 @@ import { formatDate, formatNumber, terbilang } from "@/lib/format";
 import { Letterhead } from "@/components/spj/letterhead";
 import {
   buildSpjNumber,
-  capitalize,
   orDash,
   pickGroupDate,
+  titleCase,
 } from "./_helpers";
 
 // ============================================================
@@ -146,7 +146,7 @@ export function SuratPertanggungjawaban({
 
       {/* === Terbilang (italic) === */}
       <div className="mb-4 text-[12px] italic">
-        Terbilang : {capitalize(terbilang(total))}
+        Terbilang : {titleCase(terbilang(total))}
       </div>
 
       {/* === Closing paragraph === */}
