@@ -207,13 +207,15 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
         Aksesoris/Elektronik/Jasa lainnya.
       </div>
 
-      {/* === Signature block - RATA KANAN === */}
-      <div style={{ marginTop: "20px", textAlign: "right", fontSize: "12px" }}>
-        <div>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
-        <div>Pelaksana</div>
-        <div style={{ height: "56px" }} />
-        <div style={nameStyle}>{orDash(school?.principalName)}</div>
-        <div>NIP. {orDash(school?.principalNip)}</div>
+      {/* === Signature block - di kanan, teks rata kiri === */}
+      <div style={{ marginTop: "20px", fontSize: "12px", display: "flex", justifyContent: "flex-end" }}>
+        <div style={{ textAlign: "left", width: "250px" }}>
+          <div>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
+          <div>Pelaksana</div>
+          <div style={{ height: "56px" }} />
+          <div style={nameStyle}>{orDash(school?.principalName)}</div>
+          <div>NIP. {orDash(school?.principalNip)}</div>
+        </div>
       </div>
     </div>
   );
