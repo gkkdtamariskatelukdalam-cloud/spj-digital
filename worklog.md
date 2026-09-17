@@ -2243,3 +2243,104 @@ Stage Summary:
 - Kepala Sekolah sekarang visually aligned dengan kolom Lunas Bayar Oleh (centerX=796)
 - Gap antara Lunas Bayar dan Diterima oleh: 58px
 - Lint clean, semua interaksi terverifikasi via Agent Browser
+
+---
+Task ID: 32-auth-user-management
+Agent: Main (Claude)
+Task: Tambah halaman login, pengaturan pengguna, admin manage user (tambah/edit/hapus), dan feature-based access control (admin pilih fitur apa saja yang bisa diakses per user).
+
+Work Log:
+- User minta: (1) halaman login, (2) pengaturan pengguna, (3) admin bisa ubah+tambah user, (4) pilihan fitur per user
+- Konfirmasi user: admin/admin123 default, 2 role (admin/user), logout button + username di top-right, user management di Master Data tab, user bisa edit profil sendiri
+
+**Step 1: Prisma schema + DB push**
+- Tambah model User dengan fields: id, name, username (unique), password (bcrypt hash), role ("admin"|"user"), enabledFeatures (JSON string array), isActive, timestamps
+- `bun run db:push` → sukses
+
+**Step 2: NextAuth.js setup**
+- Install bcryptjs + @types/bcryptjs
+- `src/lib/auth.ts`: NextAuth config dengan CredentialsProvider, JWT session, callbacks untuk persist role/username/enabledFeatures ke token & session
+- Export ALL_FEATURE_KEYS (8 keys: dashboard, data-belanja, transaksi, dokumen, laporan, master-data, letterhead, import-excel) + FEATURE_LABELS + canAccess() helper
+- `src/app/api/auth/[...nextauth]/route.ts`: NextAuth handler (GET + POST)
+- `src/types/next-auth.d.ts`: type augmentation untuk session.user.role/username/enabledFeatures
+- Tambah NEXTAUTH_URL + NEXTAUTH_SECRET ke .env
+
+**Step 3: API routes untuk user management**
+- `src/app/api/users/route.ts`: GET (list all, admin only), POST (create new, admin only, validasi uniqueness + role + features whitelist)
+- `src/app/api/users/[id]/route.ts`: GET (single), PUT (update fields optional), DELETE (guard: tidak bisa hapus admin terakhir atau diri sendiri)
+- `src/app/api/profile/route.ts`: PUT (self-service, butuh currentPassword untuk ganti password, min 6 char)
+
+**Step 4: Seed default admin user**
+- `scripts/seed-admin.ts`: idempotent, create admin/admin123 jika belum ada
+- Run `bunx tsx scripts/seed-admin.ts` → sukses, admin user ter-seed dengan bcrypt hash
+
+**Step 5: SessionProvider + types**
+- Update `src/components/providers.tsx`: combine SessionProvider (NextAuth) + QueryClientProvider (TanStack) jadi satu wrapper `Providers`
+- Update `src/app/layout.tsx`: pakai `<Providers>` (sebelumnya ReactQueryProvider)
+- Type augmentation untuk Session.user
+
+**Step 6: Login modal component**
+- `src/components/auth/login-modal.tsx`: full-screen overlay dengan form (username + password), tombol Masuk, error display, hint default admin/admin123
+- Submit via `signIn("credentials", { redirect: false })` + `window.location.reload()` on success
+
+**Step 7: User menu (top-right)**
+- `src/components/auth/user-menu.tsx`: dropdown dengan:
+  - Display name + @username (truncate)
+  - Role badge (ADMIN=rose, USER=slate) dengan icon
+  - "Profil Saya" button → buka ProfileEditor dialog
+  - "Keluar" button → `signOut({ redirect: false })` + reload
+
+**Step 8: Profile editor modal**
+- `src/components/auth/profile-editor.tsx`: dialog form dengan:
+  - Nama Tampilan (pre-filled)
+  - Username (pre-filled, uniqueness di server)
+  - Ganti Password section (optional): Password Saat Ini + Password Baru + Konfirmasi
+  - Submit ke PUT /api/profile
+  - Reset fields when dialog opens
+
+**Step 9: User management UI (Master Data tab)**
+- `src/components/user-management/user-management.tsx`: tanam di Master Data sebagai tab "Pengguna" (admin only)
+- Tabel list user: nama, username, role badge, fitur yang diakses, status (aktif/nonaktif toggle), tombol Edit + Hapus
+- "Tambah User" button → UserFormDialog
+- UserFormDialog: form create/edit dengan nama, username, password (required untuk create, optional untuk edit), role selector (User/Admin cards), 8 feature checkboxes (only enabled when role=user), status Aktif/Nonaktif
+- Hapus dengan konfirmasi + guard (admin terakhir + diri sendiri)
+- Update MasterData component: import useSession, add Users tab conditional render (only for admin)
+
+**Step 10: Feature-based access control di page.tsx**
+- Update `src/app/page.tsx`:
+  - Wrap dengan `useSession()` untuk dapat session.user
+  - `if (status === "loading")` → loading spinner
+  - `if (status !== "authenticated")` → render LoginModal
+  - Filter navItems via `canAccess(role, enabledFeatures, item.featureKey)` → visibleNavItems
+  - Render hanya visibleNavItems di nav (desktop + mobile)
+  - effectiveView: fallback ke first visible nav if current view tidak diizinkan
+  - UserMenu di top-right (sebelumnya hanya Excel badge)
+
+**Step 11: Verifikasi end-to-end dengan Agent Browser**
+- Restart dev server (proses butuh beberapa kali restart karena agent-browser open kadang kill dev process)
+- Buka http://localhost:3000/ → LoginModal muncul (VLM confirm: judul SPJ Digital, fields Username/Password, tombol Masuk, hint admin/admin123) ✅
+- Login sebagai admin (admin/admin123) → dashboard muncul, nav lengkap 8 tabs, UserMenu "Administrator @admin" terlihat ✅
+- Click Master Data → tab "Pengguna" muncul (admin only) ✅
+- Click Pengguna → UserManagement UI: list dengan admin, "Tambah User" button ✅
+- Click "Tambah User" → form dialog muncul dengan: Nama, Username, Password, Role selector (User/Admin), 8 feature checkboxes, Status (Aktif/Nonaktif) ✅
+- Create user "Bendahara Sekolah" / "bendahara" / "bendahara123" dengan role User + features [Dashboard, Dokumen SPJ] → POST /api/users 200, user baru muncul di list dengan badges "Dashboard Dokumen SPJ" ✅
+- Logout (via user menu dropdown → Keluar → POST /api/auth/signout 200) → halaman kembali ke LoginModal ✅
+- Login sebagai bendahara (bendahara/bendahara123) → dashboard muncul HANYA dengan 2 tabs: Dashboard + Dokumen SPJ (6 tabs lain disembunyikan via feature filtering) ✅
+- User menu menampilkan "Bendahara Sekolah @bendahara" dengan badge USER ✅
+- Click Profil Saya → dialog form muncul dengan fields pre-filled (Nama + Username bendahara) ✅
+- Test API PUT /api/profile dengan currentPassword benar → 200 OK, password berhasil diubah ✅
+
+**Lint & Dev Log:**
+- `bun run lint` → clean, no errors
+- Dev log: tidak ada error fatal (hanya Fast Refresh HMR messages)
+
+Stage Summary:
+- Halaman login: full-screen overlay dengan form username/password, hint default admin/admin123
+- Pengaturan pengguna: tab "Pengguna" di Master Data (admin only) dengan tabel list, add/edit/delete, aktif/nonaktif toggle
+- Admin bisa tambah/edit/hapus user: UserFormDialog dengan fields lengkap (nama, username, password, role, 8 feature checkboxes, status)
+- Feature-based access control: 8 feature keys (dashboard, data-belanja, transaksi, dokumen, laporan, master-data, letterhead, import-excel), admin selalu full access, user hanya lihat tab yang diizinkan
+- User menu top-right: display name + @username + role badge + Profil Saya + Keluar
+- Profile editor: user bisa ubah nama/username/password sendiri (dengan konfirmasi currentPassword)
+- Default admin user: admin/admin123 (ter-seed dengan bcrypt hash)
+- API routes: /api/auth/[...nextauth] (login/logout), /api/users (CRUD admin), /api/profile (self-service update)
+- Lint clean, semua fitur terverifikasi end-to-end via Agent Browser

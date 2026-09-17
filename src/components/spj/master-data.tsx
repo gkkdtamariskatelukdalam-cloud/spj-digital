@@ -24,6 +24,7 @@ import {
   Trash2,
   UserCheck,
   UserCog,
+  Users,
   Wallet,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -72,6 +73,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { UserManagement } from "@/components/user-management/user-management";
+import { useSession } from "next-auth/react";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Tooltip,
@@ -302,6 +305,11 @@ function RowActions({
 
 export function MasterData() {
   const [tab, setTab] = useState<string>("vendor");
+  // Lazy-import useSession to avoid adding client-side coupling at module
+  // load time. We just need the role to decide whether to show the
+  // "Pengguna" admin tab.
+  const { data: session } = useSession();
+  const isAdmin = (session?.user as any)?.role === "admin";
 
   return (
     <div className="space-y-4">
@@ -336,6 +344,15 @@ export function MasterData() {
               <SchoolIcon className="size-3.5" />
               Sekolah
             </TabsTrigger>
+            {isAdmin && (
+              <TabsTrigger
+                value="users"
+                className="data-[state=active]:bg-slate-800 data-[state=active]:text-white data-[state=active]:shadow-sm gap-1.5"
+              >
+                <Users className="size-3.5" />
+                Pengguna
+              </TabsTrigger>
+            )}
           </TabsList>
         </div>
 
@@ -351,6 +368,11 @@ export function MasterData() {
         <TabsContent value="school">
           <SchoolTab />
         </TabsContent>
+        {isAdmin && (
+          <TabsContent value="users">
+            <UserManagement />
+          </TabsContent>
+        )}
       </Tabs>
     </div>
   );

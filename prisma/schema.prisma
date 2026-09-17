@@ -286,3 +286,21 @@ model LetterheadSettings {
   updatedAt       DateTime @updatedAt
 }
 
+
+// ============ USER & AUTH ============
+
+model User {
+  id              String   @id @default(cuid())
+  name            String
+  username        String   @unique
+  password        String   // hashed with bcrypt
+  role            String   @default("user") // "admin" | "user"
+  // JSON-encoded array of feature keys the user can access.
+  // Feature keys: dashboard, data-belanja, transaksi, dokumen, laporan,
+  // master-data, letterhead, import-excel
+  // For admin role, this is ignored (admin always has full access).
+  enabledFeatures String   @default("[]")
+  isActive        Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useSession } from "next-auth/react";
 import { Dashboard } from "@/components/spj/dashboard";
 import { Transactions } from "@/components/spj/transactions";
 import { MasterData } from "@/components/spj/master-data";
@@ -10,6 +11,9 @@ import { LetterheadSettingsPanel } from "@/components/spj/letterhead-settings";
 import { ImportExcel } from "@/components/spj/import-excel";
 import { DataBelanja } from "@/components/spj/data-belanja";
 import { Toaster } from "@/components/ui/sonner";
+import { LoginModal } from "@/components/auth/login-modal";
+import { UserMenu } from "@/components/auth/user-menu";
+import { canAccess } from "@/lib/auth";
 import {
   LayoutDashboard,
   Receipt,
@@ -21,6 +25,7 @@ import {
   Image as ImageIcon,
   Upload,
   ShoppingCart,
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -29,6 +34,8 @@ type View = "dashboard" | "transactions" | "documents" | "reports" | "master" | 
 
 interface NavItem {
   id: View;
+  /** Feature key used for role-based access control. */
+  featureKey: string;
   label: string;
   icon: React.ReactNode;
   description: string;
@@ -38,6 +45,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   {
     id: "dashboard",
+    featureKey: "dashboard",
     label: "Dashboard",
     icon: <LayoutDashboard className="h-4 w-4" />,
     description: "Ringkasan & statistik",
@@ -45,6 +53,7 @@ const navItems: NavItem[] = [
   },
   {
     id: "belanja",
+    featureKey: "data-belanja",
     label: "Data Belanja",
     icon: <ShoppingCart className="h-4 w-4" />,
     description: "Semua hasil import",
@@ -52,6 +61,7 @@ const navItems: NavItem[] = [
   },
   {
     id: "transactions",
+    featureKey: "transaksi",
     label: "Transaksi",
     icon: <Receipt className="h-4 w-4" />,
     description: "Daftar pengeluaran",
@@ -59,6 +69,7 @@ const navItems: NavItem[] = [
   },
   {
     id: "documents",
+    featureKey: "dokumen",
     label: "Dokumen SPJ",
     icon: <FileText className="h-4 w-4" />,
     description: "Cetak pertanggungjawaban",
@@ -66,6 +77,7 @@ const navItems: NavItem[] = [
   },
   {
     id: "reports",
+    featureKey: "laporan",
     label: "Laporan",
     icon: <BarChart3 className="h-4 w-4" />,
     description: "Rekap & analisa",
@@ -73,6 +85,7 @@ const navItems: NavItem[] = [
   },
   {
     id: "master",
+    featureKey: "master-data",
     label: "Master Data",
     icon: <Database className="h-4 w-4" />,
     description: "Vendor, produk, BPU",
@@ -80,6 +93,7 @@ const navItems: NavItem[] = [
   },
   {
     id: "letterhead",
+    featureKey: "letterhead",
     label: "Pengaturan KOP",
     icon: <ImageIcon className="h-4 w-4" />,
     description: "Logo, font, layout KOP",
@@ -87,6 +101,7 @@ const navItems: NavItem[] = [
   },
   {
     id: "import",
+    featureKey: "import-excel",
     label: "Import Excel",
     icon: <Upload className="h-4 w-4" />,
     description: "Import data dari Excel",
@@ -95,7 +110,51 @@ const navItems: NavItem[] = [
 ];
 
 export default function Home() {
+  const { data: session, status } = useSession();
   const [view, setView] = useState<View>("dashboard");
+
+  // Filter nav items by the current user's enabled features.
+  // Admin role bypasses the filter (canAccess returns true for admin).
+  const visibleNavItems = useMemo(() => {
+    if (status !== "authenticated") return [];
+    const role = (session?.user as any)?.role;
+    const enabledFeatures = (session?.user as any)?.enabledFeatures;
+    return navItems.filter((item) =>
+      canAccess(role, enabledFeatures, item.featureKey),
+    );
+  }, [session, status]);
+
+  // Loading state — show a centered spinner while NextAuth rehydrates the
+  // session from the JWT cookie.
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-rose-50/30 dark:from-slate-950 dark:via-slate-950 dark:to-rose-950/10">
+        <Loader2 className="h-8 w-8 animate-spin text-rose-500" />
+      </div>
+    );
+  }
+
+  // Unauthenticated — show login overlay
+  if (status !== "authenticated" || !session?.user) {
+    return <LoginModal />;
+  }
+
+  // Authenticated — show the main app.
+  // If the currently-selected view is not in the user's allowed features
+  // (e.g., admin removed a feature after the user was last on that tab),
+  // fall back to the first visible nav item, or to "dashboard" if none.
+  const effectiveView =
+    visibleNavItems.some((i) => i.id === view) ||
+    // For admin, all features allowed — `view` is always valid
+    (session.user as any).role === "admin"
+      ? view
+      : visibleNavItems[0]?.id ?? "dashboard";
+
+  const user = {
+    name: session.user.name,
+    username: (session.user as any).username,
+    role: (session.user as any).role,
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-rose-50/30 dark:from-slate-950 dark:via-slate-950 dark:to-rose-950/10">
@@ -119,36 +178,39 @@ export default function Home() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-0.5 rounded-lg border bg-muted/40 p-0.5">
-            {navItems.map((item) => (
+            {visibleNavItems.map((item) => (
               <NavButton
                 key={item.id}
                 item={item}
-                active={view === item.id}
+                active={effectiveView === item.id}
                 onClick={() => setView(item.id)}
               />
             ))}
           </nav>
 
-          {/* Password badge */}
-          <div className="hidden sm:flex items-center gap-1.5 text-xs">
-            <Lock className="h-3 w-3 text-rose-500" />
-            <span className="text-muted-foreground">Excel:</span>
-            <Badge
-              variant="outline"
-              className="font-mono text-[10px] border-rose-300 text-rose-700 dark:text-rose-300"
-            >
-              88dina
-            </Badge>
+          {/* User menu (top-right) */}
+          <div className="flex items-center gap-2">
+            <div className="hidden sm:flex items-center gap-1.5 text-xs">
+              <Lock className="h-3 w-3 text-rose-500" />
+              <span className="text-muted-foreground">Excel:</span>
+              <Badge
+                variant="outline"
+                className="font-mono text-[10px] border-rose-300 text-rose-700 dark:text-rose-300"
+              >
+                88dina
+              </Badge>
+            </div>
+            <UserMenu user={user} />
           </div>
         </div>
 
         {/* Mobile nav (horizontal scroll) */}
         <nav className="md:hidden flex items-center gap-1 px-2 pb-2 overflow-x-auto">
-          {navItems.map((item) => (
+          {visibleNavItems.map((item) => (
             <NavButton
               key={item.id}
               item={item}
-              active={view === item.id}
+              active={effectiveView === item.id}
               onClick={() => setView(item.id)}
               mobile
             />
@@ -159,14 +221,14 @@ export default function Home() {
       {/* Main content */}
       <main className="flex-1 min-w-0 overflow-x-hidden">
         <div className="container mx-auto p-3 sm:p-4 lg:p-6 max-w-[1500px]">
-          {view === "dashboard" && <Dashboard />}
-          {view === "belanja" && <DataBelanja />}
-          {view === "transactions" && <Transactions />}
-          {view === "documents" && <Documents />}
-          {view === "reports" && <Reports />}
-          {view === "master" && <MasterData />}
-          {view === "letterhead" && <LetterheadSettingsPanel />}
-          {view === "import" && <ImportExcel />}
+          {effectiveView === "dashboard" && <Dashboard />}
+          {effectiveView === "belanja" && <DataBelanja />}
+          {effectiveView === "transactions" && <Transactions />}
+          {effectiveView === "documents" && <Documents />}
+          {effectiveView === "reports" && <Reports />}
+          {effectiveView === "master" && <MasterData />}
+          {effectiveView === "letterhead" && <LetterheadSettingsPanel />}
+          {effectiveView === "import" && <ImportExcel />}
         </div>
       </main>
 
