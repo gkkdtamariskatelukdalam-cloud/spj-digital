@@ -1922,3 +1922,84 @@ Stage Summary:
 - Page break memisahkan Surat Pesanan (page 1-2) dari Tanda Pembayaran (page 3)
 - Lint clean, semua interaksi terverifikasi via Agent Browser
 - Tidak perlu tambah field baru ke DB — kodeProgram & kodeRekening sudah ada sejak awal
+
+---
+Task ID: 27-move-tanda-pembayaran-to-kuitansi
+Agent: Main (Claude)
+Task: Pindahkan Tanda Pembayaran dari Surat Pesanan ke Kuitansi (yang sudah punya TANDA PEMBAYARAN), sync kodeProgram/kodeRekening/kegiatan ke gambar referensi, dan buat titik dua (:) sejajar di info block.
+
+Work Log:
+- User clarifikasi: Tanda Pembayaran seharusnya di fitur Kuitansi (sudah ada), bukan di Surat Pesanan
+- User minta: hapus Tanda Pembayaran dari Surat Pesanan, sync kode program/rekening/kegiatan ke Kuitansi, buat titik dua sejajar
+- Analisa gambar referensi (pasted_image_1789652119428.png) dengan VLM:
+  - Info block 3 baris dengan 4 kolom: [label1][value1][label2][value2]
+  - Row 1: Sumber Anggaran : Dana BOSP 2025 | Program : —
+  - Row 2: Kas/Pos Tanggal : 23 Januari 2025 | Kegiatan : —
+  - Row 3: Nomor : BPU01 | Kode Rek : —
+  - Ada border, titik dua harus sejajar
+
+**Step 1: Hapus Tanda Pembayaran dari surat-pesanan.tsx**
+- Remove PAGE 3 section (page break, info block, title, body block, 3-col signatures, Menyetujui block)
+- Remove unused variables: firstUraian, sumberAnggaranDisplay, programDisplay, kegiatanDisplay, kodeRekDisplay
+- Remove unused variables: treasurerName/Nip/Rank, goodsManagerName/Nip/Rank, principalRank
+- Remove unused const: pageBreakStyle
+- Surat Pesanan sekarang hanya punya 2 halaman (PAGE 1-2: Surat Pesanan + PPN + Terbilang + Instruksi + Signatures)
+
+**Step 2: Update Kuitansi**
+- Restructure info table dari 2-col ke 6-col (label, colon, value, label, colon, value)
+- Add 5 new style constants:
+  - `infoLabelStyle`: width 18%, textAlign right, nowrap → label kiri sejajar
+  - `infoColonStyle`: width 2%, textAlign center → colon di tengah
+  - `infoValueStyle`: width 30%, textAlign left → value kiri
+  - `infoLabelRightStyle`: width 12%, textAlign right, nowrap → label kanan sejajar
+  - `infoValueRightStyle`: width 38%, textAlign left → value kanan
+- Tambah derive logic untuk kodeProgram, kodeRekening:
+  - kodeProgramFull = (group.kodeProgram || "").trim() (e.g. "06. 05. 08.")
+  - kodeProgramSegments = split by "." + filter Boolean
+  - programDisplay = 2 segmen pertama join ". " (e.g. "06. 05")
+  - kegiatanDisplay = full kodeProgram (e.g. "06. 05. 08.")
+  - kodeRekDisplay = kodeRekening as-is (e.g. "5.1.02.01.01.0024")
+  - sumberAnggaranDisplay = `Dana BOSP {tahun}`
+- Replace placeholder "-" dengan data real
+- Remove unused bodyLabelStyle & bodyValueStyle consts
+
+**Step 3: Verifikasi end-to-end dengan Agent Browser**
+
+Verifikasi Surat Pesanan (transaksi #01):
+- DOM check: hasTandaPembayaran=false, hasSumberAnggaran=false, hasMenyetujui=false, hasSudahTerima=false, hasDiterima=false, hasKodeRek=false ✅
+- Konfirmasi: Tanda Pembayaran sudah terhapus dari Surat Pesanan
+- Surat Pesanan masih punya: SURAT PESANAN, RINCIAN PEKERJAAN, Instruksi, Terbilang ✅
+
+Verifikasi Kuitansi (transaksi #01, Rumah Roti Helena Rp1.250.000):
+- Info block content:
+  - Sumber Anggaran: Dana BOSP 2025 ✅
+  - Program: 05. 05 ✅ (derived dari "05.05.02.")
+  - Kas/Pos Tanggal: 23 Januari 2025 ✅
+  - Kegiatan: 05.05.02. ✅ (full kodeProgram)
+  - Nomor: BPU01 ✅
+  - Kode Rek: 5.1.02.01.01.0052 ✅
+- Colon alignment check via DOM:
+  - colon1_x_positions: [528, 528, 528] → aligned ✅
+  - colon2_x_positions: [896, 896, 896] → aligned ✅
+  - colon1_aligned: true, colon2_aligned: true ✅
+
+Verifikasi Kuitansi (transaksi #04, UD. JOSUA Rp17.972.000):
+- Info block content:
+  - Sumber Anggaran: Dana BOSP 2025 ✅
+  - Program: 06. 05 ✅ (derived dari "06. 05. 08.")
+  - Kas/Pos Tanggal: 23 Januari 2025 ✅
+  - Kegiatan: 06. 05. 08. ✅ (full kodeProgram)
+  - Nomor: BPU04 ✅
+  - Kode Rek: 5.1.02.01.01.0024 ✅
+- Colon alignment: [528,528,528] dan [896,896,896] ✅
+- VLM visual verification: tabel dengan border, kolon kiri & kanan sejajar vertikal ✅
+
+**Lint & Dev Log:**
+- `bun run lint` → clean, no errors
+- Dev log: tidak ada error/warning
+
+Stage Summary:
+- Tanda Pembayaran dihapus dari Surat Pesanan (sekarang hanya 2 halaman)
+- Kuitansi sekarang menggunakan data real untuk Program (derived dari 2 segmen pertama kodeProgram), Kegiatan (full kodeProgram), Kode Rek (kodeRekening as-is)
+- Info table direstrukturisasi jadi 6 kolom (label/colon/value × 2) dengan label right-aligned + fixed width → semua titik dua sejajar vertikal di kolom 2 dan 5
+- Lint clean, semua interaksi terverifikasi via Agent Browser (transaksi #01 dan #04)

@@ -14,6 +14,7 @@ const cellStyle: React.CSSProperties = {
   border: "1px solid #000",
   padding: "4px 8px",
   fontSize: "12px",
+  verticalAlign: "top",
 };
 
 const nameStyle: React.CSSProperties = {
@@ -27,20 +28,42 @@ const borderlessTableStyle: React.CSSProperties = {
   border: "none",
 };
 
-// Body label column: right-aligned, fixed width so all ':' align
-const bodyLabelStyle: React.CSSProperties = {
-  width: "40%",
+// === Info-block styles (4-column table with aligned colons) ===
+// Label cells: right-aligned + fixed width so the trailing ':' lines up
+// vertically across rows regardless of label length.
+const infoLabelStyle: React.CSSProperties = {
+  ...cellStyle,
   textAlign: "right",
-  padding: "1px 4px",
-  fontSize: "12px",
-  verticalAlign: "top",
+  whiteSpace: "nowrap",
+  width: "18%", // fixed width → colons align
+  padding: "3px 6px",
+};
+const infoColonStyle: React.CSSProperties = {
+  ...cellStyle,
+  textAlign: "center",
+  width: "2%",
+  padding: "3px 4px",
+};
+const infoValueStyle: React.CSSProperties = {
+  ...cellStyle,
+  textAlign: "left",
+  width: "30%",
+  padding: "3px 6px",
   whiteSpace: "nowrap",
 };
-
-const bodyValueStyle: React.CSSProperties = {
-  padding: "1px 4px",
-  fontSize: "12px",
-  verticalAlign: "top",
+// Right-side label (Program/Kegiatan/Kode Rek) — slightly narrower column
+const infoLabelRightStyle: React.CSSProperties = {
+  ...cellStyle,
+  textAlign: "right",
+  whiteSpace: "nowrap",
+  width: "12%",
+  padding: "3px 6px",
+};
+const infoValueRightStyle: React.CSSProperties = {
+  ...cellStyle,
+  textAlign: "left",
+  width: "38%",
+  padding: "3px 6px",
 };
 
 export function Kuitansi({
@@ -79,6 +102,32 @@ export function Kuitansi({
   // Terbilang
   const terbilangText = titleCase(terbilang(total));
 
+  // === Info-block fields (synced to kodeProgram / kodeRekening data) ===
+  // Per Excel 01PESAN sheet rows 118-120:
+  //   - Sumber Anggaran : "Dana BOSP {tahun}"
+  //   - Program         : 2-segment prefix of kodeProgram (e.g. "06. 05")
+  //   - Kas/Pos Tanggal : formatDate(tglBayar)
+  //   - Kegiatan        : full kodeProgram (e.g. "06. 05. 08.")
+  //   - Nomor           : noBku
+  //   - Kode Rek        : kodeRekening (e.g. "5.1.02.01.01.0024")
+  //
+  // The source Excel labels col D as "Kode Program" but its content is
+  // actually a 3-segment Kegiatan code. We therefore split it: the first
+  // two dot-separated segments become "Program", the full string becomes
+  // "Kegiatan". Falls back to "—" when kodeProgram is empty.
+  const kodeProgramFull = (group.kodeProgram || "").trim();
+  const kodeProgramSegments = kodeProgramFull
+    .split(".")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const programDisplay =
+    kodeProgramSegments.length >= 2
+      ? `${kodeProgramSegments[0]}. ${kodeProgramSegments[1]}`
+      : kodeProgramFull || "—";
+  const kegiatanDisplay = kodeProgramFull || "—";
+  const kodeRekDisplay = (group.kodeRekening || "").trim() || "—";
+  const sumberAnggaranDisplay = `Dana BOSP ${tahun}`;
+
   return (
     <div
       className="spj-doc"
@@ -90,20 +139,37 @@ export function Kuitansi({
         color: "#000",
       }}
     >
-      {/* === INFO TABLE (with borders, 4 columns) === */}
+      {/* === INFO TABLE (4 columns, all cells bordered, ':' aligned) === */}
+      {/* Layout per row: [label1][colon][value1][label2][colon][value2]
+          Label cells are right-aligned with fixed width so the ':' columns
+          line up vertically across rows. */}
       <table style={tableStyle}>
         <tbody>
           <tr>
-            <td style={cellStyle}>Sumber Anggaran : Dana BOSP {tahun}</td>
-            <td style={cellStyle}>Program : -</td>
+            <td style={infoLabelStyle}>Sumber Anggaran</td>
+            <td style={infoColonStyle}>:</td>
+            <td style={infoValueStyle}>{sumberAnggaranDisplay}</td>
+            <td style={infoLabelRightStyle}>Program</td>
+            <td style={infoColonStyle}>:</td>
+            <td style={infoValueRightStyle}>{programDisplay}</td>
           </tr>
           <tr>
-            <td style={cellStyle}>Kas/Pos Tanggal : {tglBayar ? formatDate(tglBayar) : "—"}</td>
-            <td style={cellStyle}>Kegiatan : -</td>
+            <td style={infoLabelStyle}>Kas/Pos Tanggal</td>
+            <td style={infoColonStyle}>:</td>
+            <td style={infoValueStyle}>
+              {tglBayar ? formatDate(tglBayar) : "—"}
+            </td>
+            <td style={infoLabelRightStyle}>Kegiatan</td>
+            <td style={infoColonStyle}>:</td>
+            <td style={infoValueRightStyle}>{kegiatanDisplay}</td>
           </tr>
           <tr>
-            <td style={cellStyle}>Nomor : {noBku || "—"}</td>
-            <td style={cellStyle}>Kode Rek : -</td>
+            <td style={infoLabelStyle}>Nomor</td>
+            <td style={infoColonStyle}>:</td>
+            <td style={infoValueStyle}>{noBku || "—"}</td>
+            <td style={infoLabelRightStyle}>Kode Rek</td>
+            <td style={infoColonStyle}>:</td>
+            <td style={infoValueRightStyle}>{kodeRekDisplay}</td>
           </tr>
         </tbody>
       </table>
