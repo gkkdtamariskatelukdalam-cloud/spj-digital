@@ -257,17 +257,12 @@ export function BeritaAcaraSerahTerima({
         sebagaimana mestinya.
       </p>
 
-      {/* === Right-aligned date === */}
-      <div className="text-right mb-4 text-[12px]">
-        Telukdalam, {formatDate(tglPesan)}
-      </div>
-
-      {/* === 3-COLUMN signature block (borderless table) === */}
+      {/* === 2-COLUMN signature block (PIHAK KEDUA | PIHAK PERTAMA) === */}
       <table style={borderlessTableStyle}>
         <tbody>
           <tr>
             {/* LEFT: PIHAK KEDUA (receiver) */}
-            <td style={{ width: "33%", textAlign: "center", padding: "0 6px", verticalAlign: "top" }}>
+            <td style={{ width: "50%", textAlign: "center", padding: "0 6px", verticalAlign: "top" }}>
               <div>PIHAK KEDUA,</div>
               <div style={{ height: "64px" }} />
               <div style={{ fontWeight: 700, textDecoration: "underline" }}>
@@ -276,19 +271,8 @@ export function BeritaAcaraSerahTerima({
               <div>Penerima Barang</div>
             </td>
 
-            {/* CENTER: PEMERIKSA BARANG (goodsManager) */}
-            <td style={{ width: "34%", textAlign: "center", padding: "0 6px", verticalAlign: "top" }}>
-              <div>PEMERIKSA BARANG,</div>
-              <div style={{ height: "64px" }} />
-              <div style={{ fontWeight: 700, textDecoration: "underline" }}>
-                {orDash(school?.goodsManagerName)}
-              </div>
-              <div>Penata Muda</div>
-              <div>NIP. {orDash(school?.goodsManagerNip)}</div>
-            </td>
-
             {/* RIGHT: PIHAK PERTAMA (vendor) */}
-            <td style={{ width: "33%", textAlign: "center", padding: "0 6px", verticalAlign: "top" }}>
+            <td style={{ width: "50%", textAlign: "center", padding: "0 6px", verticalAlign: "top" }}>
               <div>PIHAK PERTAMA,</div>
               <div style={{ height: "64px" }} />
               <div style={{ fontWeight: 700, textDecoration: "underline" }}>
@@ -299,6 +283,17 @@ export function BeritaAcaraSerahTerima({
           </tr>
         </tbody>
       </table>
+
+      {/* === PEMERIKSA BARANG - di tengah, di bawah kedua pihak === */}
+      <div style={{ textAlign: "center", marginTop: "24px", fontSize: "12px" }}>
+        <div>PEMERIKSA BARANG,</div>
+        <div style={{ height: "56px" }} />
+        <div style={{ fontWeight: 700, textDecoration: "underline" }}>
+          {orDash(school?.goodsManagerName)}
+        </div>
+        <div>Penata Muda</div>
+        <div>NIP. {orDash(school?.goodsManagerNip)}</div>
+      </div>
     </div>
   );
 }
