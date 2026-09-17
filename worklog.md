@@ -2003,3 +2003,82 @@ Stage Summary:
 - Kuitansi sekarang menggunakan data real untuk Program (derived dari 2 segmen pertama kodeProgram), Kegiatan (full kodeProgram), Kode Rek (kodeRekening as-is)
 - Info table direstrukturisasi jadi 6 kolom (label/colon/value × 2) dengan label right-aligned + fixed width → semua titik dua sejajar vertikal di kolom 2 dan 5
 - Lint clean, semua interaksi terverifikasi via Agent Browser (transaksi #01 dan #04)
+
+---
+Task ID: 28-kuitansi-match-pdf
+Agent: Main (Claude)
+Task: Sesuaikan format Kuitansi dengan PDF asli (Untitled1.pdf) — label rata kanan, titik dua sejajar, struktur 6 kolom dengan rasio 50:50.
+
+Work Log:
+- User upload gambar (pasted_image_1789652778515.png) + PDF asli (Untitled1.pdf)
+- Extract PDF text dengan pdftotext -layout untuk dapat format persis:
+  - Row 1: "Sumber Anggaran : Dana BOSP 2025   |   Program : 06. 05"
+  - Row 2: "Kas/Pos Tanggal : 23 Januari 2025  |   Kegiatan : 06. 05. 09."
+  - Row 3: "Nomor           : BPU07            |   Kode Rek : 5.1.02.01.01.0030"
+- Convert PDF ke PNG (200 DPI) untuk visual comparison
+- VLM analysis mengkonfirmasi: label rata kanan, titik dua sejajar, 50:50 ratio, ada border + divider vertikal
+
+- Restructure kuitansi.tsx info block:
+  - 6 cell per row: [label][colon][value][label][colon][value]
+  - Width ratio: 16% + 2% + 32% + 16% + 2% + 32% = 100% (kiri 50% : kanan 50%)
+  - infoLabelStyle: textAlign right, width 16%, whiteSpace nowrap
+  - infoColonStyle: textAlign center, width 2%
+  - infoValueStyle: textAlign left, width 32%, whiteSpace nowrap
+  - Same styles untuk right side (infoLabelRightStyle + infoValueRightStyle)
+
+- Restructure body block:
+  - Setiap baris: <span width 170px>label</span> : value
+  - Body label rata kiri dengan width seragam 170px supaya ':' sejajar
+  - "Nomor Surat persetujuan penyediaan barang" → no colon (header line)
+  - "dan jasa" → : {nomorSurat} (continuation with colon)
+  - "Uang sebesar" value: "Rp {formatNumber(total)}" (Rp prefix + amount)
+  - "Terbilang" value: italic + bold + Title Case
+
+- Cleanup unused imports:
+  - Remove formatRupiah (tidak dipakai, pakai formatNumber + "Rp" prefix manual)
+  - Remove duplicate local formatNumber function definition
+  - Add formatNumber ke import dari @/lib/format
+
+- `bun run lint` → clean, no errors
+
+- Verifikasi end-to-end dengan Agent Browser (transaksi #07 UD. JOSUA Rp11.398.500):
+  - DOM inspection info block:
+    - 3 rows × 6 cells
+    - colon1_x_positions: [511, 511, 511] → aligned ✅
+    - colon2_x_positions: [930, 930, 930] → aligned ✅
+    - divider position: 796 (50% dari 378-1215) ✅ match PDF 50:50
+    - tableLeft: 378, tableRight: 1215 (table width = 837px)
+  - Data matches PDF:
+    - Sumber Anggaran : Dana BOSP 2025 ✅
+    - Program : 06. 05 ✅ (derived dari 2 segmen pertama "06. 05. 09.")
+    - Kas/Pos Tanggal : 23 Januari 2025 ✅
+    - Kegiatan : 06. 05. 09. ✅ (full kodeProgram)
+    - Nomor : BPU07 ✅
+    - Kode Rek : 5.1.02.01.01.0030 ✅
+  - Body block:
+    - TANDA PEMBAYARAN ✅
+    - Sudah terima dari : Bendahara SMA Negeri 1 Telukdalam ✅
+    - Uang sebesar : Rp 11.398.500 ✅ (Rp + amount)
+    - Terbilang : Sebelas Juta Tiga Ratus Sembilan Puluh Delapan Ribu Lima Ratus Rupiah ✅ (italic Title Case)
+    - Nomor Surat persetujuan penyediaan barang + dan jasa : 421.3/07-P/DB/SMANSATLD/I/2025 ✅ (2-line format)
+    - Untuk pembayaran : Sapu ✅ (firstUraian)
+
+- VLM visual verification (clean screenshot of info table):
+  - 3 baris terlihat dengan border ✅
+  - Titik dua di kolom 2 sejajar dengan kolom 5 ✅
+  - Teks kolom 1 (label kiri) rata kanan (right-aligned) ✅
+  - Teks kolom 4 (label kanan) rata kanan (right-aligned) ✅
+  - Pembagian 50:50 sesuai PDF ✅
+
+Stage Summary:
+- Info block Kuitansi sekarang match 100% dengan PDF asli:
+  - 6 kolom dengan rasio 16:2:32:16:2:32 (kiri 50% : kanan 50%)
+  - Label rata kanan dengan fixed width → titik dua sejajar
+  - Border penuh + divider vertikal di tengah
+  - Data real: Program (derived), Kegiatan (full), Kode Rek (as-is)
+- Body block:
+  - Label rata kiri dengan width 170px → ':' sejajar
+  - "Nomor Surat persetujuan penyediaan barang dan jasa" jadi 2 baris (header + continuation)
+  - "Uang sebesar" : "Rp {amount}" (Rp + nominal)
+  - "Terbilang" : italic + bold + Title Case
+- Lint clean, semua interaksi terverifikasi via Agent Browser

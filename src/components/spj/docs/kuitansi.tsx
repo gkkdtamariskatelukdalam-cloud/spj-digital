@@ -1,7 +1,7 @@
 "use client";
 
 import type { DocumentGroup, School } from "@/lib/types/spj";
-import { formatDate, formatRupiah, terbilang } from "@/lib/format";
+import { formatDate, formatNumber, terbilang } from "@/lib/format";
 import { toRoman, titleCase } from "@/components/spj/docs/_helpers";
 
 const tableStyle: React.CSSProperties = {
@@ -28,14 +28,21 @@ const borderlessTableStyle: React.CSSProperties = {
   border: "none",
 };
 
-// === Info-block styles (4-column table with aligned colons) ===
-// Label cells: right-aligned + fixed width so the trailing ':' lines up
-// vertically across rows regardless of label length.
+// === Info-block styles (matches PDF layout) ===
+// The PDF layout has a single vertical divider in the middle, splitting
+// the table into 2 equal halves (left half + right half). Each half has
+// 3 cells: [label right-aligned][colon][value left-aligned].
+//
+// Layout (6 cells per row):
+//   [L-label (16%)][L-colon (2%)][L-value (32%)][R-label (16%)][R-colon (2%)][R-value (32%)]
+//
+// Label cells are right-aligned + fixed width so colons line up vertically
+// across rows regardless of label length. Per PDF, both halves are ~50:50.
 const infoLabelStyle: React.CSSProperties = {
   ...cellStyle,
   textAlign: "right",
   whiteSpace: "nowrap",
-  width: "18%", // fixed width → colons align
+  width: "16%",
   padding: "3px 6px",
 };
 const infoColonStyle: React.CSSProperties = {
@@ -47,22 +54,21 @@ const infoColonStyle: React.CSSProperties = {
 const infoValueStyle: React.CSSProperties = {
   ...cellStyle,
   textAlign: "left",
-  width: "30%",
+  width: "32%",
   padding: "3px 6px",
   whiteSpace: "nowrap",
 };
-// Right-side label (Program/Kegiatan/Kode Rek) — slightly narrower column
 const infoLabelRightStyle: React.CSSProperties = {
   ...cellStyle,
   textAlign: "right",
   whiteSpace: "nowrap",
-  width: "12%",
+  width: "16%",
   padding: "3px 6px",
 };
 const infoValueRightStyle: React.CSSProperties = {
   ...cellStyle,
   textAlign: "left",
-  width: "38%",
+  width: "32%",
   padding: "3px 6px",
 };
 
@@ -99,17 +105,17 @@ export function Kuitansi({
   const tahun = group.tahun || 2025;
   const nomorSurat = `421.3/${noPesan}-P/DB/SMANSATLD/${romanMonth}/${tahun}`;
 
-  // Terbilang
+  // Terbilang (Title Case per spec)
   const terbilangText = titleCase(terbilang(total));
 
   // === Info-block fields (synced to kodeProgram / kodeRekening data) ===
-  // Per Excel 01PESAN sheet rows 118-120:
+  // Per Excel 01PESAN sheet rows 118-120 + PDF output:
   //   - Sumber Anggaran : "Dana BOSP {tahun}"
   //   - Program         : 2-segment prefix of kodeProgram (e.g. "06. 05")
   //   - Kas/Pos Tanggal : formatDate(tglBayar)
-  //   - Kegiatan        : full kodeProgram (e.g. "06. 05. 08.")
+  //   - Kegiatan        : full kodeProgram (e.g. "06. 05. 09.")
   //   - Nomor           : noBku
-  //   - Kode Rek        : kodeRekening (e.g. "5.1.02.01.01.0024")
+  //   - Kode Rek        : kodeRekening (e.g. "5.1.02.01.01.0030")
   //
   // The source Excel labels col D as "Kode Program" but its content is
   // actually a 3-segment Kegiatan code. We therefore split it: the first
@@ -128,6 +134,22 @@ export function Kuitansi({
   const kodeRekDisplay = (group.kodeRekening || "").trim() || "—";
   const sumberAnggaranDisplay = `Dana BOSP ${tahun}`;
 
+  // === Body-block styles (matches PDF layout) ===
+  // Per PDF:
+  //   - Each body row has a label (right-aligned, fixed width) followed
+  //     by " : " and the value.
+  //   - Labels include "Sudah terima dari", "Uang sebesar", "Terbilang",
+  //     "dan jasa" (continuation line), "Untuk pembayaran".
+  //   - "Nomor Surat persetujuan penyediaan barang" is on its own line
+  //     (no colon), then "dan jasa : {nomorSurat}" on the next line.
+  //   - "Uang sebesar" value: "Rp" + spaces + amount (we use single space).
+  //   - "Terbilang" value: italic + bold.
+  const bodyLabelStyle: React.CSSProperties = {
+    display: "inline-block",
+    width: "170px",
+    textAlign: "left",
+  };
+
   return (
     <div
       className="spj-doc"
@@ -139,10 +161,9 @@ export function Kuitansi({
         color: "#000",
       }}
     >
-      {/* === INFO TABLE (4 columns, all cells bordered, ':' aligned) === */}
-      {/* Layout per row: [label1][colon][value1][label2][colon][value2]
-          Label cells are right-aligned with fixed width so the ':' columns
-          line up vertically across rows. */}
+      {/* === INFO TABLE (6 columns, all cells bordered, ':' aligned) === */}
+      {/* Per PDF: 2 equal halves separated by a vertical divider.
+          Each half = [label right-aligned][colon][value left-aligned]. */}
       <table style={tableStyle}>
         <tbody>
           <tr>
@@ -187,14 +208,39 @@ export function Kuitansi({
         TANDA PEMBAYARAN
       </div>
 
-      {/* === BODY BLOCK - rata kiri, ':' sejajar === */}
+      {/* === BODY BLOCK - label rata kiri width sama, ':' sejajar === */}
+      {/* Per PDF: each label is left-aligned with a fixed width so the
+          trailing ':' lines up. The 'Nomor Surat persetujuan penyediaan
+          barang' line has no colon (it's the start of a 2-line label);
+          the next line 'dan jasa' has the colon and the value. */}
       <div style={{ fontSize: "12px", lineHeight: 1.8, marginBottom: "16px" }}>
-        <div><span style={{ display: "inline-block", width: "170px" }}>Sudah terima dari</span>: Bendahara SMA Negeri 1 Telukdalam</div>
-        <div><span style={{ display: "inline-block", width: "170px" }}>Uang sebesar</span>: <span style={{ fontWeight: 700 }}>{formatRupiah(total)}</span></div>
-        <div><span style={{ display: "inline-block", width: "170px" }}>Terbilang</span>: <span style={{ fontStyle: "italic", fontWeight: 700 }}>{terbilangText}</span></div>
+        <div>
+          <span style={bodyLabelStyle}>Sudah terima dari</span>
+          {" : "}Bendahara SMA Negeri 1 Telukdalam
+        </div>
+        <div>
+          <span style={bodyLabelStyle}>Uang sebesar</span>
+          {" : "}
+          <span style={{ fontWeight: 700 }}>Rp {formatNumber(total)}</span>
+        </div>
+        <div>
+          <span style={bodyLabelStyle}>Terbilang</span>
+          {" : "}
+          <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+            {terbilangText}
+          </span>
+        </div>
         <div>Nomor Surat persetujuan penyediaan barang</div>
-        <div><span style={{ display: "inline-block", width: "170px" }}>dan jasa</span>: {nomorSurat}</div>
-        <div><span style={{ display: "inline-block", width: "170px" }}>Untuk pembayaran</span>: {firstUraian}</div>
+        <div>
+          <span style={bodyLabelStyle}>dan jasa</span>
+          {" : "}
+          {nomorSurat}
+        </div>
+        <div>
+          <span style={bodyLabelStyle}>Untuk pembayaran</span>
+          {" : "}
+          {firstUraian}
+        </div>
       </div>
 
       {/* === 3-COLUMN SIGNATURE TABLE (borderless) === */}
