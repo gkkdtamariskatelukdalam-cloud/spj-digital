@@ -2,7 +2,15 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { Wallet, Loader2, AlertCircle, KeyRound, User } from "lucide-react";
+import {
+  Wallet,
+  Loader2,
+  AlertCircle,
+  KeyRound,
+  User,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 
 /**
  * Full-screen login overlay shown when the user is not authenticated.
@@ -16,6 +24,7 @@ import { Wallet, Loader2, AlertCircle, KeyRound, User } from "lucide-react";
 export function LoginModal() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -85,14 +94,28 @@ export function LoginModal() {
             <div className="relative">
               <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
-                className="w-full pl-9 pr-3 py-2 text-sm border border-slate-300 dark:border-slate-700 dark:bg-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500/40 focus:border-rose-500"
+                className="w-full pl-9 pr-10 py-2 text-sm border border-slate-300 dark:border-slate-700 dark:bg-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500/40 focus:border-rose-500"
                 placeholder="masukkan password"
                 required
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors"
+                aria-label={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+                title={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+                tabIndex={-1}
+              >
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+              </button>
             </div>
           </div>
 

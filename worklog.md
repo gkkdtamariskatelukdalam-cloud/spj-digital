@@ -2367,3 +2367,44 @@ Stage Summary:
 - Pesan diganti dengan instruksi umum: "Hubungi administrator untuk mendapatkan akun akses."
 - Default admin (admin/admin123) masih tersimpan di DB (dari seed script) — admin internal tetap bisa login dengan kredensial tersebut, tapi tidak terlihat di UI
 - Lint clean, verifikasi via Agent Browser sukses
+
+---
+Task ID: 34-login-show-password-toggle
+Agent: Main (Claude)
+Task: Tambah tombol show/hide password di halaman login agar user bisa verifikasi password yang sudah diinput.
+
+Work Log:
+- User minta: password di halaman login bisa dilihat untuk memastikan kebenaran password yang sudah diinput
+- Edit `src/components/auth/login-modal.tsx`:
+  - Import `Eye` dan `EyeOff` icons dari lucide-react
+  - Tambah state `showPassword` (default false)
+  - Password input `type={showPassword ? "text" : "password"}` — toggle antara text/password
+  - Tambah tombol toggle (Eye/EyeOff icon) di sebelah kanan input password:
+    - Posisi absolute right-2, vertical center
+    - `type="button"` (tidak submit form)
+    - `aria-label` dinamis: "Tampilkan password" / "Sembunyikan password"
+    - `title` sama untuk tooltip
+    - `tabIndex={-1}` agar tidak mengganggu alur tab keyboard
+    - Padding `pr-10` di input agar teks tidak menabrak tombol
+  - Icon: EyeOff saat shown (untuk hide), Eye saat hidden (untuk show)
+
+- `bun run lint` → clean, no errors
+
+- Verifikasi end-to-end dengan Agent Browser:
+  - Login page muncul dengan tombol "Tampilkan password" di field password ✅
+  - Default state: type=password, isHidden=true ✅
+  - Isi password "admin123" → tetap tersembunyi (masked) ✅
+  - Click eye icon → type=text, value="admin123" terlihat ✅
+    - VLM confirm: "Password TIDAK tersembunyi dalam bentuk dots/bullets. Nilai yang terlihat: admin123"
+    - Button label berubah jadi "Sembunyikan password"
+  - Click eye icon lagi → type=password, isHidden=true ✅
+    - Button label balik jadi "Tampilkan password"
+
+Stage Summary:
+- Tombol show/hide password ditambahkan di halaman login
+- Default: password tersembunyi (••••••)
+- Click eye icon: password terlihat (text plain)
+- Click lagi: password kembali tersembunyi
+- Icon dinamis (Eye/EyeOff) + label dinamis (Tampilkan/Sembunyikan)
+- aria-label + title untuk accessibility
+- Lint clean, semua interaksi terverifikasi via Agent Browser
