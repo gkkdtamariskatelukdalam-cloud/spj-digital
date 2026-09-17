@@ -197,10 +197,11 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
             </td>
           </tr>
 
-          {/* Terbilang row - merged all 6 cols */}
+          {/* Terbilang row - 2 cells: label (col 1-3) | value (col 4-6) */}
           <tr>
-            <td style={{ ...cellStyle, colSpan: 6, fontStyle: "italic" }}>
-              Terbilang : {terbilangText}
+            <td style={cellStyle} colSpan={3}>Terbilang :</td>
+            <td style={{ ...cellStyle, colSpan: 3, fontStyle: "italic" }}>
+              {terbilangText}
             </td>
           </tr>
         </tbody>
