@@ -100,12 +100,14 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
         </div>
       </div>
 
-      {/* Signature (right-aligned) */}
-      <div style={{ textAlign: "right", fontSize: "12px", marginBottom: "16px" }}>
-        <div style={{ fontWeight: 700, textTransform: "uppercase" }}>{vendorName}</div>
-        <div style={{ height: "56px" }} />
-        <div style={nameStyle}>{vendorOwner}</div>
-        <div>Direktur</div>
+      {/* Signature - di kanan, teks rata kiri */}
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "16px" }}>
+        <div style={{ textAlign: "left", width: "250px", fontSize: "12px" }}>
+          <div style={{ fontWeight: 700, textTransform: "uppercase" }}>{vendorName}</div>
+          <div style={{ height: "56px" }} />
+          <div style={nameStyle}>{vendorOwner}</div>
+          <div>Direktur</div>
+        </div>
       </div>
 
       {/* === PAGE BREAK === */}
@@ -205,13 +207,15 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
         </tbody>
       </table>
 
-      {/* Final signature (right-aligned) */}
-      <div style={{ textAlign: "right", marginTop: "20px", fontSize: "12px" }}>
-        <div>Telukdalam, {formatDate(tglPesan)}</div>
-        <div style={{ fontWeight: 700, textTransform: "uppercase", marginTop: "4px" }}>{vendorName}</div>
-        <div style={{ height: "56px" }} />
-        <div style={nameStyle}>{vendorOwner}</div>
-        <div>Direktur</div>
+      {/* Final signature - di kanan, teks rata kiri */}
+      <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>
+        <div style={{ textAlign: "left", width: "250px", fontSize: "12px" }}>
+          <div>Telukdalam, {formatDate(tglPesan)}</div>
+          <div style={{ fontWeight: 700, textTransform: "uppercase", marginTop: "4px" }}>{vendorName}</div>
+          <div style={{ height: "56px" }} />
+          <div style={nameStyle}>{vendorOwner}</div>
+          <div>Direktur</div>
+        </div>
       </div>
     </div>
   );
