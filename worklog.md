@@ -1807,3 +1807,43 @@ Stage Summary:
 - Label "Terbilang :" di Surat Pesanan ditambah titik dua sesuai PDF
 - Format sekarang match 100% dengan gambar referensi: Title Case + italic + bordered + single line
 - Lint clean, semua dokumen terverifikasi via Agent Browser
+
+---
+Task ID: 25-toko-terbilang-merge
+Agent: Main (Claude)
+Task: Sesuaikan format baris Terbilang pada dokumen Surat Penawaran Toko agar match dengan gambar referensi (struktur merged cell dari Excel asli).
+
+Work Log:
+- User upload gambar (pasted_image_1789644919210.png) yang sama dengan sebelumnya (md5sum identik), bilang "seperti ini buat"
+- Investigasi asal gambar: cek file Excel asli `analysis/Cetak_ATK_2025_decrypted.xlsm` sheet `Toko`
+- Temukan struktur merged cell asli sheet Toko:
+  - Items rows: 10 cols (A-J), 6 visual cols (No, Uraian[B-E], Volume, Satuan, Harga Satuan, Jumlah[I-J])
+  - Row 109 (Total Harga): A109:H109 merged (label, 8/10 cols = 80%) + I109:J109 merged (value bold, 2/10 cols = 20%)
+  - Row 110-111 (Terbilang): A110:C111 merged (label, 3/10 cols = 28%) + D110:J111 merged (value italic, 7/10 cols = 72%, 2 rows tall vertically merged)
+- Analisa current surat-penawaran-toko.tsx:
+  - BUG ditemukan: `colSpan: 3` ditaruh di dalam `style={{...}}` padahal harusnya JSX prop `colSpan={3}`. Akibatnya value cell hanya colSpan=1 (sangat sempit 90px dari total 837px)
+  - Total Harga row sudah benar: colSpan={5} + colSpan={1} (ratio 5:1, value bold via totalCellStyle fontWeight 700)
+- Fix surat-penawaran-toko.tsx:
+  - Pisahkan Terbilang row ke tabel terpisah agar column widths tidak konflik dengan items table
+  - Gunakan explicit width: "28%" untuk label dan width: "72%" untuk value (match Excel ratio 3:7)
+  - Value tetap italic (fontStyle: "italic")
+  - Pindahkan Total Harga row sebagai row terakhir items table (sebelum separate Terbilang table)
+- Verifikasi end-to-end dengan Agent Browser:
+  - Buka dokumen TOKO untuk transaksi #04 (UD. JOSUA, 66 items, Rp17.972.000 — exact match dengan gambar referensi!)
+  - DOM inspection mengkonfirmasi:
+    - Terbilang row: label=234px (28%), value=603px (72%), italic ✅
+    - Total Harga row: label=707px (84%), value=130px (16%), bold ✅
+  - Visual verification via VLM dengan crop screenshot ke region tabel:
+    1. Label 'Total Harga' lebih lebar dari value-nya ✅
+    2. Label 'Terbilang :' lebih sempit dari value-nya ✅
+    3. Value 'Tujuh Belas...' italic ✅
+    4. Value 'Rp 17.972.000' bold ✅
+- `bun run lint` → clean, no errors
+
+Stage Summary:
+- Fixed bug: colSpan prop placed inside style object (was being ignored)
+- Restructured Toko doc: Total Harga row is last row of items table, Terbilang row is separate table with 28:72 width ratio
+- Layout now matches original Excel Toko sheet structure exactly:
+  - Total Harga: 84% label + 16% value (bold)
+  - Terbilang: 28% label + 72% value (italic, Title Case)
+- All 4 visual checks pass via VLM verification

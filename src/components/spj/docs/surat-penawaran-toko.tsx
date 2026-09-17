@@ -189,18 +189,28 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
             ))
           )}
 
-          {/* Total Harga row - INSIDE table */}
+          {/* Total Harga row - last row of items table (label merged across
+              first 5 visual cols, value in Jumlah col, bold).
+              Matches original Excel Toko sheet: A109:H109 (label) + I109:J109 (value). */}
           <tr>
             <td style={totalCellStyle} colSpan={5}>Total Harga</td>
             <td style={{ ...totalCellStyle, textAlign: "right" }}>
                   Rp {formatNumber(total)}
             </td>
           </tr>
+        </tbody>
+      </table>
 
-          {/* Terbilang row - 2 cells: label (col 1-3) | value (col 4-6) */}
+      {/* Terbilang row - separate table to avoid column-width conflicts.
+          Matches original Excel Toko sheet row 110: A110:C111 (label, ~28%)
+          + D110:J111 (value, ~72%), italic, full border. */}
+      <table style={tableStyle}>
+        <tbody>
           <tr>
-            <td style={cellStyle} colSpan={3}>Terbilang :</td>
-            <td style={{ ...cellStyle, colSpan: 3, fontStyle: "italic" }}>
+            <td style={{ ...cellStyle, width: "28%" }}>Terbilang :</td>
+            <td
+              style={{ ...cellStyle, width: "72%", fontStyle: "italic" }}
+            >
               {terbilangText}
             </td>
           </tr>
