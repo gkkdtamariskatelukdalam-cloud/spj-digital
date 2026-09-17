@@ -215,6 +215,7 @@ export function BeritaAcaraSerahTerima({
                 Nama Barang/Jasa
               </th>
               <th style={{ ...headerCellStyle, width: "100px" }}>Diserahkan</th>
+              <th style={{ ...headerCellStyle, width: "100px" }}>Satuan</th>
               <th style={{ ...headerCellStyle, width: "100px" }}>Diterima</th>
               <th style={{ ...headerCellStyle, width: "90px" }}>Kondisi</th>
             </tr>
@@ -223,7 +224,7 @@ export function BeritaAcaraSerahTerima({
             {group.items.length === 0 ? (
               <tr>
                 <td
-                  colSpan={5}
+                  colSpan={6}
                   style={{ ...cellStyle, textAlign: "center", color: "#64748b" }}
                 >
                   Tidak ada item.
@@ -239,10 +240,13 @@ export function BeritaAcaraSerahTerima({
                     <div className="font-medium">{item.namaBarang || item.uraian}</div>
                   </td>
                   <td style={{ ...cellStyle, textAlign: "center" }}>
-                    {formatNumber(item.volume)} {item.satuan ?? ""}
+                    {formatNumber(item.volume)}
                   </td>
                   <td style={{ ...cellStyle, textAlign: "center" }}>
-                    {formatNumber(item.volume)} {item.satuan ?? ""}
+                    {orDash(item.satuan)}
+                  </td>
+                  <td style={{ ...cellStyle, textAlign: "center" }}>
+                    {formatNumber(item.volume)}
                   </td>
                   <td style={{ ...cellStyle, textAlign: "center" }}>Baik</td>
                 </tr>
