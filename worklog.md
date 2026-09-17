@@ -2408,3 +2408,67 @@ Stage Summary:
 - Icon dinamis (Eye/EyeOff) + label dinamis (Tampilkan/Sembunyikan)
 - aria-label + title untuk accessibility
 - Lint clean, semua interaksi terverifikasi via Agent Browser
+
+---
+Task ID: 35-deploy-vercel-neon-analysis
+Agent: Main (Claude)
+Task: Deploy project ke Vercel + Neon PostgreSQL, verify env vars, test login live.
+
+Work Log:
+- User provide Vercel token (vcp_...) untuk verify deployment
+- Verify token via Vercel API v2/user: ✅ valid, user = gkkdtamariskatelukdalam-7652 (email: gkkdtamariskatelukdalam@gmail.com)
+- List projects via Vercel API v9/projects: 1 project found — spj-digital (id: prj_Kyb5k11EnPYcQ3kbZWldnQPVsSeC, framework: nextjs)
+- Get env vars via v9/projects/[id]/env: 2 env vars awal (DATABASE_URL, NEXTAUTH_SECRET)
+- Get deployment info via v9/projects/[id]?withTargets=true:
+  - Latest production deployment: READY + PROMOTED
+  - Aliases: spj-digital.vercel.app, spj-digital-merdina.vercel.app, spj-digital-git-main-merdina.vercel.app
+  - Build time: ~58 seconds
+  - Deployed by: gkkdtamariskatelukdalam@gmail.com
+  - From commit: 6523fecb (Deploy to Vercel commit)
+  - Bundler: turbopack
+  - Plan: hobby
+
+**Env Vars Analysis:**
+
+Sebelum (ditemukan 2 env vars):
+1. DATABASE_URL — type=sensitive, target=[production, preview] ✅
+2. NEXTAUTH_SECRET — type=sensitive, target=[production, preview] ✅
+3. ❌ NEXTAUTH_URL — TIDAK ADA
+
+Issue yang ditemukan:
+- NEXTAUTH_URL tidak di-set — NextAuth butuh ini untuk redirect URLs di production
+- DATABASE_URL dan NEXTAUTH_SECRET target hanya [production, preview] (OK, .env local dipakai untuk dev)
+- Actual values tidak bisa diverify via API (Vercel hide sensitive values by design)
+
+**Fix: Tambah NEXTAUTH_URL**
+- POST v9/projects/[id]/env dengan key=NEXTAUTH_URL, value=https://spj-digital.vercel.app, target=[production, preview]
+- ✅ Berhasil ditambahkan
+
+**Verify env vars setelah:**
+- Total 3 env vars:
+  1. NEXTAUTH_URL — type=encrypted, target=[production, preview]
+  2. DATABASE_URL — type=sensitive, target=[production, preview]
+  3. NEXTAUTH_SECRET — type=sensitive, target=[production, preview]
+
+**Test live URL via curl:**
+- GET /: Status 200 OK, response time 0.55s
+- Page content: "SPJ Digital" muncul (login modal rendered)
+- GET /api/auth/session: returns `{}` (empty session — correct, not logged in)
+- GET /api/auth/providers: returns credentials provider config (NextAuth working)
+
+**Test login live via Agent Browser:**
+- Open https://spj-digital.vercel.app/ → LoginModal muncul ✅
+- Fill admin / admin123 + submit form
+- ✅ Login berhasil — dashboard muncul dengan 8 nav tabs + user menu "Administrator @admin"
+- Neon PostgreSQL DB connection works in production
+
+Stage Summary:
+- ✅ Vercel deployment: READY + PROMOTED, live URL https://spj-digital.vercel.app
+- ✅ Neon PostgreSQL DB: connected & working in production
+- ✅ NextAuth credentials login: berhasil dengan admin/admin123
+- ✅ All env vars properly configured:
+  - DATABASE_URL (Neon)
+  - NEXTAUTH_URL (https://spj-digital.vercel.app)
+  - NEXTAUTH_SECRET (32-char random)
+- ⚠️ Vercel token masih aktif — user should revoke after verification done
+- Local dev server tetap pakai Neon DATABASE_URL via wrapper script /tmp/start-dev.sh
