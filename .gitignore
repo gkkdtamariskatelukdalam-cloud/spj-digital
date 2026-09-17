@@ -33,6 +33,14 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# Local SQLite database (we use Neon PostgreSQL in production)
+/db/
+*.db
+*.db-journal
+
+# Sensitive analysis data (decrypted Excel, internal JSON dumps)
+/analysis/
+
 # vercel
 .vercel
 
