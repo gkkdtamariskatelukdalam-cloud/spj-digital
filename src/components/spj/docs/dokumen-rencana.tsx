@@ -144,7 +144,7 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
                 <td style={{ ...colonStyle, textAlign: "center" }}>✓</td>
                 <td style={noStyle}>1</td>
                 <td style={valueMergedStyle}>
-                  {items[0].namaBarang || items[0].uraian}
+                  {items[0].spesifikasiBarang || items[0].namaBarang || items[0].uraian}
                 </td>
               </tr>
               {items.slice(1).map((item, idx) => (
@@ -152,7 +152,7 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
                   <td style={{ ...colonStyle, textAlign: "center" }}>✓</td>
                   <td style={noStyle}>{idx + 2}</td>
                   <td style={valueMergedStyle}>
-                    {item.namaBarang || item.uraian}
+                    {item.spesifikasiBarang || item.namaBarang || item.uraian}
                   </td>
                 </tr>
               ))}

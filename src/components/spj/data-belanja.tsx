@@ -105,6 +105,7 @@ function pesananGroupToDocGroup(g: PesananGroup): import("@/lib/types/spj").Docu
       noBku: t.noBku,
       noBast: t.noBast,
       tglBayar: t.tglBayar,
+      spesifikasiBarang: t.spesifikasiBarang,
     })),
     totalJumlah: g.totalJumlah,
     totalRealisasi: g.totalJumlah,

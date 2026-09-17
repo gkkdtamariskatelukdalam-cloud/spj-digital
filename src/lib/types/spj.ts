@@ -169,6 +169,7 @@ export interface DocumentGroupItem {
   noBku: string | null;
   noBast: string | null;
   tglBayar: string | null;
+  spesifikasiBarang?: string | null;
 }
 
 export interface DocumentGroup {

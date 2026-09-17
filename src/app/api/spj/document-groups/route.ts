@@ -98,6 +98,7 @@ export async function GET(req: Request) {
         noBku: t.noBku,
         noBast: t.noBast,
         tglBayar: t.tglBayar,
+        spesifikasiBarang: t.spesifikasiBarang,
       });
       group.totalJumlah += t.jumlah;
       group.totalRealisasi += t.realisasi;
