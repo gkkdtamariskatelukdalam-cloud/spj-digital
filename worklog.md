@@ -2142,3 +2142,58 @@ Stage Summary:
   - Label rata kiri (bukan rata kanan)
   - Titik dua tetap sejajar karena label dibungkus span inline-block dengan fixed width
 - Lint clean, semua interaksi terverifikasi via Agent Browser
+
+---
+Task ID: 30-kuitansi-colon-align-flexbox
+Agent: Main (Claude)
+Task: Fix titik dua (colon) yang belum lurus di info block Kuitansi — gunakan flexbox dengan justify-content: space-between agar label rata kiri + colon di kanan edge.
+
+Work Log:
+- User feedback: titik dua belum lurus meskipun layout sudah sesuai
+- DOM inspection mengkonfirmasi:
+  - colons at x=476, 470, 423 (left) — TIDAK aligned
+  - colons at x=849, 851, 856 (right) — TIDAK aligned
+- Root cause: span dengan display:inline-block + fixed width 150px + text "Sumber Anggaran :" → colon ada di END TEXT, bukan di RIGHT EDGE span. Untuk label pendek seperti "Nomor :" (7 chars), colon ada di x=56px dari start span, bukan x=150px (right edge).
+
+- Solusi: gunakan flexbox dengan justify-content: space-between
+  - Restructure label container jadi:
+    ```jsx
+    <span style={{ display: "inline-flex", justifyContent: "space-between", width: "150px" }}>
+      <span>Label Text</span>
+      <span>:</span>
+    </span>
+    ```
+  - Label text akan di LEFT edge container (rata kiri)
+  - Colon akan di RIGHT edge container (aligned)
+  - Karena semua label container punya fixed width 150px, semua colon ada di posisi x yang sama
+
+- Update infoLabelTextStyle & infoLabelRightTextStyle:
+  - display: "inline-flex" (sebelumnya "inline-block")
+  - justifyContent: "space-between"
+  - alignItems: "flex-start"
+  - width: "150px" (left) / "90px" (right) — same as before
+  - whiteSpace: "nowrap"
+
+- Restructure JSX: split label text dan colon jadi 2 child span dalam parent inline-flex container
+  - Tambahkan {" "} (spasi) setelah label container sebelum value, supaya ada spasi antara colon dan value
+
+- `bun run lint` → clean, no errors
+
+- Verifikasi end-to-end dengan Agent Browser:
+  - DOM inspection menggunakan Range API untuk dapat POSISI COLON SEBENARNYA:
+    - Left colons: x=533, 533, 533 → all aligned ✅
+    - Right colons: x=891, 891, 891 → all aligned ✅
+    - leftColon_aligned: true ✅
+    - rightColon_aligned: true ✅
+  - VLM visual verification:
+    - Colons on left side aligned vertically (perfect) ✅
+    - Colons on right side aligned vertically (perfect) ✅
+    - No border between label and colon in same cell ✅
+    - Labels start at left edge of cell content area (left-aligned, 8px cell padding is consistent) ✅
+
+Stage Summary:
+- Titik dua sekarang LURUS (aligned) di kolom kiri (x=533) dan kanan (x=891)
+- Label tetap rata kiri (label text starts at left edge of fixed-width container)
+- Struktur 2 cell per row dipertahankan (no internal border between label+colon+value)
+- Solusi: flexbox dengan justify-content: space-between + fixed width
+- Lint clean, semua interaksi terverifikasi via Agent Browser

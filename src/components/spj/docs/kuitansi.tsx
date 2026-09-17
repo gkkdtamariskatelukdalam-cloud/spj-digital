@@ -38,7 +38,11 @@ const borderlessTableStyle: React.CSSProperties = {
 //   [L-label : L-value (50%)] | [R-label : R-value (50%)]
 //
 // To align the colons across rows despite varying label lengths, the
-// label text is wrapped in an inline-block with a fixed width.
+// label text + colon are wrapped in an inline-flex container with
+// justify-content: space-between. The label text sits at the LEFT edge
+// of the fixed-width container (rata kiri), and the colon is pushed to
+// the RIGHT edge — matching the PDF layout where "Sumber Anggaran :"
+// and "Nomor           :" both have the colon at the same x position.
 const infoCellLeftStyle: React.CSSProperties = {
   ...cellStyle,
   textAlign: "left",
@@ -53,18 +57,23 @@ const infoCellRightStyle: React.CSSProperties = {
   padding: "3px 8px",
   verticalAlign: "top",
 };
-// Inline-block wrapper for the label so colons line up across rows
+// Inline-flex container: label text on the LEFT, colon on the RIGHT
+// → colons line up across rows because they all land at the right edge
+// of this fixed-width container.
 const infoLabelTextStyle: React.CSSProperties = {
-  display: "inline-block",
+  display: "inline-flex",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
   // Width chosen to fit the longest left-side label "Sumber Anggaran"
-  // (16 chars) plus the trailing " : " — keeps colons aligned across
-  // rows for both left and right halves.
+  // (16 chars) — keeps colons aligned across rows for both halves.
   width: "150px",
   whiteSpace: "nowrap",
 };
 const infoLabelRightTextStyle: React.CSSProperties = {
-  display: "inline-block",
-  // Width chosen to fit the longest right-side label "Kode Rek" + " : "
+  display: "inline-flex",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  // Width chosen to fit the longest right-side label "Kode Rek"
   width: "90px",
   whiteSpace: "nowrap",
 };
@@ -161,36 +170,64 @@ export function Kuitansi({
       {/* === INFO TABLE (2 cells per row, all cells bordered, labels left-aligned) === */}
       {/* Per PDF: each row has 2 cells (left half + right half). Each cell
           contains the full "Label : Value" string. The vertical divider
-          between halves is naturally created by the cell borders. */}
+          between halves is naturally created by the cell borders.
+          The label text + colon are wrapped in an inline-flex container
+          with justify-content: space-between so the label text sits at
+          the LEFT edge (rata kiri) while the colon is pushed to the RIGHT
+          edge of the fixed-width container — colons align across rows. */}
       <table style={tableStyle}>
         <tbody>
           <tr>
             <td style={infoCellLeftStyle}>
-              <span style={infoLabelTextStyle}>Sumber Anggaran :</span>
+              <span style={infoLabelTextStyle}>
+                <span>Sumber Anggaran</span>
+                <span>:</span>
+              </span>
+              {" "}
               {sumberAnggaranDisplay}
             </td>
             <td style={infoCellRightStyle}>
-              <span style={infoLabelRightTextStyle}>Program :</span>
+              <span style={infoLabelRightTextStyle}>
+                <span>Program</span>
+                <span>:</span>
+              </span>
+              {" "}
               {programDisplay}
             </td>
           </tr>
           <tr>
             <td style={infoCellLeftStyle}>
-              <span style={infoLabelTextStyle}>Kas/Pos Tanggal :</span>
+              <span style={infoLabelTextStyle}>
+                <span>Kas/Pos Tanggal</span>
+                <span>:</span>
+              </span>
+              {" "}
               {tglBayar ? formatDate(tglBayar) : "—"}
             </td>
             <td style={infoCellRightStyle}>
-              <span style={infoLabelRightTextStyle}>Kegiatan :</span>
+              <span style={infoLabelRightTextStyle}>
+                <span>Kegiatan</span>
+                <span>:</span>
+              </span>
+              {" "}
               {kegiatanDisplay}
             </td>
           </tr>
           <tr>
             <td style={infoCellLeftStyle}>
-              <span style={infoLabelTextStyle}>Nomor :</span>
+              <span style={infoLabelTextStyle}>
+                <span>Nomor</span>
+                <span>:</span>
+              </span>
+              {" "}
               {noBku || "—"}
             </td>
             <td style={infoCellRightStyle}>
-              <span style={infoLabelRightTextStyle}>Kode Rek :</span>
+              <span style={infoLabelRightTextStyle}>
+                <span>Kode Rek</span>
+                <span>:</span>
+              </span>
+              {" "}
               {kodeRekDisplay}
             </td>
           </tr>
