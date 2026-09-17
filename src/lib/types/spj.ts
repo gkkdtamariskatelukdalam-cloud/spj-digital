@@ -187,6 +187,11 @@ export interface DocumentGroup {
   vendorOwner: string | null;
   vendorPhone: string | null;
   vendorAddress: string | null;
+  /** Full code (e.g. "06. 05. 08.") — labeled "Kode Program" in source Excel
+   *  but functionally a Kegiatan code. Used as "Kegiatan" in Tanda Pembayaran. */
+  kodeProgram: string | null;
+  /** Code rekening (e.g. "5.1.02.01.01.0024") — used as "Kode Rek" in Tanda Pembayaran. */
+  kodeRekening: string | null;
   items: DocumentGroupItem[];
   totalJumlah: number;
   totalRealisasi: number;

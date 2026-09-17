@@ -1847,3 +1847,78 @@ Stage Summary:
   - Total Harga: 84% label + 16% value (bold)
   - Terbilang: 28% label + 72% value (italic, Title Case)
 - All 4 visual checks pass via VLM verification
+
+---
+Task ID: 26-tanda-pembayaran-kode-program-rekening
+Agent: Main (Claude)
+Task: Tambah halaman Tanda Pembayaran (page 3) pada Surat Pesanan dengan field Kode Program & Kode Rekening yang sebelumnya hanya placeholder "-".
+
+Work Log:
+- Cek Excel asli `analysis/Cetak_ATK_2025_decrypted.xlsm` sheet 01PESAN rows 117-160:
+  - Row 118: A=Sumber Anggaran, C=Dana BOSP 2025, G=Program, I=06. 05
+  - Row 119: A=Kas/Pos Tanggal, C=23 Januari 2025, G=Kegiatan, I=06. 05. 09.
+  - Row 120: A=Nomor, C=BPU07, G=Kode Rek, I=5.1.02.01.01.0030
+  - Row 125: A=TANDA PEMBAYARAN (merged A125:K125, centered)
+  - Row 127-132: body block (Sudah terima dari, Uang sebesar, Terbilang, Nomor Surat, Untuk pembayaran)
+  - Row 137-147: 3-col signatures (Mengetahui/Lunas Bayar Oleh/Diterima oleh)
+  - Row 150-159: Menyetujui / Kepala Sekolah block (centered)
+- Cek Prisma schema: field `kodeProgram` & `kodeRekening` sudah ada di Transaction model (line 80 & 82)
+- Cek data DB: kodeProgram di DB ternyata berisi kode lengkap 3 segmen ("06. 05. 08.") — yang sebenarnya adalah kode Kegiatan, bukan Program
+- Cek sheet Data2025 (sumber import): col D ber-label "Kode Program" tapi isinya kode kegiatan 3 segmen
+- Strategi: tidak tambah field baru, melainkan derive "Program" dari 2 segmen pertama kodeProgram, dan "Kegiatan" = full kodeProgram
+- Update `DocumentGroup` type di `src/lib/types/spj.ts`: tambah field `kodeProgram: string | null` & `kodeRekening: string | null` dengan JSDoc
+- Update API `document-groups/route.ts`: tambah ke type `Group` dan `groupMap.set()` (kodeProgram: t.kodeProgram, kodeRekening: t.kodeRekening)
+- API `transaksi-detail/route.ts`: tidak perlu diubah karena sudah return full transaction object dari Prisma
+- Update `surat-pesanan.tsx`:
+  - Tambah derive logic untuk Program & Kegiatan:
+    ```ts
+    const kodeProgramFull = (group.kodeProgram || "").trim();
+    const kodeProgramSegments = kodeProgramFull.split(".").map(s => s.trim()).filter(Boolean);
+    const programDisplay = kodeProgramSegments.length >= 2
+      ? `${kodeProgramSegments[0]}. ${kodeProgramSegments[1]}`
+      : kodeProgramFull || "—";
+    const kegiatanDisplay = kodeProgramFull || "—";
+    const kodeRekDisplay = (group.kodeRekening || "").trim() || "—";
+    const sumberAnggaranDisplay = `Dana BOSP ${group.tahun || 2025}`;
+    ```
+  - Tambah PAGE 3 setelah signature table halaman 2:
+    - Page break div (`pageBreakStyle`)
+    - Info block (borderless 2-col table dengan 2 label/value pairs per row, 3 rows)
+    - Title "TANDA PEMBAYARAN" (centered, bold, underlined, 14pt)
+    - Body block (6 baris: Sudah terima dari, Uang sebesar bold, Terbilang italic Title Case, Nomor Surat persetujuan + dan jasa, Untuk pembayaran)
+    - 3-column borderless signature table (Mengetahui | Lunas Bayar Oleh | Diterima oleh)
+    - Menyetujui / Kepala Sekolah block (centered, mt-8)
+- `bun run lint` → clean, no errors
+- Verifikasi end-to-end dengan Agent Browser (transaksi #04 UD. JOSUA Rp17.972.000):
+  - Click Dokumen SPJ → click #04 → click 01 PESAN tab → scroll to bottom
+  - DOM check: hasTandaPembayaran=true, hasProgram=true, hasKegiatan=true, hasKodeRek=true, hasSumberAnggaran=true, hasSudahTerima=true, hasMenyetujui=true, hasDiterima=true ✅
+  - Extract Tanda Pembayaran section text konfirmasi:
+    - Sumber Anggaran: Dana BOSP 2025 ✅
+    - Program: 06. 05 ✅ (derived dari 2 segmen pertama "06. 05. 08.")
+    - Kas/Pos Tanggal: 23 Januari 2025 ✅
+    - Kegiatan: 06. 05. 08. ✅ (full kodeProgram)
+    - Nomor: BPU04 ✅
+    - Kode Rek: 5.1.02.01.01.0024 ✅
+    - Title: TANDA PEMBAYARAN ✅
+    - Sudah terima dari: Bendahara SMA Negeri 1 Telukdalam ✅
+    - Uang sebesar: Rp 17.972.000 ✅
+    - Terbilang: Tujuh Belas Juta Sembilan Ratus Tujuh Puluh Dua Ribu Rupiah ✅
+    - Nomor Surat persetujuan + dan jasa: 421.3/04-P/DB/SMANSATLD/I/2025 ✅
+    - Untuk pembayaran: Plastik Mica ✅
+    - 3-col signatures: Radius S. K. Siburian (Pengurus Barang) / Riama Tiodora Siahaan (Bendahara) / Gestiwaz Bazikho (Direktur) ✅
+    - Menyetujui / Kepala Sekolah: Nursari Rindu Simanullang ✅
+  - VLM visual verification via screenshot: semua section terlihat rapi dan profesional ✅
+
+Stage Summary:
+- Halaman Tanda Pembayaran (page 3) ditambahkan ke Surat Pesanan dengan field lengkap:
+  - Sumber Anggaran: Dana BOSP {tahun}
+  - Program: derived dari 2 segmen pertama kodeProgram (e.g. "06. 05")
+  - Kas/Pos Tanggal: formatDate(tglBayar)
+  - Kegiatan: full kodeProgram (e.g. "06. 05. 08.")
+  - Nomor: noBku
+  - Kode Rek: kodeRekening (e.g. "5.1.02.01.01.0024")
+- Body block dengan 6 baris termasuk Terbilang italic Title Case
+- 3-column signature row (Mengetahui/Lunas Bayar/Diterima) + Menyetujui/Kepala Sekolah block
+- Page break memisahkan Surat Pesanan (page 1-2) dari Tanda Pembayaran (page 3)
+- Lint clean, semua interaksi terverifikasi via Agent Browser
+- Tidak perlu tambah field baru ke DB — kodeProgram & kodeRekening sudah ada sejak awal

@@ -34,6 +34,8 @@ export async function GET(req: Request) {
       vendorOwner: string | null;
       vendorPhone: string | null;
       vendorAddress: string | null;
+      kodeProgram: string | null;
+      kodeRekening: string | null;
       items: Array<{
         id: string;
         uraian: string;
@@ -78,6 +80,8 @@ export async function GET(req: Request) {
           vendorOwner: t.vendor?.owner || null,
           vendorPhone: t.vendor?.phone || null,
           vendorAddress: t.vendor?.address || null,
+          kodeProgram: t.kodeProgram,
+          kodeRekening: t.kodeRekening,
           items: [],
           totalJumlah: 0,
           totalRealisasi: 0,

@@ -90,6 +90,33 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
   // Ratus Tujuh Puluh Dua Ribu Rupiah" — every word capitalized).
   const terbilangText = titleCase(terbilang(total));
 
+  // Tanda Pembayaran info block (page 3).
+  // Per Excel 01PESAN sheet rows 118-120:
+  //   - Sumber Anggaran : "Dana BOSP {tahun}"
+  //   - Program         : 2-segment prefix of kodeProgram (e.g. "06. 05")
+  //   - Kas/Pos Tanggal : formatDate(tglBayar)
+  //   - Kegiatan        : full kodeProgram (e.g. "06. 05. 08.")
+  //   - Nomor           : noBku
+  //   - Kode Rek        : kodeRekening (e.g. "5.1.02.01.01.0024")
+  //
+  // The source Excel labels col D as "Kode Program", but its content is
+  // actually a 3-segment Kegiatan code. We therefore split it: the first
+  // two dot-separated segments become "Program", the full string becomes
+  // "Kegiatan". Falls back to "—" when kodeProgram is empty.
+  const kodeProgramFull = (group.kodeProgram || "").trim();
+  const kodeProgramSegments = kodeProgramFull
+    .split(".")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  // Program = first 2 non-empty segments joined by ". "
+  const programDisplay =
+    kodeProgramSegments.length >= 2
+      ? `${kodeProgramSegments[0]}. ${kodeProgramSegments[1]}`
+      : kodeProgramFull || "—";
+  const kegiatanDisplay = kodeProgramFull || "—";
+  const kodeRekDisplay = (group.kodeRekening || "").trim() || "—";
+  const sumberAnggaranDisplay = `Dana BOSP ${group.tahun || 2025}`;
+
   // Instruction list (spec text, exact)
   const instruksiList = [
     "Penyedia berkewajiban untuk menyediakan barang/jasa sesuai dengan surat pesanan dan dalam jangka waktu transaksi yang berlaku",
@@ -370,6 +397,148 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           </tr>
         </tbody>
       </table>
+
+      {/* ============================================================ */}
+      {/* PAGE 3: TANDA PEMBAYARAN                                      */}
+      {/* ============================================================ */}
+      <div style={pageBreakStyle} />
+
+      {/* === Info block (borderless 2-col table with 2 label/value pairs per row) === */}
+      {/* Matches Excel 01PESAN rows 118-120 layout:
+            Col A-B = label1 (merged), Col C = value1,
+            Col G-H = label2 (merged), Col I-onwards = value2 */}
+      <div className="mb-4">
+        <table style={borderlessTableStyle}>
+          <tbody>
+            <tr>
+              <td style={{ width: "20%", verticalAlign: "top", padding: "2px 4px" }}>
+                Sumber Anggaran
+              </td>
+              <td style={{ width: "3%", verticalAlign: "top", padding: "2px 4px" }}>: </td>
+              <td style={{ width: "27%", verticalAlign: "top", padding: "2px 4px" }}>
+                {sumberAnggaranDisplay}
+              </td>
+              <td style={{ width: "20%", verticalAlign: "top", padding: "2px 4px" }}>
+                Program
+              </td>
+              <td style={{ width: "3%", verticalAlign: "top", padding: "2px 4px" }}>: </td>
+              <td style={{ width: "27%", verticalAlign: "top", padding: "2px 4px" }}>
+                {programDisplay}
+              </td>
+            </tr>
+            <tr>
+              <td style={{ verticalAlign: "top", padding: "2px 4px" }}>Kas/Pos Tanggal</td>
+              <td style={{ verticalAlign: "top", padding: "2px 4px" }}>: </td>
+              <td style={{ verticalAlign: "top", padding: "2px 4px" }}>
+                {formatDate(group.tglBayar)}
+              </td>
+              <td style={{ verticalAlign: "top", padding: "2px 4px" }}>Kegiatan</td>
+              <td style={{ verticalAlign: "top", padding: "2px 4px" }}>: </td>
+              <td style={{ verticalAlign: "top", padding: "2px 4px" }}>
+                {kegiatanDisplay}
+              </td>
+            </tr>
+            <tr>
+              <td style={{ verticalAlign: "top", padding: "2px 4px" }}>Nomor</td>
+              <td style={{ verticalAlign: "top", padding: "2px 4px" }}>: </td>
+              <td style={{ verticalAlign: "top", padding: "2px 4px" }}>
+                {orDash(group.noBku)}
+              </td>
+              <td style={{ verticalAlign: "top", padding: "2px 4px" }}>Kode Rek</td>
+              <td style={{ verticalAlign: "top", padding: "2px 4px" }}>: </td>
+              <td style={{ verticalAlign: "top", padding: "2px 4px" }}>
+                {kodeRekDisplay}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* === Title === */}
+      <div className="text-center mb-4">
+        <h1
+          className="font-bold text-[14px] underline"
+          style={{ textDecorationThickness: "1px" }}
+        >
+          TANDA PEMBAYARAN
+        </h1>
+      </div>
+
+      {/* === Body block (text-justify, space-y-1) === */}
+      <div className="mb-6 space-y-1 text-justify">
+        <div>
+          Sudah terima dari : Bendahara SMA Negeri 1 Telukdalam
+        </div>
+        <div>
+          Uang sebesar : <span style={{ fontWeight: 700 }}>{formatRupiah(total)}</span>
+        </div>
+        <div>
+          Terbilang : <span style={{ fontStyle: "italic" }}>{terbilangText}</span>
+        </div>
+        <div>Nomor Surat persetujuan penyediaan barang</div>
+        <div>dan jasa : {docNumber}</div>
+        <div>Untuk pembayaran : {firstUraian}</div>
+      </div>
+
+      {/* === 3-column borderless signature row (top) === */}
+      <table style={borderlessTableStyle}>
+        <tbody>
+          <tr>
+            <td
+              style={{
+                width: "33%",
+                verticalAlign: "top",
+                padding: "0 8px",
+              }}
+            >
+              <div>Mengetahui :</div>
+              <div>Pengurus Barang</div>
+              <div style={{ height: "64px" }} />
+              <div style={nameStyle}>{goodsManagerName}</div>
+              <div>{goodsManagerRank}</div>
+              <div>NIP. {goodsManagerNip}</div>
+            </td>
+            <td
+              style={{
+                width: "34%",
+                verticalAlign: "top",
+                padding: "0 8px",
+              }}
+            >
+              <div>Lunas Bayar Oleh :</div>
+              <div>Bendahara SMA Negeri</div>
+              <div>1 Telukdalam</div>
+              <div style={{ height: "48px" }} />
+              <div style={nameStyle}>{treasurerName}</div>
+              <div>{treasurerRank}</div>
+              <div>NIP. {treasurerNip}</div>
+            </td>
+            <td
+              style={{
+                width: "33%",
+                verticalAlign: "top",
+                padding: "0 8px",
+              }}
+            >
+              <div>Diterima oleh :</div>
+              <div>{vendorName || "—"}</div>
+              <div style={{ height: "64px" }} />
+              <div style={nameStyle}>{vendorOwner}</div>
+              <div>Direktur</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      {/* === Menyetujui / Kepala Sekolah block (below, centered) === */}
+      <div className="text-center mt-8">
+        <div>Menyetujui :</div>
+        <div>Kepala Sekolah SMA Negeri 1 Telukdalam</div>
+        <div style={{ height: "64px" }} />
+        <div style={nameStyle}>{principalName}</div>
+        <div>{principalRank}</div>
+        <div>NIP. {principalNip}</div>
+      </div>
     </div>
   );
 }
