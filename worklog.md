@@ -2472,3 +2472,77 @@ Stage Summary:
   - NEXTAUTH_SECRET (32-char random)
 - ⚠️ Vercel token masih aktif — user should revoke after verification done
 - Local dev server tetap pakai Neon DATABASE_URL via wrapper script /tmp/start-dev.sh
+
+---
+Task ID: 36-fix-vercel-upload-logo-readonly-fs
+Agent: Main (Claude)
+Task: Fix error production "EROFS: read-only file system" saat upload logo di Vercel deployment.
+
+Work Log:
+- User report console errors setelah deploy:
+  - `/api/spj/school:1 404` (3x)
+  - `/api/users:1 409` (2x)
+  - `logo-sman1.png:1 404`
+  - `/api/spj/letterhead/upload-logo:1 500`
+  - EROFS error: "read-only file system, open '/var/task/public/uploads/logo-...png'"
+
+**Root Cause Analysis:**
+
+1. **Upload Logo 500 (EROFS)** — Root cause utama
+   - Route `/api/spj/letterhead/upload-logo/route.ts` pakai `fs.writeFileSync()` untuk simpan logo ke `public/uploads/`
+   - Vercel serverless function punya filesystem READ-ONLY (kecuali `/tmp` yang ephemeral)
+   - Error: `EROFS: read-only file system, open '/var/task/public/uploads/logo-...'`
+   - Fix: ganti filesystem write dengan store logo sebagai **base64 data URL** di kolom `logoPath` di Neon DB
+
+2. **/api/spj/school 404**
+   - Neon DB kosong (hanya ter-seed admin user saat migrasi SQLite → PostgreSQL)
+   - User sudah configure school via UI setelah deploy → sekarang return 200 OK ✅
+   - Added `scripts/seed-school.ts` (idempotent seed script) sebagai backup kalau school belum dikonfigurasi
+
+3. **/api/users 409 (Conflict)**
+   - Bukan bug — 409 = username already exists saat user coba create user dengan username yang sudah ada
+   - Behavior yang benar (route.ts punya guard uniqueness)
+
+4. **logo-sman1.png 404**
+   - Old local SQLite DB punya `logoPath = "/uploads/logo-sman1.png"` (file path)
+   - File itu ada di local `public/uploads/` tapi TIDAK ada di Vercel deployment
+   - Fix: user re-upload logo via UI → sekarang akan disimpan sebagai base64 data URL (no filesystem needed)
+
+**Fix Implementation:**
+
+File `src/app/api/spj/letterhead/upload-logo/route.ts` (full rewrite):
+- Remove `import fs from "fs"` and `import path from "path"`
+- Remove `fs.mkdirSync(uploadDir, { recursive: true })` — tidak bisa write filesystem
+- Remove `fs.writeFileSync(filepath, buffer)` — ganti dengan base64 encoding
+- Remove `fs.unlinkSync(oldPath)` cleanup — tidak ada file di disk
+- Convert uploaded file: `Buffer.from(await file.arrayBuffer()).toString("base64")`
+- Build data URL: `data:${file.type};base64,${base64}`
+- Save ke DB via `db.letterheadSettings.update({ data: { [pathField]: dataUrl } })`
+- Frontend `<img src={logoPath}>` support both file paths AND data URLs transparently — letterhead.tsx no changes needed
+- Return JSON dengan `storedAs: "base64"` indicator
+
+Added `scripts/seed-school.ts`:
+- Idempotent script untuk seed default School record (name, officials, dll)
+- Berguna kalau Neon DB reset atau empty
+
+**Verification End-to-End:**
+
+1. Push ke GitHub (commit `177e62e`)
+2. Vercel auto-redeploy (BUILDING → READY dalam ~60 seconds)
+3. Live test via curl dengan session cookie:
+   - Login sebagai admin (POST /api/auth/callback/credentials) → session cookie ter-set ✅
+   - Upload test PNG (69 bytes): POST /api/spj/letterhead/upload-logo
+     - Response: `{"logoPath":"data:image/png;base64,iVBORw0...","size":69,"isLogo2":false,"storedAs":"base64"}` ✅
+   - Upload logo 2 (?logo=2): Response `isLogo2: true, storedAs: base64` ✅
+   - Upload real 1067 bytes PNG: Response `storedAs: base64, size: 1067, error: none` ✅
+   - Verify di DB: GET /api/spj/letterhead → `logoPath` is data URL ✅
+4. No more EROFS errors — Vercel serverless compatible
+
+Stage Summary:
+- Upload logo sekarang works di Vercel production (no filesystem writes)
+- Logos stored sebagai base64 data URLs di Neon PostgreSQL
+- Frontend letterhead.tsx render both file paths AND data URLs (no changes needed)
+- School record sudah ter-configured di Neon (return 200 OK sekarang)
+- 409 conflict di /api/users adalah normal behavior (duplicate username guard)
+- Vercel auto-redeploy triggered by git push, completed in ~60 seconds
+- Lint clean, semua tests sukses di live URL
