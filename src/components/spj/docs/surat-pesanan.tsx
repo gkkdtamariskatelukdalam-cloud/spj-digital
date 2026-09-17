@@ -329,7 +329,12 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           <tr>
             <td
               style={{
-                width: "50%",
+                width: "15%",
+              }}
+            />
+            <td
+              style={{
+                width: "35%",
                 textAlign: "left",
                 padding: "0 8px",
                 verticalAlign: "top",
@@ -343,7 +348,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
             <td
               style={{
-                width: "50%",
+                width: "35%",
                 textAlign: "left",
                 padding: "0 8px",
                 verticalAlign: "top",
@@ -355,6 +360,11 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
               <div style={nameStyle}>{principalName}</div>
               <div>NIP. {principalNip}</div>
             </td>
+            <td
+              style={{
+                width: "15%",
+              }}
+            />
           </tr>
         </tbody>
       </table>
