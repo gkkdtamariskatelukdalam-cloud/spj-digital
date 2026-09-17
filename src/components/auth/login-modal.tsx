@@ -119,9 +119,7 @@ export function LoginModal() {
           </button>
 
           <p className="text-[11px] text-center text-slate-500 dark:text-slate-400 mt-2">
-            Default admin:{" "}
-            <span className="font-mono font-medium">admin</span> /{" "}
-            <span className="font-mono font-medium">admin123</span>
+            Hubungi administrator untuk mendapatkan akun akses.
           </p>
         </form>
       </div>

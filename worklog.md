@@ -2344,3 +2344,26 @@ Stage Summary:
 - Default admin user: admin/admin123 (ter-seed dengan bcrypt hash)
 - API routes: /api/auth/[...nextauth] (login/logout), /api/users (CRUD admin), /api/profile (self-service update)
 - Lint clean, semua fitur terverifikasi end-to-end via Agent Browser
+
+---
+Task ID: 33-remove-default-admin-hint
+Agent: Main (Claude)
+Task: Hapus tampilan default admin (admin/admin123) dari halaman login agar tidak semua orang bisa lihat kredensial default.
+
+Work Log:
+- User minta: hilangkan default admin dari halaman login
+- Edit `src/components/auth/login-modal.tsx`:
+  - Hapus teks "Default admin: admin / admin123" di bawah tombol Masuk
+  - Ganti dengan pesan umum "Hubungi administrator untuk mendapatkan akun akses."
+  - Hint kredensial default TIDAK ditampilkan lagi di UI
+
+- Verifikasi via Agent Browser:
+  - DOM check: hasDefaultHint=false ✅, hasAdmin123=false ✅, hasHubungiMsg=true ✅
+  - VLM visual verification: "Hanya instruksi umum untuk hubungi administrator. Tidak ada teks yang menampilkan username atau password default." ✅
+- `bun run lint` → clean, no errors
+
+Stage Summary:
+- Halaman login sekarang tidak menampilkan kredensial default
+- Pesan diganti dengan instruksi umum: "Hubungi administrator untuk mendapatkan akun akses."
+- Default admin (admin/admin123) masih tersimpan di DB (dari seed script) — admin internal tetap bisa login dengan kredensial tersebut, tapi tidak terlihat di UI
+- Lint clean, verifikasi via Agent Browser sukses
