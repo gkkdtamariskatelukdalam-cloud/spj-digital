@@ -2082,3 +2082,63 @@ Stage Summary:
   - "Uang sebesar" : "Rp {amount}" (Rp + nominal)
   - "Terbilang" : italic + bold + Title Case
 - Lint clean, semua interaksi terverifikasi via Agent Browser
+
+---
+Task ID: 29-kuitansi-no-internal-border-left-align
+Agent: Main (Claude)
+Task: Sesuaikan info block Kuitansi: tidak ada garis (border) di antara titik dua, dan label rata kiri sesuai permintaan user.
+
+Work Log:
+- User feedback: "tidak ada garis diantar titik dua tersebut" + label harus rata kiri
+- VLM verification PDF asli mengkonfirmasi:
+  - 4 sel per baris (visually)
+  - TIDAK ada border antara "Sumber Anggaran :" dan "Dana BOSP 2025" (mereka di cell yang sama)
+  - ADA border vertikal di tengah tabel (pemisah kiri-kanan)
+  - Label rata KIRI (Sumber Anggaran, Program, Kas/Pos Tanggal, Kegiatan, Nomor, Kode Rek)
+
+- Restructure kuitansi.tsx info block:
+  - Dari 6 cell per row → 2 cell per row
+  - Setiap cell berisi full "Label : Value" string
+  - Label dibungkus dalam <span> dengan display:inline-block + fixed width supaya colon sejajar
+  - textAlign: "left" untuk semua cell (label rata kiri)
+  - Border tetap di luar cell → divider vertikal di tengah tetap ada
+  - Tidak ada internal border dalam cell (no border between label dan value)
+
+- New style constants:
+  - infoCellLeftStyle: textAlign left, width 50%, padding 3px 8px
+  - infoCellRightStyle: textAlign left, width 50%, padding 3px 8px
+  - infoLabelTextStyle: inline-block, width 150px (untuk label kiri "Sumber Anggaran" + " : ")
+  - infoLabelRightTextStyle: inline-block, width 90px (untuk label kanan "Kode Rek" + " : ")
+
+- `bun run lint` → clean, no errors
+
+- Verifikasi end-to-end dengan Agent Browser (transaksi #07):
+  - DOM inspection: 2 cells per row ✅ (bukan 6)
+  - cell1TextAlign: "left" ✅, cell2TextAlign: "left" ✅
+  - Border: cell1BorderRight: 1px (ada garis di tengah) ✅
+  - Tidak ada border internal dalam cell ✅
+  - Colon alignment:
+    - Left label endX: [536, 536, 536] → aligned ✅
+    - Right label endX: [895, 895, 895] → aligned ✅
+  - Data tetap lengkap:
+    - Sumber Anggaran : Dana BOSP 2025 ✅
+    - Program : 06. 05 ✅
+    - Kas/Pos Tanggal : 23 Januari 2025 ✅
+    - Kegiatan : 06. 05. 09. ✅
+    - Nomor : BPU07 ✅
+    - Kode Rek : 5.1.02.01.01.0030 ✅
+
+- VLM visual verification:
+  - "Tidak ada garis vertikal antara 'Sumber Anggaran :' dan 'Dana BOSP 2025'" ✅
+  - "Ada garis vertikal di tengah tabel (pemisah antara kolom kiri dan kolom kanan)" ✅
+  - "Label rata KIRI" ✅
+  - "Titik dua (:) sejajar vertikal di kolom kiri" ✅
+  - "Titik dua (:) sejajar vertikal di kolom kanan" ✅
+
+Stage Summary:
+- Info block Kuitansi sekarang sesuai PDF asli:
+  - 2 cell per row (label+value dalam 1 cell, tanpa border internal)
+  - Border vertikal di tengah tabel sebagai pemisah kiri-kanan
+  - Label rata kiri (bukan rata kanan)
+  - Titik dua tetap sejajar karena label dibungkus span inline-block dengan fixed width
+- Lint clean, semua interaksi terverifikasi via Agent Browser

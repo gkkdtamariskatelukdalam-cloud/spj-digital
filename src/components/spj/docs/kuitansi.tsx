@@ -29,47 +29,44 @@ const borderlessTableStyle: React.CSSProperties = {
 };
 
 // === Info-block styles (matches PDF layout) ===
-// The PDF layout has a single vertical divider in the middle, splitting
-// the table into 2 equal halves (left half + right half). Each half has
-// 3 cells: [label right-aligned][colon][value left-aligned].
+// Per PDF: 2 cells per row (left half + right half), each cell contains
+// the full "Label : Value" string with NO internal border between label
+// and value. The vertical divider between left and right halves is
+// naturally created by the cell borders. Labels are left-aligned.
 //
-// Layout (6 cells per row):
-//   [L-label (16%)][L-colon (2%)][L-value (32%)][R-label (16%)][R-colon (2%)][R-value (32%)]
+// Layout (2 cells per row):
+//   [L-label : L-value (50%)] | [R-label : R-value (50%)]
 //
-// Label cells are right-aligned + fixed width so colons line up vertically
-// across rows regardless of label length. Per PDF, both halves are ~50:50.
-const infoLabelStyle: React.CSSProperties = {
-  ...cellStyle,
-  textAlign: "right",
-  whiteSpace: "nowrap",
-  width: "16%",
-  padding: "3px 6px",
-};
-const infoColonStyle: React.CSSProperties = {
-  ...cellStyle,
-  textAlign: "center",
-  width: "2%",
-  padding: "3px 4px",
-};
-const infoValueStyle: React.CSSProperties = {
+// To align the colons across rows despite varying label lengths, the
+// label text is wrapped in an inline-block with a fixed width.
+const infoCellLeftStyle: React.CSSProperties = {
   ...cellStyle,
   textAlign: "left",
-  width: "32%",
-  padding: "3px 6px",
-  whiteSpace: "nowrap",
+  width: "50%",
+  padding: "3px 8px",
+  verticalAlign: "top",
 };
-const infoLabelRightStyle: React.CSSProperties = {
-  ...cellStyle,
-  textAlign: "right",
-  whiteSpace: "nowrap",
-  width: "16%",
-  padding: "3px 6px",
-};
-const infoValueRightStyle: React.CSSProperties = {
+const infoCellRightStyle: React.CSSProperties = {
   ...cellStyle,
   textAlign: "left",
-  width: "32%",
-  padding: "3px 6px",
+  width: "50%",
+  padding: "3px 8px",
+  verticalAlign: "top",
+};
+// Inline-block wrapper for the label so colons line up across rows
+const infoLabelTextStyle: React.CSSProperties = {
+  display: "inline-block",
+  // Width chosen to fit the longest left-side label "Sumber Anggaran"
+  // (16 chars) plus the trailing " : " — keeps colons aligned across
+  // rows for both left and right halves.
+  width: "150px",
+  whiteSpace: "nowrap",
+};
+const infoLabelRightTextStyle: React.CSSProperties = {
+  display: "inline-block",
+  // Width chosen to fit the longest right-side label "Kode Rek" + " : "
+  width: "90px",
+  whiteSpace: "nowrap",
 };
 
 export function Kuitansi({
@@ -161,36 +158,41 @@ export function Kuitansi({
         color: "#000",
       }}
     >
-      {/* === INFO TABLE (6 columns, all cells bordered, ':' aligned) === */}
-      {/* Per PDF: 2 equal halves separated by a vertical divider.
-          Each half = [label right-aligned][colon][value left-aligned]. */}
+      {/* === INFO TABLE (2 cells per row, all cells bordered, labels left-aligned) === */}
+      {/* Per PDF: each row has 2 cells (left half + right half). Each cell
+          contains the full "Label : Value" string. The vertical divider
+          between halves is naturally created by the cell borders. */}
       <table style={tableStyle}>
         <tbody>
           <tr>
-            <td style={infoLabelStyle}>Sumber Anggaran</td>
-            <td style={infoColonStyle}>:</td>
-            <td style={infoValueStyle}>{sumberAnggaranDisplay}</td>
-            <td style={infoLabelRightStyle}>Program</td>
-            <td style={infoColonStyle}>:</td>
-            <td style={infoValueRightStyle}>{programDisplay}</td>
+            <td style={infoCellLeftStyle}>
+              <span style={infoLabelTextStyle}>Sumber Anggaran :</span>
+              {sumberAnggaranDisplay}
+            </td>
+            <td style={infoCellRightStyle}>
+              <span style={infoLabelRightTextStyle}>Program :</span>
+              {programDisplay}
+            </td>
           </tr>
           <tr>
-            <td style={infoLabelStyle}>Kas/Pos Tanggal</td>
-            <td style={infoColonStyle}>:</td>
-            <td style={infoValueStyle}>
+            <td style={infoCellLeftStyle}>
+              <span style={infoLabelTextStyle}>Kas/Pos Tanggal :</span>
               {tglBayar ? formatDate(tglBayar) : "—"}
             </td>
-            <td style={infoLabelRightStyle}>Kegiatan</td>
-            <td style={infoColonStyle}>:</td>
-            <td style={infoValueRightStyle}>{kegiatanDisplay}</td>
+            <td style={infoCellRightStyle}>
+              <span style={infoLabelRightTextStyle}>Kegiatan :</span>
+              {kegiatanDisplay}
+            </td>
           </tr>
           <tr>
-            <td style={infoLabelStyle}>Nomor</td>
-            <td style={infoColonStyle}>:</td>
-            <td style={infoValueStyle}>{noBku || "—"}</td>
-            <td style={infoLabelRightStyle}>Kode Rek</td>
-            <td style={infoColonStyle}>:</td>
-            <td style={infoValueRightStyle}>{kodeRekDisplay}</td>
+            <td style={infoCellLeftStyle}>
+              <span style={infoLabelTextStyle}>Nomor :</span>
+              {noBku || "—"}
+            </td>
+            <td style={infoCellRightStyle}>
+              <span style={infoLabelRightTextStyle}>Kode Rek :</span>
+              {kodeRekDisplay}
+            </td>
           </tr>
         </tbody>
       </table>
