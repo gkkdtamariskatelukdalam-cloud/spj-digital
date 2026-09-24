@@ -95,7 +95,7 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
             display: "flex",
             justifyContent: "space-around",
             width: "100%",
-            fontSize: `${line.size}px`,
+            fontSize: `${line.size}pt`,
             fontWeight: line.bold ? 700 : 400,
             lineHeight: 1.3,
             marginTop: index > 0 ? `${s.lineSpacing}px` : "0",
@@ -113,7 +113,7 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
       <div
         key={index}
         style={{
-          fontSize: `${line.size}px`,
+          fontSize: `${line.size}pt`,
           fontWeight: line.bold ? 700 : 400,
           lineHeight: 1.3,
           marginTop: index > 0 ? `${s.lineSpacing}px` : "0",
