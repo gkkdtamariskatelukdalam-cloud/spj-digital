@@ -17,7 +17,9 @@ export async function GET() {
         return new NextResponse(buffer, {
           headers: {
             "Content-Type": mimeType,
-            "Cache-Control": "public, max-age=3600",
+            // No cache — always fetch latest logo (so upload/delete
+            // reflects immediately in browser favicon).
+            "Cache-Control": "no-cache, no-store, must-revalidate",
           },
         });
       }
@@ -34,7 +36,7 @@ export async function GET() {
   return new NextResponse(transparentPng, {
     headers: {
       "Content-Type": "image/png",
-      "Cache-Control": "public, max-age=60",
+      "Cache-Control": "no-cache, no-store, must-revalidate",
     },
   });
 }

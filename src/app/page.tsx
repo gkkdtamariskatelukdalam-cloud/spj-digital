@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { Dashboard } from "@/components/spj/dashboard";
 import { Transactions } from "@/components/spj/transactions";
@@ -112,6 +112,15 @@ const navItems: NavItem[] = [
 export default function Home() {
   const { data: session, status } = useSession();
   const [view, setView] = useState<View>("dashboard");
+  const [appLogo, setAppLogo] = useState<string | null>(null);
+
+  // Fetch app logo for dashboard header
+  useEffect(() => {
+    fetch("/api/app-settings")
+      .then((r) => r.json())
+      .then((data) => setAppLogo(data.appLogo || null))
+      .catch(() => {});
+  }, [status]);
 
   // Filter nav items by the current user's enabled features.
   // Admin role bypasses the filter (canAccess returns true for admin).
@@ -163,8 +172,12 @@ export default function Home() {
         <div className="flex h-14 items-center px-3 sm:px-4 gap-3">
           {/* Logo */}
           <div className="flex items-center gap-2 flex-1 min-w-0">
-            <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-rose-600 to-amber-500 flex items-center justify-center text-white shadow-sm flex-shrink-0">
-              <Wallet className="h-4 w-4" />
+            <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-rose-600 to-amber-500 flex items-center justify-center text-white shadow-sm flex-shrink-0 overflow-hidden">
+              {appLogo ? (
+                <img src={appLogo} alt="Logo" className="h-full w-full object-contain p-0.5" />
+              ) : (
+                <Wallet className="h-4 w-4" />
+              )}
             </div>
             <div className="min-w-0">
               <h1 className="text-sm font-bold tracking-tight truncate leading-tight">
