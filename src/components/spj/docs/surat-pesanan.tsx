@@ -480,14 +480,6 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
 
-          {/* === GAP ROW (matches Excel R95-R96) === */}
-          {/* Empty row between Terbilang and Instruksi with left+right borders
-              only. Provides visual spacing before the Instruksi section. */}
-          <tr>
-            <td style={leftOnlyCellStyle}>&nbsp;</td>
-            <td style={rightOnlyCellStyle} colSpan={5}>&nbsp;</td>
-          </tr>
-
           {/* === INSTRUKSI SECTION (9px per user request) === */}
           {/* Per Excel R97-R103:
               - Header row (R97): colSpan=6, LEFT + RIGHT borders only (no top/bottom)
@@ -528,13 +520,12 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           {/* === SIGNATURE ROW (Penyedia | Pelaksana) === */}
           {/* Per Excel R105-R115:
               - Penyedia cell (left, cols A-F): LEFT + BOTTOM borders only
-                (no right → no vertical line between Penyedia and Pelaksana)
-                Shifted right with paddingLeft for neater appearance.
               - Pelaksana cell (right, cols G-K): RIGHT + BOTTOM borders only
-                (no left → no vertical line)
               - Bottom border closes the entire table
-              - No top border → seamlessly continues from Instruksi above */}
-          <tr>
+              - page-break-inside: avoid → prevents signature from splitting
+                across pages when printing (keeps it compact, not "jauh dibawah")
+              - Signature gap reduced from 64px to 40px (still enough to sign) */}
+          <tr style={{ pageBreakInside: "avoid" }}>
             <td
               style={{
                 ...signatureLeftCellStyle,
@@ -545,7 +536,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             >
               <div>Penyedia,</div>
               <div>{vendorName || "—"}</div>
-              <div style={{ height: "64px" }} />
+              <div style={{ height: "40px" }} />
               <div style={{ fontWeight: 400 }}>{vendorOwner || "—"}</div>
               <div>Direktur</div>
             </td>
@@ -559,7 +550,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             >
               <div>Telukdalam, {formatDate(tglPesan)}</div>
               <div>Pelaksana,</div>
-              <div style={{ height: "64px" }} />
+              <div style={{ height: "40px" }} />
               <div style={nameStyle}>{principalName}</div>
               <div>NIP. {principalNip}</div>
             </td>
