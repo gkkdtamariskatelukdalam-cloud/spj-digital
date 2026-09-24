@@ -49,6 +49,7 @@ export async function GET(req: Request) {
         noBast: string | null;
         tglBayar: string | null;
         spesifikasiBarang: string | null;
+        uraianKwitansi: string | null; // kolom Y
         // System 2 pricing (kolom AB-AF) — used for PPN-aware Harga Satuan
         hargaSatuanSebelumPajak: number | null;
         jumlahHargaSebelumPajak: number | null;
@@ -111,6 +112,7 @@ export async function GET(req: Request) {
         noBast: t.noBast,
         tglBayar: t.tglBayar,
         spesifikasiBarang: t.spesifikasiBarang,
+        uraianKwitansi: t.uraianKwitansi,
         // System 2 pricing (kolom AB-AF)
         hargaSatuanSebelumPajak: t.hargaSatuanSebelumPajak,
         jumlahHargaSebelumPajak: t.jumlahHargaSebelumPajak,

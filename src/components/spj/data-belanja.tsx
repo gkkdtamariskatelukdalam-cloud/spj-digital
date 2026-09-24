@@ -112,6 +112,7 @@ function pesananGroupToDocGroup(g: PesananGroup): import("@/lib/types/spj").Docu
       noBast: t.noBast,
       tglBayar: t.tglBayar,
       spesifikasiBarang: t.spesifikasiBarang,
+      uraianKwitansi: t.uraianKwitansi,
       // System 2 pricing (kolom AB-AF) — needed by PESAN document
       // for PPN-aware Harga Satuan display
       hargaSatuanSebelumPajak: t.hargaSatuanSebelumPajak,

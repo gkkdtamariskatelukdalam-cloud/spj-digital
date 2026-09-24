@@ -104,7 +104,7 @@ export function SuratHasilPemeriksaan({
             <tr>
               <td style={labelCellNoBorder}>Nama pekerjaan</td>
               <td style={labelCellNoBorder}>
-                : Pengadaan Alat Tulis Kantor (ATK)
+                : Pengadaan {group.items[0]?.uraianKwitansi || "Alat Tulis Kantor (ATK)"}
               </td>
             </tr>
             <tr>

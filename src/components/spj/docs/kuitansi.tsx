@@ -103,8 +103,11 @@ export function Kuitansi({
   const goodsManagerNip = school?.goodsManagerNip || "—";
   const goodsManagerRank = school?.goodsManagerRank || "Penata Muda";
 
-  // First item uraian for "Untuk pembayaran"
-  const firstUraian = group.items[0]?.uraian || "Pengadaan ATK";
+  // Kolom Y (Uraian Kwitansi) — dipakai untuk "Untuk pembayaran: Pengadaan [Y]"
+  // Diawali dengan kata "Pengadaan" lalu diikuti oleh isi kolom Y.
+  const firstUraian = group.items[0]?.uraianKwitansi
+    ? `Pengadaan ${group.items[0].uraianKwitansi}`
+    : group.items[0]?.uraian || "Pengadaan ATK";
 
   // Nomor surat
   const romanMonth = toRoman(group.bulan || 1);

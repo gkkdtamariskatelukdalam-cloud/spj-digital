@@ -64,7 +64,8 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
   const items = group.items;
   const tglPesan = group.tglPesan;
   const tahun = group.tahun || 2025;
-  const firstUraian = items[0]?.uraian || "Pengadaan ATK";
+  // Kolom Y (Uraian Kwitansi) — dipakai untuk "Kategori Barang/Jasa"
+  const firstUraian = items[0]?.uraianKwitansi || items[0]?.uraian || "Pengadaan ATK";
 
   return (
     <div className="spj-doc px-6 sm:px-10 py-8 text-[11pt] leading-relaxed text-slate-900">

@@ -92,8 +92,9 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
       <div style={{ marginBottom: "20px", fontSize: "11pt", lineHeight: 1.6, textAlign: "justify" }}>
         <div>Dengan hormat,</div>
         <div style={{ marginTop: "4px" }}>
-          Memenuhi maksud surat permohonan Ibu kepada kami untuk menyediakan Alat
-          Tulis Kantor (ATK) sesuai dengan pesanan Nomor: {docNumber}, Tanggal{" "}
+          Memenuhi maksud surat permohonan Ibu kepada kami untuk menyediakan{" "}
+          {group.items[0]?.uraianKwitansi || "Alat Tulis Kantor (ATK)"}{" "}
+          sesuai dengan pesanan Nomor: {docNumber}, Tanggal{" "}
           {formatDate(tglPesan)} , bersama ini kami bersedia untuk mengadakannya.
           Bon faktur turut terlampir. Demikian, atas perhatian diucapkan terima
           kasih.

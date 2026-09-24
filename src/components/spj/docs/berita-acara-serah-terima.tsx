@@ -126,7 +126,7 @@ export function BeritaAcaraSerahTerima({
               </tr>
               <tr>
                 <td style={labelCellNoBorder}>Nama pekerjaan</td>
-                <td style={labelCellNoBorder}>: Pengadaan Alat Tulis Kantor (ATK)</td>
+                <td style={labelCellNoBorder}>: Pengadaan {group.items[0]?.uraianKwitansi || "Alat Tulis Kantor (ATK)"}</td>
               </tr>
               <tr>
                 <td style={labelCellNoBorder}>Tahun</td>
@@ -227,8 +227,9 @@ export function BeritaAcaraSerahTerima({
 
         {/* Serah terima paragraph */}
         <p className="text-justify mb-4">
-          PIHAK PERTAMA menyerahkan hasil pekerjaan Pengadaan Alat Tulis
-          Kantor (ATK) kepada PIHAK KEDUA, dan PIHAK KEDUA telah menerima
+          PIHAK PERTAMA menyerahkan hasil pekerjaan Pengadaan{" "}
+          {group.items[0]?.uraianKwitansi || "Alat Tulis Kantor (ATK)"}{" "}
+          kepada PIHAK KEDUA, dan PIHAK KEDUA telah menerima
           hasil pekerjaan tersebut dalam jumlah yang lengkap dan kondisi yang
           baik sesuai dengan rincian berikut:
         </p>

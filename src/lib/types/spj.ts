@@ -170,6 +170,8 @@ export interface DocumentGroupItem {
   noBast: string | null;
   tglBayar: string | null;
   spesifikasiBarang?: string | null;
+  // Kolom Y (Uraian Kwitansi) — used by RENCANA, SHP, BAST, TOKO, KUITANSI
+  uraianKwitansi?: string | null;
   // System 2 pricing (kolom AB-AF in source Excel) — used by PESAN document
   // for tax-aware Harga Satuan display:
   //   - When document total > 2 juta (PPN applies) → display totalHargaSebelumDPP (kolom AE)
