@@ -170,6 +170,17 @@ export interface DocumentGroupItem {
   noBast: string | null;
   tglBayar: string | null;
   spesifikasiBarang?: string | null;
+  // System 2 pricing (kolom AB-AF in source Excel) — used by PESAN document
+  // for tax-aware Harga Satuan display:
+  //   - When document total > 2 juta (PPN applies) → display totalHargaSebelumDPP (kolom AE)
+  //   - When document total < 2 juta (no PPN) → display totalHargaAsli (kolom AF)
+  // Falls back to tarifHarga (kolom N) when null.
+  hargaSatuanSebelumPajak?: number | null; // kolom AB
+  jumlahHargaSebelumPajak?: number | null; // kolom AC
+  hargaTotalAsli?: number | null; // kolom AD
+  totalHargaSebelumDPP?: number | null; // kolom AE (DPP = AD/1.11)
+  totalHargaAsli?: number | null; // kolom AF (= AD, final total)
+  satuan2?: string | null; // kolom AA (System 2 satuan, e.g. "kotak")
 }
 
 export interface DocumentGroup {

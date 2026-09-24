@@ -185,3 +185,42 @@
     font-size: 11px;
   }
 }
+
+/* ============================================================
+   Custom horizontal scrollbar for items table in Data Belanja
+   — ensures scrollbar is always visible & easy to grab
+   ============================================================ */
+.db-items-scroll {
+  /* Force horizontal scrollbar to always be visible (not auto-hidden) */
+  overflow-x: scroll !important;
+  overflow-y: hidden !important;
+  scrollbar-width: thin;            /* Firefox: thin scrollbar */
+  scrollbar-color: #a855f7 #f1f5f9; /* Firefox: purple thumb, slate track */
+}
+.db-items-scroll::-webkit-scrollbar {
+  height: 10px;
+  -webkit-appearance: none;
+}
+.db-items-scroll::-webkit-scrollbar-track {
+  background: #f1f5f9;        /* slate-100 */
+  border-radius: 5px;
+}
+.db-items-scroll::-webkit-scrollbar-thumb {
+  background: #a855f7;        /* violet-500 */
+  border-radius: 5px;
+  border: 2px solid #f1f5f9;
+}
+.db-items-scroll::-webkit-scrollbar-thumb:hover {
+  background: #9333ea;        /* violet-600 */
+}
+/* Dark mode scrollbar */
+.dark .db-items-scroll {
+  scrollbar-color: #c084fc #1e293b;
+}
+.dark .db-items-scroll::-webkit-scrollbar-track {
+  background: #1e293b;        /* slate-800 */
+}
+.dark .db-items-scroll::-webkit-scrollbar-thumb {
+  background: #c084fc;        /* violet-400 */
+  border-color: #1e293b;
+}

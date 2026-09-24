@@ -48,6 +48,14 @@ export async function GET(req: Request) {
         noBku: string | null;
         noBast: string | null;
         tglBayar: string | null;
+        spesifikasiBarang: string | null;
+        // System 2 pricing (kolom AB-AF) — used for PPN-aware Harga Satuan
+        hargaSatuanSebelumPajak: number | null;
+        jumlahHargaSebelumPajak: number | null;
+        hargaTotalAsli: number | null;
+        totalHargaSebelumDPP: number | null;
+        totalHargaAsli: number | null;
+        satuan2: string | null;
       }>;
       totalJumlah: number;
       totalRealisasi: number;
@@ -103,6 +111,13 @@ export async function GET(req: Request) {
         noBast: t.noBast,
         tglBayar: t.tglBayar,
         spesifikasiBarang: t.spesifikasiBarang,
+        // System 2 pricing (kolom AB-AF)
+        hargaSatuanSebelumPajak: t.hargaSatuanSebelumPajak,
+        jumlahHargaSebelumPajak: t.jumlahHargaSebelumPajak,
+        hargaTotalAsli: t.hargaTotalAsli,
+        totalHargaSebelumDPP: t.totalHargaSebelumDPP,
+        totalHargaAsli: t.totalHargaAsli,
+        satuan2: t.satuan2,
       });
       group.totalJumlah += t.jumlah;
       group.totalRealisasi += t.realisasi;

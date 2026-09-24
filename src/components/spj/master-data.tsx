@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   GraduationCap,
   Hash,
+  Image as ImageIcon,
   Info,
   Loader2,
   MapPin,
@@ -76,6 +77,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserManagement } from "@/components/user-management/user-management";
 import { BospManagement } from "@/components/bosp/bosp-management";
+import { LetterheadSettingsPanel } from "@/components/spj/letterhead-settings";
 import { useSession } from "next-auth/react";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -314,7 +316,7 @@ export function MasterData() {
   const isAdmin = (session?.user as any)?.role === "admin";
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <Tabs value={tab} onValueChange={setTab} className="w-full">
         <div className="overflow-x-auto -mx-1 px-1">
           <TabsList className="bg-slate-100 dark:bg-slate-900 h-auto p-1 gap-1">
@@ -345,6 +347,13 @@ export function MasterData() {
             >
               <SchoolIcon className="size-3.5" />
               Sekolah
+            </TabsTrigger>
+            <TabsTrigger
+              value="kop"
+              className="data-[state=active]:bg-rose-600 data-[state=active]:text-white data-[state=active]:shadow-sm gap-1.5"
+            >
+              <ImageIcon className="size-3.5" />
+              KOP
             </TabsTrigger>
             {isAdmin && (
               <TabsTrigger
@@ -378,6 +387,9 @@ export function MasterData() {
         </TabsContent>
         <TabsContent value="school">
           <SchoolTab />
+        </TabsContent>
+        <TabsContent value="kop">
+          <LetterheadSettingsPanel />
         </TabsContent>
         {isAdmin && (
           <TabsContent value="bosp">
@@ -496,7 +508,7 @@ function VendorTab() {
   const isSaving = createMut.isPending || updateMut.isPending;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <FilterHeader tone="rose">
         <SearchInput
           value={searchInput}

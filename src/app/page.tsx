@@ -7,8 +7,8 @@ import { Transactions } from "@/components/spj/transactions";
 import { MasterData } from "@/components/spj/master-data";
 import { Reports } from "@/components/spj/reports";
 import { Documents } from "@/components/spj/documents";
-import { LetterheadSettingsPanel } from "@/components/spj/letterhead-settings";
-import { ImportExcel } from "@/components/spj/import-excel";
+// LetterheadSettingsPanel is now imported by master-data.tsx (KOP tab)
+// ImportExcel component is now imported by data-belanja.tsx directly
 import { DataBelanja } from "@/components/spj/data-belanja";
 import { Toaster } from "@/components/ui/sonner";
 import { LoginModal } from "@/components/auth/login-modal";
@@ -21,8 +21,6 @@ import {
   FileText,
   BarChart3,
   Lock,
-  Image as ImageIcon,
-  Upload,
   ShoppingCart,
   Loader2,
   ExternalLink,
@@ -31,7 +29,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 
-type View = "dashboard" | "transactions" | "documents" | "reports" | "master" | "letterhead" | "import" | "belanja";
+type View = "dashboard" | "transactions" | "documents" | "reports" | "master" | "belanja";
 
 interface NavItem {
   id: View;
@@ -92,22 +90,10 @@ const navItems: NavItem[] = [
     description: "Vendor, produk, BPU",
     color: "cyan",
   },
-  {
-    id: "letterhead",
-    featureKey: "letterhead",
-    label: "Pengaturan KOP",
-    icon: <ImageIcon className="h-4 w-4" />,
-    description: "Logo, font, layout KOP",
-    color: "rose",
-  },
-  {
-    id: "import",
-    featureKey: "import-excel",
-    label: "Import Excel",
-    icon: <Upload className="h-4 w-4" />,
-    description: "Import data dari Excel",
-    color: "emerald",
-  },
+  // Note: "Import Excel" was moved INTO the Data Belanja feature as a button.
+  // Note: "Pengaturan KOP" was moved INTO Master Data as a tab (KOP).
+  // Both keep their original component code unchanged — only the nav entry
+  // was removed and the component is now rendered inside another feature.
 ];
 
 export default function Home() {
@@ -201,7 +187,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-rose-50/30 dark:from-slate-950 dark:via-slate-950 dark:to-rose-950/10">
       {/* Top navigation */}
       <header className="sticky top-0 z-40 border-b bg-white/85 dark:bg-slate-950/85 backdrop-blur-md print:hidden">
-        <div className="flex h-14 items-center px-3 sm:px-4 gap-3">
+        <div className="flex h-14 items-center px-3 sm:px-4 gap-4">
           {/* Logo */}
           <div className="flex items-center gap-2 flex-1 min-w-0">
             <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-rose-600 to-amber-500 flex items-center justify-center text-white shadow-sm flex-shrink-0 overflow-hidden">
@@ -235,11 +221,11 @@ export default function Home() {
             ))}
           </nav>
 
-          {/* User menu (top-right) */}
-          <div className="flex items-center gap-2">
+          {/* User menu (top-right) — more breathing room between groups */}
+          <div className="flex items-center gap-3">
             {/* BOSP indicator */}
             {activeBosp && (
-              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950/40 text-violet-700 dark:text-violet-300">
+              <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950/40 text-violet-700 dark:text-violet-300">
                 <Calendar className="h-3.5 w-3.5" />
                 {activeBosp}
               </div>
@@ -249,13 +235,14 @@ export default function Home() {
               href="https://spj-dokumentasi.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border border-violet-200 dark:border-violet-800 text-violet-700 dark:text-violet-300 hover:bg-violet-50 dark:hover:bg-violet-950/40 transition-colors"
+              className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border border-violet-200 dark:border-violet-800 text-violet-700 dark:text-violet-300 hover:bg-violet-50 dark:hover:bg-violet-950/40 transition-colors"
               title="Buka Dokumentasi SPJ di tab baru"
             >
               <ExternalLink className="h-3.5 w-3.5" />
               Dokumentasi
             </a>
-            <div className="hidden sm:flex items-center gap-1.5 text-xs">
+            {/* Excel password badge — compact, only show on xl screens */}
+            <div className="hidden xl:flex items-center gap-1.5 text-xs" title="Password file Excel sumber">
               <Lock className="h-3 w-3 text-rose-500" />
               <span className="text-muted-foreground">Excel:</span>
               <Badge
@@ -265,6 +252,8 @@ export default function Home() {
                 88dina
               </Badge>
             </div>
+            {/* Divider between info badges and user menu */}
+            <div className="hidden sm:block h-6 w-px bg-border" />
             <UserMenu user={user} />
           </div>
         </div>
@@ -292,8 +281,6 @@ export default function Home() {
           {effectiveView === "documents" && <Documents />}
           {effectiveView === "reports" && <Reports />}
           {effectiveView === "master" && <MasterData />}
-          {effectiveView === "letterhead" && <LetterheadSettingsPanel />}
-          {effectiveView === "import" && <ImportExcel />}
         </div>
       </main>
 

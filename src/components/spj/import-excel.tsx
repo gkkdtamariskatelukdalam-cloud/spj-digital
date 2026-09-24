@@ -258,7 +258,7 @@ export function ImportExcel() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Header */}
       <Card className="border-l-4 border-l-emerald-500">
         <CardHeader className="pb-3">
@@ -320,10 +320,10 @@ export function ImportExcel() {
                   di 5 tab berikut:
                 </p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-                <div className="flex items-start gap-2 p-2 rounded-md bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 items-stretch">
+                <div className="flex items-start gap-2 p-2 rounded-md bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800 h-full">
                   <LayoutDashboard className="h-4 w-4 text-rose-600 flex-shrink-0 mt-0.5" />
-                  <div>
+                  <div className="flex-1">
                     <div className="text-xs font-semibold text-rose-700 dark:text-rose-300">
                       Dashboard
                     </div>
@@ -333,9 +333,9 @@ export function ImportExcel() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-2 p-2 rounded-md bg-violet-50 dark:bg-violet-950/30 border border-violet-200 dark:border-violet-800">
+                <div className="flex items-start gap-2 p-2 rounded-md bg-violet-50 dark:bg-violet-950/30 border border-violet-200 dark:border-violet-800 h-full">
                   <Receipt className="h-4 w-4 text-violet-600 flex-shrink-0 mt-0.5" />
-                  <div>
+                  <div className="flex-1">
                     <div className="text-xs font-semibold text-violet-700 dark:text-violet-300">
                       Transaksi
                     </div>
@@ -345,9 +345,9 @@ export function ImportExcel() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-2 p-2 rounded-md bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800">
+                <div className="flex items-start gap-2 p-2 rounded-md bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 h-full">
                   <FileText className="h-4 w-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-                  <div>
+                  <div className="flex-1">
                     <div className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">
                       Dokumen SPJ
                     </div>
@@ -357,9 +357,9 @@ export function ImportExcel() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-2 p-2 rounded-md bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800">
+                <div className="flex items-start gap-2 p-2 rounded-md bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 h-full">
                   <BarChart3 className="h-4 w-4 text-amber-600 flex-shrink-0 mt-0.5" />
-                  <div>
+                  <div className="flex-1">
                     <div className="text-xs font-semibold text-amber-700 dark:text-amber-300">
                       Laporan
                     </div>
@@ -369,9 +369,9 @@ export function ImportExcel() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-2 p-2 rounded-md bg-cyan-50 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-800">
+                <div className="flex items-start gap-2 p-2 rounded-md bg-cyan-50 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-800 h-full">
                   <Database className="h-4 w-4 text-cyan-600 flex-shrink-0 mt-0.5" />
-                  <div>
+                  <div className="flex-1">
                     <div className="text-xs font-semibold text-cyan-700 dark:text-cyan-300">
                       Master Data
                     </div>
@@ -380,17 +380,14 @@ export function ImportExcel() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-2 p-2 rounded-md bg-slate-50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800">
+                <div className="flex items-start gap-2 p-2 rounded-md bg-slate-50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 h-full">
                   <DatabaseIcon className="h-4 w-4 text-slate-600 flex-shrink-0 mt-0.5" />
-                  <div>
+                  <div className="flex-1">
                     <div className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                      Database (SQLite)
+                      Database (Postgres)
                     </div>
                     <div className="text-[10px] text-muted-foreground">
-                      File:{" "}
-                      <code className="font-mono text-[9px]">
-                        db/custom.db
-                      </code>
+                      Tersimpan di Neon Postgres (production DB)
                     </div>
                   </div>
                 </div>

@@ -347,7 +347,7 @@ export function Reports() {
   const [tab, setTab] = useState("monthly");
 
   return (
-    <Tabs value={tab} onValueChange={setTab} className="space-y-4">
+    <Tabs value={tab} onValueChange={setTab} className="space-y-6">
       <div className="overflow-x-auto -mx-1 px-1 pb-1">
         <TabsList className="bg-muted/60 h-auto py-1 gap-1">
           <TabsTrigger

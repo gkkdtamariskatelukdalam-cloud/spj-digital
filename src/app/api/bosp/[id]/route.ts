@@ -4,7 +4,8 @@ import { db } from "@/lib/db";
 import { authOptions } from "@/lib/auth";
 
 interface RouteParams {
-  params: { id: string };
+  // Next.js 16: params is a Promise — must be awaited before accessing .id
+  params: Promise<{ id: string }>;
 }
 
 // PUT /api/bosp/[id] — activate this BOSP year (deactivate all others)
@@ -14,19 +15,22 @@ export async function PUT(req: Request, { params }: RouteParams) {
     if (!session || (session.user as any)?.role !== "admin") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    
+
+    // Await params to get the id (Next.js 16 async params)
+    const { id } = await params;
+
     // Deactivate all
     await db.tahunBOSP.updateMany({
       where: { isActive: true },
       data: { isActive: false },
     });
-    
+
     // Activate selected
     const bosp = await db.tahunBOSP.update({
-      where: { id: params.id },
+      where: { id },
       data: { isActive: true },
     });
-    
+
     // Update School year
     const yearMatch = bosp.tahun.match(/\d{4}/);
     if (yearMatch) {
@@ -38,7 +42,7 @@ export async function PUT(req: Request, { params }: RouteParams) {
         });
       }
     }
-    
+
     return NextResponse.json({ bosp });
   } catch (e) {
     console.error("PUT /api/bosp/[id] error:", e);
@@ -56,24 +60,27 @@ export async function DELETE(_req: Request, { params }: RouteParams) {
     if (!session || (session.user as any)?.role !== "admin") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    
-    const target = await db.tahunBOSP.findUnique({ where: { id: params.id } });
+
+    // Await params to get the id (Next.js 16 async params)
+    const { id } = await params;
+
+    const target = await db.tahunBOSP.findUnique({ where: { id } });
     if (!target) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
     if (target.isActive) {
       return NextResponse.json({ error: "Tidak bisa menghapus BOSP yang aktif" }, { status: 400 });
     }
-    
-    const txCount = await db.transaction.count({ where: { tahunBospId: params.id } });
+
+    const txCount = await db.transaction.count({ where: { tahunBospId: id } });
     if (txCount > 0) {
       return NextResponse.json(
         { error: `Tidak bisa menghapus — masih ada ${txCount} transaksi` },
         { status: 400 },
       );
     }
-    
-    await db.tahunBOSP.delete({ where: { id: params.id } });
+
+    await db.tahunBOSP.delete({ where: { id } });
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error("DELETE /api/bosp/[id] error:", e);

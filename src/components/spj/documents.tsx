@@ -170,7 +170,7 @@ export function Documents() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Header */}
       <Card className="print:hidden">
         <CardHeader className="pb-3">

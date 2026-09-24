@@ -179,6 +179,17 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
   // - Food/drink items → PPh 23 2% = first item price × 2%, DPP = total - PPh
   // - Food keywords: Nasi Kotak, Kue Kotak, Kue, Aqua Botol, Aqua Cup
   // - Label: "Harga Total" if food, "Harga sebelum PPN" if non-food
+  //
+  // HARGA SATUAN DISPLAY RULE (per user request):
+  // - If document total > 2.000.000 (PPN applies) → Harga Satuan per item = kolom AE
+  //   (Total Harga Sebelum DPP = item's DPP = AF/1.11). This is the pre-PPN amount
+  //   per item, so PPN can be calculated and added on top.
+  // - If document total < 2.000.000 (no PPN) → Harga Satuan per item = kolom AF
+  //   (Total Harga Asli = item's actual final price, no tax adjustment).
+  //
+  // Verified from Excel data:
+  //   AE = AF / 1.11 (per-item DPP, matches 100% across all PESAN with PPN)
+  //   AF = AD (final total per item, includes PPN if applicable)
   const PPN_THRESHOLD = 2_000_000;
   const FOOD_KEYWORDS = ["Nasi Kotak", "Kue Kotak", "Kue", "Aqua Botol", "Aqua Cup"];
 
@@ -217,6 +228,17 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
 
   // Dynamic label per Excel G89 formula
   const hargaLabel = hasFoodItems ? "Harga Total" : "Harga sebelum PPN";
+
+  // Helper: determine displayed Harga Satuan per item based on PPN applicability.
+  // Falls back to tarifHarga (kolom N) if AE/AF is null (data belum diisi).
+  const getDisplayedHargaSatuan = (item: typeof items[number]): number => {
+    if (isPpnApplicable) {
+      // PPN applies → use kolom AE (Total Harga Sebelum DPP = DPP per item)
+      return item.totalHargaSebelumDPP ?? item.tarifHarga ?? 0;
+    }
+    // No PPN → use kolom AF (Total Harga Asli = actual final price per item)
+    return item.totalHargaAsli ?? item.tarifHarga ?? 0;
+  };
 
   const vendorName = orDash(group.vendorName);
   const vendorOwner = orDash(group.vendorOwner);
@@ -383,7 +405,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                   {orDash(item.satuan)}
                 </td>
                 <td style={{ ...cellStyle, textAlign: "right" }}>
-                  Rp {formatNumber(item.tarifHarga)}
+                  Rp {formatNumber(getDisplayedHargaSatuan(item))}
                 </td>
                 <td style={{ ...cellStyle, textAlign: "right" }}>
                   Rp {formatNumber(item.jumlah)}

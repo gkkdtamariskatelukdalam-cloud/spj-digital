@@ -158,7 +158,7 @@ export function Dashboard() {
   const schoolYear = school?.year ?? 2025;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* ===== Hero header ===== */}
       <Card className="overflow-hidden border-0 bg-gradient-to-br from-slate-900 via-slate-800 to-rose-900 text-white shadow-lg">
         <CardContent className="p-6 sm:p-8">
@@ -202,7 +202,7 @@ export function Dashboard() {
       </Card>
 
       {/* ===== Stat tiles ===== */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
         <StatTile
           icon={<Wallet className="h-4 w-4" />}
           label="Total Pengeluaran"
@@ -242,7 +242,7 @@ export function Dashboard() {
       </div>
 
       {/* ===== Charts row ===== */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-stretch">
         {/* Monthly spending chart */}
         <Card className="lg:col-span-3">
           <CardHeader className="pb-2">
@@ -368,7 +368,7 @@ export function Dashboard() {
       </div>
 
       {/* ===== Quick stats row ===== */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
         <QuickStat
           icon={<Package className="h-4 w-4" />}
           label="Total Produk"
@@ -416,15 +416,15 @@ function StatTile({
   const t = toneMap[tone];
   return (
     <Card
-      className={`gap-0 py-0 border ${t.ring} hover:shadow-md transition-shadow`}
+      className={`gap-0 py-0 border h-full flex flex-col ${t.ring} hover:shadow-md transition-shadow`}
     >
-      <CardContent className="p-4 space-y-3">
+      <CardContent className="p-4 space-y-3 flex flex-col flex-1">
         <div
           className={`inline-flex items-center justify-center h-9 w-9 rounded-md ${t.iconBg} ${t.iconText}`}
         >
           {icon}
         </div>
-        <div>
+        <div className="flex-1">
           <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">
             {label}
           </div>
@@ -452,15 +452,15 @@ function QuickStat({
   const t = toneMap[tone];
   return (
     <Card
-      className={`gap-0 py-0 border ${t.ring} hover:shadow-sm transition-shadow`}
+      className={`gap-0 py-0 border h-full flex flex-col ${t.ring} hover:shadow-sm transition-shadow`}
     >
-      <CardContent className="p-3 flex items-center gap-3">
+      <CardContent className="p-3 flex items-center gap-3 flex-1">
         <div
           className={`inline-flex items-center justify-center h-9 w-9 rounded-md ${t.iconBg} ${t.iconText} flex-shrink-0`}
         >
           {icon}
         </div>
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">
             {label}
           </div>

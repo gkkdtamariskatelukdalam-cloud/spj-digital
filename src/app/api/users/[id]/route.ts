@@ -5,7 +5,8 @@ import { db } from "@/lib/db";
 import { authOptions, ALL_FEATURE_KEYS } from "@/lib/auth";
 
 interface RouteParams {
-  params: { id: string };
+  // Next.js 16: params is a Promise — must be awaited before accessing .id
+  params: Promise<{ id: string }>;
 }
 
 // GET /api/users/[id] — fetch single user (admin only)
@@ -15,8 +16,9 @@ export async function GET(_req: Request, { params }: RouteParams) {
     if (!session || (session.user as any)?.role !== "admin") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+    const { id } = await params;
     const user = await db.user.findUnique({
-      where: { id: params.id },
+      where: { id },
       select: {
         id: true,
         name: true,
@@ -53,6 +55,7 @@ export async function PUT(req: Request, { params }: RouteParams) {
     if (!session || (session.user as any)?.role !== "admin") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+    const { id } = await params;
     const body = await req.json();
     const { name, username, password, role, enabledFeatures, isActive } =
       body as {
@@ -72,7 +75,7 @@ export async function PUT(req: Request, { params }: RouteParams) {
       const exists = await db.user.findUnique({
         where: { username: username.trim() },
       });
-      if (exists && exists.id !== params.id) {
+      if (exists && exists.id !== id) {
         return NextResponse.json(
           { error: "Username sudah dipakai" },
           { status: 409 },
@@ -93,7 +96,7 @@ export async function PUT(req: Request, { params }: RouteParams) {
     if (typeof isActive === "boolean") update.isActive = isActive;
 
     const updated = await db.user.update({
-      where: { id: params.id },
+      where: { id },
       data: update,
       select: {
         id: true,
@@ -130,7 +133,8 @@ export async function DELETE(_req: Request, { params }: RouteParams) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const target = await db.user.findUnique({ where: { id: params.id } });
+    const { id } = await params;
+    const target = await db.user.findUnique({ where: { id } });
     if (!target) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
@@ -151,7 +155,7 @@ export async function DELETE(_req: Request, { params }: RouteParams) {
         { status: 400 },
       );
     }
-    await db.user.delete({ where: { id: params.id } });
+    await db.user.delete({ where: { id } });
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error("DELETE /api/users/[id] error:", e);

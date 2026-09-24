@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -47,9 +46,11 @@ import {
   Hash,
   Printer,
   Download,
+  Upload,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DocumentPreview, CetakMenuButton } from "@/components/spj/document-preview";
+import { ImportExcel } from "@/components/spj/import-excel";
 import { useAllPrintStatuses } from "@/hooks/use-spj";
 import {
   useTransactions,
@@ -77,6 +78,9 @@ export interface PesananGroup {
 }
 
 // Convert PesananGroup to DocumentGroup (for document preview)
+// Passes ALL imported fields (including System 2 kolom AB-AF) so the
+// PESAN document preview uses the correct Harga Satuan (AE when PPN,
+// AF when no PPN) — matching the Dokumen SPJ tab's behavior.
 function pesananGroupToDocGroup(g: PesananGroup): import("@/lib/types/spj").DocumentGroup {
   return {
     key: g.key,
@@ -93,6 +97,8 @@ function pesananGroupToDocGroup(g: PesananGroup): import("@/lib/types/spj").Docu
     vendorOwner: g.items[0]?.direkturToko1 || g.items[0]?.vendor?.owner || null,
     vendorPhone: g.items[0]?.noHp || g.items[0]?.vendor?.phone || null,
     vendorAddress: g.items[0]?.alamatToko1 || g.items[0]?.vendor?.address || null,
+    kodeProgram: g.items[0]?.kodeProgram || null,
+    kodeRekening: g.items[0]?.kodeRekening || null,
     items: g.items.map((t) => ({
       id: t.id,
       uraian: t.uraian,
@@ -106,6 +112,14 @@ function pesananGroupToDocGroup(g: PesananGroup): import("@/lib/types/spj").Docu
       noBast: t.noBast,
       tglBayar: t.tglBayar,
       spesifikasiBarang: t.spesifikasiBarang,
+      // System 2 pricing (kolom AB-AF) — needed by PESAN document
+      // for PPN-aware Harga Satuan display
+      hargaSatuanSebelumPajak: t.hargaSatuanSebelumPajak,
+      jumlahHargaSebelumPajak: t.jumlahHargaSebelumPajak,
+      hargaTotalAsli: t.hargaTotalAsli,
+      totalHargaSebelumDPP: t.totalHargaSebelumDPP,
+      totalHargaAsli: t.totalHargaAsli,
+      satuan2: t.satuan2,
     })),
     totalJumlah: g.totalJumlah,
     totalRealisasi: g.totalJumlah,
@@ -120,6 +134,7 @@ export function DataBelanja() {
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(new Set());
   const [editingTx, setEditingTx] = useState<Transaction | null>(null);
   const [showAdd, setShowAdd] = useState(false);
+  const [showImport, setShowImport] = useState(false);
   
   // Preview state
   const [previewGroup, setPreviewGroup] = useState<PesananGroup | null>(null);
@@ -236,7 +251,7 @@ export function DataBelanja() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Header */}
       <Card className="border-l-4 border-l-violet-500">
         <CardHeader className="pb-3">
@@ -330,6 +345,14 @@ export function DataBelanja() {
               >
                 <Printer className="h-3.5 w-3.5 mr-1" />
                 Cetak Semua SPJ
+              </Button>
+              <Button
+                onClick={() => setShowImport(true)}
+                size="sm"
+                className="bg-emerald-600 hover:bg-emerald-700"
+              >
+                <Upload className="h-3.5 w-3.5 mr-1" />
+                Import Excel
               </Button>
               <Button onClick={() => setShowAdd(true)} size="sm">
                 <Plus className="h-3.5 w-3.5 mr-1" />
@@ -450,9 +473,20 @@ export function DataBelanja() {
               </p>
             </div>
           ) : (
-            <ScrollArea className="h-[650px]">
+            /* Using native overflow-y-auto instead of Radix ScrollArea.
+               Radix ScrollArea's viewport intercepts wheel events, which
+               prevents the inner items table (.overflow-x-auto) from
+               scrolling horizontally when the user tries to scroll right.
+               Native overflow lets each scroll container handle its own
+               scroll independently. */
+            <div className="h-[650px] overflow-y-auto overflow-x-hidden rounded-md border border-slate-200 dark:border-slate-800">
               {/* === MASTER TABLE: 1 row per No. Pesanan === */}
-              <table className="w-full border-separate border-spacing-0 text-xs">
+              {/* table-fixed ensures column widths are fixed (from thead),
+                  preventing the table from expanding when an expanded row
+                  contains a wide items table (34 cols). Without table-fixed,
+                  the td colSpan={11} expands to fit the items table (3754px),
+                  pushing the whole master table wider than the viewport. */}
+              <table className="w-full table-fixed border-separate border-spacing-0 text-xs">
                 <thead className="sticky top-0 z-30">
                   <tr className="bg-card border-b">
                     <th className="w-8 p-2 border-b text-center"></th>
@@ -492,7 +526,7 @@ export function DataBelanja() {
                   })}
                 </tbody>
               </table>
-            </ScrollArea>
+            </div>
           )}
         </CardContent>
       </Card>
@@ -504,6 +538,25 @@ export function DataBelanja() {
 
       {/* Add Dialog */}
       {showAdd && <AddBelanjaDialog onClose={() => setShowAdd(false)} />}
+
+      {/* Import Excel Dialog — moved from navbar into Data Belanja */}
+      <Dialog open={showImport} onOpenChange={setShowImport}>
+        <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Upload className="h-4 w-4 text-emerald-600" />
+              Import Excel — Data Belanja
+            </DialogTitle>
+            <DialogDescription className="text-xs">
+              Upload file Excel (.xlsx) untuk import data transaksi, vendor,
+              dan BPU. Data akan masuk ke tabel Data Belanja otomatis.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-2">
+            <ImportExcel />
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Document Preview Modal */}
       <DocumentPreview
@@ -664,21 +717,51 @@ function PesananRow({
                   — {group.itemCount} barang
                 </span>
               </div>
-              {/* Items table */}
-              <div className="overflow-x-auto rounded-md border border-slate-200 dark:border-slate-800">
-                <table className="w-full border-collapse text-xs">
+              {/* Items table — ALL 34 imported columns (kolom A-AH) */}
+              {/* NO w-full on table — let it use natural width (sum of column
+                  min-widths ~3754px) so the overflow-x-auto div scrolls. */}
+              <div className="db-items-scroll w-full rounded-md border border-slate-200 dark:border-slate-800">
+                <table className="border-collapse text-xs">
                   <thead>
                     <tr className="bg-slate-100 dark:bg-slate-800">
-                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-10">No</th>
-                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[200px]">
-                        Nama Barang <span className="text-muted-foreground font-normal">(klik untuk edit)</span>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-10 sticky left-0 bg-slate-100 dark:bg-slate-800 z-10">No</th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-12" title="Kolom A">A<br/><span className="text-[9px] font-normal text-muted-foreground">No. Pesan</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-14" title="Kolom B">B<br/><span className="text-[9px] font-normal text-muted-foreground">No. BKU</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[120px]" title="Kolom C">C<br/><span className="text-[9px] font-normal text-muted-foreground">Kode Program</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[150px]" title="Kolom D">D<br/><span className="text-[9px] font-normal text-muted-foreground">Kode Rekening</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-24" title="Kolom E">E<br/><span className="text-[9px] font-normal text-muted-foreground">Tgl Perencanaan</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-24" title="Kolom F">F<br/><span className="text-[9px] font-normal text-muted-foreground">Tgl Pesanan</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-24" title="Kolom G">G<br/><span className="text-[9px] font-normal text-muted-foreground">Tgl BAST</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-24" title="Kolom H">H<br/><span className="text-[9px] font-normal text-muted-foreground">Tgl Periksa</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-24" title="Kolom I">I<br/><span className="text-[9px] font-normal text-muted-foreground">Tgl Bayar</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[200px]" title="Kolom J">J<br/><span className="text-[9px] font-normal text-muted-foreground">Uraian Kegiatan</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[180px]" title="Kolom K — klik untuk edit">
+                        K<br/><span className="text-[9px] font-normal text-muted-foreground">Nama Barang (klik edit)</span>
                       </th>
-                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[200px]">Uraian Kegiatan</th>
-                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-20">Volume</th>
-                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-20">Satuan</th>
-                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-right w-28">Harga Satuan</th>
-                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-right w-32">Jumlah</th>
-                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-20">Status</th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-16" title="Kolom L">L<br/><span className="text-[9px] font-normal text-muted-foreground">Volume</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-16" title="Kolom M">M<br/><span className="text-[9px] font-normal text-muted-foreground">Satuan</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-right w-28" title="Kolom N">N<br/><span className="text-[9px] font-normal text-muted-foreground">Harga Satuan</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-right w-32" title="Kolom O">O<br/><span className="text-[9px] font-normal text-muted-foreground">Jumlah</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[120px]" title="Kolom P">P<br/><span className="text-[9px] font-normal text-muted-foreground">Kategori Belanja</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[180px]" title="Kolom Q">Q<br/><span className="text-[9px] font-normal text-muted-foreground">Spesifikasi Barang</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-right w-24" title="Kolom R">R<br/><span className="text-[9px] font-normal text-muted-foreground">Harga Toko 1</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-right w-24" title="Kolom S">S<br/><span className="text-[9px] font-normal text-muted-foreground">Harga Toko 2</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[140px]" title="Kolom T">T<br/><span className="text-[9px] font-normal text-muted-foreground">Nama Toko 1</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[140px]" title="Kolom U">U<br/><span className="text-[9px] font-normal text-muted-foreground">Nama Toko 2</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[120px]" title="Kolom V">V<br/><span className="text-[9px] font-normal text-muted-foreground">Direktur Toko 1</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[180px]" title="Kolom W">W<br/><span className="text-[9px] font-normal text-muted-foreground">Alamat Toko 1</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[180px]" title="Kolom X">X<br/><span className="text-[9px] font-normal text-muted-foreground">Alamat Toko 2</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[120px]" title="Kolom Y">Y<br/><span className="text-[9px] font-normal text-muted-foreground">Uraian Kwitansi</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[140px]" title="Kolom Z">Z<br/><span className="text-[9px] font-normal text-muted-foreground">Nama Pekerjaan/Kategori</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-16" title="Kolom AA">AA<br/><span className="text-[9px] font-normal text-muted-foreground">Satuan (Kwitansi)</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-right w-28" title="Kolom AB">AB<br/><span className="text-[9px] font-normal text-muted-foreground">Hrg Satuan Sebelum Pajak</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-right w-28" title="Kolom AC">AC<br/><span className="text-[9px] font-normal text-muted-foreground">Jumlah Harga Sebelum Pajak</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-right w-28" title="Kolom AD">AD<br/><span className="text-[9px] font-normal text-muted-foreground">Harga Total Asli</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-right w-28" title="Kolom AE — dipakai PESAN jika PPN">AE<br/><span className="text-[9px] font-normal text-rose-600">Total Sebelum DPP</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-right w-28" title="Kolom AF — dipakai PESAN jika no PPN">AF<br/><span className="text-[9px] font-normal text-rose-600">Total Harga Asli</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[120px]" title="Kolom AG">AG<br/><span className="text-[9px] font-normal text-muted-foreground">Alamat Surat Balasan</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-left min-w-[120px]" title="Kolom AH">AH<br/><span className="text-[9px] font-normal text-muted-foreground">No. HP</span></th>
+                      <th className="p-2 border border-slate-200 dark:border-slate-700 text-center w-20" title="Status">Status</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -695,13 +778,13 @@ function PesananRow({
                   {/* Total row */}
                   <tfoot>
                     <tr className="bg-slate-100 dark:bg-slate-800 font-bold">
-                      <td colSpan={6} className="p-2 border border-slate-200 dark:border-slate-700 text-right">
+                      <td colSpan={15} className="p-2 border border-slate-200 dark:border-slate-700 text-right">
                         TOTAL
                       </td>
                       <td className="p-2 border border-slate-200 dark:border-slate-700 text-right font-mono text-rose-700 dark:text-rose-300">
                         {formatRupiah(group.totalJumlah)}
                       </td>
-                      <td className="p-2 border border-slate-200 dark:border-slate-700"></td>
+                      <td colSpan={19} className="p-2 border border-slate-200 dark:border-slate-700"></td>
                     </tr>
                   </tfoot>
                 </table>
@@ -781,7 +864,7 @@ function PrintStatusBadges({
   );
 }
 
-// === Item Row (inside expanded group) ===
+// === Item Row (inside expanded group) — displays ALL 34 imported columns (A-AH) ===
 function ItemRow({
   item,
   index,
@@ -793,6 +876,19 @@ function ItemRow({
   isDraft: boolean;
   onEdit: () => void;
 }) {
+  // Helper: format date or dash
+  const fmtDate = (d: string | null | undefined) =>
+    d ? formatDateShort(d) : <span className="text-muted-foreground/40">—</span>;
+  // Helper: format number or dash
+  const fmtNum = (v: number | null | undefined) =>
+    v != null && v > 0 ? formatRupiah(v) : <span className="text-muted-foreground/40">—</span>;
+  // Helper: format plain number (no currency) or dash
+  const fmtPlainNum = (v: number | null | undefined) =>
+    v != null && v > 0 ? v.toLocaleString("id-ID") : <span className="text-muted-foreground/40">—</span>;
+  // Helper: format string or dash
+  const fmtStr = (s: string | null | undefined) =>
+    s ? s : <span className="text-muted-foreground/40">—</span>;
+
   return (
     <tr
       className={cn(
@@ -800,13 +896,54 @@ function ItemRow({
         isDraft && "bg-amber-50/30 dark:bg-amber-950/10"
       )}
     >
-      <td className="p-2 border border-slate-200 dark:border-slate-700 text-center font-mono text-muted-foreground">
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-center font-mono text-muted-foreground sticky left-0 bg-inherit z-10">
         {index}
       </td>
-      {/* Nama Barang - CLICKABLE */}
+      {/* A: No. Surat Pesan */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-center font-mono">
+        {fmtStr(item.noPesan)}
+      </td>
+      {/* B: No. BKU */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-center font-mono">
+        {fmtStr(item.noBku)}
+      </td>
+      {/* C: Kode Program */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left font-mono text-[10px]">
+        {fmtStr(item.kodeProgram)}
+      </td>
+      {/* D: Kode Rekening */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left font-mono text-[10px]">
+        {fmtStr(item.kodeRekening)}
+      </td>
+      {/* E: Tgl Perencanaan */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-center">
+        {fmtDate(item.tglPerencanaan)}
+      </td>
+      {/* F: Tgl Pesanan */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-center">
+        {fmtDate(item.tglPesan)}
+      </td>
+      {/* G: Tgl BAST */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-center">
+        {fmtDate(item.tglBast)}
+      </td>
+      {/* H: Tgl Pemeriksaan */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-center">
+        {fmtDate(item.tglPeriksa)}
+      </td>
+      {/* I: Tgl Bayar */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-center">
+        {fmtDate(item.tglBayar)}
+      </td>
+      {/* J: Uraian Kegiatan */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left text-[10px] max-w-[200px] truncate" title={item.uraian || ""}>
+        {fmtStr(item.uraian)}
+      </td>
+      {/* K: Nama Barang - CLICKABLE */}
       <td
-        className="p-2 border border-slate-200 dark:border-slate-700 cursor-pointer text-violet-700 dark:text-violet-300 hover:underline"
+        className="p-2 border border-slate-200 dark:border-slate-700 cursor-pointer text-violet-700 dark:text-violet-300 hover:underline max-w-[200px] truncate"
         onClick={onEdit}
+        title={item.namaBarang || item.uraian || "(belum diisi) - klik untuk edit"}
       >
         {item.namaBarang ? (
           <span className="font-medium">{item.namaBarang}</span>
@@ -814,25 +951,103 @@ function ItemRow({
           <span className="font-medium">{item.uraian}</span>
         ) : (
           <span className="text-muted-foreground/50 italic">
-            (belum diisi) - klik untuk edit
+            (belum diisi) - klik edit
           </span>
         )}
       </td>
-      <td className="p-2 border border-slate-200 dark:border-slate-700 text-muted-foreground">
-        {item.uraian || <span className="text-muted-foreground/40">—</span>}
-      </td>
+      {/* L: Volume */}
       <td className="p-2 border border-slate-200 dark:border-slate-700 text-center font-mono">
         {item.volume > 0 ? item.volume : "—"}
       </td>
+      {/* M: Satuan */}
       <td className="p-2 border border-slate-200 dark:border-slate-700 text-center">
-        {item.satuan || "—"}
+        {fmtStr(item.satuan)}
       </td>
+      {/* N: Harga Satuan */}
       <td className="p-2 border border-slate-200 dark:border-slate-700 text-right font-mono">
-        {item.tarifHarga > 0 ? formatRupiah(item.tarifHarga) : "—"}
+        {fmtNum(item.tarifHarga)}
       </td>
+      {/* O: Jumlah */}
       <td className="p-2 border border-slate-200 dark:border-slate-700 text-right font-mono font-semibold text-rose-700 dark:text-rose-300">
-        {item.jumlah > 0 ? formatRupiah(item.jumlah) : "—"}
+        {fmtNum(item.jumlah)}
       </td>
+      {/* P: Kategori Belanja */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left text-[10px]">
+        {fmtStr(item.kategoriBelanja)}
+      </td>
+      {/* Q: Spesifikasi Barang */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left text-[10px] max-w-[180px] truncate" title={item.spesifikasiBarang || ""}>
+        {fmtStr(item.spesifikasiBarang)}
+      </td>
+      {/* R: Harga Toko 1 */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-right font-mono">
+        {fmtNum(item.hargaToko1)}
+      </td>
+      {/* S: Harga Toko 2 */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-right font-mono">
+        {fmtNum(item.hargaToko2)}
+      </td>
+      {/* T: Nama Toko 1 */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left text-[10px] max-w-[140px] truncate" title={item.namaToko1 || ""}>
+        {fmtStr(item.namaToko1)}
+      </td>
+      {/* U: Nama Toko 2 */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left text-[10px] max-w-[140px] truncate" title={item.namaToko2 || ""}>
+        {fmtStr(item.namaToko2)}
+      </td>
+      {/* V: Direktur Toko 1 */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left text-[10px] max-w-[120px] truncate" title={item.direkturToko1 || ""}>
+        {fmtStr(item.direkturToko1)}
+      </td>
+      {/* W: Alamat Toko 1 */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left text-[10px] max-w-[180px] truncate" title={item.alamatToko1 || ""}>
+        {fmtStr(item.alamatToko1)}
+      </td>
+      {/* X: Alamat Toko 2 */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left text-[10px] max-w-[180px] truncate" title={item.alamatToko2 || ""}>
+        {fmtStr(item.alamatToko2)}
+      </td>
+      {/* Y: Uraian Kwitansi */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left text-[10px] max-w-[120px] truncate" title={item.uraianKwitansi || ""}>
+        {fmtStr(item.uraianKwitansi)}
+      </td>
+      {/* Z: Nama Pekerjaan / Kategori */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left text-[10px] max-w-[140px] truncate" title={item.namaPekerjaanKategori || ""}>
+        {fmtStr(item.namaPekerjaanKategori)}
+      </td>
+      {/* AA: Satuan (Kwitansi) */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-center">
+        {fmtStr(item.satuan2)}
+      </td>
+      {/* AB: Harga Satuan Sebelum Pajak */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-right font-mono">
+        {fmtNum(item.hargaSatuanSebelumPajak)}
+      </td>
+      {/* AC: Jumlah Harga Sebelum Pajak */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-right font-mono">
+        {fmtNum(item.jumlahHargaSebelumPajak)}
+      </td>
+      {/* AD: Harga Total Asli */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-right font-mono">
+        {fmtNum(item.hargaTotalAsli)}
+      </td>
+      {/* AE: Total Harga Sebelum DPP — highlighted (PPN-aware) */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-right font-mono bg-rose-50/50 dark:bg-rose-950/20" title="Dipakai PESAN saat PPN applies (total > 2 juta)">
+        {fmtNum(item.totalHargaSebelumDPP)}
+      </td>
+      {/* AF: Total Harga Asli — highlighted (PPN-aware) */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-right font-mono bg-rose-50/50 dark:bg-rose-950/20" title="Dipakai PESAN saat no PPN (total < 2 juta)">
+        {fmtNum(item.totalHargaAsli)}
+      </td>
+      {/* AG: Alamat Surat Balasan Toko */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left text-[10px] max-w-[120px] truncate" title={item.alamatSuratBalasan || ""}>
+        {fmtStr(item.alamatSuratBalasan)}
+      </td>
+      {/* AH: NO HP */}
+      <td className="p-2 border border-slate-200 dark:border-slate-700 text-left font-mono text-[10px]">
+        {fmtStr(item.noHp)}
+      </td>
+      {/* Status */}
       <td className="p-2 border border-slate-200 dark:border-slate-700 text-center">
         {item.status === "draft" ? (
           <Badge variant="outline" className="text-[9px] border-amber-400 text-amber-700 dark:text-amber-300">
@@ -899,7 +1114,12 @@ function EditBelanjaDialog({
     uraianKwitansi: tx.uraianKwitansi || "",
     namaPekerjaanKategori: tx.namaPekerjaanKategori || "",
     satuan2: tx.satuan2 || "",
+    // System 2 pricing (kolom AB-AF) — used for PPN-aware PESAN document
     hargaSatuanSebelumPajak: tx.hargaSatuanSebelumPajak ? String(tx.hargaSatuanSebelumPajak) : "",
+    jumlahHargaSebelumPajak: tx.jumlahHargaSebelumPajak ? String(tx.jumlahHargaSebelumPajak) : "",
+    hargaTotalAsli: tx.hargaTotalAsli ? String(tx.hargaTotalAsli) : "",
+    totalHargaSebelumDPP: tx.totalHargaSebelumDPP ? String(tx.totalHargaSebelumDPP) : "",
+    totalHargaAsli: tx.totalHargaAsli ? String(tx.totalHargaAsli) : "",
     alamatSuratBalasan: tx.alamatSuratBalasan || "",
     vendorId: tx.vendorId || "__none__",
     bulan: tx.bulan ? String(tx.bulan) : "",
@@ -946,7 +1166,12 @@ function EditBelanjaDialog({
           uraianKwitansi: form.uraianKwitansi || null,
           namaPekerjaanKategori: form.namaPekerjaanKategori || null,
           satuan2: form.satuan2 || null,
+          // System 2 pricing (kolom AB-AF) — used by PESAN document
           hargaSatuanSebelumPajak: numOrNull(form.hargaSatuanSebelumPajak),
+          jumlahHargaSebelumPajak: numOrNull(form.jumlahHargaSebelumPajak),
+          hargaTotalAsli: numOrNull(form.hargaTotalAsli),
+          totalHargaSebelumDPP: numOrNull(form.totalHargaSebelumDPP),
+          totalHargaAsli: numOrNull(form.totalHargaAsli),
           alamatSuratBalasan: form.alamatSuratBalasan || null,
           vendorId: form.vendorId && form.vendorId !== "__none__" ? form.vendorId : null,
           bulan: form.bulan ? parseInt(form.bulan) : null,
@@ -1279,11 +1504,48 @@ function EditBelanjaDialog({
                 />
               </div>
               <div>
-                <Label className="text-xs">Harga Satuan Sebelum Pajak (Rp)</Label>
+                <Label className="text-xs">Harga Satuan Sebelum Pajak (Rp) <span className="text-muted-foreground font-normal">[kolom AB]</span></Label>
                 <Input
                   type="number"
                   value={form.hargaSatuanSebelumPajak}
                   onChange={(e) => setForm({ ...form, hargaSatuanSebelumPajak: e.target.value })}
+                  className="h-9 text-sm font-mono"
+                />
+              </div>
+              <div>
+                <Label className="text-xs">Jumlah Harga Sebelum Pajak (Rp) <span className="text-muted-foreground font-normal">[kolom AC]</span></Label>
+                <Input
+                  type="number"
+                  value={form.jumlahHargaSebelumPajak}
+                  onChange={(e) => setForm({ ...form, jumlahHargaSebelumPajak: e.target.value })}
+                  className="h-9 text-sm font-mono"
+                />
+              </div>
+              <div>
+                <Label className="text-xs">Harga Total Asli (Rp) <span className="text-muted-foreground font-normal">[kolom AD]</span></Label>
+                <Input
+                  type="number"
+                  value={form.hargaTotalAsli}
+                  onChange={(e) => setForm({ ...form, hargaTotalAsli: e.target.value })}
+                  className="h-9 text-sm font-mono"
+                />
+              </div>
+              <div>
+                <Label className="text-xs">Total Harga Sebelum DPP (Rp) <span className="text-muted-foreground font-normal">[kolom AE — dipakai PESAN jika PPN]</span></Label>
+                <Input
+                  type="number"
+                  step="0.01"
+                  value={form.totalHargaSebelumDPP}
+                  onChange={(e) => setForm({ ...form, totalHargaSebelumDPP: e.target.value })}
+                  className="h-9 text-sm font-mono"
+                />
+              </div>
+              <div>
+                <Label className="text-xs">Total Harga Asli (Rp) <span className="text-muted-foreground font-normal">[kolom AF — dipakai PESAN jika no PPN]</span></Label>
+                <Input
+                  type="number"
+                  value={form.totalHargaAsli}
+                  onChange={(e) => setForm({ ...form, totalHargaAsli: e.target.value })}
                   className="h-9 text-sm font-mono"
                 />
               </div>

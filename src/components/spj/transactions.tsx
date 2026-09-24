@@ -294,7 +294,7 @@ export function Transactions() {
 
   // ============ Render ============
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* === Filter bar === */}
       <Card className="border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/60 backdrop-blur sticky top-0 z-30 rounded-xl shadow-sm">
         <CardContent className="p-3 sm:p-4 space-y-3">

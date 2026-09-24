@@ -22,7 +22,11 @@ function ScrollArea({
       >
         {children}
       </ScrollAreaPrimitive.Viewport>
+      {/* Vertical scrollbar (default) */}
       <ScrollBar />
+      {/* Horizontal scrollbar — needed when content is wider than viewport
+          (e.g. expanded item rows with 34 columns in Data Belanja) */}
+      <ScrollBar orientation="horizontal" />
       <ScrollAreaPrimitive.Corner />
     </ScrollAreaPrimitive.Root>
   )
