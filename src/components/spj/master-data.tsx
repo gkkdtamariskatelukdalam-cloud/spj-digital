@@ -25,6 +25,7 @@ import {
   UserCheck,
   UserCog,
   Users,
+  Calendar,
   Wallet,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -74,6 +75,7 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserManagement } from "@/components/user-management/user-management";
+import { BospManagement } from "@/components/bosp/bosp-management";
 import { useSession } from "next-auth/react";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -346,6 +348,15 @@ export function MasterData() {
             </TabsTrigger>
             {isAdmin && (
               <TabsTrigger
+                value="bosp"
+                className="data-[state=active]:bg-violet-600 data-[state=active]:text-white data-[state=active]:shadow-sm gap-1.5"
+              >
+                <Calendar className="size-3.5" />
+                BOSP
+              </TabsTrigger>
+            )}
+            {isAdmin && (
+              <TabsTrigger
                 value="users"
                 className="data-[state=active]:bg-slate-800 data-[state=active]:text-white data-[state=active]:shadow-sm gap-1.5"
               >
@@ -368,6 +379,11 @@ export function MasterData() {
         <TabsContent value="school">
           <SchoolTab />
         </TabsContent>
+        {isAdmin && (
+          <TabsContent value="bosp">
+            <BospManagement />
+          </TabsContent>
+        )}
         {isAdmin && (
           <TabsContent value="users">
             <UserManagement />

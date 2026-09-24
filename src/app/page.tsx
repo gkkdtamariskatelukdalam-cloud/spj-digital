@@ -27,6 +27,7 @@ import {
   ShoppingCart,
   Loader2,
   ExternalLink,
+  Calendar,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -114,12 +115,25 @@ export default function Home() {
   const { data: session, status } = useSession();
   const [view, setView] = useState<View>("dashboard");
   const [appLogo, setAppLogo] = useState<string | null>(null);
+  const [activeBosp, setActiveBosp] = useState<string>("");
 
   // Fetch app logo for dashboard header
   useEffect(() => {
     fetch("/api/app-settings")
       .then((r) => r.json())
       .then((data) => setAppLogo(data.appLogo || null))
+      .catch(() => {});
+  }, [status]);
+
+  // Fetch active BOSP
+  useEffect(() => {
+    if (status !== "authenticated") return;
+    fetch("/api/bosp")
+      .then((r) => r.json())
+      .then((data) => {
+        const active = data.bospList?.find((b: any) => b.isActive);
+        if (active) setActiveBosp(active.tahun);
+      })
       .catch(() => {});
   }, [status]);
 
@@ -204,6 +218,13 @@ export default function Home() {
 
           {/* User menu (top-right) */}
           <div className="flex items-center gap-2">
+            {/* BOSP indicator */}
+            {activeBosp && (
+              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950/40 text-violet-700 dark:text-violet-300">
+                <Calendar className="h-3.5 w-3.5" />
+                {activeBosp}
+              </div>
+            )}
             {/* Link to Dokumentasi SPJ */}
             <a
               href="https://spj-dokumentasi.vercel.app"

@@ -150,8 +150,10 @@ model Transaction {
   status        String    @default("lunas") // lunas, pending, draft
   bpuCode       String?
   vendorId      String?
+  tahunBospId   String?
   excelRowNum   Int?      // original Excel row number for dedup tracking
   vendor        Vendor?   @relation(fields: [vendorId], references: [id])
+  tahunBosp     TahunBOSP? @relation(fields: [tahunBospId], references: [id])
   documents     Document[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -311,4 +313,16 @@ model AppSettings {
   id        String   @id @default(cuid())
   appLogo   String?  // base64 data URL for login page + favicon (max 5MB)
   updatedAt DateTime @updatedAt
+}
+
+// ============ BOSP (Bantuan Operasional Sekolah Pendidikan) ============
+
+model TahunBOSP {
+  id        String   @id @default(cuid())
+  tahun     String   @unique  // "BOSP 2024", "BOSP 2025", dst
+  isActive  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  transactions Transaction[]
 }
