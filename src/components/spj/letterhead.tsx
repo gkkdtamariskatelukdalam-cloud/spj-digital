@@ -152,9 +152,13 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
           )}
 
           {/* Teks tengah */}
+          {/* minWidth: 0 + overflow: hidden → prevents long text (nowrap)
+              from pushing the right logo off-screen when font is bigger (pt) */}
           <div
             style={{
               flex: 1,
+              minWidth: 0,
+              overflow: "hidden",
               textAlign: "center",
               display: "flex",
               flexDirection: "column",
