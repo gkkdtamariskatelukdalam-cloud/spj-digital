@@ -389,25 +389,25 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </tr>
           ) : (
             items.map((item, idx) => (
-              <tr key={item.id}>
-                <td style={{ ...cellStyle, textAlign: "center" }}>
+              <tr key={item.id} style={{ height: "53px" }}>
+                <td style={{ ...cellStyle, textAlign: "center", height: "53px" }}>
                   {idx + 1}
                 </td>
-                <td style={{ ...cellStyle, textAlign: "left" }}>
+                <td style={{ ...cellStyle, textAlign: "left", height: "53px" }}>
                   <div className="font-medium">
                     {item.namaBarang || item.uraian}
                   </div>
                 </td>
-                <td style={{ ...cellStyle, textAlign: "center" }}>
+                <td style={{ ...cellStyle, textAlign: "center", height: "53px" }}>
                   {formatNumber(item.volume)}
                 </td>
-                <td style={{ ...cellStyle, textAlign: "center" }}>
+                <td style={{ ...cellStyle, textAlign: "center", height: "53px" }}>
                   {orDash(item.satuan)}
                 </td>
-                <td style={{ ...cellStyle, textAlign: "right" }}>
+                <td style={{ ...cellStyle, textAlign: "right", height: "53px" }}>
                   Rp {formatNumber(Math.round(getDisplayedHargaSatuan(item)))}
                 </td>
-                <td style={{ ...cellStyle, textAlign: "right" }}>
+                <td style={{ ...cellStyle, textAlign: "right", height: "53px" }}>
                   Rp {formatNumber(item.jumlah)}
                 </td>
               </tr>
