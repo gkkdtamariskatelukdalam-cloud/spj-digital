@@ -46,10 +46,10 @@ export function DokumenPembanding({ group, school }: DokumenPembandingProps) {
   const formattedDate = formatDate(tglPesan);
 
   return (
-    <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
-      {/* === Title (centered, bold, NO underline, 14pt) === */}
+    <div className="spj-doc px-6 sm:px-10 py-8 text-[11pt] leading-relaxed text-slate-900">
+      {/* === Title (centered, bold, 14pt per Excel) === */}
       <div className="text-center mb-5">
-        <h1 className="font-bold text-[14px]">DOKUMEN HASIL PEMBANDING</h1>
+        <h1 className="font-bold" style={{ fontSize: "14pt" }}>DOKUMEN HASIL PEMBANDING</h1>
       </div>
 
       {/* === Plain-text info (borderless 2-col table) === */}
@@ -122,19 +122,18 @@ export function DokumenPembanding({ group, school }: DokumenPembandingProps) {
       </div>
 
       {/* === Catatan === */}
-      <p className="text-justify text-[12px] mb-6">
+      <p className="text-justify text-[11pt] mb-6">
         Catatan: Harga terbaik dipilih berdasarkan perbandingan harga dari
         beberapa penyedia.
       </p>
 
-      {/* === Right-aligned date & signature === */}
-      <div className="text-right text-[12px] mb-3">
+      {/* === Right-positioned signature, text left-aligned (per Excel F131-F139) === */}
+      <div style={{ marginLeft: "auto", width: "300px", textAlign: "left" }} className="text-[11pt] mb-3">
         <div>Telukdalam, {formattedDate}</div>
-        <div>Mengetahui,</div>
-        <div>Kepala Sekolah</div>
+        <div>Pelaksana,</div>
       </div>
 
-      <div className="text-right text-[12px]">
+      <div style={{ marginLeft: "auto", width: "300px", textAlign: "left" }} className="text-[11pt]">
         <div style={{ height: "56px" }} />
         <div style={{ fontWeight: 700, textDecoration: "underline" }}>
           {orDash(school?.principalName)}
