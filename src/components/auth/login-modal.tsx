@@ -62,7 +62,7 @@ export function LoginModal() {
         {/* Header */}
         <div className="bg-gradient-to-br from-rose-600 to-amber-500 p-6 text-white">
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center overflow-hidden flex-shrink-0">
+            <div className="h-16 w-16 rounded-xl bg-white backdrop-blur flex items-center justify-center overflow-hidden flex-shrink-0 p-1">
               {appLogo ? (
                 <img
                   src={appLogo}
@@ -70,7 +70,7 @@ export function LoginModal() {
                   className="h-full w-full object-contain"
                 />
               ) : (
-                <Wallet className="h-6 w-6" />
+                <Wallet className="h-6 w-6 text-rose-600" />
               )}
             </div>
             <div>
