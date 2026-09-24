@@ -1036,7 +1036,6 @@ export function LetterheadSettingsPanel() {
 function AppLogoUpload() {
   const [appLogo, setAppLogo] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const { toast } = useToast();
 
   useEffect(() => {
     fetch("/api/app-settings")
@@ -1049,7 +1048,7 @@ function AppLogoUpload() {
     const file = e.target.files?.[0];
     if (!file) return;
     if (file.size > 5 * 1024 * 1024) {
-      toast({ title: "Error", description: "File terlalu besar. Maksimal 5MB.", variant: "destructive" });
+      toast.error("File terlalu besar. Maksimal 5MB.");
       return;
     }
     setLoading(true);
@@ -1063,9 +1062,9 @@ function AppLogoUpload() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Gagal upload");
       setAppLogo(data.appLogo);
-      toast({ title: "Berhasil", description: "Logo aplikasi diperbarui." });
+      toast.success("Logo aplikasi diperbarui.");
     } catch (err) {
-      toast({ title: "Error", description: (err as Error).message, variant: "destructive" });
+      toast.error((err as Error).message);
     } finally {
       setLoading(false);
     }
@@ -1080,7 +1079,7 @@ function AppLogoUpload() {
         body: JSON.stringify({ appLogo: null }),
       });
       setAppLogo(null);
-      toast({ title: "Berhasil", description: "Logo aplikasi dihapus." });
+      toast.success("Logo aplikasi dihapus.");
     } finally {
       setLoading(false);
     }
