@@ -2,12 +2,11 @@
 
 import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
-import { formatDate, formatNumber } from "@/lib/format";
+import { formatDate, formatNumber, getMonthName } from "@/lib/format";
 import { Letterhead } from "@/components/spj/letterhead";
 import {
   getDayName,
   getDayNum,
-  getMonthName,
   getYearNum,
   groupRomanMonth,
   orDash,
