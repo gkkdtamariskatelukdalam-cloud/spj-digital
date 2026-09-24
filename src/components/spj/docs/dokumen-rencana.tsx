@@ -20,7 +20,7 @@ const cellStyle: CSSProperties = {
   border: "1px solid #000",
   padding: "4px 6px",
   verticalAlign: "top",
-  fontSize: "12px",
+  fontSize: "11pt",
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
@@ -31,7 +31,7 @@ const titleCellStyle: CSSProperties = {
   ...cellStyle,
   textAlign: "center",
   fontWeight: 700,
-  fontSize: "14px",
+  fontSize: "20pt",
   padding: "8px 6px",
 };
 const labelCellStyle: CSSProperties = {
@@ -67,7 +67,7 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
   const firstUraian = items[0]?.uraian || "Pengadaan ATK";
 
   return (
-    <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
+    <div className="spj-doc px-6 sm:px-10 py-8 text-[11pt] leading-relaxed text-slate-900">
       {/* === 4-column table === */}
       <table style={tableStyle}>
         <tbody>
@@ -210,14 +210,14 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
       </table>
 
       {/* === Catatan kaki === */}
-      <div style={{ fontSize: "10px", marginTop: "8px", fontStyle: "italic" }}>
+      <div style={{ fontSize: "11pt", marginTop: "8px", fontStyle: "italic" }}>
         Misalnya Buku Teks Utama/Buku Teks Pendamping/Buku Nonteks/Kebutuhan dan
         Perlengkapan Satuan Pendidikan/Alat Peraga Pendidikan/Komputer dan
         Aksesoris/Elektronik/Jasa lainnya.
       </div>
 
       {/* === Signature block - di kanan, teks rata kiri === */}
-      <div style={{ marginTop: "20px", fontSize: "12px", display: "flex", justifyContent: "flex-end" }}>
+      <div style={{ marginTop: "20px", fontSize: "11pt", display: "flex", justifyContent: "flex-end" }}>
         <div style={{ textAlign: "left", width: "250px" }}>
           <div>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
           <div>Pelaksana</div>
