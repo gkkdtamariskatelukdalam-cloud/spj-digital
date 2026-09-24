@@ -517,11 +517,11 @@ export function LetterheadSettingsPanel() {
                     Lebar
                   </Label>
                   <Slider
-                    value={[local.logoWidth]}
-                    min={40}
-                    max={250}
-                    step={5}
-                    onValueChange={(v) => update("logoWidth", v[0])}
+                    value={[Math.round(local.logoWidth / 37.795)]}
+                    min={1}
+                    max={7}
+                    step={0.5}
+                    onValueChange={(v) => update("logoWidth", Math.round(v[0] * 37.795))}
                     className="mt-1"
                   />
                 </div>
@@ -530,11 +530,11 @@ export function LetterheadSettingsPanel() {
                     Tinggi
                   </Label>
                   <Slider
-                    value={[local.logoHeight]}
-                    min={40}
-                    max={250}
-                    step={5}
-                    onValueChange={(v) => update("logoHeight", v[0])}
+                    value={[Math.round(local.logoHeight / 37.795)]}
+                    min={1}
+                    max={7}
+                    step={0.5}
+                    onValueChange={(v) => update("logoHeight", Math.round(v[0] * 37.795))}
                     className="mt-1"
                   />
                 </div>
@@ -708,11 +708,11 @@ export function LetterheadSettingsPanel() {
                       Lebar
                     </Label>
                     <Slider
-                      value={[local.logo2Width]}
-                      min={40}
-                      max={250}
-                      step={5}
-                      onValueChange={(v) => update("logo2Width", v[0])}
+                      value={[Math.round(local.logo2Width / 37.795)]}
+                      min={1}
+                      max={7}
+                      step={0.5}
+                      onValueChange={(v) => update("logo2Width", Math.round(v[0] * 37.795))}
                       className="mt-1"
                     />
                   </div>
@@ -721,11 +721,11 @@ export function LetterheadSettingsPanel() {
                       Tinggi
                     </Label>
                     <Slider
-                      value={[local.logo2Height]}
-                      min={40}
-                      max={250}
-                      step={5}
-                      onValueChange={(v) => update("logo2Height", v[0])}
+                      value={[Math.round(local.logo2Height / 37.795)]}
+                      min={1}
+                      max={7}
+                      step={0.5}
+                      onValueChange={(v) => update("logo2Height", Math.round(v[0] * 37.795))}
                       className="mt-1"
                     />
                   </div>
@@ -913,7 +913,7 @@ export function LetterheadSettingsPanel() {
                                   Ukuran Font
                                 </Label>
                                 <span className="text-[10px] font-mono text-muted-foreground">
-                                  {size}px
+                                  {size}pt
                                 </span>
                               </div>
                               <Slider
@@ -978,7 +978,7 @@ export function LetterheadSettingsPanel() {
                                   Ukuran Font
                                 </Label>
                                 <span className="text-[10px] font-mono text-muted-foreground">
-                                  {size}px
+                                  {size}pt
                                 </span>
                               </div>
                               <Slider
