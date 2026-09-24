@@ -480,17 +480,16 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
 
-          {/* === INSTRUKSI SECTION (9px per user request) === */}
-          {/* Per Excel R97-R103:
-              - Header row (R97): colSpan=6, LEFT + RIGHT borders only (no top/bottom)
-              - Number column (col A): LEFT border only (no right → no vertical
-                line between number and text)
-              - Text column (cols B-K merged): RIGHT border only (no left)
-              - NO horizontal separators between items (no top/bottom)
-              - Font size: 9px */}
+          {/* === INSTRUKSI + SIGNATURE SECTION === */}
+          {/* Close the main tbody, open a new one with page-break-inside: avoid
+              so the Instruksi and Signature stay TOGETHER when printing —
+              prevents the signature from being pushed to a new page with empty
+              space above it. Padding reduced to make section more compact. */}
+          </tbody>
+          <tbody style={{ pageBreakInside: "avoid" }}>
           <tr>
             <td
-              style={{ ...instruksiHeaderStyle, fontWeight: 700, fontSize: "9pt" }}
+              style={{ ...instruksiHeaderStyle, fontWeight: 700, fontSize: "9pt", padding: "2px 6px" }}
               colSpan={6}
             >
               Instruksi ke Penyedia dan Satuan Pendidikan
@@ -504,12 +503,14 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                   textAlign: "center",
                   verticalAlign: "top",
                   fontSize: "9pt",
+                  padding: "1px 6px",
+                  lineHeight: 1.3,
                 }}
               >
                 {idx + 1}
               </td>
               <td
-                style={{ ...rightOnlyCellStyle, textAlign: "justify", fontSize: "9pt" }}
+                style={{ ...rightOnlyCellStyle, textAlign: "justify", fontSize: "9pt", padding: "1px 6px", lineHeight: 1.3 }}
                 colSpan={5}
               >
                 {text}
@@ -518,25 +519,22 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           ))}
 
           {/* === SIGNATURE ROW (Penyedia | Pelaksana) === */}
-          {/* Per Excel R105-R115:
-              - Penyedia cell (left, cols A-F): LEFT + BOTTOM borders only
-              - Pelaksana cell (right, cols G-K): RIGHT + BOTTOM borders only
-              - Bottom border closes the entire table
-              - page-break-inside: avoid → prevents signature from splitting
-                across pages when printing (keeps it compact, not "jauh dibawah")
-              - Signature gap reduced from 64px to 40px (still enough to sign) */}
-          <tr style={{ pageBreakInside: "avoid" }}>
+          {/* Inside the same tbody as Instruksi (page-break-inside: avoid)
+              so Instruksi + Signature stay together when printing.
+              Signature gap 30px (compact but enough to sign). */}
+          <tr>
             <td
               style={{
                 ...signatureLeftCellStyle,
                 verticalAlign: "top",
                 paddingLeft: "40px",
+                padding: "4px 6px 4px 40px",
               }}
               colSpan={3}
             >
               <div>Penyedia,</div>
               <div>{vendorName || "—"}</div>
-              <div style={{ height: "40px" }} />
+              <div style={{ height: "30px" }} />
               <div style={{ fontWeight: 400 }}>{vendorOwner || "—"}</div>
               <div>Direktur</div>
             </td>
@@ -545,17 +543,18 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                 ...signatureRightCellStyle,
                 verticalAlign: "top",
                 paddingLeft: "40px",
+                padding: "4px 6px 4px 40px",
               }}
               colSpan={3}
             >
               <div>Telukdalam, {formatDate(tglPesan)}</div>
               <div>Pelaksana,</div>
-              <div style={{ height: "40px" }} />
+              <div style={{ height: "30px" }} />
               <div style={nameStyle}>{principalName}</div>
               <div>NIP. {principalNip}</div>
             </td>
           </tr>
-        </tbody>
+          </tbody>
       </table>
     </div>
   );
