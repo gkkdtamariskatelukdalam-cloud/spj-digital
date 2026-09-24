@@ -12,7 +12,13 @@ import {
 } from "./_helpers";
 
 // ============================================================
-// 01PESAN — Surat Pesanan (pages 1-2) + Tanda Pembayaran (page 3)
+// 01PESAN — Surat Pesanan (1 continuous table for entire doc)
+// ============================================================
+// Per user request & PDF asli 01PESAN_07_2025.pdf: seluruh konten
+// (Info block + RINCIAN PEKERJAAN + items + PPN + Terbilang +
+// Instruksi + Signature) berada dalam SATU tabel ber-border kontinyu.
+// Tidak ada tabel terpisah. colSpan dipakai untuk merge cells sesuai
+// struktur Excel asli.
 // ============================================================
 
 interface SuratPesananProps {
@@ -35,10 +41,6 @@ const headerCellStyle: CSSProperties = {
   background: "#e2e8f0",
   fontWeight: 700,
   textAlign: "center",
-};
-const borderlessTableStyle: CSSProperties = {
-  borderCollapse: "collapse",
-  width: "100%",
 };
 const nameStyle: CSSProperties = {
   fontWeight: 700,
@@ -68,8 +70,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
       (it.uraian && it.uraian.trim()),
   );
 
-  // Terbilang in Title Case per PDF spec (e.g. "Tujuh Belas Juta Sembilan
-  // Ratus Tujuh Puluh Dua Ribu Rupiah" — every word capitalized).
+  // Terbilang in Title Case per PDF spec
   const terbilangText = titleCase(terbilang(total));
 
   // Instruction list (spec text, exact)
@@ -84,10 +85,6 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
 
   return (
     <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
-      {/* ============================================================ */}
-      {/* PAGE 1+2: SURAT PESANAN                                       */}
-      {/* ============================================================ */}
-
       {/* === Kop Surat === */}
       <div className="mb-5">
         <Letterhead />
@@ -98,231 +95,263 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
         <h1 className="font-bold text-[14px]">SURAT PESANAN</h1>
       </div>
 
-      {/* === Info TABLE (3 cols, all cells bordered 1px) === */}
-      <div className="mb-4">
-        <table style={tableStyle}>
-          <tbody>
-            <tr>
-              <td style={{ ...cellStyle, width: "33%" }}>Paket Pesanan :</td>
-              <td style={{ ...cellStyle, width: "25%" }}>Nomor Surat Pesanan</td>
-              <td style={{ ...cellStyle, width: "42%" }}>{docNumber}</td>
-            </tr>
-            <tr>
-              <td style={cellStyle}>
-                Kegiatan jual beli dengan mitra {vendorName}
-              </td>
-              <td style={cellStyle}>Tanggal Pesanan</td>
-              <td style={cellStyle}>{formatDate(tglPesan)}</td>
-            </tr>
-            <tr>
-              <td style={cellStyle}>&nbsp;</td>
-              <td style={cellStyle}>Tanggal Negosiasi</td>
-              <td style={cellStyle}>&nbsp;</td>
-            </tr>
-            <tr>
-              <td style={cellStyle}>
-                <div>Waktu Pengerjaan Pesanan:</div>
-                <div style={{ paddingLeft: "12px" }}>{formatDate(tglPesan)}</div>
-              </td>
-              <td style={cellStyle}>No. BPU</td>
-              <td style={cellStyle}>{orDash(group.bpuCode)}</td>
-            </tr>
-            <tr>
-              <td style={cellStyle}>
-                <div>Waktu Pemrosesan Pesanan:</div>
-                <div style={{ paddingLeft: "12px" }}>{formatDate(tglPesan)}</div>
-              </td>
-              <td style={cellStyle}>&nbsp;</td>
-              <td style={cellStyle}>&nbsp;</td>
-            </tr>
-            <tr>
-              <td style={cellStyle}>
-                <div>Waktu Penyelesaian Pesanan:</div>
-                <div style={{ paddingLeft: "12px" }}>
-                  {completion ? formatDate(completion) : "—"}
-                </div>
-              </td>
-              <td style={cellStyle} colSpan={2}>
-                Catatan Pengiriman Untuk Penyedia:
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      {/* ============================================================ */}
+      {/* ONE CONTINUOUS TABLE — covers Info + Items + PPN + Terbilang */}
+      {/* + Instruksi + Signature. All borders connected.            */}
+      {/* 6 visual cols. colSpan merges cells per section.             */}
+      {/* ============================================================ */}
+      <table style={tableStyle}>
+        <colgroup>
+          <col style={{ width: "40px" }} />
+          <col />
+          <col style={{ width: "70px" }} />
+          <col style={{ width: "90px" }} />
+          <col style={{ width: "130px" }} />
+          <col style={{ width: "150px" }} />
+        </colgroup>
+        <tbody>
+          {/* === INFO BLOCK (3 visual cols, mapped to 6 via colSpan 2/2/2) === */}
+          <tr>
+            <td style={cellStyle} colSpan={2}>
+              Paket Pesanan :
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              Nomor Surat Pesanan
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              {docNumber}
+            </td>
+          </tr>
+          <tr>
+            <td style={cellStyle} colSpan={2}>
+              Kegiatan jual beli dengan mitra {vendorName}
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              Tanggal Pesanan
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              {formatDate(tglPesan)}
+            </td>
+          </tr>
+          <tr>
+            <td style={cellStyle} colSpan={2}>
+              &nbsp;
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              Tanggal Negosiasi
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td style={cellStyle} colSpan={2}>
+              <div>Waktu Pengerjaan Pesanan:</div>
+              <div style={{ paddingLeft: "12px" }}>{formatDate(tglPesan)}</div>
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              No. BPU
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              {orDash(group.bpuCode)}
+            </td>
+          </tr>
+          <tr>
+            <td style={cellStyle} colSpan={2}>
+              <div>Waktu Pemrosesan Pesanan:</div>
+              <div style={{ paddingLeft: "12px" }}>{formatDate(tglPesan)}</div>
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              &nbsp;
+            </td>
+            <td style={cellStyle} colSpan={2}>
+              &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td style={cellStyle} colSpan={2}>
+              <div>Waktu Penyelesaian Pesanan:</div>
+              <div style={{ paddingLeft: "12px" }}>
+                {completion ? formatDate(completion) : "—"}
+              </div>
+            </td>
+            <td style={cellStyle} colSpan={4}>
+              Catatan Pengiriman Untuk Penyedia:
+            </td>
+          </tr>
 
-      {/* === Items table with RINCIAN PEKERJAAN merged header row === */}
-      <div className="mb-3">
-        <table style={tableStyle}>
-          <thead>
+          {/* === RINCIAN PEKERJAAN header (merged 6 cols) === */}
+          <tr>
+            <td
+              style={{ ...headerCellStyle, textAlign: "center" }}
+              colSpan={6}
+            >
+              RINCIAN PEKERJAAN
+            </td>
+          </tr>
+
+          {/* === Items column headers === */}
+          <tr>
+            <td style={headerCellStyle}>No</td>
+            <td style={{ ...headerCellStyle, textAlign: "left" }}>
+              Uraian Barang / Jasa
+            </td>
+            <td style={headerCellStyle}>Jumlah</td>
+            <td style={headerCellStyle}>Satuan Ukuran</td>
+            <td style={{ ...headerCellStyle, textAlign: "right" }}>
+              Harga Satuan
+            </td>
+            <td style={{ ...headerCellStyle, textAlign: "right" }}>
+              Total Harga
+            </td>
+          </tr>
+
+          {/* === Items rows === */}
+          {items.length === 0 ? (
             <tr>
-              <th
-                style={{ ...headerCellStyle, textAlign: "center" }}
+              <td
                 colSpan={6}
+                style={{ ...cellStyle, textAlign: "center", color: "#64748b" }}
               >
-                RINCIAN PEKERJAAN
-              </th>
+                Tidak ada item.
+              </td>
             </tr>
-            <tr>
-              <th style={{ ...headerCellStyle, width: "40px" }}>No</th>
-              <th style={{ ...headerCellStyle, textAlign: "left" }}>
-                Uraian Barang / Jasa
-              </th>
-              <th style={{ ...headerCellStyle, width: "70px" }}>Jumlah</th>
-              <th style={{ ...headerCellStyle, width: "90px" }}>
-                Satuan Ukuran
-              </th>
-              <th
-                style={{
-                  ...headerCellStyle,
-                  textAlign: "right",
-                  width: "130px",
-                }}
-              >
-                Harga Satuan
-              </th>
-              <th
-                style={{
-                  ...headerCellStyle,
-                  textAlign: "right",
-                  width: "150px",
-                }}
-              >
-                Total Harga
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.length === 0 ? (
-              <tr>
-                <td
-                  colSpan={6}
-                  style={{ ...cellStyle, textAlign: "center", color: "#64748b" }}
-                >
-                  Tidak ada item.
+          ) : (
+            items.map((item, idx) => (
+              <tr key={item.id}>
+                <td style={{ ...cellStyle, textAlign: "center" }}>
+                  {idx + 1}
+                </td>
+                <td style={{ ...cellStyle, textAlign: "left" }}>
+                  <div className="font-medium">
+                    {item.namaBarang || item.uraian}
+                  </div>
+                </td>
+                <td style={{ ...cellStyle, textAlign: "center" }}>
+                  {formatNumber(item.volume)}
+                </td>
+                <td style={{ ...cellStyle, textAlign: "center" }}>
+                  {orDash(item.satuan)}
+                </td>
+                <td style={{ ...cellStyle, textAlign: "right" }}>
+                  Rp {formatNumber(item.tarifHarga)}
+                </td>
+                <td style={{ ...cellStyle, textAlign: "right" }}>
+                  Rp {formatNumber(item.jumlah)}
                 </td>
               </tr>
-            ) : (
-              items.map((item, idx) => (
-                <tr key={item.id}>
-                  <td style={{ ...cellStyle, textAlign: "center" }}>
-                    {idx + 1}
-                  </td>
-                  <td style={{ ...cellStyle, textAlign: "left" }}>
-                    <div className="font-medium">
-                      {item.namaBarang || item.uraian}
-                    </div>
-                  </td>
-                  <td style={{ ...cellStyle, textAlign: "center" }}>
-                    {formatNumber(item.volume)}
-                  </td>
-                  <td style={{ ...cellStyle, textAlign: "center" }}>
-                    {orDash(item.satuan)}
-                  </td>
-                  <td style={{ ...cellStyle, textAlign: "right" }}>
-                    Rp {formatNumber(item.tarifHarga)}
-                  </td>
-                  <td style={{ ...cellStyle, textAlign: "right" }}>
-                    Rp {formatNumber(item.jumlah)}
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+            ))
+          )}
 
-      {/* === PPN CALCULATION TABLE (2 cols, ALL borders, right-aligned) === */}
-      <div className="mb-3">
-        <table
-          style={{
-            ...tableStyle,
-            width: "60%",
-            marginLeft: "auto",
-          }}
-        >
-          <tbody>
-            <tr>
-              <td style={cellStyle}>Harga sebelum PPN</td>
-              <td style={{ ...cellStyle, textAlign: "right" }}>
-                {formatRupiah(total)}
-              </td>
-            </tr>
-            <tr>
-              <td style={cellStyle}>DPP PPN :</td>
-              <td style={{ ...cellStyle, textAlign: "right" }}>
-                {formatRupiah(dppPpn)}
-              </td>
-            </tr>
-            <tr>
-              <td style={cellStyle}>PPN 11% :</td>
-              <td style={{ ...cellStyle, textAlign: "right" }}>
-                {formatRupiah(ppn11)}
-              </td>
-            </tr>
-            <tr>
-              <td style={{ ...cellStyle, fontWeight: 700 }}>
-                Total Pembayaran :
-              </td>
+          {/* === PPN CALCULATION ROWS === */}
+          {/* Per Excel: PPN table is on the RIGHT side (cols G-K). Left side
+              (cols A-F = No, Uraian, Jumlah, Satuan) is empty. */}
+          <tr>
+            <td style={cellStyle} colSpan={4}>
+              &nbsp;
+            </td>
+            <td style={cellStyle}>Harga sebelum PPN</td>
+            <td style={{ ...cellStyle, textAlign: "right" }}>
+              {formatRupiah(total)}
+            </td>
+          </tr>
+          <tr>
+            <td style={cellStyle} colSpan={4}>
+              &nbsp;
+            </td>
+            <td style={cellStyle}>DPP PPN :</td>
+            <td style={{ ...cellStyle, textAlign: "right" }}>
+              {formatRupiah(dppPpn)}
+            </td>
+          </tr>
+          <tr>
+            <td style={cellStyle} colSpan={4}>
+              &nbsp;
+            </td>
+            <td style={cellStyle}>PPN 11% :</td>
+            <td style={{ ...cellStyle, textAlign: "right" }}>
+              {formatRupiah(ppn11)}
+            </td>
+          </tr>
+          <tr>
+            <td style={cellStyle} colSpan={4}>
+              &nbsp;
+            </td>
+            <td style={{ ...cellStyle, fontWeight: 700 }}>
+              Total Pembayaran :
+            </td>
+            <td
+              style={{
+                ...cellStyle,
+                textAlign: "right",
+                fontWeight: 700,
+              }}
+            >
+              {formatRupiah(total)}
+            </td>
+          </tr>
+          <tr>
+            <td style={cellStyle} colSpan={4}>
+              &nbsp;
+            </td>
+            <td style={cellStyle}>PPh 23 2% :</td>
+            <td style={{ ...cellStyle, textAlign: "right" }}>-</td>
+          </tr>
+
+          {/* === TERBILANG ROW === */}
+          {/* Label (col 1) + Value (cols 2-6 merged) — italic */}
+          <tr>
+            <td style={cellStyle}>Terbilang :</td>
+            <td
+              style={{ ...cellStyle, fontStyle: "italic" }}
+              colSpan={5}
+            >
+              {terbilangText}
+            </td>
+          </tr>
+
+          {/* === INSTRUKSI SECTION (in same table) === */}
+          {/* Header row merged 6 cols */}
+          <tr>
+            <td
+              style={{ ...cellStyle, fontWeight: 700 }}
+              colSpan={6}
+            >
+              Instruksi ke Penyedia dan Satuan Pendidikan
+            </td>
+          </tr>
+          {/* Numbered instruksi items: number (col 1) + text (cols 2-6 merged) */}
+          {instruksiList.map((text, idx) => (
+            <tr key={idx}>
               <td
                 style={{
                   ...cellStyle,
-                  textAlign: "right",
-                  fontWeight: 700,
+                  textAlign: "center",
+                  verticalAlign: "top",
                 }}
               >
-                {formatRupiah(total)}
+                {idx + 1}
+              </td>
+              <td
+                style={{ ...cellStyle, textAlign: "justify" }}
+                colSpan={5}
+              >
+                {text}
               </td>
             </tr>
-            <tr>
-              <td style={cellStyle}>PPh 23 2% :</td>
-              <td style={{ ...cellStyle, textAlign: "right" }}>-</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      {/* === TERBILANG TABLE (2 cols, ALL borders, italic value) === */}
-      <div className="mb-4">
-        <table style={tableStyle}>
-          <tbody>
-            <tr>
-              <td style={{ ...cellStyle, width: "15%" }}>Terbilang :</td>
-              <td style={{ ...cellStyle, fontStyle: "italic" }}>
-                {terbilangText}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      {/* === INSTRUKSI section (outside table, no border) === */}
-      <div className="mb-5">
-        <div className="font-bold mb-2">
-          Instruksi ke Penyedia dan Satuan Pendidikan
-        </div>
-        <ol className="list-decimal pl-6 space-y-1 text-justify">
-          {instruksiList.map((text, idx) => (
-            <li key={idx}>{text}</li>
           ))}
-        </ol>
-      </div>
 
-      {/* === 2-column borderless signature table (Penyedia | Pelaksana) === */}
-      <table style={borderlessTableStyle}>
-        <tbody>
+          {/* === SIGNATURE ROW (2 columns: Penyedia | Pelaksana) === */}
+          {/* Per Excel: each signature cell spans ~5-6 cols. Penyedia on left
+              (cols A-F ≈ 1-4 in our 6-col), Pelaksana on right (cols G-K ≈
+              4-6 in our 6-col). For simpler split, use 3+3 cols. */}
           <tr>
             <td
               style={{
-                width: "15%",
-              }}
-            />
-            <td
-              style={{
-                width: "35%",
-                textAlign: "left",
-                padding: "0 8px",
+                ...cellStyle,
                 verticalAlign: "top",
               }}
+              colSpan={3}
             >
               <div>Penyedia,</div>
               <div>{vendorName || "—"}</div>
@@ -332,11 +361,10 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
             <td
               style={{
-                width: "35%",
-                textAlign: "left",
-                padding: "0 8px",
+                ...cellStyle,
                 verticalAlign: "top",
               }}
+              colSpan={3}
             >
               <div>Telukdalam, {formatDate(tglPesan)}</div>
               <div>Pelaksana,</div>
@@ -344,11 +372,6 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
               <div style={nameStyle}>{principalName}</div>
               <div>NIP. {principalNip}</div>
             </td>
-            <td
-              style={{
-                width: "15%",
-              }}
-            />
           </tr>
         </tbody>
       </table>
