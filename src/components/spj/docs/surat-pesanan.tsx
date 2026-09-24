@@ -522,35 +522,55 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           ))}
 
           {/* === SIGNATURE ROW (Penyedia | Pelaksana) === */}
-          {/* Elegant spacing: title → vendor name → 50px signature gap →
-              owner name → role. Each element has margin for breathing room. */}
+          {/* Professional Indonesian formal document standard:
+              - Label → 12px gap → entity name → 40px gap → 130px signature
+                area (enough for wet signature + round stamp 3-4cm + margin) →
+                15px gap → underlined name → 2px gap → role/title
+              - Left-aligned with 40px indent
+              - Cell padding: 20px top, 25px bottom for breathing room */}
           <tr>
             <td
               style={{
                 ...signatureLeftCellStyle,
                 verticalAlign: "top",
-                padding: "8px 6px 12px 40px",
+                padding: "20px 6px 25px 40px",
               }}
               colSpan={3}
             >
-              <div style={{ marginBottom: "2px" }}>Penyedia,</div>
-              <div style={{ marginBottom: "8px" }}>{vendorName || "—"}</div>
-              <div style={{ height: "50px" }} />
-              <div style={{ fontWeight: 400, marginBottom: "2px" }}>{vendorOwner || "—"}</div>
+              <div style={{ marginBottom: "12px" }}>Penyedia,</div>
+              <div style={{ marginBottom: "40px", fontWeight: 500 }}>{vendorName || "—"}</div>
+              <div style={{ minHeight: "130px", lineHeight: "130px" }}>&nbsp;</div>
+              <div style={{
+                fontWeight: 400,
+                textDecoration: "underline",
+                textUnderlineOffset: "3px",
+                marginTop: "15px",
+                marginBottom: "2px",
+              }}>
+                {vendorOwner || "—"}
+              </div>
               <div>Direktur</div>
             </td>
             <td
               style={{
                 ...signatureRightCellStyle,
                 verticalAlign: "top",
-                padding: "8px 6px 12px 40px",
+                padding: "20px 6px 25px 40px",
               }}
               colSpan={3}
             >
-              <div style={{ marginBottom: "2px" }}>Telukdalam, {formatDate(tglPesan)}</div>
-              <div style={{ marginBottom: "8px" }}>Pelaksana,</div>
-              <div style={{ height: "50px" }} />
-              <div style={nameStyle}>{principalName}</div>
+              <div style={{ marginBottom: "12px" }}>Telukdalam, {formatDate(tglPesan)}</div>
+              <div style={{ marginBottom: "40px" }}>Pelaksana,</div>
+              <div style={{ minHeight: "130px", lineHeight: "130px" }}>&nbsp;</div>
+              <div style={{
+                ...nameStyle,
+                textDecoration: "underline",
+                textUnderlineOffset: "3px",
+                marginTop: "15px",
+                marginBottom: "2px",
+              }}>
+                {principalName}
+              </div>
               <div>NIP. {principalNip}</div>
             </td>
           </tr>
