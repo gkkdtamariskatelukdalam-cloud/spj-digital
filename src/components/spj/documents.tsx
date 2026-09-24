@@ -50,7 +50,6 @@ import { DokumenRencana } from "@/components/spj/docs/dokumen-rencana";
 import { SuratHasilPemeriksaan } from "@/components/spj/docs/surat-hasil-pemeriksaan";
 import { BeritaAcaraSerahTerima } from "@/components/spj/docs/berita-acara-serah-terima";
 import { SuratPenawaranToko } from "@/components/spj/docs/surat-penawaran-toko";
-import { SuratPertanggungjawaban } from "@/components/spj/docs/surat-pertanggungjawaban";
 import { Kuitansi } from "@/components/spj/docs/kuitansi";
 
 type DocType =
@@ -60,7 +59,6 @@ type DocType =
   | "surat-hasil-pemeriksaan"
   | "berita-acara-serah-terima"
   | "surat-penawaran-toko"
-  | "surat-pertanggungjawaban"
   | "kuitansi";
 
 interface DocTypeMeta {
@@ -127,15 +125,6 @@ const DOC_TYPES: DocTypeMeta[] = [
     color: "text-slate-700 dark:text-slate-300",
     bg: "bg-slate-50 dark:bg-slate-900/40 border-slate-200 dark:border-slate-800",
     desc: "Surat penawaran dari vendor",
-  },
-  {
-    id: "surat-pertanggungjawaban",
-    label: "Surat Pertanggungjawaban",
-    short: "SPJ",
-    icon: <FileText className="h-3.5 w-3.5" />,
-    color: "text-rose-700 dark:text-rose-300",
-    bg: "bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800",
-    desc: "Surat pertanggungjawaban pengeluaran",
   },
   {
     id: "kuitansi",
@@ -395,9 +384,6 @@ export function Documents() {
                   {docType === "surat-penawaran-toko" && (
                     <SuratPenawaranToko group={selectedGroup} school={school} />
                   )}
-                  {docType === "surat-pertanggungjawaban" && (
-                    <SuratPertanggungjawaban group={selectedGroup} school={school} />
-                  )}
                   {docType === "kuitansi" && (
                     <Kuitansi group={selectedGroup} school={school} />
                   )}
@@ -419,7 +405,6 @@ const DOC_IDS = [
   "surat-hasil-pemeriksaan",
   "berita-acara-serah-terima",
   "surat-penawaran-toko",
-  "surat-pertanggungjawaban",
   "kuitansi",
 ];
 
