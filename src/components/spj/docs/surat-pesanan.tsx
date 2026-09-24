@@ -61,10 +61,26 @@ const borderlessCellStyle: CSSProperties = {
   verticalAlign: "top",
 };
 
-// PPN label/value cell — full 4 borders (TBLR).
-// Matches Excel rows 89-93 cells G-I (label) and J-K (value).
+// PPN label/value cell — vertical borders only (left + right, no top/bottom).
+// Per user request: PPN stays on RIGHT side, only ADD vertical borders,
+// NO horizontal separators between PPN rows.
 const ppnCellStyle: CSSProperties = {
-  ...cellStyle,
+  borderLeft: "1px solid #000",
+  borderRight: "1px solid #000",
+  borderTop: "none",
+  borderBottom: "none",
+  padding: "4px 6px",
+  verticalAlign: "top",
+};
+
+// Also keep verticalOnlyCellStyle as an alias for PPN cells (used by PPN rows).
+const verticalOnlyCellStyle: CSSProperties = {
+  borderLeft: "1px solid #000",
+  borderRight: "1px solid #000",
+  borderTop: "none",
+  borderBottom: "none",
+  padding: "4px 6px",
+  verticalAlign: "top",
 };
 
 // LEFT border only — for the number column (col A) in Instruksi rows.
@@ -319,50 +335,50 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           )}
 
           {/* === PPN CALCULATION ROWS === */}
-          {/* Per user request: PPN on the LEFT side, only vertical borders
-              (left + right edges), NO horizontal separators between rows.
-              Label (col 1, LEFT border only) + Value (col 2, RIGHT border
-              only) + empty (cols 3-6, borderless). */}
+          {/* Per user request: PPN stays on the RIGHT side (same position as
+              original). Only ADD vertical borders (left + right edges of PPN
+              block). NO horizontal separators between PPN rows.
+              Layout: empty (colSpan=4, borderless) | label (vertical-only) | value (vertical-only) */}
           <tr>
-            <td style={leftOnlyCellStyle}>Harga sebelum PPN</td>
-            <td style={{ ...rightOnlyCellStyle, textAlign: "right" }}>
+            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
+            <td style={verticalOnlyCellStyle}>Harga sebelum PPN</td>
+            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }}>
               {formatRupiah(total)}
             </td>
-            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
           </tr>
           <tr>
-            <td style={leftOnlyCellStyle}>DPP PPN :</td>
-            <td style={{ ...rightOnlyCellStyle, textAlign: "right" }}>
+            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
+            <td style={verticalOnlyCellStyle}>DPP PPN :</td>
+            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }}>
               {formatRupiah(dppPpn)}
             </td>
-            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
           </tr>
           <tr>
-            <td style={leftOnlyCellStyle}>PPN 11% :</td>
-            <td style={{ ...rightOnlyCellStyle, textAlign: "right" }}>
+            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
+            <td style={verticalOnlyCellStyle}>PPN 11% :</td>
+            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }}>
               {formatRupiah(ppn11)}
             </td>
-            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
           </tr>
           <tr>
-            <td style={{ ...leftOnlyCellStyle, fontWeight: 700 }}>
+            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
+            <td style={{ ...verticalOnlyCellStyle, fontWeight: 700 }}>
               Total Pembayaran :
             </td>
             <td
               style={{
-                ...rightOnlyCellStyle,
+                ...verticalOnlyCellStyle,
                 textAlign: "right",
                 fontWeight: 700,
               }}
             >
               {formatRupiah(total)}
             </td>
-            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
           </tr>
           <tr>
-            <td style={leftOnlyCellStyle}>PPh 23 2% :</td>
-            <td style={{ ...rightOnlyCellStyle, textAlign: "right" }}>-</td>
             <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
+            <td style={verticalOnlyCellStyle}>PPh 23 2% :</td>
+            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }}>-</td>
           </tr>
 
           {/* === TERBILANG ROW === */}
