@@ -32,7 +32,6 @@ import { DokumenRencana } from "@/components/spj/docs/dokumen-rencana";
 import { SuratHasilPemeriksaan } from "@/components/spj/docs/surat-hasil-pemeriksaan";
 import { BeritaAcaraSerahTerima } from "@/components/spj/docs/berita-acara-serah-terima";
 import { SuratPenawaranToko } from "@/components/spj/docs/surat-penawaran-toko";
-import { SuratPertanggungjawaban } from "@/components/spj/docs/surat-pertanggungjawaban";
 import { Kuitansi } from "@/components/spj/docs/kuitansi";
 
 interface DocTemplate {
@@ -85,13 +84,6 @@ const DOC_TEMPLATES: DocTemplate[] = [
     short: "TOKO",
     color: "border-slate-400 text-slate-700 dark:text-slate-300",
     render: (g, s) => <SuratPenawaranToko group={g} school={s} />,
-  },
-  {
-    id: "surat-pertanggungjawaban",
-    label: "Surat Pertanggungjawaban",
-    short: "SPJ",
-    color: "border-rose-400 text-rose-700 dark:text-rose-300",
-    render: (g, s) => <SuratPertanggungjawaban group={g} school={s} />,
   },
   {
     id: "kuitansi",
