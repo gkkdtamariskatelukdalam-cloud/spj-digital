@@ -83,6 +83,17 @@ const verticalOnlyCellStyle: CSSProperties = {
   verticalAlign: "top",
 };
 
+// PPN empty left cell — LEFT border only (vertical line on left edge
+// that continues from the items table above). No other borders.
+const ppnEmptyCellStyle: CSSProperties = {
+  borderLeft: "1px solid #000",
+  borderRight: "none",
+  borderTop: "none",
+  borderBottom: "none",
+  padding: "4px 6px",
+  verticalAlign: "top",
+};
+
 // LEFT border only — for the number column (col A) in Instruksi rows.
 // Per Excel R98-R103: A column has only Left border (no top/bottom/right).
 // This ensures NO vertical line between the number and the text.
@@ -340,28 +351,28 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
               block). NO horizontal separators between PPN rows.
               Layout: empty (colSpan=4, borderless) | label (vertical-only) | value (vertical-only) */}
           <tr>
-            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
+            <td style={ppnEmptyCellStyle} colSpan={4}>&nbsp;</td>
             <td style={verticalOnlyCellStyle}>Harga sebelum PPN</td>
             <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }}>
               {formatRupiah(total)}
             </td>
           </tr>
           <tr>
-            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
+            <td style={ppnEmptyCellStyle} colSpan={4}>&nbsp;</td>
             <td style={verticalOnlyCellStyle}>DPP PPN :</td>
             <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }}>
               {formatRupiah(dppPpn)}
             </td>
           </tr>
           <tr>
-            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
+            <td style={ppnEmptyCellStyle} colSpan={4}>&nbsp;</td>
             <td style={verticalOnlyCellStyle}>PPN 11% :</td>
             <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }}>
               {formatRupiah(ppn11)}
             </td>
           </tr>
           <tr>
-            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
+            <td style={ppnEmptyCellStyle} colSpan={4}>&nbsp;</td>
             <td style={{ ...verticalOnlyCellStyle, fontWeight: 700 }}>
               Total Pembayaran :
             </td>
@@ -376,7 +387,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
           <tr>
-            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
+            <td style={ppnEmptyCellStyle} colSpan={4}>&nbsp;</td>
             <td style={verticalOnlyCellStyle}>PPh 23 2% :</td>
             <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }}>-</td>
           </tr>
