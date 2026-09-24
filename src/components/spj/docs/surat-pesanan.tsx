@@ -30,6 +30,7 @@ const cellStyle: CSSProperties = {
   border: "1px solid #000",
   padding: "4px 6px",
   verticalAlign: "top",
+  fontSize: "11px",
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
@@ -63,7 +64,7 @@ const borderlessCellStyle: CSSProperties = {
 
 // PPN label/value cell — vertical borders only (left + right, no top/bottom).
 // Per user request: PPN stays on RIGHT side, only ADD vertical borders,
-// NO horizontal separators between PPN rows.
+// NO horizontal separators between PPN rows. Font: 11px.
 const ppnCellStyle: CSSProperties = {
   borderLeft: "1px solid #000",
   borderRight: "1px solid #000",
@@ -71,6 +72,7 @@ const ppnCellStyle: CSSProperties = {
   borderBottom: "none",
   padding: "4px 6px",
   verticalAlign: "top",
+  fontSize: "11px",
 };
 
 // Also keep verticalOnlyCellStyle as an alias for PPN cells (used by PPN rows).
@@ -81,6 +83,7 @@ const verticalOnlyCellStyle: CSSProperties = {
   borderBottom: "none",
   padding: "4px 6px",
   verticalAlign: "top",
+  fontSize: "11px",
 };
 
 // PPN empty left cell — LEFT border only (vertical line on left edge
@@ -92,6 +95,7 @@ const ppnEmptyCellStyle: CSSProperties = {
   borderBottom: "none",
   padding: "4px 6px",
   verticalAlign: "top",
+  fontSize: "11px",
 };
 
 // LEFT border only — for the number column (col A) in Instruksi rows.
@@ -139,6 +143,7 @@ const signatureLeftCellStyle: CSSProperties = {
   borderRight: "none",
   padding: "4px 6px",
   verticalAlign: "top",
+  fontSize: "11px",
 };
 
 // Signature second cell (Pelaksana, right side) — RIGHT + BOTTOM borders only.
@@ -151,6 +156,7 @@ const signatureRightCellStyle: CSSProperties = {
   borderLeft: "none",
   padding: "4px 6px",
   verticalAlign: "top",
+  fontSize: "11px",
 };
 
 export function SuratPesanan({ group, school }: SuratPesananProps) {
@@ -190,7 +196,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
   ];
 
   return (
-    <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
+    <div className="spj-doc px-6 sm:px-10 py-8 text-[11px] leading-relaxed text-slate-900">
       {/* === Kop Surat === */}
       <div className="mb-5">
         <Letterhead />
@@ -282,10 +288,10 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
 
-          {/* === RINCIAN PEKERJAAN header (merged 6 cols) === */}
+          {/* === RINCIAN PEKERJAAN header (merged 6 cols, 14px) === */}
           <tr>
             <td
-              style={{ ...headerCellStyle, textAlign: "center" }}
+              style={{ ...headerCellStyle, textAlign: "center", fontSize: "14px" }}
               colSpan={6}
             >
               RINCIAN PEKERJAAN
@@ -414,16 +420,17 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             <td style={rightOnlyCellStyle} colSpan={5}>&nbsp;</td>
           </tr>
 
-          {/* === INSTRUKSI SECTION === */}
+          {/* === INSTRUKSI SECTION (9px per user request) === */}
           {/* Per Excel R97-R103:
               - Header row (R97): colSpan=6, LEFT + RIGHT borders only (no top/bottom)
               - Number column (col A): LEFT border only (no right → no vertical
                 line between number and text)
               - Text column (cols B-K merged): RIGHT border only (no left)
-              - NO horizontal separators between items (no top/bottom) */}
+              - NO horizontal separators between items (no top/bottom)
+              - Font size: 9px */}
           <tr>
             <td
-              style={{ ...instruksiHeaderStyle, fontWeight: 700 }}
+              style={{ ...instruksiHeaderStyle, fontWeight: 700, fontSize: "9px" }}
               colSpan={6}
             >
               Instruksi ke Penyedia dan Satuan Pendidikan
@@ -436,12 +443,13 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                   ...leftOnlyCellStyle,
                   textAlign: "center",
                   verticalAlign: "top",
+                  fontSize: "9px",
                 }}
               >
                 {idx + 1}
               </td>
               <td
-                style={{ ...rightOnlyCellStyle, textAlign: "justify" }}
+                style={{ ...rightOnlyCellStyle, textAlign: "justify", fontSize: "9px" }}
                 colSpan={5}
               >
                 {text}
