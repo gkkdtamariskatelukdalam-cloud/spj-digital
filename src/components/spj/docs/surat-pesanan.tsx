@@ -352,50 +352,52 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           )}
 
           {/* === PPN CALCULATION ROWS === */}
-          {/* PPN starts at col 3 (Jumlah) per user request "sejajar kolom jumlah".
-              Layout: empty (colSpan=2, LEFT border) | label (colSpan=2, vertical) | value (colSpan=2, vertical)
-              Only vertical borders, NO horizontal separators between rows. */}
+          {/* Per user reference image from Google Drive:
+              - Empty (colSpan=2, No+Uraian): LEFT border only, no other borders
+              - Label (colSpan=3, Jumlah+Satuan+Harga): FULL 4 borders (TBLR)
+              - Value (colSpan=1, Total Harga): FULL 4 borders (TBLR)
+              - WITH horizontal separators between PPN rows
+              - Label: rata kiri, Value: rata kanan */}
           <tr>
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
-            <td style={verticalOnlyCellStyle} colSpan={2}>Harga sebelum PPN</td>
-            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }} colSpan={2}>
+            <td style={cellStyle} colSpan={3}>Harga sebelum PPN</td>
+            <td style={{ ...cellStyle, textAlign: "right" }}>
               {formatRupiah(total)}
             </td>
           </tr>
           <tr>
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
-            <td style={verticalOnlyCellStyle} colSpan={2}>DPP PPN :</td>
-            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }} colSpan={2}>
+            <td style={cellStyle} colSpan={3}>DPP PPN :</td>
+            <td style={{ ...cellStyle, textAlign: "right" }}>
               {formatRupiah(dppPpn)}
             </td>
           </tr>
           <tr>
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
-            <td style={verticalOnlyCellStyle} colSpan={2}>PPN 11% :</td>
-            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }} colSpan={2}>
+            <td style={cellStyle} colSpan={3}>PPN 11% :</td>
+            <td style={{ ...cellStyle, textAlign: "right" }}>
               {formatRupiah(ppn11)}
             </td>
           </tr>
           <tr>
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
-            <td style={{ ...verticalOnlyCellStyle, fontWeight: 700 }} colSpan={2}>
+            <td style={{ ...cellStyle, fontWeight: 700 }} colSpan={3}>
               Total Pembayaran :
             </td>
             <td
               style={{
-                ...verticalOnlyCellStyle,
+                ...cellStyle,
                 textAlign: "right",
                 fontWeight: 700,
               }}
-              colSpan={2}
             >
               {formatRupiah(total)}
             </td>
           </tr>
           <tr>
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
-            <td style={verticalOnlyCellStyle} colSpan={2}>PPh 23 2% :</td>
-            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }} colSpan={2}>-</td>
+            <td style={cellStyle} colSpan={3}>PPh 23 2% :</td>
+            <td style={{ ...cellStyle, textAlign: "right" }}>-</td>
           </tr>
 
           {/* === TERBILANG ROW === */}
