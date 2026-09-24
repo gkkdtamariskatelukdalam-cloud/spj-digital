@@ -26,6 +26,7 @@ import {
   Upload,
   ShoppingCart,
   Loader2,
+  ExternalLink,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -203,6 +204,17 @@ export default function Home() {
 
           {/* User menu (top-right) */}
           <div className="flex items-center gap-2">
+            {/* Link to Dokumentasi SPJ */}
+            <a
+              href="https://spj-dokumentasi.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border border-violet-200 dark:border-violet-800 text-violet-700 dark:text-violet-300 hover:bg-violet-50 dark:hover:bg-violet-950/40 transition-colors"
+              title="Buka Dokumentasi SPJ di tab baru"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              Dokumentasi
+            </a>
             <div className="hidden sm:flex items-center gap-1.5 text-xs">
               <Lock className="h-3 w-3 text-rose-500" />
               <span className="text-muted-foreground">Excel:</span>
