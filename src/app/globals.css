@@ -145,7 +145,9 @@
   .spj-doc {
     color: #000 !important;
     font-family: "Times New Roman", Times, serif !important;
-    font-size: 11px !important;
+    /* Removed font-size: 11px !important — let inline styles handle
+       font sizes per-section (14pt for titles, 11pt for body, 9pt for
+       Instruksi, matching Excel original). */
     line-height: 1.4 !important;
     padding: 0 !important;
   }
@@ -170,7 +172,9 @@
   background: white;
   color: #0f172a;
   font-family: "Times New Roman", Times, serif;
-  font-size: 12px;
+  /* Default font-size 11pt — matches Excel. Individual cells override
+     with inline fontSize for 14pt titles and 9pt Instruksi. */
+  font-size: 11pt;
   line-height: 1.5;
   padding: 2rem 2.5rem;
 }

@@ -30,7 +30,7 @@ const cellStyle: CSSProperties = {
   border: "1px solid #000",
   padding: "4px 6px",
   verticalAlign: "top",
-  fontSize: "11px",
+  fontSize: "11pt",
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
@@ -72,7 +72,7 @@ const ppnCellStyle: CSSProperties = {
   borderBottom: "none",
   padding: "4px 6px",
   verticalAlign: "top",
-  fontSize: "11px",
+  fontSize: "11pt",
 };
 
 // Also keep verticalOnlyCellStyle as an alias for PPN cells (used by PPN rows).
@@ -83,7 +83,7 @@ const verticalOnlyCellStyle: CSSProperties = {
   borderBottom: "none",
   padding: "4px 6px",
   verticalAlign: "top",
-  fontSize: "11px",
+  fontSize: "11pt",
 };
 
 // PPN empty left cell — LEFT border only (vertical line on left edge
@@ -95,7 +95,7 @@ const ppnEmptyCellStyle: CSSProperties = {
   borderBottom: "none",
   padding: "4px 6px",
   verticalAlign: "top",
-  fontSize: "11px",
+  fontSize: "11pt",
 };
 
 // LEFT border only — for the number column (col A) in Instruksi rows.
@@ -143,7 +143,7 @@ const signatureLeftCellStyle: CSSProperties = {
   borderRight: "none",
   padding: "4px 6px",
   verticalAlign: "top",
-  fontSize: "11px",
+  fontSize: "11pt",
 };
 
 // Signature second cell (Pelaksana, right side) — RIGHT + BOTTOM borders only.
@@ -156,7 +156,7 @@ const signatureRightCellStyle: CSSProperties = {
   borderLeft: "none",
   padding: "4px 6px",
   verticalAlign: "top",
-  fontSize: "11px",
+  fontSize: "11pt",
 };
 
 export function SuratPesanan({ group, school }: SuratPesananProps) {
@@ -202,9 +202,9 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
         <Letterhead />
       </div>
 
-      {/* === Title === */}
+      {/* === Title (14pt per Excel) === */}
       <div className="text-center mb-4">
-        <h1 className="font-bold text-[14px]">SURAT PESANAN</h1>
+        <h1 className="font-bold" style={{ fontSize: "14pt" }}>SURAT PESANAN</h1>
       </div>
 
       {/* ============================================================ */}
@@ -291,7 +291,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           {/* === RINCIAN PEKERJAAN header (merged 6 cols, 14px) === */}
           <tr>
             <td
-              style={{ ...headerCellStyle, textAlign: "center", fontSize: "14px" }}
+              style={{ ...headerCellStyle, textAlign: "center", fontSize: "14pt" }}
               colSpan={6}
             >
               RINCIAN PEKERJAAN
@@ -430,7 +430,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
               - Font size: 9px */}
           <tr>
             <td
-              style={{ ...instruksiHeaderStyle, fontWeight: 700, fontSize: "9px" }}
+              style={{ ...instruksiHeaderStyle, fontWeight: 700, fontSize: "9pt" }}
               colSpan={6}
             >
               Instruksi ke Penyedia dan Satuan Pendidikan
@@ -443,13 +443,13 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                   ...leftOnlyCellStyle,
                   textAlign: "center",
                   verticalAlign: "top",
-                  fontSize: "9px",
+                  fontSize: "9pt",
                 }}
               >
                 {idx + 1}
               </td>
               <td
-                style={{ ...rightOnlyCellStyle, textAlign: "justify", fontSize: "9px" }}
+                style={{ ...rightOnlyCellStyle, textAlign: "justify", fontSize: "9pt" }}
                 colSpan={5}
               >
                 {text}
