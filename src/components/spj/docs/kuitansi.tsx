@@ -13,7 +13,7 @@ const tableStyle: React.CSSProperties = {
 const cellStyle: React.CSSProperties = {
   border: "1px solid #000",
   padding: "4px 8px",
-  fontSize: "12px",
+  fontSize: "10pt",
   verticalAlign: "top",
 };
 
@@ -161,7 +161,7 @@ export function Kuitansi({
       className="spj-doc"
       style={{
         fontFamily: '"Times New Roman", Times, serif',
-        fontSize: "12px",
+        fontSize: "10pt",
         lineHeight: 1.5,
         padding: "2rem 2.5rem",
         color: "#000",
@@ -239,7 +239,7 @@ export function Kuitansi({
         style={{
           textAlign: "center",
           fontWeight: 700,
-          fontSize: "14px",
+          fontSize: "16pt",
           textDecoration: "underline",
           margin: "16px 0 12px 0",
         }}
@@ -252,7 +252,7 @@ export function Kuitansi({
           trailing ':' lines up. The 'Nomor Surat persetujuan penyediaan
           barang' line has no colon (it's the start of a 2-line label);
           the next line 'dan jasa' has the colon and the value. */}
-      <div style={{ fontSize: "12px", lineHeight: 1.8, marginBottom: "16px" }}>
+      <div style={{ fontSize: "10pt", lineHeight: 1.8, marginBottom: "16px" }}>
         <div>
           <span style={bodyLabelStyle}>Sudah terima dari</span>
           {" : "}Bendahara SMA Negeri 1 Telukdalam
@@ -293,7 +293,7 @@ export function Kuitansi({
                 textAlign: "left",
                 verticalAlign: "top",
                 padding: "8px 8px 0 0",
-                fontSize: "12px",
+                fontSize: "10pt",
               }}
             >
               <div>Mengetahui :</div>
@@ -310,7 +310,7 @@ export function Kuitansi({
                 textAlign: "left",
                 verticalAlign: "top",
                 padding: "8px 8px 0 8px",
-                fontSize: "12px",
+                fontSize: "10pt",
               }}
             >
               <div>Lunas Bayar Oleh :</div>
@@ -330,7 +330,7 @@ export function Kuitansi({
                 textAlign: "left",
                 verticalAlign: "top",
                 padding: "8px 0 0 50px",
-                fontSize: "12px",
+                fontSize: "10pt",
               }}
             >
               <div>Diterima oleh :</div>
@@ -348,7 +348,7 @@ export function Kuitansi({
         style={{
           textAlign: "center",
           marginTop: "24px",
-          fontSize: "12px",
+          fontSize: "10pt",
         }}
       >
         <div>Menyetujui :</div>
