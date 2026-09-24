@@ -19,7 +19,7 @@ const cellStyle: CSSProperties = {
   border: "1px solid #000",
   padding: "4px 6px",
   verticalAlign: "top",
-  fontSize: "12px",
+  fontSize: "11pt",
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
@@ -52,7 +52,7 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
   const terbilangText = titleCase(terbilang(total));
 
   return (
-    <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
+    <div className="spj-doc px-6 sm:px-10 py-8 text-[11pt] leading-relaxed text-slate-900">
 
       {/* ============================================================ */}
       {/* PAGE 1: SURAT PENGANTAR                                       */}
@@ -60,22 +60,22 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
 
       {/* Vendor header (big, centered) */}
       <div style={{ textAlign: "center", marginBottom: "4px" }}>
-        <div style={{ fontSize: "26px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px" }}>
+        <div style={{ fontSize: "34pt", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px" }}>
           {vendorName}
         </div>
-        <div style={{ fontSize: "11px", marginTop: "2px" }}>
+        <div style={{ fontSize: "9pt", marginTop: "2px" }}>
           {vendorAddress}
         </div>
         <div style={{ borderTop: "3px solid #000", marginTop: "6px" }} />
       </div>
 
       {/* Date (right-aligned) */}
-      <div style={{ textAlign: "right", marginTop: "8px", marginBottom: "12px", fontSize: "12px" }}>
+      <div style={{ textAlign: "right", marginTop: "8px", marginBottom: "12px", fontSize: "11pt" }}>
         Telukdalam, {formatDate(tglPesan)}
       </div>
 
       {/* Recipient (left-aligned) */}
-      <div style={{ marginBottom: "12px", fontSize: "12px", lineHeight: 1.6 }}>
+      <div style={{ marginBottom: "12px", fontSize: "11pt", lineHeight: 1.6 }}>
         <div>Kepada Yth.</div>
         <div>Kepala SMA Negeri 1 Telukdalam</div>
         <div>Cq. Penanggungjawab Kegiatan</div>
@@ -84,12 +84,12 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
       </div>
 
       {/* Subject (bold) */}
-      <div style={{ marginBottom: "8px", fontSize: "12px", fontWeight: 700 }}>
+      <div style={{ marginBottom: "8px", fontSize: "11pt", fontWeight: 700 }}>
         Perihal : Pesanan Barang
       </div>
 
       {/* Greeting + body */}
-      <div style={{ marginBottom: "20px", fontSize: "12px", lineHeight: 1.6, textAlign: "justify" }}>
+      <div style={{ marginBottom: "20px", fontSize: "11pt", lineHeight: 1.6, textAlign: "justify" }}>
         <div>Dengan hormat,</div>
         <div style={{ marginTop: "4px" }}>
           Memenuhi maksud surat permohonan Ibu kepada kami untuk menyediakan Alat
@@ -102,7 +102,7 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
 
       {/* Signature - di kanan, teks rata kiri */}
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "16px" }}>
-        <div style={{ textAlign: "left", width: "250px", fontSize: "12px" }}>
+        <div style={{ textAlign: "left", width: "250px", fontSize: "11pt" }}>
           <div style={{ fontWeight: 700, textTransform: "uppercase" }}>{vendorName}</div>
           <div style={{ height: "56px" }} />
           <div style={nameStyle}>{vendorOwner}</div>
@@ -119,10 +119,10 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
 
       {/* Vendor header again */}
       <div style={{ textAlign: "center", marginBottom: "4px" }}>
-        <div style={{ fontSize: "26px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px" }}>
+        <div style={{ fontSize: "34pt", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px" }}>
           {vendorName}
         </div>
-        <div style={{ fontSize: "11px", marginTop: "2px" }}>
+        <div style={{ fontSize: "9pt", marginTop: "2px" }}>
           {vendorAddress}
         </div>
         <div style={{ borderTop: "3px solid #000", marginTop: "6px" }} />
@@ -130,7 +130,7 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
 
       {/* Title */}
       <div style={{ textAlign: "center", marginTop: "10px", marginBottom: "10px" }}>
-        <span style={{ fontWeight: 700, fontSize: "14px", textDecoration: "underline", textTransform: "uppercase" }}>
+        <span style={{ fontWeight: 700, fontSize: "14pt", textDecoration: "underline", textTransform: "uppercase" }}>
           DAFTAR KUANTITAS DAN HARGA
         </span>
       </div>
@@ -219,7 +219,7 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
 
       {/* Final signature - di kanan, teks rata kiri */}
       <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "20px" }}>
-        <div style={{ textAlign: "left", width: "250px", fontSize: "12px" }}>
+        <div style={{ textAlign: "left", width: "250px", fontSize: "11pt" }}>
           <div>Telukdalam, {formatDate(tglPesan)}</div>
           <div style={{ fontWeight: 700, textTransform: "uppercase", marginTop: "4px" }}>{vendorName}</div>
           <div style={{ height: "56px" }} />
