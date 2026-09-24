@@ -166,9 +166,13 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
   const completion = estimateCompletionDate(group);
   const total = group.totalJumlah;
 
-  // PPN calculation per spec
-  const dppPpn = Math.round(total / 1.11);
-  const ppn11 = total - dppPpn;
+  // PPN calculation per user rule:
+  // - Total > 2.000.000 → PPN 11% berlaku (DPP = total/1.11, PPN = total-DPP)
+  // - Total ≤ 2.000.000 → TIDAK ada PPN (DPP = "-", PPN = "-")
+  const PPN_THRESHOLD = 2_000_000;
+  const isPpnApplicable = total > PPN_THRESHOLD;
+  const dppPpn = isPpnApplicable ? Math.round(total / 1.11) : 0;
+  const ppn11 = isPpnApplicable ? total - dppPpn : 0;
 
   const vendorName = orDash(group.vendorName);
   const vendorOwner = orDash(group.vendorOwner);
@@ -357,7 +361,8 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
               - Label (colSpan=3, Jumlah+Satuan+Harga): FULL 4 borders (TBLR)
               - Value (colSpan=1, Total Harga): FULL 4 borders (TBLR)
               - WITH horizontal separators between PPN rows
-              - Label: rata kiri, Value: rata kanan */}
+              - Label: rata kiri, Value: rata kanan
+              - PPN rule: total > 2.000.000 → PPN 11% applies; else DPP/PPN = "-" */}
           <tr>
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
             <td style={cellStyle} colSpan={3}>Harga sebelum PPN</td>
@@ -369,14 +374,14 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
             <td style={cellStyle} colSpan={3}>DPP PPN :</td>
             <td style={{ ...cellStyle, textAlign: "right" }}>
-              {formatRupiah(dppPpn)}
+              {isPpnApplicable ? formatRupiah(dppPpn) : "-"}
             </td>
           </tr>
           <tr>
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
             <td style={cellStyle} colSpan={3}>PPN 11% :</td>
             <td style={{ ...cellStyle, textAlign: "right" }}>
-              {formatRupiah(ppn11)}
+              {isPpnApplicable ? formatRupiah(ppn11) : "-"}
             </td>
           </tr>
           <tr>
