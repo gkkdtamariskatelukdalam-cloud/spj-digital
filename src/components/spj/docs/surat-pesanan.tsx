@@ -225,8 +225,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           </tr>
           <tr>
             <td style={cellStyle} colSpan={2}>
-              <div>Waktu Pengerjaan Pesanan:</div>
-              <div style={{ paddingLeft: "12px" }}>{formatDate(tglPesan)}</div>
+              Waktu Pengerjaan Pesanan : {formatDate(tglPesan)}
             </td>
             <td style={cellStyle} colSpan={2}>
               No. BPU
@@ -237,8 +236,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           </tr>
           <tr>
             <td style={cellStyle} colSpan={2}>
-              <div>Waktu Pemrosesan Pesanan:</div>
-              <div style={{ paddingLeft: "12px" }}>{formatDate(tglPesan)}</div>
+              Waktu Pemrosesan Pesanan : {formatDate(tglPesan)}
             </td>
             <td style={cellStyle} colSpan={2}>
               &nbsp;
@@ -249,10 +247,8 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           </tr>
           <tr>
             <td style={cellStyle} colSpan={2}>
-              <div>Waktu Penyelesaian Pesanan:</div>
-              <div style={{ paddingLeft: "12px" }}>
-                {completion ? formatDate(completion) : "—"}
-              </div>
+              Waktu Penyelesaian Pesanan :{" "}
+              {completion ? formatDate(completion) : "—"}
             </td>
             <td style={cellStyle} colSpan={4}>
               Catatan Pengiriman Untuk Penyedia:
@@ -323,59 +319,50 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           )}
 
           {/* === PPN CALCULATION ROWS === */}
-          {/* Per Excel R89-R93: Left side (cols A-F) is BORDERLESS (empty),
-              right side (cols G-I = label, J-K = value) has full 4 borders.
-              In our 6-col HTML: colSpan=4 (borderless) + label (full) + value (full). */}
+          {/* Per user request: PPN on the LEFT side, only vertical borders
+              (left + right edges), NO horizontal separators between rows.
+              Label (col 1, LEFT border only) + Value (col 2, RIGHT border
+              only) + empty (cols 3-6, borderless). */}
           <tr>
-            <td style={borderlessCellStyle} colSpan={4}>
-              &nbsp;
-            </td>
-            <td style={ppnCellStyle}>Harga sebelum PPN</td>
-            <td style={{ ...ppnCellStyle, textAlign: "right" }}>
+            <td style={leftOnlyCellStyle}>Harga sebelum PPN</td>
+            <td style={{ ...rightOnlyCellStyle, textAlign: "right" }}>
               {formatRupiah(total)}
             </td>
+            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
           </tr>
           <tr>
-            <td style={borderlessCellStyle} colSpan={4}>
-              &nbsp;
-            </td>
-            <td style={ppnCellStyle}>DPP PPN :</td>
-            <td style={{ ...ppnCellStyle, textAlign: "right" }}>
+            <td style={leftOnlyCellStyle}>DPP PPN :</td>
+            <td style={{ ...rightOnlyCellStyle, textAlign: "right" }}>
               {formatRupiah(dppPpn)}
             </td>
+            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
           </tr>
           <tr>
-            <td style={borderlessCellStyle} colSpan={4}>
-              &nbsp;
-            </td>
-            <td style={ppnCellStyle}>PPN 11% :</td>
-            <td style={{ ...ppnCellStyle, textAlign: "right" }}>
+            <td style={leftOnlyCellStyle}>PPN 11% :</td>
+            <td style={{ ...rightOnlyCellStyle, textAlign: "right" }}>
               {formatRupiah(ppn11)}
             </td>
+            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
           </tr>
           <tr>
-            <td style={borderlessCellStyle} colSpan={4}>
-              &nbsp;
-            </td>
-            <td style={{ ...ppnCellStyle, fontWeight: 700 }}>
+            <td style={{ ...leftOnlyCellStyle, fontWeight: 700 }}>
               Total Pembayaran :
             </td>
             <td
               style={{
-                ...ppnCellStyle,
+                ...rightOnlyCellStyle,
                 textAlign: "right",
                 fontWeight: 700,
               }}
             >
               {formatRupiah(total)}
             </td>
+            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
           </tr>
           <tr>
-            <td style={borderlessCellStyle} colSpan={4}>
-              &nbsp;
-            </td>
-            <td style={ppnCellStyle}>PPh 23 2% :</td>
-            <td style={{ ...ppnCellStyle, textAlign: "right" }}>-</td>
+            <td style={leftOnlyCellStyle}>PPh 23 2% :</td>
+            <td style={{ ...rightOnlyCellStyle, textAlign: "right" }}>-</td>
+            <td style={borderlessCellStyle} colSpan={4}>&nbsp;</td>
           </tr>
 
           {/* === TERBILANG ROW === */}
