@@ -6,6 +6,10 @@ generator client {
 }
 
 datasource db {
+  // Production: PostgreSQL (Neon). Dev: started via /tmp/start-dev.sh
+  // which exports DATABASE_URL pointing to the Neon Postgres connection.
+  // The local .env SQLite URL is only a fallback when /tmp/start-dev.sh
+  // is not used.
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }

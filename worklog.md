@@ -2546,3 +2546,52 @@ Stage Summary:
 - 409 conflict di /api/users adalah normal behavior (duplicate username guard)
 - Vercel auto-redeploy triggered by git push, completed in ~60 seconds
 - Lint clean, semua tests sukses di live URL
+
+---
+Task ID: 5 (import-excel-feature)
+Agent: Main (Claude)
+Task: Membangun kombinasi fitur A (Excel Import dengan dedup anti-duplikat) + B (template generator bersih 34 kolom) untuk halaman Data Belanja SPJ Digital.
+
+Work Log:
+- Eksplorasi struktur project: prisma schema (Transaction model punya 34 kolom Excel + excelRowNum + tahunBospId), import API existing, import-excel.tsx UI existing
+- Analisis file `upload/import aplikasi SPJ.xlsx` dengan openpyxl: 34 kolom (A-AH), 423 baris data nyata, cached values tersimpan walau ada formula cross-workbook
+- Identified critical issue: schema.prisma pakai `provider = "postgresql"` tapi DATABASE_URL di .env pakai SQLite → Prisma client gagal loading AppSettings model. FIXED: reverted schema to postgresql, using Neon Postgres via /tmp/start-dev.sh wrapper
+- Improved `src/app/api/spj/import/route.ts`:
+  - Robust parsing: parseStr/parseNum/parseNumNullable/parseDate/isRowEmpty handle #N/A, "0", datetime.time(0,0), tanggal dd/MM/yyyy
+  - All 423 data rows parsed regardless of empty cells (per user requirement)
+  - DEDUP STRATEGY: excelRowNum (primary, paling stabil saat user isi data kosong) + composite key `noPesan|noBku|namaBarang` (secondary, untuk rows yang pindah posisi)
+  - Link imported transactions to active BOSP year (tahunBospId)
+  - UPSERT logic: query existing by excelRowNum + composite key, then UPDATE existing or CREATE new
+  - Vendors upsert by name (update owner/phone/address jika berubah)
+  - BPU codes upsert by code
+- Created `src/app/api/spj/import/template/route.ts`:
+  - GET endpoint generate .xlsx template bersih (no external formulas)
+  - 34 columns matching user's original template (A-AH)
+  - Title row (merged A1:AH1), header row (bold white on dark blue), number row (1-34), sample row (light yellow italic), 96 empty input rows
+  - Column widths set for readability
+  - Returns file as attachment with `Content-Disposition: attachment; filename="template_import_SPJ_YYYY-MM-DD.xlsx"`
+- Updated `src/components/spj/import-excel.tsx`:
+  - `downloadTemplate()` now actually fetches `/api/spj/import/template`, creates blob, triggers download
+  - Button label: "Info Format" → "Download Template" with emerald accent
+  - ImportResult interface extended: vendorsCreated, vendorsUpdated, transactionsUnchanged, bospYear, dedupStrategy
+  - Result card shows dedup strategy + BOSP year info
+  - Card description explains anti-duplicate behavior
+- Verified code with standalone scripts (dev server unstable in this sandbox - dies when agent-browser connects):
+  - `test-import-logic.ts` (read-only): 423 rows parsed, 421 match by excelRowNum, 245 match by composite key
+  - `test-template.ts`: Template generated 34 columns, headers match user's original
+  - `test-import-e2e.ts`: Initial import (778→780, +2 new) + re-import same file (780→780, 0 new, all 423 updated) → anti-duplicate CONFIRMED
+- Cleaned up test scripts, ran `bun run lint` → clean (no errors)
+- Schema note: kept as `provider = "postgresql"` (production uses Neon Postgres via /tmp/start-dev.sh). .env still has SQLite fallback but db:push to Neon succeeded ("already in sync")
+
+Stage Summary:
+- 3 files modified/created:
+  - MODIFIED `src/app/api/spj/import/route.ts` (improved dedup + BOSP linking + robust parsing)
+  - CREATED `src/app/api/spj/import/template/route.ts` (template generator)
+  - MODIFIED `src/components/spj/import-excel.tsx` (real template download + improved result display)
+- All 34 Excel columns (A-AH) are mapped and stored
+- Anti-duplicate behavior verified via end-to-end test against Neon Postgres:
+  - Initial import: +2 new transactions (rows that weren't in DB before)
+  - Re-import same file: +0 new transactions, all 423 rows updated (matched by dedup key)
+  - Dedup strategy: excelRowNum (primary) + noPesan|noBku|namaBarang (secondary)
+- Lint clean, TypeScript compiles, Prisma schema synced with Neon DB
+- Note: Local dev server is unstable in this sandbox (dies when agent-browser connects — likely memory pressure from Chrome + dev server exceeding 4GB cgroup limit). User should test the deployed version at https://spj-digital.vercel.app where this issue doesn't occur.

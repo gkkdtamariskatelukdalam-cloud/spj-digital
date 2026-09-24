@@ -71,10 +71,16 @@ interface ImportResult {
     totalRows: number;
     transactionsImported: number;
     transactionsUpdated: number;
-    transactionsSkipped: number;
-    vendorsImported: number;
-    bpuImported: number;
+    transactionsUnchanged?: number;
+    transactionsSkipped?: number;
+    vendorsCreated?: number;
+    vendorsImported?: number;
+    vendorsUpdated?: number;
+    bpuImported?: number;
+    bpuCreated?: number;
     sheetName: string;
+    bospYear?: string | null;
+    dedupStrategy?: string;
   };
 }
 
@@ -223,11 +229,32 @@ export function ImportExcel() {
     }
   };
 
-  const downloadTemplate = () => {
-    // The template is the user's uploaded file format - let's create a simple guide
-    toast.info(
-      "Format import: Sheet 'Master' dengan kolom: No. Surat Pesan, No BKU, Tanggal Pesanan, Tanggal Bayar, Uraian Kegiatan, Nama Barang, Volume, Satuan, Harga Satuan, Jumlah, Nama Toko 1, Direktur Toko 1, Alamat Toko 1, NO HP"
-    );
+  const downloadTemplate = async () => {
+    try {
+      toast.info("Mengunduh template Excel...");
+      const res = await fetch("/api/spj/import/template", {
+        method: "GET",
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Gagal mengunduh template");
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `template_import_SPJ_${new Date().toISOString().split("T")[0]}.xlsx`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast.success("Template berhasil diunduh!", {
+        description: "Buka file, hapus baris contoh, lalu isi data Anda.",
+        duration: 4000,
+      });
+    } catch (e) {
+      toast.error("Gagal mengunduh template: " + (e as Error).message);
+    }
   };
 
   return (
@@ -243,9 +270,10 @@ export function ImportExcel() {
               </CardTitle>
               <CardDescription className="text-sm">
                 Upload file Excel (.xlsx) untuk import data transaksi, vendor,
-                dan BPU secara massal. Format: sheet &quot;Master&quot; dengan
-                kolom No. Surat Pesan, No BKU, Tanggal, Uraian, Nama Barang,
-                Volume, Harga, Toko, dll.
+                dan BPU secara massal. Semua kolom &amp; baris akan masuk
+                walau ada sel kosong. Import ulang setelah mengisi data kosong
+                akan otomatis <b className="text-violet-700 dark:text-violet-300">update (anti-duplikat)</b> —
+                matched via No. Pesanan + BPU + Nama Barang (atau nomor baris Excel).
               </CardDescription>
             </div>
             <div className="flex items-center gap-2">
@@ -253,10 +281,10 @@ export function ImportExcel() {
                 variant="outline"
                 size="sm"
                 onClick={downloadTemplate}
-                className="h-8 text-xs"
+                className="h-8 text-xs border-emerald-400 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-300 dark:hover:bg-emerald-950/30"
               >
                 <Download className="h-3 w-3 mr-1" />
-                Info Format
+                Download Template
               </Button>
               <Button
                 variant="outline"
@@ -468,25 +496,41 @@ export function ImportExcel() {
                         </div>
                         <div>
                           <span className="font-bold text-emerald-700 dark:text-emerald-300">
-                            {importResult.summary.vendorsImported}
+                            {importResult.summary.vendorsCreated ??
+                              importResult.summary.vendorsImported ??
+                              0}
                           </span>{" "}
-                          vendor
+                          vendor baru
+                          {importResult.summary.vendorsUpdated ? (
+                            <span className="text-violet-600 dark:text-violet-400">
+                              {" "}
+                              +{importResult.summary.vendorsUpdated} update
+                            </span>
+                          ) : null}
                         </div>
                         <div>
                           <span className="font-bold text-emerald-700 dark:text-emerald-300">
-                            {importResult.summary.bpuImported}
+                            {importResult.summary.bpuCreated ??
+                              importResult.summary.bpuImported ??
+                              0}
                           </span>{" "}
                           BPU baru
                         </div>
                         <div>
                           <span className="text-muted-foreground">
-                            {importResult.summary.transactionsSkipped} di-skip
+                            {importResult.summary.transactionsUnchanged ?? 0} unchanged
                           </span>
                         </div>
                       </div>
                       {importResult.summary.transactionsUpdated > 0 && (
                         <p className="text-[10px] text-violet-600 dark:text-violet-400 mt-2">
-                          ✓ {importResult.summary.transactionsUpdated} transaksi diperbarui (No. Pesanan + BKU + Nama Barang sama → update, bukan duplikat)
+                          ✓ {importResult.summary.transactionsUpdated} transaksi diperbarui
+                          (matched via <code className="text-[9px] bg-violet-100 dark:bg-violet-900/40 px-1 rounded">{importResult.summary.dedupStrategy ?? "row number + composite key"}</code>) — tidak ada duplikat
+                        </p>
+                      )}
+                      {importResult.summary.bospYear && (
+                        <p className="text-[10px] text-amber-700 dark:text-amber-300 mt-1">
+                          📅 Tahun BOSP aktif: <b>{importResult.summary.bospYear}</b> — semua transaksi di-link ke tahun ini
                         </p>
                       )}
                     </AlertDescription>

@@ -1,0 +1,742 @@
+     1→"use client";
+     2→
+     3→import { useState, useRef } from "react";
+     4→import {
+     5→  Card,
+     6→  CardContent,
+     7→  CardHeader,
+     8→  CardTitle,
+     9→  CardDescription,
+    10→} from "@/components/ui/card";
+    11→import { Badge } from "@/components/ui/badge";
+    12→import { Button } from "@/components/ui/button";
+    13→import { ScrollArea } from "@/components/ui/scroll-area";
+    14→import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+    15→import {
+    16→  Table,
+    17→  TableBody,
+    18→  TableCell,
+    19→  TableHead,
+    20→  TableHeader,
+    21→  TableRow,
+    22→} from "@/components/ui/table";
+    23→import {
+    24→  Upload,
+    25→  FileSpreadsheet,
+    26→  CheckCircle2,
+    27→  AlertCircle,
+    28→  Loader2,
+    29→  Trash2,
+    30→  Download,
+    31→  Eye,
+    32→  DatabaseIcon,
+    33→  Store,
+    34→  Hash,
+    35→  Wallet,
+    36→  RotateCcw,
+    37→  LayoutDashboard,
+    38→  Receipt,
+    39→  Database,
+    40→  FileText,
+    41→  BarChart3,
+    42→} from "lucide-react";
+    43→import { toast } from "sonner";
+    44→import { formatRupiah } from "@/lib/format";
+    45→
+    46→interface PreviewRow {
+    47→  noPesan: string;
+    48→  noBku: string;
+    49→  uraian: string;
+    50→  namaBarang: string;
+    51→  volume: number;
+    52→  satuan: string;
+    53→  hargaSatuan: number;
+    54→  jumlah: number;
+    55→  vendorName: string;
+    56→}
+    57→
+    58→interface PreviewResult {
+    59→  sheetName: string;
+    60→  totalRows: number;
+    61→  totalVendors: number;
+    62→  totalBpu: number;
+    63→  totalAmount: number;
+    64→  preview: PreviewRow[];
+    65→  detectedColumns: Record<string, boolean>;
+    66→}
+    67→
+    68→interface ImportResult {
+    69→  success: boolean;
+    70→  summary: {
+    71→    totalRows: number;
+    72→    transactionsImported: number;
+    73→    transactionsUpdated: number;
+    74→    transactionsSkipped: number;
+    75→    vendorsImported: number;
+    76→    bpuImported: number;
+    77→    sheetName: string;
+    78→  };
+    79→}
+    80→
+    81→export function ImportExcel() {
+    82→  const [file, setFile] = useState<File | null>(null);
+    83→  const [preview, setPreview] = useState<PreviewResult | null>(null);
+    84→  const [previewLoading, setPreviewLoading] = useState(false);
+    85→  const [importLoading, setImportLoading] = useState(false);
+    86→  const [importResult, setImportResult] = useState<ImportResult | null>(null);
+    87→  const [error, setError] = useState<string | null>(null);
+    88→  const [resetLoading, setResetLoading] = useState(false);
+    89→  const fileInputRef = useRef<HTMLInputElement>(null);
+    90→
+    91→  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    92→    const selectedFile = e.target.files?.[0];
+    93→    if (selectedFile) {
+    94→      handleFile(selectedFile);
+    95→    }
+    96→  };
+    97→
+    98→  const handleDrop = (e: React.DragEvent) => {
+    99→    e.preventDefault();
+   100→    const droppedFile = e.dataTransfer.files[0];
+   101→    if (droppedFile) {
+   102→      handleFile(droppedFile);
+   103→    }
+   104→  };
+   105→
+   106→  const handleDragOver = (e: React.DragEvent) => {
+   107→    e.preventDefault();
+   108→  };
+   109→
+   110→  const handleFile = (selectedFile: File) => {
+   111→    const name = selectedFile.name.toLowerCase();
+   112→    if (!name.endsWith(".xlsx") && !name.endsWith(".xls")) {
+   113→      toast.error("File harus berformat .xlsx atau .xls");
+   114→      return;
+   115→    }
+   116→
+   117→    setFile(selectedFile);
+   118→    setPreview(null);
+   119→    setImportResult(null);
+   120→    setError(null);
+   121→    // Auto-preview
+   122→    previewFile(selectedFile);
+   123→  };
+   124→
+   125→  const previewFile = async (selectedFile: File) => {
+   126→    setPreviewLoading(true);
+   127→    setError(null);
+   128→    try {
+   129→      const formData = new FormData();
+   130→      formData.append("file", selectedFile);
+   131→      const res = await fetch("/api/spj/import/preview", {
+   132→        method: "POST",
+   133→        body: formData,
+   134→      });
+   135→      const data = await res.json();
+   136→      if (!res.ok) {
+   137→        throw new Error(data.error || "Gagal parse Excel");
+   138→      }
+   139→      setPreview(data as PreviewResult);
+   140→      toast.success(`File berhasil di-parse: ${data.totalRows} baris data`);
+   141→    } catch (e) {
+   142→      setError((e as Error).message);
+   143→      toast.error("Gagal parse Excel: " + (e as Error).message);
+   144→    } finally {
+   145→      setPreviewLoading(false);
+   146→    }
+   147→  };
+   148→
+   149→  const handleImport = async () => {
+   150→    if (!file) return;
+   151→
+   152→    // Confirm
+   153→    if (
+   154→      !confirm(
+   155→        `Import ${preview?.totalRows || 0} baris data dari Excel? Data akan ditambahkan ke database.`
+   156→      )
+   157→    )
+   158→      return;
+   159→
+   160→    setImportLoading(true);
+   161→    setError(null);
+   162→    try {
+   163→      const formData = new FormData();
+   164→      formData.append("file", file);
+   165→      const res = await fetch("/api/spj/import", {
+   166→        method: "POST",
+   167→        body: formData,
+   168→      });
+   169→      const data = await res.json();
+   170→      if (!res.ok) {
+   171→        throw new Error(data.error || "Gagal import Excel");
+   172→      }
+   173→      setImportResult(data as ImportResult);
+   174→      toast.success(
+   175→        `Berhasil import ${data.summary.transactionsImported} transaksi!`,
+   176→        { duration: 4000 }
+   177→      );
+   178→    } catch (e) {
+   179→      setError((e as Error).message);
+   180→      toast.error("Gagal import: " + (e as Error).message);
+   181→    } finally {
+   182→      setImportLoading(false);
+   183→    }
+   184→  };
+   185→
+   186→  const handleReset = () => {
+   187→    setFile(null);
+   188→    setPreview(null);
+   189→    setImportResult(null);
+   190→    setError(null);
+   191→    if (fileInputRef.current) fileInputRef.current.value = "";
+   192→  };
+   193→
+   194→  const handleResetDatabase = async () => {
+   195→    if (
+   196→      !confirm(
+   197→        "Reset SEMUA data transaksi, vendor, dan BPU? Data sekolah, produk, dan pengaturan KOP tidak akan dihapus. Tindakan ini TIDAK BISA dibatalkan."
+   198→      )
+   199→    )
+   200→      return;
+   201→
+   202→    setResetLoading(true);
+   203→    try {
+   204→      const res = await fetch("/api/spj/reset-data", {
+   205→        method: "POST",
+   206→        headers: { "Content-Type": "application/json" },
+   207→        body: JSON.stringify({ scope: "all" }),
+   208→      });
+   209→      const data = await res.json();
+   210→      if (!res.ok) throw new Error(data.error || "Gagal reset");
+   211→      toast.success(data.message || "Database berhasil di-reset", {
+   212→        duration: 4000,
+   213→      });
+   214→      // Clear local state
+   215→      setImportResult(null);
+   216→      setPreview(null);
+   217→      setFile(null);
+   218→      if (fileInputRef.current) fileInputRef.current.value = "";
+   219→    } catch (e) {
+   220→      toast.error("Gagal reset: " + (e as Error).message);
+   221→    } finally {
+   222→      setResetLoading(false);
+   223→    }
+   224→  };
+   225→
+   226→  const downloadTemplate = () => {
+   227→    // The template is the user's uploaded file format - let's create a simple guide
+   228→    toast.info(
+   229→      "Format import: Sheet 'Master' dengan kolom: No. Surat Pesan, No BKU, Tanggal Pesanan, Tanggal Bayar, Uraian Kegiatan, Nama Barang, Volume, Satuan, Harga Satuan, Jumlah, Nama Toko 1, Direktur Toko 1, Alamat Toko 1, NO HP"
+   230→    );
+   231→  };
+   232→
+   233→  return (
+   234→    <div className="space-y-4">
+   235→      {/* Header */}
+   236→      <Card className="border-l-4 border-l-emerald-500">
+   237→        <CardHeader className="pb-3">
+   238→          <div className="flex items-start justify-between gap-3 flex-wrap">
+   239→            <div className="space-y-1">
+   240→              <CardTitle className="text-xl flex items-center gap-2">
+   241→                <Upload className="h-5 w-5 text-emerald-600" />
+   242→                Import Excel
+   243→              </CardTitle>
+   244→              <CardDescription className="text-sm">
+   245→                Upload file Excel (.xlsx) untuk import data transaksi, vendor,
+   246→                dan BPU secara massal. Format: sheet &quot;Master&quot; dengan
+   247→                kolom No. Surat Pesan, No BKU, Tanggal, Uraian, Nama Barang,
+   248→                Volume, Harga, Toko, dll.
+   249→              </CardDescription>
+   250→            </div>
+   251→            <div className="flex items-center gap-2">
+   252→              <Button
+   253→                variant="outline"
+   254→                size="sm"
+   255→                onClick={downloadTemplate}
+   256→                className="h-8 text-xs"
+   257→              >
+   258→                <Download className="h-3 w-3 mr-1" />
+   259→                Info Format
+   260→              </Button>
+   261→              <Button
+   262→                variant="outline"
+   263→                size="sm"
+   264→                onClick={handleResetDatabase}
+   265→                disabled={resetLoading}
+   266→                className="h-8 text-xs border-rose-300 text-rose-700 hover:bg-rose-50 dark:text-rose-300 dark:hover:bg-rose-950/30"
+   267→              >
+   268→                {resetLoading ? (
+   269→                  <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+   270→                ) : (
+   271→                  <Trash2 className="h-3 w-3 mr-1" />
+   272→                )}
+   273→                Reset Database
+   274→              </Button>
+   275→            </div>
+   276→          </div>
+   277→        </CardHeader>
+   278→      </Card>
+   279→
+   280→      {/* Info: Kemana Data Masuk */}
+   281→      <Card className="border-l-4 border-l-violet-500">
+   282→        <CardContent className="p-4">
+   283→          <div className="flex items-start gap-3">
+   284→            <DatabaseIcon className="h-5 w-5 text-violet-600 flex-shrink-0 mt-0.5" />
+   285→            <div className="space-y-2">
+   286→              <div>
+   287→                <h3 className="text-sm font-semibold text-violet-700 dark:text-violet-300">
+   288→                  Saat import, data masuk ke mana?
+   289→                </h3>
+   290→                <p className="text-xs text-muted-foreground mt-0.5">
+   291→                  Data hasil import tersimpan di database dan otomatis muncul
+   292→                  di 5 tab berikut:
+   293→                </p>
+   294→              </div>
+   295→              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+   296→                <div className="flex items-start gap-2 p-2 rounded-md bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800">
+   297→                  <LayoutDashboard className="h-4 w-4 text-rose-600 flex-shrink-0 mt-0.5" />
+   298→                  <div>
+   299→                    <div className="text-xs font-semibold text-rose-700 dark:text-rose-300">
+   300→                      Dashboard
+   301→                    </div>
+   302→                    <div className="text-[10px] text-muted-foreground">
+   303→                      Total pengeluaran, jumlah transaksi, chart bulanan, top
+   304→                      vendor akan update
+   305→                    </div>
+   306→                  </div>
+   307→                </div>
+   308→                <div className="flex items-start gap-2 p-2 rounded-md bg-violet-50 dark:bg-violet-950/30 border border-violet-200 dark:border-violet-800">
+   309→                  <Receipt className="h-4 w-4 text-violet-600 flex-shrink-0 mt-0.5" />
+   310→                  <div>
+   311→                    <div className="text-xs font-semibold text-violet-700 dark:text-violet-300">
+   312→                      Transaksi
+   313→                    </div>
+   314→                    <div className="text-[10px] text-muted-foreground">
+   315→                      Daftar lengkap pengeluaran dengan filter bulan, vendor,
+   316→                      status
+   317→                    </div>
+   318→                  </div>
+   319→                </div>
+   320→                <div className="flex items-start gap-2 p-2 rounded-md bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800">
+   321→                  <FileText className="h-4 w-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+   322→                  <div>
+   323→                    <div className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+   324→                      Dokumen SPJ
+   325→                    </div>
+   326→                    <div className="text-[10px] text-muted-foreground">
+   327→                      Grup transaksi siap untuk cetak Surat Pesanan, BAST,
+   328→                      SHP, SPJ
+   329→                    </div>
+   330→                  </div>
+   331→                </div>
+   332→                <div className="flex items-start gap-2 p-2 rounded-md bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800">
+   333→                  <BarChart3 className="h-4 w-4 text-amber-600 flex-shrink-0 mt-0.5" />
+   334→                  <div>
+   335→                    <div className="text-xs font-semibold text-amber-700 dark:text-amber-300">
+   336→                      Laporan
+   337→                    </div>
+   338→                    <div className="text-[10px] text-muted-foreground">
+   339→                      Rekap bulanan, per vendor, per kategori, status SPJ
+   340→                      update
+   341→                    </div>
+   342→                  </div>
+   343→                </div>
+   344→                <div className="flex items-start gap-2 p-2 rounded-md bg-cyan-50 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-800">
+   345→                  <Database className="h-4 w-4 text-cyan-600 flex-shrink-0 mt-0.5" />
+   346→                  <div>
+   347→                    <div className="text-xs font-semibold text-cyan-700 dark:text-cyan-300">
+   348→                      Master Data
+   349→                    </div>
+   350→                    <div className="text-[10px] text-muted-foreground">
+   351→                      Vendor baru &amp; kode BPU baru otomatis masuk ke daftar
+   352→                    </div>
+   353→                  </div>
+   354→                </div>
+   355→                <div className="flex items-start gap-2 p-2 rounded-md bg-slate-50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800">
+   356→                  <DatabaseIcon className="h-4 w-4 text-slate-600 flex-shrink-0 mt-0.5" />
+   357→                  <div>
+   358→                    <div className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+   359→                      Database (SQLite)
+   360→                    </div>
+   361→                    <div className="text-[10px] text-muted-foreground">
+   362→                      File:{" "}
+   363→                      <code className="font-mono text-[9px]">
+   364→                        db/custom.db
+   365→                      </code>
+   366→                    </div>
+   367→                  </div>
+   368→                </div>
+   369→              </div>
+   370→            </div>
+   371→          </div>
+   372→        </CardContent>
+   373→      </Card>
+   374→
+   375→      {/* Upload area */}
+   376→      <Card>
+   377→        <CardContent className="p-6">
+   378→          <input
+   379→            ref={fileInputRef}
+   380→            type="file"
+   381→            accept=".xlsx,.xls"
+   382→            onChange={handleFileSelect}
+   383→            className="hidden"
+   384→          />
+   385→
+   386→          {!file ? (
+   387→            <div
+   388→              onDrop={handleDrop}
+   389→              onDragOver={handleDragOver}
+   390→              onClick={() => fileInputRef.current?.click()}
+   391→              className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-lg p-12 text-center cursor-pointer hover:border-emerald-400 hover:bg-emerald-50/30 dark:hover:bg-emerald-950/10 transition-all"
+   392→            >
+   393→              <FileSpreadsheet className="h-12 w-12 text-emerald-500 mx-auto mb-3" />
+   394→              <p className="text-sm font-medium">
+   395→                Klik untuk pilih file atau drag & drop
+   396→              </p>
+   397→              <p className="text-xs text-muted-foreground mt-1">
+   398→                Format: .xlsx atau .xls (Max 10MB)
+   399→              </p>
+   400→            </div>
+   401→          ) : (
+   402→            <div className="space-y-3">
+   403→              {/* File info */}
+   404→              <div className="flex items-center gap-3 p-3 rounded-md border bg-muted/30">
+   405→                <FileSpreadsheet className="h-8 w-8 text-emerald-600 flex-shrink-0" />
+   406→                <div className="flex-1 min-w-0">
+   407→                  <p className="text-sm font-medium truncate">{file.name}</p>
+   408→                  <p className="text-xs text-muted-foreground">
+   409→                    {(file.size / 1024).toFixed(1)} KB
+   410→                    {preview && ` · ${preview.totalRows} baris data`}
+   411→                  </p>
+   412→                </div>
+   413→                <Button
+   414→                  variant="ghost"
+   415→                  size="sm"
+   416→                  onClick={handleReset}
+   417→                  className="h-8 w-8 p-0 text-muted-foreground hover:text-rose-600"
+   418→                >
+   419→                  <Trash2 className="h-4 w-4" />
+   420→                </Button>
+   421→              </div>
+   422→
+   423→              {/* Loading preview */}
+   424→              {previewLoading && (
+   425→                <div className="flex items-center justify-center py-8">
+   426→                  <Loader2 className="h-6 w-6 animate-spin text-emerald-600" />
+   427→                  <span className="ml-2 text-sm text-muted-foreground">
+   428→                    Memparse Excel...
+   429→                  </span>
+   430→                </div>
+   431→              )}
+   432→
+   433→              {/* Error */}
+   434→              {error && (
+   435→                <Alert variant="destructive">
+   436→                  <AlertCircle className="h-4 w-4" />
+   437→                  <AlertTitle>Gagal</AlertTitle>
+   438→                  <AlertDescription>{error}</AlertDescription>
+   439→                </Alert>
+   440→              )}
+   441→
+   442→              {/* Preview results */}
+   443→              {preview && !previewLoading && (
+   444→                <PreviewResults preview={preview} />
+   445→              )}
+   446→
+   447→              {/* Import result */}
+   448→              {importResult && (
+   449→                <div className="space-y-3">
+   450→                  <Alert className="border-emerald-500 bg-emerald-50 dark:bg-emerald-950/30">
+   451→                    <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+   452→                    <AlertTitle className="text-emerald-700 dark:text-emerald-300">
+   453→                      Import Berhasil!
+   454→                    </AlertTitle>
+   455→                    <AlertDescription>
+   456→                      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-2 text-xs">
+   457→                        <div>
+   458→                          <span className="font-bold text-emerald-700 dark:text-emerald-300">
+   459→                            {importResult.summary.transactionsImported}
+   460→                          </span>{" "}
+   461→                          transaksi baru
+   462→                        </div>
+   463→                        <div>
+   464→                          <span className="font-bold text-violet-700 dark:text-violet-300">
+   465→                            {importResult.summary.transactionsUpdated}
+   466→                          </span>{" "}
+   467→                          diperbarui
+   468→                        </div>
+   469→                        <div>
+   470→                          <span className="font-bold text-emerald-700 dark:text-emerald-300">
+   471→                            {importResult.summary.vendorsImported}
+   472→                          </span>{" "}
+   473→                          vendor
+   474→                        </div>
+   475→                        <div>
+   476→                          <span className="font-bold text-emerald-700 dark:text-emerald-300">
+   477→                            {importResult.summary.bpuImported}
+   478→                          </span>{" "}
+   479→                          BPU baru
+   480→                        </div>
+   481→                        <div>
+   482→                          <span className="text-muted-foreground">
+   483→                            {importResult.summary.transactionsSkipped} di-skip
+   484→                          </span>
+   485→                        </div>
+   486→                      </div>
+   487→                      {importResult.summary.transactionsUpdated > 0 && (
+   488→                        <p className="text-[10px] text-violet-600 dark:text-violet-400 mt-2">
+   489→                          ✓ {importResult.summary.transactionsUpdated} transaksi diperbarui (No. Pesanan + BKU + Nama Barang sama → update, bukan duplikat)
+   490→                        </p>
+   491→                      )}
+   492→                    </AlertDescription>
+   493→                  </Alert>
+   494→
+   495→                  {/* Where data went */}
+   496→                  <Alert className="border-violet-300 bg-violet-50 dark:bg-violet-950/30">
+   497→                    <DatabaseIcon className="h-4 w-4 text-violet-600" />
+   498→                    <AlertTitle className="text-violet-700 dark:text-violet-300 text-sm">
+   499→                      Data telah masuk ke aplikasi!
+   500→                    </AlertTitle>
+   501→                    <AlertDescription>
+   502→                      <p className="text-xs mt-1 mb-2 text-muted-foreground">
+   503→                        Data hasil import sekarang tersimpan di database dan
+   504→                        muncul di tab berikut:
+   505→                      </p>
+   506→                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs">
+   507→                        <div className="flex items-center gap-1.5">
+   508→                          <LayoutDashboard className="h-3 w-3 text-rose-500" />
+   509→                          <span><b>Dashboard</b> — statistik &amp; chart update</span>
+   510→                        </div>
+   511→                        <div className="flex items-center gap-1.5">
+   512→                          <Receipt className="h-3 w-3 text-violet-500" />
+   513→                          <span><b>Transaksi</b> — daftar lengkap pengeluaran</span>
+   514→                        </div>
+   515→                        <div className="flex items-center gap-1.5">
+   516→                          <FileText className="h-3 w-3 text-emerald-500" />
+   517→                          <span><b>Dokumen SPJ</b> — grup transaksi untuk cetak</span>
+   518→                        </div>
+   519→                        <div className="flex items-center gap-1.5">
+   520→                          <BarChart3 className="h-3 w-3 text-amber-500" />
+   521→                          <span><b>Laporan</b> — rekap &amp; analisa</span>
+   522→                        </div>
+   523→                        <div className="flex items-center gap-1.5">
+   524→                          <Database className="h-3 w-3 text-cyan-500" />
+   525→                          <span><b>Master Data</b> — vendor &amp; BPU baru</span>
+   526→                        </div>
+   527→                      </div>
+   528→                    </AlertDescription>
+   529→                  </Alert>
+   530→                </div>
+   531→              )}
+   532→
+   533→              {/* Actions */}
+   534→              {preview && !importResult && (
+   535→                <div className="flex items-center gap-2 justify-end">
+   536→                  <Button
+   537→                    variant="outline"
+   538→                    onClick={handleReset}
+   539→                    disabled={importLoading}
+   540→                    size="sm"
+   541→                  >
+   542→                    <RotateCcw className="h-3.5 w-3.5 mr-1" />
+   543→                    Reset
+   544→                  </Button>
+   545→                  <Button
+   546→                    onClick={handleImport}
+   547→                    disabled={importLoading}
+   548→                    size="sm"
+   549→                    className="bg-emerald-600 hover:bg-emerald-700"
+   550→                  >
+   551→                    {importLoading ? (
+   552→                      <>
+   553→                        <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />
+   554→                        Importing...
+   555→                      </>
+   556→                    ) : (
+   557→                      <>
+   558→                        <DatabaseIcon className="h-3.5 w-3.5 mr-1" />
+   559→                        Import {preview.totalRows} Baris
+   560→                      </>
+   561→                    )}
+   562→                  </Button>
+   563→                </div>
+   564→              )}
+   565→
+   566→              {/* After import - done button */}
+   567→              {importResult && (
+   568→                <div className="flex items-center gap-2 justify-end">
+   569→                  <Button onClick={handleReset} size="sm" variant="outline">
+   570→                    <Upload className="h-3.5 w-3.5 mr-1" />
+   571→                    Import File Lain
+   572→                  </Button>
+   573→                </div>
+   574→              )}
+   575→            </div>
+   576→          )}
+   577→        </CardContent>
+   578→      </Card>
+   579→    </div>
+   580→  );
+   581→}
+   582→
+   583→function PreviewResults({ preview }: { preview: PreviewResult }) {
+   584→  const cols = preview.detectedColumns;
+   585→  const allDetected = Object.values(cols).every((v) => v);
+   586→
+   587→  return (
+   588→    <div className="space-y-3">
+   589→      {/* Summary stats */}
+   590→      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+   591→        <StatCard
+   592→          icon={<DatabaseIcon className="h-3.5 w-3.5" />}
+   593→          label="Total Baris"
+   594→          value={preview.totalRows}
+   595→          color="text-violet-700 dark:text-violet-300"
+   596→          bg="bg-violet-50 dark:bg-violet-950/40"
+   597→        />
+   598→        <StatCard
+   599→          icon={<Store className="h-3.5 w-3.5" />}
+   600→          label="Vendor"
+   601→          value={preview.totalVendors}
+   602→          color="text-amber-700 dark:text-amber-300"
+   603→          bg="bg-amber-50 dark:bg-amber-950/40"
+   604→        />
+   605→        <StatCard
+   606→          icon={<Hash className="h-3.5 w-3.5" />}
+   607→          label="BPU Codes"
+   608→          value={preview.totalBpu}
+   609→          color="text-cyan-700 dark:text-cyan-300"
+   610→          bg="bg-cyan-50 dark:bg-cyan-950/40"
+   611→        />
+   612→        <StatCard
+   613→          icon={<Wallet className="h-3.5 w-3.5" />}
+   614→          label="Total Nilai"
+   615→          value={formatRupiah(preview.totalAmount)}
+   616→          color="text-rose-700 dark:text-rose-300"
+   617→          bg="bg-rose-50 dark:bg-rose-950/40"
+   618→          isString
+   619→        />
+   620→      </div>
+   621→
+   622→      {/* Column detection */}
+   623→      <div className="flex items-center gap-2 flex-wrap">
+   624→        <span className="text-xs font-semibold text-muted-foreground">
+   625→          Kolom terdeteksi:
+   626→        </span>
+   627→        {Object.entries(cols).map(([key, detected]) => (
+   628→          <Badge
+   629→            key={key}
+   630→            variant="outline"
+   631→            className={
+   632→              detected
+   633→                ? "text-[9px] border-emerald-400 text-emerald-700 dark:text-emerald-300"
+   634→                : "text-[9px] border-rose-400 text-rose-700 dark:text-rose-300"
+   635→            }
+   636→          >
+   637→            {detected ? "✓" : "✗"} {key}
+   638→          </Badge>
+   639→        ))}
+   640→      </div>
+   641→
+   642→      {!allDetected && (
+   643→        <Alert variant="default" className="border-amber-300 bg-amber-50 dark:bg-amber-950/30">
+   644→          <AlertCircle className="h-4 w-4 text-amber-600" />
+   645→          <AlertDescription className="text-xs text-amber-800 dark:text-amber-200">
+   646→            Beberapa kolom tidak terdeteksi. Data tetap bisa diimport tetapi
+   647→            beberapa field mungkin kosong.
+   648→          </AlertDescription>
+   649→        </Alert>
+   650→      )}
+   651→
+   652→      {/* Preview table */}
+   653→      <div>
+   654→        <div className="flex items-center gap-2 mb-2">
+   655→          <Eye className="h-4 w-4 text-muted-foreground" />
+   656→          <span className="text-sm font-semibold">
+   657→            Pratinjau Data (10 baris pertama dari {preview.totalRows})
+   658→          </span>
+   659→        </div>
+   660→        <ScrollArea className="h-[300px] rounded-md border">
+   661→          <Table>
+   662→            <TableHeader className="sticky top-0 bg-card z-10">
+   663→              <TableRow>
+   664→                <TableHead className="text-xs w-12">No</TableHead>
+   665→                <TableHead className="text-xs">No. BKU</TableHead>
+   666→                <TableHead className="text-xs">Uraian</TableHead>
+   667→                <TableHead className="text-xs">Nama Barang</TableHead>
+   668→                <TableHead className="text-xs w-20">Vol</TableHead>
+   669→                <TableHead className="text-xs w-20">Satuan</TableHead>
+   670→                <TableHead className="text-xs w-28">Harga</TableHead>
+   671→                <TableHead className="text-xs w-32">Jumlah</TableHead>
+   672→                <TableHead className="text-xs">Vendor</TableHead>
+   673→              </TableRow>
+   674→            </TableHeader>
+   675→            <TableBody>
+   676→              {preview.preview.map((row, i) => (
+   677→                <TableRow key={i}>
+   678→                  <TableCell className="text-xs font-mono">
+   679→                    {row.noPesan || "—"}
+   680→                  </TableCell>
+   681→                  <TableCell className="text-xs font-mono">
+   682→                    {row.noBku || "—"}
+   683→                  </TableCell>
+   684→                  <TableCell className="text-xs max-w-[200px] truncate" title={row.uraian}>
+   685→                    {row.uraian || "—"}
+   686→                  </TableCell>
+   687→                  <TableCell className="text-xs max-w-[200px] truncate" title={row.namaBarang}>
+   688→                    {row.namaBarang || "—"}
+   689→                  </TableCell>
+   690→                  <TableCell className="text-xs font-mono text-center">
+   691→                    {row.volume || "—"}
+   692→                  </TableCell>
+   693→                  <TableCell className="text-xs">{row.satuan || "—"}</TableCell>
+   694→                  <TableCell className="text-xs font-mono text-right">
+   695→                    {row.hargaSatuan > 0 ? formatRupiah(row.hargaSatuan) : "—"}
+   696→                  </TableCell>
+   697→                  <TableCell className="text-xs font-mono text-right font-semibold text-rose-700 dark:text-rose-300">
+   698→                    {row.jumlah > 0 ? formatRupiah(row.jumlah) : "—"}
+   699→                  </TableCell>
+   700→                  <TableCell className="text-xs max-w-[150px] truncate" title={row.vendorName}>
+   701→                    {row.vendorName || "—"}
+   702→                  </TableCell>
+   703→                </TableRow>
+   704→              ))}
+   705→            </TableBody>
+   706→          </Table>
+   707→        </ScrollArea>
+   708→      </div>
+   709→    </div>
+   710→  );
+   711→}
+   712→
+   713→function StatCard({
+   714→  icon,
+   715→  label,
+   716→  value,
+   717→  color,
+   718→  bg,
+   719→  isString,
+   720→}: {
+   721→  icon: React.ReactNode;
+   722→  label: string;
+   723→  value: number | string;
+   724→  color: string;
+   725→  bg: string;
+   726→  isString?: boolean;
+   727→}) {
+   728→  return (
+   729→    <div className={`rounded-md border px-3 py-2 ${bg}`}>
+   730→      <div className={`flex items-center gap-1.5 mb-1 ${color}`}>
+   731→        {icon}
+   732→        <span className="text-[10px] uppercase tracking-wide font-bold">
+   733→          {label}
+   734→        </span>
+   735→      </div>
+   736→      <div className={`font-bold font-mono ${color} ${isString ? "text-sm" : "text-lg"}`}>
+   737→        {value}
+   738→      </div>
+   739→    </div>
+   740→  );
+   741→}
+   742→
