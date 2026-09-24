@@ -34,7 +34,10 @@ const cellStyle: CSSProperties = {
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
   width: "100%",
-  border: "1px solid #000",
+  // NO border on the table itself — cell borders handle all borders.
+  // This allows PPN rows to have a borderless left side (no continuous
+  // vertical line from the table's left edge).
+  border: "none",
 };
 const headerCellStyle: CSSProperties = {
   ...cellStyle,
@@ -47,13 +50,50 @@ const nameStyle: CSSProperties = {
   textDecoration: "underline",
 };
 
-// === Vertical-borders-only cell style ===
-// Per Excel 01PESAN rows 97+ (Instruksi & Signature): cells have
-// ONLY left + right borders, NO horizontal separators (no top/bottom).
-// This makes the Instruksi section appear as one continuous block
-// (no row separators between numbered items) and the Signature row
-// seamlessly continues from the Instruksi section above.
-const verticalOnlyCellStyle: CSSProperties = {
+// === Border styles per Excel 01PESAN row-by-row border analysis ===
+// Each style maps to a specific cell role in the original Excel layout.
+
+// Empty cell with NO borders — used for the left side of PPN rows
+// (cols A-F in Excel are borderless, only the right side cols G-K have borders).
+const borderlessCellStyle: CSSProperties = {
+  border: "none",
+  padding: "4px 6px",
+  verticalAlign: "top",
+};
+
+// PPN label/value cell — full 4 borders (TBLR).
+// Matches Excel rows 89-93 cells G-I (label) and J-K (value).
+const ppnCellStyle: CSSProperties = {
+  ...cellStyle,
+};
+
+// LEFT border only — for the number column (col A) in Instruksi rows.
+// Per Excel R98-R103: A column has only Left border (no top/bottom/right).
+// This ensures NO vertical line between the number and the text.
+const leftOnlyCellStyle: CSSProperties = {
+  borderLeft: "1px solid #000",
+  borderTop: "none",
+  borderBottom: "none",
+  borderRight: "none",
+  padding: "4px 6px",
+  verticalAlign: "top",
+};
+
+// RIGHT border only — for the text column (cols B-K merged) in Instruksi rows.
+// Per Excel R98-R103: B:K merged cell has only Right border.
+// No left border → no vertical line between number and text.
+const rightOnlyCellStyle: CSSProperties = {
+  borderRight: "1px solid #000",
+  borderTop: "none",
+  borderBottom: "none",
+  borderLeft: "none",
+  padding: "4px 6px",
+  verticalAlign: "top",
+};
+
+// Instruksi header row — colSpan=6, LEFT + RIGHT borders only.
+// Per Excel R97: A97 has Left only, K97 has Right only, no top/bottom.
+const instruksiHeaderStyle: CSSProperties = {
   borderLeft: "1px solid #000",
   borderRight: "1px solid #000",
   borderTop: "none",
@@ -62,12 +102,28 @@ const verticalOnlyCellStyle: CSSProperties = {
   verticalAlign: "top",
 };
 
-// === Signature cell style ===
-// Same as vertical-only, but with bottom border to close the table.
-// (No top border — visually continues from Instruksi section above.)
-const signatureCellStyle: CSSProperties = {
-  ...verticalOnlyCellStyle,
+// Signature first cell (Penyedia, left side) — LEFT + BOTTOM borders only.
+// Per Excel R105-R115: A column has Left only; last row has Bottom to close table.
+// No right border → no vertical line between Penyedia and Pelaksana.
+const signatureLeftCellStyle: CSSProperties = {
+  borderLeft: "1px solid #000",
   borderBottom: "1px solid #000",
+  borderTop: "none",
+  borderRight: "none",
+  padding: "4px 6px",
+  verticalAlign: "top",
+};
+
+// Signature second cell (Pelaksana, right side) — RIGHT + BOTTOM borders only.
+// Per Excel R105-R115: K column has Right only; last row has Bottom to close table.
+// No left border → no vertical line between Penyedia and Pelaksana.
+const signatureRightCellStyle: CSSProperties = {
+  borderRight: "1px solid #000",
+  borderBottom: "1px solid #000",
+  borderTop: "none",
+  borderLeft: "none",
+  padding: "4px 6px",
+  verticalAlign: "top",
 };
 
 export function SuratPesanan({ group, school }: SuratPesananProps) {
@@ -267,45 +323,46 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           )}
 
           {/* === PPN CALCULATION ROWS === */}
-          {/* Per Excel: PPN table is on the RIGHT side (cols G-K). Left side
-              (cols A-F = No, Uraian, Jumlah, Satuan) is empty. */}
+          {/* Per Excel R89-R93: Left side (cols A-F) is BORDERLESS (empty),
+              right side (cols G-I = label, J-K = value) has full 4 borders.
+              In our 6-col HTML: colSpan=4 (borderless) + label (full) + value (full). */}
           <tr>
-            <td style={cellStyle} colSpan={4}>
+            <td style={borderlessCellStyle} colSpan={4}>
               &nbsp;
             </td>
-            <td style={cellStyle}>Harga sebelum PPN</td>
-            <td style={{ ...cellStyle, textAlign: "right" }}>
+            <td style={ppnCellStyle}>Harga sebelum PPN</td>
+            <td style={{ ...ppnCellStyle, textAlign: "right" }}>
               {formatRupiah(total)}
             </td>
           </tr>
           <tr>
-            <td style={cellStyle} colSpan={4}>
+            <td style={borderlessCellStyle} colSpan={4}>
               &nbsp;
             </td>
-            <td style={cellStyle}>DPP PPN :</td>
-            <td style={{ ...cellStyle, textAlign: "right" }}>
+            <td style={ppnCellStyle}>DPP PPN :</td>
+            <td style={{ ...ppnCellStyle, textAlign: "right" }}>
               {formatRupiah(dppPpn)}
             </td>
           </tr>
           <tr>
-            <td style={cellStyle} colSpan={4}>
+            <td style={borderlessCellStyle} colSpan={4}>
               &nbsp;
             </td>
-            <td style={cellStyle}>PPN 11% :</td>
-            <td style={{ ...cellStyle, textAlign: "right" }}>
+            <td style={ppnCellStyle}>PPN 11% :</td>
+            <td style={{ ...ppnCellStyle, textAlign: "right" }}>
               {formatRupiah(ppn11)}
             </td>
           </tr>
           <tr>
-            <td style={cellStyle} colSpan={4}>
+            <td style={borderlessCellStyle} colSpan={4}>
               &nbsp;
             </td>
-            <td style={{ ...cellStyle, fontWeight: 700 }}>
+            <td style={{ ...ppnCellStyle, fontWeight: 700 }}>
               Total Pembayaran :
             </td>
             <td
               style={{
-                ...cellStyle,
+                ...ppnCellStyle,
                 textAlign: "right",
                 fontWeight: 700,
               }}
@@ -314,15 +371,16 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
           <tr>
-            <td style={cellStyle} colSpan={4}>
+            <td style={borderlessCellStyle} colSpan={4}>
               &nbsp;
             </td>
-            <td style={cellStyle}>PPh 23 2% :</td>
-            <td style={{ ...cellStyle, textAlign: "right" }}>-</td>
+            <td style={ppnCellStyle}>PPh 23 2% :</td>
+            <td style={{ ...ppnCellStyle, textAlign: "right" }}>-</td>
           </tr>
 
           {/* === TERBILANG ROW === */}
-          {/* Label (col 1) + Value (cols 2-6 merged) — italic */}
+          {/* Per Excel R94: Label (cols A-D merged) + Value (cols E-K merged).
+              Full 4 borders (TBLR) on both cells. Italic value. */}
           <tr>
             <td style={cellStyle}>Terbilang :</td>
             <td
@@ -333,26 +391,34 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
 
-          {/* === INSTRUKSI SECTION (in same table, vertical borders only) === */}
-          {/* Per Excel R97+: NO horizontal separators between Instruksi rows.
-              Only left+right vertical borders. The bottom border of the
-              Terbilang row above serves as the visual top of this section. */}
+          {/* === GAP ROW (matches Excel R95-R96) === */}
+          {/* Empty row between Terbilang and Instruksi with left+right borders
+              only. Provides visual spacing before the Instruksi section. */}
+          <tr>
+            <td style={leftOnlyCellStyle}>&nbsp;</td>
+            <td style={rightOnlyCellStyle} colSpan={5}>&nbsp;</td>
+          </tr>
+
+          {/* === INSTRUKSI SECTION === */}
+          {/* Per Excel R97-R103:
+              - Header row (R97): colSpan=6, LEFT + RIGHT borders only (no top/bottom)
+              - Number column (col A): LEFT border only (no right → no vertical
+                line between number and text)
+              - Text column (cols B-K merged): RIGHT border only (no left)
+              - NO horizontal separators between items (no top/bottom) */}
           <tr>
             <td
-              style={{ ...verticalOnlyCellStyle, fontWeight: 700 }}
+              style={{ ...instruksiHeaderStyle, fontWeight: 700 }}
               colSpan={6}
             >
               Instruksi ke Penyedia dan Satuan Pendidikan
             </td>
           </tr>
-          {/* Numbered instruksi items: number (col 1) + text (cols 2-6 merged).
-              No horizontal separators between items — they appear as one
-              continuous block of text. */}
           {instruksiList.map((text, idx) => (
             <tr key={idx}>
               <td
                 style={{
-                  ...verticalOnlyCellStyle,
+                  ...leftOnlyCellStyle,
                   textAlign: "center",
                   verticalAlign: "top",
                 }}
@@ -360,7 +426,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                 {idx + 1}
               </td>
               <td
-                style={{ ...verticalOnlyCellStyle, textAlign: "justify" }}
+                style={{ ...rightOnlyCellStyle, textAlign: "justify" }}
                 colSpan={5}
               >
                 {text}
@@ -369,12 +435,17 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           ))}
 
           {/* === SIGNATURE ROW (Penyedia | Pelaksana) === */}
-          {/* Per Excel R105+: only left+right+bottom borders (no top).
-              Bottom border closes the entire table. */}
+          {/* Per Excel R105-R115:
+              - Penyedia cell (left, cols A-F): LEFT + BOTTOM borders only
+                (no right → no vertical line between Penyedia and Pelaksana)
+              - Pelaksana cell (right, cols G-K): RIGHT + BOTTOM borders only
+                (no left → no vertical line)
+              - Bottom border closes the entire table
+              - No top border → seamlessly continues from Instruksi above */}
           <tr>
             <td
               style={{
-                ...signatureCellStyle,
+                ...signatureLeftCellStyle,
                 verticalAlign: "top",
               }}
               colSpan={3}
@@ -387,7 +458,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
             <td
               style={{
-                ...signatureCellStyle,
+                ...signatureRightCellStyle,
                 verticalAlign: "top",
               }}
               colSpan={3}
