@@ -292,18 +292,18 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
 
-          {/* === Items column headers === */}
+          {/* === Items column headers (all center-aligned per user request) === */}
           <tr>
             <td style={headerCellStyle}>No</td>
-            <td style={{ ...headerCellStyle, textAlign: "left" }}>
+            <td style={headerCellStyle}>
               Uraian Barang / Jasa
             </td>
             <td style={headerCellStyle}>Jumlah</td>
             <td style={headerCellStyle}>Satuan Ukuran</td>
-            <td style={{ ...headerCellStyle, textAlign: "right" }}>
+            <td style={headerCellStyle}>
               Harga Satuan
             </td>
-            <td style={{ ...headerCellStyle, textAlign: "right" }}>
+            <td style={headerCellStyle}>
               Total Harga
             </td>
           </tr>
@@ -393,13 +393,14 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           </tr>
 
           {/* === TERBILANG ROW === */}
-          {/* Per Excel R94: Label (cols A-D merged) + Value (cols E-K merged).
-              Full 4 borders (TBLR) on both cells. Italic value. */}
+          {/* Per Excel R94: Label (cols A-D merged = ~36%) + Value (cols E-K
+              merged = ~64%). In 6-col HTML: label colSpan=2 + value colSpan=4.
+              Full 4 borders (TBLR). Italic value. */}
           <tr>
-            <td style={cellStyle}>Terbilang :</td>
+            <td style={cellStyle} colSpan={2}>Terbilang :</td>
             <td
               style={{ ...cellStyle, fontStyle: "italic" }}
-              colSpan={5}
+              colSpan={4}
             >
               {terbilangText}
             </td>
@@ -452,6 +453,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           {/* Per Excel R105-R115:
               - Penyedia cell (left, cols A-F): LEFT + BOTTOM borders only
                 (no right → no vertical line between Penyedia and Pelaksana)
+                Shifted right with paddingLeft for neater appearance.
               - Pelaksana cell (right, cols G-K): RIGHT + BOTTOM borders only
                 (no left → no vertical line)
               - Bottom border closes the entire table
@@ -461,6 +463,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
               style={{
                 ...signatureLeftCellStyle,
                 verticalAlign: "top",
+                paddingLeft: "40px",
               }}
               colSpan={3}
             >
@@ -474,6 +477,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
               style={{
                 ...signatureRightCellStyle,
                 verticalAlign: "top",
+                paddingLeft: "40px",
               }}
               colSpan={3}
             >
