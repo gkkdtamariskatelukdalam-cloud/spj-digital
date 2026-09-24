@@ -166,25 +166,62 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
   const completion = estimateCompletionDate(group);
   const total = group.totalJumlah;
 
-  // PPN calculation per user rule:
-  // - Total > 2.000.000 → PPN 11% berlaku (DPP = total/1.11, PPN = total-DPP)
-  // - Total ≤ 2.000.000 → TIDAK ada PPN (DPP = "-", PPN = "-")
-  const PPN_THRESHOLD = 2_000_000;
-  const isPpnApplicable = total > PPN_THRESHOLD;
-  const dppPpn = isPpnApplicable ? Math.round(total / 1.11) : 0;
-  const ppn11 = isPpnApplicable ? total - dppPpn : 0;
-
-  const vendorName = orDash(group.vendorName);
-  const vendorOwner = orDash(group.vendorOwner);
-  const principalName = orDash(school?.principalName);
-  const principalNip = orDash(school?.principalNip);
-
   // Filter empty items (only show items with namaBarang or uraian)
   const items = group.items.filter(
     (it) =>
       (it.namaBarang && it.namaBarang.trim()) ||
       (it.uraian && it.uraian.trim()),
   );
+
+  // PPN/PPh calculation per Excel 01PESAN formulas:
+  // - Total > 2.000.000 → pajak berlaku
+  // - Non-food items → PPN 11% = total × 11%, DPP = total - PPN
+  // - Food/drink items → PPh 23 2% = first item price × 2%, DPP = total - PPh
+  // - Food keywords: Nasi Kotak, Kue Kotak, Kue, Aqua Botol, Aqua Cup
+  // - Label: "Harga Total" if food, "Harga sebelum PPN" if non-food
+  const PPN_THRESHOLD = 2_000_000;
+  const FOOD_KEYWORDS = ["Nasi Kotak", "Kue Kotak", "Kue", "Aqua Botol", "Aqua Cup"];
+
+  // Check first item for food/drink (Excel checks B19 = first item)
+  const firstItemName = items.length > 0
+    ? (items[0].namaBarang || items[0].uraian || "").toLowerCase()
+    : "";
+  const isFirstItemFood = FOOD_KEYWORDS.some(kw =>
+    firstItemName.includes(kw.toLowerCase())
+  );
+
+  // Check first 6 items for label (Excel checks B19:B24)
+  const firstSixItems = items.slice(0, 6);
+  const hasFoodItems = firstSixItems.some(it => {
+    const name = (it.namaBarang || it.uraian || "").toLowerCase();
+    return FOOD_KEYWORDS.some(kw => name.includes(kw.toLowerCase()));
+  });
+
+  const isPpnApplicable = total > PPN_THRESHOLD;
+
+  // PPN 11%: only for non-food items, = total × 11%
+  const ppn11 = (isPpnApplicable && !isFirstItemFood)
+    ? Math.round(total * 0.11)
+    : 0;
+
+  // PPh 23 2%: only for food/drink items, = first item price × 2%
+  const firstItemPrice = items.length > 0 ? items[0].jumlah : 0;
+  const pph23 = (isPpnApplicable && isFirstItemFood)
+    ? Math.round(firstItemPrice * 0.02)
+    : 0;
+
+  // DPP: total - PPN (non-food) or total - PPh (food)
+  const dppPpn = isPpnApplicable
+    ? (isFirstItemFood ? total - pph23 : total - ppn11)
+    : 0;
+
+  // Dynamic label per Excel G89 formula
+  const hargaLabel = hasFoodItems ? "Harga Total" : "Harga sebelum PPN";
+
+  const vendorName = orDash(group.vendorName);
+  const vendorOwner = orDash(group.vendorOwner);
+  const principalName = orDash(school?.principalName);
+  const principalNip = orDash(school?.principalNip);
 
   // Terbilang in Title Case per PDF spec
   const terbilangText = titleCase(terbilang(total));
@@ -365,7 +402,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
               - PPN rule: total > 2.000.000 → PPN 11% applies; else DPP/PPN = "-" */}
           <tr>
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
-            <td style={cellStyle} colSpan={3}>Harga sebelum PPN</td>
+            <td style={cellStyle} colSpan={3}>{hargaLabel}</td>
             <td style={{ ...cellStyle, textAlign: "right" }}>
               {formatRupiah(total)}
             </td>
@@ -381,7 +418,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
             <td style={cellStyle} colSpan={3}>PPN 11% :</td>
             <td style={{ ...cellStyle, textAlign: "right" }}>
-              {isPpnApplicable ? formatRupiah(ppn11) : "-"}
+              {(isPpnApplicable && !isFirstItemFood) ? formatRupiah(ppn11) : "-"}
             </td>
           </tr>
           <tr>
@@ -402,7 +439,9 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           <tr>
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
             <td style={cellStyle} colSpan={3}>PPh 23 2% :</td>
-            <td style={{ ...cellStyle, textAlign: "right" }}>-</td>
+            <td style={{ ...cellStyle, textAlign: "right" }}>
+              {(isPpnApplicable && isFirstItemFood) ? formatRupiah(pph23) : "-"}
+            </td>
           </tr>
 
           {/* === TERBILANG ROW === */}
