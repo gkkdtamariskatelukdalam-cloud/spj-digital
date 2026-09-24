@@ -1062,6 +1062,12 @@ function AppLogoUpload() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Gagal upload");
       setAppLogo(data.appLogo);
+      // Sync localStorage so login + dashboard headers update on next page load
+      try {
+        localStorage.setItem("appLogo", data.appLogo);
+      } catch {
+        // localStorage might be full — ignore
+      }
       toast.success("Logo aplikasi diperbarui.");
     } catch (err) {
       toast.error((err as Error).message);
@@ -1079,6 +1085,12 @@ function AppLogoUpload() {
         body: JSON.stringify({ appLogo: null }),
       });
       setAppLogo(null);
+      // Clear localStorage cache so login + dashboard headers fall back
+      try {
+        localStorage.removeItem("appLogo");
+      } catch {
+        // ignore
+      }
       toast.success("Logo aplikasi dihapus.");
     } finally {
       setLoading(false);

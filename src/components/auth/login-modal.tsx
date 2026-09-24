@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import {
-  Wallet,
   Loader2,
   AlertCircle,
   KeyRound,
@@ -26,14 +25,32 @@ export function LoginModal() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [appLogo, setAppLogo] = useState<string | null>(null);
+  // Initialize appLogo from localStorage (if previously fetched) so the logo
+  // shows immediately on first render — no Wallet-icon flash. SSR-safe
+  // (returns null on server, populated after hydration).
+  const [appLogo, setAppLogo] = useState<string | null>(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      return localStorage.getItem("appLogo") || null;
+    } catch {
+      return null;
+    }
+  });
 
-  // Fetch app logo on mount (public endpoint, no auth needed)
+  // Fetch app logo on mount (public endpoint, no auth needed).
+  // Updates state + localStorage so next page load can use it immediately.
   useEffect(() => {
     fetch("/api/app-settings")
       .then((r) => r.json())
       .then((data) => {
-        if (data.appLogo) setAppLogo(data.appLogo);
+        if (data.appLogo) {
+          setAppLogo(data.appLogo);
+          try {
+            localStorage.setItem("appLogo", data.appLogo);
+          } catch {
+            // localStorage might be full or disabled — ignore
+          }
+        }
       })
       .catch(() => {});
   }, []);
@@ -70,7 +87,11 @@ export function LoginModal() {
                   className="h-full w-full object-contain"
                 />
               ) : (
-                <Wallet className="h-6 w-6 text-rose-600" />
+                <span className="text-[11px] font-extrabold tracking-tight text-rose-600 leading-none text-center">
+                  SPJ
+                  <br />
+                  DIGITAL
+                </span>
               )}
             </div>
             <div>

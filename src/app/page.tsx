@@ -20,7 +20,6 @@ import {
   Database,
   FileText,
   BarChart3,
-  Wallet,
   Lock,
   Image as ImageIcon,
   Upload,
@@ -114,14 +113,32 @@ const navItems: NavItem[] = [
 export default function Home() {
   const { data: session, status } = useSession();
   const [view, setView] = useState<View>("dashboard");
-  const [appLogo, setAppLogo] = useState<string | null>(null);
+  // Initialize appLogo from localStorage so the dashboard header shows the
+  // logo immediately on first render (no Wallet-icon flash).
+  const [appLogo, setAppLogo] = useState<string | null>(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      return localStorage.getItem("appLogo") || null;
+    } catch {
+      return null;
+    }
+  });
   const [activeBosp, setActiveBosp] = useState<string>("");
 
-  // Fetch app logo for dashboard header
+  // Fetch app logo for dashboard header (and refresh localStorage cache).
   useEffect(() => {
     fetch("/api/app-settings")
       .then((r) => r.json())
-      .then((data) => setAppLogo(data.appLogo || null))
+      .then((data) => {
+        if (data.appLogo) {
+          setAppLogo(data.appLogo);
+          try {
+            localStorage.setItem("appLogo", data.appLogo);
+          } catch {
+            // ignore
+          }
+        }
+      })
       .catch(() => {});
   }, [status]);
 
@@ -191,7 +208,9 @@ export default function Home() {
               {appLogo ? (
                 <img src={appLogo} alt="Logo" className="h-full w-full object-contain p-0.5" />
               ) : (
-                <Wallet className="h-4 w-4" />
+                <span className="text-[8px] font-extrabold tracking-tighter leading-none text-center">
+                  SPJ
+                </span>
               )}
             </div>
             <div className="min-w-0">
