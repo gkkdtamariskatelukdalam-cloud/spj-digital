@@ -143,8 +143,8 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
                 src={s.logoPath}
                 alt="Logo Kiri"
                 style={{
-                  width: `${s.logoWidth}px`,
-                  height: s.logoHeight > 0 ? `${s.logoHeight}px` : "auto",
+                  width: `${(s.logoWidth / 37.795).toFixed(2)}cm`,
+                  height: s.logoHeight > 0 ? `${(s.logoHeight / 37.795).toFixed(2)}cm` : "auto",
                   objectFit: "contain",
                 }}
               />
@@ -181,8 +181,8 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
                 src={s.logo2Path}
                 alt="Logo Kanan"
                 style={{
-                  width: `${s.logo2Width}px`,
-                  height: s.logo2Height > 0 ? `${s.logo2Height}px` : "auto",
+                  width: `${(s.logo2Width / 37.795).toFixed(2)}cm`,
+                  height: s.logo2Height > 0 ? `${(s.logo2Height / 37.795).toFixed(2)}cm` : "auto",
                   objectFit: "contain",
                 }}
               />
@@ -219,8 +219,8 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
               src={s.logoPath}
               alt="Logo"
               style={{
-                width: `${s.logoWidth}px`,
-                height: s.logoHeight > 0 ? `${s.logoHeight}px` : "auto",
+                width: `${(s.logoWidth / 37.795).toFixed(2)}cm`,
+                height: s.logoHeight > 0 ? `${(s.logoHeight / 37.795).toFixed(2)}cm` : "auto",
                 objectFit: "contain",
               }}
             />
@@ -267,8 +267,8 @@ export function Letterhead() {
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <div
             style={{
-              width: `${settings.logoWidth}px`,
-              height: `${settings.logoHeight}px`,
+              width: `${(settings.logoWidth / 37.795).toFixed(2)}cm`,
+              height: `${(settings.logoHeight / 37.795).toFixed(2)}cm`,
               background: "#e2e8f0",
               borderRadius: "4px",
             }}

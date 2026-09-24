@@ -476,7 +476,7 @@ export function LetterheadSettingsPanel() {
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div>
                     <Label className="text-[10px] text-muted-foreground">
-                      Offset X: {local.logoOffsetX}px
+                      Offset X: {(local.logoOffsetX / 37.795).toFixed(1)}cm
                     </Label>
                     <Slider
                       value={[local.logoOffsetX]}
@@ -489,7 +489,7 @@ export function LetterheadSettingsPanel() {
                   </div>
                   <div>
                     <Label className="text-[10px] text-muted-foreground">
-                      Offset Y: {local.logoOffsetY}px
+                      Offset Y: {(local.logoOffsetY / 37.795).toFixed(1)}cm
                     </Label>
                     <Slider
                       value={[local.logoOffsetY]}
@@ -509,7 +509,7 @@ export function LetterheadSettingsPanel() {
                 <div className="flex items-center justify-between">
                   <Label className="text-xs font-semibold">Ukuran Logo</Label>
                   <span className="text-[10px] font-mono text-muted-foreground">
-                    {local.logoWidth}×{local.logoHeight}px
+                    {(local.logoWidth / 37.795).toFixed(1)}×{(local.logoHeight / 37.795).toFixed(1)}cm
                   </span>
                 </div>
                 <div>
@@ -667,7 +667,7 @@ export function LetterheadSettingsPanel() {
                   <div className="grid grid-cols-2 gap-3 mt-2">
                     <div>
                       <Label className="text-[10px] text-muted-foreground">
-                        Offset X: {local.logo2OffsetX}px
+                        Offset X: {(local.logo2OffsetX / 37.795).toFixed(1)}cm
                       </Label>
                       <Slider
                         value={[local.logo2OffsetX]}
@@ -680,7 +680,7 @@ export function LetterheadSettingsPanel() {
                     </div>
                     <div>
                       <Label className="text-[10px] text-muted-foreground">
-                        Offset Y: {local.logo2OffsetY}px
+                        Offset Y: {(local.logo2OffsetY / 37.795).toFixed(1)}cm
                       </Label>
                       <Slider
                         value={[local.logo2OffsetY]}
@@ -700,7 +700,7 @@ export function LetterheadSettingsPanel() {
                   <div className="flex items-center justify-between">
                     <Label className="text-xs font-semibold">Ukuran Logo 2</Label>
                     <span className="text-[10px] font-mono text-muted-foreground">
-                      {local.logo2Width}×{local.logo2Height}px
+                      {(local.logo2Width / 37.795).toFixed(1)}×{(local.logo2Height / 37.795).toFixed(1)}cm
                     </span>
                   </div>
                   <div>
