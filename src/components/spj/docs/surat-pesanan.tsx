@@ -352,34 +352,33 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           )}
 
           {/* === PPN CALCULATION ROWS === */}
-          {/* Per user request: PPN stays on the RIGHT side (same position as
-              original). Only ADD vertical borders (left + right edges of PPN
-              block). NO horizontal separators between PPN rows.
-              Layout: empty (colSpan=4, borderless) | label (vertical-only) | value (vertical-only) */}
+          {/* PPN starts at col 3 (Jumlah) per user request "sejajar kolom jumlah".
+              Layout: empty (colSpan=2, LEFT border) | label (colSpan=2, vertical) | value (colSpan=2, vertical)
+              Only vertical borders, NO horizontal separators between rows. */}
           <tr>
-            <td style={ppnEmptyCellStyle} colSpan={4}>&nbsp;</td>
-            <td style={verticalOnlyCellStyle}>Harga sebelum PPN</td>
-            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }}>
+            <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
+            <td style={verticalOnlyCellStyle} colSpan={2}>Harga sebelum PPN</td>
+            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }} colSpan={2}>
               {formatRupiah(total)}
             </td>
           </tr>
           <tr>
-            <td style={ppnEmptyCellStyle} colSpan={4}>&nbsp;</td>
-            <td style={verticalOnlyCellStyle}>DPP PPN :</td>
-            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }}>
+            <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
+            <td style={verticalOnlyCellStyle} colSpan={2}>DPP PPN :</td>
+            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }} colSpan={2}>
               {formatRupiah(dppPpn)}
             </td>
           </tr>
           <tr>
-            <td style={ppnEmptyCellStyle} colSpan={4}>&nbsp;</td>
-            <td style={verticalOnlyCellStyle}>PPN 11% :</td>
-            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }}>
+            <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
+            <td style={verticalOnlyCellStyle} colSpan={2}>PPN 11% :</td>
+            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }} colSpan={2}>
               {formatRupiah(ppn11)}
             </td>
           </tr>
           <tr>
-            <td style={ppnEmptyCellStyle} colSpan={4}>&nbsp;</td>
-            <td style={{ ...verticalOnlyCellStyle, fontWeight: 700 }}>
+            <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
+            <td style={{ ...verticalOnlyCellStyle, fontWeight: 700 }} colSpan={2}>
               Total Pembayaran :
             </td>
             <td
@@ -388,14 +387,15 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                 textAlign: "right",
                 fontWeight: 700,
               }}
+              colSpan={2}
             >
               {formatRupiah(total)}
             </td>
           </tr>
           <tr>
-            <td style={ppnEmptyCellStyle} colSpan={4}>&nbsp;</td>
-            <td style={verticalOnlyCellStyle}>PPh 23 2% :</td>
-            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }}>-</td>
+            <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
+            <td style={verticalOnlyCellStyle} colSpan={2}>PPh 23 2% :</td>
+            <td style={{ ...verticalOnlyCellStyle, textAlign: "right" }} colSpan={2}>-</td>
           </tr>
 
           {/* === TERBILANG ROW === */}
