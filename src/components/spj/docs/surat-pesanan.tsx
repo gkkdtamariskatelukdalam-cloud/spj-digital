@@ -47,6 +47,29 @@ const nameStyle: CSSProperties = {
   textDecoration: "underline",
 };
 
+// === Vertical-borders-only cell style ===
+// Per Excel 01PESAN rows 97+ (Instruksi & Signature): cells have
+// ONLY left + right borders, NO horizontal separators (no top/bottom).
+// This makes the Instruksi section appear as one continuous block
+// (no row separators between numbered items) and the Signature row
+// seamlessly continues from the Instruksi section above.
+const verticalOnlyCellStyle: CSSProperties = {
+  borderLeft: "1px solid #000",
+  borderRight: "1px solid #000",
+  borderTop: "none",
+  borderBottom: "none",
+  padding: "4px 6px",
+  verticalAlign: "top",
+};
+
+// === Signature cell style ===
+// Same as vertical-only, but with bottom border to close the table.
+// (No top border — visually continues from Instruksi section above.)
+const signatureCellStyle: CSSProperties = {
+  ...verticalOnlyCellStyle,
+  borderBottom: "1px solid #000",
+};
+
 export function SuratPesanan({ group, school }: SuratPesananProps) {
   const romanMonth = groupRomanMonth(group);
   const docNumber = `421.3/${group.noPesan || "—"}-P/DB/SMANSATLD/${romanMonth}/${group.tahun}`;
@@ -310,22 +333,26 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
 
-          {/* === INSTRUKSI SECTION (in same table) === */}
-          {/* Header row merged 6 cols */}
+          {/* === INSTRUKSI SECTION (in same table, vertical borders only) === */}
+          {/* Per Excel R97+: NO horizontal separators between Instruksi rows.
+              Only left+right vertical borders. The bottom border of the
+              Terbilang row above serves as the visual top of this section. */}
           <tr>
             <td
-              style={{ ...cellStyle, fontWeight: 700 }}
+              style={{ ...verticalOnlyCellStyle, fontWeight: 700 }}
               colSpan={6}
             >
               Instruksi ke Penyedia dan Satuan Pendidikan
             </td>
           </tr>
-          {/* Numbered instruksi items: number (col 1) + text (cols 2-6 merged) */}
+          {/* Numbered instruksi items: number (col 1) + text (cols 2-6 merged).
+              No horizontal separators between items — they appear as one
+              continuous block of text. */}
           {instruksiList.map((text, idx) => (
             <tr key={idx}>
               <td
                 style={{
-                  ...cellStyle,
+                  ...verticalOnlyCellStyle,
                   textAlign: "center",
                   verticalAlign: "top",
                 }}
@@ -333,7 +360,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                 {idx + 1}
               </td>
               <td
-                style={{ ...cellStyle, textAlign: "justify" }}
+                style={{ ...verticalOnlyCellStyle, textAlign: "justify" }}
                 colSpan={5}
               >
                 {text}
@@ -341,14 +368,13 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </tr>
           ))}
 
-          {/* === SIGNATURE ROW (2 columns: Penyedia | Pelaksana) === */}
-          {/* Per Excel: each signature cell spans ~5-6 cols. Penyedia on left
-              (cols A-F ≈ 1-4 in our 6-col), Pelaksana on right (cols G-K ≈
-              4-6 in our 6-col). For simpler split, use 3+3 cols. */}
+          {/* === SIGNATURE ROW (Penyedia | Pelaksana) === */}
+          {/* Per Excel R105+: only left+right+bottom borders (no top).
+              Bottom border closes the entire table. */}
           <tr>
             <td
               style={{
-                ...cellStyle,
+                ...signatureCellStyle,
                 verticalAlign: "top",
               }}
               colSpan={3}
@@ -361,7 +387,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
             <td
               style={{
-                ...cellStyle,
+                ...signatureCellStyle,
                 verticalAlign: "top",
               }}
               colSpan={3}
