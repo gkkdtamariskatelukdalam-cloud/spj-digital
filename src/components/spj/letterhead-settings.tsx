@@ -508,35 +508,32 @@ export function LetterheadSettingsPanel() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label className="text-xs font-semibold">Ukuran Logo</Label>
-                  <span className="text-[10px] font-mono text-muted-foreground">
-                    {(local.logoWidth / 37.795).toFixed(1)}×{(local.logoHeight / 37.795).toFixed(1)}cm
-                  </span>
                 </div>
-                <div>
-                  <Label className="text-[10px] text-muted-foreground">
-                    Lebar
-                  </Label>
-                  <Slider
-                    value={[Math.round(local.logoWidth / 37.795)]}
-                    min={1}
-                    max={7}
-                    step={0.5}
-                    onValueChange={(v) => update("logoWidth", Math.round(v[0] * 37.795))}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label className="text-[10px] text-muted-foreground">
-                    Tinggi
-                  </Label>
-                  <Slider
-                    value={[Math.round(local.logoHeight / 37.795)]}
-                    min={1}
-                    max={7}
-                    step={0.5}
-                    onValueChange={(v) => update("logoHeight", Math.round(v[0] * 37.795))}
-                    className="mt-1"
-                  />
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <Label className="text-[10px] text-muted-foreground">Lebar (cm)</Label>
+                    <Input
+                      type="number"
+                      step="0.01"
+                      min="0.5"
+                      max="10"
+                      value={(local.logoWidth / 37.795).toFixed(2)}
+                      onChange={(e) => update("logoWidth", Math.round(parseFloat(e.target.value || "0") * 37.795))}
+                      className="h-8 text-xs font-mono"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-[10px] text-muted-foreground">Tinggi (cm)</Label>
+                    <Input
+                      type="number"
+                      step="0.01"
+                      min="0.5"
+                      max="10"
+                      value={(local.logoHeight / 37.795).toFixed(2)}
+                      onChange={(e) => update("logoHeight", Math.round(parseFloat(e.target.value || "0") * 37.795))}
+                      className="h-8 text-xs font-mono"
+                    />
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -699,35 +696,32 @@ export function LetterheadSettingsPanel() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Label className="text-xs font-semibold">Ukuran Logo 2</Label>
-                    <span className="text-[10px] font-mono text-muted-foreground">
-                      {(local.logo2Width / 37.795).toFixed(1)}×{(local.logo2Height / 37.795).toFixed(1)}cm
-                    </span>
                   </div>
-                  <div>
-                    <Label className="text-[10px] text-muted-foreground">
-                      Lebar
-                    </Label>
-                    <Slider
-                      value={[Math.round(local.logo2Width / 37.795)]}
-                      min={1}
-                      max={7}
-                      step={0.5}
-                      onValueChange={(v) => update("logo2Width", Math.round(v[0] * 37.795))}
-                      className="mt-1"
-                    />
-                  </div>
-                  <div>
-                    <Label className="text-[10px] text-muted-foreground">
-                      Tinggi
-                    </Label>
-                    <Slider
-                      value={[Math.round(local.logo2Height / 37.795)]}
-                      min={1}
-                      max={7}
-                      step={0.5}
-                      onValueChange={(v) => update("logo2Height", Math.round(v[0] * 37.795))}
-                      className="mt-1"
-                    />
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <Label className="text-[10px] text-muted-foreground">Lebar (cm)</Label>
+                      <Input
+                        type="number"
+                        step="0.01"
+                        min="0.5"
+                        max="10"
+                        value={(local.logo2Width / 37.795).toFixed(2)}
+                        onChange={(e) => update("logo2Width", Math.round(parseFloat(e.target.value || "0") * 37.795))}
+                        className="h-8 text-xs font-mono"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-[10px] text-muted-foreground">Tinggi (cm)</Label>
+                      <Input
+                        type="number"
+                        step="0.01"
+                        min="0.5"
+                        max="10"
+                        value={(local.logo2Height / 37.795).toFixed(2)}
+                        onChange={(e) => update("logo2Height", Math.round(parseFloat(e.target.value || "0") * 37.795))}
+                        className="h-8 text-xs font-mono"
+                      />
+                    </div>
                   </div>
                 </div>
               </CardContent>
