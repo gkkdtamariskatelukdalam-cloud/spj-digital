@@ -414,6 +414,15 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             ))
           )}
 
+          {/* === PPN + TERBILANG + INSTRUKSI + SIGNATURE SECTION === */}
+          {/* All in ONE tbody with page-break-inside: avoid so they stay
+              TOGETHER when printing — whether 1, 5, 20, or 66 items.
+              This prevents the signature from appearing alone on a page
+              with only instructions ("jangan terpotong hanya ada keterangan
+              dan tanda tangan"). The PPN + Terbilang provide context. */}
+          </tbody>
+          <tbody style={{ pageBreakInside: "avoid" }}>
+
           {/* === PPN CALCULATION ROWS === */}
           {/* Per user reference image from Google Drive:
               - Empty (colSpan=2, No+Uraian): LEFT border only, no other borders
@@ -480,13 +489,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
 
-          {/* === INSTRUKSI + SIGNATURE SECTION === */}
-          {/* Close the main tbody, open a new one with page-break-inside: avoid
-              so the Instruksi and Signature stay TOGETHER when printing —
-              prevents the signature from being pushed to a new page with empty
-              space above it. Padding reduced to make section more compact. */}
-          </tbody>
-          <tbody style={{ pageBreakInside: "avoid" }}>
+          {/* === INSTRUKSI SECTION (within the same pageBreakInside:avoid tbody) === */}
           <tr>
             <td
               style={{ ...instruksiHeaderStyle, fontWeight: 700, fontSize: "9pt", padding: "2px 6px" }}
@@ -519,37 +522,34 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           ))}
 
           {/* === SIGNATURE ROW (Penyedia | Pelaksana) === */}
-          {/* Inside the same tbody as Instruksi (page-break-inside: avoid)
-              so Instruksi + Signature stay together when printing.
-              Signature gap 30px (compact but enough to sign). */}
+          {/* Elegant spacing: title → vendor name → 50px signature gap →
+              owner name → role. Each element has margin for breathing room. */}
           <tr>
             <td
               style={{
                 ...signatureLeftCellStyle,
                 verticalAlign: "top",
-                paddingLeft: "40px",
-                padding: "4px 6px 4px 40px",
+                padding: "8px 6px 12px 40px",
               }}
               colSpan={3}
             >
-              <div>Penyedia,</div>
-              <div>{vendorName || "—"}</div>
-              <div style={{ height: "30px" }} />
-              <div style={{ fontWeight: 400 }}>{vendorOwner || "—"}</div>
+              <div style={{ marginBottom: "2px" }}>Penyedia,</div>
+              <div style={{ marginBottom: "8px" }}>{vendorName || "—"}</div>
+              <div style={{ height: "50px" }} />
+              <div style={{ fontWeight: 400, marginBottom: "2px" }}>{vendorOwner || "—"}</div>
               <div>Direktur</div>
             </td>
             <td
               style={{
                 ...signatureRightCellStyle,
                 verticalAlign: "top",
-                paddingLeft: "40px",
-                padding: "4px 6px 4px 40px",
+                padding: "8px 6px 12px 40px",
               }}
               colSpan={3}
             >
-              <div>Telukdalam, {formatDate(tglPesan)}</div>
-              <div>Pelaksana,</div>
-              <div style={{ height: "30px" }} />
+              <div style={{ marginBottom: "2px" }}>Telukdalam, {formatDate(tglPesan)}</div>
+              <div style={{ marginBottom: "8px" }}>Pelaksana,</div>
+              <div style={{ height: "50px" }} />
               <div style={nameStyle}>{principalName}</div>
               <div>NIP. {principalNip}</div>
             </td>
