@@ -27,6 +27,7 @@ const cellStyle: CSSProperties = {
   border: "1px solid #000",
   padding: "4px 6px",
   verticalAlign: "top",
+  fontSize: "11pt",
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
@@ -66,16 +67,16 @@ export function SuratHasilPemeriksaan({
       : String(group.tahun);
 
   return (
-    <div className="spj-doc px-6 sm:px-10 py-8 text-[12px] leading-relaxed text-slate-900">
+    <div className="spj-doc px-6 sm:px-10 py-8 text-[11pt] leading-relaxed text-slate-900">
       {/* === Kop Surat === */}
       <div className="mb-5">
         <Letterhead />
       </div>
 
-      {/* === Title === */}
+      {/* === Title (16pt per Excel A8) === */}
       <div className="text-center mb-4">
-        <h1 className="font-bold text-[14px]">SURAT HASIL PEMERIKSAAN</h1>
-        <div className="text-[12px] mt-1">NOMOR : {docNumber}</div>
+        <h1 className="font-bold" style={{ fontSize: "16pt" }}>SURAT HASIL PEMERIKSAAN</h1>
+        <div className="text-[11pt] mt-1">NOMOR : {docNumber}</div>
       </div>
 
       {/* === Opening paragraph === */}
@@ -199,7 +200,7 @@ export function SuratHasilPemeriksaan({
         </table>
       </div>
 
-      <p className="text-justify text-[12px] mb-6">
+      <p className="text-justify text-[11pt] mb-6">
         Demikian surat hasil pemeriksaan ini dibuat untuk dapat dipergunakan
         sebagaimana mestinya.
       </p>
@@ -232,7 +233,7 @@ export function SuratHasilPemeriksaan({
       </table>
 
       {/* === PEMERIKSA BARANG - di tengah, di bawah kedua pihak === */}
-      <div style={{ textAlign: "center", marginTop: "24px", fontSize: "12px" }}>
+      <div style={{ textAlign: "center", marginTop: "24px", fontSize: "11pt" }}>
         <div>PEMERIKSA BARANG,</div>
         <div style={{ height: "56px" }} />
         <div style={{ fontWeight: 700, textDecoration: "underline" }}>
