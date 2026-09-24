@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   keywords: ["SPJ", "Surat Pertanggungjawaban", "ATK", "BOSP", "SMA Negeri 1 Telukdalam", "Pengadaan"],
   authors: [{ name: "Z.ai" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/api/favicon",
   },
 };
 

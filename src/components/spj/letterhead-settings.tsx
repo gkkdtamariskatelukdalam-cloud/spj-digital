@@ -256,6 +256,9 @@ export function LetterheadSettingsPanel() {
 
   return (
     <div className="space-y-4">
+      {/* App Logo Upload (Login + Favicon) */}
+      <AppLogoUpload />
+
       {/* Header */}
       <Card className="border-l-4 border-l-rose-500">
         <CardHeader className="pb-3">
@@ -1023,5 +1026,106 @@ export function LetterheadSettingsPanel() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+// ============================================================
+// App Logo Upload Section (for login page + favicon)
+// ============================================================
+
+function AppLogoUpload() {
+  const [appLogo, setAppLogo] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    fetch("/api/app-settings")
+      .then((r) => r.json())
+      .then((data) => setAppLogo(data.appLogo || null))
+      .catch(() => {});
+  }, []);
+
+  async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      toast({ title: "Error", description: "File terlalu besar. Maksimal 5MB.", variant: "destructive" });
+      return;
+    }
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("logo", file);
+    try {
+      const res = await fetch("/api/app-settings/upload-logo", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Gagal upload");
+      setAppLogo(data.appLogo);
+      toast({ title: "Berhasil", description: "Logo aplikasi diperbarui." });
+    } catch (err) {
+      toast({ title: "Error", description: (err as Error).message, variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleDelete() {
+    setLoading(true);
+    try {
+      await fetch("/api/app-settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ appLogo: null }),
+      });
+      setAppLogo(null);
+      toast({ title: "Berhasil", description: "Logo aplikasi dihapus." });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <Card className="border-l-4 border-l-violet-500">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-base flex items-center gap-2">
+          <ImageIcon className="h-4 w-4 text-violet-600" />
+          Logo Aplikasi (Login + Favicon)
+        </CardTitle>
+        <CardDescription className="text-xs">
+          Logo ini muncul di halaman login dan sebagai favicon browser. Maksimal 5MB.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        <div className="flex items-center gap-4">
+          <div className="h-16 w-16 rounded-xl bg-slate-100 dark:bg-slate-800 border-2 border-dashed border-slate-300 dark:border-slate-700 flex items-center justify-center overflow-hidden flex-shrink-0">
+            {appLogo ? (
+              <img src={appLogo} alt="App Logo" className="h-full w-full object-contain" />
+            ) : (
+              <ImageIcon className="h-6 w-6 text-slate-400" />
+            )}
+          </div>
+          <div className="flex flex-col gap-2">
+            <label className="cursor-pointer">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-violet-600 text-white text-xs font-medium hover:bg-violet-700 transition-colors">
+                <Upload className="h-3.5 w-3.5" />
+                {loading ? "Mengupload..." : "Upload Logo"}
+              </span>
+              <input type="file" accept="image/*" className="hidden" onChange={handleUpload} disabled={loading} />
+            </label>
+            {appLogo && (
+              <button
+                onClick={handleDelete}
+                disabled={loading}
+                className="text-xs text-rose-600 hover:text-rose-700"
+              >
+                Hapus Logo
+              </button>
+            )}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

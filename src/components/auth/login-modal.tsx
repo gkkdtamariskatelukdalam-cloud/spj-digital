@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import {
   Wallet,
@@ -15,11 +15,10 @@ import {
 /**
  * Full-screen login overlay shown when the user is not authenticated.
  *
- * Submits credentials to NextAuth via `signIn("credentials", ...)` which
- * hits the configured Credentials provider. On success, the session is
- * stored in a cookie and the parent component re-renders.
+ * Displays the app logo (uploaded via Master Data → Pengaturan → App Logo)
+ * above the login form. If no logo is set, falls back to the Wallet icon.
  *
- * Default seeded admin: username `admin`, password `admin123`.
+ * Submits credentials to NextAuth via `signIn("credentials", ...)`.
  */
 export function LoginModal() {
   const [username, setUsername] = useState("");
@@ -27,6 +26,17 @@ export function LoginModal() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [appLogo, setAppLogo] = useState<string | null>(null);
+
+  // Fetch app logo on mount (public endpoint, no auth needed)
+  useEffect(() => {
+    fetch("/api/app-settings")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.appLogo) setAppLogo(data.appLogo);
+      })
+      .catch(() => {});
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -43,8 +53,6 @@ export function LoginModal() {
       setError("Username atau password salah, atau akun nonaktif");
       return;
     }
-    // On success: parent re-renders via useSession() status change.
-    // Trigger a reload to refresh server data and ensure session cookie is set.
     if (typeof window !== "undefined") window.location.reload();
   }
 
@@ -54,8 +62,16 @@ export function LoginModal() {
         {/* Header */}
         <div className="bg-gradient-to-br from-rose-600 to-amber-500 p-6 text-white">
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center">
-              <Wallet className="h-6 w-6" />
+            <div className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center overflow-hidden flex-shrink-0">
+              {appLogo ? (
+                <img
+                  src={appLogo}
+                  alt="Logo"
+                  className="h-full w-full object-contain"
+                />
+              ) : (
+                <Wallet className="h-6 w-6" />
+              )}
             </div>
             <div>
               <h1 className="text-xl font-bold tracking-tight">SPJ Digital</h1>
