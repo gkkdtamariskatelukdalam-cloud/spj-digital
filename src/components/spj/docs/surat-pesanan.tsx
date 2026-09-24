@@ -405,7 +405,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                   {orDash(item.satuan)}
                 </td>
                 <td style={{ ...cellStyle, textAlign: "right" }}>
-                  Rp {formatNumber(getDisplayedHargaSatuan(item))}
+                  Rp {formatNumber(Math.round(getDisplayedHargaSatuan(item)))}
                 </td>
                 <td style={{ ...cellStyle, textAlign: "right" }}>
                   Rp {formatNumber(item.jumlah)}
