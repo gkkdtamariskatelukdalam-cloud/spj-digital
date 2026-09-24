@@ -267,7 +267,7 @@ export function DataBelanja() {
  barang di dalam setiap pesanan.
               </CardDescription>
             </div>
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-2 flex-wrap justify-end ml-auto">
               {/* Cetak per Toko dropdown */}
               <div className="relative inline-block">
                 <Button
