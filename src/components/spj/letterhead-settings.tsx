@@ -64,6 +64,31 @@ const FONT_OPTIONS = [
   { value: "Palatino Linotype", label: "Palatino Linotype" },
 ];
 
+// CmInput: Uncontrolled input for cm values.
+// User can type freely (e.g., "3", "2.91") without value reverting.
+// key = rounded cm value → only re-mounts when cm changes by ≥1 (settings load)
+// onBlur → convert cm to px, call parent onChange
+function CmInput({ pxValue, onChange, label }: { pxValue: number; onChange: (px: number) => void; label: string }) {
+  return (
+    <div>
+      <Label className="text-[10px] text-muted-foreground">{label}</Label>
+      <Input
+        key={Math.round(pxValue / 37.795)}
+        type="number"
+        step="0.01"
+        min="0.5"
+        max="10"
+        defaultValue={(pxValue / 37.795).toFixed(2)}
+        onBlur={(e) => {
+          const px = Math.round(parseFloat(e.target.value || "0") * 37.795);
+          if (!isNaN(px) && px >= 0) onChange(px);
+        }}
+        className="h-8 text-xs font-mono"
+      />
+    </div>
+  );
+}
+
 const DEFAULT_SETTINGS: LetterheadSettings = {
   id: "default",
   logoPath: "/uploads/logo-sman1.png",
@@ -413,127 +438,21 @@ export function LetterheadSettingsPanel() {
                 </div>
               </div>
 
-              {/* Logo position controls */}
-              <Separator />
-              <div className="space-y-2">
-                <Label className="text-xs font-semibold">
-                  Posisi Logo (Geser)
-                </Label>
-                <div className="grid grid-cols-3 gap-1.5 max-w-[200px] mx-auto">
-                  <div />
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-8"
-                    onClick={() => update("logoOffsetY", local.logoOffsetY - 5)}
-                    title="Geser ke atas"
-                  >
-                    <ArrowUp className="h-3.5 w-3.5" />
-                  </Button>
-                  <div />
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-8"
-                    onClick={() => update("logoOffsetX", local.logoOffsetX - 5)}
-                    title="Geser ke kiri"
-                  >
-                    <ArrowLeft className="h-3.5 w-3.5" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-8"
-                    onClick={() => {
-                      update("logoOffsetX", 0);
-                      update("logoOffsetY", 0);
-                    }}
-                    title="Reset posisi"
-                  >
-                    <RotateCcw className="h-3 w-3" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-8"
-                    onClick={() => update("logoOffsetX", local.logoOffsetX + 5)}
-                    title="Geser ke kanan"
-                  >
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
-                  <div />
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-8"
-                    onClick={() => update("logoOffsetY", local.logoOffsetY + 5)}
-                    title="Geser ke bawah"
-                  >
-                    <ArrowDown className="h-3.5 w-3.5" />
-                  </Button>
-                  <div />
-                </div>
-                <div className="grid grid-cols-2 gap-3 mt-2">
-                  <div>
-                    <Label className="text-[10px] text-muted-foreground">
-                      Offset X: {(local.logoOffsetX / 37.795).toFixed(1)}cm
-                    </Label>
-                    <Slider
-                      value={[local.logoOffsetX]}
-                      min={-100}
-                      max={100}
-                      step={1}
-                      onValueChange={(v) => update("logoOffsetX", v[0])}
-                      className="mt-1"
-                    />
-                  </div>
-                  <div>
-                    <Label className="text-[10px] text-muted-foreground">
-                      Offset Y: {(local.logoOffsetY / 37.795).toFixed(1)}cm
-                    </Label>
-                    <Slider
-                      value={[local.logoOffsetY]}
-                      min={-100}
-                      max={100}
-                      step={1}
-                      onValueChange={(v) => update("logoOffsetY", v[0])}
-                      className="mt-1"
-                    />
-                  </div>
-                </div>
-              </div>
-
               {/* Logo size */}
               <Separator />
               <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <Label className="text-xs font-semibold">Ukuran Logo</Label>
-                </div>
+                <Label className="text-xs font-semibold">Ukuran Logo</Label>
                 <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <Label className="text-[10px] text-muted-foreground">Lebar (cm)</Label>
-                    <Input
-                      type="number"
-                      step="0.01"
-                      min="0.5"
-                      max="10"
-                      value={(local.logoWidth / 37.795).toFixed(2)}
-                      onChange={(e) => update("logoWidth", Math.round(parseFloat(e.target.value || "0") * 37.795))}
-                      className="h-8 text-xs font-mono"
-                    />
-                  </div>
-                  <div>
-                    <Label className="text-[10px] text-muted-foreground">Tinggi (cm)</Label>
-                    <Input
-                      type="number"
-                      step="0.01"
-                      min="0.5"
-                      max="10"
-                      value={(local.logoHeight / 37.795).toFixed(2)}
-                      onChange={(e) => update("logoHeight", Math.round(parseFloat(e.target.value || "0") * 37.795))}
-                      className="h-8 text-xs font-mono"
-                    />
-                  </div>
+                  <CmInput
+                    pxValue={local.logoWidth}
+                    onChange={(px) => update("logoWidth", px)}
+                    label="Lebar (cm)"
+                  />
+                  <CmInput
+                    pxValue={local.logoHeight}
+                    onChange={(px) => update("logoHeight", px)}
+                    label="Tinggi (cm)"
+                  />
                 </div>
               </div>
             </CardContent>
@@ -593,135 +512,21 @@ export function LetterheadSettingsPanel() {
                   </div>
                 </div>
 
-                {/* Logo 2 position controls */}
-                <Separator />
-                <div className="space-y-2">
-                  <Label className="text-xs font-semibold">
-                    Posisi Logo 2 (Geser)
-                  </Label>
-                  <div className="grid grid-cols-3 gap-1.5 max-w-[200px] mx-auto">
-                    <div />
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="h-8"
-                      onClick={() =>
-                        update("logo2OffsetY", local.logo2OffsetY - 5)
-                      }
-                      title="Geser ke atas"
-                    >
-                      <ArrowUp className="h-3.5 w-3.5" />
-                    </Button>
-                    <div />
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="h-8"
-                      onClick={() =>
-                        update("logo2OffsetX", local.logo2OffsetX - 5)
-                      }
-                      title="Geser ke kiri"
-                    >
-                      <ArrowLeft className="h-3.5 w-3.5" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="h-8"
-                      onClick={() => {
-                        update("logo2OffsetX", 0);
-                        update("logo2OffsetY", 0);
-                      }}
-                      title="Reset posisi"
-                    >
-                      <RotateCcw className="h-3 w-3" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="h-8"
-                      onClick={() =>
-                        update("logo2OffsetX", local.logo2OffsetX + 5)
-                      }
-                      title="Geser ke kanan"
-                    >
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </Button>
-                    <div />
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="h-8"
-                      onClick={() =>
-                        update("logo2OffsetY", local.logo2OffsetY + 5)
-                      }
-                      title="Geser ke bawah"
-                    >
-                      <ArrowDown className="h-3.5 w-3.5" />
-                    </Button>
-                    <div />
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 mt-2">
-                    <div>
-                      <Label className="text-[10px] text-muted-foreground">
-                        Offset X: {(local.logo2OffsetX / 37.795).toFixed(1)}cm
-                      </Label>
-                      <Slider
-                        value={[local.logo2OffsetX]}
-                        min={-100}
-                        max={100}
-                        step={1}
-                        onValueChange={(v) => update("logo2OffsetX", v[0])}
-                        className="mt-1"
-                      />
-                    </div>
-                    <div>
-                      <Label className="text-[10px] text-muted-foreground">
-                        Offset Y: {(local.logo2OffsetY / 37.795).toFixed(1)}cm
-                      </Label>
-                      <Slider
-                        value={[local.logo2OffsetY]}
-                        min={-100}
-                        max={100}
-                        step={1}
-                        onValueChange={(v) => update("logo2OffsetY", v[0])}
-                        className="mt-1"
-                      />
-                    </div>
-                  </div>
-                </div>
-
                 {/* Logo 2 size */}
                 <Separator />
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Label className="text-xs font-semibold">Ukuran Logo 2</Label>
-                  </div>
+                  <Label className="text-xs font-semibold">Ukuran Logo 2</Label>
                   <div className="grid grid-cols-2 gap-2">
-                    <div>
-                      <Label className="text-[10px] text-muted-foreground">Lebar (cm)</Label>
-                      <Input
-                        type="number"
-                        step="0.01"
-                        min="0.5"
-                        max="10"
-                        value={(local.logo2Width / 37.795).toFixed(2)}
-                        onChange={(e) => update("logo2Width", Math.round(parseFloat(e.target.value || "0") * 37.795))}
-                        className="h-8 text-xs font-mono"
-                      />
-                    </div>
-                    <div>
-                      <Label className="text-[10px] text-muted-foreground">Tinggi (cm)</Label>
-                      <Input
-                        type="number"
-                        step="0.01"
-                        min="0.5"
-                        max="10"
-                        value={(local.logo2Height / 37.795).toFixed(2)}
-                        onChange={(e) => update("logo2Height", Math.round(parseFloat(e.target.value || "0") * 37.795))}
-                        className="h-8 text-xs font-mono"
-                      />
-                    </div>
+                    <CmInput
+                      pxValue={local.logo2Width}
+                      onChange={(px) => update("logo2Width", px)}
+                      label="Lebar (cm)"
+                    />
+                    <CmInput
+                      pxValue={local.logo2Height}
+                      onChange={(px) => update("logo2Height", px)}
+                      label="Tinggi (cm)"
+                    />
                   </div>
                 </div>
               </CardContent>
