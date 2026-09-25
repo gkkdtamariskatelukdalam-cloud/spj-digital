@@ -52,7 +52,7 @@ const cellStyle: CSSProperties = {
   border: "1px solid #000",
   padding: "2px 5px",
   verticalAlign: "top",
-  fontSize: "11pt",
+  fontSize: "11pt",  // Per user request: isi tabel 11pt
   lineHeight: 1.2,
 };
 const tableStyle: CSSProperties = {
@@ -63,18 +63,20 @@ const tableStyle: CSSProperties = {
 const headerCellStyle: CSSProperties = {
   ...cellStyle,
   background: "#e2e8f0",
-  fontWeight: 700,
+  fontWeight: 700,  // Per user request: header Bold
   textAlign: "center",
 };
 const borderlessTableStyle: CSSProperties = {
   borderCollapse: "collapse",
   width: "100%",
 };
+// Info block: 12pt BOLD per user request
 const labelCellNoBorder: CSSProperties = {
   padding: "1px 6px",
   verticalAlign: "top",
   whiteSpace: "nowrap",
   fontSize: "12pt",
+  fontWeight: 700,  // Per user request: Bold dan 12pt
 };
 const nameStyle: CSSProperties = {
   fontWeight: 700,
@@ -159,14 +161,18 @@ export function DokumenPembanding({ group, school }: DokumenPembandingProps) {
         </table>
       </div>
 
-      {/* === Comparison table (5 visual cols) === */}
+      {/* === Comparison table (5 visual cols) ===
+          Colgroup uses % widths so table adapts to BOTH landscape AND portrait
+          paper orientation. Landscape: wide columns; Portrait: narrower but
+          still readable. Per user request: "posisi kertas landscape dan potret
+          bisa mendukung". */}
       <table style={tableStyle}>
         <colgroup>
-          <col style={{ width: "40px" }} />   {/* Col 1: No */}
-          <col style={{ width: "180px" }} /> {/* Col 2: Label */}
-          <col />                             {/* Col 3: Toko 1 */}
-          <col />                             {/* Col 4: Toko 2 */}
-          <col style={{ width: "60px" }} />  {/* Col 5: dst */}
+          <col style={{ width: "5%" }} />    {/* Col 1: No */}
+          <col style={{ width: "20%" }} />  {/* Col 2: Label */}
+          <col style={{ width: "35%" }} />  {/* Col 3: Toko 1 (Produk I) */}
+          <col style={{ width: "35%" }} />  {/* Col 4: Toko 2 (Produk II) */}
+          <col style={{ width: "5%" }} />   {/* Col 5: dst */}
         </colgroup>
         <tbody>
           {/* === Header row 1: No (rowSpan 2) | empty | Produk I | Produk II | dst === */}
@@ -220,11 +226,12 @@ export function DokumenPembanding({ group, school }: DokumenPembandingProps) {
         </tbody>
       </table>
 
-      {/* === Signature block (right-aligned, same style as Dokumen Rencana) === */}
+      {/* === Signature block (right-aligned, same style as Dokumen Rencana) ===
+          Per user request: "Penandatangan 12pt". */}
       <div
         style={{
           marginTop: "20px",
-          fontSize: "11pt",
+          fontSize: "12pt",  // Per user request: 12pt (was 11pt)
           display: "flex",
           justifyContent: "flex-end",
           marginRight: "40px",
