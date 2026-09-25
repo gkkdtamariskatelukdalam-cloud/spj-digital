@@ -125,12 +125,9 @@
 @media print {
   @page {
     size: A4 portrait;
-    /* Top: 2cm (room for KOP surat)
-       Right: 2cm
-       Bottom: 1.5cm
-       Left: 2cm
-       Matches standard Indonesian formal document margins */
-    margin: 2cm 2cm 1.5cm 2cm;
+    /* Top: 2cm, Right: 2cm, Bottom: 2cm, Left: 2.5cm
+       Matches PDF original margins */
+    margin: 2cm 2cm 2cm 2.5cm;
   }
   body * {
     visibility: hidden;
