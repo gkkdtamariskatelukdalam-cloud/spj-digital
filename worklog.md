@@ -3151,3 +3151,51 @@ Stage Summary:
 - ✅ Info block more compact vertically (one less row of empty space) and horizontally (shorter labels)
 - ✅ Layout remains professional (VLM-verified: "compact and professional, clean grid layout")
 - ✅ Lint clean
+
+---
+Task ID: 44-verify-single-mode-kop-fixes
+Agent: Main (Claude)
+Task: User asked "apakah pengaturan KOP ini juga berlaku untuk KOP dengan 1 logo?" — do the KOP fixes (floating logo, whiteSpace: nowrap, Excel-matched sizes) also apply to single mode?
+
+Work Log:
+- Inspected src/components/spj/letterhead.tsx:
+  - `renderLine()` function (line 128-140) is SHARED by both single & dual modes — uses `whiteSpace: "nowrap"` ✓
+  - Single mode block (line 245+) uses `position: absolute` for the logo (same fix as dual mode) ✓
+  - Dual mode block (line 148+) uses `position: absolute` for both logos ✓
+  - Both modes use `position: relative` on the outer container + `minHeight` based on logo height
+- Switched kopMode to "single" via DB update to test
+- Agent Browser DOM inspection confirms single mode layout:
+  - logoPosition: "absolute" ✓ (floating, not flex)
+  - logoLeft: "0px", logoTop: "0px" ✓ (top-left of KOP container)
+  - logoZIndex: "1" ✓ (above text)
+  - textPosition: "relative" ✓
+  - textWidth: 703px = kopWidth: 703px ✓ (text takes FULL page width — logo doesn't push)
+  - textZIndex: "0" ✓ (below logo)
+  - isLogoFloating: true ✓
+- All 7 KOP text rows in single mode confirmed using whiteSpace: nowrap:
+  - PEMERINTAH PROVINSI SUMATERA UTARA (nowrap, 389px)
+  - DINAS PENDIDIKAN (nowrap, 231px)
+  - SMA NEGERI 1 TELUKDALAM (nowrap, 344px)
+  - Jl. Pendidikan No.13,... (nowrap, 497px — single mode address is shorter than dual mode)
+  - Cabdisdik Wil.XIV, Kode Pos 22865 (nowrap, 211px)
+  - Telp/HP: 081370904506,... (nowrap, 407px)
+  - Laman : smansatelukdalam.sch.id (nowrap)
+- All text widths fit within the 703px container ✓
+- VLM analysis of single mode screenshot:
+  - "Yes, there is only 1 logo, and it is positioned on the left side"
+  - "Yes, all the KOP text lines are on a single line each without wrapping"
+  - "Yes, the layout looks professional, clean, and well-aligned"
+- (VLM also said logo "does not appear to be floating" — but this is just visual perception because text is centered across full width; DOM inspection confirms logo IS position: absolute and text container IS 100% width = 703px = kopWidth)
+
+Stage Summary:
+- ✅ YES — all KOP fixes apply to BOTH single mode (1 logo) AND dual mode (2 logos):
+  - `whiteSpace: nowrap` in renderLine() (shared by both modes)
+  - Logo `position: absolute` (floating, doesn't push text) — applied to both single & dual mode
+  - Excel-matched font sizes (14/18/18/10/10/10/11 pt for single; 14/12/13/14/8/8/8 pt for dual)
+  - Excel-matched line1 NOT bold (matches Excel row 1)
+  - line3Size = 18pt (was 20pt — caused overlap before)
+  - line4-6Size = 10pt (was 11pt — slightly too big before)
+  - line7Size = 11pt (Calibri)
+- ✅ DOM verified: in single mode, logo is `position: absolute`, text container takes 100% width (703px = 18.6cm = full page width minus 1.2cm L/R margins)
+- ✅ All 7 KOP text rows fit on 1 line each in single mode (no wrapping)
+- ✅ User can switch between single/dual mode via Master Data → KOP tab → "Mode KOP Surat" — all fixes apply to both
