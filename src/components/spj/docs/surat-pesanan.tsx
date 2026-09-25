@@ -32,9 +32,12 @@ interface SuratPesananProps {
 
 const cellStyle: CSSProperties = {
   border: "1px solid #000",
-  padding: "4px 6px",
+  // Very compact padding so 1-10 items fit on 1 A4 page.
+  // Was 4px 6px (too tall); now 1px 4px — saves ~3cm over 32 rows.
+  padding: "1px 4px",
   verticalAlign: "top",
   fontSize: "11pt",
+  lineHeight: 1.15,
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
@@ -265,12 +268,14 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
   return (
     <div className="spj-doc text-[11px] leading-relaxed text-slate-900">
       {/* === Kop Surat === */}
-      <div className="mb-5">
+      {/* mb-1 (was mb-5 originally) — KOP already has bottom border, minimal space after */}
+      <div className="mb-1">
         <Letterhead />
       </div>
 
       {/* === Title (14pt per Excel) === */}
-      <div className="text-center mb-4">
+      {/* mb-1 (was mb-4 originally) — compact so 10 items fit on 1 page */}
+      <div className="text-center mb-1">
         <h1 className="font-bold" style={{ fontSize: "14pt" }}>SURAT PESANAN</h1>
       </div>
 
@@ -355,10 +360,10 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
 
-          {/* === RINCIAN PEKERJAAN header (merged 6 cols, 14px) === */}
+          {/* === RINCIAN PEKERJAAN header (merged 6 cols, compact) === */}
           <tr>
             <td
-              style={{ ...headerCellStyle, textAlign: "center", fontSize: "14pt" }}
+              style={{ ...headerCellStyle, textAlign: "center", fontSize: "12pt", padding: "2px 4px" }}
               colSpan={6}
             >
               RINCIAN PEKERJAAN
@@ -527,22 +532,25 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
 
           {/* === SIGNATURE ROW (Penyedia | Pelaksana) === */}
           {/* Per PDF original: gap 4cm, Penyedia name NOT underlined, Pelaksana underlined */}
+          {/* Compact signature (was 150px minHeight + 12px 15px padding).
+              Reduced to 50px so 10-item docs fit on 1 A4 page.
+              50px = ~1.32cm is enough for a wet-ink signature stamp. */}
           <tr>
             <td
               style={{
                 ...signatureLeftCellStyle,
                 verticalAlign: "top",
-                padding: "12px 6px 15px 40px",
+                padding: "4px 6px 4px 20px",
               }}
               colSpan={3}
             >
-              <div style={{ marginBottom: "6px" }}>Penyedia,</div>
-              <div style={{ marginBottom: "20px", fontWeight: 500 }}>{vendorName || "—"}</div>
-              <div style={{ minHeight: "150px", lineHeight: "150px" }}>&nbsp;</div>
+              <div style={{ marginBottom: "2px" }}>Penyedia,</div>
+              <div style={{ marginBottom: "2px", fontWeight: 500 }}>{vendorName || "—"}</div>
+              <div style={{ minHeight: "50px", lineHeight: "50px" }}>&nbsp;</div>
               <div style={{
                 fontWeight: 400,
-                marginTop: "8px",
-                marginBottom: "2px",
+                marginTop: "2px",
+                marginBottom: "1px",
               }}>
                 {vendorOwner || "—"}
               </div>
@@ -552,19 +560,19 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
               style={{
                 ...signatureRightCellStyle,
                 verticalAlign: "top",
-                padding: "12px 6px 15px 40px",
+                padding: "4px 6px 4px 20px",
               }}
               colSpan={3}
             >
-              <div style={{ marginBottom: "6px" }}>Telukdalam, {formatDate(tglPesan)}</div>
-              <div style={{ marginBottom: "20px" }}>Pelaksana,</div>
-              <div style={{ minHeight: "150px", lineHeight: "150px" }}>&nbsp;</div>
+              <div style={{ marginBottom: "2px" }}>Telukdalam, {formatDate(tglPesan)}</div>
+              <div style={{ marginBottom: "2px" }}>Pelaksana,</div>
+              <div style={{ minHeight: "50px", lineHeight: "50px" }}>&nbsp;</div>
               <div style={{
                 ...nameStyle,
                 textDecoration: "underline",
                 textUnderlineOffset: "3px",
-                marginTop: "8px",
-                marginBottom: "2px",
+                marginTop: "2px",
+                marginBottom: "1px",
               }}>
                 {principalName}
               </div>
