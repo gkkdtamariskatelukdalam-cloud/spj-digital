@@ -149,11 +149,31 @@ export function DocumentPreview({
   const [currentGroupIdx, setCurrentGroupIdx] = useState(0);
   const [downloading, setDownloading] = useState(false);
   const [printing, setPrinting] = useState(false);
+  // Orientation override — user can switch between Portrait/Landscape
+  // Default: null (use the doc's PAGE_SETUP default orientation)
+  // When user clicks the toggle, this overrides the default
+  const [orientationOverride, setOrientationOverride] = useState<"portrait" | "landscape" | null>(null);
 
   // Determine which groups to show (all, vendor, or single)
   const groups = mode === "all" || mode === "vendor" ? allGroups : group ? [group] : [];
   const currentGroup = groups[currentGroupIdx] || null;
   const currentDoc = DOC_TEMPLATES[currentDocIdx];
+
+  // === Effective page setup (with orientation override) ===
+  // Get the doc's default PAGE_SETUP, then apply orientation override if set
+  const defaultPageSetup: PageSetup =
+    PAGE_SETUP_BY_DOC_ID[currentDoc?.id ?? ""] ?? {
+      margin: "1.00cm 1.00cm 1.00cm 1.00cm",
+      orientation: "portrait",
+      scale: 100,
+      source: "(default fallback)",
+    };
+  const effectiveOrientation: "portrait" | "landscape" =
+    orientationOverride ?? defaultPageSetup.orientation;
+  const effectivePageSetup: PageSetup = {
+    ...defaultPageSetup,
+    orientation: effectiveOrientation,
+  };
 
   // === Visibility filter per current group ===
   // Hidden docs (visible=false in DB) are excluded from navigation & printing.
@@ -170,6 +190,8 @@ export function DocumentPreview({
     if (open) {
       setCurrentDocIdx(0);
       setCurrentGroupIdx(0);
+      // Reset orientation override to null (use doc's default PAGE_SETUP)
+      setOrientationOverride(null);
     }
   }, [open]);
 
@@ -278,15 +300,9 @@ export function DocumentPreview({
       // Dynamically import html2pdf to avoid SSR issues
       const html2pdf = (await import("html2pdf.js")).default;
       
-      // Lookup the current doc's Excel-matched page setup (margins, orientation, scale).
+      // Use the effective page setup (with orientation override if user toggled it)
       // Falls back to a generic A4 portrait setup if doc id is not found.
-      const currentPageSetup: PageSetup =
-        PAGE_SETUP_BY_DOC_ID[currentDoc.id] ?? {
-          margin: "1.00cm 1.00cm 1.00cm 1.00cm",
-          orientation: "portrait",
-          scale: 100,
-          source: "(default fallback)",
-        };
+      const currentPageSetup = effectivePageSetup;
       const [mt, mr, mb, ml] = parseMarginToMm(currentPageSetup.margin);
       
       // Create a temporary container
@@ -405,14 +421,8 @@ export function DocumentPreview({
       return;
     }
 
-    // Lookup the current doc's Excel-matched page setup (margins, orientation, scale).
-    const currentPageSetup: PageSetup =
-      PAGE_SETUP_BY_DOC_ID[currentDoc.id] ?? {
-        margin: "1.00cm 1.00cm 1.00cm 1.00cm",
-        orientation: "portrait",
-        scale: 100,
-        source: "(default fallback)",
-      };
+    // Use the effective page setup (with orientation override if user toggled it)
+    const currentPageSetup = effectivePageSetup;
     const pageCss = buildPageCss(currentPageSetup);
     const scaleTransform = buildScaleTransform(currentPageSetup);
 
@@ -502,6 +512,34 @@ export function DocumentPreview({
             
             {/* Action buttons */}
             <div className="flex items-center gap-2">
+              {/* Orientation toggle — Potret / Landscape */}
+              {/* Per user request: "jangan lupa untuk membuat pilihan cetak potret dan landscape" */}
+              <div className="flex items-center rounded-md border border-slate-200 dark:border-slate-700 overflow-hidden">
+                <button
+                  onClick={() => setOrientationOverride("portrait")}
+                  className={cn(
+                    "px-2 py-1 text-[10px] font-medium transition-colors",
+                    effectiveOrientation === "portrait"
+                      ? "bg-violet-600 text-white"
+                      : "text-muted-foreground hover:bg-muted/50"
+                  )}
+                  title="Cetak dalam orientasi Portrait (vertikal)"
+                >
+                  Potret
+                </button>
+                <button
+                  onClick={() => setOrientationOverride("landscape")}
+                  className={cn(
+                    "px-2 py-1 text-[10px] font-medium transition-colors",
+                    effectiveOrientation === "landscape"
+                      ? "bg-violet-600 text-white"
+                      : "text-muted-foreground hover:bg-muted/50"
+                  )}
+                  title="Cetak dalam orientasi Landscape (horizontal)"
+                >
+                  Landscape
+                </button>
+              </div>
               <Button
                 variant="outline"
                 size="sm"
@@ -631,8 +669,10 @@ export function DocumentPreview({
               id="preview-doc-content"
               className="bg-white shadow-lg"
               style={{
-                width: "210mm",
-                minHeight: "297mm",
+                // Preview pane width matches effective orientation:
+                // Portrait = 210mm, Landscape = 297mm
+                width: effectiveOrientation === "landscape" ? "297mm" : "210mm",
+                minHeight: effectiveOrientation === "landscape" ? "210mm" : "297mm",
                 maxWidth: "none",
               }}
             >

@@ -3762,3 +3762,97 @@ Stage Summary:
   - Estimasi harga per toko (same values)
   - Alamat calon penyedia per toko
 - ✅ Lint clean, data verified via API + DOM + VLM
+
+---
+Task ID: 52-add-orientation-toggle-potret-landscape
+Agent: Main (Claude)
+Task: User requested: "jangan lupa untuk membuat pilihan cetak potret dan landscape ya" — add a toggle to choose between Portrait and Landscape orientation for printing.
+
+Work Log:
+- Analyzed DocumentPreview component (src/components/spj/document-preview.tsx):
+  - Uses PAGE_SETUP_BY_DOC_ID[currentDoc.id] to get default orientation per doc
+  - handleDownloadPDF uses currentPageSetup.orientation for jsPDF
+  - handlePrint uses buildPageCss(currentPageSetup) for @page CSS rule
+  - Preview pane #preview-doc-content has fixed width: "210mm" (portrait only)
+- User wants a CHOICE (toggle) to switch between portrait and landscape
+
+**Fix Implementation** (src/components/spj/document-preview.tsx):
+
+1. **New state**: `orientationOverride`
+   ```ts
+   const [orientationOverride, setOrientationOverride] = useState<"portrait" | "landscape" | null>(null);
+   ```
+   - null = use doc's default PAGE_SETUP orientation
+   - "portrait" = override to portrait
+   - "landscape" = override to landscape
+
+2. **Computed `effectivePageSetup`**:
+   ```ts
+   const defaultPageSetup = PAGE_SETUP_BY_DOC_ID[currentDoc?.id ?? ""] ?? fallback;
+   const effectiveOrientation = orientationOverride ?? defaultPageSetup.orientation;
+   const effectivePageSetup = { ...defaultPageSetup, orientation: effectiveOrientation };
+   ```
+
+3. **Updated handleDownloadPDF**: `const currentPageSetup = effectivePageSetup;` (was: lookup from PAGE_SETUP_BY_DOC_ID)
+   - Now uses the user's orientation override when generating PDF
+   - jsPDF.orientation reflects the effective orientation
+
+4. **Updated handlePrint**: `const currentPageSetup = effectivePageSetup;`
+   - Now uses the user's orientation override when building @page CSS
+   - @page rule: `size: A4 ${effectiveOrientation}; margin: ...`
+
+5. **Updated preview pane width**: adaptive based on effective orientation
+   ```tsx
+   style={{
+     width: effectiveOrientation === "landscape" ? "297mm" : "210mm",
+     minHeight: effectiveOrientation === "landscape" ? "210mm" : "297mm",
+   }}
+   ```
+   - Portrait: 210mm × 297mm (A4 portrait)
+   - Landscape: 297mm × 210mm (A4 landscape)
+   - Preview pane visually matches the print output orientation
+
+6. **Added orientation toggle UI** in dialog header (next to Unduh PDF / Cetak buttons):
+   - Two buttons: "Potret" and "Landscape"
+   - Active button highlighted with `bg-violet-600 text-white`
+   - Inactive: `text-muted-foreground hover:bg-muted/50`
+   - Toggle group styled with rounded border
+   - Tooltip: "Cetak dalam orientasi Portrait (vertikal)" / "Cetak dalam orientasi Landscape (horizontal)"
+
+7. **Reset on dialog open**: Added `setOrientationOverride(null)` to the reset effect
+   - Each time the dialog opens, orientation resets to doc's default
+   - Prevents stale override from previous session
+
+**Verification:**
+
+1. Lint passes: `bun run lint` → no errors
+2. DOM inspection confirms toggle buttons exist:
+   - hasPotretBtn: true ✓
+   - hasLandscapeBtn: true ✓
+3. Default behavior (Surat Pesanan = portrait):
+   - potretActive: true (highlighted) ✓
+   - landscapeActive: false ✓
+   - previewWidth: 793.69px (= 210mm at 96 DPI = portrait) ✓
+4. After navigating to 02 BANDING (default landscape):
+   - landscapeActive: true (highlighted) ✓
+   - potretActive: false ✓
+   - previewWidth: 1122.52px (= 297mm at 96 DPI = landscape) ✓
+5. After clicking "Potret" while on 02 BANDING:
+   - potretActive: true (toggle worked!) ✓
+   - landscapeActive: false ✓
+   - previewWidth: 793.69px (preview pane resized from 297mm → 210mm!) ✓
+6. VLM analysis of screenshot:
+   - "Yes, the orientation toggle is visible" ✓
+   - "The 'Potret' button is currently active (highlighted in violet/purple)" ✓
+
+Stage Summary:
+- ✅ Orientation toggle added to DocumentPreview dialog header
+- ✅ Two buttons: "Potret" and "Landscape" with active state highlighting
+- ✅ Default: uses doc's PAGE_SETUP orientation (e.g. 01PESAN=portrait, 02BANDING=landscape)
+- ✅ User can override by clicking the toggle
+- ✅ Preview pane width changes dynamically (210mm portrait ↔ 297mm landscape)
+- ✅ PDF generation uses effective orientation (jsPDF.orientation)
+- ✅ Print uses effective orientation (@page CSS: `size: A4 portrait/landscape`)
+- ✅ Orientation resets to default when dialog reopens
+- ✅ Lint clean, toggle verified via DOM + VLM
+- ✅ Works for ALL document types (Surat Pesanan, Dokumen Pembanding, Dokumen Rencana, etc.)
