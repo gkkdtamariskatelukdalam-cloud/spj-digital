@@ -145,10 +145,11 @@
   }
   .spj-doc {
     color: #000 !important;
-    font-family: "Times New Roman", Times, serif !important;
-    /* Removed font-size: 11px !important — let inline styles handle
-       font sizes per-section (14pt for titles, 11pt for body, 9pt for
-       Instruksi, matching Excel original). */
+    /* Do NOT force font-family with !important — let the Letterhead
+       component's inline style (Arial for KOP, Times New Roman for
+       body) take effect. Forcing Times New Roman !important overrides
+       the KOP's Arial font, causing KOP to look "hancur" when printed. */
+    font-family: "Times New Roman", Times, serif;
     line-height: 1.4 !important;
     padding: 0 !important;
   }
