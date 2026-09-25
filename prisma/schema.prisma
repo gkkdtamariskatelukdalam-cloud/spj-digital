@@ -200,6 +200,30 @@ model PrintStatus {
   @@index([groupKey])
 }
 
+// ============ DOCUMENT VISIBILITY (per-group toggle) ============
+// Stores per-pesanan flags controlling which optional docs to show.
+// Default: all visible (true). User can hide docs they don't need per
+// pesanan via the Dokumen SPJ page → "Sertakan Dokumen X" checkbox.
+//
+// Current use case: Dokumen Pembanding (02BANDING) — not all purchases
+// need a comparison doc. Hiding it avoids wasting paper when printing
+// "Cetak Semua SPJ".
+//
+// Extensible: can add visibility flags for other doc types in the future
+// (e.g. "surat-penawaran-toko", "kuitansi", etc.) without schema changes.
+
+model DocumentVisibility {
+  id        String   @id @default(cuid())
+  groupKey  String   // noPesan atau noBku (matches PrintStatus.groupKey)
+  docType   String   // e.g. "dokumen-pembanding"
+  visible   Boolean  @default(true)  // default: tampilkan
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  
+  @@unique([groupKey, docType])
+  @@index([groupKey])
+}
+
 // ============ LETTERHEAD (KOP SURAT) SETTINGS ============
 
 model LetterheadSettings {

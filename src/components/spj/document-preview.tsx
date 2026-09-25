@@ -19,10 +19,11 @@ import {
   Loader2,
   X,
   CheckCircle2,
+  EyeOff,
 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { useSchool, useMarkPrinted, useAllPrintStatuses } from "@/hooks/use-spj";
+import { useSchool, useMarkPrinted, useAllPrintStatuses, useAllDocumentVisibilities } from "@/hooks/use-spj";
 import type { DocumentGroup } from "@/lib/types/spj";
 
 // Import all 7 document templates
@@ -137,6 +138,10 @@ export function DocumentPreview({
   const { data: schoolData } = useSchool();
   const markPrintedMutation = useMarkPrinted();
   const { data: allPrintStatusesData } = useAllPrintStatuses();
+  // Per-group visibility flags — fetch ALL groups' visibilities upfront
+  // so we don't refetch when navigating between groups in "all" mode.
+  const { data: visibilityData } = useAllDocumentVisibilities();
+  const visibilities = visibilityData?.allVisibilities ?? {};
   const school = schoolData?.item ?? null;
   
   // State for navigation
@@ -149,6 +154,16 @@ export function DocumentPreview({
   const groups = mode === "all" || mode === "vendor" ? allGroups : group ? [group] : [];
   const currentGroup = groups[currentGroupIdx] || null;
   const currentDoc = DOC_TEMPLATES[currentDocIdx];
+
+  // === Visibility filter per current group ===
+  // Hidden docs (visible=false in DB) are excluded from navigation & printing.
+  // Default: visible (true) when no record exists.
+  const currentGroupKey = currentGroup?.noPesan || currentGroup?.noBku || currentGroup?.key || "";
+  const isDocHidden = (docId: string, gKey: string = currentGroupKey): boolean => {
+    return visibilities[gKey]?.[docId] === false;
+  };
+  // Filter visible docs for current group (used for tab display)
+  const visibleDocs = DOC_TEMPLATES.filter(d => !isDocHidden(d.id));
 
   // Reset when opened
   useEffect(() => {
@@ -168,24 +183,80 @@ export function DocumentPreview({
 
   if (!open || !currentGroup) return null;
 
-  const totalSteps = (mode === "all" || mode === "vendor") ? groups.length * DOC_TEMPLATES.length : DOC_TEMPLATES.length;
-  const currentStep = currentGroupIdx * DOC_TEMPLATES.length + currentDocIdx + 1;
+  // === Navigation with visibility filter ===
+  // Find next/prev VISIBLE doc index (skip hidden docs).
+  // In "all" mode, also handle group transitions.
+  const findNextVisibleIdx = (startIdx: number, gKey: string): number => {
+    for (let i = startIdx; i < DOC_TEMPLATES.length; i++) {
+      if (!isDocHidden(DOC_TEMPLATES[i].id, gKey)) return i;
+    }
+    return -1; // no visible doc found
+  };
+  const findPrevVisibleIdx = (endIdx: number, gKey: string): number => {
+    for (let i = endIdx; i >= 0; i--) {
+      if (!isDocHidden(DOC_TEMPLATES[i].id, gKey)) return i;
+    }
+    return -1;
+  };
+
+  // Count visible docs across all groups (for totalSteps in all mode)
+  const totalVisibleCount = (mode === "all" || mode === "vendor")
+    ? groups.reduce((sum, g) => {
+        const gKey = g.noPesan || g.noBku || g.key || "";
+        return sum + DOC_TEMPLATES.filter(d => !isDocHidden(d.id, gKey)).length;
+      }, 0)
+    : visibleDocs.length;
+
+  // Count visible docs before current group (for currentStep calculation)
+  const visibleBeforeCurrent = (mode === "all" || mode === "vendor")
+    ? groups.slice(0, currentGroupIdx).reduce((sum, g) => {
+        const gKey = g.noPesan || g.noBku || g.key || "";
+        return sum + DOC_TEMPLATES.filter(d => !isDocHidden(d.id, gKey)).length;
+      }, 0)
+    : 0;
+
+  const totalSteps = totalVisibleCount || 1;
+  const currentStep = visibleBeforeCurrent +
+    DOC_TEMPLATES.slice(0, currentDocIdx + 1).filter(d => !isDocHidden(d.id, currentGroupKey)).length;
 
   const handleNext = () => {
-    if (currentDocIdx < DOC_TEMPLATES.length - 1) {
-      setCurrentDocIdx(currentDocIdx + 1);
+    // Try to find next visible doc within current group
+    const nextIdx = findNextVisibleIdx(currentDocIdx + 1, currentGroupKey);
+    if (nextIdx >= 0) {
+      setCurrentDocIdx(nextIdx);
     } else if ((mode === "all" || mode === "vendor") && currentGroupIdx < groups.length - 1) {
-      setCurrentGroupIdx(currentGroupIdx + 1);
-      setCurrentDocIdx(0);
+      // Move to next group, find first visible doc
+      for (let gi = currentGroupIdx + 1; gi < groups.length; gi++) {
+        const g = groups[gi];
+        const gKey = g.noPesan || g.noBku || g.key || "";
+        const firstVisible = findNextVisibleIdx(0, gKey);
+        if (firstVisible >= 0) {
+          setCurrentGroupIdx(gi);
+          setCurrentDocIdx(firstVisible);
+          return;
+        }
+      }
+      // No more visible docs in any group — stay at current
     }
   };
 
   const handlePrev = () => {
-    if (currentDocIdx > 0) {
-      setCurrentDocIdx(currentDocIdx - 1);
+    // Try to find prev visible doc within current group
+    const prevIdx = findPrevVisibleIdx(currentDocIdx - 1, currentGroupKey);
+    if (prevIdx >= 0) {
+      setCurrentDocIdx(prevIdx);
     } else if ((mode === "all" || mode === "vendor") && currentGroupIdx > 0) {
-      setCurrentGroupIdx(currentGroupIdx - 1);
-      setCurrentDocIdx(DOC_TEMPLATES.length - 1);
+      // Move to prev group, find last visible doc
+      for (let gi = currentGroupIdx - 1; gi >= 0; gi--) {
+        const g = groups[gi];
+        const gKey = g.noPesan || g.noBku || g.key || "";
+        const lastVisible = findPrevVisibleIdx(DOC_TEMPLATES.length - 1, gKey);
+        if (lastVisible >= 0) {
+          setCurrentGroupIdx(gi);
+          setCurrentDocIdx(lastVisible);
+          return;
+        }
+      }
     }
   };
 
@@ -226,10 +297,14 @@ export function DocumentPreview({
       document.body.appendChild(container);
 
       // Render all docs for current group (or all groups)
+      // — but SKIP docs hidden via per-group visibility toggle.
       const groupsToRender = (mode === "all" || mode === "vendor") ? groups : [currentGroup];
       
       for (const g of groupsToRender) {
+        const gKey = g.noPesan || g.noBku || g.key || "";
         for (const doc of DOC_TEMPLATES) {
+          // Skip hidden docs — user has marked them as "don't print this doc"
+          if (isDocHidden(doc.id, gKey)) continue;
           // Each doc may have its OWN page setup — look it up per-doc.
           const docPageSetup: PageSetup =
             PAGE_SETUP_BY_DOC_ID[doc.id] ?? currentPageSetup;
@@ -298,10 +373,11 @@ export function DocumentPreview({
       if (mode === "single") {
         await markAsPrinted(groupKey, currentDoc.id);
       } else {
-        // Mark all docs in all groups
+        // Mark all docs in all groups — skip hidden docs (they weren't printed)
         for (const g of groupsToRender) {
           const gk = g.noPesan || g.noBku || g.key;
           for (const doc of DOC_TEMPLATES) {
+            if (isDocHidden(doc.id, gk)) continue;
             await markAsPrinted(gk, doc.id);
           }
         }
@@ -384,10 +460,11 @@ export function DocumentPreview({
     if (mode === "single") {
       markAsPrinted(groupKey, currentDoc.id);
     } else {
-      // Mark all docs in all groups
+      // Mark all docs in all groups — skip hidden docs (they weren't printed)
       for (const g of groups) {
         const gk = g.noPesan || g.noBku || g.key;
         for (const doc of DOC_TEMPLATES) {
+          if (isDocHidden(doc.id, gk)) continue;
           markAsPrinted(gk, doc.id);
         }
       }
@@ -470,21 +547,29 @@ export function DocumentPreview({
               const gKey = currentGroup?.noPesan || currentGroup?.noBku || currentGroup?.key || "";
               const allStatuses = allPrintStatusesData?.allStatuses || {};
               const isPrinted = allStatuses[gKey]?.[doc.id]?.printed === true;
+              // Hidden docs (per-group visibility) — show as disabled with EyeOff
+              const isHidden = isDocHidden(doc.id, gKey);
               
               return (
                 <button
                   key={doc.id}
-                  onClick={() => setCurrentDocIdx(i)}
+                  onClick={() => !isHidden && setCurrentDocIdx(i)}
+                  disabled={isHidden}
+                  title={isHidden ? "Dokumen ini disembunyikan untuk pesanan ini" : undefined}
                   className={cn(
                     "text-[10px] px-2 py-1 rounded border transition-all flex items-center gap-1",
-                    i === currentDocIdx
-                      ? doc.color + " bg-muted/50 font-semibold"
-                      : "border-transparent text-muted-foreground hover:bg-muted/30"
+                    isHidden
+                      ? "border-transparent text-muted-foreground/50 cursor-not-allowed line-through"
+                      : i === currentDocIdx
+                        ? doc.color + " bg-muted/50 font-semibold"
+                        : "border-transparent text-muted-foreground hover:bg-muted/30"
                   )}
                 >
-                  {isPrinted && (
+                  {isHidden ? (
+                    <EyeOff className="h-2.5 w-2.5" />
+                  ) : isPrinted ? (
                     <CheckCircle2 className="h-2.5 w-2.5 text-emerald-500" />
-                  )}
+                  ) : null}
                   {doc.short}
                 </button>
               );
@@ -570,6 +655,14 @@ interface CetakMenuProps {
 
 export function CetakMenuButton({ group, onPreview, onDownload, onPrint }: CetakMenuProps) {
   const [open, setOpen] = useState(false);
+  // Fetch visibility flags for the current group (to hide individual docs that
+  // are marked as hidden per-pesanan, e.g. "Dokumen Pembanding")
+  const { data: visibilityData } = useAllDocumentVisibilities();
+  const visibilities = visibilityData?.allVisibilities ?? {};
+  const gKey = group?.noPesan || group?.noBku || group?.key || "";
+  const isDocHidden = (docId: string): boolean => visibilities[gKey]?.[docId] === false;
+  // Filter visible docs only (hidden docs are skipped entirely in the list)
+  const visibleDocs = DOC_TEMPLATES.filter(d => !isDocHidden(d.id));
 
   return (
     <div className="relative inline-block">
@@ -651,10 +744,14 @@ export function CetakMenuButton({ group, onPreview, onDownload, onPrint }: Cetak
             <div className="border-t mt-1 pt-1">
               <div className="px-2 py-1">
                 <p className="text-[10px] font-bold uppercase text-muted-foreground">
-                  Cetak Dokumen Individual
+                  Cetak Dokumen Individual{visibleDocs.length < DOC_TEMPLATES.length && (
+                    <span className="text-amber-600 ml-1 normal-case font-normal">
+                      ({DOC_TEMPLATES.length - visibleDocs.length} disembunyikan)
+                    </span>
+                  )}
                 </p>
               </div>
-              {DOC_TEMPLATES.map((doc) => (
+              {visibleDocs.map((doc) => (
                 <button
                   key={doc.id}
                   className="w-full text-left px-3 py-1.5 text-xs hover:bg-muted flex items-center gap-2"

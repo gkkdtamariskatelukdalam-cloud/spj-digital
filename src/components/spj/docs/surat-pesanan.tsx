@@ -184,19 +184,16 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
   // - Total > 2.000.000 → pajak berlaku
   // - Non-food items → PPN 11% = total × 11%, DPP = total - PPN
   // - Food/drink items → PPh 23 2% = first item price × 2%, DPP = total - PPh
-  // - Food keywords: Nasi Kotak, Kue Kotak, Kue, Aqua Botol, Aqua Cup
-  // - Label: "Harga Total" if food, "Harga sebelum PPN" if non-food
+  // - Food keywords: Nasi Kotak, Kue Kotak, Aqua Botol, Aqua Cup
   //
-  // HARGA SATUAN DISPLAY RULE (per user request):
-  // - If document total > 2.000.000 (PPN applies) → Harga Satuan per item = kolom AE
-  //   (Total Harga Sebelum DPP = item's DPP = AF/1.11). This is the pre-PPN amount
-  //   per item, so PPN can be calculated and added on top.
-  // - If document total < 2.000.000 (no PPN) → Harga Satuan per item = kolom AF
-  //   (Total Harga Asli = item's actual final price, no tax adjustment).
+  // HARGA SATUAN DISPLAY RULE (per user request — simplified):
+  // - Always use kolom N (tarifHarga) — original harga satuan from Excel.
+  // - Previously: when PPN applied (>2 juta), we used kolom AE (DPP per item).
+  // - Now: always use kolom N regardless of total amount. Whether total is
+  //   below or above 2 juta, Harga Satuan = kolom N (tarifHarga).
   //
-  // Verified from Excel data:
-  //   AE = AF / 1.11 (per-item DPP, matches 100% across all PESAN with PPN)
-  //   AF = AD (final total per item, includes PPN if applicable)
+  // LABEL RULE (per user request):
+  // - Always "Harga Total" (was: "Harga Total" if food, "Harga sebelum PPN" if non-food)
   const PPN_THRESHOLD = 2_000_000;
   const FOOD_KEYWORDS = ["Nasi Kotak", "Kue Kotak", "Kue", "Aqua Botol", "Aqua Cup"];
 
@@ -218,6 +215,8 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
   const isPpnApplicable = total > PPN_THRESHOLD;
 
   // PPN 11%: only for non-food items, = total × 11%
+  // Confirmed: when total > 2.000.000 (PPN_THRESHOLD), PPN = total × 11%
+  // When total ≤ 2.000.000, PPN = 0 (no tax)
   const ppn11 = (isPpnApplicable && !isFirstItemFood)
     ? Math.round(total * 0.11)
     : 0;
@@ -233,18 +232,15 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
     ? (isFirstItemFood ? total - pph23 : total - ppn11)
     : 0;
 
-  // Dynamic label per Excel G89 formula
-  const hargaLabel = hasFoodItems ? "Harga Total" : "Harga sebelum PPN";
+  // Label: always "Harga Total" (per user request — was conditional before)
+  const hargaLabel = "Harga Total";
 
-  // Helper: determine displayed Harga Satuan per item based on PPN applicability.
-  // Falls back to tarifHarga (kolom N) if AE/AF is null (data belum diisi).
+  // Helper: Harga Satuan per item — ALWAYS use kolom N (tarifHarga).
+  // Per user request: simplifikasi logic — whether total > 2 juta (PPN applies)
+  // or total ≤ 2 juta (no PPN), Harga Satuan = kolom N (tarifHarga asli).
+  // Previously: when PPN applied, used kolom AE (DPP per item = totalHargaSebelumDPP).
   const getDisplayedHargaSatuan = (item: typeof items[number]): number => {
-    if (isPpnApplicable) {
-      // PPN applies → use kolom AE (Total Harga Sebelum DPP = DPP per item)
-      return item.totalHargaSebelumDPP ?? item.tarifHarga ?? 0;
-    }
-    // No PPN → use kolom AF (Total Harga Asli = actual final price per item)
-    return item.totalHargaAsli ?? item.tarifHarga ?? 0;
+    return item.tarifHarga ?? 0;
   };
 
   const vendorName = orDash(group.vendorName);

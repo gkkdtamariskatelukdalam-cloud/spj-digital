@@ -32,6 +32,8 @@ import {
   Store,
   Hash,
   CheckCircle2,
+  EyeOff,
+  Eye,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -39,6 +41,8 @@ import {
   useSchool,
   useAllPrintStatuses,
   useMarkPrinted,
+  useAllDocumentVisibilities,
+  useSetDocumentVisibility,
 } from "@/hooks/use-spj";
 import { formatRupiah, formatDate, getMonthName } from "@/lib/format";
 import type { DocumentGroup } from "@/lib/types/spj";
@@ -69,6 +73,10 @@ interface DocTypeMeta {
   color: string;
   bg: string;
   desc: string;
+  // optional: jika true, user bisa hide dokumen ini per-pesanan via
+  // toggle "Sembunyikan" (EyeOff icon). Default: false (selalu tampil).
+  // Untuk sekarang, hanya "dokumen-pembanding" (02BANDING) yang optional.
+  optional?: boolean;
 }
 
 const DOC_TYPES: DocTypeMeta[] = [
@@ -89,6 +97,10 @@ const DOC_TYPES: DocTypeMeta[] = [
     color: "text-amber-700 dark:text-amber-300",
     bg: "bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-800",
     desc: "Hasil perbandingan harga",
+    // optional: true — user bisa hide dokumen ini per-pesanan.
+    // Tidak semua belanja memerlukan dokumen pembanding (misalnya: belanja
+    // langsung tanpa perbandingan harga). Hide untuk hemat kertas saat cetak.
+    optional: true,
   },
   {
     id: "dokumen-rencana",
@@ -148,10 +160,14 @@ export function Documents() {
   const schoolQ = useSchool();
   const printStatusQ = useAllPrintStatuses();
   const markPrintedMutation = useMarkPrinted();
+  // Document visibility — per-group toggle for optional docs (e.g. 02BANDING)
+  const visibilityQ = useAllDocumentVisibilities();
+  const setVisibilityMutation = useSetDocumentVisibility();
 
   const groups = groupsQ.data?.groups ?? [];
   const school = schoolQ.data?.item ?? null;
   const printStatuses = printStatusQ.data?.allStatuses ?? {};
+  const visibilities = visibilityQ.data?.allVisibilities ?? {};
   const selectedGroup = useMemo(
     () => groups.find((g) => g.key === selectedKey) ?? null,
     [groups, selectedKey]
@@ -275,39 +291,103 @@ export function Documents() {
                 {DOC_TYPES.map((dt) => {
                   const gKey = selectedGroup?.noPesan || selectedGroup?.noBku || selectedGroup?.key || "";
                   const isDocPrinted = printStatuses[gKey]?.[dt.id]?.printed === true;
+                  // Visibility: optional docs can be hidden per-group.
+                  // Default: visible (true) when no record exists.
+                  const isVisible = dt.optional
+                    ? visibilities[gKey]?.[dt.id] !== false
+                    : true;
+                  const isHidden = dt.optional ? !isVisible : false;
                   
                   return (
-                    <button
+                    <div
                       key={dt.id}
-                      onClick={() => setDocType(dt.id)}
-                      disabled={!selectedGroup}
                       className={cn(
-                        "text-left rounded-md border px-2.5 py-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed relative",
-                        docType === dt.id
-                          ? dt.bg + " " + dt.color
-                          : "border-border hover:bg-muted/50"
+                        "relative rounded-md border transition-all",
+                        isHidden && "opacity-40",
+                        docType === dt.id && !isHidden
+                          ? dt.bg + " " + dt.color + " border-current"
+                          : "border-border"
                       )}
                     >
-                      <div className="flex items-center gap-1 mb-1">
-                        {dt.icon}
-                        <span className="text-[9px] font-mono font-bold uppercase tracking-wide">
-                          {dt.short}
-                        </span>
-                        {/* Print status indicator */}
-                        {isDocPrinted && (
-                          <CheckCircle2 className="h-2.5 w-2.5 text-emerald-500 ml-auto" />
+                      <button
+                        onClick={() => !isHidden && setDocType(dt.id)}
+                        disabled={!selectedGroup || isHidden}
+                        className={cn(
+                          "w-full text-left px-2.5 py-2 transition-all disabled:cursor-not-allowed",
+                          !isHidden && "hover:bg-muted/30"
                         )}
-                      </div>
-                      <div className="text-[11px] font-semibold leading-tight">
-                        {dt.label}
-                      </div>
-                      <div className="text-[9px] text-muted-foreground mt-0.5 line-clamp-1">
-                        {isDocPrinted ? "Sudah dicetak" : dt.desc}
-                      </div>
-                    </button>
+                      >
+                        <div className="flex items-center gap-1 mb-1">
+                          {dt.icon}
+                          <span className="text-[9px] font-mono font-bold uppercase tracking-wide">
+                            {dt.short}
+                          </span>
+                          {/* Print status indicator */}
+                          {isDocPrinted && !isHidden && (
+                            <CheckCircle2 className="h-2.5 w-2.5 text-emerald-500 ml-auto" />
+                          )}
+                          {/* Hidden indicator */}
+                          {isHidden && (
+                            <EyeOff className="h-2.5 w-2.5 text-muted-foreground ml-auto" />
+                          )}
+                        </div>
+                        <div className={cn(
+                          "text-[11px] font-semibold leading-tight",
+                          isHidden && "line-through text-muted-foreground"
+                        )}>
+                          {dt.label}
+                        </div>
+                        <div className="text-[9px] text-muted-foreground mt-0.5 line-clamp-1">
+                          {isHidden
+                            ? "Disembunyikan"
+                            : isDocPrinted
+                              ? "Sudah dicetak"
+                              : dt.desc}
+                        </div>
+                      </button>
+                      {/* Toggle visibility button — only shown for optional docs */}
+                      {dt.optional && selectedGroup && (
+                        <button
+                          onClick={() => {
+                            const newVisible = !isVisible;
+                            setVisibilityMutation.mutate(
+                              { groupKey: gKey, docType: dt.id, visible: newVisible },
+                              {
+                                onSuccess: () => {
+                                  toast.success(
+                                    newVisible
+                                      ? `${dt.label} ditampilkan`
+                                      : `${dt.label} disembunyikan — tidak akan dicetak di "Cetak Semua SPJ"`,
+                                  );
+                                },
+                                onError: () => {
+                                  toast.error("Gagal mengubah pengaturan");
+                                },
+                              },
+                            );
+                          }}
+                          disabled={setVisibilityMutation.isPending}
+                          title={isVisible ? "Sembunyikan dokumen ini" : "Tampilkan dokumen ini"}
+                          className="absolute top-1 right-1 p-1 rounded hover:bg-muted/50 transition-colors"
+                        >
+                          {isVisible ? (
+                            <Eye className="h-3 w-3 text-muted-foreground" />
+                          ) : (
+                            <EyeOff className="h-3 w-3 text-amber-600" />
+                          )}
+                        </button>
+                      )}
+                    </div>
                   );
                 })}
               </div>
+              {/* Hint about toggleable docs */}
+              <p className="text-[10px] text-muted-foreground mt-2">
+                Tip: Dokumen dengan icon{" "}
+                <Eye className="inline h-3 w-3 align-text-bottom" />{" "}
+                bisa disembunyikan per-pesanan (klik icon untuk toggle).
+                Dokumen yang disembunyikan tidak akan dicetak saat "Cetak Semua SPJ".
+              </p>
             </CardContent>
           </Card>
 

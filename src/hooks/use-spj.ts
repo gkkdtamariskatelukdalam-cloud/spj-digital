@@ -429,6 +429,72 @@ export function useMarkPrinted() {
   });
 }
 
+// ============ Document Visibility (per-group toggle) ============
+// Returns per-group visibility flags for optional docs (e.g. dokumen-pembanding).
+// Default: all visible (true) — if no record exists, treated as visible.
+export function useDocumentVisibility(groupKey: string | null) {
+  return useQuery({
+    queryKey: ["spj-document-visibility", groupKey],
+    queryFn: async (): Promise<{
+      visibility: Record<string, boolean>;
+    }> => {
+      if (!groupKey) return { visibility: {} };
+      const res = await fetch(
+        `/api/spj/document-visibility?groupKey=${encodeURIComponent(groupKey)}`,
+        { cache: "no-store" },
+      );
+      if (!res.ok) throw new Error("Failed");
+      return res.json();
+    },
+    enabled: !!groupKey,
+    staleTime: 10 * 1000,
+  });
+}
+
+export function useAllDocumentVisibilities() {
+  return useQuery({
+    queryKey: ["spj-document-visibility-all"],
+    queryFn: async (): Promise<{
+      allVisibilities: Record<string, Record<string, boolean>>;
+    }> => {
+      // Fetch all visibility records grouped by groupKey
+      const res = await fetch("/api/spj/document-visibility?all=true", {
+        cache: "no-store",
+      });
+      if (!res.ok) throw new Error("Failed");
+      return res.json();
+    },
+    staleTime: 10 * 1000,
+  });
+}
+
+export function useSetDocumentVisibility() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async ({
+      groupKey,
+      docType,
+      visible,
+    }: {
+      groupKey: string;
+      docType: string;
+      visible: boolean;
+    }) => {
+      const res = await fetch("/api/spj/document-visibility", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ groupKey, docType, visible }),
+      });
+      if (!res.ok) throw new Error("Failed");
+      return res.json();
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["spj-document-visibility"] });
+      qc.invalidateQueries({ queryKey: ["spj-document-visibility-all"] });
+    },
+  });
+}
+
 // ============ Letterhead Settings ============
 export function useLetterhead() {
   return useQuery({

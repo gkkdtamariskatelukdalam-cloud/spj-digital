@@ -3251,3 +3251,113 @@ Stage Summary:
 - ✅ Wet-ink signature space preserved (height: 56px = ~1.5cm blank)
 - ✅ Layout remains professional (VLM-verified)
 - ✅ Lint clean
+
+---
+Task ID: 46-ppn-fixes-and-dokumen-pembanding-toggle
+Agent: Main (Claude)
+Task: User requested 4 changes:
+1. Label "Harga sebelum PPN" → "Harga total" (always)
+2. Harga Satuan always use kolom N (tarifHarga) — regardless of PPN threshold
+3. Confirm PPN 11% = total × 0.11 when total > 2 juta (already correct)
+4. Per-group toggle to show/hide Dokumen Pembanding (02BANDING)
+
+Work Log:
+
+**Changes 1, 2, 3** (src/components/spj/docs/surat-pesanan.tsx):
+- Change 1: `hargaLabel = hasFoodItems ? "Harga Total" : "Harga sebelum PPN"` → `hargaLabel = "Harga Total"` (always)
+- Change 2: `getDisplayedHargaSatuan` logic simplified — always use `item.tarifHarga ?? 0` (kolom N), regardless of PPN applicability. Was conditional (use AE when PPN applies, AF when not).
+- Change 3: Confirmed PPN calculation already correct:
+  - `ppn11 = (isPpnApplicable && !isFirstItemFood) ? Math.round(total * 0.11) : 0`
+  - When total > 2.000.000 (PPN_THRESHOLD) → PPN = total × 11%
+  - When total ≤ 2.000.000 → PPN = 0 (no tax)
+  - This matches user's expectation
+
+**Change 4: Dokumen Pembanding per-group toggle** (multi-file change):
+
+a. **Schema** (prisma/schema.prisma): Added new `DocumentVisibility` model
+   - `id`, `groupKey`, `docType`, `visible` (Boolean @default true), `updatedAt`, `createdAt`
+   - `@@unique([groupKey, docType])` — one record per group per doc type
+   - `@@index([groupKey])` — fast lookup by group
+   - Default: visible (true) when no record exists (clean behavior)
+   - Extensible: can add visibility flags for other doc types in the future
+   - Ran `prisma db push` + `prisma generate` (initial generate missed the new model)
+
+b. **API** (src/app/api/spj/document-visibility/route.ts — NEW):
+   - GET ?groupKey=XXX → returns single group's visibility map
+   - GET ?all=true → returns ALL groups' visibilities (for fetching all at once)
+   - PUT body {groupKey, docType, visible} → upserts record (create if missing, update if exists)
+   - Returns updated visibility map after PUT
+
+c. **Hooks** (src/hooks/use-spj.ts):
+   - `useDocumentVisibility(groupKey)` — fetch single group's flags
+   - `useAllDocumentVisibilities()` — fetch ALL groups' flags (used in DocumentPreview & CetakMenuButton)
+   - `useSetDocumentVisibility()` — mutation to PUT new visibility flag
+   - Auto-invalidates queries on success
+
+d. **UI in documents.tsx** (Dokumen SPJ page):
+   - Added `optional?: boolean` field to DocTypeMeta interface
+   - Marked "dokumen-pembanding" (02BANDING) as `optional: true`
+   - Added Eye/EyeOff toggle button on top-right of optional doc type cards
+   - Hidden docs:
+     - Button disabled (can't click to view)
+     - EyeOff icon shows on the doc type card
+     - Label has line-through styling (strikethrough)
+     - Card opacity reduced (40%)
+     - Description changes to "Disembunyikan"
+   - Visible docs: Eye icon (clickable to toggle to hidden)
+   - Added tip text below the doc picker grid explaining the Eye icon
+   - Toast notification on toggle: "X ditampilkan" or "X disembunyikan — tidak akan dicetak di 'Cetak Semua SPJ'"
+
+e. **DocumentPreview** (src/components/spj/document-preview.tsx):
+   - Imported `useAllDocumentVisibilities` hook
+   - Added `isDocHidden(docId, gKey)` helper function
+   - Added `visibleDocs` filter for current group
+   - Updated `handleNext`/`handlePrev` to skip hidden docs (find next/prev VISIBLE doc index)
+   - Updated `totalSteps` to count visible docs only (per-group in "all" mode)
+   - Updated `currentStep` calculation to use visible docs count
+   - Updated `handleDownloadPDF` to skip hidden docs in the iteration loop (per-group filter)
+   - Updated `handlePrint` same way
+   - Updated markAsPrinted loops to skip hidden docs (don't mark hidden docs as printed)
+   - Updated doc type tabs (bottom of dialog):
+     - Hidden tabs: disabled, EyeOff icon, line-through text, muted color
+     - Visible tabs: clickable, Eye icon hidden (only show on documents.tsx picker)
+
+f. **CetakMenuButton** (in document-preview.tsx):
+   - Added `useAllDocumentVisibilities` hook
+   - Filter `visibleDocs` for the current group
+   - "Cetak Dokumen Individual" dropdown shows only visible docs (hidden docs are skipped entirely)
+   - Added "(N disembunyikan)" badge when docs are hidden, to inform user
+
+**Verification:**
+
+1. Lint passes: `bun run lint` → no errors
+2. Initial Prisma generate missed the new model — re-ran `bunx prisma generate` after `prisma db push`
+3. Restarted dev server to pick up new Prisma client (db.documentVisibility was undefined before)
+4. API GET /api/spj/document-visibility?all=true → returns `{allVisibilities: {}}` (200 OK)
+5. Agent Browser test:
+   - Navigated to Dokumen SPJ page
+   - Selected transaction #01 (Rumah Roti Helena, 1 item)
+   - Verified Eye icon appears on Dokumen Pembanding card (title="Sembunyikan dokumen ini")
+   - Clicked Eye toggle to hide → API returns `{group 01: {dokumen-pembanding: False}}` ✓
+   - Verified 02 BANDING button: `disabled: true`, `hasEyeOff: true`, text shows "Disembunyikan" ✓
+   - Clicked EyeOff toggle to show → API returns `{group 01: {dokumen-pembanding: True}}` ✓
+   - Verified 02 BANDING button: `disabled: false`, no EyeOff icon, text shows "Sudah dicetak" ✓
+6. VLM analysis of screenshot:
+   - "Yes, there is a small eye/eye-off icon on the top-right corner of each document type button" ✓
+   - "Yes, the '02 BANDING' button is visibly different. It appears grayed out/faded, and the text below it explicitly says 'Disembunyikan'" ✓
+   - "Yes, the tip text below the buttons is visible, explaining that documents with the eye icon can be hidden per order and will not be checked when selecting all SPJ" ✓
+7. Reset visibility records back to clean state (deleted all from DB) for fresh start
+
+Stage Summary:
+- ✅ Change 1: Label "Harga sebelum PPN" → "Harga Total" (always)
+- ✅ Change 2: Harga Satuan always uses kolom N (tarifHarga), regardless of total amount
+- ✅ Change 3: PPN calculation confirmed correct — total × 11% when total > 2 juta, else 0
+- ✅ Change 4: Dokumen Pembanding per-group toggle implemented end-to-end:
+    - Schema: DocumentVisibility model added
+    - API: GET + PUT endpoints created
+    - Hooks: useDocumentVisibility, useAllDocumentVisibilities, useSetDocumentVisibility
+    - UI in documents.tsx: Eye/EyeOff toggle per optional doc type card
+    - DocumentPreview: hidden docs skipped in navigation, PDF, print, markAsPrinted
+    - CetakMenuButton: individual doc dropdown skips hidden docs
+- ✅ Lint clean, dev server stable
+- ✅ All 4 changes verified via DOM inspection, API calls, and VLM analysis
