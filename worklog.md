@@ -3199,3 +3199,55 @@ Stage Summary:
 - ✅ DOM verified: in single mode, logo is `position: absolute`, text container takes 100% width (703px = 18.6cm = full page width minus 1.2cm L/R margins)
 - ✅ All 7 KOP text rows fit on 1 line each in single mode (no wrapping)
 - ✅ User can switch between single/dual mode via Master Data → KOP tab → "Mode KOP Surat" — all fixes apply to both
+
+---
+Task ID: 45-dokumen-rencana-signature-fix
+Agent: Main (Claude)
+Task: User reported that principal's name "Nursari Rindu Simanullang, S.Pd., M.M." in Dokumen Perencanaan signature block wraps to 2 lines. Wants it on 1 line, and the block shifted left so the name fits.
+
+Work Log:
+- Analyzed signature block in src/components/spj/docs/dokumen-rencana.tsx (lines 224-233):
+  - Outer div: `display: flex, justifyContent: "flex-end"` (block flush right)
+  - Inner div: `textAlign: "left", width: "250px"` (FIXED width too narrow)
+  - name div uses `nameStyle` (fontWeight 700, underline) — NO whiteSpace set → defaults to normal → wraps when text is wider than 250px
+- Root cause:
+  - Name "Nursari Rindu Simanullang, S.Pd., M.M." = 41 chars at 11pt Arial ≈ 248px wide
+  - Container width = 250px (just barely too tight with default line-height/padding)
+  - Text wraps to 2 lines
+
+**Fix Implementation:**
+
+1. **Increase inner div width**: 250px → **320px** (gives 70+px breathing room)
+2. **Add `whiteSpace: "nowrap"`** to ALL divs in signature block:
+   - Telukdalam date div
+   - "Pelaksana" div
+   - Principal name div (via `{...nameStyle, whiteSpace: "nowrap"}`)
+   - NIP div
+3. **Add `marginRight: "40px"`** to outer div:
+   - Shifts block 40px to the LEFT (not flush against right page edge)
+   - Matches Excel 03RENCANA layout (signature has slight right margin)
+   - Also accommodates the wider 320px block within page width
+
+**Verification:**
+
+1. Lint passes: `bun run lint` → no errors
+2. DOM inspection confirms:
+   - Principal name: "Nursari Rindu Simanullang, S.Pd., M.M."
+   - height: 22px = 1 line ✓ (would be ~40px if 2 lines)
+   - isOneLine: true ✓
+   - whiteSpace: "nowrap" ✓
+   - width: 320px ✓ (matches new container width)
+   - Block position: left=631.5px, right=951.5px (shifted left via marginRight=40px)
+3. VLM analysis of full-page screenshot:
+   - "Yes, the principal's name is on one line" ✓
+   - "Yes, the signature block is positioned to the right (right-aligned)" ✓
+   - "Yes, there is enough space (a clear blank area) above the name for a wet-ink signature" ✓
+
+Stage Summary:
+- ✅ Principal name now on 1 line (no wrapping)
+- ✅ Signature block width increased from 250px → 320px (more room for long names)
+- ✅ whiteSpace: nowrap applied to all 4 divs in signature block (Telukdalam, Pelaksana, Name, NIP)
+- ✅ Block shifted 40px to the LEFT via marginRight (not flush right)
+- ✅ Wet-ink signature space preserved (height: 56px = ~1.5cm blank)
+- ✅ Layout remains professional (VLM-verified)
+- ✅ Lint clean

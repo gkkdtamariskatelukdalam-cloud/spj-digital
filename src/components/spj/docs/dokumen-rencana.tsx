@@ -221,14 +221,22 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
         Aksesoris/Elektronik/Jasa lainnya.
       </div>
 
-      {/* === Signature block - di kanan, teks rata kiri === */}
-      <div style={{ marginTop: "20px", fontSize: "11pt", display: "flex", justifyContent: "flex-end" }}>
-        <div style={{ textAlign: "left", width: "250px" }}>
-          <div>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
-          <div>Pelaksana</div>
+      {/* === Signature block - di kanan, teks rata kiri ===
+          FIX: sebelumnya width 250px terlalu sempit untuk nama panjang seperti
+          "Nursari Rindu Simanullang, S.Pd., M.M." (41 char at 11pt ≈ 248px).
+          nama wrap jadi 2 baris. Sekarang:
+          - width: 320px (lebih lebar supaya nama muat 1 baris)
+          - whiteSpace: nowrap pada nama supaya PASTI 1 baris
+          - marginRight: 40px supaya block geser sedikit ke kiri
+            (tidak flush ke tepi kanan, match Excel layout)
+      */}
+      <div style={{ marginTop: "20px", fontSize: "11pt", display: "flex", justifyContent: "flex-end", marginRight: "40px" }}>
+        <div style={{ textAlign: "left", width: "320px" }}>
+          <div style={{ whiteSpace: "nowrap" }}>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
+          <div style={{ whiteSpace: "nowrap" }}>Pelaksana</div>
           <div style={{ height: "56px" }} />
-          <div style={nameStyle}>{orDash(school?.principalName)}</div>
-          <div>NIP. {orDash(school?.principalNip)}</div>
+          <div style={{ ...nameStyle, whiteSpace: "nowrap" }}>{orDash(school?.principalName)}</div>
+          <div style={{ whiteSpace: "nowrap" }}>NIP. {orDash(school?.principalNip)}</div>
         </div>
       </div>
     </div>
