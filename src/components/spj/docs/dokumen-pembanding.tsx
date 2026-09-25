@@ -165,14 +165,16 @@ export function DokumenPembanding({ group, school }: DokumenPembandingProps) {
           Colgroup uses % widths so table adapts to BOTH landscape AND portrait
           paper orientation. Landscape: wide columns; Portrait: narrower but
           still readable. Per user request: "posisi kertas landscape dan potret
-          bisa mendukung". */}
+          bisa mendukung".
+          NOTE: No inline JSX comments inside <colgroup> — HTML doesn't allow
+          whitespace text nodes as children of colgroup (causes hydration error). */}
       <table style={tableStyle}>
         <colgroup>
-          <col style={{ width: "5%" }} />    {/* Col 1: No */}
-          <col style={{ width: "20%" }} />  {/* Col 2: Label */}
-          <col style={{ width: "35%" }} />  {/* Col 3: Toko 1 (Produk I) */}
-          <col style={{ width: "35%" }} />  {/* Col 4: Toko 2 (Produk II) */}
-          <col style={{ width: "5%" }} />   {/* Col 5: dst */}
+          <col style={{ width: "5%" }} />
+          <col style={{ width: "20%" }} />
+          <col style={{ width: "35%" }} />
+          <col style={{ width: "35%" }} />
+          <col style={{ width: "5%" }} />
         </colgroup>
         <tbody>
           {/* === Header row 1: No (rowSpan 2) | empty | Produk I | Produk II | dst === */}

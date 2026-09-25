@@ -3600,3 +3600,82 @@ Stage Summary:
 - ✅ #6 Signature block 12pt (was 11pt)
 - ✅ + Landscape + Portrait orientation support via % column widths
 - ✅ Lint clean, all changes VLM-verified
+
+---
+Task ID: 50-fix-colgroup-hydration-error
+Agent: Main (Claude)
+Task: User reported hydration error: "In HTML, whitespace text nodes cannot be a child of <colgroup>" in DokumenPembanding component.
+
+Work Log:
+- Read error message:
+  ```
+  Error: In HTML, whitespace text nodes cannot be a child of <colgroup>.
+  This will cause a hydration error.
+  at colgroup (<anonymous>:null:null)
+  at DokumenPembanding (src/components/spj/docs/dokumen-pembanding.tsx:170:9)
+  ```
+- Root cause identified: JSX inline comments inside `<colgroup>` like:
+  ```tsx
+  <colgroup>
+    <col style={{ width: "5%" }} />    {/* Col 1: No */}
+    <col style={{ width: "20%" }} />  {/* Col 2: Label */}
+    ...
+  ```
+  The whitespace (4 spaces) between `<col ... />` and `{/* Col X: ... */}` is preserved as a text node. JSX comments `{/* */}` are removed during compilation, but the surrounding whitespace on the same line stays as a text node "    ". This text node becomes a child of `<colgroup>`, which is invalid HTML (colgroup should only contain `<col>` elements).
+
+**Fix Implementation:**
+
+Removed all inline JSX comments from inside the `<colgroup>` element in src/components/spj/docs/dokumen-pembanding.tsx:
+
+Before (caused hydration error):
+```tsx
+<colgroup>
+  <col style={{ width: "5%" }} />    {/* Col 1: No */}
+  <col style={{ width: "20%" }} />  {/* Col 2: Label */}
+  <col style={{ width: "35%" }} />  {/* Col 3: Toko 1 (Produk I) */}
+  <col style={{ width: "35%" }} />  {/* Col 4: Toko 2 (Produk II) */}
+  <col style={{ width: "5%" }} />   {/* Col 5: dst */}
+</colgroup>
+```
+
+After (clean — no inline comments inside colgroup):
+```tsx
+<colgroup>
+  <col style={{ width: "5%" }} />
+  <col style={{ width: "20%" }} />
+  <col style={{ width: "35%" }} />
+  <col style={{ width: "35%" }} />
+  <col style={{ width: "5%" }} />
+</colgroup>
+```
+
+Also added a NOTE comment above the colgroup explaining why:
+```
+NOTE: No inline JSX comments inside <colgroup> — HTML doesn't allow
+whitespace text nodes as children of colgroup (causes hydration error).
+```
+
+- Checked other doc files for similar issue (surat-pesanan.tsx has colgroup too):
+  - surat-pesanan.tsx colgroup already clean — no inline comments, just plain `<col>` elements on separate lines ✓
+
+**Verification:**
+
+1. Lint passes: `bun run lint` → no errors
+2. No hydration errors in dev log
+3. Agent Browser test:
+   - Logged in → Dokumen SPJ tab → selected transaction #01 → clicked "02 BANDING" doc type button
+   - Document rendered without console errors ✓
+4. DOM inspection confirms:
+   - colCount: 5 ✓
+   - colWidths: ['5%', '20%', '35%', '35%', '5%'] ✓ (the % widths I set earlier)
+   - hasColgroup: true ✓
+   - title: "DOKUMEN HASIL PEMBANDING" ✓
+5. Console check: no errors, only Fast Refresh log messages ✓
+
+Stage Summary:
+- ✅ Hydration error FIXED — removed inline JSX comments inside <colgroup>
+- ✅ Colgroup now has clean <col> elements (no whitespace text nodes between them)
+- ✅ The 5-column layout (No | Label | Toko 1 | Toko 2 | dst) still works correctly
+- ✅ Percentage column widths preserved (5% / 20% / 35% / 35% / 5%)
+- ✅ Other doc files (surat-pesanan.tsx) checked — colgroup already clean
+- ✅ Lint clean, no console errors, no hydration errors
