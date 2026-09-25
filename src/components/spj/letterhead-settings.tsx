@@ -89,6 +89,174 @@ function CmInput({ pxValue, onChange, label }: { pxValue: number; onChange: (px:
   );
 }
 
+// OffsetPad: D-pad control for shifting the logo position.
+// - Click ↑/↓ to move the logo up/down (logoOffsetY, negative=up, positive=down)
+// - Click ←/→ to move the logo left/right (logoOffsetX, negative=left, positive=right)
+// - Click "Reset" to return to (0, 0)
+// - Slider allows fine-tuning in the range -50..+50 px
+// - Live readout shows current X and Y in px and cm
+const OFFSET_MIN = -100;
+const OFFSET_MAX = 100;
+const OFFSET_STEP = 2; // px per arrow click
+
+function OffsetPad({
+  offsetX,
+  offsetY,
+  onChangeX,
+  onChangeY,
+}: {
+  offsetX: number;
+  offsetY: number;
+  onChangeX: (px: number) => void;
+  onChangeY: (px: number) => void;
+}) {
+  return (
+    <div className="space-y-3">
+      {/* D-pad: 3x3 grid with arrows on the sides and reset in center */}
+      <div className="grid grid-cols-3 gap-1.5 w-fit mx-auto">
+        <div />
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-8 w-12 p-0"
+          onClick={() => onChangeY(Math.max(OFFSET_MIN, offsetY - OFFSET_STEP))}
+          title="Menaikkan logo (geser ke atas)"
+        >
+          <ArrowUp className="h-3.5 w-3.5" />
+        </Button>
+        <div />
+
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-8 w-12 p-0"
+          onClick={() => onChangeX(Math.max(OFFSET_MIN, offsetX - OFFSET_STEP))}
+          title="Geser ke kiri"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+        </Button>
+        <Button
+          variant="secondary"
+          size="sm"
+          className="h-8 w-12 p-0 text-[10px] font-mono"
+          onClick={() => {
+            onChangeX(0);
+            onChangeY(0);
+          }}
+          title="Reset posisi ke tengah"
+        >
+          0
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-8 w-12 p-0"
+          onClick={() => onChangeX(Math.min(OFFSET_MAX, offsetX + OFFSET_STEP))}
+          title="Geser ke kanan"
+        >
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Button>
+
+        <div />
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-8 w-12 p-0"
+          onClick={() => onChangeY(Math.min(OFFSET_MAX, offsetY + OFFSET_STEP))}
+          title="Menurunkan logo (geser ke bawah)"
+        >
+          <ArrowDown className="h-3.5 w-3.5" />
+        </Button>
+        <div />
+      </div>
+
+      {/* Live readout */}
+      <div className="flex items-center justify-center gap-4 text-[10px] font-mono text-muted-foreground">
+        <span>
+          X: <span className="text-foreground">{offsetX}px</span>
+          <span className="text-muted-foreground/70">
+            {" "}
+            ({(offsetX / 37.795).toFixed(2)}cm)
+          </span>
+        </span>
+        <span>
+          Y: <span className="text-foreground">{offsetY}px</span>
+          <span className="text-muted-foreground/70">
+            {" "}
+            ({(offsetY / 37.795).toFixed(2)}cm)
+          </span>
+        </span>
+      </div>
+
+      {/* Fine-tuning sliders */}
+      <div className="space-y-2">
+        <div>
+          <Label className="text-[10px] text-muted-foreground mb-1 block">
+            Geser Kiri / Kanan
+          </Label>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-6 w-6 p-0"
+              onClick={() => onChangeX(Math.max(OFFSET_MIN, offsetX - OFFSET_STEP))}
+            >
+              <ArrowLeft className="h-3 w-3" />
+            </Button>
+            <Slider
+              value={[offsetX]}
+              min={OFFSET_MIN}
+              max={OFFSET_MAX}
+              step={OFFSET_STEP}
+              onValueChange={(v) => onChangeX(v[0])}
+              className="flex-1"
+            />
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-6 w-6 p-0"
+              onClick={() => onChangeX(Math.min(OFFSET_MAX, offsetX + OFFSET_STEP))}
+            >
+              <ArrowRight className="h-3 w-3" />
+            </Button>
+          </div>
+        </div>
+        <div>
+          <Label className="text-[10px] text-muted-foreground mb-1 block">
+            Menaikkan / Menurunkan
+          </Label>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-6 w-6 p-0"
+              onClick={() => onChangeY(Math.max(OFFSET_MIN, offsetY - OFFSET_STEP))}
+            >
+              <ArrowUp className="h-3 w-3" />
+            </Button>
+            <Slider
+              value={[offsetY]}
+              min={OFFSET_MIN}
+              max={OFFSET_MAX}
+              step={OFFSET_STEP}
+              onValueChange={(v) => onChangeY(v[0])}
+              className="flex-1"
+            />
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-6 w-6 p-0"
+              onClick={() => onChangeY(Math.min(OFFSET_MAX, offsetY + OFFSET_STEP))}
+            >
+              <ArrowDown className="h-3 w-3" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const DEFAULT_SETTINGS: LetterheadSettings = {
   id: "default",
   logoPath: "/uploads/logo-sman1.png",
@@ -455,6 +623,24 @@ export function LetterheadSettingsPanel() {
                   />
                 </div>
               </div>
+
+              {/* Logo position (offset) */}
+              <Separator />
+              <div className="space-y-2">
+                <Label className="text-xs font-semibold">
+                  Posisi Logo (Geser)
+                </Label>
+                <p className="text-[10px] text-muted-foreground">
+                  Klik panah untuk menggeser logo. Tombol &quot;0&quot; di
+                  tengah mereset ke posisi awal.
+                </p>
+                <OffsetPad
+                  offsetX={local.logoOffsetX}
+                  offsetY={local.logoOffsetY}
+                  onChangeX={(px) => update("logoOffsetX", px)}
+                  onChangeY={(px) => update("logoOffsetY", px)}
+                />
+              </div>
             </CardContent>
           </Card>
 
@@ -528,6 +714,24 @@ export function LetterheadSettingsPanel() {
                       label="Tinggi (cm)"
                     />
                   </div>
+                </div>
+
+                {/* Logo 2 position (offset) */}
+                <Separator />
+                <div className="space-y-2">
+                  <Label className="text-xs font-semibold">
+                    Posisi Logo 2 (Geser)
+                  </Label>
+                  <p className="text-[10px] text-muted-foreground">
+                    Klik panah untuk menggeser logo kanan. Tombol
+                    &quot;0&quot; di tengah mereset ke posisi awal.
+                  </p>
+                  <OffsetPad
+                    offsetX={local.logo2OffsetX}
+                    offsetY={local.logo2OffsetY}
+                    onChangeX={(px) => update("logo2OffsetX", px)}
+                    onChangeY={(px) => update("logo2OffsetY", px)}
+                  />
                 </div>
               </CardContent>
             </Card>

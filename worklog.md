@@ -2800,3 +2800,88 @@ Stage Summary:
     - Per-document print scale (90/95/100% per sheet)
 - ✅ User can still adjust logo size via Letterhead Settings UI if they want a different size
 - Note: Excel document sheets (01PESAN, 04SHP, etc.) have NO logo embedded (KOP is text-only). The logo on the app's KOP is the user's addition.
+
+---
+Task ID: 39-add-logo-position-controls
+Agent: Main (Claude)
+Task: User asked "menaikkan menurunkan geser kiri kanan logo bagaimana?" — how to move the logo up/down/left/right.
+
+Work Log:
+- Inspected src/components/spj/letterhead-settings.tsx and found:
+  - Schema has fields: `logoOffsetX`, `logoOffsetY`, `logo2OffsetX`, `logo2OffsetY`
+  - Letterhead.tsx applies them via `transform: translate(${logoOffsetX}px, ${logoOffsetY}px)` on the logo container div
+  - API route /api/spj/letterhead PUT already accepts all 4 offset fields
+  - BUT — the UI in letterhead-settings.tsx had NO controls for adjusting offsets. Only "Ukuran Logo" (size) controls existed.
+- User had no way to move the logo position via the UI.
+
+**Fix Implementation:**
+
+1. **New `OffsetPad` component** (added to letterhead-settings.tsx):
+   - Props: `offsetX`, `offsetY`, `onChangeX`, `onChangeY`
+   - Range: -100 to +100 px per axis (OFFSET_MIN/MAX)
+   - Step: 2 px per arrow click (OFFSET_STEP)
+   - Layout:
+     - D-pad: 3×3 grid with 4 arrow buttons (↑ ↓ ← →) on the edges
+     - Center: "0" reset button (sets both X and Y back to 0)
+     - Live readout: "X: 5px (0.13cm)  Y: -9px (-0.24cm)"
+     - Two fine-tuning sliders below:
+       - "Geser Kiri / Kanan" (X axis, with arrow buttons at ends)
+       - "Menaikkan / Menurunkan" (Y axis, with arrow buttons at ends)
+   - All buttons have `title` attributes for accessibility + tooltips:
+     - "Menaikkan logo (geser ke atas)"
+     - "Menurunkan logo (geser ke bawah)"
+     - "Geser ke kiri"
+     - "Geser ke kanan"
+     - "Reset posisi ke tengah"
+
+2. **Added "Posisi Logo (Geser)" section** under "Ukuran Logo" for Logo 1:
+   - Separator
+   - Label: "Posisi Logo (Geser)"
+   - Helper text: "Klik panah untuk menggeser logo. Tombol '0' di tengah mereset ke posisi awal."
+   - `<OffsetPad>` component bound to `local.logoOffsetX` / `local.logoOffsetY`
+
+3. **Added "Posisi Logo 2 (Geser)" section** under "Ukuran Logo 2" for Logo 2 (only in dual mode):
+   - Same structure as Logo 1 but bound to `local.logo2OffsetX` / `local.logo2OffsetY`
+
+**End-to-end wiring verified:**
+- Letterhead.tsx already uses `transform: translate(logoOffsetX, logoOffsetY)` on the logo container div (single mode) and on both Logo 1 and Logo 2 containers (dual mode)
+- API PUT /api/spj/letterhead already accepts `logoOffsetX`, `logoOffsetY`, `logo2OffsetX`, `logo2OffsetY` in its `allowedFields` list
+- Prisma schema has these fields with `@default(0)` so they default to 0 (centered)
+
+**Verification:**
+
+1. Lint passes: `bun run lint` → no errors
+2. Agent Browser inspection of Master Data → KOP tab → snapshot shows:
+   - "Posisi Logo (Geser)" section visible ✓
+   - "Klik panah untuk menggeser logo. Tombol '0' di tengah mereset ke posisi awal." description ✓
+   - 4 arrow buttons with proper titles:
+     - "Menaikkan logo (geser ke atas)" ✓
+     - "Geser ke kiri" ✓
+     - "Geser ke kanan" ✓
+     - "Menurunkan logo (geser ke bawah)" ✓
+   - "X:" and "Y:" live readout ✓
+   - "Geser Kiri / Kanan" slider ✓
+   - "Menaikkan / Menurunkan" slider ✓
+   - "Posisi Logo 2 (Geser)" section also visible for dual mode ✓
+3. VLM analysis of full-page screenshot confirms:
+   - "'Posisi Logo (Geser)' Section: Yes, clearly visible. Appears twice (for Logo 1 and Logo 2 in dual mode)"
+   - "Arrow Buttons & Reset: Yes, exactly as described — four arrows in + shape with circular '0' button in center"
+   - "Sliders: Yes, two sliders below directional buttons ('Geser Kiri / Kanan' and 'Menaikkan / Menurunkan')"
+   - "Layout looks very clean and highly usable. Controls for positioning provide an intuitive way to fine-tune the letterhead layout visually."
+4. Tested end-to-end via Agent Browser clicking "Geser ke kanan" 5 times — DB shows `logoOffsetX` updated (PUT /api/spj/letterhead 200 in dev log)
+5. After testing, reset all offsets to 0 via direct DB update (so user starts with a clean state)
+
+Stage Summary:
+- ✅ User can now move the logo in 4 directions via UI:
+    - ↑ (ArrowUp): menaikkan logo (Y -= 2px)
+    - ↓ (ArrowDown): menurunkan logo (Y += 2px)
+    - ← (ArrowLeft): geser kiri (X -= 2px)
+    - → (ArrowRight): geser kanan (X += 2px)
+    - "0" (center): reset to (0, 0)
+- ✅ Two fine-tuning sliders also available for precise adjustments (range -100 to +100 px)
+- ✅ Live X/Y readout shows current offset in both px and cm
+- ✅ Same controls for Logo 1 (single mode) and Logo 2 (dual mode, kanan)
+- ✅ Changes auto-save to DB via PUT /api/spj/letterhead
+- ✅ Letterhead component applies offset via CSS `transform: translate(Xpx, Ypx)`
+- ✅ Lint clean, VLM confirms UI is clean and usable
+- Note: User can find these controls at Master Data → KOP tab → "Posisi Logo (Geser)" section under "Ukuran Logo"
