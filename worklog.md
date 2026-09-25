@@ -2968,3 +2968,49 @@ Stage Summary:
 - ✅ Dual mode sizes match Excel K1-K6 (14/12/13/14/8/8/8 pt)
 - ✅ Screen preview now matches print output (same padding values)
 - ✅ Lint clean
+
+---
+Task ID: 41-fix-address-cut-off
+Agent: Main (Claude)
+Task: User reported "alamat pada KOP terpotong kiri dan kanan" — address text on KOP is cut off on left and right edges. Asked if it's due to left/right margins.
+
+Work Log:
+- Inspected DOM via Agent Browser to compare text width vs container width:
+  - Container (.spj-doc inner): 703px = 18.60cm ✓ (matches Excel 01PESAN: 21cm - 1.20cm L - 1.20cm R)
+  - Address text (dualLine6): offsetWidth = 765px = 20.24cm
+  - Overflow: 765 - 703 = 62px total (31px each side) → text cut off both edges
+- Re-checked API: dualLine5/6/7Size was 9pt (user had changed via UI from 8pt)
+- Recalculated text width at different font sizes:
+  - 9pt: 132 chars × 6.0px = 792px = 20.96cm → overflow 89px (cut off)
+  - 8pt: 132 chars × 5.33px = 704px = 18.62cm → fits in 703px container (1px overflow, not visible)
+  - 10pt: 132 chars × 6.67px = 880px = 23.29cm → way too wide
+- Confirmed: cut-off NOT caused by margins (1.20cm L/R matches Excel exactly). Caused by font size being too big for the long text.
+
+**Fix:**
+
+Re-ran migration script (scripts/migrate-letterhead-excel-defaults.ts) to reset dual mode sizes back to Excel-matched values:
+- dualLine5Size: 9 → 8 (Excel K4: 8pt)
+- dualLine6Size: 9 → 8 (Excel K5: 8pt — address line)
+- dualLine7Size: 9 → 8 (Excel K6: 8pt — email line)
+
+**Verification:**
+
+1. API confirms dual mode sizes now match Excel (14/12/18/14/8/8/8 pt — dualLine3 stays at 18 since user customized)
+2. DOM inspection after reload:
+   - fontSize: 10.67px (= 8pt ✓)
+   - textWidth: 679px (actual rendering, less than theoretical max due to char-width variance)
+   - containerWidth: 703px
+   - overflow: -24px (NEGATIVE means text fits with 24px breathing room ✓)
+3. VLM confirms all KOP lines fully visible:
+   - "address visible? yes"
+   - "NIS line visible? yes"
+   - "email line visible? yes"
+4. Lint passes: `bun run lint` → no errors
+
+Stage Summary:
+- ✅ Address text NO LONGER cut off — fits in container with 24px spare
+- ✅ Root cause was font size (9pt was too big for 132-char text), NOT margins
+- ✅ Margins remain 1.20cm L/R (matches Excel 01PESAN exactly)
+- ✅ Font size reset to 8pt (matches Excel K5 for dual mode address line)
+- ✅ VLM confirms all 3 long lines (NIS, address, email) fully visible
+- ✅ User can still adjust font size via Letterhead Settings UI, but at 9pt+ the address won't fit
