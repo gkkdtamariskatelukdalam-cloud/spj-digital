@@ -522,6 +522,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
           ))}
 
           {/* === SIGNATURE ROW (Penyedia | Pelaksana) === */}
+          {/* Per PDF original: gap 4cm, Penyedia name NOT underlined, Pelaksana underlined */}
           <tr>
             <td
               style={{
@@ -533,11 +534,9 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             >
               <div style={{ marginBottom: "6px" }}>Penyedia,</div>
               <div style={{ marginBottom: "20px", fontWeight: 500 }}>{vendorName || "—"}</div>
-              <div style={{ minHeight: "70px", lineHeight: "70px" }}>&nbsp;</div>
+              <div style={{ minHeight: "150px", lineHeight: "150px" }}>&nbsp;</div>
               <div style={{
                 fontWeight: 400,
-                textDecoration: "underline",
-                textUnderlineOffset: "3px",
                 marginTop: "8px",
                 marginBottom: "2px",
               }}>
@@ -555,7 +554,7 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             >
               <div style={{ marginBottom: "6px" }}>Telukdalam, {formatDate(tglPesan)}</div>
               <div style={{ marginBottom: "20px" }}>Pelaksana,</div>
-              <div style={{ minHeight: "70px", lineHeight: "70px" }}>&nbsp;</div>
+              <div style={{ minHeight: "150px", lineHeight: "150px" }}>&nbsp;</div>
               <div style={{
                 ...nameStyle,
                 textDecoration: "underline",
