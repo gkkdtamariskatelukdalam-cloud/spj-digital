@@ -178,10 +178,13 @@
 }
 
 /* Screen-only styling for document preview.
-   Note: padding is intentionally small here — the actual page margins
-   come from the @page rule above during printing. The screen preview
-   shows the document content without the surrounding page margin
-   whitespace (which is added by the browser when printing). */
+   Padding matches Excel "01PESAN" sheet margins exactly:
+     T=0.90cm R=1.20cm B=0.40cm L=1.20cm
+   This way the screen preview shows the SAME layout as the printed output
+   (where @page rule applies the same margins). Each doc file used to have
+   extra `px-6 sm:px-10 py-8` Tailwind padding that added 1.06cm on top of
+   the @page margin, causing KOP text to wrap (text area was too narrow).
+   Removed those Tailwind classes — now .spj-doc is the only source of padding. */
 .spj-doc {
   background: white;
   color: #0f172a;
@@ -190,12 +193,14 @@
      with inline fontSize for 14pt titles and 9pt Instruksi. */
   font-size: 11pt;
   line-height: 1.5;
-  padding: 0.4cm 1.2cm;
+  /* Excel 01PESAN margins: top right bottom left */
+  padding: 0.90cm 1.20cm 0.40cm 1.20cm;
 }
 
 @media (max-width: 640px) {
   .spj-doc {
-    padding: 1rem;
+    /* On mobile, smaller padding so content is readable */
+    padding: 0.5cm 0.5cm 0.3cm 0.5cm;
     font-size: 11px;
   }
 }

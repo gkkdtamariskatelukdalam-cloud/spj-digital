@@ -56,7 +56,7 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
   const terbilangText = titleCase(terbilang(total));
 
   return (
-    <div className="spj-doc px-6 sm:px-10 py-8 text-[11pt] leading-relaxed text-slate-900">
+    <div className="spj-doc text-[11pt] leading-relaxed text-slate-900">
 
       {/* ============================================================ */}
       {/* PAGE 1: SURAT PENGANTAR                                       */}

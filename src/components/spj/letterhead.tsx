@@ -125,7 +125,9 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
       );
     }
 
-    // Normal line render - ensure long lines (alamat, email) stay on 1 line
+    // Normal line render - whiteSpace: nowrap ensures each KOP row stays
+    // on ONE line (matches Excel where KOP text is in merged cells A1:K1,
+    // A2:K2, etc. with auto-resize rows — text NEVER wraps).
     return (
       <div
         key={index}
@@ -135,7 +137,7 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
           lineHeight: 1.3,
           marginTop: index > 0 ? `${s.lineSpacing}px` : "0",
           textTransform: line.size >= 14 ? "uppercase" : "none",
-          whiteSpace: "normal",
+          whiteSpace: "nowrap",
         }}
       >
         {line.text}
@@ -145,65 +147,86 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
 
   if (isDual) {
     // === DUAL LOGO MODE: logo kiri + teks tengah + logo kanan ===
+    // Logo kiri & kanan di-absolute-position supaya TIDAK mempengaruhi
+    // posisi teks tengah (match Excel di mana logo adalah floating image
+    // di atas cell grid, dan teks di merged cells A1:K1 di-center full width).
+    // Logo "wrap" maksudnya: logo float di atas/bawah text area, tidak
+    // ambil space di flex container, jadi text tetap di tengah full page.
+    const logoLeftStyle = {
+      position: "absolute" as const,
+      left: 0,
+      top: 0,
+      transform: `translate(${s.logoOffsetX}px, ${s.logoOffsetY}px)`,
+      zIndex: 1,
+    };
+    const logoRightStyle = {
+      position: "absolute" as const,
+      right: 0,
+      top: 0,
+      transform: `translate(${s.logo2OffsetX}px, ${s.logo2OffsetY}px)`,
+      zIndex: 1,
+    };
+    // minHeight ensures container is tall enough for the logo when text
+    // rows are few (logo is absolute-positioned, doesn't contribute to
+    // parent height by default).
+    const tallestLogoHeightCm = Math.max(
+      s.logoHeight > 0 ? s.logoHeight : 0,
+      s.logo2Height > 0 ? s.logo2Height : 0,
+    ) / 37.795;
+
     return (
-      <div className="kop-surat" style={{ fontFamily: s.fontFamily }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          {/* Logo kiri */}
-          {s.logoPath && (
-            <div
+      <div
+        className="kop-surat"
+        style={{
+          fontFamily: s.fontFamily,
+          position: "relative",
+          minHeight: `${tallestLogoHeightCm.toFixed(2)}cm`,
+        }}
+      >
+        {/* Logo kiri — absolute, doesn't push text */}
+        {s.logoPath && (
+          <div style={logoLeftStyle}>
+            <img
+              src={s.logoPath}
+              alt="Logo Kiri"
               style={{
-                transform: `translate(${s.logoOffsetX}px, ${s.logoOffsetY}px)`,
-                flexShrink: 0,
+                width: `${(s.logoWidth / 37.795).toFixed(2)}cm`,
+                height: s.logoHeight > 0 ? `${(s.logoHeight / 37.795).toFixed(2)}cm` : "auto",
+                objectFit: "contain",
               }}
-            >
-              <img
-                src={s.logoPath}
-                alt="Logo Kiri"
-                style={{
-                  width: `${(s.logoWidth / 37.795).toFixed(2)}cm`,
-                  height: s.logoHeight > 0 ? `${(s.logoHeight / 37.795).toFixed(2)}cm` : "auto",
-                  objectFit: "contain",
-                }}
-              />
-            </div>
-          )}
-
-          {/* Teks tengah */}
-          {/* minWidth: 0 allows flex item to shrink, text wraps naturally
-              instead of overflowing and pushing the right logo off-screen */}
-          <div
-            style={{
-              flex: 1,
-              minWidth: 0,
-              textAlign: "center",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            {lines.map((line, i) => renderLine(line, i))}
+            />
           </div>
+        )}
 
-          {/* Logo kanan */}
-          {s.logo2Path && (
-            <div
+        {/* Logo kanan — absolute, doesn't push text */}
+        {s.logo2Path && (
+          <div style={logoRightStyle}>
+            <img
+              src={s.logo2Path}
+              alt="Logo Kanan"
               style={{
-                transform: `translate(${s.logo2OffsetX}px, ${s.logo2OffsetY}px)`,
-                flexShrink: 0,
+                width: `${(s.logo2Width / 37.795).toFixed(2)}cm`,
+                height: s.logo2Height > 0 ? `${(s.logo2Height / 37.795).toFixed(2)}cm` : "auto",
+                objectFit: "contain",
               }}
-            >
-              <img
-                src={s.logo2Path}
-                alt="Logo Kanan"
-                style={{
-                  width: `${(s.logo2Width / 37.795).toFixed(2)}cm`,
-                  height: s.logo2Height > 0 ? `${(s.logo2Height / 37.795).toFixed(2)}cm` : "auto",
-                  objectFit: "contain",
-                }}
-              />
-            </div>
-          )}
+            />
+          </div>
+        )}
+
+        {/* Teks tengah — full width, centered. Logos float on top, don't push. */}
+        <div
+          style={{
+            width: "100%",
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            zIndex: 0,
+          }}
+        >
+          {lines.map((line, i) => renderLine(line, i))}
         </div>
 
         {/* Garis bawah */}
@@ -219,44 +242,60 @@ export function LetterheadStatic({ settings }: { settings: LetterheadSettings })
     );
   }
 
-  // === SINGLE LOGO MODE: logo kiri + teks kanan (centered dalam bloknya) ===
+  // === SINGLE LOGO MODE: logo kiri (floating) + teks tengah full width ===
+  // Logo di-absolute-position supaya TIDAK mempengaruhi posisi teks (match
+  // Excel di mana logo adalah floating image di atas cell grid, dan teks
+  // di merged cells A1:K1 di-center full width). Logo "wrap" maksudnya:
+  // logo float di atas text area, tidak ambil space di flex container,
+  // jadi text tetap di tengah full page width.
+  const logoHeightCm = (s.logoHeight > 0 ? s.logoHeight : 0) / 37.795;
   return (
-    <div className="kop-surat" style={{ fontFamily: s.fontFamily }}>
-      <div style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
-        {/* Logo kiri */}
-        {s.logoPath && (
-          <div
-            style={{
-              transform: `translate(${s.logoOffsetX}px, ${s.logoOffsetY}px)`,
-              flexShrink: 0,
-            }}
-          >
-            <img
-              src={s.logoPath}
-              alt="Logo"
-              style={{
-                width: `${(s.logoWidth / 37.795).toFixed(2)}cm`,
-                height: s.logoHeight > 0 ? `${(s.logoHeight / 37.795).toFixed(2)}cm` : "auto",
-                objectFit: "contain",
-              }}
-            />
-          </div>
-        )}
-
-        {/* Teks */}
+    <div
+      className="kop-surat"
+      style={{
+        fontFamily: s.fontFamily,
+        position: "relative",
+        minHeight: `${logoHeightCm.toFixed(2)}cm`,
+      }}
+    >
+      {/* Logo kiri — absolute positioned, doesn't push text */}
+      {s.logoPath && (
         <div
           style={{
-            flex: 1,
-            textAlign: "center",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingTop: "4px",
+            position: "absolute",
+            left: 0,
+            top: 0,
+            transform: `translate(${s.logoOffsetX}px, ${s.logoOffsetY}px)`,
+            zIndex: 1,
           }}
         >
-          {lines.map((line, i) => renderLine(line, i))}
+          <img
+            src={s.logoPath}
+            alt="Logo"
+            style={{
+              width: `${(s.logoWidth / 37.795).toFixed(2)}cm`,
+              height: s.logoHeight > 0 ? `${(s.logoHeight / 37.795).toFixed(2)}cm` : "auto",
+              objectFit: "contain",
+            }}
+          />
         </div>
+      )}
+
+      {/* Teks — full width, centered. Logo floats on top, doesn't push. */}
+      <div
+        style={{
+          width: "100%",
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingTop: "4px",
+          position: "relative",
+          zIndex: 0,
+        }}
+      >
+        {lines.map((line, i) => renderLine(line, i))}
       </div>
 
       {/* Garis bawah */}

@@ -94,7 +94,7 @@ export function BeritaAcaraSerahTerima({
   );
 
   return (
-    <div className="spj-doc px-6 sm:px-10 py-8 text-[11pt] leading-relaxed text-slate-900">
+    <div className="spj-doc text-[11pt] leading-relaxed text-slate-900">
       {/* === Kop Surat === */}
       <div className="mb-5">
         <Letterhead />

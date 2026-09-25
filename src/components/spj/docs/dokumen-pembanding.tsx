@@ -50,7 +50,7 @@ export function DokumenPembanding({ group, school }: DokumenPembandingProps) {
   const formattedDate = formatDate(tglPesan);
 
   return (
-    <div className="spj-doc px-6 sm:px-10 py-8 text-[11pt] leading-relaxed text-slate-900">
+    <div className="spj-doc text-[11pt] leading-relaxed text-slate-900">
       {/* === Title (centered, bold, 14pt per Excel) === */}
       <div className="text-center mb-5">
         <h1 className="font-bold" style={{ fontSize: "14pt" }}>DOKUMEN HASIL PEMBANDING</h1>
