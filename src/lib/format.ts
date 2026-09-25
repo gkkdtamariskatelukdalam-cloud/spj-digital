@@ -11,7 +11,12 @@ export function formatRupiah(amount: number | null | undefined): string {
 
 export function formatNumber(amount: number | null | undefined): string {
   if (amount === null || amount === undefined || isNaN(amount)) return "0";
-  return new Intl.NumberFormat("id-ID").format(amount);
+  // Per user request: no decimal places ("2 digit di belakang koma tidak digunakan")
+  // Indonesian locale uses "." as thousand separator (e.g., 1.250.000).
+  return new Intl.NumberFormat("id-ID", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
 }
 
 // Indonesian date formatting

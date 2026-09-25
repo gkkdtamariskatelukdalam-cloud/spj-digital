@@ -10,6 +10,7 @@ import {
   pickGroupDate,
   titleCase,
 } from "./_helpers";
+import { RupiahCell } from "./_rupiah";
 // Per-document page setup — no matching Excel sheet; use default.
 import { PAGE_SETUP_SURAT_PJ as PAGE_SETUP } from "./_page-setup";
 export { PAGE_SETUP };
@@ -92,10 +93,10 @@ export function SuratPertanggungjawaban({
               <th style={{ ...headerCellStyle, width: "60px" }}>Vol</th>
               <th style={{ ...headerCellStyle, width: "80px" }}>Satuan</th>
               <th style={{ ...headerCellStyle, textAlign: "right", width: "120px" }}>
-                Tarif (Rp)
+                Tarif
               </th>
               <th style={{ ...headerCellStyle, textAlign: "right", width: "140px" }}>
-                Jumlah (Rp)
+                Jumlah
               </th>
             </tr>
           </thead>
@@ -125,10 +126,10 @@ export function SuratPertanggungjawaban({
                     {orDash(item.satuan)}
                   </td>
                   <td style={{ ...cellStyle, textAlign: "right" }}>
-                    {formatNumber(item.tarifHarga)}
+                    <RupiahCell amount={item.tarifHarga} />
                   </td>
                   <td style={{ ...cellStyle, textAlign: "right" }}>
-                    {formatNumber(item.jumlah)}
+                    <RupiahCell amount={item.jumlah} />
                   </td>
                 </tr>
               ))
@@ -140,7 +141,7 @@ export function SuratPertanggungjawaban({
               </td>
               <td style={totalCellStyle}>&nbsp;</td>
               <td style={{ ...totalCellStyle, textAlign: "right" }}>
-                {formatNumber(total)}
+                <RupiahCell amount={total} style={{ fontWeight: 700 }} />
               </td>
             </tr>
           </tbody>

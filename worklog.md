@@ -3361,3 +3361,72 @@ Stage Summary:
     - CetakMenuButton: individual doc dropdown skips hidden docs
 - ✅ Lint clean, dev server stable
 - ✅ All 4 changes verified via DOM inspection, API calls, and VLM analysis
+
+---
+Task ID: 47-rupiah-accounting-format
+Agent: Main (Claude)
+Task: User requested accounting format for currency display — "Rp" on LEFT, amount on RIGHT, Indonesian locale, no decimal places. Apply to "satuan harga" (Harga Satuan) in every document.
+
+Work Log:
+- Analyzed current currency display in src/components/spj/docs/:
+  - Used `Rp {formatNumber(item.tarifHarga)}` and `Rp {formatNumber(item.jumlah)}` — inline, no alignment
+  - `formatRupiah()` returns "Rp 1.250.000" string
+  - `formatNumber()` used Intl.NumberFormat("id-ID") with default fraction digits (might show decimals for non-integer values)
+- Identified 4 docs with currency displays in tables:
+  - surat-pesanan.tsx (Harga Satuan, Total Harga per item, PPN section: Harga Total, DPP, PPN, Total Pembayaran, PPh)
+  - dokumen-pembanding.tsx (Estimasi Harga per item)
+  - surat-penawaran-toko.tsx (Harga Satuan, Jumlah Harga per item, Total Harga)
+  - surat-pertanggungjawaban.tsx (Tarif, Jumlah per item, JUMLAH TOTAL)
+  - kuitansi.tsx (1 inline display "Uang sebesar : Rp XXX" — kept inline, not table column)
+
+**Fix Implementation:**
+
+1. **NEW shared component** (`src/components/spj/docs/_rupiah.tsx`):
+   - `RupiahCell` React component — renders `<div style="display: flex; justify-content: space-between">`
+   - Left span: "Rp"
+   - Right span: amount (right-aligned)
+   - Indonesian locale via `Intl.NumberFormat("id-ID", { minimumFractionDigits: 0, maximumFractionDigits: 0 })`
+   - No decimal places (per user request: "2 digit di belakang koma tidak digunakan")
+   - Indonesian thousand separators using "." (e.g., 1.250.000)
+   - Props: `amount`, `style` (for fontWeight override), `dashOnEmpty`, `showZero`
+
+2. **format.ts** — Updated `formatNumber()`:
+   - Added explicit `minimumFractionDigits: 0, maximumFractionDigits: 0` (was implicit default)
+   - Now consistent with formatRupiah — both no decimals
+
+3. **Applied RupiahCell** to 4 documents:
+   - **surat-pesanan.tsx**: Harga Satuan, Total Harga per item, Harga Total, DPP PPN, PPN 11%, Total Pembayaran (with fontWeight 700), PPh 23
+   - **dokumen-pembanding.tsx**: Estimasi Harga per item
+   - **surat-penawaran-toko.tsx**: Harga Satuan, Jumlah Harga per item, Total Harga (with fontWeight 700)
+   - **surat-pertanggungjawaban.tsx**: Tarif per item, Jumlah per item, JUMLAH TOTAL (with fontWeight 700)
+     - Also updated column headers from "Tarif (Rp)" → "Tarif" and "Jumlah (Rp)" → "Jumlah" (since Rp now in cell)
+   - **kuitansi.tsx**: Kept inline format "Rp {formatNumber(total)}" (it's an inline label-value display, not a table column — accounting format doesn't apply here)
+
+**Verification:**
+
+1. Lint passes: `bun run lint` → no errors
+2. DOM inspection confirms RupiahCell rendering:
+   - 4 instances found in surat-pesanan preview
+   - Each has structure: `<div style="display: flex; justify-content: space-between"><span>Rp</span><span style="text-align: right">[amount]</span></div>`
+   - Sample amounts: "50.000", "1.250.000" — Indonesian format with "." separator
+   - No decimal digits ✓
+3. VLM analysis of screenshot:
+   - "Yes, the 'Rp' symbol is positioned on the left side" ✓
+   - "Yes, the visible amount uses a period (.) as the thousand separator" ✓
+   - "No. The visible amount is a whole number with no decimal places shown" ✓
+   - "Yes. The document features official government logos, clear headers, a structured table layout, and consistent typography, giving it a neat and professional appearance" ✓
+
+Stage Summary:
+- ✅ Created shared RupiahCell component (src/components/spj/docs/_rupiah.tsx)
+- ✅ Indonesian accounting format: Rp on LEFT, amount on RIGHT
+- ✅ No decimal digits (per user request)
+- ✅ Indonesian thousand separators (1.250.000)
+- ✅ Applied to Harga Satuan + Total Harga + PPN section in surat-pesanan
+- ✅ Applied to Estimasi Harga in dokumen-pembanding
+- ✅ Applied to Harga Satuan + Jumlah + Total Harga in surat-penawaran-toko
+- ✅ Applied to Tarif + Jumlah + JUMLAH TOTAL in surat-pertanggungjawaban
+- ✅ Updated column headers in surat-pertanggungjawaban to remove "(Rp)" suffix (Rp now in cell)
+- ✅ Kept kuitansi.tsx as inline (it's a label-value display, not a table column)
+- ✅ Updated formatNumber() to be explicit about no-decimals (was implicit)
+- ✅ Lint clean, VLM verified
+- Note: The accounting format aligns "Rp" on the LEFT edge of the cell and amount on the RIGHT edge, making amounts line up neatly across rows (e.g., Rp | 1.250.000, Rp | 50.000, Rp | 17.972.000 — all amounts right-aligned at same x position)

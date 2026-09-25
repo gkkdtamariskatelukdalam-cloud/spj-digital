@@ -10,6 +10,7 @@ import {
   orDash,
   titleCase,
 } from "./_helpers";
+import { RupiahCell } from "./_rupiah";
 // Per-document page setup — Excel 01PESAN sheet margins (cm):
 //   L=1.20 R=1.20 T=0.90 B=0.40  scale=95%  portrait
 import { PAGE_SETUP_01PESAN as PAGE_SETUP } from "./_page-setup";
@@ -416,10 +417,10 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                   {orDash(item.satuan)}
                 </td>
                 <td style={{ ...cellStyle, textAlign: "right" }}>
-                  Rp {formatNumber(Math.round(getDisplayedHargaSatuan(item)))}
+                  <RupiahCell amount={Math.round(getDisplayedHargaSatuan(item))} />
                 </td>
                 <td style={{ ...cellStyle, textAlign: "right" }}>
-                  Rp {formatNumber(item.jumlah)}
+                  <RupiahCell amount={item.jumlah} />
                 </td>
               </tr>
             ))
@@ -446,21 +447,21 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
             <td style={cellStyle} colSpan={3}>{hargaLabel}</td>
             <td style={{ ...cellStyle, textAlign: "right" }}>
-              {formatRupiah(total)}
+              <RupiahCell amount={total} />
             </td>
           </tr>
           <tr>
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
             <td style={cellStyle} colSpan={3}>DPP PPN :</td>
             <td style={{ ...cellStyle, textAlign: "right" }}>
-              {isPpnApplicable ? formatRupiah(dppPpn) : "-"}
+              {isPpnApplicable ? <RupiahCell amount={dppPpn} /> : "-"}
             </td>
           </tr>
           <tr>
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
             <td style={cellStyle} colSpan={3}>PPN 11% :</td>
             <td style={{ ...cellStyle, textAlign: "right" }}>
-              {(isPpnApplicable && !isFirstItemFood) ? formatRupiah(ppn11) : "-"}
+              {(isPpnApplicable && !isFirstItemFood) ? <RupiahCell amount={ppn11} /> : "-"}
             </td>
           </tr>
           <tr>
@@ -475,14 +476,14 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
                 fontWeight: 700,
               }}
             >
-              {formatRupiah(total)}
+              <RupiahCell amount={total} style={{ fontWeight: 700 }} />
             </td>
           </tr>
           <tr>
             <td style={ppnEmptyCellStyle} colSpan={2}>&nbsp;</td>
             <td style={cellStyle} colSpan={3}>PPh 23 2% :</td>
             <td style={{ ...cellStyle, textAlign: "right" }}>
-              {(isPpnApplicable && isFirstItemFood) ? formatRupiah(pph23) : "-"}
+              {(isPpnApplicable && isFirstItemFood) ? <RupiahCell amount={pph23} /> : "-"}
             </td>
           </tr>
 

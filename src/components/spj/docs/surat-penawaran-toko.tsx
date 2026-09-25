@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate, formatRupiah, formatNumber, terbilang } from "@/lib/format";
 import { groupRomanMonth, orDash, titleCase } from "./_helpers";
+import { RupiahCell } from "./_rupiah";
 // Per-document page setup — Excel Toko sheet margins (cm):
 //   L=1.30 R=1.30 T=1.40 B=1.40  scale=95%  portrait
 import { PAGE_SETUP_TOKO as PAGE_SETUP } from "./_page-setup";
@@ -185,10 +186,10 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
                   {orDash(item.satuan)}
                 </td>
                 <td style={{ ...cellStyle, textAlign: "right" }}>
-                  Rp {formatNumber(item.tarifHarga)}
+                  <RupiahCell amount={item.tarifHarga} />
                 </td>
                 <td style={{ ...cellStyle, textAlign: "right" }}>
-                  Rp {formatNumber(item.jumlah)}
+                  <RupiahCell amount={item.jumlah} />
                 </td>
               </tr>
             ))
@@ -200,7 +201,7 @@ export function SuratPenawaranToko({ group, school }: SuratPenawaranTokoProps) {
           <tr>
             <td style={totalCellStyle} colSpan={5}>Total Harga</td>
             <td style={{ ...totalCellStyle, textAlign: "right" }}>
-                  Rp {formatNumber(total)}
+                  <RupiahCell amount={total} style={{ fontWeight: 700 }} />
             </td>
           </tr>
         </tbody>

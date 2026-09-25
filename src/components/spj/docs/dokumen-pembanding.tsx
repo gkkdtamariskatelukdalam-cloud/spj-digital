@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate, formatNumber } from "@/lib/format";
 import { orDash, schoolName } from "./_helpers";
+import { RupiahCell } from "./_rupiah";
 // Per-document page setup — Excel 02BANDING sheet margins (cm):
 //   L=0.80 R=0.80 T=1.50 B=0.80  scale=90%  landscape
 import { PAGE_SETUP_02BANDING as PAGE_SETUP } from "./_page-setup";
@@ -116,7 +117,7 @@ export function DokumenPembanding({ group, school }: DokumenPembandingProps) {
                     </div>
                   </td>
                   <td style={{ ...cellStyle, textAlign: "right" }}>
-                    Rp {formatNumber(item.tarifHarga)}
+                    <RupiahCell amount={item.tarifHarga} />
                   </td>
                 </tr>
               ))
