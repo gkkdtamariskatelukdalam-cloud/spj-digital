@@ -125,9 +125,8 @@
 @media print {
   @page {
     size: A4 portrait;
-    /* Top: 2cm, Right: 2cm, Bottom: 2cm, Left: 2.5cm
-       Matches PDF original margins */
-    margin: 2cm 2cm 2cm 2.5cm;
+    /* 2.5cm all sides — matches reference PDF margins */
+    margin: 2.5cm;
   }
   body * {
     visibility: hidden;
