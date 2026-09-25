@@ -2733,3 +2733,70 @@ Stage Summary:
 - html2pdf no longer double-pads (zeros out .spj-doc padding)
 - Migration script is idempotent — re-running detects any drift from Excel defaults and corrects
 - Lint clean, dev server stable, VLM confirms KOP renders correctly with no overlap
+
+---
+Task ID: 38-revert-logo-size
+Agent: Main (Claude)
+Task: User reported "kenapa logonya besar sekali" — the logo was too big after my previous migration (5.24 cm). Revert logo size to a smaller, sensible default.
+
+Work Log:
+- Realized my mistake: I took logo size (198x198 px = 5.24 cm) from the BACK sheet of "Cetak ATK_2025.xlsm", but the BACK sheet is the COVER PAGE with 4 logos arranged for 2 KOPs side-by-side (each KOP gets ~half the page width, so logos are bigger than normal).
+- The actual document sheets (01PESAN, 04SHP, 05BAT, Toko, 03RENCANA, 02BANDING) have NO logo embedded — their KOP is TEXT-ONLY (verified earlier via openpyxl: Images count = 0 for those sheets).
+- Verified from printed PDF (upload/01PESAN_07_2025.pdf via pdftotext) that the KOP is text-only with no logo image.
+- User's previous custom value before my migration was: 132x151 px (3.49 x 4.00 cm) — a reasonable Indonesian KOP logo size that the user explicitly chose.
+
+**Revert Implementation:**
+
+1. **Migration script** (scripts/migrate-letterhead-excel-defaults.ts):
+   - Changed EXCEL_DEFAULTS.logoWidth/Height from 198 → 110 (standard Indonesian KOP logo size)
+   - Changed EXCEL_DEFAULTS.logo2Width/Height from 211/221 → 110
+   - Added explicit comment explaining WHY: BACK sheet is the cover page (logos bigger), document sheets have no logo
+
+2. **Prisma schema** (prisma/schema.prisma — LetterheadSettings):
+   - logoWidth default: 198 → 110 (≈ 2.91 cm)
+   - logoHeight default: 198 → 110
+   - logo2Width default: 211 → 110
+   - logo2Height default: 221 → 110
+   - Updated comments to explain logo size is USER CUSTOMIZATION (Excel doesn't dictate it)
+
+3. **FALLBACK constant** (src/components/spj/letterhead.tsx):
+   - logoWidth/Height: 198 → 110
+   - logo2Width/Height: 211/221 → 110
+   - Updated comment block to explain the BACK sheet mistake
+
+4. **Ran migration** to revert the existing DB record:
+   - 4 fields reverted: logoWidth 198→110, logoHeight 198→110, logo2Width 211→110, logo2Height 221→110
+
+**Verification:**
+
+1. API GET /api/spj/letterhead now returns:
+   - logoWidth=110, logoHeight=110 (2.91 x 2.91 cm) ✓
+   - logo2Width=110, logo2Height=110 (2.91 x 2.91 cm) ✓
+   - KOP text sizes still match Excel: 14/18/18/10/10/10/11 pt ✓
+   - line1Bold still false (matches Excel) ✓
+
+2. Agent Browser DOM inspection:
+   - `<img alt="Logo Kiri" style="width: 2.91cm; height: 2.91cm; ...">` ✓
+   - `<img alt="Logo Kanan" style="width: 2.91cm; height: 2.91cm; ...">` ✓
+
+3. VLM analysis of new screenshot:
+   - "Logos are now a reasonable size for a formal Indonesian government letterhead. They are no longer 'too big.'"
+   - "Text is fully readable without overlap"
+   - "Layout is well-balanced. Logos frame the text effectively without dominating it."
+   - "Design looks professional and authoritative. Logos act as strong visual anchors on left and right"
+
+4. Lint passes: `bun run lint` → no errors
+
+Stage Summary:
+- ✅ Logo size reverted from 5.24 cm (too big) → 2.91 cm (standard Indonesian KOP)
+- ✅ Single mode logo: 198x198 px → 110x110 px (2.91 x 2.91 cm)
+- ✅ Dual mode logo: 211x221 px → 110x110 px (2.91 x 2.91 cm)
+- ✅ All other Excel-matched values PRESERVED:
+    - KOP text font sizes (14/18/18/10/10/10/11 pt)
+    - KOP line1 NOT bold (matches Excel)
+    - Dual mode sizes (14/12/13/14/8/8/8 pt)
+    - Per-document page margins (01PESAN 0.9/1.2/0.4/1.2 cm, etc.)
+    - Per-document orientation (portrait/landscape per sheet)
+    - Per-document print scale (90/95/100% per sheet)
+- ✅ User can still adjust logo size via Letterhead Settings UI if they want a different size
+- Note: Excel document sheets (01PESAN, 04SHP, etc.) have NO logo embedded (KOP is text-only). The logo on the app's KOP is the user's addition.

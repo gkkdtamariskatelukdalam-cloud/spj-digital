@@ -4,9 +4,16 @@ import { useLetterhead } from "@/hooks/use-spj";
 import type { LetterheadSettings } from "@/lib/types/spj";
 
 // ============ Fallback defaults ============
-// EXACT match to Excel "Cetak ATK_2025.xlsm":
-//   - Logo (single mode): 198x198 px ≈ 5.24x5.24 cm  (from BACK sheet Image 2)
-//   - Logo 2 (dual mode): 211x221 px ≈ 5.58x5.85 cm  (from BACK sheet Image 3)
+// Logo size is a USER CUSTOMIZATION. Excel document sheets (01PESAN, 04SHP,
+// 05BAT, Toko, 03RENCANA, 02BANDING) have NO logo embedded — their KOP is
+// text-only. The 198x198 px logo I previously took from the BACK sheet was
+// TOO BIG because BACK is the cover page with 2 KOPs side-by-side (each
+// KOP gets ~half the page width, so logos are larger).
+//
+// Default logo size 110x110 px ≈ 2.91x2.91 cm — the standard Indonesian
+// KOP logo size. User can adjust via Letterhead Settings UI.
+//
+// Other values match Excel "Cetak ATK_2025.xlsm":
 //   - Single-mode KOP rows 1-7: Arial 14/18/18/10/10/10/11 pt
 //       Row 1 PEMERINTAH PROVINSI SUMATERA UTARA — Arial 14pt NOT bold
 //       Row 2 DINAS PENDIDIKAN                    — Arial 18pt bold
@@ -17,13 +24,13 @@ import type { LetterheadSettings } from "@/lib/types/spj";
 const FALLBACK: LetterheadSettings = {
   id: "fallback",
   logoPath: "/uploads/logo-sman1.png",
-  logoWidth: 198,
-  logoHeight: 198,
+  logoWidth: 110,
+  logoHeight: 110,
   logoOffsetX: 0,
   logoOffsetY: 0,
   logo2Path: null,
-  logo2Width: 211,
-  logo2Height: 221,
+  logo2Width: 110,
+  logo2Height: 110,
   logo2OffsetX: 0,
   logo2OffsetY: 0,
   kopMode: "single",

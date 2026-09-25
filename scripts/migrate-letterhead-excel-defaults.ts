@@ -18,14 +18,20 @@ const db = new PrismaClient();
 
 // Excel-exact values (extracted via openpyxl from "Cetak ATK_2025.xlsm")
 const EXCEL_DEFAULTS = {
-  // Single-mode logo (left side): 198x198 px ≈ 5.24x5.24 cm — from BACK
-  // sheet Image 2 (the single-mode logo on the cover sheet).
-  logoWidth: 198,
-  logoHeight: 198,
-  // Dual-mode right logo: 211x221 px ≈ 5.58x5.85 cm — from BACK sheet
-  // Image 3 (right-side dual logo on the cover sheet).
-  logo2Width: 211,
-  logo2Height: 221,
+  // NOTE: Logo sizes are NOT taken from the BACK sheet (198x198 / 211x221),
+  // because BACK is the COVER page with 4 logos arranged for 2 KOPs
+  // side-by-side (each KOP gets ~half the page width, so logos are bigger).
+  // The actual document sheets (01PESAN, 04SHP, 05BAT, Toko, 03RENCANA,
+  // 02BANDING) have NO logo embedded — their KOP is TEXT-ONLY.
+  //
+  // Logo size is a USER CUSTOMIZATION. We use a conservative default of
+  // 110x110 px (≈ 2.91 cm) — the standard Indonesian KOP logo size.
+  // The user can adjust via the Letterhead Settings UI if they want a
+  // different size.
+  logoWidth: 110,
+  logoHeight: 110,
+  logo2Width: 110,
+  logo2Height: 110,
   // Vertical spacing between KOP lines (px). Matches Excel row spacing.
   lineSpacing: 6,
 

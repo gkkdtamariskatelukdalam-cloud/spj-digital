@@ -207,18 +207,21 @@ model LetterheadSettings {
   
   // Logo settings
   logoPath        String?  // relative path to uploaded logo, e.g. /uploads/logo.png
-  // Excel-matched defaults: 198x198 px ≈ 5.24x5.24 cm at 96 DPI
-  // (matches the main logo on BACK sheet of "Cetak ATK_2025.xlsm")
-  logoWidth       Int      @default(198)  // logo width in px (was 110; Excel: 198px = 5.24cm)
-  logoHeight      Int      @default(198)   // logo height in px (auto if 0)
+  // Logo size is a USER CUSTOMIZATION — Excel document sheets (01PESAN,
+  // 04SHP, 05BAT, etc.) have NO logo embedded (KOP is text-only). The
+  // 198x198 px value from the BACK sheet (cover page) is too big for
+  // regular documents because BACK has 2 KOPs side-by-side.
+  // Default 110x110 px ≈ 2.91x2.91 cm (standard Indonesian KOP logo size).
+  // User can adjust via Letterhead Settings UI.
+  logoWidth       Int      @default(110)  // logo width in px (≈ 2.91 cm at 96 DPI)
+  logoHeight      Int      @default(110)   // logo height in px (auto if 0)
   logoOffsetX     Int      @default(0)     // horizontal shift: negative=left, positive=right
   logoOffsetY     Int      @default(0)     // vertical shift: negative=up, positive=down
   
   // Logo 2 settings (for KOP with 2 logos - left and right)
-  // Excel right-side dual logo: 211x221 px ≈ 5.58x5.85 cm
   logo2Path       String?
-  logo2Width      Int      @default(211)
-  logo2Height     Int      @default(221)
+  logo2Width      Int      @default(110)
+  logo2Height     Int      @default(110)
   logo2OffsetX    Int      @default(0)
   logo2OffsetY    Int      @default(0)
   
