@@ -3090,3 +3090,64 @@ Stage Summary:
 - ✅ RINCIAN PEKERJAAN header 14pt → 12pt
 - Note: PDF generation applies additional 95% print scale (PAGE_SETUP_01PESAN.scale=95), which makes content ~5% smaller than screen preview — helps fit more items per page
 - Note: User can adjust line spacing / padding via Letterhead Settings UI if they want different compactness
+
+---
+Task ID: 43-surat-pesanan-info-block-fixes
+Agent: Main (Claude)
+Task: User requested 4 fixes to Surat Pesanan info block:
+1. "Kegiatan jual beli dengan mitra UD. JOSUA" cell should merge DOWN (rowSpan)
+2. "Waktu Pengerjaan Pesanan" → "Waktu Pengerjaan" (shorter, so column doesn't widen)
+3. "Waktu Pemrosesan Pesanan" → "Waktu Pemrosesan"
+4. "Waktu Penyelesaian Pesanan" → "Waktu Penyelesaian :"
+
+Work Log:
+- Analyzed current info block in surat-pesanan.tsx (rows 295-365):
+  - Row 1: Paket Pesanan : | Nomor Surat Pesanan | docNumber
+  - Row 2: Kegiatan jual beli dengan mitra {vendorName} | Tanggal Pesanan | date (NO rowSpan — cell takes 1 row)
+  - Row 3: (empty nbsp) | Tanggal Negosiasi | (empty nbsp) (col 1 wasted on empty cell)
+  - Row 4: Waktu Pengerjaan Pesanan : date | No. BPU | bpuCode (label too long)
+  - Row 5: Waktu Pemrosesan Pesanan : date | empty | empty (label too long)
+  - Row 6: Waktu Penyelesaian Pesanan : completion | Catatan Pengiriman colSpan=4 (label too long)
+- Verified Excel 01PESAN layout has A11:E12 merged (rowSpan 2) for "Kegiatan jual beli..." cell — matches user request #1
+
+**Fix Implementation:**
+
+1. **Row 2 "Kegiatan..." cell**: added `rowSpan={2}` attribute
+   - Now the "Kegiatan jual beli..." cell spans rows 2-3 (merges DOWN)
+   - Matches Excel A11:E12 merged layout
+   - Saves vertical space (no more empty cell in row 3 col 1)
+
+2. **Row 3 col 1 (empty nbsp)**: REMOVED entirely
+   - Because it's covered by the rowSpan from row 2
+   - Without removal, the table structure would have an extra orphan cell
+
+3. **Label "Waktu Pengerjaan Pesanan :"** → **"Waktu Pengerjaan :"**
+   - Removed the "Pesanan" word to shorten label
+   - Reduces column 1 width (label column)
+
+4. **Label "Waktu Pemrosesan Pesanan :"** → **"Waktu Pemrosesan :"**
+   - Same — shortened
+
+5. **Label "Waktu Penyelesaian Pesanan :"** → **"Waktu Penyelesaian :"**
+   - Same — shortened
+
+**Verification:**
+
+1. Lint passes: `bun run lint` → no errors
+2. DOM inspection confirms:
+   - "Kegiatan jual beli" cell: rowSpan="2" colSpan="2" ✓
+   - "Waktu Pengerjaan :" text ✓
+   - "Waktu Pemrosesan :" text ✓
+   - "Waktu Penyelesaian :" text ✓
+3. VLM analysis of screenshot:
+   - "Yes, the cell containing 'Kegiatan jual beli dengan mitra...' is merged down (spans two vertical rows, covering the space next to both 'Nomor Surat Pesanan' and 'Tanggal Pesanan')"
+   - "Yes, the labels for time are short; they are written as just 'Waktu Pengerjaan :' and 'Waktu Pemrosesan :' (without the word 'Pesanan')"
+   - "Yes, the info block appears compact and professional, utilizing a clean grid layout with clear labels and aligned data"
+
+Stage Summary:
+- ✅ "Kegiatan jual beli..." cell now merged DOWN (rowSpan 2) — matches Excel A11:E12
+- ✅ Empty cell in row 3 col 1 removed (covered by rowSpan)
+- ✅ All 3 "Waktu X Pesanan :" labels shortened to "Waktu X :" (removed "Pesanan" suffix)
+- ✅ Info block more compact vertically (one less row of empty space) and horizontally (shorter labels)
+- ✅ Layout remains professional (VLM-verified: "compact and professional, clean grid layout")
+- ✅ Lint clean

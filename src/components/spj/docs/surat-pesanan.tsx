@@ -307,7 +307,9 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
           <tr>
-            <td style={cellStyle} colSpan={2}>
+            {/* Kegiatan jual beli — rowSpan 2 supaya merge ke bawah (match
+                Excel A11:E12 merged). Membuat tabel lebih compact vertically. */}
+            <td style={cellStyle} colSpan={2} rowSpan={2}>
               Kegiatan jual beli dengan mitra {vendorName}
             </td>
             <td style={cellStyle} colSpan={2}>
@@ -318,9 +320,9 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
           <tr>
-            <td style={cellStyle} colSpan={2}>
-              &nbsp;
-            </td>
+            {/* Col 1 empty cell REMOVED — covered by rowSpan from row above.
+                This is the whole point of merging down: row 2's "Kegiatan..."
+                cell visually occupies rows 2-3 col 1. */}
             <td style={cellStyle} colSpan={2}>
               Tanggal Negosiasi
             </td>
@@ -329,8 +331,10 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
           <tr>
+            {/* Label shortened: "Waktu Pengerjaan Pesanan :" → "Waktu Pengerjaan :"
+                — mengurangi lebar kolom label agar tabel tidak melebar. */}
             <td style={cellStyle} colSpan={2}>
-              Waktu Pengerjaan Pesanan : {formatDate(tglPesan)}
+              Waktu Pengerjaan : {formatDate(tglPesan)}
             </td>
             <td style={cellStyle} colSpan={2}>
               No. BPU
@@ -340,8 +344,9 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
           <tr>
+            {/* Label shortened: "Waktu Pemrosesan Pesanan :" → "Waktu Pemrosesan :" */}
             <td style={cellStyle} colSpan={2}>
-              Waktu Pemrosesan Pesanan : {formatDate(tglPesan)}
+              Waktu Pemrosesan : {formatDate(tglPesan)}
             </td>
             <td style={cellStyle} colSpan={2}>
               &nbsp;
@@ -351,8 +356,9 @@ export function SuratPesanan({ group, school }: SuratPesananProps) {
             </td>
           </tr>
           <tr>
+            {/* Label shortened: "Waktu Penyelesaian Pesanan :" → "Waktu Penyelesaian :" */}
             <td style={cellStyle} colSpan={2}>
-              Waktu Penyelesaian Pesanan :{" "}
+              Waktu Penyelesaian :{" "}
               {completion ? formatDate(completion) : "—"}
             </td>
             <td style={cellStyle} colSpan={4}>
