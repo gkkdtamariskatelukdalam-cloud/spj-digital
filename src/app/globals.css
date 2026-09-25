@@ -121,12 +121,20 @@
   }
 }
 
-/* ============ SPJ Document Print Styles ============ */
+/* ============ SPJ Document Print Styles ============
+   Per-document Excel-matched page setup is injected dynamically by
+   document-preview.tsx (see buildPageCss() in _page-setup.ts).
+   This default applies when no per-document override is in effect
+   (e.g. when user uses Ctrl+P directly from the main page).
+   Defaults match Excel sheet "01PESAN" exactly:
+     L=1.20cm R=1.20cm T=0.90cm B=0.40cm  portrait
+   See: src/components/spj/docs/_page-setup.ts for the per-doc values.
+*/
 @media print {
   @page {
     size: A4 portrait;
-    /* 2.5cm all sides — matches reference PDF margins */
-    margin: 2.5cm;
+    /* Excel 01PESAN margins (T R B L): 0.90cm 1.20cm 0.40cm 1.20cm */
+    margin: 0.90cm 1.20cm 0.40cm 1.20cm;
   }
   body * {
     visibility: hidden;
@@ -169,7 +177,11 @@
   }
 }
 
-/* Screen-only styling for document preview */
+/* Screen-only styling for document preview.
+   Note: padding is intentionally small here — the actual page margins
+   come from the @page rule above during printing. The screen preview
+   shows the document content without the surrounding page margin
+   whitespace (which is added by the browser when printing). */
 .spj-doc {
   background: white;
   color: #0f172a;
@@ -178,7 +190,7 @@
      with inline fontSize for 14pt titles and 9pt Instruksi. */
   font-size: 11pt;
   line-height: 1.5;
-  padding: 2rem 2.5rem;
+  padding: 0.4cm 1.2cm;
 }
 
 @media (max-width: 640px) {

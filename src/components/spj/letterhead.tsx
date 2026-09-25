@@ -4,16 +4,26 @@ import { useLetterhead } from "@/hooks/use-spj";
 import type { LetterheadSettings } from "@/lib/types/spj";
 
 // ============ Fallback defaults ============
+// EXACT match to Excel "Cetak ATK_2025.xlsm":
+//   - Logo (single mode): 198x198 px ≈ 5.24x5.24 cm  (from BACK sheet Image 2)
+//   - Logo 2 (dual mode): 211x221 px ≈ 5.58x5.85 cm  (from BACK sheet Image 3)
+//   - Single-mode KOP rows 1-7: Arial 14/18/18/10/10/10/11 pt
+//       Row 1 PEMERINTAH PROVINSI SUMATERA UTARA — Arial 14pt NOT bold
+//       Row 2 DINAS PENDIDIKAN                    — Arial 18pt bold
+//       Row 3 SMA NEGERI 1 TELUKDALAM            — Arial 18pt bold (was 20pt → caused overlap!)
+//       Row 4-6 address / telp / laman           — Arial 10pt
+//       Row 7 Laman                              — Calibri 11pt
+//   - Dual-mode KOP rows K1-K6: Times 14/12/14/8/8/8 pt
 const FALLBACK: LetterheadSettings = {
   id: "fallback",
   logoPath: "/uploads/logo-sman1.png",
-  logoWidth: 110,
-  logoHeight: 110,
+  logoWidth: 198,
+  logoHeight: 198,
   logoOffsetX: 0,
   logoOffsetY: 0,
   logo2Path: null,
-  logo2Width: 110,
-  logo2Height: 110,
+  logo2Width: 211,
+  logo2Height: 221,
   logo2OffsetX: 0,
   logo2OffsetY: 0,
   kopMode: "single",
@@ -21,34 +31,34 @@ const FALLBACK: LetterheadSettings = {
   lineSpacing: 6,
   // Single mode (KOP 1 Logo)
   line1Text: "PEMERINTAH PROVINSI SUMATERA UTARA",
-  line1Bold: true, line1Size: 14,
+  line1Bold: false, line1Size: 14,
   line2Text: "DINAS PENDIDIKAN",
-  line2Bold: true, line2Size: 14,
+  line2Bold: true, line2Size: 18,
   line3Text: "SMA NEGERI 1 TELUKDALAM",
-  line3Bold: true, line3Size: 20,
+  line3Bold: true, line3Size: 18,
   line4Text: "Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan,",
-  line4Bold: false, line4Size: 11,
+  line4Bold: false, line4Size: 10,
   line5Text: "Cabdisdik Wil.XIV, Kode Pos 22865",
-  line5Bold: false, line5Size: 11,
+  line5Bold: false, line5Size: 10,
   line6Text: "Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com",
-  line6Bold: false, line6Size: 11,
+  line6Bold: false, line6Size: 10,
   line7Text: "Laman : smansatelukdalam.sch.id",
   line7Bold: false, line7Size: 11,
   // Dual mode (KOP 2 Logo)
   dualLine1Text: "PEMERINTAH PROVINSI SUMATERA UTARA",
   dualLine1Bold: true, dualLine1Size: 14,
   dualLine2Text: "DINAS PENDIDIKAN",
-  dualLine2Bold: true, dualLine2Size: 14,
+  dualLine2Bold: true, dualLine2Size: 12,
   dualLine3Text: "CABDIS PENDIDIKAN WILAYAH XIV",
   dualLine3Bold: true, dualLine3Size: 13,
   dualLine4Text: "SMA NEGERI 1 TELUKDALAM",
-  dualLine4Bold: true, dualLine4Size: 20,
+  dualLine4Bold: true, dualLine4Size: 14,
   dualLine5Text: "NIS : 300010         NPSN : 10258246        Terakreditasi A           NSS: 301071701001",
-  dualLine5Bold: false, dualLine5Size: 11,
+  dualLine5Bold: false, dualLine5Size: 8,
   dualLine6Text: "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865",
-  dualLine6Bold: false, dualLine6Size: 11,
+  dualLine6Bold: false, dualLine6Size: 8,
   dualLine7Text: "Email: smansatelukdalam1987@gmail.com ; website: www.smansatelukdalam.sch.id",
-  dualLine7Bold: false, dualLine7Size: 11,
+  dualLine7Bold: false, dualLine7Size: 8,
   showBottomLine: true,
   bottomLineWidth: 2,
 };

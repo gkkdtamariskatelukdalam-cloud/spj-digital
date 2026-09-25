@@ -13,6 +13,10 @@ import {
   schoolAddress,
   schoolName,
 } from "./_helpers";
+// Per-document page setup — Excel 05BAT sheet margins (cm):
+//   L=0.80 R=0.80 T=1.50 B=0.80  scale=90%  portrait
+import { PAGE_SETUP_05BAT as PAGE_SETUP } from "./_page-setup";
+export { PAGE_SETUP };
 
 // ============================================================
 // 05BAT — Berita Acara Serah Terima

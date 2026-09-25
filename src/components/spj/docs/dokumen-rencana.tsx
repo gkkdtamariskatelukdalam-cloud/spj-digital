@@ -4,6 +4,10 @@ import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate } from "@/lib/format";
 import { orDash, schoolAddress, schoolName } from "./_helpers";
+// Per-document page setup — Excel 03RENCANA sheet margins (cm):
+//   L=0.80 R=0.80 T=1.40 B=0.30  scale=100%  landscape
+import { PAGE_SETUP_03RENCANA as PAGE_SETUP } from "./_page-setup";
+export { PAGE_SETUP };
 
 // ============================================================
 // 03RENCANA — Dokumen Perencanaan

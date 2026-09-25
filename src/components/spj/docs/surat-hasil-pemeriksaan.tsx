@@ -13,6 +13,10 @@ import {
   schoolAddress,
   schoolName,
 } from "./_helpers";
+// Per-document page setup — Excel 04SHP sheet margins (cm):
+//   L=1.30 R=1.30 T=1.50 B=0.80  scale=90%  portrait
+import { PAGE_SETUP_04SHP as PAGE_SETUP } from "./_page-setup";
+export { PAGE_SETUP };
 
 // ============================================================
 // 04SHP — Surat Hasil Pemeriksaan

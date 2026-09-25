@@ -10,6 +10,10 @@ import {
   orDash,
   titleCase,
 } from "./_helpers";
+// Per-document page setup — Excel 01PESAN sheet margins (cm):
+//   L=1.20 R=1.20 T=0.90 B=0.40  scale=95%  portrait
+import { PAGE_SETUP_01PESAN as PAGE_SETUP } from "./_page-setup";
+export { PAGE_SETUP };
 
 // ============================================================
 // 01PESAN — Surat Pesanan (1 continuous table for entire doc)

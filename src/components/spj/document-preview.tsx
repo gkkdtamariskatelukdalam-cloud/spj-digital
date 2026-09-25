@@ -33,6 +33,27 @@ import { SuratHasilPemeriksaan } from "@/components/spj/docs/surat-hasil-pemerik
 import { BeritaAcaraSerahTerima } from "@/components/spj/docs/berita-acara-serah-terima";
 import { SuratPenawaranToko } from "@/components/spj/docs/surat-penawaran-toko";
 import { Kuitansi } from "@/components/spj/docs/kuitansi";
+// Per-document Excel-matched page setup (margins + orientation + scale)
+import {
+  PAGE_SETUP_BY_DOC_ID,
+  type PageSetup,
+  buildPageCss,
+  buildScaleTransform,
+} from "@/components/spj/docs/_page-setup";
+
+/**
+ * Parse a CSS margin shorthand like "0.90cm 1.20cm 0.40cm 1.20cm"
+ * into an array [top, right, bottom, left] in millimeters (for html2pdf).
+ */
+function parseMarginToMm(marginStr: string): [number, number, number, number] {
+  const parts = marginStr.split(/\s+/).map((s) => parseFloat(s));
+  // Expect 4 parts: top right bottom left
+  if (parts.length === 4 && parts.every((p) => !isNaN(p))) {
+    return [parts[0] * 10, parts[1] * 10, parts[2] * 10, parts[3] * 10];
+  }
+  // Fallback: 10mm all sides
+  return [10, 10, 10, 10];
+}
 
 interface DocTemplate {
   id: string;
@@ -186,6 +207,17 @@ export function DocumentPreview({
       // Dynamically import html2pdf to avoid SSR issues
       const html2pdf = (await import("html2pdf.js")).default;
       
+      // Lookup the current doc's Excel-matched page setup (margins, orientation, scale).
+      // Falls back to a generic A4 portrait setup if doc id is not found.
+      const currentPageSetup: PageSetup =
+        PAGE_SETUP_BY_DOC_ID[currentDoc.id] ?? {
+          margin: "1.00cm 1.00cm 1.00cm 1.00cm",
+          orientation: "portrait",
+          scale: 100,
+          source: "(default fallback)",
+        };
+      const [mt, mr, mb, ml] = parseMarginToMm(currentPageSetup.margin);
+      
       // Create a temporary container
       const container = document.createElement("div");
       container.style.position = "absolute";
@@ -198,6 +230,11 @@ export function DocumentPreview({
       
       for (const g of groupsToRender) {
         for (const doc of DOC_TEMPLATES) {
+          // Each doc may have its OWN page setup — look it up per-doc.
+          const docPageSetup: PageSetup =
+            PAGE_SETUP_BY_DOC_ID[doc.id] ?? currentPageSetup;
+          const scaleTransform = buildScaleTransform(docPageSetup);
+          
           const docDiv = document.createElement("div");
           docDiv.className = "spj-doc-page";
           docDiv.style.cssText = `
@@ -206,10 +243,11 @@ export function DocumentPreview({
             font-family: "Times New Roman", Times, serif;
             font-size: 12px;
             line-height: 1.5;
-            padding: 2rem 2.5rem;
+            padding: 0;
             width: 210mm;
             min-height: 297mm;
             page-break-after: always;
+            ${scaleTransform}
           `;
           
           // Use ReactDOM server render or clone the preview content
@@ -217,13 +255,26 @@ export function DocumentPreview({
           if (previewEl) {
             docDiv.innerHTML = previewEl.innerHTML;
           }
+          // CRITICAL: zero out .spj-doc's own padding (px-6 sm:px-10 py-8
+          // from the className) so html2pdf's `margin` option is the ONLY
+          // source of page margins. Otherwise we get double padding:
+          //   Excel margin (1.2cm) + .spj-doc padding (1.06cm) = 2.26cm
+          // which is way more than Excel's 1.2cm and pushes KOP content
+          // off the page.
+          const spjDoc = docDiv.querySelector(".spj-doc") as HTMLElement | null;
+          if (spjDoc) {
+            spjDoc.style.padding = "0";
+          }
           container.appendChild(docDiv);
         }
       }
 
-      // Generate PDF
+      // Generate PDF — use the CURRENT doc's page setup for orientation,
+      // but margins must apply to ALL pages (since the PDF is one file
+      // with mixed-orientation pages, we use the current doc's margins
+      // as the dominant setting).
       const opt = {
-        margin: 0,
+        margin: [mt, ml, mb, mr], // [top, left, bottom, right] in mm
         filename: (mode === "all" || mode === "vendor")
           ? mode === "vendor"
             ? `SPJ-Toko-${vendorName || "unknown"}.pdf`
@@ -231,7 +282,11 @@ export function DocumentPreview({
           : `SPJ-Pesanan-${currentGroup.noPesan || currentGroup.noBku}.pdf`,
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        jsPDF: {
+          unit: "mm",
+          format: "a4",
+          orientation: currentPageSetup.orientation,
+        },
         pagebreak: { mode: "css", before: ".spj-doc-page" },
       };
 
@@ -274,6 +329,17 @@ export function DocumentPreview({
       return;
     }
 
+    // Lookup the current doc's Excel-matched page setup (margins, orientation, scale).
+    const currentPageSetup: PageSetup =
+      PAGE_SETUP_BY_DOC_ID[currentDoc.id] ?? {
+        margin: "1.00cm 1.00cm 1.00cm 1.00cm",
+        orientation: "portrait",
+        scale: 100,
+        source: "(default fallback)",
+      };
+    const pageCss = buildPageCss(currentPageSetup);
+    const scaleTransform = buildScaleTransform(currentPageSetup);
+
     // Open print window
     const printWindow = window.open("", "_blank", "width=800,height=600");
     if (!printWindow) {
@@ -288,13 +354,16 @@ export function DocumentPreview({
       <head>
         <title>Cetak SPJ - ${currentGroup.noPesan || currentGroup.noBku}</title>
         <style>
-          @page { size: A4 portrait; margin: 1.2cm; }
+          /* Per-document Excel-matched page setup — injected dynamically
+             so each document type uses its own margins + orientation. */
+          ${pageCss}
           body { margin: 0; padding: 0; font-family: "Times New Roman", Times, serif; }
           .spj-doc { 
             color: #000; 
             font-family: "Times New Roman", Times, serif;
             font-size: 12px;
             line-height: 1.5;
+            ${scaleTransform}
           }
           .spj-doc table { border-collapse: collapse; width: 100%; }
           .spj-doc td, .spj-doc th { border: 1px solid #000; padding: 4px 6px; }

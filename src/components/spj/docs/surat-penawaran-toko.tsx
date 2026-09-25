@@ -4,6 +4,10 @@ import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate, formatRupiah, formatNumber, terbilang } from "@/lib/format";
 import { groupRomanMonth, orDash, titleCase } from "./_helpers";
+// Per-document page setup — Excel Toko sheet margins (cm):
+//   L=1.30 R=1.30 T=1.40 B=1.40  scale=95%  portrait
+import { PAGE_SETUP_TOKO as PAGE_SETUP } from "./_page-setup";
+export { PAGE_SETUP };
 
 // ============================================================
 // Toko — Surat Penawaran Toko / Penyedia

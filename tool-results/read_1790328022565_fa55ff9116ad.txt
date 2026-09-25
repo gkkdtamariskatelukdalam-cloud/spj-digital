@@ -1,0 +1,942 @@
+     1→"use client";
+     2→
+     3→import { useState, useEffect, useRef } from "react";
+     4→import {
+     5→  Card,
+     6→  CardContent,
+     7→  CardHeader,
+     8→  CardTitle,
+     9→  CardDescription,
+    10→} from "@/components/ui/card";
+    11→import { Badge } from "@/components/ui/badge";
+    12→import { Button } from "@/components/ui/button";
+    13→import { Input } from "@/components/ui/input";
+    14→import { Label } from "@/components/ui/label";
+    15→import { Switch } from "@/components/ui/switch";
+    16→import { Slider } from "@/components/ui/slider";
+    17→import {
+    18→  Select,
+    19→  SelectContent,
+    20→  SelectItem,
+    21→  SelectTrigger,
+    22→  SelectValue,
+    23→} from "@/components/ui/select";
+    24→import { ScrollArea } from "@/components/ui/scroll-area";
+    25→import { Separator } from "@/components/ui/separator";
+    26→import { toast } from "sonner";
+    27→import {
+    28→  Image as ImageIcon,
+    29→  Upload,
+    30→  Bold,
+    31→  ArrowUp,
+    32→  ArrowDown,
+    33→  ArrowLeft,
+    34→  ArrowRight,
+    35→  Save,
+    36→  RotateCcw,
+    37→  Type,
+    38→  AlignLeft,
+    39→  Loader2,
+    40→  Trash2,
+    41→  Eye,
+    42→} from "lucide-react";
+    43→import {
+    44→  useLetterhead,
+    45→  useUpdateLetterhead,
+    46→  useUploadLogo,
+    47→} from "@/hooks/use-spj";
+    48→import type { LetterheadSettings } from "@/lib/types/spj";
+    49→import { LetterheadStatic } from "@/components/spj/letterhead";
+    50→
+    51→const FONT_OPTIONS = [
+    52→  { value: "Arial", label: "Arial" },
+    53→  { value: "Times New Roman", label: "Times New Roman" },
+    54→  { value: "Calibri", label: "Calibri" },
+    55→  { value: "Cambria", label: "Cambria" },
+    56→  { value: "Courier New", label: "Courier New" },
+    57→  { value: "Georgia", label: "Georgia" },
+    58→  { value: "Garamond", label: "Garamond" },
+    59→  { value: "Helvetica", label: "Helvetica" },
+    60→  { value: "Tahoma", label: "Tahoma" },
+    61→  { value: "Trebuchet MS", label: "Trebuchet MS" },
+    62→  { value: "Verdana", label: "Verdana" },
+    63→  { value: "Book Antiqua", label: "Book Antiqua" },
+    64→  { value: "Palatino Linotype", label: "Palatino Linotype" },
+    65→];
+    66→
+    67→// CmInput: Uncontrolled input for cm values.
+    68→// User can type freely (e.g., "3", "2.91") without value reverting.
+    69→// key = rounded cm value → only re-mounts when cm changes by ≥1 (settings load)
+    70→// onBlur → convert cm to px, call parent onChange
+    71→function CmInput({ pxValue, onChange, label }: { pxValue: number; onChange: (px: number) => void; label: string }) {
+    72→  return (
+    73→    <div>
+    74→      <Label className="text-[10px] text-muted-foreground">{label}</Label>
+    75→      <Input
+    76→        key={Math.round(pxValue / 37.795)}
+    77→        type="number"
+    78→        step="0.01"
+    79→        min="0.5"
+    80→        max="10"
+    81→        defaultValue={(pxValue / 37.795).toFixed(2)}
+    82→        onBlur={(e) => {
+    83→          const px = Math.round(parseFloat(e.target.value || "0") * 37.795);
+    84→          if (!isNaN(px) && px >= 0) onChange(px);
+    85→        }}
+    86→        className="h-8 text-xs font-mono"
+    87→      />
+    88→    </div>
+    89→  );
+    90→}
+    91→
+    92→const DEFAULT_SETTINGS: LetterheadSettings = {
+    93→  id: "default",
+    94→  logoPath: "/uploads/logo-sman1.png",
+    95→  logoWidth: 110,
+    96→  logoHeight: 110,
+    97→  logoOffsetX: 0,
+    98→  logoOffsetY: 0,
+    99→  logo2Path: null,
+   100→  logo2Width: 110,
+   101→  logo2Height: 110,
+   102→  logo2OffsetX: 0,
+   103→  logo2OffsetY: 0,
+   104→  kopMode: "single",
+   105→  fontFamily: "Arial",
+   106→  lineSpacing: 6,
+   107→  line1Text: "PEMERINTAH PROVINSI SUMATERA UTARA",
+   108→  line1Bold: true,
+   109→  line1Size: 14,
+   110→  line2Text: "DINAS PENDIDIKAN",
+   111→  line2Bold: true,
+   112→  line2Size: 14,
+   113→  line3Text: "SMA NEGERI 1 TELUKDALAM",
+   114→  line3Bold: true,
+   115→  line3Size: 20,
+   116→  line4Text:
+   117→    "Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan,",
+   118→  line4Bold: false,
+   119→  line4Size: 11,
+   120→  line5Text: "Cabdisdik Wil.XIV, Kode Pos 22865",
+   121→  line5Bold: false,
+   122→  line5Size: 11,
+   123→  line6Text: "Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com",
+   124→  line6Bold: false,
+   125→  line6Size: 11,
+   126→  line7Text: "Laman : smansatelukdalam.sch.id",
+   127→  line7Bold: false,
+   128→  line7Size: 11,
+   129→  // Dual mode (KOP 2 Logo) - expanded text with CABDIS, NIS, etc.
+   130→  dualLine1Text: "PEMERINTAH PROVINSI SUMATERA UTARA",
+   131→  dualLine1Bold: true,
+   132→  dualLine1Size: 14,
+   133→  dualLine2Text: "DINAS PENDIDIKAN",
+   134→  dualLine2Bold: true,
+   135→  dualLine2Size: 14,
+   136→  dualLine3Text: "CABDIS PENDIDIKAN WILAYAH XIV",
+   137→  dualLine3Bold: true,
+   138→  dualLine3Size: 13,
+   139→  dualLine4Text: "SMA NEGERI 1 TELUKDALAM",
+   140→  dualLine4Bold: true,
+   141→  dualLine4Size: 20,
+   142→  dualLine5Text:
+   143→    "NIS : 300010         NPSN : 10258246        Terakreditasi A           NSS: 301071701001",
+   144→  dualLine5Bold: false,
+   145→  dualLine5Size: 11,
+   146→  dualLine6Text:
+   147→    "Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865",
+   148→  dualLine6Bold: false,
+   149→  dualLine6Size: 11,
+   150→  dualLine7Text:
+   151→    "Email: smansatelukdalam1987@gmail.com ; website: www.smansatelukdalam.sch.id",
+   152→  dualLine7Bold: false,
+   153→  dualLine7Size: 11,
+   154→  showBottomLine: true,
+   155→  bottomLineWidth: 2,
+   156→};
+   157→
+   158→export function LetterheadSettingsPanel() {
+   159→  const { data, isLoading } = useLetterhead();
+   160→  const updateMutation = useUpdateLetterhead();
+   161→  const uploadMutation = useUploadLogo();
+   162→
+   163→  const [local, setLocal] = useState<LetterheadSettings>(DEFAULT_SETTINGS);
+   164→  const fileInputRef = useRef<HTMLInputElement>(null);
+   165→  const fileInputRef2 = useRef<HTMLInputElement>(null);
+   166→  // Ref to always hold the latest settings (avoids stale closure in rapid updates)
+   167→  const localRef = useRef<LetterheadSettings>(DEFAULT_SETTINGS);
+   168→
+   169→  // Sync server data to local state
+   170→  useEffect(() => {
+   171→    if (data?.settings) {
+   172→      // eslint-disable-next-line react-hooks/set-state-in-effect
+   173→      setLocal(data.settings);
+   174→      localRef.current = data.settings;
+   175→    }
+   176→  }, [data?.settings]);
+   177→
+   178→  // Debounced auto-save
+   179→  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+   180→  const [dirty, setDirty] = useState(false);
+   181→
+   182→  const scheduleSave = (newSettings: LetterheadSettings) => {
+   183→    localRef.current = newSettings;
+   184→    setLocal(newSettings);
+   185→    setDirty(true);
+   186→    if (saveTimer.current) clearTimeout(saveTimer.current);
+   187→    saveTimer.current = setTimeout(() => {
+   188→      updateMutation.mutate(newSettings, {
+   189→        onSuccess: () => {
+   190→          setDirty(false);
+   191→          toast.success("Pengaturan KOP disimpan", {
+   192→            duration: 1500,
+   193→          });
+   194→        },
+   195→        onError: (e) => toast.error("Gagal menyimpan: " + e.message),
+   196→      });
+   197→    }, 800);
+   198→  };
+   199→
+   200→  const update = (field: keyof LetterheadSettings, value: unknown) => {
+   201→    scheduleSave({ ...localRef.current, [field]: value });
+   202→  };
+   203→
+   204→  const updateLine = (
+   205→    lineNum: number,
+   206→    field: "Text" | "Bold" | "Size",
+   207→    value: string | boolean | number
+   208→  ) => {
+   209→    const key = (`line${lineNum}${field}` as keyof LetterheadSettings);
+   210→    scheduleSave({ ...localRef.current, [key]: value } as LetterheadSettings);
+   211→  };
+   212→
+   213→  const updateDualLine = (
+   214→    lineNum: number,
+   215→    field: "Text" | "Bold" | "Size",
+   216→    value: string | boolean | number
+   217→  ) => {
+   218→    const key = (`dualLine${lineNum}${field}` as keyof LetterheadSettings);
+   219→    scheduleSave({ ...localRef.current, [key]: value } as LetterheadSettings);
+   220→  };
+   221→
+   222→  const handleFileUpload = async (
+   223→    e: React.ChangeEvent<HTMLInputElement>,
+   224→    isLogo2 = false
+   225→  ) => {
+   226→    const file = e.target.files?.[0];
+   227→    if (!file) return;
+   228→    try {
+   229→      await uploadMutation.mutateAsync({ file, isLogo2 });
+   230→      toast.success(
+   231→        isLogo2 ? "Logo 2 berhasil diunggah" : "Logo berhasil diunggah"
+   232→      );
+   233→    } catch (err) {
+   234→      toast.error("Gagal upload: " + (err as Error).message);
+   235→    }
+   236→    const ref = isLogo2 ? fileInputRef2 : fileInputRef;
+   237→    if (ref.current) ref.current.value = "";
+   238→  };
+   239→
+   240→  const handleReset = () => {
+   241→    if (
+   242→      !confirm(
+   243→        "Reset pengaturan KOP ke nilai default? Semua perubahan akan hilang."
+   244→      )
+   245→    )
+   246→      return;
+   247→    scheduleSave(DEFAULT_SETTINGS);
+   248→    toast.info("Reset ke pengaturan default");
+   249→  };
+   250→
+   251→  if (isLoading) {
+   252→    return (
+   253→      <div className="flex items-center justify-center py-16">
+   254→        <Loader2 className="h-6 w-6 animate-spin text-rose-600" />
+   255→        <span className="ml-2 text-sm text-muted-foreground">
+   256→          Memuat pengaturan KOP...
+   257→        </span>
+   258→      </div>
+   259→    );
+   260→  }
+   261→
+   262→  const lineMeta = [
+   263→    { num: 1, label: "Baris 1", placeholder: "PEMERINTAH PROVINSI..." },
+   264→    { num: 2, label: "Baris 2", placeholder: "DINAS PENDIDIKAN" },
+   265→    { num: 3, label: "Baris 3 (terbesar)", placeholder: "SMA NEGERI 1..." },
+   266→    { num: 4, label: "Baris 4 (alamat)", placeholder: "Jl. Pendidikan..." },
+   267→    { num: 5, label: "Baris 5 (cabdisdik/pos)", placeholder: "Cabdisdik Wil..." },
+   268→    { num: 6, label: "Baris 6 (telp/email)", placeholder: "Telp/HP: ..." },
+   269→    { num: 7, label: "Baris 7 (laman)", placeholder: "Laman : ..." },
+   270→  ];
+   271→
+   272→  const dualLineMeta = [
+   273→    { num: 1, label: "Baris 1", placeholder: "PEMERINTAH PROVINSI..." },
+   274→    { num: 2, label: "Baris 2", placeholder: "DINAS PENDIDIKAN" },
+   275→    { num: 3, label: "Baris 3", placeholder: "CABDIS PENDIDIKAN..." },
+   276→    { num: 4, label: "Baris 4 (terbesar)", placeholder: "SMA NEGERI 1..." },
+   277→    { num: 5, label: "Baris 5 (NIS/NPSN)", placeholder: "NIS : ... NPSN : ... NSS: ..." },
+   278→    { num: 6, label: "Baris 6 (alamat)", placeholder: "Jl. Pendidikan... Kode Pos" },
+   279→    { num: 7, label: "Baris 7 (email/web)", placeholder: "Email: ... website: ..." },
+   280→  ];
+   281→
+   282→  return (
+   283→    <div className="space-y-4">
+   284→      {/* App Logo Upload (Login + Favicon) */}
+   285→      <AppLogoUpload />
+   286→
+   287→      {/* Header */}
+   288→      <Card className="border-l-4 border-l-rose-500">
+   289→        <CardHeader className="pb-3">
+   290→          <div className="flex items-start justify-between gap-3 flex-wrap">
+   291→            <div className="space-y-1">
+   292→              <CardTitle className="text-xl flex items-center gap-2">
+   293→                <ImageIcon className="h-5 w-5 text-rose-600" />
+   294→                Pengaturan KOP Surat
+   295→              </CardTitle>
+   296→              <CardDescription className="text-sm">
+   297→                Atur logo, font, ukuran, dan posisi KOP surat untuk semua
+   298→                dokumen SPJ. Perubahan otomatis tersimpan.
+   299→              </CardDescription>
+   300→            </div>
+   301→            <div className="flex items-center gap-2">
+   302→              {dirty || updateMutation.isPending ? (
+   303→                <Badge
+   304→                  variant="outline"
+   305→                  className="text-[10px] border-amber-400 text-amber-700 dark:text-amber-300"
+   306→                >
+   307→                  <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+   308→                  Menyimpan...
+   309→                </Badge>
+   310→              ) : (
+   311→                <Badge
+   312→                  variant="outline"
+   313→                  className="text-[10px] border-emerald-400 text-emerald-700 dark:text-emerald-300"
+   314→                >
+   315→                  <Save className="h-3 w-3 mr-1" />
+   316→                  Tersimpan
+   317→                </Badge>
+   318→              )}
+   319→              <Button
+   320→                variant="outline"
+   321→                size="sm"
+   322→                onClick={handleReset}
+   323→                className="h-8 text-xs"
+   324→              >
+   325→                <RotateCcw className="h-3 w-3 mr-1" />
+   326→                Reset
+   327→              </Button>
+   328→            </div>
+   329→          </div>
+   330→        </CardHeader>
+   331→      </Card>
+   332→
+   333→      {/* KOP Mode Toggle */}
+   334→      <Card className="border-l-4 border-l-blue-500">
+   335→        <CardHeader className="pb-3">
+   336→          <CardTitle className="text-base flex items-center gap-2">
+   337→            <ImageIcon className="h-4 w-4 text-blue-600" />
+   338→            Mode KOP Surat
+   339→          </CardTitle>
+   340→          <CardDescription className="text-xs">
+   341→            Pilih tampilan KOP: 1 logo di kiri, atau 2 logo (kiri + kanan)
+   342→            dengan teks di tengah. Berlaku untuk semua dokumen SPJ.
+   343→          </CardDescription>
+   344→        </CardHeader>
+   345→        <CardContent>
+   346→          <div className="grid grid-cols-2 gap-2">
+   347→            <button
+   348→              type="button"
+   349→              onClick={() => update("kopMode", "single")}
+   350→              className={`flex flex-col items-start gap-1 rounded-lg border p-3 text-left transition-all ${
+   351→                local.kopMode === "single"
+   352→                  ? "border-blue-500 bg-blue-50 ring-2 ring-blue-500 dark:bg-blue-950/30"
+   353→                  : "border-muted bg-muted/30 opacity-60 hover:opacity-100"
+   354→              }`}
+   355→            >
+   356→              <div className="flex items-center gap-2">
+   357→                <ImageIcon className="h-4 w-4 text-blue-600" />
+   358→                <span className="text-sm font-semibold">KOP 1 Logo</span>
+   359→              </div>
+   360→              <span className="text-[10px] text-muted-foreground">
+   361→                Logo di kiri, teks di kanan
+   362→              </span>
+   363→            </button>
+   364→            <button
+   365→              type="button"
+   366→              onClick={() => update("kopMode", "dual")}
+   367→              className={`flex flex-col items-start gap-1 rounded-lg border p-3 text-left transition-all ${
+   368→                local.kopMode === "dual"
+   369→                  ? "border-violet-500 bg-violet-50 ring-2 ring-violet-500 dark:bg-violet-950/30"
+   370→                  : "border-muted bg-muted/30 opacity-60 hover:opacity-100"
+   371→              }`}
+   372→            >
+   373→              <div className="flex items-center gap-2">
+   374→                <ImageIcon className="h-4 w-4 text-violet-600" />
+   375→                <span className="text-sm font-semibold">KOP 2 Logo</span>
+   376→              </div>
+   377→              <span className="text-[10px] text-muted-foreground">
+   378→                Logo kiri + kanan, teks di tengah
+   379→              </span>
+   380→            </button>
+   381→          </div>
+   382→        </CardContent>
+   383→      </Card>
+   384→
+   385→      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+   386→        {/* LEFT: Settings */}
+   387→        <div className="space-y-4">
+   388→          {/* Logo Settings */}
+   389→          <Card>
+   390→            <CardHeader className="pb-3">
+   391→              <CardTitle className="text-base flex items-center gap-2">
+   392→                <ImageIcon className="h-4 w-4 text-violet-600" />
+   393→                {local.kopMode === "dual" ? "Logo Kiri (Logo 1)" : "Logo"}
+   394→              </CardTitle>
+   395→              <CardDescription className="text-xs">
+   396→                Upload logo dan atur posisi & ukurannya
+   397→              </CardDescription>
+   398→            </CardHeader>
+   399→            <CardContent className="space-y-4">
+   400→              {/* Upload */}
+   401→              <div className="flex items-center gap-3">
+   402→                <div className="h-16 w-16 rounded-md border bg-muted/30 overflow-hidden flex items-center justify-center flex-shrink-0">
+   403→                  {local.logoPath ? (
+   404→                    <img
+   405→                      src={local.logoPath}
+   406→                      alt="Logo preview"
+   407→                      className="h-full w-full object-contain"
+   408→                    />
+   409→                  ) : (
+   410→                    <ImageIcon className="h-6 w-6 text-muted-foreground" />
+   411→                  )}
+   412→                </div>
+   413→                <div className="flex-1 space-y-1">
+   414→                  <input
+   415→                    ref={fileInputRef}
+   416→                    type="file"
+   417→                    accept="image/png,image/jpeg,image/jpg,image/webp,image/gif"
+   418→                    onChange={handleFileUpload}
+   419→                    className="hidden"
+   420→                  />
+   421→                  <Button
+   422→                    variant="outline"
+   423→                    size="sm"
+   424→                    onClick={() => fileInputRef.current?.click()}
+   425→                    disabled={uploadMutation.isPending}
+   426→                    className="w-full h-8 text-xs"
+   427→                  >
+   428→                    {uploadMutation.isPending ? (
+   429→                      <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+   430→                    ) : (
+   431→                      <Upload className="h-3 w-3 mr-1" />
+   432→                    )}
+   433→                    Upload Logo
+   434→                  </Button>
+   435→                  <p className="text-[10px] text-muted-foreground">
+   436→                    PNG/JPG/WebP/GIF, max 5MB
+   437→                  </p>
+   438→                </div>
+   439→              </div>
+   440→
+   441→              {/* Logo size */}
+   442→              <Separator />
+   443→              <div className="space-y-2">
+   444→                <Label className="text-xs font-semibold">Ukuran Logo</Label>
+   445→                <div className="grid grid-cols-2 gap-2">
+   446→                  <CmInput
+   447→                    pxValue={local.logoWidth}
+   448→                    onChange={(px) => update("logoWidth", px)}
+   449→                    label="Lebar (cm)"
+   450→                  />
+   451→                  <CmInput
+   452→                    pxValue={local.logoHeight}
+   453→                    onChange={(px) => update("logoHeight", px)}
+   454→                    label="Tinggi (cm)"
+   455→                  />
+   456→                </div>
+   457→              </div>
+   458→            </CardContent>
+   459→          </Card>
+   460→
+   461→          {/* Logo 2 Settings (only in dual mode) */}
+   462→          {local.kopMode === "dual" && (
+   463→            <Card>
+   464→              <CardHeader className="pb-3">
+   465→                <CardTitle className="text-base flex items-center gap-2">
+   466→                  <ImageIcon className="h-4 w-4 text-violet-600" />
+   467→                  Logo Kanan (Logo 2)
+   468→                </CardTitle>
+   469→                <CardDescription className="text-xs">
+   470→                  Upload logo kanan dan atur posisi & ukurannya
+   471→                </CardDescription>
+   472→              </CardHeader>
+   473→              <CardContent className="space-y-4">
+   474→                {/* Upload */}
+   475→                <div className="flex items-center gap-3">
+   476→                  <div className="h-16 w-16 rounded-md border bg-muted/30 overflow-hidden flex items-center justify-center flex-shrink-0">
+   477→                    {local.logo2Path ? (
+   478→                      <img
+   479→                        src={local.logo2Path}
+   480→                        alt="Logo 2 preview"
+   481→                        className="h-full w-full object-contain"
+   482→                      />
+   483→                    ) : (
+   484→                      <ImageIcon className="h-6 w-6 text-muted-foreground" />
+   485→                    )}
+   486→                  </div>
+   487→                  <div className="flex-1 space-y-1">
+   488→                    <input
+   489→                      ref={fileInputRef2}
+   490→                      type="file"
+   491→                      accept="image/png,image/jpeg,image/jpg,image/webp,image/gif"
+   492→                      onChange={(e) => handleFileUpload(e, true)}
+   493→                      className="hidden"
+   494→                    />
+   495→                    <Button
+   496→                      variant="outline"
+   497→                      size="sm"
+   498→                      onClick={() => fileInputRef2.current?.click()}
+   499→                      disabled={uploadMutation.isPending}
+   500→                      className="w-full h-8 text-xs"
+   501→                    >
+   502→                      {uploadMutation.isPending ? (
+   503→                        <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+   504→                      ) : (
+   505→                        <Upload className="h-3 w-3 mr-1" />
+   506→                      )}
+   507→                      Upload Logo 2
+   508→                    </Button>
+   509→                    <p className="text-[10px] text-muted-foreground">
+   510→                      PNG/JPG/WebP/GIF, max 5MB
+   511→                    </p>
+   512→                  </div>
+   513→                </div>
+   514→
+   515→                {/* Logo 2 size */}
+   516→                <Separator />
+   517→                <div className="space-y-2">
+   518→                  <Label className="text-xs font-semibold">Ukuran Logo 2</Label>
+   519→                  <div className="grid grid-cols-2 gap-2">
+   520→                    <CmInput
+   521→                      pxValue={local.logo2Width}
+   522→                      onChange={(px) => update("logo2Width", px)}
+   523→                      label="Lebar (cm)"
+   524→                    />
+   525→                    <CmInput
+   526→                      pxValue={local.logo2Height}
+   527→                      onChange={(px) => update("logo2Height", px)}
+   528→                      label="Tinggi (cm)"
+   529→                    />
+   530→                  </div>
+   531→                </div>
+   532→              </CardContent>
+   533→            </Card>
+   534→          )}
+   535→
+   536→          {/* Font Settings */}
+   537→          <Card>
+   538→            <CardHeader className="pb-3">
+   539→              <CardTitle className="text-base flex items-center gap-2">
+   540→                <Type className="h-4 w-4 text-amber-600" />
+   541→                Font & Spasi
+   542→              </CardTitle>
+   543→            </CardHeader>
+   544→            <CardContent className="space-y-3">
+   545→              <div>
+   546→                <Label className="text-xs font-semibold mb-1.5 block">
+   547→                  Jenis Huruf (Font Family)
+   548→                </Label>
+   549→                <Select
+   550→                  value={local.fontFamily}
+   551→                  onValueChange={(v) => update("fontFamily", v)}
+   552→                >
+   553→                  <SelectTrigger className="h-9">
+   554→                    <SelectValue />
+   555→                  </SelectTrigger>
+   556→                  <SelectContent>
+   557→                    {FONT_OPTIONS.map((f) => (
+   558→                      <SelectItem
+   559→                        key={f.value}
+   560→                        value={f.value}
+   561→                        style={{ fontFamily: f.value }}
+   562→                      >
+   563→                        {f.label}
+   564→                      </SelectItem>
+   565→                    ))}
+   566→                  </SelectContent>
+   567→                </Select>
+   568→              </div>
+   569→
+   570→              <div>
+   571→                <div className="flex items-center justify-between mb-1.5">
+   572→                  <Label className="text-xs font-semibold">
+   573→                    Jarak Antar Baris
+   574→                  </Label>
+   575→                  <span className="text-[10px] font-mono text-muted-foreground">
+   576→                    {local.lineSpacing}px
+   577→                  </span>
+   578→                </div>
+   579→                <div className="flex items-center gap-2">
+   580→                  <Button
+   581→                    variant="outline"
+   582→                    size="sm"
+   583→                    className="h-7 w-7 p-0"
+   584→                    onClick={() =>
+   585→                      update("lineSpacing", Math.max(0, local.lineSpacing - 1))
+   586→                    }
+   587→                  >
+   588→                    <ArrowUp className="h-3 w-3" />
+   589→                  </Button>
+   590→                  <Slider
+   591→                    value={[local.lineSpacing]}
+   592→                    min={0}
+   593→                    max={30}
+   594→                    step={1}
+   595→                    onValueChange={(v) => update("lineSpacing", v[0])}
+   596→                    className="flex-1"
+   597→                  />
+   598→                  <Button
+   599→                    variant="outline"
+   600→                    size="sm"
+   601→                    className="h-7 w-7 p-0"
+   602→                    onClick={() =>
+   603→                      update("lineSpacing", Math.min(30, local.lineSpacing + 1))
+   604→                    }
+   605→                  >
+   606→                    <ArrowDown className="h-3 w-3" />
+   607→                  </Button>
+   608→                </div>
+   609→                <p className="text-[10px] text-muted-foreground mt-1">
+   610→                  Gunakan tombol ↑ untuk menaikkan jarak, ↓ untuk menurunkan
+   611→                </p>
+   612→              </div>
+   613→
+   614→              <Separator />
+   615→
+   616→              <div className="flex items-center justify-between">
+   617→                <div>
+   618→                  <Label className="text-xs font-semibold">
+   619→                    Garis Bawah KOP
+   620→                  </Label>
+   621→                  <p className="text-[10px] text-muted-foreground">
+   622→                    Tampilkan garis pemisah di bawah KOP
+   623→                  </p>
+   624→                </div>
+   625→                <Switch
+   626→                  checked={local.showBottomLine}
+   627→                  onCheckedChange={(v) => update("showBottomLine", v)}
+   628→                />
+   629→              </div>
+   630→
+   631→              {local.showBottomLine && (
+   632→                <div>
+   633→                  <Label className="text-[10px] text-muted-foreground">
+   634→                    Ketebalan Garis: {local.bottomLineWidth}px
+   635→                  </Label>
+   636→                  <Slider
+   637→                    value={[local.bottomLineWidth]}
+   638→                    min={1}
+   639→                    max={5}
+   640→                    step={1}
+   641→                    onValueChange={(v) => update("bottomLineWidth", v[0])}
+   642→                    className="mt-1"
+   643→                  />
+   644→                </div>
+   645→              )}
+   646→            </CardContent>
+   647→          </Card>
+   648→        </div>
+   649→
+   650→        {/* RIGHT: Per-line settings */}
+   651→        <div className="space-y-4">
+   652→          <Card>
+   653→            <CardHeader className="pb-3">
+   654→              <CardTitle className="text-base flex items-center gap-2">
+   655→                <AlignLeft className="h-4 w-4 text-emerald-600" />
+   656→                Teks & Format per Baris —{" "}
+   657→                {local.kopMode === "dual" ? "KOP 2 Logo" : "KOP 1 Logo"}
+   658→              </CardTitle>
+   659→              <CardDescription className="text-xs">
+   660→                Atur teks, ukuran font, dan bold/tidak untuk setiap baris KOP
+   661→              </CardDescription>
+   662→            </CardHeader>
+   663→            <CardContent>
+   664→              <ScrollArea className="h-[520px] pr-3">
+   665→                <div className="space-y-3">
+   666→                  {local.kopMode === "single"
+   667→                    ? lineMeta.map((lm) => {
+   668→                        const textKey = `line${lm.num}Text` as keyof LetterheadSettings;
+   669→                        const boldKey = `line${lm.num}Bold` as keyof LetterheadSettings;
+   670→                        const sizeKey = `line${lm.num}Size` as keyof LetterheadSettings;
+   671→                        const text = local[textKey] as string;
+   672→                        const bold = local[boldKey] as boolean;
+   673→                        const size = local[sizeKey] as number;
+   674→                        return (
+   675→                          <div
+   676→                            key={lm.num}
+   677→                            className="rounded-md border p-2.5 space-y-2"
+   678→                          >
+   679→                            <div className="flex items-center justify-between">
+   680→                              <Label className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+   681→                                {lm.label}
+   682→                              </Label>
+   683→                              <div className="flex items-center gap-1">
+   684→                                <Button
+   685→                                  variant={bold ? "default" : "outline"}
+   686→                                  size="sm"
+   687→                                  className="h-6 w-7 p-0"
+   688→                                  onClick={() =>
+   689→                                    updateLine(lm.num, "Bold", !bold)
+   690→                                  }
+   691→                                  title={bold ? "Bold aktif" : "Aktifkan bold"}
+   692→                                >
+   693→                                  <Bold className="h-3 w-3" />
+   694→                                </Button>
+   695→                              </div>
+   696→                            </div>
+   697→                            <Input
+   698→                              value={text}
+   699→                              onChange={(e) =>
+   700→                                updateLine(lm.num, "Text", e.target.value)
+   701→                              }
+   702→                              placeholder={lm.placeholder}
+   703→                              className="h-8 text-xs"
+   704→                              style={{
+   705→                                fontFamily: local.fontFamily,
+   706→                                fontWeight: bold ? 700 : 400,
+   707→                              }}
+   708→                            />
+   709→                            <div>
+   710→                              <div className="flex items-center justify-between">
+   711→                                <Label className="text-[10px] text-muted-foreground">
+   712→                                  Ukuran Font
+   713→                                </Label>
+   714→                                <span className="text-[10px] font-mono text-muted-foreground">
+   715→                                  {size}pt
+   716→                                </span>
+   717→                              </div>
+   718→                              <Slider
+   719→                                value={[size]}
+   720→                                min={8}
+   721→                                max={32}
+   722→                                step={1}
+   723→                                onValueChange={(v) =>
+   724→                                  updateLine(lm.num, "Size", v[0])
+   725→                                }
+   726→                                className="mt-1"
+   727→                              />
+   728→                            </div>
+   729→                          </div>
+   730→                        );
+   731→                      })
+   732→                    : dualLineMeta.map((lm) => {
+   733→                        const textKey = `dualLine${lm.num}Text` as keyof LetterheadSettings;
+   734→                        const boldKey = `dualLine${lm.num}Bold` as keyof LetterheadSettings;
+   735→                        const sizeKey = `dualLine${lm.num}Size` as keyof LetterheadSettings;
+   736→                        const text = local[textKey] as string;
+   737→                        const bold = local[boldKey] as boolean;
+   738→                        const size = local[sizeKey] as number;
+   739→                        return (
+   740→                          <div
+   741→                            key={lm.num}
+   742→                            className="rounded-md border p-2.5 space-y-2"
+   743→                          >
+   744→                            <div className="flex items-center justify-between">
+   745→                              <Label className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+   746→                                {lm.label}
+   747→                              </Label>
+   748→                              <div className="flex items-center gap-1">
+   749→                                <Button
+   750→                                  variant={bold ? "default" : "outline"}
+   751→                                  size="sm"
+   752→                                  className="h-6 w-7 p-0"
+   753→                                  onClick={() =>
+   754→                                    updateDualLine(lm.num, "Bold", !bold)
+   755→                                  }
+   756→                                  title={bold ? "Bold aktif" : "Aktifkan bold"}
+   757→                                >
+   758→                                  <Bold className="h-3 w-3" />
+   759→                                </Button>
+   760→                              </div>
+   761→                            </div>
+   762→                            <Input
+   763→                              value={text}
+   764→                              onChange={(e) =>
+   765→                                updateDualLine(lm.num, "Text", e.target.value)
+   766→                              }
+   767→                              placeholder={lm.placeholder}
+   768→                              className="h-8 text-xs"
+   769→                              style={{
+   770→                                fontFamily: local.fontFamily,
+   771→                                fontWeight: bold ? 700 : 400,
+   772→                              }}
+   773→                            />
+   774→                            <div>
+   775→                              <div className="flex items-center justify-between">
+   776→                                <Label className="text-[10px] text-muted-foreground">
+   777→                                  Ukuran Font
+   778→                                </Label>
+   779→                                <span className="text-[10px] font-mono text-muted-foreground">
+   780→                                  {size}pt
+   781→                                </span>
+   782→                              </div>
+   783→                              <Slider
+   784→                                value={[size]}
+   785→                                min={8}
+   786→                                max={32}
+   787→                                step={1}
+   788→                                onValueChange={(v) =>
+   789→                                  updateDualLine(lm.num, "Size", v[0])
+   790→                                }
+   791→                                className="mt-1"
+   792→                              />
+   793→                            </div>
+   794→                          </div>
+   795→                        );
+   796→                      })}
+   797→                </div>
+   798→              </ScrollArea>
+   799→            </CardContent>
+   800→          </Card>
+   801→        </div>
+   802→      </div>
+   803→
+   804→      {/* Live Preview */}
+   805→      <Card className="border-l-4 border-l-emerald-500">
+   806→        <CardHeader className="pb-3">
+   807→          <CardTitle className="text-base flex items-center gap-2">
+   808→            <Eye className="h-4 w-4 text-emerald-600" />
+   809→            Pratinjau KOP (Live)
+   810→          </CardTitle>
+   811→          <CardDescription className="text-xs">
+   812→            Inilah tampilan KOP yang akan muncul di semua dokumen SPJ
+   813→          </CardDescription>
+   814→        </CardHeader>
+   815→        <CardContent>
+   816→          <div className="bg-white border rounded-md p-6 shadow-sm">
+   817→            <div className="spj-doc-preview">
+   818→              <LetterheadStatic settings={local} />
+   819→            </div>
+   820→          </div>
+   821→          <p className="text-[10px] text-muted-foreground mt-2 text-center">
+   822→            KOP ini akan tampil di: Surat Pesanan, Surat Hasil Pemeriksaan (SHP),
+   823→            Berita Acara Serah Terima (BAST), dan Surat Pertanggungjawaban (SPJ)
+   824→          </p>
+   825→        </CardContent>
+   826→      </Card>
+   827→    </div>
+   828→  );
+   829→}
+   830→
+   831→// ============================================================
+   832→// App Logo Upload Section (for login page + favicon)
+   833→// ============================================================
+   834→
+   835→function AppLogoUpload() {
+   836→  const [appLogo, setAppLogo] = useState<string | null>(null);
+   837→  const [loading, setLoading] = useState(false);
+   838→
+   839→  useEffect(() => {
+   840→    fetch("/api/app-settings")
+   841→      .then((r) => r.json())
+   842→      .then((data) => setAppLogo(data.appLogo || null))
+   843→      .catch(() => {});
+   844→  }, []);
+   845→
+   846→  async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
+   847→    const file = e.target.files?.[0];
+   848→    if (!file) return;
+   849→    if (file.size > 5 * 1024 * 1024) {
+   850→      toast.error("File terlalu besar. Maksimal 5MB.");
+   851→      return;
+   852→    }
+   853→    setLoading(true);
+   854→    const formData = new FormData();
+   855→    formData.append("logo", file);
+   856→    try {
+   857→      const res = await fetch("/api/app-settings/upload-logo", {
+   858→        method: "POST",
+   859→        body: formData,
+   860→      });
+   861→      const data = await res.json();
+   862→      if (!res.ok) throw new Error(data.error || "Gagal upload");
+   863→      setAppLogo(data.appLogo);
+   864→      // Sync localStorage so login + dashboard headers update on next page load
+   865→      try {
+   866→        localStorage.setItem("appLogo", data.appLogo);
+   867→      } catch {
+   868→        // localStorage might be full — ignore
+   869→      }
+   870→      toast.success("Logo aplikasi diperbarui.");
+   871→    } catch (err) {
+   872→      toast.error((err as Error).message);
+   873→    } finally {
+   874→      setLoading(false);
+   875→    }
+   876→  }
+   877→
+   878→  async function handleDelete() {
+   879→    setLoading(true);
+   880→    try {
+   881→      await fetch("/api/app-settings", {
+   882→        method: "PUT",
+   883→        headers: { "Content-Type": "application/json" },
+   884→        body: JSON.stringify({ appLogo: null }),
+   885→      });
+   886→      setAppLogo(null);
+   887→      // Clear localStorage cache so login + dashboard headers fall back
+   888→      try {
+   889→        localStorage.removeItem("appLogo");
+   890→      } catch {
+   891→        // ignore
+   892→      }
+   893→      toast.success("Logo aplikasi dihapus.");
+   894→    } finally {
+   895→      setLoading(false);
+   896→    }
+   897→  }
+   898→
+   899→  return (
+   900→    <Card className="border-l-4 border-l-violet-500">
+   901→      <CardHeader className="pb-3">
+   902→        <CardTitle className="text-base flex items-center gap-2">
+   903→          <ImageIcon className="h-4 w-4 text-violet-600" />
+   904→          Logo Aplikasi (Login + Favicon)
+   905→        </CardTitle>
+   906→        <CardDescription className="text-xs">
+   907→          Logo ini muncul di halaman login dan sebagai favicon browser. Maksimal 5MB.
+   908→        </CardDescription>
+   909→      </CardHeader>
+   910→      <CardContent className="space-y-3">
+   911→        <div className="flex items-center gap-4">
+   912→          <div className="h-16 w-16 rounded-xl bg-slate-100 dark:bg-slate-800 border-2 border-dashed border-slate-300 dark:border-slate-700 flex items-center justify-center overflow-hidden flex-shrink-0">
+   913→            {appLogo ? (
+   914→              <img src={appLogo} alt="App Logo" className="h-full w-full object-contain" />
+   915→            ) : (
+   916→              <ImageIcon className="h-6 w-6 text-slate-400" />
+   917→            )}
+   918→          </div>
+   919→          <div className="flex flex-col gap-2">
+   920→            <label className="cursor-pointer">
+   921→              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-violet-600 text-white text-xs font-medium hover:bg-violet-700 transition-colors">
+   922→                <Upload className="h-3.5 w-3.5" />
+   923→                {loading ? "Mengupload..." : "Upload Logo"}
+   924→              </span>
+   925→              <input type="file" accept="image/*" className="hidden" onChange={handleUpload} disabled={loading} />
+   926→            </label>
+   927→            {appLogo && (
+   928→              <button
+   929→                onClick={handleDelete}
+   930→                disabled={loading}
+   931→                className="text-xs text-rose-600 hover:text-rose-700"
+   932→              >
+   933→                Hapus Logo
+   934→              </button>
+   935→            )}
+   936→          </div>
+   937→        </div>
+   938→      </CardContent>
+   939→    </Card>
+   940→  );
+   941→}
+   942→

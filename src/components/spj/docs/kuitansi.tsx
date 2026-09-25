@@ -3,6 +3,10 @@
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate, formatNumber, terbilang } from "@/lib/format";
 import { toRoman, titleCase } from "@/components/spj/docs/_helpers";
+// Per-document page setup — Kuitansi has no matching Excel sheet;
+// use a sensible default (1cm all sides, portrait, no scaling).
+import { PAGE_SETUP_KUITANSI as PAGE_SETUP } from "./_page-setup";
+export { PAGE_SETUP };
 
 const tableStyle: React.CSSProperties = {
   borderCollapse: "collapse",

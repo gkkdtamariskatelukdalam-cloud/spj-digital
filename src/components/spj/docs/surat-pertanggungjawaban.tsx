@@ -10,6 +10,9 @@ import {
   pickGroupDate,
   titleCase,
 } from "./_helpers";
+// Per-document page setup — no matching Excel sheet; use default.
+import { PAGE_SETUP_SURAT_PJ as PAGE_SETUP } from "./_page-setup";
+export { PAGE_SETUP };
 
 // ============================================================
 // SPJ — Surat Pertanggungjawaban

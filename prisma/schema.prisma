@@ -207,15 +207,18 @@ model LetterheadSettings {
   
   // Logo settings
   logoPath        String?  // relative path to uploaded logo, e.g. /uploads/logo.png
-  logoWidth       Int      @default(110)  // logo width in px
-  logoHeight      Int      @default(110)   // logo height in px (auto if 0)
+  // Excel-matched defaults: 198x198 px ≈ 5.24x5.24 cm at 96 DPI
+  // (matches the main logo on BACK sheet of "Cetak ATK_2025.xlsm")
+  logoWidth       Int      @default(198)  // logo width in px (was 110; Excel: 198px = 5.24cm)
+  logoHeight      Int      @default(198)   // logo height in px (auto if 0)
   logoOffsetX     Int      @default(0)     // horizontal shift: negative=left, positive=right
   logoOffsetY     Int      @default(0)     // vertical shift: negative=up, positive=down
   
   // Logo 2 settings (for KOP with 2 logos - left and right)
+  // Excel right-side dual logo: 211x221 px ≈ 5.58x5.85 cm
   logo2Path       String?
-  logo2Width      Int      @default(110)
-  logo2Height     Int      @default(110)
+  logo2Width      Int      @default(211)
+  logo2Height     Int      @default(221)
   logo2OffsetX    Int      @default(0)
   logo2OffsetY    Int      @default(0)
   
@@ -223,46 +226,62 @@ model LetterheadSettings {
   kopMode         String   @default("single")
   
   // Font settings (shared between both modes)
+  // Excel uses Arial for the KOP text. lineSpacing matches Excel row spacing.
   fontFamily      String   @default("Arial")
   lineSpacing     Int      @default(6)     // extra spacing between lines in px
   
   // === KOP 1 LOGO lines (single mode) ===
+  // Matches Excel 01PESAN/04SHP/05BAT rows 1-7 exactly:
+  //   Row 1: Arial 14pt NOT bold  → PEMERINTAH PROVINSI SUMATERA UTARA
+  //   Row 2: Arial 18pt bold     → DINAS PENDIDIKAN
+  //   Row 3: Arial 18pt bold     → SMA NEGERI 1 TELUKDALAM
+  //   Row 4: Arial 10pt not bold → address line 1
+  //   Row 5: Arial 10pt not bold → address line 2
+  //   Row 6: Arial 10pt not bold → telp/email
+  //   Row 7: Calibri 11pt not bold → laman
   line1Text       String   @default("PEMERINTAH PROVINSI SUMATERA UTARA")
-  line1Bold       Boolean  @default(true)
+  line1Bold       Boolean  @default(false)
   line1Size       Int      @default(14)
   
   line2Text       String   @default("DINAS PENDIDIKAN")
   line2Bold       Boolean  @default(true)
-  line2Size       Int      @default(14)
+  line2Size       Int      @default(18)
   
   line3Text       String   @default("SMA NEGERI 1 TELUKDALAM")
   line3Bold       Boolean  @default(true)
-  line3Size       Int      @default(20)
+  line3Size       Int      @default(18)
   
   line4Text       String   @default("Jl. Pendidikan No.13, Kel. Pasar Teluk Dalam, Kec. Teluk Dalam, Kab. Nias Selatan,")
   line4Bold       Boolean  @default(false)
-  line4Size       Int      @default(11)
+  line4Size       Int      @default(10)
   
   line5Text       String   @default("Cabdisdik Wil.XIV, Kode Pos 22865")
   line5Bold       Boolean  @default(false)
-  line5Size       Int      @default(11)
+  line5Size       Int      @default(10)
   
   line6Text       String   @default("Telp/HP: 081370904506, Pos-el smansatelukdalam1987@gmail.com")
   line6Bold       Boolean  @default(false)
-  line6Size       Int      @default(11)
+  line6Size       Int      @default(10)
   
   line7Text       String   @default("Laman : smansatelukdalam.sch.id")
   line7Bold       Boolean  @default(false)
   line7Size       Int      @default(11)
   
   // === KOP 2 LOGO lines (dual mode) ===
+  // Matches Excel BACK sheet K1-K6 (cover page) exactly:
+  //   K1: Times 14pt bold → PEMERINTAH PROVINSI SUMATERA UTARA
+  //   K2: Times 12pt bold → DINAS PENDIDIKAN
+  //   K3: Times 14pt bold → SMA NEGERI 1 TELUKDALAM
+  //   K4: Arial  8pt bold → NIS/NPSN/NSS line
+  //   K5: Times  8pt not bold → address line
+  //   K6: Times  8pt not bold → email line
   dualLine1Text       String   @default("PEMERINTAH PROVINSI SUMATERA UTARA")
   dualLine1Bold       Boolean  @default(true)
   dualLine1Size       Int      @default(14)
   
   dualLine2Text       String   @default("DINAS PENDIDIKAN")
   dualLine2Bold       Boolean  @default(true)
-  dualLine2Size       Int      @default(14)
+  dualLine2Size       Int      @default(12)
   
   dualLine3Text       String   @default("CABDIS PENDIDIKAN WILAYAH XIV")
   dualLine3Bold       Boolean  @default(true)
@@ -270,19 +289,19 @@ model LetterheadSettings {
   
   dualLine4Text       String   @default("SMA NEGERI 1 TELUKDALAM")
   dualLine4Bold       Boolean  @default(true)
-  dualLine4Size       Int      @default(20)
+  dualLine4Size       Int      @default(14)
   
   dualLine5Text       String   @default("NIS : 300010         NPSN : 10258246        Terakreditasi A           NSS: 301071701001")
   dualLine5Bold       Boolean  @default(false)
-  dualLine5Size       Int      @default(11)
+  dualLine5Size       Int      @default(8)
   
   dualLine6Text       String   @default("Jl. Pendidikan No. 13 Kelurahan Pasar Telukdalam Kecamatan Telukdalam Kabupaten Nias Selatan; Telp/HP: 081370904506; Kode Pos: 22865")
   dualLine6Bold       Boolean  @default(false)
-  dualLine6Size       Int      @default(11)
+  dualLine6Size       Int      @default(8)
   
   dualLine7Text       String   @default("Email: smansatelukdalam1987@gmail.com ; website: www.smansatelukdalam.sch.id")
   dualLine7Bold       Boolean  @default(false)
-  dualLine7Size       Int      @default(11)
+  dualLine7Size       Int      @default(8)
   
   // Bottom border line
   showBottomLine  Boolean  @default(true)
