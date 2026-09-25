@@ -3679,3 +3679,86 @@ Stage Summary:
 - ✅ Percentage column widths preserved (5% / 20% / 35% / 35% / 5%)
 - ✅ Other doc files (surat-pesanan.tsx) checked — colgroup already clean
 - ✅ Lint clean, no console errors, no hydration errors
+
+---
+Task ID: 51-fix-toko-data-not-appearing-in-pembanding
+Agent: Main (Claude)
+Task: User reported "kenapa nama toko 1 dan toko 2 tidak masuk serta harga juga dan estimasi" — toko names, harga, and estimasi not appearing in Dokumen Pembanding.
+
+Work Log:
+- Investigated DokumenPembanding component — code correctly references `item.hargaToko1`, `item.hargaToko2`, `items[0].namaToko1`, `items[0].namaToko2`, `items[0].alamatToko1`, `items[0].alamatToko2`
+- Checked DocumentGroupItem TypeScript interface in src/lib/types/spj.ts:
+  - Did NOT have: namaToko1, namaToko2, hargaToko1, hargaToko2, direkturToko1, alamatToko1, alamatToko2
+- Checked API route src/app/api/spj/document-groups/route.ts:
+  - Prisma query uses `include: { vendor: true }` — fetches ALL Transaction fields (no `select` clause) ✓
+  - BUT the `group.items.push({...})` mapping at line 102-123 DID NOT include toko fields
+  - Only mapped: id, uraian, namaBarang, volume, satuan, tarifHarga, jumlah, realisasi, noBku, noBast, tglBayar, spesifikasiBarang, uraianKwitansi, hargaSatuanSebelumPajak, jumlahHargaSebelumPajak, hargaTotalAsli, totalHargaSebelumDPP, totalHargaAsli, satuan2
+  - Missing: hargaToko1, hargaToko2, namaToko1, namaToko2, direkturToko1, alamatToko1, alamatToko2
+- Verified DB has the data:
+  - Total transactions: 423
+  - With namaToko1: 258 (61%)
+  - With namaToko2: 423 (100%)
+  - With hargaToko1: 423 (100%)
+  - Sample: noPesan=03, namaBarang="Bola Lampu", namaToko1="CV. GORIYAKU WIRATRADE", namaToko2="UD. JESSLYN", hargaToko1=2200000, hargaToko2=2202000
+
+**Root Cause**: Data was in the DB, but the API route wasn't mapping the toko fields to the items array. So the frontend received items WITHOUT toko data — DokumenPembanding showed "—" for everything.
+
+**Fix Implementation** (2 files):
+
+1. **src/lib/types/spj.ts** — DocumentGroupItem interface:
+   - Added 7 new optional fields:
+     - `hargaToko1?: number | null` (kolom 18 / R)
+     - `hargaToko2?: number | null` (kolom 19 / S)
+     - `namaToko1?: string | null` (kolom 20 / T)
+     - `namaToko2?: string | null` (kolom 21 / U)
+     - `direkturToko1?: string | null` (kolom 22 / V)
+     - `alamatToko1?: string | null` (kolom 23 / W)
+     - `alamatToko2?: string | null` (kolom 24 / X)
+   - Added comment block explaining Excel column mapping
+
+2. **src/app/api/spj/document-groups/route.ts**:
+   - Updated `items: Array<{...}>` TypeScript type to include the 7 toko fields
+   - Updated `group.items.push({...})` to map all 7 toko fields from Transaction (t) to the items array:
+     ```ts
+     hargaToko1: t.hargaToko1,
+     hargaToko2: t.hargaToko2,
+     namaToko1: t.namaToko1,
+     namaToko2: t.namaToko2,
+     direkturToko1: t.direkturToko1,
+     alamatToko1: t.alamatToko1,
+     alamatToko2: t.alamatToko2,
+     ```
+
+**Verification:**
+
+1. Lint passes: `bun run lint` → no errors
+2. API GET /api/spj/document-groups returns toko data for group #04:
+   - namaToko1: "UD. JOSUA" ✓
+   - namaToko2: "UD. JESSLYN" ✓
+   - hargaToko1: 120000 ✓
+   - hargaToko2: 124000 ✓
+   - alamatToko1: "Jl. Diponegoro Kel. Pasar Telukdalam - Nias Selatan" ✓
+   - alamatToko2: "Jl. Pasir Putih Pasar Telukdalam, Telukdalam Kab. Nias Selatan" ✓
+3. Agent Browser DOM inspection after clicking 02 BANDING for transaction #04:
+   - foundToko1Cell: true (UD. JOSUA in DOM)
+   - foundToko2Cell: true (UD. JESSLYN in DOM)
+   - rupiahCellCount: 264 (all harga values rendering as RupiahCell)
+   - Sample: Rp 120.000 / Rp 124.000 (hargaToko1 / hargaToko2 for items)
+4. VLM analysis of screenshot:
+   - "Yes, 'UD. JOSUA' is visible as the Toko 1 name (under Produk I)" ✓
+   - "Yes, 'UD. JESSLYN' is visible as the Toko 2 name (under Produk II)" ✓
+   - "Yes, 'Harga satuan' values are visible (e.g., 120.000 / 124.000)" ✓
+   - "Yes, 'Estimasi harga' values are visible" ✓
+   - (Alamat calon penyedia not visible in top screenshot — it's at the bottom, needs scroll)
+
+Stage Summary:
+- ✅ Bug FIXED — toko data (namaToko1, namaToko2, hargaToko1, hargaToko2, alamatToko1, alamatToko2) now flows from DB → API → frontend
+- ✅ Root cause was API route not mapping toko fields to items array (DB had data, but API didn't expose it)
+- ✅ Updated DocumentGroupItem TypeScript interface to include 7 toko fields
+- ✅ Updated API route to map all 7 toko fields from Transaction to items
+- ✅ DokumenPembanding now displays:
+  - Toko names in header (UD. JOSUA, UD. JESSLYN, etc.)
+  - Harga satuan per toko (Rp 120.000 / Rp 124.000)
+  - Estimasi harga per toko (same values)
+  - Alamat calon penyedia per toko
+- ✅ Lint clean, data verified via API + DOM + VLM

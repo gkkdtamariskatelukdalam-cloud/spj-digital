@@ -183,6 +183,20 @@ export interface DocumentGroupItem {
   totalHargaSebelumDPP?: number | null; // kolom AE (DPP = AD/1.11)
   totalHargaAsli?: number | null; // kolom AF (= AD, final total)
   satuan2?: string | null; // kolom AA (System 2 satuan, e.g. "kotak")
+  // === Toko comparison fields (kolom R-X in source Excel) ===
+  // Used by DOKUMEN PEMBANDING (02BANDING) — per-item data for each toko
+  // being compared. Kolom 18-24 in Excel:
+  //   R (18) = Harga Toko 1   | S (19) = Harga Toko 2
+  //   T (20) = Nama Toko 1    | U (21) = Nama Toko 2
+  //   V (22) = Direktur Toko 1
+  //   W (23) = Alamat Toko 1  | X (24) = Alamat Toko 2
+  hargaToko1?: number | null;
+  hargaToko2?: number | null;
+  namaToko1?: string | null;
+  namaToko2?: string | null;
+  direkturToko1?: string | null;
+  alamatToko1?: string | null;
+  alamatToko2?: string | null;
 }
 
 export interface DocumentGroup {
