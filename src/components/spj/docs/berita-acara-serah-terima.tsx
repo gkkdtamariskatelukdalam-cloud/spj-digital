@@ -307,7 +307,7 @@ export function BeritaAcaraSerahTerima({
             {/* LEFT: PIHAK KEDUA (receiver) */}
             <td style={{ width: "50%", textAlign: "center", padding: "0 6px", verticalAlign: "top", fontSize: "11pt" }}>
               <div>PIHAK KEDUA,</div>
-              <div style={{ height: "64px" }} />
+              <div style={{ minHeight: "50px", lineHeight: "50px" }} />
               <div style={nameStyle}>{receiverName}</div>
               <div>Penerima Barang</div>
             </td>
@@ -315,7 +315,7 @@ export function BeritaAcaraSerahTerima({
             {/* RIGHT: PIHAK PERTAMA (vendor) */}
             <td style={{ width: "50%", textAlign: "center", padding: "0 6px", verticalAlign: "top", fontSize: "11pt" }}>
               <div>PIHAK PERTAMA,</div>
-              <div style={{ height: "64px" }} />
+              <div style={{ minHeight: "50px", lineHeight: "50px" }} />
               <div style={nameStyle}>{vendorOwner}</div>
               <div>Direktur</div>
             </td>

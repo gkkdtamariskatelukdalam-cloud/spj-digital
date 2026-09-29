@@ -195,14 +195,14 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
         </div>
 
         {/* Signature block - di kanan, teks rata kiri
-            Tambah jarak antar baris (marginBottom 6px per baris) per user request:
-            "tambah sedikit jarak antar penandatangan, kira-kira 1 enter" */}
-        <div style={{ marginTop: "12px", fontSize: "12pt", display: "flex", justifyContent: "flex-end", marginRight: "40px" }}>
+            JARAK SAMA DENGAN SURAT PESANAN:
+            marginBottom: 2px per baris, minHeight: 50px wet-ink space */}
+        <div style={{ marginTop: "8px", fontSize: "12pt", display: "flex", justifyContent: "flex-end", marginRight: "40px" }}>
           <div style={{ textAlign: "left", width: "320px" }}>
-            <div style={{ whiteSpace: "nowrap", marginBottom: "6px" }}>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
-            <div style={{ whiteSpace: "nowrap", marginBottom: "6px" }}>Pelaksana</div>
-            <div style={{ height: "40px" }} />
-            <div style={{ ...nameStyle, whiteSpace: "nowrap", marginBottom: "6px" }}>{orDash(school?.principalName)}</div>
+            <div style={{ whiteSpace: "nowrap", marginBottom: "2px" }}>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
+            <div style={{ whiteSpace: "nowrap", marginBottom: "2px" }}>Pelaksana,</div>
+            <div style={{ minHeight: "50px", lineHeight: "50px" }}>&nbsp;</div>
+            <div style={{ ...nameStyle, whiteSpace: "nowrap", marginTop: "2px", marginBottom: "1px" }}>{orDash(school?.principalName)}</div>
             <div style={{ whiteSpace: "nowrap" }}>NIP. {orDash(school?.principalNip)}</div>
           </div>
         </div>

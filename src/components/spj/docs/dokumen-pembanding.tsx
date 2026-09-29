@@ -228,22 +228,23 @@ export function DokumenPembanding({ group, school }: DokumenPembandingProps) {
         </tbody>
       </table>
 
-      {/* === Signature block (right-aligned, same style as Dokumen Rencana) ===
-          Per user request: "Penandatangan 12pt". */}
+      {/* === Signature block (right-aligned)
+          JARAK SAMA DENGAN SURAT PESANAN:
+          marginBottom: 2px per baris, minHeight: 50px wet-ink space */}
       <div
         style={{
-          marginTop: "20px",
-          fontSize: "12pt",  // Per user request: 12pt (was 11pt)
+          marginTop: "8px",
+          fontSize: "12pt",
           display: "flex",
           justifyContent: "flex-end",
           marginRight: "40px",
         }}
       >
         <div style={{ textAlign: "left", width: "320px" }}>
-          <div style={{ whiteSpace: "nowrap" }}>Telukdalam, {formattedDate}</div>
-          <div style={{ whiteSpace: "nowrap" }}>Pelaksana</div>
-          <div style={{ height: "50px" }} />
-          <div style={{ ...nameStyle, whiteSpace: "nowrap" }}>
+          <div style={{ whiteSpace: "nowrap", marginBottom: "2px" }}>Telukdalam, {formattedDate}</div>
+          <div style={{ whiteSpace: "nowrap", marginBottom: "2px" }}>Pelaksana,</div>
+          <div style={{ minHeight: "50px", lineHeight: "50px" }}>&nbsp;</div>
+          <div style={{ ...nameStyle, whiteSpace: "nowrap", marginTop: "2px", marginBottom: "1px" }}>
             {orDash(school?.principalName)}
           </div>
           <div style={{ whiteSpace: "nowrap" }}>
