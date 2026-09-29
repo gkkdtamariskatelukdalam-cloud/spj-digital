@@ -18,11 +18,11 @@ interface DokumenRencanaProps {
 
 const cellStyle: CSSProperties = {
   border: "1px solid #000",
-  padding: "4px 6px",  // Sedikit lebih tinggi dari 2px → rows lebih lega,
-                        // sebagian footer terdorong ke page 2 untuk 20-item case
+  padding: "4px 6px",
   verticalAlign: "top",
   fontSize: "11pt",
-  lineHeight: 1.35,  // Lebih lega dari 1.2 → text tidak terlalu rapat
+  lineHeight: 1.35,
+  fontFamily: '"Times New Roman", Times, serif',  // Match reference Excel
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
@@ -33,12 +33,12 @@ const titleCellStyle: CSSProperties = {
   ...cellStyle,
   textAlign: "center",
   fontWeight: 700,
-  fontSize: "14pt",
+  fontSize: "16pt",  // Reference: ~16-18pt
   padding: "6px 5px",
 };
 const labelCellStyle: CSSProperties = {
   ...cellStyle,
-  fontWeight: 600,
+  fontWeight: 700,  // Reference: labels are Bold (was 600)
 };
 const colonStyle: CSSProperties = {
   ...cellStyle,
@@ -137,10 +137,13 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
             <td style={labelCellStyle} colSpan={2}>Alokasi Anggaran&nbsp;&nbsp;:&nbsp;&nbsp;<span style={boldStyle}>Bantuan Operasional Satuan Pendidikan (BOSP) {tahun}</span></td>
           </tr>
           <tr>
-            <td style={labelCellStyle} colSpan={2}>Perorangan/Badan Usaha&nbsp;&nbsp;&nbsp;Memenuhi syarat sebagai berikut:</td>
+            <td style={labelCellStyle} colSpan={2}>Perorangan/Badan Usaha</td>
           </tr>
           <tr>
-            <td style={labelCellStyle} colSpan={2}>&nbsp;&nbsp;&nbsp;Persyaratan penyedia&nbsp;&nbsp;:&nbsp;&nbsp;a. Identitas Penyedia&nbsp;&nbsp;&nbsp;b. NPWP;</td>
+            <td style={valueMergedStyle} colSpan={2}>Memenuhi syarat sebagai berikut:</td>
+          </tr>
+          <tr>
+            <td style={labelCellStyle} colSpan={2}>Persyaratan penyedia&nbsp;&nbsp;:&nbsp;&nbsp;a. Identitas Penyedia<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. NPWP;</td>
           </tr>
         </tbody>
       </table>
