@@ -219,23 +219,25 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
         </tbody>
       </table>
 
-      {/* === Catatan kaki === */}
-      <div style={{ fontSize: "11pt", marginTop: "8px", fontStyle: "italic" }}>
-        Misalnya Buku Teks Utama/Buku Teks Pendamping/Buku Nonteks/Kebutuhan dan
-        Perlengkapan Satuan Pendidikan/Alat Peraga Pendidikan/Komputer dan
-        Aksesoris/Elektronik/Jasa lainnya.
-      </div>
+      {/* === Catatan kaki + Signature block — wrapped together with
+            pageBreakInside: avoid supaya NIP tidak sendirian di halaman baru === */}
+      <div style={{ pageBreakInside: "avoid" as const }}>
+        {/* Catatan kaki */}
+        <div style={{ fontSize: "11pt", marginTop: "8px", fontStyle: "italic" }}>
+          Misalnya Buku Teks Utama/Buku Teks Pendamping/Buku Nonteks/Kebutuhan dan
+          Perlengkapan Satuan Pendidikan/Alat Peraga Pendidikan/Komputer dan
+          Aksesoris/Elektronik/Jasa lainnya.
+        </div>
 
-      {/* === Signature block - di kanan, teks rata kiri ===
-          Compact spacing: marginTop 8px (was 20px) + wet-ink 30px (was 56px)
-          supaya signature dekat dengan content di atasnya, tidak "melayang". */}
-      <div style={{ marginTop: "8px", fontSize: "12pt", display: "flex", justifyContent: "flex-end", marginRight: "40px" }}>
-        <div style={{ textAlign: "left", width: "320px" }}>
-          <div style={{ whiteSpace: "nowrap" }}>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
-          <div style={{ whiteSpace: "nowrap" }}>Pelaksana</div>
-          <div style={{ height: "30px" }} />
-          <div style={{ ...nameStyle, whiteSpace: "nowrap" }}>{orDash(school?.principalName)}</div>
-          <div style={{ whiteSpace: "nowrap" }}>NIP. {orDash(school?.principalNip)}</div>
+        {/* Signature block - di kanan, teks rata kiri */}
+        <div style={{ marginTop: "8px", fontSize: "12pt", display: "flex", justifyContent: "flex-end", marginRight: "40px" }}>
+          <div style={{ textAlign: "left", width: "320px" }}>
+            <div style={{ whiteSpace: "nowrap" }}>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
+            <div style={{ whiteSpace: "nowrap" }}>Pelaksana</div>
+            <div style={{ height: "30px" }} />
+            <div style={{ ...nameStyle, whiteSpace: "nowrap" }}>{orDash(school?.principalName)}</div>
+            <div style={{ whiteSpace: "nowrap" }}>NIP. {orDash(school?.principalNip)}</div>
+          </div>
         </div>
       </div>
     </div>
