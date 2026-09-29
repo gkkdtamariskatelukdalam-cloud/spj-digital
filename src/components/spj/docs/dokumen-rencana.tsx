@@ -4,10 +4,6 @@ import type { CSSProperties } from "react";
 import type { DocumentGroup, School } from "@/lib/types/spj";
 import { formatDate } from "@/lib/format";
 import { orDash, schoolAddress, schoolName } from "./_helpers";
-// Per-document page setup — Excel 03RENCANA sheet margins (cm):
-//   L=0.80 R=0.80 T=1.40 B=0.30  scale=100%  landscape
-import { PAGE_SETUP_03RENCANA as PAGE_SETUP } from "./_page-setup";
-export { PAGE_SETUP };
 
 // ============================================================
 // 03RENCANA — Dokumen Perencanaan
@@ -73,8 +69,16 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
 
   return (
     <div className="spj-doc text-[11pt] leading-relaxed text-slate-900">
-      {/* === 4-column table === */}
+      {/* === 4-column table — split into multiple <tbody> for natural page breaks === */}
       <table style={tableStyle}>
+        <colgroup>
+          <col style={{ width: "25%" }} />
+          <col style={{ width: "5%" }} />
+          <col style={{ width: "5%" }} />
+          <col />
+        </colgroup>
+
+        {/* === tbody 1: Title + Info block === */}
         <tbody>
           {/* Title row (merged 4 cols) */}
           <tr>
@@ -85,7 +89,7 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
 
           {/* Nama Satuan Pendidikan */}
           <tr>
-            <td style={{ ...labelCellStyle, width: "25%" }}>Nama Satuan Pendidikan</td>
+            <td style={labelCellStyle}>Nama Satuan Pendidikan</td>
             <td style={colonStyle}>:</td>
             <td style={valueMergedStyle} colSpan={2}>
               {schoolName(school)}
@@ -127,44 +131,45 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
               <span style={boldStyle}>{itemCount}</span>
             </td>
           </tr>
+        </tbody>
 
-          {/* Spesifikasi section: col 1 = rowspan, col 2 = ✓, col 3 = No, col 4 = deskripsi */}
+        {/* === tbody 2: Items section — allows natural page breaks ===
+            NO rowSpan — each <tr> can break across pages independently.
+            "Spesifikasi/ruang lingkup barang/jasa" is a SECTION HEADER row
+            (colSpan 4) above the items, NOT a rowSpan cell. This prevents
+            the "all items forced to one page" issue. */}
+        <tbody>
+          {/* Section header row */}
+          <tr>
+            <td style={labelCellStyle}>Spesifikasi/ruang lingkup barang/jasa</td>
+            <td style={colonStyle}>:</td>
+            <td style={noStyle}>&nbsp;</td>
+            <td style={{ ...subHeaderCellStyle, textAlign: "left" }}>&nbsp;</td>
+          </tr>
+
+          {/* Per-item rows — 3 visual cols: ✓ | No | Description (colSpan 2) */}
           {items.length === 0 ? (
             <tr>
-              <td style={labelCellStyle}>Spesifikasi/ruang lingkup barang/jasa</td>
-              <td style={colonStyle}>:</td>
-              <td style={valueMergedStyle} colSpan={2}>
+              <td style={cellStyle} colSpan={4} className="text-center text-muted-foreground">
                 Tidak ada item.
               </td>
             </tr>
           ) : (
-            <>
-              <tr>
-                <td
-                  style={labelCellStyle}
-                  rowSpan={items.length}
-                >
-                  Spesifikasi/ruang lingkup barang/jasa
-                </td>
+            items.map((item, idx) => (
+              <tr key={item.id}>
                 <td style={{ ...colonStyle, textAlign: "center" }}>✓</td>
-                <td style={noStyle}>1</td>
-                <td style={valueMergedStyle}>
-                  {items[0].spesifikasiBarang || items[0].namaBarang || items[0].uraian}
+                <td style={noStyle}>{idx + 1}</td>
+                <td style={valueMergedStyle} colSpan={2}>
+                  {item.spesifikasiBarang || item.namaBarang || item.uraian}
                 </td>
               </tr>
-              {items.slice(1).map((item, idx) => (
-                <tr key={item.id}>
-                  <td style={{ ...colonStyle, textAlign: "center" }}>✓</td>
-                  <td style={noStyle}>{idx + 2}</td>
-                  <td style={valueMergedStyle}>
-                    {item.spesifikasiBarang || item.namaBarang || item.uraian}
-                  </td>
-                </tr>
-              ))}
-            </>
+            ))
           )}
+        </tbody>
 
-          {/* Waktu serah terima - DI DALAM tabel */}
+        {/* === tbody 3: Footer info — pageBreakInside: avoid so it stays together === */}
+        <tbody style={{ pageBreakInside: "avoid" as const }}>
+          {/* Waktu serah terima */}
           <tr>
             <td style={labelCellStyle}>Waktu serah terima</td>
             <td style={colonStyle}>:</td>
@@ -222,19 +227,13 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
       </div>
 
       {/* === Signature block - di kanan, teks rata kiri ===
-          FIX: sebelumnya width 250px terlalu sempit untuk nama panjang seperti
-          "Nursari Rindu Simanullang, S.Pd., M.M." (41 char at 11pt ≈ 248px).
-          nama wrap jadi 2 baris. Sekarang:
-          - width: 320px (lebih lebar supaya nama muat 1 baris)
-          - whiteSpace: nowrap pada nama supaya PASTI 1 baris
-          - marginRight: 40px supaya block geser sedikit ke kiri
-            (tidak flush ke tepi kanan, match Excel layout)
-      */}
-      <div style={{ marginTop: "20px", fontSize: "11pt", display: "flex", justifyContent: "flex-end", marginRight: "40px" }}>
+          Compact spacing: marginTop 8px (was 20px) + wet-ink 30px (was 56px)
+          supaya signature dekat dengan content di atasnya, tidak "melayang". */}
+      <div style={{ marginTop: "8px", fontSize: "12pt", display: "flex", justifyContent: "flex-end", marginRight: "40px" }}>
         <div style={{ textAlign: "left", width: "320px" }}>
           <div style={{ whiteSpace: "nowrap" }}>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
           <div style={{ whiteSpace: "nowrap" }}>Pelaksana</div>
-          <div style={{ height: "56px" }} />
+          <div style={{ height: "30px" }} />
           <div style={{ ...nameStyle, whiteSpace: "nowrap" }}>{orDash(school?.principalName)}</div>
           <div style={{ whiteSpace: "nowrap" }}>NIP. {orDash(school?.principalNip)}</div>
         </div>
