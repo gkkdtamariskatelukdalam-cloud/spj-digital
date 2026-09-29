@@ -18,10 +18,11 @@ interface DokumenRencanaProps {
 
 const cellStyle: CSSProperties = {
   border: "1px solid #000",
-  padding: "2px 5px",
+  padding: "4px 6px",  // Sedikit lebih tinggi dari 2px → rows lebih lega,
+                        // sebagian footer terdorong ke page 2 untuk 20-item case
   verticalAlign: "top",
   fontSize: "11pt",
-  lineHeight: 1.2,
+  lineHeight: 1.35,  // Lebih lega dari 1.2 → text tidak terlalu rapat
 };
 const tableStyle: CSSProperties = {
   borderCollapse: "collapse",
@@ -68,63 +69,50 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
 
   return (
     <div className="spj-doc text-[11pt] leading-relaxed text-slate-900">
-      {/* === 3-column table — col 1 = label/✓, col 2 = colon/No, col 3 = value/desc === */}
+      {/* === 2-column table — col 1 = No (5%), col 2 = value/description === */}
       <table style={tableStyle}>
         <colgroup>
-          <col style={{ width: "20%" }} />
           <col style={{ width: "5%" }} />
           <col />
         </colgroup>
 
-        {/* === tbody 1: Title + Info block (Nama, Alamat, Kategori, Jenis) === */}
+        {/* === tbody 1: Title + Info block === */}
         <tbody>
           <tr>
-            <td style={titleCellStyle} colSpan={3}>DOKUMEN PERENCANAAN</td>
+            <td style={titleCellStyle} colSpan={2}>DOKUMEN PERENCANAAN</td>
           </tr>
           <tr>
-            <td style={labelCellStyle}>Nama Satuan Pendidikan</td>
-            <td style={colonStyle}>:</td>
-            <td style={valueMergedStyle}>{schoolName(school)}</td>
+            <td style={labelCellStyle} colSpan={2}>Nama Satuan Pendidikan&nbsp;&nbsp;:&nbsp;&nbsp;{schoolName(school)}</td>
           </tr>
           <tr>
-            <td style={labelCellStyle}>Alamat Satuan Pendidikan</td>
-            <td style={colonStyle}>:</td>
-            <td style={valueMergedStyle}>{schoolAddress(school)}</td>
+            <td style={labelCellStyle} colSpan={2}>Alamat Satuan Pendidikan&nbsp;&nbsp;:&nbsp;&nbsp;{schoolAddress(school)}</td>
           </tr>
           <tr>
-            <td style={labelCellStyle}>Kategori Barang/Jasa</td>
-            <td style={colonStyle}>:</td>
-            <td style={valueMergedStyle}>{firstUraian}</td>
+            <td style={labelCellStyle} colSpan={2}>Kategori Barang/Jasa&nbsp;&nbsp;:&nbsp;&nbsp;{firstUraian}</td>
           </tr>
           <tr>
-            <td style={labelCellStyle}>Jenis</td>
-            <td style={colonStyle}>&nbsp;</td>
-            <td style={{ ...valueMergedStyle, fontWeight: 700, textAlign: "center" }}>KETERANGAN</td>
+            <td style={labelCellStyle} colSpan={2}>Jenis&nbsp;&nbsp;&nbsp;<span style={{ fontWeight: 700 }}>KETERANGAN</span></td>
           </tr>
         </tbody>
 
-        {/* === tbody 2: Section header + Items (✓ | No | description) ===
-            Urutan per user request:
-            1. Spesifikasi/ruang lingkup barang/jasa (section header)
-            2. Tabel centang (items with ✓)
-            NO rowSpan — items flow natural across pages. */}
+        {/* === tbody 2: Section header + Items (No | description)
+            NO rowSpan, NO ✓ checkmark — items flow natural across pages. === */}
         <tbody>
-          {/* Section header — full-width, bold, with background */}
+          {/* Section header — full-width */}
           <tr>
-            <td style={sectionHeaderStyle} colSpan={3}>Spesifikasi/ruang lingkup barang/jasa</td>
+            <td style={sectionHeaderStyle} colSpan={2}>Spesifikasi/ruang lingkup barang/jasa</td>
           </tr>
 
-          {/* Per-item rows: ✓ | No | Description */}
+          {/* Per-item rows: No | Description (✓ dihapus per user request) */}
           {items.length === 0 ? (
             <tr>
-              <td style={cellStyle} colSpan={3} className="text-center text-muted-foreground">
+              <td style={cellStyle} colSpan={2} className="text-center text-muted-foreground">
                 Tidak ada item.
               </td>
             </tr>
           ) : (
             items.map((item, idx) => (
               <tr key={item.id}>
-                <td style={{ ...colonStyle, textAlign: "center" }}>✓</td>
                 <td style={noStyle}>{idx + 1}</td>
                 <td style={valueMergedStyle}>
                   {item.spesifikasiBarang || item.namaBarang || item.uraian}
@@ -134,53 +122,25 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
           )}
         </tbody>
 
-        {/* === tbody 3: Footer info (pageBreakInside: avoid) ===
-            Urutan per user request:
-            3. Jumlah barang (moved HERE — was in tbody 1 before)
-            4. Spesifikasi (Waktu, Lokasi, Alokasi, Perorangan, Persyaratan) */}
+        {/* === tbody 3: Footer info (pageBreakInside: avoid) === */}
         <tbody style={{ pageBreakInside: "avoid" as const }}>
           <tr>
-            <td style={labelCellStyle}>Jumlah Barang/Jasa</td>
-            <td style={colonStyle}>:</td>
-            <td style={{ ...valueMergedStyle, textAlign: "center" }}>
-              <span style={boldStyle}>{itemCount}</span>
-            </td>
+            <td style={labelCellStyle} colSpan={2}>Jumlah Barang/Jasa&nbsp;&nbsp;:&nbsp;&nbsp;<span style={boldStyle}>{itemCount}</span></td>
           </tr>
           <tr>
-            <td style={labelCellStyle}>Waktu serah terima</td>
-            <td style={colonStyle}>:</td>
-            <td style={valueMergedStyle}>
-              <span style={boldStyle}>{tglPesan ? formatDate(tglPesan) : "—"}</span>
-            </td>
+            <td style={labelCellStyle} colSpan={2}>Waktu serah terima&nbsp;&nbsp;:&nbsp;&nbsp;<span style={boldStyle}>{tglPesan ? formatDate(tglPesan) : "—"}</span></td>
           </tr>
           <tr>
-            <td style={labelCellStyle}>Lokasi serah terima</td>
-            <td style={colonStyle}>:</td>
-            <td style={valueMergedStyle}>
-              <span style={boldStyle}>{schoolName(school)}</span>
-            </td>
+            <td style={labelCellStyle} colSpan={2}>Lokasi serah terima&nbsp;&nbsp;:&nbsp;&nbsp;<span style={boldStyle}>{schoolName(school)}</span></td>
           </tr>
           <tr>
-            <td style={labelCellStyle}>Alokasi Anggaran</td>
-            <td style={colonStyle}>:</td>
-            <td style={valueMergedStyle}>
-              <span style={boldStyle}>Bantuan Operasional Satuan Pendidikan (BOSP) {tahun}</span>
-            </td>
+            <td style={labelCellStyle} colSpan={2}>Alokasi Anggaran&nbsp;&nbsp;:&nbsp;&nbsp;<span style={boldStyle}>Bantuan Operasional Satuan Pendidikan (BOSP) {tahun}</span></td>
           </tr>
           <tr>
-            <td style={labelCellStyle}>Perorangan/Badan Usaha</td>
-            <td style={colonStyle}>&nbsp;</td>
-            <td style={valueMergedStyle}>Memenuhi syarat sebagai berikut:</td>
+            <td style={labelCellStyle} colSpan={2}>Perorangan/Badan Usaha&nbsp;&nbsp;&nbsp;Memenuhi syarat sebagai berikut:</td>
           </tr>
           <tr>
-            <td style={labelCellStyle}>
-              <span style={boldStyle}>Persyaratan penyedia</span>
-            </td>
-            <td style={colonStyle}>:</td>
-            <td style={valueMergedStyle}>
-              <div>a. Identitas Penyedia</div>
-              <div>b. NPWP;</div>
-            </td>
+            <td style={labelCellStyle} colSpan={2}>&nbsp;&nbsp;&nbsp;Persyaratan penyedia&nbsp;&nbsp;:&nbsp;&nbsp;a. Identitas Penyedia&nbsp;&nbsp;&nbsp;b. NPWP;</td>
           </tr>
         </tbody>
       </table>
@@ -195,13 +155,15 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
           Aksesoris/Elektronik/Jasa lainnya.
         </div>
 
-        {/* Signature block - di kanan, teks rata kiri */}
-        <div style={{ marginTop: "8px", fontSize: "12pt", display: "flex", justifyContent: "flex-end", marginRight: "40px" }}>
+        {/* Signature block - di kanan, teks rata kiri
+            Tambah jarak antar baris (marginBottom 6px per baris) per user request:
+            "tambah sedikit jarak antar penandatangan, kira-kira 1 enter" */}
+        <div style={{ marginTop: "12px", fontSize: "12pt", display: "flex", justifyContent: "flex-end", marginRight: "40px" }}>
           <div style={{ textAlign: "left", width: "320px" }}>
-            <div style={{ whiteSpace: "nowrap" }}>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
-            <div style={{ whiteSpace: "nowrap" }}>Pelaksana</div>
-            <div style={{ height: "30px" }} />
-            <div style={{ ...nameStyle, whiteSpace: "nowrap" }}>{orDash(school?.principalName)}</div>
+            <div style={{ whiteSpace: "nowrap", marginBottom: "6px" }}>Telukdalam, {tglPesan ? formatDate(tglPesan) : "—"}</div>
+            <div style={{ whiteSpace: "nowrap", marginBottom: "6px" }}>Pelaksana</div>
+            <div style={{ height: "40px" }} />
+            <div style={{ ...nameStyle, whiteSpace: "nowrap", marginBottom: "6px" }}>{orDash(school?.principalName)}</div>
             <div style={{ whiteSpace: "nowrap" }}>NIP. {orDash(school?.principalNip)}</div>
           </div>
         </div>
