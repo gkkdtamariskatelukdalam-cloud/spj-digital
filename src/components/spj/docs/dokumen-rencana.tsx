@@ -69,51 +69,74 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
 
   return (
     <div className="spj-doc text-[11pt] leading-relaxed text-slate-900">
-      {/* === 2-column table — col 1 = No (5%), col 2 = value/description === */}
+      {/* === 4-column table — match reference 03RENCANA_04_2025.pdf EXACTLY ===
+            Col 1 (30%): Label / Spesifikasi label (empty for item rows 2+)
+            Col 2 (5%):  ✓ checkmark
+            Col 3 (5%):  Item number
+            Col 4 (60%): Value / Description text
+            NO rowSpan — first item row has label in col 1, subsequent rows have
+            empty col 1. This looks identical to rowSpan but allows page breaks. */}
       <table style={tableStyle}>
         <colgroup>
+          <col style={{ width: "30%" }} />
+          <col style={{ width: "5%" }} />
           <col style={{ width: "5%" }} />
           <col />
         </colgroup>
 
-        {/* === tbody 1: Title + Info block === */}
+        {/* === tbody 1: Title + Info block ===
+            Info rows: Label (col 1) + Value (colSpan 3)
+            Colon is part of label text, right-aligned within label cell */}
         <tbody>
           <tr>
-            <td style={titleCellStyle} colSpan={2}>DOKUMEN PERENCANAAN</td>
+            <td style={titleCellStyle} colSpan={4}>DOKUMEN PERENCANAAN</td>
           </tr>
           <tr>
-            <td style={labelCellStyle} colSpan={2}>Nama Satuan Pendidikan&nbsp;&nbsp;:&nbsp;&nbsp;{schoolName(school)}</td>
+            <td style={labelCellStyle}>Nama Satuan Pendidikan&nbsp;&nbsp;:</td>
+            <td style={valueMergedStyle} colSpan={3}>{schoolName(school)}</td>
           </tr>
           <tr>
-            <td style={labelCellStyle} colSpan={2}>Alamat Satuan Pendidikan&nbsp;&nbsp;:&nbsp;&nbsp;{schoolAddress(school)}</td>
+            <td style={labelCellStyle}>Alamat Satuan Pendidikan&nbsp;&nbsp;:</td>
+            <td style={valueMergedStyle} colSpan={3}>{schoolAddress(school)}</td>
           </tr>
           <tr>
-            <td style={labelCellStyle} colSpan={2}>Kategori Barang/Jasa&nbsp;&nbsp;:&nbsp;&nbsp;{firstUraian}</td>
+            <td style={labelCellStyle}>Kategori Barang/Jasa&nbsp;&nbsp;:</td>
+            <td style={valueMergedStyle} colSpan={3}>{firstUraian}</td>
           </tr>
           <tr>
-            <td style={labelCellStyle} colSpan={2}>Jenis&nbsp;&nbsp;&nbsp;<span style={{ fontWeight: 700 }}>KETERANGAN</span></td>
+            <td style={labelCellStyle}>Jenis</td>
+            <td style={valueMergedStyle} colSpan={3}>&nbsp;</td>
+          </tr>
+          <tr>
+            <td style={labelCellStyle}>&nbsp;</td>
+            <td style={{ ...valueMergedStyle, fontWeight: 700, textAlign: "center" }} colSpan={3}>KETERANGAN</td>
           </tr>
         </tbody>
 
-        {/* === tbody 2: Section header + Items (No | description)
-            NO rowSpan, NO ✓ checkmark — items flow natural across pages. === */}
+        {/* === tbody 2: Items section ===
+            Row 1: "Spesifikasi/ruang lingkup barang/jasa :" (col 1) | ✓ (col 2) | 1 (col 3) | desc (col 4)
+            Row 2+: empty (col 1) | ✓ (col 2) | No (col 3) | desc (col 4)
+            NO rowSpan — col 1 is just empty for rows 2+, allowing natural page breaks */}
         <tbody>
-          {/* Section header — full-width */}
-          <tr>
-            <td style={sectionHeaderStyle} colSpan={2}>Spesifikasi/ruang lingkup barang/jasa</td>
-          </tr>
-
-          {/* Per-item rows: No | Description (✓ dihapus per user request) */}
           {items.length === 0 ? (
             <tr>
-              <td style={cellStyle} colSpan={2} className="text-center text-muted-foreground">
+              <td style={labelCellStyle}>Spesifikasi/ruang lingkup barang/jasa&nbsp;&nbsp;:</td>
+              <td style={cellStyle} colSpan={3} className="text-center text-muted-foreground">
                 Tidak ada item.
               </td>
             </tr>
           ) : (
             items.map((item, idx) => (
               <tr key={item.id}>
+                {/* Col 1: label only on first item, empty for subsequent */}
+                <td style={labelCellStyle}>
+                  {idx === 0 ? "Spesifikasi/ruang lingkup barang/jasa\u00A0\u00A0:" : "\u00A0"}
+                </td>
+                {/* Col 2: ✓ checkmark */}
+                <td style={{ ...noStyle }}>✓</td>
+                {/* Col 3: item number */}
                 <td style={noStyle}>{idx + 1}</td>
+                {/* Col 4: description */}
                 <td style={valueMergedStyle}>
                   {item.spesifikasiBarang || item.namaBarang || item.uraian}
                 </td>
@@ -125,25 +148,38 @@ export function DokumenRencana({ group, school }: DokumenRencanaProps) {
         {/* === tbody 3: Footer info (pageBreakInside: avoid) === */}
         <tbody style={{ pageBreakInside: "avoid" as const }}>
           <tr>
-            <td style={labelCellStyle} colSpan={2}>Jumlah Barang/Jasa&nbsp;&nbsp;:&nbsp;&nbsp;<span style={boldStyle}>{itemCount}</span></td>
+            <td style={labelCellStyle}>Jumlah Barang/Jasa&nbsp;&nbsp;:</td>
+            <td style={{ ...valueMergedStyle, textAlign: "center", fontWeight: 700 }} colSpan={3}>
+              {itemCount}
+            </td>
           </tr>
           <tr>
-            <td style={labelCellStyle} colSpan={2}>Waktu serah terima&nbsp;&nbsp;:&nbsp;&nbsp;<span style={boldStyle}>{tglPesan ? formatDate(tglPesan) : "—"}</span></td>
+            <td style={labelCellStyle}>Waktu serah terima&nbsp;&nbsp;:</td>
+            <td style={valueMergedStyle} colSpan={3}>
+              <span style={boldStyle}>{tglPesan ? formatDate(tglPesan) : "—"}</span>
+            </td>
           </tr>
           <tr>
-            <td style={labelCellStyle} colSpan={2}>Lokasi serah terima&nbsp;&nbsp;:&nbsp;&nbsp;<span style={boldStyle}>{schoolName(school)}</span></td>
+            <td style={labelCellStyle}>Lokasi serah terima&nbsp;&nbsp;:</td>
+            <td style={valueMergedStyle} colSpan={3}>
+              <span style={boldStyle}>{schoolName(school)}</span>
+            </td>
           </tr>
           <tr>
-            <td style={labelCellStyle} colSpan={2}>Alokasi Anggaran&nbsp;&nbsp;:&nbsp;&nbsp;<span style={boldStyle}>Bantuan Operasional Satuan Pendidikan (BOSP) {tahun}</span></td>
+            <td style={labelCellStyle}>Alokasi Anggaran&nbsp;&nbsp;:</td>
+            <td style={valueMergedStyle} colSpan={3}>
+              <span style={boldStyle}>Bantuan Operasional Satuan Pendidikan (BOSP) {tahun}</span>
+            </td>
           </tr>
           <tr>
-            <td style={labelCellStyle} colSpan={2}>Perorangan/Badan Usaha</td>
+            <td style={labelCellStyle}>Perorangan/Badan Usaha</td>
+            <td style={valueMergedStyle} colSpan={3}>Memenuhi syarat sebagai berikut:</td>
           </tr>
           <tr>
-            <td style={valueMergedStyle} colSpan={2}>Memenuhi syarat sebagai berikut:</td>
-          </tr>
-          <tr>
-            <td style={labelCellStyle} colSpan={2}>Persyaratan penyedia&nbsp;&nbsp;:&nbsp;&nbsp;a. Identitas Penyedia<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. NPWP;</td>
+            <td style={labelCellStyle}>Persyaratan penyedia&nbsp;&nbsp;:</td>
+            <td style={valueMergedStyle} colSpan={3}>
+              a. Identitas Penyedia<br />b. NPWP;
+            </td>
           </tr>
         </tbody>
       </table>
