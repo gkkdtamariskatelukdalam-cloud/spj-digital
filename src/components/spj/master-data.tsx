@@ -28,6 +28,8 @@ import {
   Users,
   Calendar,
   Wallet,
+  Printer,
+  FileText,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -36,6 +38,7 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -78,6 +81,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserManagement } from "@/components/user-management/user-management";
 import { BospManagement } from "@/components/bosp/bosp-management";
 import { LetterheadSettingsPanel } from "@/components/spj/letterhead-settings";
+import { usePrintDocSettings, useSetPrintDocSetting } from "@/hooks/use-spj";
+import { Switch } from "@/components/ui/switch";
 import { useSession } from "next-auth/react";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -357,6 +362,15 @@ export function MasterData() {
             </TabsTrigger>
             {isAdmin && (
               <TabsTrigger
+                value="print-settings"
+                className="data-[state=active]:bg-cyan-600 data-[state=active]:text-white data-[state=active]:shadow-sm gap-1.5"
+              >
+                <Printer className="size-3.5" />
+                Pengaturan Cetak
+              </TabsTrigger>
+            )}
+            {isAdmin && (
+              <TabsTrigger
                 value="bosp"
                 className="data-[state=active]:bg-violet-600 data-[state=active]:text-white data-[state=active]:shadow-sm gap-1.5"
               >
@@ -391,6 +405,11 @@ export function MasterData() {
         <TabsContent value="kop">
           <LetterheadSettingsPanel />
         </TabsContent>
+        {isAdmin && (
+          <TabsContent value="print-settings">
+            <PrintDocSettingsTab />
+          </TabsContent>
+        )}
         {isAdmin && (
           <TabsContent value="bosp">
             <BospManagement />
@@ -2088,5 +2107,113 @@ function SchoolTab() {
       key={school?.id ?? "new"}
       initialSchool={school}
     />
+  );
+}
+
+// ============ Print Doc Settings Tab ============
+// Global enable/disable for each document type.
+// When OFF, the doc is skipped in ALL print modes.
+
+const PRINT_DOC_LIST = [
+  { id: "surat-pesanan", label: "Surat Pesanan", short: "01 PESAN", desc: "Surat pemesanan barang/jasa" },
+  { id: "dokumen-pembanding", label: "Dokumen Pembanding", short: "02 BANDING", desc: "Hasil perbandingan harga" },
+  { id: "dokumen-rencana", label: "Dokumen Rencana", short: "03 RENCANA", desc: "Rencana pembelian" },
+  { id: "surat-hasil-pemeriksaan", label: "Surat Hasil Pemeriksaan", short: "04 SHP", desc: "Surat hasil pemeriksaan barang" },
+  { id: "berita-acara-serah-terima", label: "Berita Acara Serah Terima", short: "05 BAST", desc: "Berita acara serah terima" },
+  { id: "surat-penawaran-toko", label: "Surat Penawaran Toko", short: "TOKO", desc: "Surat penawaran dari vendor" },
+  { id: "kuitansi", label: "Kuitansi", short: "KUITANSI", desc: "Tanda pembayaran" },
+];
+
+function PrintDocSettingsTab() {
+  const { data, isLoading } = usePrintDocSettings();
+  const setMutation = useSetPrintDocSetting();
+  const settings = data?.settings ?? {};
+
+  if (isLoading) {
+    return (
+      <Card>
+        <CardContent className="p-6">
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Memuat pengaturan...
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-base flex items-center gap-2">
+          <Printer className="h-4 w-4 text-cyan-600" />
+          Pengaturan Cetak Dokumen
+        </CardTitle>
+        <CardDescription className="text-xs">
+          Aktifkan/nonaktifkan dokumen yang akan dicetak. Dokumen yang
+          dinonaktifkan tidak akan muncul saat &quot;Cetak Semua SPJ&quot;,
+          &quot;Cetak per Toko&quot;, atau unduh PDF.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-2">
+        {PRINT_DOC_LIST.map((doc) => {
+          const isEnabled = settings[doc.id] !== false; // default: true
+          return (
+            <div
+              key={doc.id}
+              className="flex items-center justify-between rounded-lg border p-3 hover:bg-muted/30 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <FileText className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wide text-muted-foreground">
+                      {doc.short}
+                    </span>
+                    <span className="text-sm font-semibold">{doc.label}</span>
+                  </div>
+                  <p className="text-[10px] text-muted-foreground">{doc.desc}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                {isEnabled ? (
+                  <span className="text-[10px] text-emerald-600 font-medium">Aktif</span>
+                ) : (
+                  <span className="text-[10px] text-muted-foreground font-medium">Nonaktif</span>
+                )}
+                <Switch
+                  checked={isEnabled}
+                  onCheckedChange={(checked) => {
+                    setMutation.mutate(
+                      { docType: doc.id, enabled: checked },
+                      {
+                        onSuccess: () => {
+                          toast.success(
+                            checked
+                              ? `${doc.label} diaktifkan`
+                              : `${doc.label} dinonaktifkan — tidak akan dicetak`,
+                          );
+                        },
+                        onError: () => {
+                          toast.error("Gagal mengubah pengaturan");
+                        },
+                      },
+                    );
+                  }}
+                  disabled={setMutation.isPending}
+                />
+              </div>
+            </div>
+          );
+        })}
+
+        <div className="mt-4 p-3 rounded-lg bg-cyan-50 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-900">
+          <p className="text-[11px] text-cyan-700 dark:text-cyan-300">
+            💡 Tip: Nonaktifkan dokumen yang tidak diperlukan untuk menghemat
+            kertas saat mencetak. Pengaturan ini berlaku untuk semua pesanan.
+          </p>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

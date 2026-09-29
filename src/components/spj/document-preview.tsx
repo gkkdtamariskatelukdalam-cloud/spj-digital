@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { useSchool, useMarkPrinted, useAllPrintStatuses, useAllDocumentVisibilities } from "@/hooks/use-spj";
+import { useSchool, useMarkPrinted, useAllPrintStatuses, useAllDocumentVisibilities, usePrintDocSettings } from "@/hooks/use-spj";
 import type { DocumentGroup } from "@/lib/types/spj";
 
 // Import all 7 document templates
@@ -142,6 +142,9 @@ export function DocumentPreview({
   // so we don't refetch when navigating between groups in "all" mode.
   const { data: visibilityData } = useAllDocumentVisibilities();
   const visibilities = visibilityData?.allVisibilities ?? {};
+  // Global print doc settings (enable/disable per doc type)
+  const { data: printDocSettingsData } = usePrintDocSettings();
+  const printDocSettings = printDocSettingsData?.settings ?? {};
   const school = schoolData?.item ?? null;
   
   // State for navigation
@@ -176,10 +179,15 @@ export function DocumentPreview({
   };
 
   // === Visibility filter per current group ===
-  // Hidden docs (visible=false in DB) are excluded from navigation & printing.
+  // A doc is hidden if:
+  //   1. Global print doc setting is OFF (admin disabled it in Pengaturan Cetak)
+  //   2. Per-group visibility is false (user toggled Eye icon per-pesanan)
   // Default: visible (true) when no record exists.
   const currentGroupKey = currentGroup?.noPesan || currentGroup?.noBku || currentGroup?.key || "";
   const isDocHidden = (docId: string, gKey: string = currentGroupKey): boolean => {
+    // Check global setting first
+    if (printDocSettings[docId] === false) return true;
+    // Then check per-group override
     return visibilities[gKey]?.[docId] === false;
   };
   // Filter visible docs for current group (used for tab display)
@@ -699,8 +707,15 @@ export function CetakMenuButton({ group, onPreview, onDownload, onPrint }: Cetak
   // are marked as hidden per-pesanan, e.g. "Dokumen Pembanding")
   const { data: visibilityData } = useAllDocumentVisibilities();
   const visibilities = visibilityData?.allVisibilities ?? {};
+  // Global print doc settings (enable/disable per doc type)
+  const { data: printDocSettingsData } = usePrintDocSettings();
+  const printDocSettings = printDocSettingsData?.settings ?? {};
   const gKey = group?.noPesan || group?.noBku || group?.key || "";
-  const isDocHidden = (docId: string): boolean => visibilities[gKey]?.[docId] === false;
+  // A doc is hidden if global setting is OFF OR per-group visibility is false
+  const isDocHidden = (docId: string): boolean => {
+    if (printDocSettings[docId] === false) return true;
+    return visibilities[gKey]?.[docId] === false;
+  };
   // Filter visible docs only (hidden docs are skipped entirely in the list)
   const visibleDocs = DOC_TEMPLATES.filter(d => !isDocHidden(d.id));
 

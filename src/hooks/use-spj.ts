@@ -495,6 +495,49 @@ export function useSetDocumentVisibility() {
   });
 }
 
+// ============ Print Doc Settings (global enable/disable per doc type) ============
+// Returns which doc types are enabled/disabled globally.
+// Default: all enabled (true) when no record exists.
+export function usePrintDocSettings() {
+  return useQuery({
+    queryKey: ["spj-print-doc-settings"],
+    queryFn: async (): Promise<{
+      settings: Record<string, boolean>;
+    }> => {
+      const res = await fetch("/api/spj/print-doc-settings", {
+        cache: "no-store",
+      });
+      if (!res.ok) throw new Error("Failed");
+      return res.json();
+    },
+    staleTime: 10 * 1000,
+  });
+}
+
+export function useSetPrintDocSetting() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async ({
+      docType,
+      enabled,
+    }: {
+      docType: string;
+      enabled: boolean;
+    }) => {
+      const res = await fetch("/api/spj/print-doc-settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ docType, enabled }),
+      });
+      if (!res.ok) throw new Error("Failed");
+      return res.json();
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["spj-print-doc-settings"] });
+    },
+  });
+}
+
 // ============ Letterhead Settings ============
 export function useLetterhead() {
   return useQuery({

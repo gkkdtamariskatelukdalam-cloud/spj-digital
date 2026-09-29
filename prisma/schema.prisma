@@ -365,6 +365,20 @@ model AppSettings {
   updatedAt DateTime @updatedAt
 }
 
+// ============ PRINT DOC SETTINGS (global enable/disable per doc type) ============
+// User can toggle each document type ON/OFF via Master Data → Pengaturan Cetak.
+// When OFF, the doc is skipped in ALL print modes (Cetak per Toko,
+// Cetak Semua SPJ, Cetak Individual, Unduh PDF).
+// Default: all enabled (true). If no record exists, treated as enabled.
+
+model PrintDocSettings {
+  id        String   @id @default(cuid())
+  docType   String   @unique  // "surat-pesanan", "dokumen-pembanding", etc.
+  enabled   Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
 // ============ BOSP (Bantuan Operasional Sekolah Pendidikan) ============
 
 model TahunBOSP {
